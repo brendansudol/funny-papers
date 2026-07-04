@@ -1,0 +1,194 @@
+{
+  "key": "07-expunations",
+  "ref": "#7",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/07-expunations/07-expunations.md",
+  "source_md_sha256": "cea77fcea80bf0a0276e30cfb8a7ca425b8d8368f24f916376be154c1e962a67",
+  "source_truncated": false,
+  "title": "ExPUNations: Augmenting Puns with Keywords and Explanations",
+  "authors": [
+    "Jiao Sun",
+    "Anjali Narayan-Chen",
+    "Shereen Oraby",
+    "Alessandra Cervone",
+    "Tagyoung Chung",
+    "Jing Huang",
+    "Yang Liu",
+    "Nanyun Peng"
+  ],
+  "year": 2022,
+  "venue": null,
+  "paper_types": [
+    "dataset",
+    "benchmark",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can an existing pun dataset be augmented with fine-grained annotations of understandability, offensiveness, joke intent, funniness, natural-language explanations, and joke keywords?",
+    "Can natural-language explanations be generated for puns, and can explanations improve models' ability to classify whether a text is a joke?",
+    "Can human-annotated pun keywords improve keyword-conditioned pun generation compared with automatically extracted keywords and an AmbiPun baseline?",
+    "How well do current pretrained NLP models perform on pun explanation and keyword-conditioned pun generation?"
+  ],
+  "tasks": [
+    "pun explanation",
+    "pun classification",
+    "keyword-conditioned pun generation"
+  ],
+  "humor_domains": [
+    "puns",
+    "homographic puns",
+    "heterographic puns",
+    "wordplay"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "ExPUNations (ExPun)",
+      "role": "introduced",
+      "size": "1,999 text samples; 6,650 explanations"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "source-material",
+      "size": "834 heterographic puns, 1,074 homographic puns and 91 non-puns"
+    },
+    {
+      "name": "BookCorpus",
+      "role": "trained-on",
+      "size": "200 sentences that contain the pun word for a given pun word"
+    }
+  ],
+  "models_evaluated": [
+    "BERT-base",
+    "RoBERTa-base",
+    "DeBERTa-base",
+    "T5-base",
+    "ELV",
+    "AmbiPun"
+  ],
+  "methods_proposed": [
+    {
+      "name": "ExPUN annotation schema",
+      "summary": "The paper augments SemEval 2017 Task 7 samples with six annotation fields: understandability, offensiveness, joke intent, 1-5 funniness, natural-language explanations, and joke keywords."
+    },
+    {
+      "name": "Keyword aggregation algorithm",
+      "summary": "The algorithm merges five annotators' keyword lists by selecting high-reliability anchor annotators, fuzzy-matching keyword phrases with a threshold of 60, and choosing concise consensus keywords."
+    },
+    {
+      "name": "Pun explanation for classification",
+      "summary": "The paper formulates pun explanation as generating a natural-language explanation from a pun sentence, then evaluates explanation utility through pun classification using simulatability: acc(IE → O) − acc(I → O)."
+    },
+    {
+      "name": "Keyword-conditioned pun generation",
+      "summary": "The paper defines a generation task in which models receive human-annotated keywords, a pun word, an alternate pun word, and optionally pun-word senses, then generate a novel pun incorporating them."
+    },
+    {
+      "name": "T5PT+FT",
+      "summary": "The generation model first pretrains T5-base on BookCorpus sentences paired with RAKE-extracted keywords and then finetunes on ExPUN keyword-to-pun examples."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The related work section says human-extracted keywords usually reflect the ambiguity and distinctiveness principles discussed in Kao et al. (2016), motivating keyword-conditioned pun generation; the principles are not formalized as the annotation scheme."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "A professional team of 10 dedicated full-time annotators provided 5 annotations per sample, after a kick-off meeting, 3 pilot rounds, and 7 rounds of annotation with manual quality checks."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Dataset agreement was measured with averaged Cohen's kappa and Spearman's rho for numeric fields, and pairwise BLEU-4 and METEOR for explanation and keyword text fields."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Pun explanation quality was evaluated by simulatability, measuring joke-classification accuracy improvement when explanations are added to the input."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Keyword-conditioned pun generation was evaluated with word incorporation rate for pun words and keywords."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Amazon Mechanical Turk workers labeled whether generated puns were successful; workers had to pass a qualifier by correctly labeling >= 80% of 20 manually annotated samples, each item had 3 annotators, and Fleiss' kappa was κ = 0.49."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The ExPUN dataset contains 1,999 samples, with majority-vote labels identifying 1,795 understandable samples, 65 offensive/inappropriate samples, and 1,449 jokes, and the average funniness score is 1.68.",
+      "metric": "dataset statistics",
+      "value": "1,999 samples; 1,795; 65; 1,449; 1.68",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": null
+    },
+    {
+      "finding": "ExPUN includes 6,650 natural-language explanations, averaging 3.33 explanations per sample, 31.67 tokens per explanation, and 2.01 sentences per explanation.",
+      "metric": "annotation statistics",
+      "value": "6,650; 3.33; 31.67; 2.01",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": null
+    },
+    {
+      "finding": "Keyword annotations showed much higher lexical agreement than explanations.",
+      "metric": "BLEU-4 / METEOR",
+      "value": "AF6 Keywords: 0.58 / 0.74; AF5 Explain: 0.18 / 0.30",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": null
+    },
+    {
+      "finding": "For numeric annotation fields, the highest reported Cohen's kappa was for whether the text is a joke.",
+      "metric": "Cohen's κ / Spearman's ρ",
+      "value": "AF1 0.40 / 0.16; AF2 0.16 / 0.34; AF3 0.58 / 0.32; AF4 0.41 / 0.30",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": null
+    },
+    {
+      "finding": "With ExPUN keywords, T5PT+FT achieved the highest human-evaluated pun generation success rate.",
+      "metric": "Success Rate %",
+      "value": "77.0",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": "T5PT+FT"
+    },
+    {
+      "finding": "With ExPUN keywords, AmbiPun achieved the highest word incorporation rates but a lower human success rate than T5PT+FT.",
+      "metric": "Word Incorp. % p_w / K / both; Success Rate %",
+      "value": "99.0 / 92.1 / 94.4; 51.0",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": "AmbiPun"
+    }
+  ],
+  "key_findings": [
+    "ExPUN adds fine-grained humor annotations to SemEval 2017 Task 7 puns, including natural-language explanations and sparse joke keywords.",
+    "Annotators showed higher agreement on keyword spans than on free-form explanations, while joke intent had the strongest numeric-field kappa at 0.58.",
+    "Gold human-written explanations are useful for pun classification, and the paper reports that adding randomly sampled negative explanations further improves classification accuracy.",
+    "T5-generated explanations often identify the pun word but usually fail to explain the alternate word sense or phonological similarity needed for the wordplay.",
+    "Human-annotated ExPUN keywords led to more successful generated puns than RAKE-extracted keywords: T5PT+FT reached 77.0 success with ExPUN keywords versus 54.0 with RAKE keywords.",
+    "AmbiPun incorporated input words best under ExPUN keywords, but this did not translate into the highest human-rated pun success."
+  ],
+  "limitations": [
+    "The work focuses on puns, a single and very specific form of humorous language.",
+    "Humor is highly subjective, and perceptions of humor can differ greatly depending on annotators' backgrounds and experiences.",
+    "Generated explanations did not improve classification accuracy at test time, and qualitative analysis found that T5 often failed to explain alternate senses or phonological similarity.",
+    "The pun generation model can fail to incorporate the alternate word sense meaningfully and can copy input keywords into incoherent sentences.",
+    "Because the generation systems use pretrained language models, they are susceptible to generating biased or sensitive content, and the paper does not explicitly address those concerns within the framework."
+  ],
+  "safety_ethics_notes": "The paper states that no user data from commercial voice assistant systems is used; the source text comes from SemEval 2017 Task 7. Annotators were full-time employees with benefits, personal worker information was discarded, and pay per task was above the annotator's local minimum wage, approximately $15 USD / Hour. The authors acknowledge ACL Code of Ethics compliance and note that pretrained generation models may produce biased or sensitive content, which they do not explicitly address to date.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://github.com/amazon-research/expunations",
+    "other": null
+  }
+}

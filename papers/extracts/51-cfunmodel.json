@@ -1,0 +1,174 @@
+{
+  "key": "51-cfunmodel",
+  "ref": "#51",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/51-cfunmodel/51-cfunmodel.md",
+  "source_md_sha256": "5c11da64de0bb2067597c9db8923dac99d042f046a16ac9b068087ce953d748d",
+  "source_truncated": false,
+  "title": "CFunModel: A \"Funny\" Language Model Capable of Chinese Humor Generation and Processing",
+  "authors": [
+    "Zhenghan Yu",
+    "Xinyu Hu",
+    "Xiaojun Wan"
+  ],
+  "year": 2025,
+  "venue": "arXiv:2503.20417v1 [cs.CL]",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can a comprehensive multi-task Chinese humor dataset be constructed by aggregating open-source Chinese humor datasets and collecting jokes from Tieba—JokeBar?",
+    "Can supervised fine-tuning Qwen2.5-7B-Instruct on this dataset produce a language model capable of Chinese humor generation and processing?",
+    "How does CFunModel compare with GPT-4o, GPT-4o mini, DeepSeek-V3, and Qwen2.5-7B-Instruct on humor recognition, crosstalk response selection, joke generation, and crosstalk generation tasks?"
+  ],
+  "tasks": [
+    "Crosstalk Response Selection",
+    "Humor Recognition",
+    "Joke Generation",
+    "Joke Continuation",
+    "Humor Explanation",
+    "Crosstalk Generation",
+    "Crosstalk Continuation"
+  ],
+  "humor_domains": [
+    "Chinese jokes",
+    "Tieba—JokeBar online jokes",
+    "Chinese Crosstalk",
+    "Weibo social-media humor",
+    "humor explanations"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "CFunSet",
+      "role": "introduced",
+      "size": "over 160,000 samples"
+    },
+    {
+      "name": "CFunSet",
+      "role": "trained-on",
+      "size": "over 160,000 samples"
+    },
+    {
+      "name": "Tieba—JokeBar",
+      "role": "source-material",
+      "size": "over 20,000 jokes"
+    },
+    {
+      "name": "CrossDial",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "CrossDial",
+      "role": "evaluated-on",
+      "size": "4,664 samples for Dougen response selection and 2,688 samples for Penggen response selection"
+    },
+    {
+      "name": "Chumor 2.0",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HumorWB",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HumorWB",
+      "role": "evaluated-on",
+      "size": "4,200 samples for training and 1,091 samples for testing"
+    },
+    {
+      "name": "Chinese-Humor-Sentiment",
+      "role": "source-material",
+      "size": "over 4,000 Duet Crosstalk scripts"
+    },
+    {
+      "name": "Crosstalk-Generation",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "CCL-2019-Chinese-Humor-Computation",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "GPT-4o mini",
+    "DeepSeek-V3",
+    "Qwen2.5-7B-Instruct",
+    "CFunModel"
+  ],
+  "methods_proposed": [
+    {
+      "name": "CFunSet",
+      "summary": "A Chinese humor-related multi-task dataset built by cleaning existing open-source Chinese humor resources and collecting jokes from Tieba—JokeBar. Each sample is formatted with an instruction, input, and output for tasks such as humor recognition, crosstalk response selection, joke generation/continuation, crosstalk generation/continuation, and humor explanation."
+    },
+    {
+      "name": "CFunModel",
+      "summary": "A Chinese humor language model obtained by supervised fine-tuning Qwen2.5-7B-Instruct on CFunSet for 2 epochs with a learning rate of 2e-5 and batch size of 128. It is designed to generate and process Chinese humor across multiple task formats."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Accuracy was used for HumorWB humor recognition and CrossDial crosstalk response selection; HumorWB was manually split into 4,200 training samples and 1,091 test samples, and CrossDial test data comprised 4,664 Dougen and 2,688 Penggen samples."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "CFunModel achieved the best reported accuracy on CrossDial Dougen response selection, exceeding GPT-4o, GPT-4o mini, DeepSeek-V3, ERNIE, and Qwen2.5-7B-Instruct.",
+      "metric": "Accuracy",
+      "value": "91.70%",
+      "dataset": "CrossDial Dougen",
+      "best_system": "CFunModel"
+    },
+    {
+      "finding": "CFunModel achieved the best reported accuracy on CrossDial Penggen response selection, exceeding GPT-4o, GPT-4o mini, DeepSeek-V3, RoBERTa, and Qwen2.5-7B-Instruct.",
+      "metric": "Accuracy",
+      "value": "88.99%",
+      "dataset": "CrossDial Penggen",
+      "best_system": "CFunModel"
+    },
+    {
+      "finding": "CFunModel achieved the best reported accuracy on HumorWB humor recognition, above DeepSeek-V3's 85.15, GPT-4o mini's 84.78, GPT-4o's 83.41, and Qwen2.5-7B-Instruct's 79.56.",
+      "metric": "Accuracy",
+      "value": "85.98%",
+      "dataset": "HumorWB",
+      "best_system": "CFunModel"
+    }
+  ],
+  "key_findings": [
+    "CFunSet contains over 160,000 samples and combines existing Chinese humor datasets with over 20,000 jokes collected from Tieba—JokeBar.",
+    "CFunModel is trained by supervised fine-tuning Qwen2.5-7B-Instruct on CFunSet for 2 epochs using a learning rate of 2e-5 and batch size of 128 on four A40 GPUs.",
+    "On CrossDial, CFunModel reached 91.70% accuracy for Dougen response selection and 88.99% for Penggen response selection, substantially above Qwen2.5-7B-Instruct's 24.74 and 20.87.",
+    "On HumorWB, CFunModel reached 85.98% accuracy, above DeepSeek-V3's 85.15, GPT-4o mini's 84.78, GPT-4o's 83.41, and Qwen2.5-7B-Instruct's 79.56.",
+    "The paper's case studies report that CFunModel generates more coherent and humorous jokes and more engaging crosstalk scripts than Qwen2.5-7B-Instruct."
+  ],
+  "limitations": [
+    "The paper states that despite cleaning the Tieba-JokeBar data, misspellings, grammatical errors, and incorrect punctuation may remain in the final dataset.",
+    "Open-ended joke generation and crosstalk generation are evaluated through case studies rather than reported automatic metrics or formal human ratings.",
+    "The paper states that CFunModel was evaluated with temperature 0, while the baseline comparison setup used temperature 1."
+  ],
+  "safety_ethics_notes": "The paper states that all data sources are publicly available on the internet, but despite review and techniques to eliminate inappropriate language, some content may still inadvertently cause offense.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://huggingface.co/datasets/ZhenghanYU/CFunSet",
+    "other": "CFunModel: https://huggingface.co/ZhenghanYU/CFunModel; demonstration video: https://youtu.be/MOsISOJ66Ms"
+  }
+}

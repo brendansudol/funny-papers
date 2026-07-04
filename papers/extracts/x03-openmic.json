@@ -1,0 +1,188 @@
+{
+  "key": "x03-openmic",
+  "ref": "Part 2 (also in this cluster)",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x03-openmic/x03-openmic.md",
+  "source_md_sha256": "b4a4dfaa11fa9e0be1b471fc575249ae8f47bf9df59b43244fa9d8b70d7cb885",
+  "source_truncated": false,
+  "title": "OpenMic: A Multi-Agent-Based Stand-Up Comedy Generation System",
+  "authors": [
+    "Yuyang Wu",
+    "Hanzhong Cao",
+    "Jianhao Chen",
+    "Yufei Li"
+  ],
+  "year": null,
+  "venue": "Preliminary work",
+  "paper_types": [
+    "system",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can an end-to-end multi-agent system transform a user-provided life topic into a 3–5 minute Chinese stand-up performance and narrated comedy video?",
+    "Can retrieval-augmented generation and a fine-tuned JokeWriter mitigate the mismatch between Chinese humor datasets and long-form stand-up generation?",
+    "Can specialized agents improve comedic structure, timing, performability, and quality control through multi-round iterative refinement?",
+    "How do different sampling temperature settings affect LLM-as-a-judge scores for generated Chinese talk-show scripts?"
+  ],
+  "tasks": [
+    "Chinese stand-up comedy generation",
+    "Chinese talk-show script generation",
+    "performance-ready script markup",
+    "stand-up comedy video synthesis",
+    "LLM-as-a-judge humor evaluation"
+  ],
+  "humor_domains": [
+    "Chinese stand-up comedy",
+    "talkshows",
+    "crosstalk",
+    "setup–punchline jokes",
+    "callbacks",
+    "puns"
+  ],
+  "modalities": [
+    "text",
+    "audio",
+    "video"
+  ],
+  "languages": [
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "CFunSet",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "traditional crosstalk scripts",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "LLM-processed Talkshow dataset",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "integrated comedic corpus",
+      "role": "introduced",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-5.2",
+    "DeepSeek",
+    "Qwen-2.5-3B-Instruct",
+    "Qwen3-4B-Instruct",
+    "Grok-4-1-fast-reasoning"
+  ],
+  "methods_proposed": [
+    {
+      "name": "OpenMic",
+      "summary": "An end-to-end AutoGen-based multi-agent system that turns a user topic into a 3–5 minute Chinese stand-up performance and then into a narrated comedy video. It decomposes the pipeline into audience analysis, planning, script drafting, performance coaching, and quality control."
+    },
+    {
+      "name": "Blackboard-centric multi-agent coordination",
+      "summary": "A shared blackboard stores audience profiles, topic expansions, draft scripts, performance markup, and critiques so that agents read and write structured state instead of relying only on conversational context."
+    },
+    {
+      "name": "Hierarchical multi-agent RAG with Secret Blackboard",
+      "summary": "A triadic inner-conversation architecture performs semantic retrieval, LLM candidate scoring, and LLM punchline refinement over an integrated comedic corpus. A Secret Blackboard hides noisy raw retrieval material from the main workflow and releases only refined writing materials to the JokeWriter."
+    },
+    {
+      "name": "Dual-dimension QualityController",
+      "summary": "The QualityController separately evaluates retrieval quality and writer quality, then routes failures to re-retrieval, rewriting, or both. Termination occurs when both dimensions pass or the maximum iteration budget is reached."
+    },
+    {
+      "name": "Comedy-specialized QLoRA JokeWriter",
+      "summary": "The paper fine-tunes a JokeWriter with QLoRA and completion-only loss to better capture setup–punchline delay, callbacks, and spoken-stage style."
+    },
+    {
+      "name": "Structured performance DSL and video synthesis pipeline",
+      "summary": "The PerformanceCoach adds markers such as pauses, emphasis, pace changes, applause, and laughter cues. A downstream middleware parses these markers to synchronize synthesized audio and avatar performance in a narrated comedy video."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The paper frames humor as controlled mismatch followed by coherent reinterpretation, and uses this view to motivate planning, verification, setup–punchline delay, hidden bridges, callbacks, and timing-aware delivery."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper introduces backdoor-style and frontdoor-style multi-step reasoning patterns, with a bridging entity E_Z that must be searched for and revealed at the right moment."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "A senior executive producer persona powered by `Grok-4-1-fast-reasoning` scores generated talk-show scripts with a Pydantic-enforced schema across Persona Fidelity, Humor Mechanics, Interactive Reactivity, Contextual Coherence, and Narrative Arc."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper defines a weighted total score as S_total = 0.30P + 0.25H + 0.20R + 0.15C + 0.10N, where P, H, R, C, and N are Persona, Humor, Reactivity, Coherence, and Narrative scores."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Under the temperature sweep, JW+Tem0.1 scored strongly on all five reported dimensions.",
+      "metric": "Persona / Reactivity / Humor / Narrative / Coherence",
+      "value": "82.5 / 88.0 / 95.5 / 93.0 / 97.5",
+      "dataset": null,
+      "best_system": "JW+Tem0.1"
+    },
+    {
+      "finding": "JW+Tem0.3 had high Persona, Humor, Narrative, and Coherence scores but very low Reactivity.",
+      "metric": "Persona / Reactivity / Humor / Narrative / Coherence",
+      "value": "88.5 / 15.0 / 96.0 / 93.0 / 97.5",
+      "dataset": null,
+      "best_system": "JW+Tem0.3"
+    },
+    {
+      "finding": "JW+Tem0.5 achieved the highest Humor score shown in Table 1 and the highest Coherence score shown in Table 1.",
+      "metric": "Humor / Coherence",
+      "value": "96.5 / 98.5",
+      "dataset": null,
+      "best_system": "JW+Tem0.5"
+    },
+    {
+      "finding": "JW+Tem0.7 achieved the highest Persona and Narrative scores shown in Table 1, while Reactivity was lower than at T = 0.1.",
+      "metric": "Persona / Reactivity / Humor / Narrative / Coherence",
+      "value": "92.5 / 45.0 / 96.0 / 98.5 / 97.0",
+      "dataset": null,
+      "best_system": "JW+Tem0.7"
+    },
+    {
+      "finding": "In the multi-round refinement loop, the paper reports rapid convergence of the hardest failure case.",
+      "metric": "Case 3 frequency",
+      "value": "~30% of round-1 attempts; <5% by round 3",
+      "dataset": null,
+      "best_system": "OpenMic"
+    }
+  ],
+  "key_findings": [
+    "The paper concludes that low temperature settings such as T = 0.1 combined with a large RAG-retrieved joke corpus yield the most superior results by preserving focus on retrieved comedic building blocks.",
+    "Higher temperatures such as T ≥ 0.7 can improve variety and Narrative Arc, with Narrative Arc reaching 98.5 at T = 0.7, but the paper says they often weaken Reactivity by causing the JokeWriter to ignore RAG-provided setups.",
+    "The triadic RAG workflow is designed to prioritize comedic potential rather than simple factual similarity by adding LLM-based candidate scoring and punchline refinement after semantic retrieval.",
+    "The blackboard and Secret Blackboard mechanisms are presented as ways to preserve structured state while keeping noisy retrieval material out of downstream agents’ context windows.",
+    "The PerformanceCoach’s DSL markers are used to bridge text generation and video rendering by specifying pauses, emphasis, pace changes, applause, and laughter cues.",
+    "The paper states that Case 3 failures in dual-dimension quality assessment drop from ~30% of round-1 attempts to <5% by round 3."
+  ],
+  "limitations": [
+    "The paper states that humor evaluation is intrinsically difficult because funniness is subjective, culturally grounded, context-dependent, and sensitive to delivery and timing.",
+    "The paper states that commonly used Chinese humor datasets are often better suited for humor understanding and evaluation than for long-form stand-up generation.",
+    "The paper states that initial metrics in the temperature analysis exhibited a high degree of variance.",
+    "The paper reports LLM-as-a-judge evaluation but does not report human-audience or live-audience evaluation."
+  ],
+  "safety_ethics_notes": "The AudienceAnalyzer produces a taboo/avoid list covering sensitive references and overly offensive wording, and the QualityController checks safety and audience fit as part of writer-quality assessment.",
+  "artifacts": {
+    "code_url": "https://github.com/acetocarmine11/OpenMic",
+    "data_url": null,
+    "other": null
+  }
+}

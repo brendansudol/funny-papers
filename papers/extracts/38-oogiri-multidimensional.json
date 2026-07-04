@@ -1,0 +1,156 @@
+{
+  "key": "38-oogiri-multidimensional",
+  "ref": "#38",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/38-oogiri-multidimensional/38-oogiri-multidimensional.md",
+  "source_md_sha256": "23cd6014185771505ed182d822b69e932b744a1d587d4e339186463496d41729",
+  "source_truncated": false,
+  "title": "Assessing the Capabilities of LLMs in Humor: A Multi-dimensional Analysis of Oogiri Generation and Evaluation",
+  "authors": [
+    "Ritsu Sakabe",
+    "Hwichan Kim",
+    "Tosho Hirasawa",
+    "Mamoru Komachi"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can LLMs produce humorous responses that humans judge as funny?",
+    "Can LLMs judge humorous responses that humans judge as funny?"
+  ],
+  "tasks": [
+    "Oogiri generation",
+    "Oogiri evaluation"
+  ],
+  "humor_domains": [
+    "Oogiri"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "Japanese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Oogiri-GO",
+      "role": "source-material",
+      "size": "1,329 topics (313 text-based and 1,016 image-based) after filtering"
+    },
+    {
+      "name": "Oogiri-Chaya",
+      "role": "introduced",
+      "size": "551 topics (425 text-based and 126 image-based) after filtering"
+    },
+    {
+      "name": "Expanded Oogiri eval set (Sakabe et al.)",
+      "role": "introduced",
+      "size": "200 topics (100 text-based and 100 image-based) with eight types of responses"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4.1",
+    "Gemini 2.5 Pro",
+    "Claude Sonnet 4"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Six-dimensional Oogiri evaluation framework",
+      "summary": "The paper evaluates each topic–response pair with 0–4 absolute ratings on Novelty, Clarity, Relevance, Intelligence, Empathy, and Overall Funniness. The same rubric is used for human annotation and LLM-as-judge evaluation."
+    },
+    {
+      "name": "Expanded multi-dimensional annotated Oogiri corpus",
+      "summary": "The authors filter Oogiri-GO, newly collect Oogiri-Chaya data, select 200 topics, and construct eight response types per topic, including human tiers, unrelated controls, serious GPT-4.1 responses, and humorous responses from three LLMs. The resulting collection is annotated by humans and by the evaluated LLMs."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The discussion interprets LLM behavior through Suls’s two-stage incongruity-resolution model: LLMs can create incongruity via Novelty and Relevance, but fail at resolution because they lack Empathy."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Human annotation was conducted on Lancers; each response was rated by four different native Japanese speakers on six dimensions using a 0–4 integer scale."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-4.1, Gemini 2.5 Pro, and Claude Sonnet 4 evaluated the same topic–response pairs with the same six-dimensional rubric and prompt template used for human annotators."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper computes Spearman’s correlation coefficients between human scores and LLM scores; appendices also report Pearson correlations and significance tests with p < 0.05."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Source website vote counts were used to define High, Mid, and Low human response tiers and to select topics based on the popularity of their top-voted answers."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Gemini 2.5 Pro was the best LLM generator under human evaluation, but its Overall Funniness remained below human Mid-tier and above human Low-tier responses.",
+      "metric": "Mean Overall Funniness (0–4), human evaluation",
+      "value": "Gemini 2.5 Pro 1.803 (0.700); human Mid 1.913 (0.675); human Low 1.232 (0.658)",
+      "dataset": "Expanded Oogiri eval set (Sakabe et al.)",
+      "best_system": "Gemini 2.5 Pro"
+    },
+    {
+      "finding": "The largest qualitative weakness identified for LLM-generated Oogiri was Empathy relative to high-tier human responses.",
+      "metric": "Mean Empathy (0–4), human evaluation",
+      "value": "Human High 2.615 (0.656); GPT-4.1 1.858 (0.770); Gemini 2.5 Pro 2.053 (0.700); Claude Sonnet 4 1.830 (0.707)",
+      "dataset": "Expanded Oogiri eval set (Sakabe et al.)",
+      "best_system": "Gemini 2.5 Pro"
+    },
+    {
+      "finding": "Agreement between LLM and human Overall Funniness evaluations was low for all three models, with Claude Sonnet 4 highest.",
+      "metric": "Spearman correlation coefficient for Overall Funniness",
+      "value": "GPT-4.1 0.224; Gemini 2.5 Pro 0.169; Claude Sonnet 4 0.266",
+      "dataset": "Expanded Oogiri eval set (Sakabe et al.)",
+      "best_system": "Claude Sonnet 4"
+    },
+    {
+      "finding": "LLMs only weakly predicted the human High/Mid/Low hierarchy for Overall Funniness.",
+      "metric": "Accuracy for correctly predicting the Overall Funniness order of High, Mid, and Low",
+      "value": "GPT-4.1 50.9 %; Gemini 2.5 Pro 51.9 %; Claude Sonnet 4 54.1 %",
+      "dataset": "Expanded Oogiri eval set (Sakabe et al.)",
+      "best_system": "Claude Sonnet 4"
+    },
+    {
+      "finding": "LLM judges substantially overvalued Unrelated responses that humans rated as not funny.",
+      "metric": "Mean Overall Funniness (0–4) for Unrelated responses",
+      "value": "Human 0.681; GPT-4.1 2.411; Gemini 2.5 Pro 3.291; Claude Sonnet 4 2.183",
+      "dataset": "Expanded Oogiri eval set (Sakabe et al.)",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "LLMs generated Oogiri responses at a level between low- and mid-tier humans, with Gemini 2.5 Pro the strongest generator among GPT-4.1, Gemini 2.5 Pro, and Claude Sonnet 4.",
+    "Human evaluations showed that LLM responses were relatively coherent and relevant but notably weaker on Empathy, which the paper identifies as central to human-perceived funniness.",
+    "LLM-as-judge performance showed low agreement with human Overall Funniness judgments, even when correlations on more objective dimensions were higher.",
+    "The paper argues that humans prioritize Empathy when evaluating humor, whereas LLMs prioritize Novelty, producing a divergence in humor sensibilities.",
+    "LLM evaluators exhibited positivity bias toward weak or unrelated responses and self-preference bias toward LLM-generated responses."
+  ],
+  "limitations": [
+    "The empirical study focuses specifically on Japanese-language Oogiri humor.",
+    "The final evaluation set used 200 topics, split evenly between 100 text-based and 100 image-based topics.",
+    "Only GPT-4.1, Gemini 2.5 Pro, and Claude Sonnet 4 were used for the generation and evaluation experiments, with default generation parameter settings.",
+    "The paper notes potential first-mover advantage and conformity bias in Bokete/Oogiri-GO vote counts; Oogiri-Chaya was added because its hidden response and vote design is less biased."
+  ],
+  "safety_ethics_notes": "For Oogiri-Chaya, the authors detected topics and responses that potentially contained discriminatory, violent, sexual, or otherwise socially inappropriate content using GPT-4o, manually reviewed all flagged items, and removed those deemed inappropriate.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that it releases the annotated corpus and benchmark design, but no URL is provided in the transcribed text."
+  }
+}

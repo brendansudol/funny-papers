@@ -1,0 +1,659 @@
+{
+  "key": "59-subjective-language-survey",
+  "ref": "#59",
+  "section": "Part 9 - Surveys & Resources",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/59-subjective-language-survey/59-subjective-language-survey.md",
+  "source_md_sha256": "c2ea2762cf693b5f25962d96d27d8ed5e8eaeef174d481031231ee7f597581e2",
+  "source_truncated": false,
+  "title": "Large Language Models for Subjective Language Understanding: A Survey",
+  "authors": [
+    "Changhao Song",
+    "Yazhou Zhang",
+    "Hui Gao",
+    "Ben Yao",
+    "Peng Zhang"
+  ],
+  "year": 2025,
+  "venue": "Preprint. Under review.",
+  "paper_types": [
+    "survey"
+  ],
+  "research_questions": [
+    "How should subjective language understanding be defined from linguistic and cognitive perspectives, and what tasks fall under it?",
+    "How have LLMs been applied to sentiment analysis, emotion recognition, sarcasm detection, humor detection, stance detection, metaphor recognition, intent detection, and aesthetics identification?",
+    "What datasets, model families, prompting/fine-tuning/reasoning methods, and challenges characterize each subjective language task in the LLM era?",
+    "What commonalities and differences exist among subjective language tasks, and what is the potential for unified or multi-task LLM approaches?",
+    "What technical, ethical, societal, and evaluation issues remain open for LLM-based subjective language understanding?"
+  ],
+  "tasks": [
+    "sentiment analysis",
+    "emotion recognition",
+    "sarcasm detection",
+    "humor detection",
+    "funniness rating",
+    "humor type classification",
+    "humor explanation",
+    "humor generation",
+    "humor appropriateness/offense detection",
+    "stance detection",
+    "metaphor recognition",
+    "metaphor interpretation",
+    "intent detection",
+    "aesthetics identification"
+  ],
+  "humor_domains": [
+    "puns",
+    "one-liners",
+    "Reddit jokes",
+    "short jokes",
+    "news headline humor",
+    "satire",
+    "sarcasm",
+    "irony",
+    "memes",
+    "cartoon captions",
+    "graphical humor",
+    "visual humor",
+    "conversational humor",
+    "workplace humor",
+    "Chinese humor",
+    "Spanish humor",
+    "Hinglish puns",
+    "Croatian tweets",
+    "family jokes",
+    "slang-based humor",
+    "dark humor",
+    "multimodal humor"
+  ],
+  "modalities": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "English",
+    "Chinese",
+    "Spanish",
+    "Hinglish",
+    "Croatian",
+    "Thai",
+    "Arabic",
+    "Indonesian",
+    "Italian",
+    "Russian"
+  ],
+  "datasets_used": [
+    {
+      "name": "MR / Polarity dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Stanford Sentiment Treebank (SST; SST-2 and SST-5)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "IMDb",
+      "role": "analyzed",
+      "size": "50k balanced reviews"
+    },
+    {
+      "name": "Amazon product reviews",
+      "role": "analyzed",
+      "size": "millions of star ratings"
+    },
+    {
+      "name": "Yelp Reviews",
+      "role": "analyzed",
+      "size": "hundreds of thousands"
+    },
+    {
+      "name": "Sentiment140",
+      "role": "analyzed",
+      "size": "1.6M tweets, balanced binary"
+    },
+    {
+      "name": "Twitter US Airline Sentiment",
+      "role": "analyzed",
+      "size": "14,160 tweets"
+    },
+    {
+      "name": "SemEval-2017 Task 4",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "University of Michigan dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Tariyal et al. product-review tweets",
+      "role": "analyzed",
+      "size": "1,150 product-review tweets"
+    },
+    {
+      "name": "Hemakala and Santhoshkumar Indian airline tweets",
+      "role": "analyzed",
+      "size": "14,640 Indian airline tweets"
+    },
+    {
+      "name": "Rahat et al. tweets",
+      "role": "analyzed",
+      "size": "10k tweets"
+    },
+    {
+      "name": "SemEval-2014 Task 4",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "SemEval-2018 Irony in Tweets",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Nuclear power sarcasm tweet dataset",
+      "role": "analyzed",
+      "size": "5,929 tweets"
+    },
+    {
+      "name": "Financial PhraseBank",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Reddit market sentiment dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "ISEAR",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Emotion-Stimulus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "TEC",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CrowdFlower/Appen",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Electoral Tweets",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "DailyDialog",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "EmotionX",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "IEMOCAP",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MELD",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "EmoBank",
+      "role": "analyzed",
+      "size": "VAD scores"
+    },
+    {
+      "name": "SemEval 2018 Affect in Tweets",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "GoEmotions",
+      "role": "analyzed",
+      "size": "58k-comment Reddit corpus with 27 categories plus Neutral"
+    },
+    {
+      "name": "EmpatheticDialogues",
+      "role": "analyzed",
+      "size": "32 emotions"
+    },
+    {
+      "name": "RECCON",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "EmoWOZ",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Ambiguous Emotion Dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Ptáček Twitter corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "SemEval-2018 Task 3",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "News Headlines dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "SARC",
+      "role": "analyzed",
+      "size": "hundreds of thousands of comments"
+    },
+    {
+      "name": "CASCADE",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MUsTARD",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MUSTARD++",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "SemEval-2022 Task 6 (iSarcasmEval)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "PodSarc",
+      "role": "analyzed",
+      "size": "large spoken sarcasm benchmark from a podcast"
+    },
+    {
+      "name": "RedEval",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MMSD2.0",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MHSDB",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "BESSTIE",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "IdSarcasm",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "SARC 2.0 pol-bal",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Kaggle Short Jokes dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Kaggle 160,000 Jokes dataset",
+      "role": "analyzed",
+      "size": "160,000 jokes"
+    },
+    {
+      "name": "Pun of the Day",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "16k one-liners collection",
+      "role": "analyzed",
+      "size": "16k one-liners"
+    },
+    {
+      "name": "rJokes corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Spanish HAHA",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "English puns collections",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CHumor 1.0",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "UR-FUNNY (repo)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Unfunny Corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Aligned topic-matched joke/non-joke pairs",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "analyzed",
+      "size": "large English dataset—primarily tweets and short texts—with multiple annotators per item"
+    },
+    {
+      "name": "Twitter hashtag #humor collections",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "HahahaClf",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Hinglish pun sets",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "WRIME",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Dinner-party dialogues with humorous turns",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "HumorDB",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Chumor 2.0",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "TalkFunny",
+      "role": "analyzed",
+      "size": "large-scale humor response dataset with chain-of-humor annotations"
+    },
+    {
+      "name": "HumorBench",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "YesBut (V1)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "ClassicMemes-50-Templates",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MemeMind",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Workplace humor appropriateness (Not All Jokes Land)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CLEF JOKER",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "SemEval-2016 Task 6",
+      "role": "analyzed",
+      "size": "five targets"
+    },
+    {
+      "name": "Fake News Challenge (FNC-1)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "PERSPECTRum",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "ArgMin",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "P-STANCE",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "COVID-19 stance datasets",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "VAST",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "VaxxStance",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MAWQIF",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "d-Stance",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "ZeroStance",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "VU Amsterdam Metaphor Corpus (VUA/VUAMC)",
+      "role": "analyzed",
+      "size": "tens of thousands of labels"
+    },
+    {
+      "name": "TroFi",
+      "role": "analyzed",
+      "size": "3k sentences for 50 target verbs"
+    },
+    {
+      "name": "MOH-X",
+      "role": "analyzed",
+      "size": "647 verb instances"
+    },
+    {
+      "name": "LCC datasets",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "TOEFL metaphor dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Stab news corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Metaphor Understanding Challenge Dataset (MUNCH)",
+      "role": "analyzed",
+      "size": "over 10,000 human-written apt paraphrases and 1,500 inapt paraphrases"
+    },
+    {
+      "name": "Chinese metaphor Task 9 resource",
+      "role": "analyzed",
+      "size": "34,463 metaphorical sentences; two 500-sentence validation sets"
+    },
+    {
+      "name": "CMDAG",
+      "role": "analyzed",
+      "size": "28K-sentence Chinese literary corpus"
+    },
+    {
+      "name": "Russian metaphor novelty datasets",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Bhagavad Gita and Sermon on the Mount corpora",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Hyperbole and metaphor dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "VMC-P corpus",
+      "role": "analyzed",
+      "size": "large paraphrase-rich"
+    },
+    {
+      "name": "Figurative Archive",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CM3D",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "II-Bench",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Book of Songs corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Textual Aesthetics dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "AesBench",
+      "role": "analyzed",
+      "size": null
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The survey states that humor often relies on incongruity and explicitly cites incongruity-resolution theory as a core modeling challenge for LLM humor detection."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "cited-in-passing",
+      "detail": "The paper describes humor as involving cognitive processes such as surprise and incongruity."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "For metaphor recognition, the paper discusses Conceptual Metaphor Theory and source–target mappings as theoretical grounding for LLM prompting and multimodal metaphor methods."
+    }
+  ],
+  "evaluation_methods": [],
+  "headline_results": [],
+  "key_findings": [
+    "The survey frames subjective language understanding as an umbrella over affective, opinion-oriented, figurative, pragmatic, and aesthetic tasks that require models to go beyond literal meaning.",
+    "It argues that LLMs are useful for subjective language because of in-context learning, broad world knowledge, generation of explanations, transfer across tasks, and multimodal extensions.",
+    "Across tasks, the survey reports that standard prompting is helpful but often brittle, while fine-tuning, PEFT, retrieval, structured reasoning, and multi-agent or multimodal pipelines can improve robustness when appropriate data or context is available.",
+    "The paper repeatedly identifies sarcasm, humor, metaphor interpretation, and aesthetics as harder than more established tasks such as sentiment analysis because they rely more heavily on implicit meaning, cultural knowledge, and pragmatic inference.",
+    "For humor specifically, the survey emphasizes that realistic, culturally grounded, multimodal benchmarks such as Chumor 2.0, HumorBench, HumorDB, MHSDB, and YesBut expose persistent gaps between LLMs and human humor understanding.",
+    "The authors call for unified frameworks and benchmarks that evaluate not only accuracy, but also reasoning, ambiguity handling, fairness, cultural diversity, and human-aligned judgment."
+  ],
+  "limitations": [
+    "The paper is a survey and does not run new experiments or provide a unified quantitative benchmark across the eight tasks.",
+    "Many comparisons are qualitative summaries of prior work rather than directly comparable results with shared models, prompts, metrics, and datasets.",
+    "The survey notes that subjective task labels are often ambiguous, culturally dependent, and affected by low inter-annotator agreement.",
+    "The paper identifies persistent LLM weaknesses in implicit meaning, sarcasm, humor, metaphor interpretation, long-range context, and multimodal pragmatic reasoning.",
+    "The paper highlights that data scarcity, dataset bias, domain shift, and low-resource language coverage limit robust evaluation and deployment.",
+    "The paper notes computational cost and black-box behavior as practical obstacles for LLM-based subjective language systems."
+  ],
+  "safety_ethics_notes": "The survey highlights bias amplification, unfair treatment of dialects or cultural groups, privacy risks when analyzing personal emotions or communications, possible misuse for persuasion or manipulation, and humor-specific risks such as safety filters erasing minority comedic perspectives or dark-humor prompts bypassing safety tuning.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

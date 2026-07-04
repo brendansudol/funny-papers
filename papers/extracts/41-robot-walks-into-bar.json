@@ -1,0 +1,180 @@
+{
+  "key": "41-robot-walks-into-bar",
+  "ref": "#41",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/41-robot-walks-into-bar/41-robot-walks-into-bar.md",
+  "source_md_sha256": "4348fb31b354d3395d3ea62c3ccfbe0eed033d8c627d32e5c05670601c9104b8",
+  "source_truncated": false,
+  "title": "A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy? An Evaluation of LLMs’ Humour Alignment with Comedians",
+  "authors": [
+    "Piotr W. Mirowski",
+    "Juliette Love",
+    "Kory Mathewson",
+    "Shakir Mohamed"
+  ],
+  "year": 2024,
+  "venue": "The 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT ’24), June 3–6, 2024, Rio de Janeiro, Brazil",
+  "paper_types": [
+    "evaluation-study",
+    "HCI-study"
+  ],
+  "research_questions": [
+    "What are the current state, use-cases, and limitations of generally available instruction-tuned LLMs as comedy-writing support tools?",
+    "How do professional comedians evaluate LLMs as creativity support tools for comedy writing, including via the Creativity Support Index?",
+    "How do comedians experience and interpret LLM problems around stereotypes, censorship or moderation, missing context, and homogenisation?",
+    "What ethical concerns do comedians raise about using AI for comedy, especially around bias, copyright, data ownership, and value alignment?"
+  ],
+  "tasks": [
+    "LLM-assisted comedy writing",
+    "joke generation",
+    "joke co-writing",
+    "joke rating/detection/explanation",
+    "comedy material rewriting/completion",
+    "joke translation"
+  ],
+  "humor_domains": [
+    "comedy writing",
+    "stand-up",
+    "improvised theatre",
+    "sketches",
+    "live comedy performance",
+    "dark humor",
+    "offensive jokes",
+    "satire"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "German",
+    "Dutch",
+    "English",
+    "French",
+    "Hindi",
+    "Swedish",
+    "Tamil"
+  ],
+  "datasets_used": [
+    {
+      "name": "AI x Comedy workshop writing-session outputs, survey results, and focus-group transcripts",
+      "role": "introduced",
+      "size": "20 professional comedians; 4 focus groups; 45-minute writing sessions"
+    }
+  ],
+  "models_evaluated": [
+    "ChatGPT-3.5",
+    "GPT-4",
+    "Gemini Pro (via Google Bard)"
+  ],
+  "methods_proposed": [
+    {
+      "name": "AI x Comedy mixed-method workshop protocol",
+      "summary": "The study combines a roughly 45-minute comedy-writing exercise with LLMs, Likert-scale and Creativity Support Index surveys, free-form survey questions, and one-hour focus groups with professional comedians. Focus-group transcripts are analyzed using constant comparison analysis with open coding and thematic grouping."
+    },
+    {
+      "name": "Community-based cultural value alignment for humour and comedy",
+      "summary": "The paper proposes moving from global value alignment toward alignment with specific comedy communities and intended audiences, using community data, feedback, norms, and governance. It also argues for incorporating relational context and giving artists more control over moderation decisions."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The introduction cites incongruity as a basic element of humour, where the setup points in one direction and the punch line in another, and later frames producing and resolving incongruity as a task with human-level difficulty."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "Mentioned in a footnote as an alternative humour theory of tension and release."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "Mentioned in a footnote as an alternative humour theory in which we laugh at others’ misfortunes to feel better about ourselves."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "cited-in-passing",
+      "detail": "Mentioned in a footnote as an alternative humour theory."
+    },
+    {
+      "theory": "frame-shifting / conceptual blending",
+      "usage": "grounding/motivation",
+      "detail": "The discussion cites Winters’ claim that humour’s frame-shifting prerequisite makes it difficult for machines and supports the view that humour can be an AI-complete problem."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Twenty professional comedians used generally available instruction-tuned LLMs in a comedy-writing session, then completed Likert-scale questions and a Creativity Support Index questionnaire assessing Exploration, Expressiveness, Immersion, Enjoyment, Results Worth Effort, and Collaboration."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "The authors manually verified transcripts and performed constant comparison analysis: sentence-by-sentence open coding, grouping codes into themes, and identifying themes coherent across four focus groups."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The overall Creativity Support Index score for LLMs as comedy-writing tools was described as mediocre.",
+      "metric": "Creativity Support Index",
+      "value": "μ = 54.6, σ = 18.1",
+      "dataset": "AI x Comedy workshop writing-session outputs, survey results, and focus-group transcripts",
+      "best_system": null
+    },
+    {
+      "finding": "The study did not observe a significant change in Creativity Support Index among the models between the August and December workshops.",
+      "metric": "Creativity Support Index by workshop period",
+      "value": "August 2023 (μ = 50, σ = 15.8); December 2023 (μ = 60, σ = 19.6)",
+      "dataset": "AI x Comedy workshop writing-session outputs, survey results, and focus-group transcripts",
+      "best_system": null
+    },
+    {
+      "finding": "The participant pool consisted of professional comedians split evenly between an in-person Edinburgh Festival Fringe workshop and online workshops.",
+      "metric": "Participant count",
+      "value": "20 professional comedians; 10 in person at the Edinburgh Festival Fringe, 10 online",
+      "dataset": "AI x Comedy workshop writing-session outputs, survey results, and focus-group transcripts",
+      "best_system": null
+    },
+    {
+      "finding": "A recurring qualitative result was that multiple comedians found LLM outputs bland or generic.",
+      "metric": "Qualitative count",
+      "value": "Six participants",
+      "dataset": "AI x Comedy workshop writing-session outputs, survey results, and focus-group transcripts",
+      "best_system": null
+    },
+    {
+      "finding": "Only part of the participant pool answered the Likert question about whether they collaborated with AI.",
+      "metric": "Survey response count for “Collaborated with AI”",
+      "value": "Only 10 participants",
+      "dataset": "AI x Comedy workshop writing-session outputs, survey results, and focus-group transcripts",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Comedians saw some practical value in LLMs for quick first drafts, structure, brainstorming, criticism, choreography assistance, translation, and historical lookup.",
+    "Many participants judged generated comedy to be poor, bland, generic, and dependent on the human writer to supply the humorous elements.",
+    "Participants said moderation and safety filtering limited creative agency, blocked common comedy topics such as sexually suggestive material, dark humor, and offensive jokes, and acted as a form of censorship.",
+    "Participants reported that LLMs reflected dominant Western, white, heteronormative, and male norms, and that attempts to prompt non-dominant identities often produced only shallow changes.",
+    "Comedians identified fundamental limitations of LLMs for comedy: lack of lived experience, perspective, audience and venue context, delivery, and surprise.",
+    "Participants raised concerns about copyrighted training data, possible plagiarism, lack of diversity in training data, licensing, compensation, and transparency."
+  ],
+  "limitations": [
+    "Participants were recruited because they already used AI in their artistic processes, which the authors state likely biased the results.",
+    "The study included only 20 professional comedians, with 10 in person and 10 online.",
+    "The authors did not collect demographic data because participant anonymity was an ethics requirement, limiting demographic analysis of opinions.",
+    "The wording of some background questionnaire items could be considered potentially biasing.",
+    "The focus-group questions were leading and could have biased respondents.",
+    "The study used generally available instruction-tuned models and notes that more complex prompting strategies could have produced higher-quality outputs.",
+    "The authors explicitly state that they do not generalize their findings beyond comedy.",
+    "The paper does not propose technical solutions for incorporating broader relational context into LLMs."
+  ],
+  "safety_ethics_notes": "The study was approved by the authors’ institutional ethics board, obtained active consent, allowed withdrawal without prejudice, paid participants £300 for 3 hours, and anonymised participants. The paper includes a warning that it may contain offensive language and discusses self-harm; the authors also discuss adverse impacts including reputation damage for comedians using AI, accidental publication of comedians’ work, and advertising LLM use as writing tools.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that full outputs of the writing sessions, individual survey results, and raw focus-group transcripts will be shared in anonymised form as supplementary material once the work is published."
+  }
+}

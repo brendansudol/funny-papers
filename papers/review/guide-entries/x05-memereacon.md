@@ -1,0 +1,3 @@
+<!-- guide claims for x05-memereacon (Part 3 (also in this section)) -->
+
+**Also in this section:** [Humor in Pixels / PixelHumor](https://arxiv.org/abs/2509.12248) (EMNLP Findings 2025, multi-panel online comics) `dataset`; [MemeReaCon](https://arxiv.org/abs/2505.17433) (Zhao et al., EMNLP 2025; 1,565 instances from 5 subreddits keeping image + post + comments) `benchmark`.

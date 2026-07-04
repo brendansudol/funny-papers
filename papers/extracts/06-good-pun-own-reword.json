@@ -1,0 +1,201 @@
+{
+  "key": "06-good-pun-own-reword",
+  "ref": "#6",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/06-good-pun-own-reword/06-good-pun-own-reword.md",
+  "source_md_sha256": "019ebaf3fff27a79ae6974520f00e3a8eaf894f968b9ca2ce79e9cf41d824b54",
+  "source_truncated": false,
+  "title": "“A good pun is its own reword”: Can Large Language Models Understand Puns?",
+  "authors": [
+    "Zhijun Xu",
+    "Siyu Yuan",
+    "Lingjie Chen",
+    "Deqing Yang"
+  ],
+  "year": 2024,
+  "venue": "EMNLP 2024",
+  "paper_types": [
+    "benchmark",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can LLMs distinguish between puns and non-puns, and how sensitive are they to biased prompts?",
+    "Can LLMs explain the humor in puns by identifying the pun word, alternative word, pun sense, and alternative sense?",
+    "Can LLMs generate successful, funny, and original puns from a pun pair, with or without relevant contextual words?",
+    "What characteristic failure modes do LLMs exhibit across pun recognition, explanation, and generation?"
+  ],
+  "tasks": [
+    "pun recognition",
+    "pun explanation",
+    "pun generation",
+    "non-pun generation baseline",
+    "pun originality evaluation"
+  ],
+  "humor_domains": [
+    "puns",
+    "homographic puns",
+    "heterographic puns",
+    "wordplay",
+    "non-pun jokes",
+    "proverbs"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "ExPUNations (ExPun)",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Filtered SemEval-2017 Task 7 + ExPun evaluation set (Hom-Dataset and Het-Dataset)",
+      "role": "introduced",
+      "size": "Hom-Dataset: 10 hom-pun examples, 10 non-pun examples, 810 hom-pun test data, 633 non-pun test data; Het-Dataset: 10 het-pun examples, 10 non-pun examples, 647 het-pun test data, 499 non-pun test data"
+    }
+  ],
+  "models_evaluated": [
+    "Llama2-7B-Chat",
+    "Mistral-7B",
+    "Vicuna-7B",
+    "OpenChat-7B",
+    "Gemini-Pro",
+    "GPT-3.5-Turbo",
+    "Claude-3-Opus",
+    "GPT-4-Turbo"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Dual-biased prompted asking",
+      "summary": "For pun recognition, the paper asks each model with prompts biased toward either “pun” or “non-pun” and measures accuracy plus response consistency through ΔTPR, ΔTNR, and Cohen’s κ."
+    },
+    {
+      "name": "Punchline check",
+      "summary": "For pun explanation, three annotators check whether explanations correctly mention the pun word, alternative word, pun sense, and alternative sense, producing Average Mention Ratio scores for each element."
+    },
+    {
+      "name": "Pairwise comparison for pun explanations",
+      "summary": "GPT-4 compares each model explanation against the human explanation, allowing win, tie, or loss, to estimate coarse-grained explanation quality at scale."
+    },
+    {
+      "name": "Free and constrained pun generation settings",
+      "summary": "The paper evaluates pun generation both from only the pun pair and from the pun pair plus contextual words, testing unconstrained creativity and context-conditioned generation."
+    },
+    {
+      "name": "Overlap and Strict Success",
+      "summary": "The Overlap metric removes provided pun words, alternative words, and contextual words, then computes lexical overlap between LLM and human puns; Strict Success counts generated puns that are both successful and have overlap < 0.5."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes pun humor as double meaning through the pun pair P_p = <w_p, w_a, S_p, S_a>, where humor depends on the pun word, alternative word, pun sense, alternative sense, and contextual words."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "operationalized",
+      "detail": "Pun generation is evaluated using the Surprise metric from He et al. (2019), based on the unexpected presence of the pun word over an anticipated alternative word."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The generation evaluation also uses Ambiguity and Distinctiveness from Kao et al. (2016), measuring whether the sentence supports both meanings and whether those meanings are distinctive."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Pun recognition uses TPR, TNR, Cohen’s κ, ΔTPR, and ΔTNR; pun generation uses Ambiguity, Distinctiveness, Surprise, One-pun-word Incorporation Rate, Contextual Word Incorporation Rate, Overlap, and Strict Success."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Three English-major undergraduate annotators evaluated 100 hom-puns and 100 het-puns for punchline checks; their annotations had Fleiss’s κ = 0.87, and disagreements were resolved by majority view."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The same subset of 100 hom-puns and 100 het-puns was used for manual pun generation evaluation, where annotators judged Success Rate and rated Funniness from 1 to 5."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-4 performed pairwise comparisons between human and model explanations, choosing a winner or tie; GPT-4 achieved 88.3% consistency with annotators on sampled data."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "With the enhanced prompt, GPT-4-Turbo achieved the strongest pun-recognition consistency on homographic puns.",
+      "metric": "TPR / ΔTPR / TNR / ΔTNR / κ",
+      "value": "0.988 / -0.001 / 0.758 / +0.010 / 0.962",
+      "dataset": "Hom-Dataset",
+      "best_system": "GPT-4-Turbo"
+    },
+    {
+      "finding": "With the enhanced prompt, GPT-4-Turbo also achieved the strongest recognition consistency on heterographic puns.",
+      "metric": "TPR / ΔTPR / TNR / ΔTNR / κ",
+      "value": "0.961 / +0.008 / 0.796 / -0.006 / 0.959",
+      "dataset": "Het-Dataset",
+      "best_system": "GPT-4-Turbo"
+    },
+    {
+      "finding": "In punchline checking, GPT-4-Turbo best captured homographic pun elements among LLMs, while human explanations still led on the alternative sense.",
+      "metric": "Average Mention Ratio for w_p / w_a / S_p / S_a",
+      "value": "GPT-4-Turbo: 0.98 / 0.98 / 0.96 / 0.93; Human: 0.95 / 0.95 / 0.95 / 0.95",
+      "dataset": "100 sampled hom-puns",
+      "best_system": "GPT-4-Turbo"
+    },
+    {
+      "finding": "For heterographic pun explanations, GPT-4-Turbo and Claude-3-Opus were strongest among LLMs but still trailed humans on the hidden alternative word and sense.",
+      "metric": "Average Mention Ratio for w_p / w_a / S_p / S_a",
+      "value": "GPT-4-Turbo: 0.96 / 0.90 / 0.93 / 0.85; Claude-3-Opus: 0.95 / 0.84 / 0.94 / 0.78; Human: 0.97 / 0.97 / 0.94 / 0.93",
+      "dataset": "100 sampled het-puns",
+      "best_system": "GPT-4-Turbo / Claude-3-Opus"
+    },
+    {
+      "finding": "In constrained homographic pun generation, GPT-4-Turbo had the best Success Rate and Funniness among LLMs, but remained below human puns.",
+      "metric": "Success / Funny",
+      "value": "GPT-4-Turbo: 0.670 / 2.584; Human pun: 0.860 / 3.268",
+      "dataset": "Hom-Dataset generation subset",
+      "best_system": "GPT-4-Turbo"
+    },
+    {
+      "finding": "In constrained heterographic pun generation, Claude-3-Opus had the best Success Rate, while Claude-3-Opus and GPT-4-Turbo tied on Funniness, still below humans.",
+      "metric": "Success / Funny",
+      "value": "Claude-3-Opus: 0.610 / 2.348; GPT-4-Turbo: 0.600 / 2.348; Human pun: 0.840 / 3.229",
+      "dataset": "Het-Dataset generation subset",
+      "best_system": "Claude-3-Opus"
+    }
+  ],
+  "key_findings": [
+    "Most tested LLMs were influenced by prompt bias in pun recognition, and adding a pun definition plus examples improved consistency and non-pun recognition.",
+    "TNR was generally lower than TPR because the non-puns were mostly non-pun jokes and proverbs, making them similar to puns.",
+    "The paper found no obvious difference between hom-puns and het-puns in recognition, but het-pun explanation and generation were harder.",
+    "Most LLMs, except GPT-4-Turbo and Claude-3-Opus, struggled to identify alternative words and alternative senses in het-puns because the alternative word is not directly present in the text.",
+    "Providing relevant contextual words improved generation quality and success rate, but increased the chance that LLMs reproduced human puns.",
+    "LLMs often used a “lazy pun generation” pattern, placing multiple pun or alternative words in different parts of the sentence rather than combining both meanings into one punchline."
+  ],
+  "limitations": [
+    "All evaluated pun texts are in English, and the authors note that pun understanding may vary across languages with different definitions, structures, or purposes.",
+    "The Overlap metric is only a rough plagiarism/originality indicator because LLM training data are largely unavailable and models might copy puns not present in the authors’ dataset.",
+    "Evaluation of pun explanation quality and generated pun success depends on human judgments, and annotator preferences for detail, clarity, brevity, and humor may vary.",
+    "The authors note that a pun amusing to one person may offend another.",
+    "The authors cannot guarantee that the publicly sourced pun datasets are free from socially harmful or toxic language."
+  ],
+  "safety_ethics_notes": "The paper states that annotators were recruited by the authors’ institution, paid $9/h exceeding the local minimum wage, consented to the use of their generated pun data, and had their privacy respected. The authors acknowledge possible socially harmful or toxic language in public pun datasets and note that humor judgments vary across backgrounds. They also state that ChatGPT was used to correct grammatical errors in the paper.",
+  "artifacts": {
+    "code_url": "https://github.com/Zhijun-Xu/PunEval",
+    "data_url": null,
+    "other": "Prompts are provided in Appendix B; annotation interface screenshots are shown in Figures 6, 7, and 8."
+  }
+}

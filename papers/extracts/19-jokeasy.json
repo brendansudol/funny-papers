@@ -1,0 +1,142 @@
+{
+  "key": "19-jokeasy",
+  "ref": "#19",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/19-jokeasy/19-jokeasy.md",
+  "source_md_sha256": "c6b7143d54161ecb77ffb4c4a4fa776e7940ab2c65adbc7b9012fe6f932d2939",
+  "source_truncated": false,
+  "title": "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
+  "authors": [
+    "Yate Ge",
+    "Lin Tian",
+    "Chiqian Xu",
+    "Luyao Xu",
+    "Meiying Li",
+    "Yuanda Hu",
+    "Weiwei Guo"
+  ],
+  "year": 2025,
+  "venue": "IASDR 2025",
+  "paper_types": [
+    "system",
+    "HCI-study"
+  ],
+  "research_questions": [
+    "How can human writers and search-enabled LLM agents collaborate effectively throughout the process of thematic joke creation?",
+    "How can real-time, web-sourced information be presented and integrated in human–AI co-creation to enrich rather than overwhelm the creative process?",
+    "How should responsibilities be divided between the human writer and the AI during ideation, refinement, and prototype generation?",
+    "What types of interfaces can best reveal the agent’s reasoning while maintaining user control and creative flow?"
+  ],
+  "tasks": [
+    "thematic joke generation",
+    "thematic joke writing",
+    "stand-up comedy joke creation",
+    "AI-assisted joke co-writing"
+  ],
+  "humor_domains": [
+    "thematic jokes",
+    "stand-up comedy",
+    "current-event and cultural-reference humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Jokeasy qualitative user study data",
+      "role": "analyzed",
+      "size": "18 participants (P1–P18); 13 general users and 5 expert users"
+    },
+    {
+      "name": "Web search results retrieved via Tavily API",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "moonshot-v1-auto"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Jokeasy",
+      "summary": "A search-enabled visual co-writing prototype for thematic joke generation. It lets users gather web material, organize it into editable inspiration blocks, and develop multiple joke maps on a visual canvas with an LLM agent."
+    },
+    {
+      "name": "Dual-role LLM agent",
+      "summary": "The LLM agent acts first as a material scout that searches for timely, relevant material and then as a prototype writer that assembles setup-and-punchline joke skeletons from the retrieved content."
+    },
+    {
+      "name": "Four-stage inspiration-block workflow",
+      "summary": "The workflow consists of topic ideation, inspiration generation and initial prototype creation, inspiration validation and collaborative refinement, and final joke synthesis. Retrieved search results are transformed into manipulable inspiration blocks that users can edit, delete, add, or regenerate."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Counter-balanced qualitative user study with 18 participants: 13 general users and 5 expert users individually used a baseline conversational system and Jokeasy for stand-up comedy joke creation tasks, with a suggested 15-minute limit per task. The study collected think-aloud comments, on-screen actions, video recordings, system logs, and 15-minute semi-structured interviews, followed by thematic analysis."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Most participants favoured Jokeasy over the baseline chat tool for thematic-joke creation.",
+      "metric": "participant preference",
+      "value": "13 / 18",
+      "dataset": "Jokeasy qualitative user study data",
+      "best_system": "Jokeasy"
+    },
+    {
+      "finding": "Eight participants said the agent reliably matched their intentions, sparked new ideas, or helped when they ran out of ideas.",
+      "metric": "participant count",
+      "value": "Eight participants",
+      "dataset": "Jokeasy qualitative user study data",
+      "best_system": "Jokeasy"
+    },
+    {
+      "finding": "Fourteen participants praised the canvas for its structured clarity.",
+      "metric": "participant count",
+      "value": "Fourteen participants",
+      "dataset": "Jokeasy qualitative user study data",
+      "best_system": "Jokeasy"
+    },
+    {
+      "finding": "All five experts saw clear value in pairing an LLM with live search, especially for humour that must reference current events.",
+      "metric": "expert agreement",
+      "value": "All five experts",
+      "dataset": "Jokeasy qualitative user study data",
+      "best_system": "Jokeasy"
+    },
+    {
+      "finding": "Most experts felt the non-linear canvas fits joke-writing practice.",
+      "metric": "expert agreement",
+      "value": "4 / 5",
+      "dataset": "Jokeasy qualitative user study data",
+      "best_system": "Jokeasy"
+    }
+  ],
+  "key_findings": [
+    "Jokeasy’s structured four-stage workflow and editable visual canvas made thematic joke creation feel more organized and controllable than the baseline conversational system for most participants.",
+    "Integrated search and one-to-one links between inspiration blocks and supporting web evidence helped users trace why the AI generated an inspiration and browse source material more efficiently.",
+    "Some retrieved results were judged too general, weakly related, redundant, or overly broad, leading users and experts to ask for finer search control and source selection.",
+    "Several participants valued the canvas as a mind-map-like collaboration scaffold, but some found it initially complex or less naturally conversational than the baseline.",
+    "Experts viewed Jokeasy as especially useful for novices and as a drafting aid for experienced writers, while emphasizing that final comic judgment must remain with human creators."
+  ],
+  "limitations": [
+    "The prototype was developed to explore early-stage thematic joke creation and does not yet support comprehensive editing or refinement of complete stand-up scripts.",
+    "The implementation relies on a simplified web search tool, which occasionally yielded overly broad or insufficiently specific results.",
+    "The qualitative user study had a relatively modest sample size, limiting broader generalizability.",
+    "The general-purpose orientation of Jokeasy may have constrained deeper insights tailored to specialized user groups or professional contexts."
+  ],
+  "safety_ethics_notes": "Participants provided informed consent; general users received 40 RMB and expert users received 200 RMB. The paper also notes expert concerns about controversial retrieved items needing user filtering, the need to balance surprise and social appropriateness, and worries that easy AI generation might dilute originality and threaten professional livelihoods.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Prototype front-end developed as a Figma widget plugin; back-end built using Node.js; search implemented using the Tavily API. No public code or data URL is stated."
+  }
+}

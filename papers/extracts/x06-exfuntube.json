@@ -1,0 +1,199 @@
+{
+  "key": "x06-exfuntube",
+  "ref": "Part 3 (video humor)",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x06-exfuntube/x06-exfuntube.md",
+  "source_md_sha256": "80514c8982fb8918f96a4036b4c7b5198928ced1422a4825ac975d1f49b09c27",
+  "source_truncated": false,
+  "title": "Can Language Models Laugh at YouTube Short-form Videos?",
+  "authors": [
+    "Dayoon Ko",
+    "Sangho Lee",
+    "Gunhee Kim"
+  ],
+  "year": 2024,
+  "venue": "arXiv:2310.14159v3 [cs.CL]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a dataset of user-generated short-form videos with timestamps and explanations evaluate whether models understand why videos are funny?",
+    "Can a GPT-3.5-based filtering pipeline select videos whose humor depends on both verbal and visual elements?",
+    "Does zero-shot video-to-text prompting improve LLMs' ability to generate explanations of video humor compared with text-only and multimodal baselines?",
+    "How do different modalities and humor categories affect explanation performance on multimodal funny videos?"
+  ],
+  "tasks": [
+    "video humor explanation",
+    "funny moment timestamp annotation",
+    "funny moment localization for rationale quality evaluation",
+    "humor taxonomy analysis"
+  ],
+  "humor_domains": [
+    "short-form YouTube videos",
+    "user-generated videos",
+    "multimodal video humor",
+    "surprises",
+    "absurdity",
+    "irony",
+    "parody",
+    "wordplay",
+    "clownish humor",
+    "deadpan",
+    "observational humor",
+    "misunderstanding",
+    "satire",
+    "situational humor",
+    "visual gags",
+    "personification",
+    "dark humor",
+    "mispronunciation",
+    "exaggeration",
+    "sarcasm",
+    "slapstick",
+    "jokes",
+    "self-deprecating humor"
+  ],
+  "modalities": [
+    "video",
+    "audio",
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "ExFunTube",
+      "role": "introduced",
+      "size": "10,136 videos; 11,166 explanations"
+    },
+    {
+      "name": "r/youtubehaiku subreddit",
+      "role": "source-material",
+      "size": "220K videos"
+    }
+  ],
+  "models_evaluated": [
+    "T5 Large",
+    "BART Large",
+    "GPT-3.5 text-davinci-003",
+    "MAF",
+    "VideoChat-Text"
+  ],
+  "methods_proposed": [
+    {
+      "name": "ExFunTube video filtering pipeline",
+      "summary": "The pipeline crawls short-form videos, generates video captions and speech transcripts, and uses GPT-3.5 to keep videos whose funny utterances and explanations depend on visual information. It then removes videos with unsafe or inappropriate content through manual review."
+    },
+    {
+      "name": "Zero-shot video-to-text prompting",
+      "summary": "The method converts video into chronological text prompts by segmenting scenes, generating visual captions with BLIP-2 and InternVideo, transcribing and speaker-separating speech with Whisper and ChatGPT, and adding sound tags. LLMs then generate up to three sentences explaining why the video is funny."
+    },
+    {
+      "name": "Moment-localization rationale quality evaluation",
+      "summary": "The paper adapts rationale quality evaluation to video humor by training QD-DETR to localize gold funny moments from gold explanations, then measuring the IoU-based gap when model-generated explanations are used instead."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The introduction cites incongruity theory and Suls' incongruity-resolution theory to motivate why humor understanding requires context and resolving unexpected content."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "For analysis, the paper classifies videos into 20 humor categories referring to Martin and Ford (2018) and Buijzen and Valkenburg (2004)."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Model-based automatic scores compare generated explanations with gold explanations using SentBERT Score and ROSCOE reasoning alignment (RA), reporting threshold proportions and mean scores."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Rationale quality is evaluated with a funny moment localization task using QD-DETR and IoU thresholds 0.3 and 0.5; lower scores are better."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For rating, five AMT workers rate each explanation for 100 randomly selected test videos on No (0), Weak No (0.25), Neutral (0.5), Weak Yes (0.75), and Yes (1), excluding the highest and lowest scores before averaging."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For comparison, five AMT workers compare GPT-3.5 with the proposed prompting against text-only GPT-3.5, MAF, and Gold explanations and choose the better explanation."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "After manual postprocessing, ExFunTube contains 10,136 videos and 11,166 timestamped explanations, with explanations averaging 44.3 words.",
+      "metric": "Dataset size and annotation statistics",
+      "value": "10,136 videos; 11,166 explanations; 44.3 words on average",
+      "dataset": "ExFunTube",
+      "best_system": null
+    },
+    {
+      "finding": "GPT-3.5 with the proposed prompting achieved the best mean SentBERT score, outperforming text-only GPT-3.5, MAF, and VideoChat-Text.",
+      "metric": "SentBERT Mean",
+      "value": "0.602",
+      "dataset": "ExFunTube",
+      "best_system": "GPT-3.5 with our prompting"
+    },
+    {
+      "finding": "GPT-3.5 with the proposed prompting achieved the best mean ROSCOE reasoning alignment score.",
+      "metric": "ROSCOE (RA) Mean",
+      "value": "0.817",
+      "dataset": "ExFunTube",
+      "best_system": "GPT-3.5 with our prompting"
+    },
+    {
+      "finding": "For GPT-3.5, prompting reduced rationale quality scores from 18.8 to 5.5 at IoU @0.3 and from 22.5 to 9.3 at IoU @0.5.",
+      "metric": "Rationale Quality Score (lower is better)",
+      "value": "5.5 (@0.3); 9.3 (@0.5)",
+      "dataset": "ExFunTube",
+      "best_system": "GPT-3.5 with our prompting"
+    },
+    {
+      "finding": "GPT-3.5 with prompting received the highest generated-model human rating, while Gold explanations remained higher.",
+      "metric": "Human Evaluation Rating",
+      "value": "0.523; Gold 0.792",
+      "dataset": "ExFunTube",
+      "best_system": "GPT-3.5 with our prompting"
+    },
+    {
+      "finding": "In ablation, using all modalities for GPT-3.5 gave higher SentBERT and ROSCOE scores than removing visual, speech, or sound components.",
+      "metric": "SentBERT / ROSCOE (RA)",
+      "value": "0.602 / 0.817 with V,T,A; 0.512 / 0.778 w/o V; 0.497 / 0.763 w/o T; 0.574 / 0.801 w/o A",
+      "dataset": "ExFunTube",
+      "best_system": "GPT-3.5 with our prompting"
+    }
+  ],
+  "key_findings": [
+    "The dataset targets general user-generated short-form YouTube humor rather than restricted domains such as speeches or sitcoms, and each video has up to three funny moments with timestamps and explanations.",
+    "The proposed video-to-text prompting improves T5, BART, and GPT-3.5 over their corresponding text-only versions in automatic scores and rationale quality scores.",
+    "GPT-3.5 with prompting outperforms multimodal baselines MAF and VideoChat-Text on the reported automatic, rationale quality, and human evaluation results.",
+    "Ablations show that visual, speech, and sound components all contribute to performance, with removing visual information causing a substantial drop.",
+    "By humor taxonomy, performance with prompting increases in nearly all categories and especially in visually grounded categories such as Clownish humor, Visual gags, and Slapsticks.",
+    "Even the best generated explanations remain below Gold human explanations, showing that ExFunTube is still challenging."
+  ],
+  "limitations": [
+    "Because copyright remains with the original owners of the videos, the dataset will distribute URLs instead of videos.",
+    "The method relies on existing state-of-the-art models used in zero-shot composition.",
+    "The approach composes models through text; the authors note that adaptor-based prompt tuning during inference could also be explored.",
+    "The paper divides videos into visual, speech, and sound modalities but does not consider temporal information of sound, even though timing can matter for humor.",
+    "Humor is subjective, so the collected explanations may also be subjective.",
+    "Recruiting AMT workers only from AU, CA, GB, NZ, and US may introduce cultural and geographic biases into humor explanations."
+  ],
+  "safety_ethics_notes": "The authors manually reviewed all 21K filtered videos and removed videos involving discrimination, animal cruelty, dangerous goods/services/activities or self-harm, obscenities or profanities, and shocking content. They state that some uncomfortable videos may still remain and will be removed if found; they also note possible cultural and geographic bias from limiting workers to AU, CA, GB, NZ, and US.",
+  "artifacts": {
+    "code_url": "https://github.com/dayoon-ko/ExFunTube",
+    "data_url": "https://github.com/dayoon-ko/ExFunTube",
+    "other": "The paper states that only URLs, not videos, will be distributed because copyright remains with the original owners."
+  }
+}

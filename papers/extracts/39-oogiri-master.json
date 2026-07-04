@@ -1,0 +1,197 @@
+{
+  "key": "39-oogiri-master",
+  "ref": "#39",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/39-oogiri-master/39-oogiri-master.md",
+  "source_md_sha256": "607e0b0875d75e9f39c3818f5ef47fcccecfd2dd4d06e6cdc905cb6e49c05cae",
+  "source_truncated": false,
+  "title": "OOGIRI-MASTER: Benchmarking Humor Understanding via Oogiri",
+  "authors": [
+    "Soichiro Murakami",
+    "Hidetaka Kamigaito",
+    "Hiroya Takamura",
+    "Manabu Okumura"
+  ],
+  "year": 2025,
+  "venue": "arXiv:2512.21494v1 [cs.CL]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "What makes Oogiri responses funny to humans?",
+    "Which linguistic features distinguish high-rated Oogiri responses from low-rated ones?",
+    "How well do LLMs and humans judge Oogiri funniness in relative and absolute settings?",
+    "Can linguistic insights and continued pretraining on a Japanese corpus improve LLM humor understanding?"
+  ],
+  "tasks": [
+    "Oogiri humor understanding",
+    "relative funniness judgment via multiple-choice question answering",
+    "absolute funniness classification",
+    "linguistic feature analysis of funniness"
+  ],
+  "humor_domains": [
+    "Oogiri",
+    "Japanese text-to-text creative response game"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "Japanese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Oogiri Sogo",
+      "role": "source-material",
+      "size": "2,165 prompts collected"
+    },
+    {
+      "name": "OOGIRI-CORPUS",
+      "role": "introduced",
+      "size": "908 prompts; 82,536 prompt–response pairs"
+    },
+    {
+      "name": "OOGIRI-CORPUS",
+      "role": "analyzed",
+      "size": "5,448 responses (908 prompts × 6 responses)"
+    },
+    {
+      "name": "Oogiri-Master dataset builder",
+      "role": "introduced",
+      "size": "600 items"
+    },
+    {
+      "name": "Oogiri-Master dataset builder",
+      "role": "evaluated-on",
+      "size": "600 items (400 items across four MCQA tasks and 200 binary-classification items)"
+    }
+  ],
+  "models_evaluated": [
+    "gpt-oss-20b",
+    "DeepSeek-R1-14b",
+    "DeepSeek-R1-14b_ja",
+    "LLM-jp-3.1-13b_ja",
+    "Claude-Opus-4",
+    "Gemini-2.5-Pro",
+    "GPT-5"
+  ],
+  "methods_proposed": [
+    {
+      "name": "OOGIRI-CORPUS",
+      "summary": "A Japanese Oogiri dataset collected from Oogiri Sogo, filtered to prompts with at least 100 total votes. It contains prompts, responses, and vote counts, with approximately 96 responses and 172 votes per prompt on average."
+    },
+    {
+      "name": "OOGIRI-MASTER",
+      "summary": "A benchmark for Oogiri humor understanding with five tasks: four relative-judgment MCQA tasks and one absolute funny/not-funny binary classification task. Positives are high-rated responses and negatives are sampled from low-rated same-prompt responses and high-rated different-prompt responses depending on the task."
+    },
+    {
+      "name": "Insight-augmented prompting",
+      "summary": "A prompting strategy that inserts linguistic features identified in the corpus analysis, including basic features such as length and LLM-scored features such as ambiguity exploitation and perspective shift. The paper also tests an instruction style that asks the model to consult these features only when uncertain."
+    },
+    {
+      "name": "Quantitative linguistic feature analysis",
+      "summary": "The paper compares high-rated and low-rated Oogiri responses using basic linguistic features, semantic/NLI features, surprisal and nPMI, and LLM-scored higher-order features. It reports independent two-sample Student’s t-tests and Cohen’s d to identify features associated with funniness."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes incongruity-related ideas through semantic distance, textual entailment, surprisal, nPMI, and an LLM-scored incongruity resolution feature measuring whether an initial mismatch is naturally resolved."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "operationalized",
+      "detail": "The LLM-scored higher-order features include benign violation, defined as deviations framed as harmless and acceptable."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "crowd-votes",
+      "detail": "Oogiri Sogo vote counts are used as funniness signals; vote counts are not displayed during the platform voting phase, and OOGIRI-CORPUS retains prompts with at least 100 total votes."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The feature analysis uses independent two-sample Student’s t-tests and Cohen’s d; benchmark experiments report accuracy and average accuracy across five tasks."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-5 scores 2,000 sampled prompt–response pairs on eight higher-order features for the corpus analysis; in insight-augmented prompting, the target LLM scores each prompt–response pair before judging the task."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Crowdworkers from Yahoo! Crowdsourcing solve OOGIRI-MASTER using the same baseline prompt as LLMs; each item is answered by 21 workers who pass attention checks, and final labels are determined by majority vote."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "OOGIRI-CORPUS is reported as the largest Japanese Oogiri dataset to date and is approximately seven times larger than Oogiri-GO in the text-to-text setting.",
+      "metric": "dataset size",
+      "value": "908 prompts; 82,536 prompt–response pairs; 95.9 responses per prompt (avg.); 171.6 votes per prompt (avg.)",
+      "dataset": "OOGIRI-CORPUS",
+      "best_system": null
+    },
+    {
+      "finding": "Among LLM-scored features, perspective shift showed the largest reported effect distinguishing high-rated from low-rated responses.",
+      "metric": "mean feature score; Cohen’s d",
+      "value": "High 2.40 vs Low 1.87; Cohen’s d 0.50",
+      "dataset": "OOGIRI-CORPUS analysis sample",
+      "best_system": null
+    },
+    {
+      "finding": "High-rated responses were shorter than low-rated responses in the linguistic analysis.",
+      "metric": "mean length; Cohen’s d",
+      "value": "High 14.12 vs Low 16.40; Cohen’s d -0.28",
+      "dataset": "OOGIRI-CORPUS analysis sample",
+      "best_system": null
+    },
+    {
+      "finding": "With the baseline prompt, Claude-Opus-4 and humans tied for the highest average accuracy across the five OOGIRI-MASTER tasks.",
+      "metric": "Ave. Accuracy",
+      "value": "68.7%",
+      "dataset": "OOGIRI-MASTER",
+      "best_system": "Claude-Opus-4 and human"
+    },
+    {
+      "finding": "With insight-augmented prompting, GPT-5 achieved the best overall benchmark result and improved over its baseline.",
+      "metric": "Ave. Accuracy; ΔAve. Accuracy",
+      "value": "70.7%; +3.1",
+      "dataset": "OOGIRI-MASTER",
+      "best_system": "GPT-5"
+    },
+    {
+      "finding": "Continued pretraining on a Japanese corpus improved DeepSeek-R1 performance on the Japanese Oogiri benchmark.",
+      "metric": "Ave. Accuracy",
+      "value": "baseline setting: 41.3% to 44.6% (+3.3 points); insight-augmented setting: 41.4% to 46.0% (+4.6 points)",
+      "dataset": "OOGIRI-MASTER",
+      "best_system": "DeepSeek-R1-14b_ja"
+    }
+  ],
+  "key_findings": [
+    "OOGIRI-CORPUS contains 908 prompts and 82,536 prompt–response pairs, averaging 95.9 responses and 171.6 votes per prompt.",
+    "High-rated responses tend to be shorter and use fewer unique characters than low-rated responses, with length showing High 14.12 vs Low 16.40 and Cohen’s d -0.28.",
+    "Higher-order features were more informative than many surface or embedding-based metrics; perspective shift had Cohen’s d 0.50, ambiguity exploitation 0.42, and incongruity resolution 0.36.",
+    "On OOGIRI-MASTER, Claude-Opus-4 and humans reached 68.7% average accuracy with the baseline prompt, while GPT-5 reached 70.7% with insight-augmented prompting.",
+    "Feature-augmented prompting helped some models but hurt others, suggesting that weaker reasoners may over-rely on feature magnitudes such as response length.",
+    "DeepSeek-R1-14b_ja outperformed DeepSeek-R1-14b, which the authors interpret as evidence that continued pretraining on a Japanese corpus improves Japanese Oogiri understanding."
+  ],
+  "limitations": [
+    "The analysis and benchmark are limited to Japanese Oogiri, and culture-specific humor effects may not transfer to other languages or cultural contexts.",
+    "Some analyzed features are Japanese-specific, such as character-type ratios, and may not directly transfer across languages.",
+    "The benchmark evaluates Oogiri understanding through four MCQA subtasks and one binary classification task, but does not evaluate humor generation or explanation.",
+    "The study focuses on text-to-text Oogiri and does not cover image-to-text or image-and-text-to-text multimodal variants.",
+    "The authors note a possible demographic mismatch between crowdworkers and Oogiri-platform users, but detailed user attributes were unavailable."
+  ],
+  "safety_ethics_notes": "OOGIRI-CORPUS was collected from the public Japanese Oogiri competition platform Oogiri Sogo, which the authors state explicitly permits web crawling. OOGIRI-CORPUS and OOGIRI-MASTER will be released under CC BY-NC-SA 4.0. Human baseline workers were recruited through Yahoo! Crowdsourcing, informed that annotations would be used for research, and compensated according to the platform’s regulations at 10 yen per 20 tasks.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that OOGIRI-CORPUS and OOGIRI-MASTER will be provided under the CC BY-NC-SA 4.0 license. Source platform: https://chinsukoustudy.com/"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "key": "18-grounded-satire-rag",
+  "ref": "#18",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/18-grounded-satire-rag/18-grounded-satire-rag.md",
+  "source_md_sha256": "6dd41e4a165120189f8ecfb7c3560bb61a71c71adae04d1a8b1d0d4cfabaf4f9",
+  "source_truncated": false,
+  "title": "Grounded Satirical Generation with RAG",
+  "authors": [
+    "Oona Itkonen",
+    "Yuxin Su",
+    "Linyao Du",
+    "Ona De Gibert"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "method",
+    "evaluation-study",
+    "dataset",
+    "system"
+  ],
+  "research_questions": [
+    "To what extent are the generated definitions humorous and politically meaningful?",
+    "To what extent is successful satire generation dependent on cultural context?",
+    "How does the choice of the candidate word affect the quality of the generated definitions?",
+    "Does RAG improve the quality of generated satirical definitions?",
+    "Can LLMs serve as reliable evaluators of satirical content?"
+  ],
+  "tasks": [
+    "grounded satire generation",
+    "satirical dictionary definition generation",
+    "satirical content evaluation",
+    "LLM-as-a-judge evaluation of satire"
+  ],
+  "humor_domains": [
+    "satire",
+    "political satire",
+    "satirical dictionary definitions",
+    "news-based satire",
+    "Finnish political culture"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Yle English-language news articles",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Annotated corpus of generated satirical dictionary definitions",
+      "role": "introduced",
+      "size": "100 definitions"
+    }
+  ],
+  "models_evaluated": [
+    "Meta-Llama-3-8B-Instruct",
+    "Qwen2.5-7B-Instruct",
+    "Llama-3.1-8B-Instruct",
+    "Mistral-7B-Instruct-v0.3",
+    "Aya-Expanse-8B",
+    "EuroLLM-9B-Instruct"
+  ],
+  "methods_proposed": [
+    {
+      "name": "RAG-based grounded satire generation pipeline",
+      "summary": "The pipeline scrapes English-language Yle news, filters by timestamp and sentiment, uses topic modeling to select candidate words, retrieves up to 3 semantically relevant news snippets, and prompts Meta-Llama-3-8B-Instruct to generate short satirical dictionary definitions grounded only in the retrieved context."
+    },
+    {
+      "name": "Task-specific satire evaluation framework",
+      "summary": "The paper operationalizes satire evaluation with two 1-to-5 Likert questions, Q1: “Is it funny?” and Q2: “Is it political?”, and applies the same rubric to human annotators and LLM judges."
+    },
+    {
+      "name": "Web application for grounded satire generation",
+      "summary": "The authors present a local web application that can generate definitions and search relevant news for user input, including keywords derived from topic modeling."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper adopts the Cambridge Dictionary definition of satire as criticizing people or ideas in a humorous way, especially to make a political point, and uses this to define the two evaluation dimensions: humor and political significance."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Six annotators evaluated 100 randomly shuffled definitions in a blind setup; half of the annotators were Finnish and half came from different cultural backgrounds, and all rated humor and political relevance on 1-to-5 Likert scales."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Five instruction-tuned open-weight models of comparable size scored the same definitions using the same annotation guidelines as the human annotators."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports Krippendorff’s α for inter-annotator agreement, Mann-Whitney U tests for cultural background and word-selection comparisons, Wilcoxon signed-rank tests for RAG vs. non-RAG definitions, and Spearman correlation ρ with 95% confidence intervals for LLM-human agreement."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Human annotators perceived the generated definitions as more political than funny.",
+      "metric": "Human mean ratings (M, SD)",
+      "value": "Funny M=1.98, SD=1.06; 40% of the annotations receiving a score of 1; Political M=2.53, SD=1.55",
+      "dataset": "Annotated corpus of generated satirical dictionary definitions",
+      "best_system": null
+    },
+    {
+      "finding": "Inter-annotator agreement was very low for humor and higher, but still cautious, for political relevance.",
+      "metric": "Krippendorff’s α",
+      "value": "All: Humor 0.070, Politics 0.514; Finnish: Humor 0.053, Politics 0.646; International: Humor 0.183, Politics 0.490",
+      "dataset": "Annotated corpus of generated satirical dictionary definitions",
+      "best_system": null
+    },
+    {
+      "finding": "Cultural background did not have a statistically significant effect on ratings.",
+      "metric": "Mann-Whitney U test",
+      "value": "p>0.1",
+      "dataset": "Annotated corpus of generated satirical dictionary definitions",
+      "best_system": null
+    },
+    {
+      "finding": "Topic-modeled candidate words led to definitions perceived as more political, but not funnier, than random words.",
+      "metric": "Mann-Whitney U test",
+      "value": "Funny p=0.758; Political p<0.001",
+      "dataset": "Annotated corpus of generated satirical dictionary definitions",
+      "best_system": "Topic-modeled candidate words"
+    },
+    {
+      "finding": "RAG improved political relevance but did not clearly improve humor.",
+      "metric": "Wilcoxon signed-rank test",
+      "value": "Funny p=.05; Political p<.001",
+      "dataset": "Annotated corpus of generated satirical dictionary definitions",
+      "best_system": "RAG-based definitions"
+    },
+    {
+      "finding": "Aya-Expanse-8B achieved the highest overall correlation with human judgments among the LLM judges, especially for political relevance.",
+      "metric": "Spearman correlation ρ with human mean scores; mean score M ± SD",
+      "value": "Funny 3.83 ± 0.77, 0.199* [0.005, 0.373]; Political 3.40 ± 1.32, 0.826** [0.758, 0.872]",
+      "dataset": "Annotated corpus of generated satirical dictionary definitions",
+      "best_system": "Aya-Expanse-8B"
+    }
+  ],
+  "key_findings": [
+    "The generated satirical dictionary definitions were rated low on humor but somewhat higher on political relevance.",
+    "Finnish and international annotators did not differ significantly in their ratings, despite the paper’s expectation that satire would depend on cultural context.",
+    "Topic-based word selection improved perceived political relevance but not perceived humor.",
+    "RAG improved perceived political relevance compared with the non-RAG baseline, but did not yield clear gains in humor generation.",
+    "LLM judges correlated strongly with humans on political relevance but poorly on humor, with Aya-Expanse-8B performing best overall.",
+    "Human satire annotation was difficult: humor agreement was very low, and political agreement remained below commonly used thresholds for strong reliability."
+  ],
+  "limitations": [
+    "The current pipeline is limited to English news from the Finnish public broadcaster Yle.",
+    "The authors state that future work should extend the approach to additional languages and sources.",
+    "The authors state that future work should explore alternative evaluation methods for a broader and more robust assessment of system performance.",
+    "Inter-annotator agreement for humor was very low, and political agreement was below commonly used thresholds for strong reliability."
+  ],
+  "safety_ethics_notes": "To reduce the risk of offensive or disturbing satire, the pipeline applies sentiment analysis to filter out overly negative news, treating sentiment as a proxy for how sensitive or severe a news topic may be; the authors set the sentiment-analysis threshold to one and discard news with a label lower than one.",
+  "artifacts": {
+    "code_url": "https://github.com/dlylinyao/ONLY/tree/CHUM",
+    "data_url": "https://github.com/dlylinyao/ONLY/tree/CHUM",
+    "other": "The paper presents a local web application for generating definitions and searching relevant news; it states that the repository of the application will be made public upon acceptance."
+  }
+}

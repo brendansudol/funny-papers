@@ -1,0 +1,168 @@
+{
+  "key": "37-punchlines-to-predictions",
+  "ref": "#37",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/37-punchlines-to-predictions/37-punchlines-to-predictions.md",
+  "source_md_sha256": "cd7f306254616c3b00747034b7e33c70df620754efc8bb850c6f916392566b54",
+  "source_truncated": false,
+  "title": "From Punchlines to Predictions: A Metric to Assess LLM Performance in Identifying Humor in Stand-Up Comedy",
+  "authors": [
+    "Adrianna Romanowski",
+    "Pedro H. V. Valois",
+    "Kazuhiro Fukui"
+  ],
+  "year": 2025,
+  "venue": "CMCL 2025",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can LLM performance in extracting humorous punchlines from stand-up comedy transcripts be scored while accounting for the subjectivity of humor?",
+    "How well do different LLMs identify humorous quotes from stand-up comedy transcripts in zero-shot prompting settings?",
+    "How do prompt variations, persona prompts, humor-preference prompts, comedian personas, and audience-demographic prompts affect humor detection performance?",
+    "How do LLM humor-detection outputs compare with human evaluators, and how much do humans and models agree on which transcript lines are funny?"
+  ],
+  "tasks": [
+    "humor detection",
+    "punchline extraction",
+    "humorous quote extraction",
+    "human-machine agreement for humor detection"
+  ],
+  "humor_domains": [
+    "stand-up comedy",
+    "punchlines",
+    "live audience laughter"
+  ],
+  "modalities": [
+    "text",
+    "audio"
+  ],
+  "languages": [],
+  "datasets_used": [
+    {
+      "name": "Open Mic dataset",
+      "role": "evaluated-on",
+      "size": "51 transcripts with an average word length of 270 words and length of 106 seconds"
+    }
+  ],
+  "models_evaluated": [
+    "Gemma 2b-it",
+    "Gemma 2 9b-it",
+    "Gemma 2 27b-it",
+    "Phi 3-Mini 3.8b-it",
+    "Llama 3.1 8B Instruct",
+    "ChatGPT-4o",
+    "Claude 3.5 Sonnet",
+    "DeepSeek-V3"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Humor detection metric with fuzzy string matching, vector embedding, and subspace similarity modules",
+      "summary": "The metric prompts an LLM to extract humorous quotes from a stand-up transcript and compares the predicted quote set with ground-truth punchlines derived from audience laughter timestamps and forced alignment. It provides three alternative scoring modules: fuzzy string matching over strings, sentence-embedding similarity over quote vectors, and subspace similarity over sets of outputs across prompt variations."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "The paper lists Superiority Theory as one of three linguistic theories explaining humor, where humor arises from feeling superior to others."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "The paper lists Relief Theory as one of three linguistic theories explaining humor, where humor releases psychological tension."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper describes stand-up comedy as mirroring Incongruity Theory, where comedians create an expectation through a set-up and subvert it with the punchline."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "The proposed metric scores model outputs against ground-truth humorous quotes using one of three modules: fuzzy string matching, sentence embeddings, or subspace similarity; overgeneration is penalized with alpha = 0.1."
+    },
+    {
+      "type": "live-audience",
+      "detail": "Ground truth humorous quotes are derived from laughter during stand-up performances using a laughter detection model, laughter timestamps, forced alignment, audio, and transcripts."
+    },
+    {
+      "type": "human-eval",
+      "detail": "11 naive participants from various cultural backgrounds, all aged 20 to 30 years, marked sentences as funny or not on 6 transcripts from well-known comedians."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Human answers were evaluated against the ground truth using the fuzzy string matching module; Percentage Agreement was used for human-human and human-machine agreement."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Across the 51-transcript model comparison, DeepSeek-V3 achieved the highest embedding score reported in Table 1.",
+      "metric": "Embed score",
+      "value": "51.6%",
+      "dataset": "Open Mic dataset",
+      "best_system": "DeepSeek-V3"
+    },
+    {
+      "finding": "ChatGPT-4o achieved the highest fuzzy string matching score among the leading models in Table 1, but its embedding score dropped sharply.",
+      "metric": "Fuzzy; Embed",
+      "value": "48.9%; 25.4%",
+      "dataset": "Open Mic dataset",
+      "best_system": "ChatGPT-4o"
+    },
+    {
+      "finding": "The highest subspace score reported in Table 1 was achieved by Gemma 2b-it.",
+      "metric": "Sub score",
+      "value": "55.7%",
+      "dataset": "Open Mic dataset",
+      "best_system": "Gemma 2b-it"
+    },
+    {
+      "finding": "Human evaluators scored below the leading LLMs when their answers were evaluated against the ground truth with the fuzzy string matching module.",
+      "metric": "Fuzzy score",
+      "value": "40.7%",
+      "dataset": "6 Open Mic dataset transcripts",
+      "best_system": null
+    },
+    {
+      "finding": "Human evaluators showed high agreement with each other across the 6-transcript human evaluation subset.",
+      "metric": "Percentage Agreement",
+      "value": "86.7% average",
+      "dataset": "6 Open Mic dataset transcripts",
+      "best_system": null
+    },
+    {
+      "finding": "Human-machine agreement averaged 59.9%, with Gemma 2b-instruct and Gemma 2 9b-instruct tied for the highest agreement and ChatGPT-4o the lowest.",
+      "metric": "Percentage Agreement",
+      "value": "59.9% average; 68.8% highest; 28.7% lowest",
+      "dataset": "6 Open Mic dataset transcripts",
+      "best_system": "Gemma 2b-instruct; Gemma 2 9b-instruct"
+    }
+  ],
+  "key_findings": [
+    "The paper introduces a modular metric for stand-up humor detection that can score LLM outputs using fuzzy string matching, sentence-embedding similarity, or subspace similarity.",
+    "On 51 Open Mic transcripts, leading models still performed only around the 50% range, with DeepSeek-V3 reaching 51.6% on the embedding module and ChatGPT-4o reaching 48.9% on the fuzzy module.",
+    "Human evaluators scored 40.7% against the laughter-derived ground truth using the fuzzy string module, so the leading LLMs outperformed humans under this text-based metric.",
+    "Prompt engineering generally did not produce meaningful improvements: Prompt 2 scored 31.2% for Gemma 2b-instruct versus the original 30.1%, while persona, humor-type, comedian, and demographic prompts mostly reduced scores.",
+    "Human-human Percentage Agreement was high at 86.7% on the 6-transcript subset, but human-machine agreement averaged only 59.9%, showing that metric score and agreement with humans are not the same.",
+    "ChatGPT-4o had a strong fuzzy score but the lowest human-machine agreement, 28.7%, which the paper uses to argue that agreement rate and metric performance can diverge."
+  ],
+  "limitations": [
+    "Ground truth is derived from laughter timestamps, and the paper assumes that the sentence preceding laughter is humorous, so the most humorous part of a joke may be misattributed.",
+    "The ground truth does not differentiate laughter magnitude.",
+    "The laughter detection model used a minimum laughter length of 0.2 seconds and a minimum probability threshold of 0.5, which may have missed subtler audience reactions.",
+    "The study relies on text-based analysis of stand-up comedy, omitting tone, timing, body language, and other live-performance cues.",
+    "The human evaluation participants were all within an age range of 20 to 30 years, which the paper notes could narrow the diversity of humor interpretations."
+  ],
+  "safety_ethics_notes": "The paper states that the stand-up comedy audio recordings and transcripts may contain humor that some may find offensive or politically incorrect, and that the content was analyzed solely for research purposes without endorsement of any particular viewpoint.",
+  "artifacts": {
+    "code_url": "https://github.com/swaggir19000/humor",
+    "data_url": null,
+    "other": null
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "key": "x07-vhub",
+  "ref": "Part 3 (video humor)",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x07-vhub/x07-vhub.md",
+  "source_md_sha256": "2420bdf386ca46f1ea60baea064ab7e19cf19efa3411b915775b283e77c76cb1",
+  "source_truncated": false,
+  "title": "v-HUB: A Benchmark for Video Humor Understanding from Vision and Sound",
+  "authors": [
+    "Zhengpeng Shi",
+    "Yanpeng Zhao",
+    "Jianqun Zhou",
+    "Yuxuan Wang",
+    "Qinrong Cui",
+    "Wei Bi",
+    "Songchun Zhu",
+    "Bo Zhao",
+    "Zilong Zheng"
+  ],
+  "year": 2026,
+  "venue": "arXiv:2509.25773v3 [cs.CV]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can a visual-centric video humor understanding benchmark be curated for evaluating multimodal large language models from vision and sound?",
+    "How well do current MLLMs perform on caption matching, humor explanation, and open-ended QA for visual-centric humorous videos?",
+    "Do MLLMs rely more on linguistic descriptions than raw visual and auditory cues when understanding video humor?",
+    "Does adding environmental sound improve video humor understanding for OmniLLMs?",
+    "How do visual text, background knowledge, and video era affect MLLM performance on video humor understanding?"
+  ],
+  "tasks": [
+    "caption matching",
+    "humor explanation",
+    "open-ended video QA"
+  ],
+  "humor_domains": [
+    "visual-centric video humor",
+    "non-verbal short videos",
+    "silent comedies",
+    "Charlie Chaplin’s silent films",
+    "user-generated funny videos",
+    "environmental-sound-enhanced humor",
+    "visual-text video humor"
+  ],
+  "modalities": [
+    "text",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "v-HUB",
+      "role": "introduced",
+      "size": "1218 videos; 4.7h total duration; average duration around 14s; 267 silent humor clips from Charlie Chaplin and 951 user-generated short funny videos"
+    },
+    {
+      "name": "Charlie Chaplin’s Silent Films",
+      "role": "source-material",
+      "size": "62 silent films reviewed; 729 funny clips collected; 267 silent humor clips in the final dataset"
+    },
+    {
+      "name": "X @humansnocontext videos",
+      "role": "source-material",
+      "size": "18080 short funny videos collected from tweets posted between March 28, 2023 and October 12, 2024"
+    },
+    {
+      "name": "HumorQA",
+      "role": "source-material",
+      "size": "1769 surprising YouTube videos from Xie et al. (2024)"
+    }
+  ],
+  "models_evaluated": [
+    "Gemini-2.5-Flash",
+    "GPT-4o",
+    "Qwen2.5-VL",
+    "Intern3.5-VL",
+    "Video-SALMONN-2",
+    "MiniCPM2.6-o",
+    "Qwen2.5-Omni",
+    "Qwen2.5-72B",
+    "Qwen2.5-7B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "v-HUB benchmark",
+      "summary": "A visual-centric video humor understanding benchmark built from non-verbal short videos, Charlie Chaplin silent films, and user-generated funny videos, annotated with captions, descriptions, explanations, prior knowledge, humor levels, and humor-source labels."
+    },
+    {
+      "name": "Three-task evaluation framework",
+      "summary": "The benchmark supports Caption Matching, Humor Explanation, and Open-ended QA to test subtle humor inference, independent humor discovery, and fundamental video reasoning over temporal, descriptive, and causal questions."
+    },
+    {
+      "name": "Video+Audio evaluation setting",
+      "summary": "The paper evaluates OmniLLMs with both visual frames and environmental sound to test whether non-speech audio such as background music and sound effects improves video humor understanding."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The authors follow Buijzen and Valkenburg (2004) to categorize videos into five categories by humor type for diversity analysis."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Caption Matching is evaluated with accuracy."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Humor Explanation and Open-ended QA are evaluated with BERTScore, Sent-BERT, and METEOR."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "AutoDQ extracts key events from generated explanations and compares them to ground-truth annotations using entailment analysis, reporting recall, precision, and F1 score; unless otherwise specified, the paper reports F1 scores."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The authors randomly sampled 50 model-generated explanations for human evaluation; one annotator rated each explanation from 0 to 100, then scores were normalized by a factor of 100."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Eight annotators created and refined annotations through three rounds; Krippendorff’s alpha was used for humor-evaluation consensus, with more than 90% of data showing High consensus and 0.3% showing Low consensus."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "v-HUB contains 1218 visual-centric humorous videos after filtering, including 267 Charlie Chaplin clips and 951 user-generated videos.",
+      "metric": "dataset size",
+      "value": "1218 videos; 4.7h; average duration around 14s",
+      "dataset": "v-HUB",
+      "best_system": null
+    },
+    {
+      "finding": "Qwen2.5-VL performs substantially better from human-written descriptions than from raw video, dropping on Caption Matching and Open-ended QA in the Video-Only setting.",
+      "metric": "Accuracy / SentBERT",
+      "value": "Caption Matching 0.726 to 0.666; Open-ended QA SentBERT 0.760 to 0.445",
+      "dataset": "v-HUB",
+      "best_system": "Qwen2.5-VL"
+    },
+    {
+      "finding": "Adding audio improves Caption Matching for several OmniLLMs, including MiniCPM2.6-o and Qwen2.5-Omni.",
+      "metric": "Accuracy",
+      "value": "MiniCPM2.6-o 0.362 to 0.442; Qwen2.5-Omni 0.553 to 0.617",
+      "dataset": "v-HUB",
+      "best_system": "Qwen2.5-Omni"
+    },
+    {
+      "finding": "Visual text improves Gemini-2.5-Flash when sound does not contribute to humor in the Video+Audio setting.",
+      "metric": "Accuracy / SentBERT",
+      "value": "Matching Accuracy 0.569 to 0.715; Open-ended QA SentBERT 0.416 to 0.437",
+      "dataset": "v-HUB",
+      "best_system": "Gemini-2.5-Flash"
+    },
+    {
+      "finding": "Providing background knowledge improves Qwen2.5-Omni humor explanation in the Video+Audio setting.",
+      "metric": "SentBERT / AutoDQ",
+      "value": "SentBERT 0.459 to 0.512; AutoDQ 0.127 to 0.176",
+      "dataset": "v-HUB",
+      "best_system": "Qwen2.5-Omni"
+    },
+    {
+      "finding": "Gemini-2.5-Flash performs better on contemporary user-generated funny videos than on last-century Charlie Chaplin silent films in the Video-Only setting.",
+      "metric": "SentBERT",
+      "value": "Explanation 0.469 vs 0.422; Open-ended QA 0.434 vs 0.386",
+      "dataset": "v-HUB",
+      "best_system": "Gemini-2.5-Flash"
+    }
+  ],
+  "key_findings": [
+    "The final benchmark is explicitly visual-centric: all 1218 videos rely on visual modality for humor, and the paper reports groups including Visual, Visual+Text, Visual+Audio, and Visual+Audio+Text.",
+    "MLLMs rely heavily on linguistic cues: Text-Only settings generally outperform Video-Only and Video+Audio settings across the three tasks.",
+    "Humor explanation is harder than open-ended QA because models must discover the humorous element without a question pointing to it.",
+    "Environmental sound gives most OmniLLMs a measurable improvement, but the gains remain much smaller than the advantage of human-written text descriptions.",
+    "Visual text and explicit background knowledge both help video humor understanding, reinforcing the value of linguistic and knowledge-based cues.",
+    "Models perform worse on last-century Charlie Chaplin silent films than on contemporary user-generated funny videos, suggesting sensitivity to temporal and cultural context."
+  ],
+  "limitations": [
+    "The authors use region-level cultural categorization as a weakly supervised proxy because assigning a single culture label to visual-centric humorous videos is ambiguous and subjective.",
+    "All data annotations were created manually in English, and the authors note that LLM humor understanding may vary across languages because languages can interpret and express the same visual content differently."
+  ],
+  "safety_ethics_notes": "The paper states adherence to the ACL Code of Ethics, respect for intellectual property and privacy rights, and restriction of the dataset to non-commercial academic use. The authors manually screened user-generated content for safety and privacy risks, defined harmful-content categories, and explicitly warn against misuse of the dataset for malicious or mocking content.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Prompts are provided in Appendix E; the dataset is restricted to non-commercial academic research use, but no URL is stated in the paper."
+  }
+}

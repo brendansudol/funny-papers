@@ -1,0 +1,299 @@
+{
+  "key": "61-humor-generation-survey-2020",
+  "ref": "#61",
+  "section": "Part 9 - Surveys & Resources",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/61-humor-generation-survey-2020/61-humor-generation-survey-2020.md",
+  "source_md_sha256": "840df24ab6cec64c983a565042fddccb396a02aec3d9905b28d7e514ce3b5c1e",
+  "source_truncated": false,
+  "title": "A Survey on Approaches to Computational Humor Generation",
+  "authors": [
+    "Miriam Amin",
+    "Manuel Burghardt"
+  ],
+  "year": 2020,
+  "venue": "Proceedings of LaTeCH-CLfL 2020, pages 29–41, Barcelona, Spain (Online), December 12, 2020",
+  "paper_types": [
+    "survey",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "What text-based systems and approaches have been developed for computational generation of verbal humor in jokes and short humorous texts?",
+    "How do neural and template-based humor generation systems differ in their sources of material, joke mechanisms, strengths, and drawbacks?",
+    "How have humor generation systems been evaluated so far, and what evaluation criteria are needed to compare them?",
+    "What future directions follow from analyzing humor generation systems through linguistic humor theories?"
+  ],
+  "tasks": [
+    "humor generation",
+    "joke generation",
+    "pun generation",
+    "punning riddle generation",
+    "humorous acronym generation",
+    "humorous analogy generation",
+    "humorous lexical replacement",
+    "humorous SMS generation",
+    "humorous response generation"
+  ],
+  "humor_domains": [
+    "verbal humor",
+    "jokes",
+    "short humorous texts",
+    "question-answer jokes",
+    "punning riddles",
+    "puns",
+    "homographic puns",
+    "light bulb jokes",
+    "current affair jokes",
+    "narrative jokes",
+    "acronyms",
+    "proverbs",
+    "SMS text messages",
+    "Japanese stand-up comedy",
+    "ambiguous compound jokes",
+    "witty analogies",
+    "conversational humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Japanese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Conan O’Brien joke corpus",
+      "role": "trained-on",
+      "size": "7,699 jokes"
+    },
+    {
+      "name": "news data",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "Wikipedia text corpus",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "lexicon of social groups and stereotypical activities",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "manually edited lexicon",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "WordNet",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "ConceptNet",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "UniSyn",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "CMU pronouncing dictionary",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "POS-tagged joke corpus",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "joke corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "non-humorous corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Google n-gram corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "list of common Japanese proverbs",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "collection of dirty words",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "list of phonetic distances between Japanese graphemes",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "human generated joke database",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "sentence database",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "SMS Corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "two online dictionaries of slang words",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "example list of funny autocorrection mistakes from the internet",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "Yang and Sheng current affair joke generator",
+    "Yu et al. homographic pun generator",
+    "LIBJOG",
+    "JAPE",
+    "STANDUP",
+    "HAHAcronym",
+    "Sjöbergh and Araki Japanese Standup system",
+    "PUNDA",
+    "Hong and Ong question-answer joke pattern generator",
+    "Sjöbergh and Araki ambiguous compound joke generator",
+    "Labutov and Lipson ConceptNet circuit humor generator",
+    "Petrović and Matthews humorous analogy generator",
+    "Valitutti et al. humorous SMS generator"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Humorousness and complexity evaluation framework",
+      "summary": "The survey proposes two criteria for comparing humor generation systems: humorousness, defined as the ability to output text identifiable as a joke or humorous intent, and complexity, defined as the ability to generate varied texts across syntax, lexis, and joke mechanisms. The authors rank surveyed systems on a 1–3 scale for both criteria."
+    },
+    {
+      "name": "Source-based taxonomy of template humor generators",
+      "summary": "The paper classifies template-based systems by how they select variables for templates: ontologies or lexicons, quantitative measures such as co-occurrence and frequency, and hybrid approaches that combine both."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The authors define humorousness using incongruity-theoretic criteria: a humorous text conveys two different concepts whose incompatibility is resolved in an unexpected way."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "The survey discusses the surprise disambiguation model and later identifies it as one of the most interesting theories for future humor generation because it formalizes properties such as obviousness, conflict, compatibility, comparison, and inappropriateness."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "The paper presents SSTH as a prominent theory and notes that Labutov and Lipson are the first and only surveyed authors to explicitly implement a linguistic humor theory based on SSTH."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "grounding/motivation",
+      "detail": "The paper introduces GTVH as an extension of SSTH and argues in the conclusion that it focuses more on representation of joke differences than on the humor mechanism itself."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "Suls’ two-stage model is discussed among prominent humor theories, but the authors argue that its dependence on a cognitive rule makes it less feasible for computational modeling."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "The survey authors qualitatively rank 12 systems in Table 1 for humorousness (H) and complexity (C) on a 1–3 scale, while noting that the judgment could only use the jokes published by system authors, usually 3–5 examples."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The paper reports that most previous systems used user studies in which humans rated generated jokes on Likert scales, typically from 0 (not a joke) to 5 (really funny), with Yang and Sheng and Valitutti et al. using a four-step Likert scale."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The paper discusses Valitutti’s HF (humorous frequency), defined as the fraction of funny items in a randomly generated set of jokes, requiring Boolean humorousness ratings for each item."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The paper discusses Yu et al.’s Soft Turing Test, in which test persons rate humanness of generated jokes on a three-score Likert scale, 2–definitely human/0–definitely machine."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The survey’s comparison finds that no surveyed system reaches the highest rank in both humorousness and complexity.",
+      "metric": "H/C rank on 1–3 scale, where 1 is the highest rank",
+      "value": "0 systems",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "Both neural systems in the survey receive the lowest humorousness rank and the highest complexity rank in Table 1.",
+      "metric": "H/C rank",
+      "value": "H=3, C=1",
+      "dataset": null,
+      "best_system": "Yang and Sheng current affair joke generator; Yu et al. homographic pun generator"
+    },
+    {
+      "finding": "Five systems receive the highest humorousness rank in Table 1, outperforming the neural systems by two rank levels on humorousness.",
+      "metric": "Humorousness rank",
+      "value": "H=1",
+      "dataset": null,
+      "best_system": "LIBJOG; JAPE and STANDUP; Hong and Ong question-answer joke patterns; Labutov and Lipson ConceptNet circuits; Petrović and Matthews humorous analogy generation"
+    },
+    {
+      "finding": "Five systems receive the middle rank for both humorousness and complexity in Table 1.",
+      "metric": "H/C rank",
+      "value": "H=2, C=2",
+      "dataset": null,
+      "best_system": "HAHAcronym; Japanese Standup; PUNDA; ambiguous compound joke generator; humorous SMS generator"
+    },
+    {
+      "finding": "Hong and Ong’s T-PEG extracted 39 templates from a POS-tagged joke corpus, of which the authors found 27 usable.",
+      "metric": "usable templates",
+      "value": "27 (69 %) of 39 templates",
+      "dataset": "POS-tagged joke corpus",
+      "best_system": "T-PEG"
+    }
+  ],
+  "key_findings": [
+    "Until Yang and Sheng’s 2017 neural joke generator, the surveyed published humor generation systems were template-based.",
+    "Neural systems have high lexical and syntactic freedom, but the paper judges their outputs as not identifiable as jokes.",
+    "Template-based systems achieve higher humorousness because their constraints and metrics implicitly encode joke mechanisms, but they are less complex and diverse than neural systems.",
+    "Existing evaluations are not standardized and usually rely on human Likert ratings of individual outputs, with unclear sample selection and sometimes hand-picked jokes.",
+    "The authors argue that future humor generators should more explicitly use linguistic humor theories, especially the surprise disambiguation model and SSTH."
+  ],
+  "limitations": [
+    "The survey is limited to text-based systems for verbal humor and excludes visual humor generation.",
+    "The authors’ ranking has no computable metric and assigns only ordinal ranks from 1 to 3.",
+    "The authors state that their humorousness assessment could only use jokes published by the original system authors, usually 3–5 examples, which may have been manually filtered as best outputs.",
+    "The paper notes that humor is highly subjective and that standardized evaluation methodology for humor generation is still missing.",
+    "The paper does not run the surveyed systems or evaluate random samples of their outputs."
+  ],
+  "safety_ethics_notes": "The paper mentions systems that use dirty words, profanity, slang, taboo words, and adult humor, but it does not provide a broader safety or ethics analysis.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

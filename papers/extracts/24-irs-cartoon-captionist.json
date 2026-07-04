@@ -1,0 +1,290 @@
+{
+  "key": "24-irs-cartoon-captionist",
+  "ref": "#24",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/24-irs-cartoon-captionist/24-irs-cartoon-captionist.md",
+  "source_md_sha256": "0dfa911148f3b0a89216c66a2338a7d849cdc952f0b06f8aa67e7a1a511eeeda",
+  "source_truncated": false,
+  "title": "Learning to Think Like a Cartoon Captionist: Incongruity–Resolution Supervision for Multimodal Humor Understanding",
+  "authors": [
+    "Hatice Merve Vural",
+    "Doga Kukul",
+    "Ege Erdem Ozlu",
+    "Demir Ekin Arikan",
+    "Bob Mankoff",
+    "Erkut Erdem",
+    "Aykut Erdem"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can multimodal humor understanding be improved by supervising the intermediate incongruity-resolution reasoning process rather than treating caption selection as black-box prediction?",
+    "Do the three IRS components—incongruity modeling, resolution modeling, and preference alignment—improve New Yorker Cartoon Caption Contest matching and ranking performance across 7B, 32B, and 72B backbones?",
+    "Do humor-specific reasoning traces and visual/style rewards transfer zero-shot to external visual humor benchmarks beyond NYCC?"
+  ],
+  "tasks": [
+    "cartoon caption matching",
+    "cartoon caption ranking",
+    "fine-grained caption preference discrimination",
+    "visual humor classification",
+    "visual humor title selection",
+    "visual humor semantic alignment",
+    "zero-shot cartoon caption generation"
+  ],
+  "humor_domains": [
+    "New Yorker cartoon captions",
+    "cartoon caption contests",
+    "visual humor",
+    "two-panel contrastive visual humor",
+    "graphical humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Zhou et al. (2025) NYCC 10-vs-1000 and 30-vs-300 splits",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "IRS captionist reasoning traces",
+      "role": "introduced",
+      "size": null
+    },
+    {
+      "name": "IRS Incongruity Modeling corpus",
+      "role": "introduced",
+      "size": "4,123 instances; 4,824,212 words; 6,291,740 tokens"
+    },
+    {
+      "name": "Curated visual references for perception alignment",
+      "role": "introduced",
+      "size": "up to ten reference descriptions per cartoon"
+    },
+    {
+      "name": "New Yorker Caption Contest Podcast",
+      "role": "source-material",
+      "size": "173 instances; 2,292,458 words; 2,921,356 tokens"
+    },
+    {
+      "name": "The Cartoon Pad",
+      "role": "source-material",
+      "size": "43 instances; 443,774 words; 568,849 tokens"
+    },
+    {
+      "name": "Official New Yorker Cartoon Podcast",
+      "role": "source-material",
+      "size": "34 instances; 349,588 words; 465,701 tokens"
+    },
+    {
+      "name": "CartoonStock YouTube Panel Discussions",
+      "role": "source-material",
+      "size": "36 instances; 224,864 words; 281,295 tokens"
+    },
+    {
+      "name": "CartoonStock Lawrence Wood Commentaries",
+      "role": "source-material",
+      "size": "175 instances; 128,635 words; 170,978 tokens"
+    },
+    {
+      "name": "How About Never",
+      "role": "source-material",
+      "size": "1 instance; 40,621 words; 56,010 tokens"
+    },
+    {
+      "name": "Your Caption Has Been Selected",
+      "role": "source-material",
+      "size": "94 instances; 8,087 words; 11,057 tokens"
+    },
+    {
+      "name": "The Naked Cartoonist",
+      "role": "source-material",
+      "size": "1 instance; 3,062 words; 4,076 tokens"
+    },
+    {
+      "name": "FineWeb",
+      "role": "source-material",
+      "size": "1,759 instances; 979,418 words; 1,308,241 tokens"
+    },
+    {
+      "name": "Olmo-Mix-1124",
+      "role": "source-material",
+      "size": "1,807 instances; 353,705 words; 504,177 tokens"
+    },
+    {
+      "name": "YesBut (V1)",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "DeepEval",
+      "role": "evaluated-on",
+      "size": "humorous subset (29 images, 2.9% of the benchmark)"
+    }
+  ],
+  "models_evaluated": [
+    "DeepSeek-R1",
+    "o4-mini",
+    "o3",
+    "GLM-4.1V-9B-Thinking",
+    "Kimi-VL-A3B-Thinking-2506",
+    "LlamaV-o1",
+    "Qwen2.5-VL-7B-Instruct",
+    "Qwen2.5-VL-32B-Instruct",
+    "Qwen2.5-VL-72B-Instruct",
+    "IRS-7B",
+    "IRS-32B",
+    "IRS-72B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Incongruity-Resolution Supervision (IRS)",
+      "summary": "A three-stage framework for multimodal humor understanding that decomposes cartoon-caption reasoning into incongruity modeling, resolution modeling, and preference alignment. It is applied to Qwen2.5-VL backbones at 7B, 32B, and 72B scales."
+    },
+    {
+      "name": "Captionist reasoning traces",
+      "summary": "Structured supervision traces for matching and ranking tasks that reconstruct the scene, identify salient visual incongruities, evaluate captions, and justify the final choice in a captionist-style format."
+    },
+    {
+      "name": "Humor-aware preference alignment",
+      "summary": "A GRPO-based reinforcement learning stage combining accuracy and format rewards with visual perception and style rewards judged by Qwen2.5-7B-Instruct, conditioned so perception and style rewards apply only when the answer is correct."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "IRS explicitly decomposes humor understanding into identifying mismatches in the visual scene and constructing coherent reinterpretations that resolve those mismatches."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "cited-in-passing",
+      "detail": "Related work mentions script opposition as a perspective highlighting humor's structured cognitive nature."
+    },
+    {
+      "theory": "frame-shifting / conceptual blending",
+      "usage": "cited-in-passing",
+      "detail": "Related work cites frame shifting as a perspective related to computational humor."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "cited-in-passing",
+      "detail": "The paper discusses HOMER as a related caption generation framework grounded in the General Theory of Verbal Humor."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Accuracy (%) is reported for NYCC caption matching, ranking, 10-vs-1000, and 30-vs-300 tasks, and for YesBut and DeepEval zero-shot evaluations."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The paper reports an expert captionist baseline and a non-expert user study with 21 participants on a subset of tasks."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Ranking labels use crowd-preferred captions and crowd-ranked caption ranges such as top-10 versus 1000–1009 and 30–39 versus 300–309."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Qwen2.5-7B-Instruct judges visual perception against curated visual references and style against five captionist criteria; these binary scores are used as reinforcement learning rewards."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Generated captionist reasoning traces are verified under human supervision for consistency with expert reasoning patterns."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "IRS-72B achieved the highest ranking accuracy overall, surpassing all model baselines and approaching the expert captionist baseline on the Hessel et al. ranking task.",
+      "metric": "Accuracy (%)",
+      "value": "76.10",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "IRS-72B"
+    },
+    {
+      "finding": "The strongest closed model, o3, achieved the best matching score overall and outperformed IRS-72B on matching.",
+      "metric": "Accuracy (%)",
+      "value": "83.33 (o3) vs 69.33 (IRS-72B)",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "o3"
+    },
+    {
+      "finding": "IRS-7B improved over Qwen2.5-VL-7B-Instruct on all four main NYCC-based settings.",
+      "metric": "Accuracy (%)",
+      "value": "59.67 vs 42.67; 64.42 vs 55.06; 56.29 vs 50.57; 53.14 vs 47.99",
+      "dataset": "New Yorker Caption Contest corpus / Zhou et al. (2025) NYCC splits",
+      "best_system": "IRS-7B"
+    },
+    {
+      "finding": "The full 7B IRS pipeline was the strongest 7B ablation across the reported tasks.",
+      "metric": "Accuracy (%)",
+      "value": "59.67; 64.42; 56.29; 53.14",
+      "dataset": "New Yorker Caption Contest corpus / Zhou et al. (2025) NYCC splits",
+      "best_system": "IM + RM + PA (IRS)"
+    },
+    {
+      "finding": "Adding the visual perception reward to accuracy and format rewards improved the 7B IM+RM model most clearly on ranking-oriented settings.",
+      "metric": "Accuracy (%)",
+      "value": "60.78 vs 57.99 on Ranking; 56.57 vs 54.57 on 10-vs-1000",
+      "dataset": "New Yorker Caption Contest corpus / Zhou et al. (2025) NYCC splits",
+      "best_system": "+ PA (w/ R_a + R_f + R_p)"
+    },
+    {
+      "finding": "IRS-7B transferred zero-shot to external visual humor benchmarks, substantially improving over Qwen2.5-VL-7B-Instruct on both YesBut and DeepEval.",
+      "metric": "Accuracy (%)",
+      "value": "YesBut: 74.90 vs 43.19, 63.32 vs 29.11; DeepEval: 54.43 vs 10.34, 100.00 vs 24.13, 63.18 vs 34.48",
+      "dataset": "YesBut (V1); DeepEval",
+      "best_system": "IRS-7B"
+    }
+  ],
+  "key_findings": [
+    "Explicit incongruity-resolution supervision improves Qwen2.5-VL backbones at 7B, 32B, and 72B scales on NYCC caption matching and ranking tasks.",
+    "IRS-72B reaches 76.10% on the Hessel et al. ranking task, outperforming all model baselines in that column, including o3 at 62.85%.",
+    "Resolution Modeling is the main source of improvement in the 7B ablation, while Incongruity Modeling is helpful mainly when paired with structured reasoning supervision.",
+    "Preference Alignment adds complementary gains, especially for ranking tasks where visual grounding and stylistic quality matter.",
+    "Zero-shot results on YesBut and DeepEval suggest that IRS learns transferable visual humor reasoning patterns rather than only NYCC-specific heuristics.",
+    "The paper’s qualitative examples show that PA shifts outputs toward more grounded, concise, captionist-style explanations."
+  ],
+  "limitations": [
+    "The model can still make visual perception errors on stylized cartoons, such as confusing a Viking warrior with the Grim Reaper, which then propagates into incorrect reasoning.",
+    "The model sometimes shows shallow cultural grounding, recognizing surface cues or over-attributing visual evidence without fully recovering the cultural script of a joke.",
+    "The authors note that reasoning supervision alone cannot compensate for systematic perception errors and that better vision encoders or domain-specific visual pretraining may be needed.",
+    "The data are centered on the New Yorker Cartoon Caption Contest and therefore reflect predominantly Anglophone and U.S.-centric humor conventions.",
+    "Humor evaluation remains subjective, and NYCC crowd judgments and editorial selections capture only a subset of possible human interpretations.",
+    "Parts of the IM corpus come from copyrighted sources such as books and podcast transcripts and cannot be directly released."
+  ],
+  "safety_ethics_notes": "The paper states that the work is intended for research, creative assistance, education, and human–AI interaction rather than high-stakes decision-making or automated content moderation. It notes that humor is culturally dependent, may reflect biases in New Yorker-style data, and that humor-capable systems could be misused to generate offensive or inappropriate content.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Project page: https://cyberiada.github.io/NYCC-Thinking/. The paper says evaluation train/test splits, preprocessing code, and prompt templates will be released, while copyrighted IM corpus materials cannot be directly released."
+  }
+}

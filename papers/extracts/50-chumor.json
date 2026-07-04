@@ -1,0 +1,166 @@
+{
+  "key": "50-chumor",
+  "ref": "#50",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/50-chumor/50-chumor.md",
+  "source_md_sha256": "824aecda4f6d9586cd7318c6c5eb0f61c3f4579458d8fbd5c657b2ce9bbe428d",
+  "source_truncated": false,
+  "title": "Chumor 1.0: A Truly Funny and Challenging Chinese Humor Understanding Dataset from Ruo Zhi Ba",
+  "authors": [
+    "Ruiqi He",
+    "Yushu He",
+    "Longju Bai",
+    "Jiarui Liu",
+    "Zhenjie Sun",
+    "Zenghao Tang",
+    "He Wang",
+    "Hanchen Xia",
+    "Naihao Deng"
+  ],
+  "year": 2024,
+  "venue": "arXiv:2406.12754v1 [cs.CL]",
+  "paper_types": [
+    "dataset",
+    "benchmark",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can a Chinese humor understanding dataset be constructed for culturally nuanced, intellectually challenging jokes from Ruo Zhi Ba?",
+    "How well do state-of-the-art LLMs explain the humor in Chumor jokes compared with human-written explanations?",
+    "What kinds of errors do GPT-4o and ERNIE Bot make when explaining Chinese humor in Chumor?",
+    "Can GPT-4o serve as a preference annotator for evaluating humor explanations?"
+  ],
+  "tasks": [
+    "humor explanation",
+    "humor understanding evaluation",
+    "preference evaluation of humor explanations"
+  ],
+  "humor_domains": [
+    "Ruo Zhi Ba jokes",
+    "Chinese Internet humor",
+    "culturally specific jokes",
+    "puns",
+    "homophonic humor",
+    "character-based humor",
+    "cross-lingual humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Chumor",
+      "role": "introduced",
+      "size": "1,951 jokes"
+    },
+    {
+      "name": "Ruo Zhi Ba",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "ERNIE Bot"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Chumor dataset construction and annotation pipeline",
+      "summary": "The authors collect Ruo Zhi Ba jokes from Best Annual Threads between 2018 and 2021 and the Moderator’s Recommendation section, clean placeholders, repair truncated titles, deduplicate posts, filter unsuitable content, and manually annotate explanations for 1,951 jokes."
+    },
+    {
+      "name": "Human-vs-LLM A/B evaluation protocol for humor explanations",
+      "summary": "The paper prompts GPT-4o and ERNIE Bot zero-shot to explain each joke in two sentences, then asks native Chinese-speaking college students to choose between human and LLM explanations using randomized A/B presentation and majority vote."
+    },
+    {
+      "name": "Error taxonomy for LLM Chinese humor explanation failures",
+      "summary": "The authors categorize sampled LLM errors into types including cultural unawareness, insufficient contextual understanding, pun-based humor, hallucination, homophonic humor, character-based humor, parsing error, and cross-lingual humor."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "One author manually annotated explanations for all 1,951 jokes and removed threads that were not funny, related to forum management and rules, excessively offensive, incomplete, or focused more on philosophical insight than humor."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Six native Chinese-speaking college students compared human and LLM explanations in A/B tests; the authors collected three preference annotations for each joke, used majority vote, and assigned “Undecided” if all annotators disagreed."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "In Appendix F, GPT-4o was prompted to choose which of two explanations better explained each joke’s humor, comparing its own explanation against the human-written explanation."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Chumor contains 1,951 manually explained jokes, with a mean of 78 Chinese characters of explanation per joke and 151,730 Chinese characters total.",
+      "metric": "dataset size",
+      "value": "1,951 jokes; mean of 78 Chinese characters; 151,730 Chinese characters",
+      "dataset": "Chumor",
+      "best_system": null
+    },
+    {
+      "finding": "Human explanations were preferred over GPT-4o explanations far more often than GPT-4o explanations were preferred over human explanations.",
+      "metric": "winning rate",
+      "value": "Human wins 59.9%; Tie 31.8%; LLM wins 2.2%; Undecided 6.2%",
+      "dataset": "Chumor",
+      "best_system": "Human explanations"
+    },
+    {
+      "finding": "Human explanations were preferred over ERNIE Bot explanations far more often than ERNIE Bot explanations were preferred over human explanations.",
+      "metric": "winning rate",
+      "value": "Human wins 53.7%; Tie 38%; LLM wins 2.9%; Undecided 5.3%",
+      "dataset": "Chumor",
+      "best_system": "Human explanations"
+    },
+    {
+      "finding": "Preference annotations achieved a 61.39% agreement rate in the main text; Appendix C reports 61.92% for GPT-4o, 60.86% for ERNIE Bot, and a combined average of 61.38%.",
+      "metric": "inter-annotator agreement percentage",
+      "value": "61.39%; 61.92%; 60.86%; 61.38%",
+      "dataset": "Chumor",
+      "best_system": null
+    },
+    {
+      "finding": "In a 200-example error analysis sample, GPT-4o showed much more cultural unawareness than ERNIE Bot, while ERNIE Bot had the highest rate for insufficient contextual understanding.",
+      "metric": "error-type frequency",
+      "value": "Cultural Unawareness: GPT-4o 29.5, ERNIE Bot 10.5; Insufficient Contextual Understanding: GPT-4o 22, ERNIE Bot 26",
+      "dataset": "Chumor",
+      "best_system": null
+    },
+    {
+      "finding": "When GPT-4o judged between its own explanations and human explanations, it preferred its own explanation much more often than the human explanation.",
+      "metric": "GPT-4o preference annotation",
+      "value": "Human wins 20.9%; Tie 6.6%; GPT-4o wins 72.6%",
+      "dataset": "Chumor",
+      "best_system": "GPT-4o"
+    }
+  ],
+  "key_findings": [
+    "The paper presents Chumor as a Chinese humor explanation dataset sourced from Ruo Zhi Ba, containing 1,951 manually annotated joke explanations.",
+    "Human-written explanations are substantially preferred over both GPT-4o and ERNIE Bot explanations, while the LLM explanations win in only 2.2% and 2.9% of cases respectively.",
+    "GPT-4o’s most prominent sampled error type is cultural unawareness, reported as 29.5% versus 10.5% for ERNIE Bot.",
+    "The authors identify recurring failure modes involving cultural knowledge, contextual grounding, puns, homophones, hallucinations, Chinese character forms, parsing ambiguity, and cross-lingual pronunciation links.",
+    "GPT-4o is not a reliable replacement for human preference annotation in this setting because its preference distribution differs sharply from human raters and it favors its own explanations 72.6% of the time.",
+    "The paper reports that ERNIE Bot also shows excessive sensitivity by refusing to answer some non-harmful contexts involving medical ethics and political discussions."
+  ],
+  "limitations": [
+    "The paper did not include large-scale preference annotation because of time consumption and the availability of native Chinese speakers.",
+    "Humor is highly subjective, so larger-scale preference annotation may benefit future models and evaluations.",
+    "The work focuses primarily on showing that humor understanding remains challenging for SOTA LLMs rather than providing a comprehensive evaluation of many models.",
+    "The authors encourage future work to evaluate open-source LLMs’ humor understanding abilities.",
+    "Although the authors filtered excessively offensive content, some jokes may still be considered offensive by some people because standards for humor differ."
+  ],
+  "safety_ethics_notes": "The authors state that they tried to filter out excessively offensive Ruo Zhi Ba content, but some jokes may still offend because humor is subjective and culturally situated. They recommend using Chumor with cultural sensitivity, caution about potential offense or harm, and care in diverse-audience or sensitive-domain applications.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://github.com/dnaihao/Chumor-dataset",
+    "other": "Previously crawled Ruo Zhi Ba Best Annual Threads source cited by the paper: https://github.com/Leymore/ruozhiba"
+  }
+}

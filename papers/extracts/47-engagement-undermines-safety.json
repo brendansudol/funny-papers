@@ -1,0 +1,208 @@
+{
+  "key": "47-engagement-undermines-safety",
+  "ref": "#47",
+  "section": "Part 6 - Safety, Harm & Boundaries",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/47-engagement-undermines-safety/47-engagement-undermines-safety.md",
+  "source_md_sha256": "2425a4d6ae741255c9144707e30ec82b1665ea70fc72c1d653e6b307db2b8376",
+  "source_truncated": false,
+  "title": "Engagement Undermines Safety: How Stereotypes and Toxicity Shape Humor in Language Models",
+  "authors": [
+    "Atharvan Dogra",
+    "Soumya Suvra Ghosal",
+    "Ameet Deshpande",
+    "Ashwin Kalyan",
+    "Dinesh Manocha"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Does assigning a role/persona change the content of LLM-generated jokes, specifically their stereotypicality and toxicity?",
+    "How do stereotypes and toxicity influence LLM generations and the perception or scoring of humor?",
+    "How do incongruity-theory-based information-theoretic metrics behave with respect to unsafe content in generated humor?",
+    "Does harmful humor persist under an explicit non-offensive prompting condition, suggesting learned bias rather than only intentional stylistic imitation?"
+  ],
+  "tasks": [
+    "joke completion",
+    "punchline generation",
+    "humor generation",
+    "humor scoring",
+    "humor ordinal classification",
+    "stereotype detection in generated humor",
+    "toxicity detection in generated humor",
+    "satire generation analysis"
+  ],
+  "humor_domains": [
+    "Reddit jokes",
+    "setup-punchline jokes",
+    "satirical headlines",
+    "stereotypical humor",
+    "toxic humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "rJokes corpus",
+      "role": "source-material",
+      "size": "over 550,000 jokes"
+    },
+    {
+      "name": "rJokes corpus",
+      "role": "trained-on",
+      "size": "80% train and 20% validation sets"
+    },
+    {
+      "name": "neutral r/Jokes prompt corpus",
+      "role": "introduced",
+      "size": "10,000 joke bodies"
+    },
+    {
+      "name": "Getting Serious with LLMs (unfun pairs)",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "Pantheon 2.0",
+      "role": "source-material",
+      "size": "50 most globally prominent figures classified as comedians"
+    }
+  ],
+  "models_evaluated": [
+    "OLMo-2-1124-7B-Instruct",
+    "OLMo-2-1124-13B-Instruct",
+    "OLMo-2-0325-32B-Instruct",
+    "Meta-Llama-3.1-8B-Instruct",
+    "Ministral-8B-Instruct-2410",
+    "Mistral-Small-24B-Instruct-2501",
+    "ChatGPT-3.5",
+    "GPT-4",
+    "Mistral-Instruct",
+    "Llama-3.3-70B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Joint humor–safety evaluation pipeline",
+      "summary": "The paper generates joke completions from neutral r/Jokes setups under base and comedian-persona prompts, then jointly measures humor, stereotypicality, toxicity, and incongruity signals. It uses both task-specific classifiers/regressors and LLM-based ordinal raters to test whether funniness optimization rewards harmful content."
+    },
+    {
+      "name": "Persona-conditioned humor safety probe",
+      "summary": "The authors assign each model one of 50 prominent comedian personas via a system-role instruction and compare stereotype and toxicity rates against base prompting. This tests whether role-based creative prompting amplifies harmful humor."
+    },
+    {
+      "name": "Counterfactual non-offensive prompt test",
+      "summary": "The paper adds a prompt condition, “Complete the joke without being offensive,” on the same setups and models to separate intentional offensive style from harmfulness embedded in learned humor distributions."
+    },
+    {
+      "name": "Information-theoretic incongruity analysis for unsafe humor",
+      "summary": "Following Xie et al. (2021), the paper computes average token-level Shannon entropy and average negative log-likelihood on generated punchlines to measure uncertainty and surprisal across stereotype and toxicity levels."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes incongruity through uncertainty and surprisal metrics over punchline tokens, treating humor as arising when a punchline violates expectations set by the setup."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "A 3-point ordinal LLM classifier rates each joke for humor labels {Not Funny, Amusing, Hilarious}, stereotypicality labels {Not Stereotypical, Subtle Stereotypical, Strong Stereotypical}, and toxicity labels {Not Toxic, Mild Toxic, Severe Toxic}; label outputs are constrained to one token with temperature 0."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "A humor regressor following Weller and Seppi (2020), retrained because checkpoints were unavailable, predicts scalar humor scores from r/Jokes upvote-derived targets."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Stereotypicality is measured with the ALBERT-v2 model from Wu et al. (2024b), fine-tuned on the Multi-Grain Stereotype dataset."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Toxicity is measured with the HateBERT-ToxiGen classifier from Hartvigsen et al. (2022)."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Incongruity is evaluated using average token-level Shannon entropy as uncertainty and average negative log-likelihood as surprisal over generated punchline tokens."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The satire-generation analysis uses human funniness labels from Horvitz et al. (2024) to partition LLM satirical generations into Funny vs. Not-Funny groups."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Comedian-persona prompting increased mean stereotypical generations under the classifier from base to persona prompting.",
+      "metric": "Generation stereotype %",
+      "value": "54.91₁.₅₁ → 59.11₃.₆₇",
+      "dataset": "rJokes corpus",
+      "best_system": null
+    },
+    {
+      "finding": "Comedian-persona prompting increased mean toxic generations under the classifier from base to persona prompting.",
+      "metric": "Generation toxicity %",
+      "value": "70.92₁.₆₇ → 75.78₄.₀₇",
+      "dataset": "rJokes corpus",
+      "best_system": null
+    },
+    {
+      "finding": "Mean humor score rose with LLM-rated stereotype level.",
+      "metric": "Mean Humor Score",
+      "value": "Not Stereotypical 0.834; Subtle Stereotypical 0.869; Strong Stereotypical 0.891",
+      "dataset": "rJokes corpus",
+      "best_system": null
+    },
+    {
+      "finding": "Mean humor score rose with LLM-rated toxicity level.",
+      "metric": "Mean Humor Score",
+      "value": "Not Toxic 0.844; Mild Toxic 0.863; Severe Toxic 0.900",
+      "dataset": "rJokes corpus",
+      "best_system": null
+    },
+    {
+      "finding": "LLM humor labels associated harmful content with higher humor: Strong Stereotypical outputs were most often Hilarious, and Hilarious was dominated by toxic content.",
+      "metric": "Row-normalized Hilarious proportion; Spearman correlations",
+      "value": "Strong Stereotypical 80.9% Hilarious; Mild Toxicity 90.5% Hilarious; Severe Toxicity 83.0% Hilarious; stereotype vs. humor ρ ≈ +0.10 (p ≪ 0.001), toxicity vs. humor ρ ≈ +0.21 (p ≪ 0.001), stereotype vs. toxicity ρ ≈ +0.26 (p ≪ 0.001)",
+      "dataset": "rJokes corpus",
+      "best_system": null
+    },
+    {
+      "finding": "In the external satire-generation task, LLM satire increased stereotypicality for all three systems and usually increased toxicity relative to original Unfun headlines.",
+      "metric": "Stereo % and Toxic %",
+      "value": "ChatGPT-3.5: Orig. Stereo 8.54 → LLM Stereo 18.29, Orig. Toxic 81.71 → LLM Toxic 89.02; GPT-4: 8.51 → 13.83, 81.91 → 86.17; Mistral-Inst.: 9.09 → 18.18, 82.83 → 77.78",
+      "dataset": "Getting Serious with LLMs (unfun pairs)",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Across the six main open-source LLMs, comedian personas generally increased stereotypical and toxic generations relative to base prompting.",
+    "Both the task-specific humor regressor and the LLM-based humor rater gave higher humor scores or labels to more stereotypical and more toxic jokes.",
+    "Information-theoretic incongruity analysis showed that harmful cues generally increased uncertainty, widening the space of plausible continuations.",
+    "Surprisal behaved differently by model family: for stereotypes it decreased for the OLMo family but increased for the other three models, suggesting some harmful punchlines were more expected by OLMo models.",
+    "External validation on Horvitz et al. satire data showed LLM-generated satirical headlines had higher stereotypicality than original Unfun headlines for ChatGPT-3.5, GPT-4, and Mistral-Instruct, and higher toxicity except for Mistral-Instruct.",
+    "A non-offensive prompt reduced but did not eliminate stereotypicality and toxicity, which the authors interpret as evidence that harmful humor is partly embedded in learned humor distributions."
+  ],
+  "limitations": [
+    "The study draws on the r/Jokes corpus and upvote-based classifiers, which may not represent all kinds of humor or stereotypes outside Reddit and may contain biases of their own.",
+    "Although the paper uses specialized task-specific evaluator models and LLM-based scorers, other evaluation methods such as multimodal or human-in-the-loop systems might reveal different bias patterns.",
+    "The main experiments test six popular open-source models; proprietary or newer models could behave differently, and their exploration was constrained by resources and monetary limits.",
+    "The prompts pair neutral setups with stereotypical punchlines to isolate bias, and using entirely new setups might change the results.",
+    "The stereotype detector groups broad categories together, so more fine-grained or culturally specific stereotypes may affect generation and scoring in ways the study does not capture."
+  ],
+  "safety_ethics_notes": "The paper studies harmful capabilities in language application pipelines, uses only publicly available data, does not collect or expose personal data, withholds prompt corpora to prevent adversarial misuse, states that analysis code will be released under an open-source license, and includes toxic or stereotypical humor examples solely for analytical purposes.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The authors state they currently withhold their prompt corpora from release to prevent adversarial misuse and will publish all analysis code under an open-source license, but no URL is provided."
+  }
+}

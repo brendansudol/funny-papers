@@ -1,0 +1,173 @@
+{
+  "key": "34-cards-against-llms",
+  "ref": "#34",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/34-cards-against-llms/34-cards-against-llms.md",
+  "source_md_sha256": "95139e91af6811d5958ced777a1f569865eef96bde862f2747430a9c6b4c2975",
+  "source_truncated": false,
+  "title": "Cards Against LLMs: Benchmarking Humor Alignment in Large Language Models",
+  "authors": [
+    "Yousra Fettach",
+    "Guillaume Bied",
+    "Hannu Toivonen",
+    "Tijl De Bie"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the 2nd Workshop on Computational Humor (CHum 2026), pages 51–64",
+  "paper_types": [
+    "benchmark",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "To what extent do frontier LLMs align with human humor preferences when selecting the funniest Cards Against Humanity response from ten candidates?",
+    "Do LLMs show stable individual or shared humor preferences, as measured by self-consistency across shuffled replicates and inter-model agreement?",
+    "Is low average human–LLM humor alignment explained by alignment differences across demographic subgroups?",
+    "How much of LLM humor selection can be explained by structural artifacts such as card position bias and white-card topic preferences?"
+  ],
+  "tasks": [
+    "humor preference selection",
+    "funniest response selection",
+    "human–LLM humor alignment evaluation",
+    "LLM humor agreement and self-consistency analysis"
+  ],
+  "humor_domains": [
+    "Cards Against Humanity",
+    "fill-in-the-blank party-game humor",
+    "subversive context-sensitive punchlines",
+    "transgressive humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "CAH Lab Gameplay Dataset",
+      "role": "evaluated-on",
+      "size": "raw dataset had 148,497 past games (rounds); filtered dataset had 107,562 unique rounds; sampled 4,947 rounds, yielding 9,894 records and 9,612 valid records after exclusions"
+    },
+    {
+      "name": "CAH Lab Demographic Answers Dataset",
+      "role": "analyzed",
+      "size": "responses covering six demographic attributes; analysis used the population of 824 players with non-missing IDs"
+    },
+    {
+      "name": "CAH white-card topic annotations",
+      "role": "introduced",
+      "size": "2,074 unique white cards annotated with 1 to 3 topics among 15 topics"
+    },
+    {
+      "name": "CAH Gameplay baseline training set",
+      "role": "trained-on",
+      "size": "84,110 CAH rounds"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-5.2",
+    "Gemini 3 Flash",
+    "Claude Opus 4.5",
+    "Grok 4",
+    "DeepSeek-V3.2"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Cards Against LLMs benchmark framework",
+      "summary": "A controlled game-based evaluation in which five frontier LLMs play the same sampled Cards Against Humanity rounds as humans by selecting the funniest white card from ten candidates, with two shuffled replicates per round."
+    },
+    {
+      "name": "Position-and-topic surrogate analysis",
+      "summary": "The paper fits per-model conditional logistic models using only slate position and white-card topic flags to quantify how much LLM choices can be predicted without using the black-card prompt."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The introduction states that humor relies on the violation and resolution of expectations, and the discussion characterizes Cards Against Humanity as rewarding transgressive incongruity."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Human reference labels are the actual white cards selected by CAH Lab players in naturalistic gameplay; model accuracy is the proportion of exact matches to the human-selected card."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports accuracy/win rate, bootstrapped 95% confidence intervals, pairwise inter-model agreement, intra-model cross-replicate consistency, chi-square tests for position bias, and conditional-logit round-level accuracy."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Mixtral 8x7B was used to annotate white cards with topic labels for the topic-bias analysis; the authors report manual coherence checks on a subset."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "All five LLMs exceeded the 10% random baseline, but human–LLM alignment remained modest, with Claude highest.",
+      "metric": "accuracy / win rate",
+      "value": "GPT 13.4%, Gemini 16.5%, Claude 17.9%, DeepSeek 15.0%, Grok 17.0%; random baseline 10%",
+      "dataset": "CAH Lab Gameplay Dataset",
+      "best_system": "Claude Opus 4.5"
+    },
+    {
+      "finding": "Simple baselines predicting human choices outperformed the LLMs.",
+      "metric": "accuracy",
+      "value": "card popularity baseline 19.11%; ensemble of boosted trees 19.77%",
+      "dataset": "CAH Lab Gameplay Dataset",
+      "best_system": "ensemble of boosted trees"
+    },
+    {
+      "finding": "LLMs were much more self-consistent across shuffled replicates than they were aligned with humans.",
+      "metric": "cross-replicate consistency",
+      "value": "GPT 49.5%, Gemini 59.9%, Claude 59.8%, DeepSeek 44.9%, Grok 63.3%",
+      "dataset": "CAH Lab Gameplay Dataset",
+      "best_system": "Grok 4"
+    },
+    {
+      "finding": "Inter-model agreement substantially exceeded human–LLM alignment rates.",
+      "metric": "pairwise agreement",
+      "value": "21.4% to 44.9%",
+      "dataset": "CAH Lab Gameplay Dataset",
+      "best_system": "Gemini 3 Flash and Grok 4"
+    },
+    {
+      "finding": "All models showed significant position bias, with DeepSeek showing the strongest deviation from uniformity.",
+      "metric": "chi-square test of uniformity for position bias",
+      "value": "GPT χ²=356, Gemini χ²=282, Claude χ²=678, DeepSeek χ²=1851, Grok χ²=658; all p<0.001",
+      "dataset": "CAH Lab Gameplay Dataset",
+      "best_system": "DeepSeek-V3.2"
+    },
+    {
+      "finding": "Surrogate models using only position and topic predicted a non-trivial share of LLM choices, especially for Grok, DeepSeek, and Gemini.",
+      "metric": "round-level accuracy",
+      "value": "GPT 0.171, Gemini 0.339, Claude 0.244, DeepSeek 0.351, Grok 0.361",
+      "dataset": "CAH Lab Gameplay Dataset",
+      "best_system": "Grok 4"
+    }
+  ],
+  "key_findings": [
+    "Current frontier LLMs capture some aspects of human humor preference in Cards Against Humanity, but their 13.4%–17.9% alignment is low and below simple popularity and boosted-tree baselines.",
+    "LLMs agree with each other far more than they agree with humans, suggesting stable but human-misaligned humor profiles.",
+    "The demographic analysis found no evidence that low-to-moderate average alignment is driven by large differences across the studied sociodemographic subgroups.",
+    "All five models exhibit statistically significant position bias, and their content preferences emphasize bodily and sexual topics more than human picks while under-selecting politics/society and identity/demographic topics.",
+    "Position and topic features alone predict up to 0.361 of a model’s choices, implying that shallow structural and content cues explain a meaningful but incomplete part of LLM humor behavior."
+  ],
+  "limitations": [
+    "The experimental scale was limited to 9,894 records across two replicates because querying five frontier models through APIs was costly.",
+    "The CAH Lab dataset provides only a single human player’s choice per round, so the paper cannot estimate inter-rater agreement or separate model failure from inherent subjectivity.",
+    "All models were queried at a fixed temperature of 0.8; other temperature settings could produce different self-consistency profiles.",
+    "The topic analysis relies on LLM-generated labels, which may introduce noise or systematic bias; the paper did not conduct systematic human inter-annotator validation.",
+    "The player population is self-selected and predominantly Western, limiting generalization to broader cultures and demographics.",
+    "Four of the five evaluated models were developed primarily in a Western context, and DeepSeek alone is insufficient for cross-cultural conclusions."
+  ],
+  "safety_ethics_notes": "The paper notes that CAH contains offensive, politically incorrect, and transgressive content; participants originally played voluntarily for entertainment, demographic survey responses were optional and anonymized, and Gemini’s abstentions likely reflected content moderation filters. The discussion also raises the possibility that safety-oriented fine-tuning conflicts with CAH’s transgressive humor style.",
+  "artifacts": {
+    "code_url": "https://github.com/aida-ugent/cards_against_llms",
+    "data_url": "Data is available upon request to CAH Lab at mail@cardsagainsthumanity.com",
+    "other": "CAH Lab platform: https://lab.cardsagainsthumanity.com"
+  }
+}

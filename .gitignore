@@ -1,0 +1,9 @@
+.env
+.venv/
+__pycache__/
+.DS_Store
+
+# vendored datasets (~8.8GB) — rebuild with scripts/download_datasets.py
+data/*
+!data/datasets.json
+!data/MANIFEST.md

@@ -1,0 +1,598 @@
+{
+  "generated_from": "humor-and-llms-field-guide.md + papers/papers.json",
+  "created": "2026-07-03",
+  "note": "Catalog of public datasets released by papers in the field guide. `paper_keys` cross-reference papers/papers.json. Status lifecycle: pending -> downloaded; or gated / request / too_large / unavailable / failed. Datasets land in data/<key>/.",
+  "datasets": [
+    {
+      "key": "newyorker-caption-contest",
+      "name": "New Yorker Caption Contest corpus",
+      "contents": "Cartoons + finalist captions; matching/ranking/explanation tasks",
+      "paper_keys": [
+        "01-androids-electric-sheep",
+        "03-humorbench"
+      ],
+      "source_url": "https://huggingface.co/datasets/jmhessel/newyorker_caption_contest",
+      "hf_repo_id": "jmhessel/newyorker_caption_contest",
+      "method": "hf",
+      "access": "public",
+      "license": "CC-BY-4.0",
+      "approx_size": "7.9 GB (148,945 rows incl. cartoon images, all task configs)",
+      "status": "too_large",
+      "note": "Not vendored (7.9 GB, images embedded across configs). Fetch on demand via HF `datasets` with a specific config, or flip status to pending + allow_large. Companion code: github.com/jmhessel/caption_contest_corpus."
+    },
+    {
+      "key": "humorbench",
+      "name": "HumorBench",
+      "contents": "~300 expert-annotated cartoon-caption pairs with joke-element rubrics + grading code",
+      "paper_keys": [
+        "03-humorbench"
+      ],
+      "source_url": "https://github.com/ReubenNarad/Humor-Bench",
+      "method": "git",
+      "access": "public",
+      "license": "MIT",
+      "approx_size": "small (CSV annotations)",
+      "status": "downloaded",
+      "note": "Text-only (cartoon descriptions); NYCC images live in the caption-contest datasets. NB: 2.1GB of the clone is the authors' analysis/ artifacts — the benchmark itself is comprehensive_annotations.csv (240KB).",
+      "commit": "cc99276f7cdff9f90d6316a61668e59be6bd1c7a",
+      "local_path": "data/humorbench",
+      "disk_mb": 2236.6
+    },
+    {
+      "key": "puneval",
+      "name": "PunEval + PunnyPattern + PunBreak + NAP",
+      "contents": "2,589 cleaned SemEval-2017 puns + perturbed variants for the illusion-of-understanding probes",
+      "paper_keys": [
+        "04-pun-unintended"
+      ],
+      "source_url": "https://github.com/alezanga/punintended",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small (JSON splits)",
+      "status": "downloaded",
+      "note": "JOKER subset intentionally not released by its authors. Underlying pun text CC BY-NC via SemEval-2017.",
+      "commit": "c7e3607d166520f0acb9a8dbfff1878a3b825182",
+      "local_path": "data/puneval",
+      "disk_mb": 2.8
+    },
+    {
+      "key": "apples-to-oranges-jokes",
+      "name": "Comparing Apples to Oranges jokes",
+      "contents": "600 jokes across 4 types (hom/het puns, non-topical, topical) with human explanations",
+      "paper_keys": [
+        "05-apples-to-oranges"
+      ],
+      "source_url": "https://github.com/tylerL404/Comparing-Apples-to-Oranges",
+      "method": "git",
+      "access": "public",
+      "license": "MIT",
+      "approx_size": "small (CSV)",
+      "status": "downloaded",
+      "commit": "98e86588fd180a2f31c65ca07ad6c065de1b7c99",
+      "local_path": "data/apples-to-oranges-jokes",
+      "disk_mb": 3.5
+    },
+    {
+      "key": "expunations",
+      "name": "ExPUNations (ExPun)",
+      "contents": "1,899 puns with keywords, natural-language explanations, funniness ratings",
+      "paper_keys": [
+        "07-expunations"
+      ],
+      "source_url": "https://github.com/amazon-science/expunations",
+      "method": "git",
+      "access": "public",
+      "license": "CC-BY-NC-4.0",
+      "approx_size": "small (JSON)",
+      "status": "downloaded",
+      "commit": "8ca1f404d288d8621f63d4b66239c44ade91dcbc",
+      "local_path": "data/expunations",
+      "disk_mb": 3.7
+    },
+    {
+      "key": "phunny",
+      "name": "Phunny",
+      "contents": "350 novel human-written structured puns (+contamination controls) for generalization testing",
+      "paper_keys": [
+        "08-phunny"
+      ],
+      "source_url": "https://huggingface.co/datasets/disi-unibo-nlp/Phunny",
+      "hf_repo_id": "disi-unibo-nlp/Phunny",
+      "method": "hf",
+      "access": "public",
+      "license": "MIT",
+      "approx_size": "tiny (<1MB parquet)",
+      "status": "downloaded",
+      "local_path": "data/phunny",
+      "disk_mb": 0.0
+    },
+    {
+      "key": "semeval2017-task7-puns",
+      "name": "SemEval-2017 Task 7 puns",
+      "contents": "~2,396 English puns (homographic + heterographic); detection/location/interpretation; gold + scorer",
+      "paper_keys": [
+        "04-pun-unintended",
+        "06-good-pun-own-reword",
+        "07-expunations"
+      ],
+      "source_url": "https://alt.qcri.org/semeval2017/task7/data/uploads/semeval2017_task7.tar.xz",
+      "method": "direct",
+      "access": "public",
+      "license": "CC BY-NC",
+      "approx_size": "small (XML)",
+      "status": "downloaded",
+      "note": "The root corpus behind most pun work (ExPun, PunEval, etc.). Archive extracted in place.",
+      "local_path": "data/semeval2017-task7-puns",
+      "disk_mb": 0.7
+    },
+    {
+      "key": "chinesepun",
+      "name": "ChinesePun",
+      "contents": "~2.1k annotated Chinese puns (PGCL curriculum-learning paper)",
+      "paper_keys": [
+        "10-joke-master-pun-curriculum"
+      ],
+      "source_url": "https://github.com/cubenlp/PGCL",
+      "method": "git",
+      "access": "public",
+      "license": "MIT",
+      "approx_size": "small (JSON)",
+      "status": "downloaded",
+      "commit": "875d3b0bb85afc795b85d2ad6274cf88271d71a8",
+      "local_path": "data/chinesepun",
+      "disk_mb": 2.4
+    },
+    {
+      "key": "oogiri-go",
+      "name": "Oogiri-GO",
+      "contents": "130k+ multimodal/multilingual Oogiri game samples (EN/ZH/JA), ~78% with preference stars",
+      "paper_keys": [
+        "11-clot-leap-of-thought"
+      ],
+      "source_url": "https://huggingface.co/datasets/zhongshsh/CLoT-Oogiri-GO",
+      "hf_repo_id": "zhongshsh/CLoT-Oogiri-GO",
+      "method": "hf",
+      "access": "public",
+      "license": "CC BY 4.0 (respect Bokete/Zhihu source terms)",
+      "approx_size": "1.39 GB (jsonl + images)",
+      "status": "downloaded",
+      "local_path": "data/oogiri-go",
+      "disk_mb": 1328.8
+    },
+    {
+      "key": "mwahaha-semeval2026",
+      "name": "SemEval-2026 Task 1 MWAHAHA data",
+      "contents": "Humor-generation shared-task inputs (constraint prompts + GIFs); no labeled training data by design",
+      "paper_keys": [
+        "57-mwahaha"
+      ],
+      "source_url": "https://www.codabench.org/competitions/9719/",
+      "method": "direct",
+      "access": "gated",
+      "license": null,
+      "approx_size": "small",
+      "status": "gated",
+      "note": "Requires free Codabench account. Task site: pln-fing-udelar.github.io/semeval-2026-humor-gen; organizers' repo github.com/pln-fing-udelar/semeval-2026-humor-gen may gain data post-competition."
+    },
+    {
+      "key": "newyorker-caption-ranking",
+      "name": "New Yorker caption ranking (Humor in AI)",
+      "contents": "2.18M captions with 250M+ aggregated crowd votes across ~900 contests + cartoon images + GPT-4 descriptions",
+      "paper_keys": [
+        "22-caption-preferences"
+      ],
+      "source_url": "https://huggingface.co/datasets/yguooo/newyorker_caption_ranking",
+      "hf_repo_id": "yguooo/newyorker_caption_ranking",
+      "method": "hf",
+      "access": "public",
+      "license": "CC BY-NC 4.0",
+      "approx_size": "1.12 GB",
+      "status": "downloaded",
+      "note": "Code: github.com/yguooo/cartoon-caption-generation. Rolling raw per-contest data: github.com/nextml/caption-contest-data.",
+      "local_path": "data/newyorker-caption-ranking",
+      "disk_mb": 1066.5
+    },
+    {
+      "key": "humordb",
+      "name": "HumorDB",
+      "contents": "3,545 images (funny/not, incl. minimally-contrastive edited pairs); binary + 1-10 regression + pairwise tasks",
+      "paper_keys": [
+        "25-humordb"
+      ],
+      "source_url": "https://huggingface.co/datasets/kreimanlab/HumorDB",
+      "hf_repo_id": "kreimanlab/HumorDB",
+      "method": "hf",
+      "access": "public",
+      "license": "CC BY 4.0",
+      "approx_size": "330 MB",
+      "status": "downloaded",
+      "local_path": "data/humordb",
+      "disk_mb": 312.1
+    },
+    {
+      "key": "yesbut",
+      "name": "YesBut (V1)",
+      "contents": "2,547 two-panel contradiction/satire comics (1,084 satirical) with annotations",
+      "paper_keys": [
+        "26-yesbut"
+      ],
+      "source_url": "https://huggingface.co/datasets/bansalaman18/yesbut",
+      "hf_repo_id": "bansalaman18/yesbut",
+      "method": "hf",
+      "access": "public",
+      "license": null,
+      "approx_size": "140 MB",
+      "status": "downloaded",
+      "note": "Canonical repo github.com/abhi1nandy2/yesbut_dataset (annotations + Drive links). No explicit license.",
+      "local_path": "data/yesbut",
+      "disk_mb": 133.0
+    },
+    {
+      "key": "yesbut-v2",
+      "name": "YesBut V2",
+      "contents": "1,262 multilingual/multicultural satire comic images",
+      "paper_keys": [
+        "26-yesbut"
+      ],
+      "source_url": "https://huggingface.co/datasets/zhehuderek/YESBUT_Benchmark_V2",
+      "hf_repo_id": "zhehuderek/YESBUT_Benchmark_V2",
+      "method": "hf",
+      "access": "public",
+      "license": null,
+      "approx_size": "small",
+      "status": "downloaded",
+      "note": "Different author team from V1.",
+      "local_path": "data/yesbut-v2",
+      "disk_mb": 4.3
+    },
+    {
+      "key": "pixelhumor",
+      "name": "PixelHumor",
+      "contents": "Annotations + URLs for 2,800 multi-panel comics from 7 creators (images NOT included)",
+      "paper_keys": [
+        "x04-pixelhumor"
+      ],
+      "source_url": "https://github.com/Social-AI-Studio/PixelHumor",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small (CSVs)",
+      "status": "downloaded",
+      "note": "Comic images must be fetched from original creators' sites (copyright stays with them; research use only; expect link rot).",
+      "commit": "acbe7ae92aec7e350a193e75c3ff834c9a9e5280",
+      "local_path": "data/pixelhumor",
+      "disk_mb": 3.8
+    },
+    {
+      "key": "memereacon",
+      "name": "MemeReaCon",
+      "contents": "1,565 meme instances with post + community reaction context",
+      "paper_keys": [
+        "x05-memereacon"
+      ],
+      "source_url": null,
+      "method": "unavailable",
+      "access": "unknown",
+      "license": null,
+      "approx_size": "unknown",
+      "status": "unavailable",
+      "note": "No public release found as of July 2026 (Reddit-sourced; likely restricted). Contact authors via EMNLP 2025 paper."
+    },
+    {
+      "key": "exfuntube",
+      "name": "ExFunTube",
+      "contents": "10,136 funny YouTube videos: URLs + funny-moment timestamps + explanations (videos not distributed)",
+      "paper_keys": [
+        "x06-exfuntube"
+      ],
+      "source_url": "https://exfuntube.github.io/",
+      "method": "direct",
+      "direct_urls": [
+        "https://drive.usercontent.google.com/download?id=1xiiBt2KfsJS70x8P7z8spdOu7atApDNt&export=download&confirm=t"
+      ],
+      "access": "public",
+      "license": null,
+      "approx_size": "small (single JSON)",
+      "status": "downloaded",
+      "note": "Saved as exfuntube.json. Videos must be fetched from YouTube; expect link rot since 2023. Code: github.com/dayoon-ko/ExFunTube.",
+      "local_path": "data/exfuntube",
+      "disk_mb": 5.3
+    },
+    {
+      "key": "v-hub",
+      "name": "v-HUB",
+      "contents": "951 minimally-verbal video clips (silent films + UGC) with captions/explanations/QA",
+      "paper_keys": [
+        "x07-vhub"
+      ],
+      "source_url": "https://huggingface.co/datasets/Foreverskyou/v-HUB",
+      "hf_repo_id": "Foreverskyou/v-HUB",
+      "method": "hf",
+      "access": "public",
+      "license": null,
+      "approx_size": "2.9 GB (video embedded in parquet)",
+      "allow_large": true,
+      "status": "downloaded",
+      "note": "Slightly over the default size cap; included deliberately (video is the point). Mixed copyright status on silent-film clips; research use.",
+      "local_path": "data/v-hub",
+      "disk_mb": 2745.3
+    },
+    {
+      "key": "oxford-tvg-hic",
+      "name": "OxfordTVG-HIC",
+      "contents": "~2.9M humorous image-caption pairs with humor scores",
+      "paper_keys": [
+        "28-humorchain"
+      ],
+      "source_url": "https://github.com/runjiali-rl/Oxford_HIC",
+      "method": "git",
+      "access": "public",
+      "license": "MIT (code)",
+      "approx_size": "tens of GB (images via Google Drive)",
+      "status": "too_large",
+      "note": "Cross-referenced training set for HUMORCHAIN. Repo is code + gdown scripts; data via Google Drive folder (quota-throttled). Not vendored."
+    },
+    {
+      "key": "cards-against-llms",
+      "name": "Cards Against LLMs (code)",
+      "contents": "Evaluation code for 9,894 Cards Against Humanity rounds; the rounds data itself is proprietary",
+      "paper_keys": [
+        "34-cards-against-llms"
+      ],
+      "source_url": "https://github.com/aida-ugent/cards_against_llms",
+      "method": "git",
+      "access": "request",
+      "license": null,
+      "approx_size": "small (code only)",
+      "status": "downloaded",
+      "note": "CAH Lab Gameplay Dataset available on request to mail@cardsagainsthumanity.com; scripts expect two CSVs in cah_lab_v2_data_for_research_2025_06/. Cloning code repo only.",
+      "commit": "1a98b1c7220ec7ea6d582b0814b9210674967ad0",
+      "local_path": "data/cards-against-llms",
+      "disk_mb": 0.4
+    },
+    {
+      "key": "oogiri-eval-aaai2026",
+      "name": "Expanded Oogiri eval set (Sakabe et al.)",
+      "contents": "Multi-dimensional Oogiri generation/evaluation annotations (Novelty/Clarity/Relevance/Intelligence/Empathy)",
+      "paper_keys": [
+        "38-oogiri-multidimensional"
+      ],
+      "source_url": null,
+      "method": "unavailable",
+      "access": "unknown",
+      "license": null,
+      "approx_size": "unknown",
+      "status": "unavailable",
+      "note": "Paper footnote points to github.com/SDS-NLP/Oogiri-Eval which 404s as of July 2026. Watch the SDS-NLP org or email authors (Tokyo Metropolitan Univ.)."
+    },
+    {
+      "key": "oogiri-master-builder",
+      "name": "Oogiri-Master dataset builder",
+      "contents": "Reproducible builder (rate-limited crawler) for Oogiri-Master (600 tasks) + Oogiri-Corpus (82,536 pairs); no data dump",
+      "paper_keys": [
+        "39-oogiri-master"
+      ],
+      "source_url": "https://github.com/CyberAgentAILab/oogiri-dataset-builder",
+      "method": "git",
+      "access": "public",
+      "license": "MIT (builder); dataset CC BY-NC-SA 4.0 when rebuilt",
+      "approx_size": "small (code); rebuilt CSVs <50MB",
+      "status": "downloaded",
+      "note": "Deliberately does not redistribute the data — run the crawler to rebuild locally.",
+      "commit": "504213de7b855f2c30097995ec2b0ef57a599cd0",
+      "local_path": "data/oogiri-master-builder",
+      "disk_mb": 0.2
+    },
+    {
+      "key": "standup4ai",
+      "name": "StandUp4AI",
+      "contents": "Metadata, laughter-annotation CSVs, and scripts for 3,617 stand-up videos in 7 languages (videos are YouTube links)",
+      "paper_keys": [
+        "44-standup4ai"
+      ],
+      "source_url": "https://github.com/Standup4AI/dataset",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small repo (~330KB); underlying video ~334h not included",
+      "status": "downloaded",
+      "note": "Research-purposes-only per README; some full data available on demand from authors.",
+      "commit": "5d689b2c48f35dd214f9464fc97f0f67024f0395",
+      "local_path": "data/standup4ai",
+      "disk_mb": 1.9
+    },
+    {
+      "key": "workplace-humor",
+      "name": "Workplace humor appropriateness (Not All Jokes Land)",
+      "contents": "304 industry-specific humorous statements annotated for appropriateness",
+      "paper_keys": [
+        "45-not-all-jokes-land"
+      ],
+      "source_url": null,
+      "method": "unavailable",
+      "access": "request",
+      "license": null,
+      "approx_size": "small",
+      "status": "unavailable",
+      "note": "Paper's anonymous.4open.science repo expired (verified July 2026); no deanonymized release found. Email authors."
+    },
+    {
+      "key": "harm-or-humor",
+      "name": "Harm or Humor benchmark",
+      "contents": "3,000 texts + 6,000 images + 1,200 videos for overt/covert harmful-humor detection",
+      "paper_keys": [
+        "48-harm-or-humor"
+      ],
+      "source_url": "https://drive.google.com/drive/folders/1H2W9Q43G8wtJy5F-KmOc2WhDDegBzJ5Z",
+      "method": "direct",
+      "access": "public",
+      "license": null,
+      "approx_size": "multi-GB (videos)",
+      "status": "too_large",
+      "note": "Google Drive folder (Images/Text/Videos), accessible without login but fragile — fetch manually with gdown --folder if needed. No GitHub/HF release."
+    },
+    {
+      "key": "chumor",
+      "name": "Chumor 2.0",
+      "contents": "Culturally-specific Chinese jokes from Ruo Zhi Ba with human explanations (supersedes 1.0)",
+      "paper_keys": [
+        "50-chumor",
+        "50b-chumor-2"
+      ],
+      "source_url": "https://huggingface.co/datasets/dnaihao/Chumor",
+      "hf_repo_id": "dnaihao/Chumor",
+      "method": "hf",
+      "access": "gated",
+      "license": "MIT",
+      "approx_size": "small (~1.6MB CSV)",
+      "status": "gated",
+      "note": "Gated by click-through agreement (no reposting examples online). Accept on HF + `hf auth login`, then flip status to pending and rerun."
+    },
+    {
+      "key": "cfunset",
+      "name": "CFunSet",
+      "contents": "~164K Chinese humor instruction rows aggregating 7 sources (Tieba JokeBar, CrossDial, Chumor, ...)",
+      "paper_keys": [
+        "51-cfunmodel"
+      ],
+      "source_url": "https://huggingface.co/datasets/ZhenghanYU/CFunSet",
+      "hf_repo_id": "ZhenghanYU/CFunSet",
+      "method": "hf",
+      "access": "public",
+      "license": null,
+      "approx_size": "220 MB",
+      "status": "downloaded",
+      "local_path": "data/cfunset",
+      "disk_mb": 208.9
+    },
+    {
+      "key": "pun2pun",
+      "name": "Pun2Pun",
+      "contents": "5.5k textual puns + ~1k visual pun images for Chinese-English pun translation",
+      "paper_keys": [
+        "52-pun2pun"
+      ],
+      "source_url": "https://github.com/rexera/Pun2Pun",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "~200 MB",
+      "status": "downloaded",
+      "note": "No license file; redistribution rights unclear.",
+      "commit": "dc57b28b4bf68e6b87e9ec444a766fcf203089a3",
+      "local_path": "data/pun2pun",
+      "disk_mb": 395.3
+    },
+    {
+      "key": "getting-serious",
+      "name": "Getting Serious with LLMs (unfun pairs)",
+      "contents": "Human unfun data + English-Hindi tweet humor + LLM unfunning code (ACL 2024)",
+      "paper_keys": [
+        "56-getting-serious-unfunny"
+      ],
+      "source_url": "https://github.com/zacharyhorvitz/Getting-Serious-With-LLMs",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small",
+      "status": "downloaded",
+      "commit": "41464cc59733a401322c6ca952ab3c0776d905c5",
+      "local_path": "data/getting-serious",
+      "disk_mb": 62.8
+    },
+    {
+      "key": "unfun-me",
+      "name": "Unfun.me database dumps",
+      "contents": "~11K human-unfunned satirical headlines (v1-v3 dumps from the unfun.me game)",
+      "paper_keys": [
+        "56-getting-serious-unfunny"
+      ],
+      "source_url": "https://github.com/epfl-dlab/unfun",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small",
+      "status": "downloaded",
+      "note": "The upstream source the ACL 2024 paper builds on (v3, Feb 2023).",
+      "commit": "475aa9d8ae979a25138f5578c9023e1292f5b50c",
+      "local_path": "data/unfun-me",
+      "disk_mb": 55.8
+    },
+    {
+      "key": "hahackathon",
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "contents": "10k texts jointly rated for humor and offense (train/dev/test CSVs)",
+      "paper_keys": [
+        "x09-hahackathon"
+      ],
+      "source_url": "https://github.com/Smolky/hahackathon-2021",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small (~1.3MB CSVs)",
+      "status": "downloaded",
+      "note": "Participant-team mirror (UMUTeam); official CodaLab competition is archived. CSVs verified present in datasets/ folder.",
+      "commit": "8d524f727d5845ccdb01b24020ebc17dc9168fca",
+      "local_path": "data/hahackathon",
+      "disk_mb": 2.0
+    },
+    {
+      "key": "humicroedit-funlines",
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "contents": "~15K minimally-edited news headlines with funniness grades + 8,248 FunLines headlines",
+      "paper_keys": [
+        "x10-humicroedit"
+      ],
+      "source_url": "https://www.cs.rochester.edu/u/nhossain/humicroedit.html",
+      "method": "direct",
+      "direct_urls": [
+        "https://cs.rochester.edu/u/nhossain/semeval-2020-task-7-dataset.zip",
+        "https://www.cs.rochester.edu/u/nhossain/funlines/semeval-2020-task-7-extra-training-data.zip"
+      ],
+      "access": "public",
+      "license": null,
+      "approx_size": "small (CSV zips)",
+      "status": "downloaded",
+      "note": "Official organizer page (Hossain). Also mirrored on Zenodo (record 3969509). Zips extracted in place.",
+      "local_path": "data/humicroedit-funlines",
+      "disk_mb": 2.0
+    },
+    {
+      "key": "rjokes",
+      "name": "rJokes corpus",
+      "contents": "550K+ Reddit jokes with upvote-derived humor degrees (through Jan 2020)",
+      "paper_keys": [
+        "x11-rjokes-last-laugh"
+      ],
+      "source_url": "https://github.com/orionw/rJokesData",
+      "method": "git",
+      "access": "public",
+      "license": "Subject to Reddit License/ToS per README",
+      "approx_size": "~210 MB (gzipped in repo)",
+      "status": "downloaded",
+      "note": "README requires removing posts on OP request.",
+      "commit": "d48bedd71bdacc7557b84ad697bf556e7aad7c21",
+      "local_path": "data/rjokes",
+      "disk_mb": 403.3
+    },
+    {
+      "key": "ur-funny",
+      "name": "UR-FUNNY (repo)",
+      "contents": "Docs + loaders for multimodal TED-talk humor detection; actual features/videos via Dropbox links",
+      "paper_keys": [
+        "x12-ur-funny"
+      ],
+      "source_url": "https://github.com/ROC-HCI/UR-FUNNY",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "repo small; features ~3.75 GB, raw videos ~19 GB (Dropbox, not vendored)",
+      "status": "downloaded",
+      "note": "Cloning repo only. Feature pickles / video zip links are in the README if needed later.",
+      "commit": "c801818da5d742ca4cf5480ece047b94bbdc8466",
+      "local_path": "data/ur-funny",
+      "disk_mb": 0.1
+    }
+  ]
+}

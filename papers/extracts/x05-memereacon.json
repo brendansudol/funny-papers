@@ -1,0 +1,179 @@
+{
+  "key": "x05-memereacon",
+  "ref": "Part 3 (also in this section)",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x05-memereacon/x05-memereacon.md",
+  "source_md_sha256": "4e4774bb0a7a471202ed9ba80eb42696ef248599b819f551b5ce6e52b229891c",
+  "source_truncated": false,
+  "title": "MemeReaCon: Probing Contextual Meme Understanding in Large Vision-Language Models",
+  "authors": [
+    "Zhengyi Zhao",
+    "Shubo Zhang",
+    "Yuxi Zhang",
+    "Yifan Zhang",
+    "Yanxi Zhao",
+    "Zezhong Wang",
+    "Huimin Wang",
+    "Yutian Zhao",
+    "Bin Liang",
+    "Yefeng Zheng",
+    "Binyang Li",
+    "Kam-Fai Wong",
+    "Xian Wu"
+  ],
+  "year": 2025,
+  "venue": "EMNLP 2025",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "To what extent do models understand the meme?",
+    "To what extent does the post context affect models’ understanding of meme?"
+  ],
+  "tasks": [
+    "Context-Meme Interplay Classification (CMI-C)",
+    "Comment Stance and Affective Consistent Classification (CSAC-C)",
+    "Post Connection Generation (PC-G)",
+    "Post Intent Generation (PI-G)",
+    "contextual meme understanding",
+    "meme explanation"
+  ],
+  "humor_domains": [
+    "memes",
+    "Reddit memes",
+    "programmer humor",
+    "British memes",
+    "relationship memes",
+    "social media comments"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "MemeReaCon",
+      "role": "introduced",
+      "size": "1,565 annotated instances"
+    },
+    {
+      "name": "Reddit",
+      "role": "source-material",
+      "size": "over 3,000 potential candidates"
+    }
+  ],
+  "models_evaluated": [
+    "Qwen2.5",
+    "Flamingo",
+    "LLaVA-OneVision-7B",
+    "Phi-4-MM-5.6B",
+    "InternVL3-8B",
+    "Qwen2.5-VL-7B",
+    "Qwen2.5-Omni-7B",
+    "GPT-4o",
+    "QvQ-72B",
+    "Grok-3",
+    "Claude-3.7-sonnet-thinking",
+    "Gemini-2.5-Pro"
+  ],
+  "methods_proposed": [
+    {
+      "name": "MemeReaCon",
+      "summary": "A benchmark for contextual meme understanding that preserves the meme image, original post text, and top-rated community comment from Reddit, with annotations for how these elements interact."
+    },
+    {
+      "name": "MemeReaCon annotation scheme",
+      "summary": "The scheme labels Context-Meme Interplay, Meme Types, Comment Stance and Affective Consistence, Post Connection, and Post Intent to capture how meme images, post context, and comments jointly create meaning."
+    },
+    {
+      "name": "Context Relevance Score (CRS)",
+      "summary": "A diagnostic metric measuring how effectively a model response integrates post text, image, and comments, computed with BERTScore relevance using a threshold of 0.7 and difficulty weights."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "Six English-speaking Ph.D. students familiar with internet culture annotated the dataset; each instance was independently annotated by 3 annotators, disagreements were resolved by majority vote or a senior annotator, and Fleiss’ Kappa on 500 held-out instances was CMI κ = 0.86, MT κ = 0.88, CSAC κ = 0.75, PC κ = 0.79, and PI κ = 0.81."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Models were evaluated zero-shot. Classification tasks used accuracy and macro F1-score; generative tasks used BERTScore and ROUGE-L; BERTScore used microsoft/deberta-xlarge-mnli as the embedding model."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper also reports Context Relevance Score (CRS), ranging from 0 to 1, based on semantic relevance between model responses and contextual elements."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Gemini-2.5-pro achieved the best Context-Meme Interplay Classification performance.",
+      "metric": "Accuracy / Macro F1",
+      "value": "83.21% / 82.86%",
+      "dataset": "MemeReaCon",
+      "best_system": "Gemini-2.5-pro"
+    },
+    {
+      "finding": "Gemini-2.5-pro achieved the best Comment Stance and Affective Consistent Classification performance.",
+      "metric": "Accuracy / Macro F1",
+      "value": "71.28% / 59.42%",
+      "dataset": "MemeReaCon",
+      "best_system": "Gemini-2.5-pro"
+    },
+    {
+      "finding": "Gemini-2.5-pro achieved the best Post Connection Generation performance.",
+      "metric": "BERTScore / ROUGE-L",
+      "value": "66.89% / 60.38%",
+      "dataset": "MemeReaCon",
+      "best_system": "Gemini-2.5-pro"
+    },
+    {
+      "finding": "Gemini-2.5-pro achieved the best Post Intent Generation performance.",
+      "metric": "BERTScore / ROUGE-L",
+      "value": "52.34% / 44.86%",
+      "dataset": "MemeReaCon",
+      "best_system": "Gemini-2.5-pro"
+    },
+    {
+      "finding": "The dataset annotation process achieved substantial inter-annotator agreement across all five annotation dimensions.",
+      "metric": "Fleiss’ Kappa",
+      "value": "CMI κ = 0.86, MT κ = 0.88, CSAC κ = 0.75, PC κ = 0.79, PI κ = 0.81",
+      "dataset": "MemeReaCon",
+      "best_system": null
+    },
+    {
+      "finding": "Gemini-2.5-pro obtained the highest Context Relevance Score in the CRS analysis.",
+      "metric": "Context Relevance Score",
+      "value": "0.68",
+      "dataset": "MemeReaCon",
+      "best_system": "Gemini-2.5-pro"
+    }
+  ],
+  "key_findings": [
+    "MemeReaCon contains 1,565 annotated Reddit meme instances with meme image, post title/body, and a top-rated comment preserved together.",
+    "The dataset is nearly balanced for Context-Meme Interplay, with 796 Context Explains Meme instances (50.9%) and 769 Meme Enhances Context instances (49.1%).",
+    "Models perform much better on classification than generation: Gemini-2.5-pro reaches 83.21% CMI-C accuracy but only 44.86% ROUGE-L on PI-G.",
+    "Vision Reasoning Models outperform standard Vision-Language Models overall, but the paper reports that even the best models struggle to integrate post text, image, and comments into communicative intent.",
+    "Specialized communities such as r/ProgrammerHumor and r/BritishMemes are harder for models than general meme communities, especially on the PI-G task.",
+    "Error analysis identifies context, visual, semantic, and cultural errors; VRMs reduce context-neglect errors but have high semantic error share at 32.9%."
+  ],
+  "limitations": [
+    "The paper reports that explicit post connections were less consistent across annotations in some cases.",
+    "The authors state that meme interpretation depends heavily on annotators’ cultural, social, and contextual background knowledge.",
+    "The dataset is drawn from five English Reddit communities, which limits coverage of other platforms, languages, and meme cultures."
+  ],
+  "safety_ethics_notes": "The dataset was collected from publicly accessible Reddit posts via the official API, following Reddit’s API terms of service. Usernames and personally identifiable information were removed. Annotators could skip uncomfortable instances, and the paper notes that memes can contain sensitive or controversial themes. Annotators were paid $0.19 per annotation, with an average hourly wage of $14.82.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

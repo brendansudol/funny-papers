@@ -1,0 +1,192 @@
+{
+  "key": "30-culture-aware-captioning",
+  "ref": "#30",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/30-culture-aware-captioning/30-culture-aware-captioning.md",
+  "source_md_sha256": "7c785ff5d35e7b7bc77588b1ecf516d615436a4bd3ae7c43999808936ba17d8d",
+  "source_truncated": false,
+  "title": "Culture-Aware Humorous Captioning: Multimodal Humor Generation across Cultural Contexts",
+  "authors": [
+    "Run Xu",
+    "Lu Li",
+    "Rongzhao Zhang",
+    "Jie Xu"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can multimodal large language models generate short humorous captions that remain grounded in an input image while adapting to an explicitly specified cultural context?",
+    "How can open-ended, culture-conditioned humorous image captions be evaluated across image grounding, cultural appropriateness, semantic quality, coherence, humor, and creativity?",
+    "Does a staged alignment framework combining Western-context supervised fine-tuning, judge-based GRPO, degradation-aware regularization, and low-resource Eastern adaptation improve contextual fit and overall caption quality?",
+    "Does explicit cultural context conditioning improve performance compared with no cultural context conditioning?"
+  ],
+  "tasks": [
+    "culture-aware humorous captioning",
+    "humorous image caption generation",
+    "culture-conditioned multimodal humor evaluation"
+  ],
+  "humor_domains": [
+    "humorous image captions",
+    "visual humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English",
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "CLoT",
+      "role": "source-material",
+      "size": "5,000 images after filtering"
+    },
+    {
+      "name": "culture-aware humorous captioning data",
+      "role": "introduced",
+      "size": "5,000 task-suitable images: 3,500 train, 500 dev, 1,000 benchmark"
+    },
+    {
+      "name": "culture-aware humorous captioning training pool",
+      "role": "trained-on",
+      "size": "3,500 images; Stage 1 uses 3,000 image-text samples; Stage 3 uses 1,000 image-text pairs"
+    },
+    {
+      "name": "cross-cultural benchmark",
+      "role": "evaluated-on",
+      "size": "1,000 images"
+    },
+    {
+      "name": "judge validation set",
+      "role": "introduced",
+      "size": "400 image instances"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "Gemini 3 Flash Preview",
+    "Claude Sonnet 4.5",
+    "InternVL3-8B-Instruct",
+    "LLaVA-OneVision-7B",
+    "MiniCPM-V 2.6",
+    "MiniGPT-4",
+    "GLM-4V-9B",
+    "Qwen2.5-VL-7B-Instruct",
+    "Qwen3-VL-8B-Instruct",
+    "cogvlm2-llama3-chat-19B",
+    "QwenVL+CLoT",
+    "CuHAlign",
+    "GPT-5.1"
+  ],
+  "methods_proposed": [
+    {
+      "name": "CuHAlign",
+      "summary": "A three-stage alignment framework for culture-aware humorous captioning. It first performs Western-context supervised fine-tuning on Qwen3-VL-8B with LoRA, then applies judge-based GRPO with multi-dimensional preference rankings, and finally adapts to Eastern cultural context using a small supervised mixture with Western replay."
+    },
+    {
+      "name": "Degradation-aware Prototype Repulsion Constraint",
+      "summary": "A constraint added during preference optimization to mitigate reward hacking in open-ended generation. It builds prototype vectors for degradation directions from annotated evidence texts and penalizes generated outputs whose representation is too similar to the corresponding degradation prototype."
+    },
+    {
+      "name": "Six-dimensional evaluation framework",
+      "summary": "An evaluation rubric scoring Image Relevance, Contextual Fit, Semantic Richness, Reasonableness, Humor, and Creativity on 10-point scales. The paper reports each dimension and their unweighted average."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "A fixed 20% subset of the 1,000 test samples is scored by human annotators using the six-dimensional 10-point rubric."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "The remaining 80% of the 1,000 test samples is scored automatically by an LLM-as-a-Judge under the same unified rubric, and final results average human-scored and judge-scored portions over the full test set."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "For preference alignment, the current policy samples K = 8 rollouts per training sample; the rollouts plus a reference caption are ranked by an LLM judge, and rewards are constructed from each rollout's rank relative to the reference."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A judge validation set of 400 image instances is built as image + high-quality caption + low-quality caption pairs with manually predefined better-worse labels."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-5.1, Gemini-3-Flash-Preview, and Claude Sonnet 4.5 are evaluated as pairwise judges on the 400-instance validation set; GPT-5.1 has the highest agreement in all four language/difficulty settings."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "CuHAlign achieved the highest Contextual Fit under the Western cultural context, improving over the Qwen3-VL-8B-Instruct backbone from 5.49 to 6.63.",
+      "metric": "Contextual Fit",
+      "value": "5.49 to 6.63",
+      "dataset": "cross-cultural benchmark",
+      "best_system": "CuHAlign"
+    },
+    {
+      "finding": "CuHAlign achieved the highest Contextual Fit under the Eastern cultural context, improving over the Qwen3-VL-8B-Instruct backbone from 5.22 to 6.30.",
+      "metric": "Contextual Fit",
+      "value": "5.22 to 6.30",
+      "dataset": "cross-cultural benchmark",
+      "best_system": "CuHAlign"
+    },
+    {
+      "finding": "On overall average in Table 2, GPT-4o scored 6.76 under Western context and 6.75 under Eastern context, compared with CuHAlign's 6.63 and 6.66.",
+      "metric": "Avg.",
+      "value": "GPT-4o: 6.76 / 6.75; CuHAlign: 6.63 / 6.66",
+      "dataset": "cross-cultural benchmark",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "Explicit cultural conditioning increased CuHAlign's Contextual Fit from 5.21 with no context to 6.63 under Western context and 6.30 under Eastern context.",
+      "metric": "Contextual Fit",
+      "value": "5.21 to 6.63 and 6.30",
+      "dataset": "cross-cultural benchmark",
+      "best_system": "CuHAlign"
+    },
+    {
+      "finding": "In the ablation, Western-context CF rose from 5.49 for the base model to 6.13 after SFT, 6.59 after GRPO, 6.62 after the degradation constraint, and 6.63 for the full model.",
+      "metric": "Contextual Fit",
+      "value": "5.49, 6.13, 6.59, 6.62, 6.63",
+      "dataset": "cross-cultural benchmark",
+      "best_system": "CuHAlign"
+    },
+    {
+      "finding": "GPT-5.1 had the highest judge-human agreement across all judge-validation settings: 68.2, 77.3, 71.6, and 79.2.",
+      "metric": "agreement with human preference (%)",
+      "value": "68.2, 77.3, 71.6, 79.2",
+      "dataset": "judge validation set",
+      "best_system": "GPT-5.1"
+    }
+  ],
+  "key_findings": [
+    "Contextual Fit separates culture-aware humorous captioning from general humorous captioning: model gaps are larger on CF than on several general caption-quality dimensions.",
+    "CuHAlign obtains the best CF under both cultural settings while maintaining competitive overall scores, but GPT-4o has the highest overall averages in Table 2.",
+    "Explicit cultural context substantially improves CF for both Qwen3-VL-8B-Instruct and CuHAlign compared with the no-context setting.",
+    "The staged alignment ablation shows SFT establishes task behavior, GRPO is the main step for improving generation quality, the degradation-aware constraint adds a smaller balance improvement, and Eastern adaptation is crucial for the low-resource Eastern setting.",
+    "Judge validation shows automatic evaluation is more reliable for clear quality gaps and harder for fine-grained ambiguous pairs; GPT-5.1 performs best among the three judges tested."
+  ],
+  "limitations": [
+    "The paper states that the Chinese–Eastern and English–Western setup may not fully disentangle language effects from cultural effects.",
+    "The task uses only two coarse-grained cultural conditions, Eastern and Western, and the paper states this is not a fine-grained or exhaustive definition of culture.",
+    "Benchmark references are intended as stable high-quality anchors and are not intended to exhaust all valid humorous expressions.",
+    "Automatic judge evaluation is reliable for obvious quality gaps but remains challenging for fine-grained discrimination on ambiguous pairs."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

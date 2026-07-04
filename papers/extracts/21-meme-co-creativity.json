@@ -1,0 +1,145 @@
+{
+  "key": "21-meme-co-creativity",
+  "ref": "#21",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/21-meme-co-creativity/21-meme-co-creativity.md",
+  "source_md_sha256": "f56e034191922dd93146d9b4caacb2db909a807b91e2f1452fad2310e27dccd9",
+  "source_truncated": false,
+  "title": "One Does Not Simply Meme Alone: Evaluating Co-Creativity Between LLMs and Humans in the Generation of Humor",
+  "authors": [
+    "Zhikun Wu",
+    "Thomas Weber",
+    "Florian Müller"
+  ],
+  "year": 2025,
+  "venue": "30th International Conference on Intelligent User Interfaces (IUI ’25), March 24–27, 2025, Cagliari, Italy",
+  "paper_types": [
+    "HCI-study",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How does access to a conversational LLM humor assistant affect participants’ productivity, perceived workload, effort, and ownership during meme-caption ideation compared with human-only creation?",
+    "How do memes created by humans alone, through human-AI collaboration, and by an LLM alone compare in perceived humor, creativity, and shareability?"
+  ],
+  "tasks": [
+    "meme caption generation",
+    "internet meme generation",
+    "human-AI co-creative meme ideation",
+    "meme humor/creativity/shareability rating"
+  ],
+  "humor_domains": [
+    "internet memes",
+    "captioned image memes",
+    "multimodal humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Popular meme templates and topics",
+      "role": "source-material",
+      "size": "six background images of popular memes and three topics (work, food, sports); one image was excluded from the study, leaving five remaining images for rating"
+    },
+    {
+      "name": "Study-generated meme image corpus",
+      "role": "introduced",
+      "size": "882 ideas marked as favorites across both human-involved study conditions; 415 baseline ideas and 441 collaborative ideas usable; after curation, 335 baseline images and 307 collaborative images; Figure 5 shows 300 AI-driven meme images; 150 images per condition were sampled for rating"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o"
+  ],
+  "methods_proposed": [
+    {
+      "name": "LLM-assisted meme ideation interface",
+      "summary": "The study interface let participants view a meme template, enter/edit/favorite caption ideas, and, in the collaboration condition, chat with GPT-4o for idea support. The system prompt constrained the assistant to be helpful and polite and to produce at most three ideas per response, while the current image was always sent to the model before user prompts."
+    },
+    {
+      "name": "AI-only meme caption generation prompt",
+      "summary": "For the AI-only condition, the authors sent the image and prompted GPT-4o to “generate 20 meme captions for this <image> about the topic of <topic>,” with topics drawn from work, food, and sports and image descriptions limited to no more than 10 words."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "cited-in-passing",
+      "detail": "The related work states that meme humor often relies on incongruity and the juxtaposition of unexpected elements, but the user study operationalizes ratings of humor, creativity, and shareability rather than an incongruity-theory annotation scheme."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Between-subject meme-creation user study recruited 124 Prolific participants, excluded 26 non-completions, and analyzed human-only versus human-AI creation with self-reported creativity questions, NASA-TLX, general interface/ideation questions, and logs of ideas and LLM interactions."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "A second Prolific sample of N=100 participants, of whom 98 completed the task, rated randomly displayed meme images; each participant rated at least 50 images on humor, creativity, and shareability, with 150 images per generation condition in the rated sample."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "LLM-supported participants generated significantly more meme ideas than baseline participants, while the paper reports an overall average of 6.1 ideas (sd: 3.2) during ideation.",
+      "metric": "Mann-Whitney-U test",
+      "value": "absolute count W = 12652, p < 0.001; average number of ideas W = 1519.5, p < 0.001",
+      "dataset": "first meme-creation user study",
+      "best_system": "Human-AI collaboration with GPT-4o"
+    },
+    {
+      "finding": "Overall Raw TLX workload did not significantly differ, but the TLX effort subscale was significantly lower for participants using the LLM.",
+      "metric": "Raw TLX t-test; Mann-Whitney-U test for effort subscale",
+      "value": "Raw TLX: t = -0.955, df = 88.811, p = 0.342; effort: W = 755, p = 0.027",
+      "dataset": "first meme-creation user study",
+      "best_system": "Human-AI collaboration with GPT-4o"
+    },
+    {
+      "finding": "Participants without LLM support reported a higher degree of ownership for the generated captions than participants using the LLM.",
+      "metric": "Mann-Whitney-U test",
+      "value": "W = 562, p < 0.001",
+      "dataset": "first meme-creation user study",
+      "best_system": "Human only"
+    },
+    {
+      "finding": "Across all topics, meme ratings differed significantly by generation condition, and pairwise comparisons showed that AI-only memes were consistently rated more positively than memes with human involvement, except that shareability between cooperative and pure AI creation was not significant.",
+      "metric": "ANOVA for Funny and Creative; Kruskal-Wallis test for Shareable",
+      "value": "Funny: F = 6.971, p = 0.001; Creative: F = 5.793, p = 0.003; Shareable: χ² = 11.761, p = 0.003",
+      "dataset": "rated meme sample, 150 images per condition",
+      "best_system": "AI-only with GPT-4o"
+    },
+    {
+      "finding": "When analyzed by topic, the previously found significant differences appeared primarily in memes about work.",
+      "metric": "ANOVA/Kruskal-Wallis by topic",
+      "value": "Work topic — Funny: F = 7.1, p = 0.001; Creative: χ² = 11.22, p = 0.004; Shareable: χ² = 8.470, p = 0.014",
+      "dataset": "rated meme sample, work-topic subset",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "GPT-4o assistance increased the number of ideas participants produced during meme ideation and lowered perceived effort, without increasing overall NASA-TLX workload.",
+    "Human-AI collaboration did not produce memes rated significantly better than human-only memes on humor, creativity, or shareability.",
+    "On average, AI-only memes were rated more positively than both human-only and human-AI collaborative memes across the three rating dimensions.",
+    "The top-performing memes showed a different pattern: human-created memes were strongest among the top humor examples, while human-AI collaborations stood out among top creativity and shareability examples.",
+    "Participants using the LLM reported a lower sense that the generated captions were their own ideas, though the paper says they generally still felt ownership.",
+    "The significant rating differences were driven mainly by the work-topic memes rather than evenly across work, sports, and food."
+  ],
+  "limitations": [
+    "The study investigated only short-term, single-session interaction with the AI system, so it does not show how prolonged use would affect creativity, satisfaction, skills, reliance on AI, or ownership.",
+    "Many participants did not fully use the LLM’s potential; less than half interacted with the LLM multiple times, and only six participants had more than eight interactions.",
+    "The chatbox interface was open-ended and lacked structure to guide iterative creative collaboration, which may have limited deeper engagement and idea revision.",
+    "Participants and raters came from varied cultural and social backgrounds, but the study did not systematically collect detailed demographic information such as ethnicity or language proficiency.",
+    "Using random crowdsourcing-platform evaluators may not capture subtle differences in humor appreciation across specific demographic groups."
+  ],
+  "safety_ethics_notes": "The paper states that participants gave informed consent and were compensated equivalent to 15 USD for meme creation and 10 USD for meme rating. It also notes authorship and bias in AI training as ethical considerations in related work and reports that LLM assistance reduced perceived ownership of captions.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that the full prompts and a full list of generated captions are available in the supplementary material."
+  }
+}

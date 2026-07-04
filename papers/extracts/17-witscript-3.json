@@ -1,0 +1,144 @@
+{
+  "key": "17-witscript-3",
+  "ref": "#17",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/17-witscript-3/17-witscript-3.md",
+  "source_md_sha256": "8182853f4347d4052cc4787d605292020f623723eb6d6ffdaa0efda9bc0b93a4",
+  "source_truncated": false,
+  "title": "Witscript 3: A Hybrid AI System for Improvising Jokes in a Conversation",
+  "authors": [
+    "Joe Toplyn"
+  ],
+  "year": 2023,
+  "venue": "arXiv",
+  "paper_types": [
+    "method",
+    "system",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a hybrid neural-symbolic system improvise a variety of contextually integrated jokes in conversation using multiple joke production mechanisms?",
+    "Does Witscript 3 produce higher-quality conversational jokes than a GPT-3 baseline that is simply prompted to be funny and than human Topical-Chat responses not produced with a special attempt to be funny?"
+  ],
+  "tasks": [
+    "improvised conversational joke generation",
+    "joke candidate selection"
+  ],
+  "humor_domains": [
+    "conversational humor",
+    "wordplay",
+    "common-sense jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Topical-Chat",
+      "role": "source-material",
+      "size": "13 sentences"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-3 text-davinci-002",
+    "GPT-LOL",
+    "Witscript 3"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Witscript 3",
+      "summary": "A neural-symbolic hybrid AI system that uses GPT-3 text-davinci-002 without fine-tuning to execute symbolic humor algorithms through prompt chaining. It generates three joke candidates using wordplay, common-sense knowledge, and a proprietary third mechanism, then uses GPT-3 to select the candidate that seems funniest."
+    },
+    {
+      "name": "GPT-LOL",
+      "summary": "A simple baseline joke generator consisting of GPT-3 text-davinci-002 prompted with “You want to be funny. Respond to this: [The sentence].” The paper uses temperature 0.7 and Top P 1.0."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "surprise theory",
+      "usage": "operationalized",
+      "detail": "The paper says one humor algorithm is derived from the Surprise Theory of Laughter and specifies that a monologue-type joke has a topic, an angle, and a punch line."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The Basic Joke-Writing Algorithm is operationalized as five steps: select a topic, select two topic handles, generate associations, create a punch line, and generate an angle between the topic and punch line."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Fifteen Amazon Mechanical Turk workers rated each of 39 input-response pairs, in random order, on a 1–4 scale: 1 = not a joke, 2 = almost a joke, 3 = a joke, 4 = a very good joke. Workers had to be located in the United States and have a HIT Approval Rate greater than or equal to 95%; the evaluation yielded 585 ratings."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Witscript 3 achieved the highest overall mean rating among the three evaluated sources.",
+      "metric": "Mean rating on a 1–4 scale",
+      "value": "2.36",
+      "dataset": "13 sentences from Topical-Chat",
+      "best_system": "Witscript 3"
+    },
+    {
+      "finding": "GPT-LOL achieved a lower overall mean rating than Witscript 3.",
+      "metric": "Mean rating on a 1–4 scale",
+      "value": "1.96",
+      "dataset": "13 sentences from Topical-Chat",
+      "best_system": "GPT-LOL"
+    },
+    {
+      "finding": "The Human responses had the lowest overall mean rating.",
+      "metric": "Mean rating on a 1–4 scale",
+      "value": "1.84",
+      "dataset": "13 sentences from Topical-Chat",
+      "best_system": "Human"
+    },
+    {
+      "finding": "Witscript 3 responses were rated as “a joke” or “a very good joke” most often.",
+      "metric": "% jokes (rated 3 or 4)",
+      "value": "44.1%",
+      "dataset": "13 sentences from Topical-Chat",
+      "best_system": "Witscript 3"
+    },
+    {
+      "finding": "GPT-LOL responses were rated as “a joke” or “a very good joke” less often than Witscript 3 responses.",
+      "metric": "% jokes (rated 3 or 4)",
+      "value": "33.8%",
+      "dataset": "13 sentences from Topical-Chat",
+      "best_system": "GPT-LOL"
+    },
+    {
+      "finding": "Human responses were rated as “a joke” or “a very good joke” least often.",
+      "metric": "% jokes (rated 3 or 4)",
+      "value": "23.6%",
+      "dataset": "13 sentences from Topical-Chat",
+      "best_system": "Human"
+    }
+  ],
+  "key_findings": [
+    "Witscript 3 is a hybrid of symbolic humor algorithms and GPT-3 text-davinci-002, using separate LLM calls for successive joke-writing steps.",
+    "The system generates three joke candidates using different mechanisms—wordplay, common-sense knowledge, and a proprietary third mechanism—then asks GPT-3 to choose the funniest candidate.",
+    "In the AMT evaluation, Witscript 3 had a mean rating of 2.36, compared with 1.96 for GPT-LOL and 1.84 for Human responses.",
+    "Witscript 3 responses were judged to be jokes 44.1% of the time, compared with 33.8% for GPT-LOL and 23.6% for Human responses.",
+    "The author argues that these results indicate a hybrid LLM-plus-symbolic-humor-algorithm approach can yield a higher-quality joke generator than an LLM merely prompted to be funny."
+  ],
+  "limitations": [
+    "The evaluation used only 13 input sentences selected from Topical-Chat.",
+    "The human comparison responses came from Topical-Chat workers who were not making any special attempt to be funny.",
+    "The third joke production mechanism is described only as proprietary, so its internal method is not specified in the paper.",
+    "Witscript 3 was still judged to be a joke or very good joke only 44.1% of the time, and the paper says future work will explore ways to generate jokes more consistently."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": "www.kaggle.com/datasets/arnavsharmaas/chatbot-dataset-topical-chat",
+    "other": "The paper states that the proprietary Witscript 3 software is available for license."
+  }
+}

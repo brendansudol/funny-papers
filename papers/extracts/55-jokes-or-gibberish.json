@@ -1,0 +1,156 @@
+{
+  "key": "55-jokes-or-gibberish",
+  "ref": "#55",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/55-jokes-or-gibberish/55-jokes-or-gibberish.md",
+  "source_md_sha256": "ab1b210cf41f4976606f961bfb28af715ecb553d4b9ac57443ce1fe0d6741ac6",
+  "source_truncated": false,
+  "title": "Jokes or Gibberish? Humor Retention in Translation with Neural Machine Translation vs. Large Language Model",
+  "authors": [
+    "Mondheera Pituxcoosuvarn",
+    "Yohei Murakami"
+  ],
+  "year": 2025,
+  "venue": "Digital",
+  "paper_types": [
+    "evaluation-study",
+    "method"
+  ],
+  "research_questions": [
+    "How well do different translation models (MT, GPT, GPT-P, and GPT-Ex) preserve humor in English-to-Thai joke translation?",
+    "What are the most common humor loss patterns in machine-translated jokes?"
+  ],
+  "tasks": [
+    "joke translation",
+    "humor retention evaluation",
+    "humor loss pattern analysis"
+  ],
+  "humor_domains": [
+    "jokes",
+    "wordplay",
+    "puns",
+    "idioms",
+    "cultural references",
+    "irony",
+    "dark humor",
+    "absurd humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Thai"
+  ],
+  "datasets_used": [
+    {
+      "name": "Humorous Jokes Dataset",
+      "role": "source-material",
+      "size": "850 English jokes randomly selected"
+    }
+  ],
+  "models_evaluated": [
+    "Google Translate",
+    "GPT-4o"
+  ],
+  "methods_proposed": [
+    {
+      "name": "GPT-P",
+      "summary": "A humor-preserving prompt for GPT-4o that instructs the model to recognize humor such as wordplay, puns, and cultural references and adapt the translation naturally for Thai speakers while avoiding explanations."
+    },
+    {
+      "name": "GPT-Ex",
+      "summary": "A humor-preserving GPT-4o prompt that additionally asks the model to provide an explanation in parentheses after the Thai translation, clarifying wordplay, double meanings, or cultural references when needed."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The related work states that humor arises from unexpected contrasts in meaning and that humor translation relies on incongruity resolution, intention attribution, and cultural knowledge."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "The related work mentions Superiority Theory as framing humor as deriving from perceived dominance over others."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper manually classifies jokes with a multi-label scheme—Wordplay, Idioms, Cultural Reference, Irony, Dark Humor, Absurd Humor, and Other—following prior work on linguistic vs. cultural humor in translation, taxonomies of linguistic jokes, and computational humor frameworks."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Three Thai-native annotators manually categorized each translated joke as X (Not Understandable), XJ (Recognized as a Joke but Not Understood), J (Joke Understood), or N (Not a Joke); final labels were assigned by majority vote, with consensus discussion or blinded adjudication for 1–1–1 splits."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Humor retention was defined as the percentage of translations labeled J; the paper also reports full class distributions, exact pairwise McNemar tests on J vs. non-J, paired percentage-point gaps, win–loss ratios, shift heatmaps, and stratified retention by joke type."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Annotator reliability was reported as Fleiss’ Kappa κ = 0.6536 and simple agreement percentage 78.57% after written bilingual guidelines, oral explanations, and a 15-item test set."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "GPT-Ex had the highest overall humor retention, followed by GPT-P, MT, and baseline GPT.",
+      "metric": "humor retention rate",
+      "value": "GPT-Ex 62.94%; GPT-P 54.12%; MT 50.12%; GPT 41.06%",
+      "dataset": "850 English jokes",
+      "best_system": "GPT-Ex"
+    },
+    {
+      "finding": "GPT-Ex significantly increased humor retention over MT.",
+      "metric": "ΔJ; exact McNemar p; win–loss",
+      "value": "+12.82 percentage points; p = 9.40 × 10^{-11}; 270:161",
+      "dataset": "850 English jokes",
+      "best_system": "GPT-Ex"
+    },
+    {
+      "finding": "Baseline GPT significantly decreased humor retention relative to MT.",
+      "metric": "ΔJ; exact McNemar p; win–loss",
+      "value": "−9.06 percentage points; p = 1.19 × 10^{-8}; 127:204",
+      "dataset": "850 English jokes",
+      "best_system": "MT"
+    },
+    {
+      "finding": "GPT-P was numerically higher than MT, but the difference was not statistically significant at α = 0.05.",
+      "metric": "ΔJ; exact McNemar p; win–loss",
+      "value": "+4.00 percentage points; p = 0.0649; 206:172",
+      "dataset": "850 English jokes",
+      "best_system": "GPT-P (numerically)"
+    },
+    {
+      "finding": "For wordplay, GPT-Ex showed a statistically robust improvement and the paper reports a large retention increase over baseline GPT.",
+      "metric": "retention rate; McNemar p",
+      "value": "GPT 32.20% to GPT-Ex 59.81% (+27.61 percentage points); MT vs. GPT-Ex n01 = 113, n10 = 44, p = 3.5 × 10^{-8}",
+      "dataset": "Wordplay (n = 413)",
+      "best_system": "GPT-Ex"
+    }
+  ],
+  "key_findings": [
+    "Only GPT-Ex clearly outperformed MT overall: GPT-Ex achieved 62.94% retention versus MT’s 50.12%, while GPT-P reached 54.12% and baseline GPT only 41.06%.",
+    "Baseline GPT was significantly worse than MT, with ΔJ = −9.06 percentage points and exact McNemar p = 1.19 × 10^{-8}.",
+    "GPT-P improved numerically over MT by +4.00 percentage points, but this did not reach statistical significance at α = 0.05 (p = 0.0649).",
+    "The paper identifies two dominant baseline-GPT failure modes among jokes originally labeled J in MT: 45 cases (10.56%) became Not Understandable and 85 cases (19.95%) became Not a Joke, for 130 failed jokes (30.52%).",
+    "Stratified McNemar tests confirmed significant GPT-Ex gains over MT for Wordplay, Cultural Reference, Irony, and Dark Humor; Idioms, Absurd, and Other were not statistically significant because of small sample sizes.",
+    "The annotator protocol achieved Fleiss’κ = 0.6536 and 78.57% simple agreement, which the paper describes as moderate to substantial agreement and relatively high consistency."
+  ],
+  "limitations": [
+    "The annotation protocol did not include an explicit complexity baseline, difficulty ratings, or calibrated easy/medium/hard exemplars.",
+    "Some joke-type categories had small sample sizes, especially Idioms (n = 24) and Absurd Humor (n = 28), limiting statistical power and making those results exploratory.",
+    "The study focuses on English-to-Thai joke translation, so the reported findings are tied to that language pair and its linguistic and cultural challenges."
+  ],
+  "safety_ethics_notes": "The paper notes that some jokes in the Humorous Jokes Dataset may contain offensive content; the authors declare no conflict of interest.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://kaggle.com/competitions/humor-detection",
+    "other": "The data presented in this study are available on request from the corresponding author."
+  }
+}

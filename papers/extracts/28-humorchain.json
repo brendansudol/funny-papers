@@ -1,0 +1,218 @@
+{
+  "key": "28-humorchain",
+  "ref": "#28",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/28-humorchain/28-humorchain.md",
+  "source_md_sha256": "6a1ea10273b6e9e9143f7e9d07da47e639b66de0c2765b76ac0a26d1ba306e28",
+  "source_truncated": false,
+  "title": "HUMORCHAIN: Theory-Guided Multi-Stage Reasoning for Interpretable Multimodal Humor Generation",
+  "authors": [
+    "Jiajun Zhang",
+    "Shijia Luo",
+    "Ruikang Zhang",
+    "Qi Su"
+  ],
+  "year": 2026,
+  "venue": "arXiv:2511.21732v2 [cs.CL]",
+  "paper_types": [
+    "method",
+    "dataset",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can explicit humor-theory-guided multi-stage reasoning improve multimodal humorous image captioning over zero-shot, few-shot, rule-based, and CoT prompting baselines?",
+    "Does HUMORCHAIN outperform external humorous image captioning systems or caption sources on Oogiri-GO and OxfordTVG-HIC?",
+    "How much does a fine-tuned human-preference-guided humor discriminator improve humor detection precision and the final proportion of humorous outputs?",
+    "Do the selected four humor theories provide adequate coverage for multimodal humor generation cases?"
+  ],
+  "tasks": [
+    "humorous image captioning",
+    "multimodal humor generation",
+    "humor detection / humor discrimination",
+    "humor preference evaluation"
+  ],
+  "humor_domains": [
+    "humorous image captions",
+    "memes",
+    "image macro memes",
+    "Oogiri"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Meme-Image-No-Text",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "Oogiri-GO",
+      "role": "evaluated-on",
+      "size": "794 pairwise comparisons in I vs G"
+    },
+    {
+      "name": "OxfordTVG-HIC",
+      "role": "evaluated-on",
+      "size": "2.9 million image-text pairs with humor ratings and emotional annotations; 1007 pairwise comparisons in I vs H"
+    },
+    {
+      "name": "HUMORCHAIN human-annotated humor preference dataset",
+      "role": "introduced",
+      "size": "5,320 image–caption pairs, with 2,511 positive samples and 2,809 negative samples; training set 5,054 samples (2,391 positive, 2,663 negative), validation set 266 samples (120 positive, 146 negative)"
+    }
+  ],
+  "models_evaluated": [
+    "HUMORCHAIN",
+    "CLoT",
+    "GPT-5-2025-08-07",
+    "Qwen3-VL-4B-Instruct",
+    "Gemini-2.5-Flash",
+    "GPT-4.1",
+    "Claude-3.5-Haiku-20241022",
+    "Qwen3-VL-235B-A22B-Instruct"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HUMORCHAIN",
+      "summary": "A theory-guided multi-stage reasoning framework for humorous image captioning. It first generates an image description, judges plausibility, incongruity, and whether humans/animals/cartoons are present, selects one of four generation strategies, applies safety checking, and uses a discriminator-driven retry loop."
+    },
+    {
+      "name": "Human-preference-guided humor discriminator",
+      "summary": "A Qwen3-VL-4B-Instruct-based binary classifier fine-tuned with LoRA on human-labeled image–caption pairs, with an added classification head and threshold 0.66. It classifies captions as humorous or non-humorous and triggers rewriting when outputs fail."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "Used to detect visual incongruity and guide Absurdity and Emotion_analogy generation, where captions help viewers reinterpret incongruous visual content."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "operationalized",
+      "detail": "Used especially in Contrast_irony to keep semantic violations within a safe emotional boundary, and supported by compliance filtering for attacks, hate speech, and humiliation."
+    },
+    {
+      "theory": "superiority",
+      "usage": "operationalized",
+      "detail": "Used to construct irony, self-deprecation, and Object_analogy captions that map objects or situations to human weakness or everyday failure."
+    },
+    {
+      "theory": "relief",
+      "usage": "operationalized",
+      "detail": "Used in Emotion_analogy and Object_analogy to frame captions as emotional release or tension resolution."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "The humor discriminator prompt uses the General Theory of Verbal Humor and asks the model to analyze six Knowledge Resources: Script Opposition, Logical Mechanism, Situation, Target, Narrative Strategy, and Language."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "Discussed as part of Attardo and Raskin’s humor-theory lineage and referenced in the discriminator prompt under Script Opposition."
+    },
+    {
+      "theory": "other",
+      "usage": "cited-in-passing",
+      "detail": "Cognitive Insight Theory and evolutionary psychology are referenced in the discriminator prompt and strategy motivation."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Pairwise comparison: annotators saw the same image with two captions and selected the funnier caption, tie, or both not funny; Win Rate, Hard Win Rate, significance tests, Bradley–Terry, and Arena Elo were derived from judgments."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Single-title evaluation: annotators assigned binary humor labels, 1 = humorous and 0 = not humorous, to image–caption pairs."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Humor discriminator dataset annotation: each image–caption pair was independently annotated by five annotators; pairs with at least two humorous labels were treated as humorous."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Generation quality was evaluated with Distinct-1/2, BERTScore / BERT Cross Score, CLIPScore, Embedding Average (EA-Rev), and Greedy Matching (GM-Rev)."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Humor detection systems were compared using confusion matrices, positive rate, precision, accuracy-related discussion, acceptance rate, average generations per accepted caption, and precision improvement."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "HUMORCHAIN won key pairwise internal comparisons, including I vs A, I vs F, and I vs J.",
+      "metric": "Win Rate",
+      "value": "I vs A: 0.695 vs 0.305; I vs F: 0.680 vs 0.320; I vs J: 0.745 vs 0.255",
+      "dataset": "Meme-Image-No-Text",
+      "best_system": "HUMORCHAIN"
+    },
+    {
+      "finding": "HUMORCHAIN outperformed external comparison groups on Oogiri-GO and OxfordTVG-HIC.",
+      "metric": "Win Rate",
+      "value": "I vs G: 0.683 vs 0.317 (Total 794); I vs H: 0.860 vs 0.140 (Total 1007)",
+      "dataset": "Oogiri-GO; OxfordTVG-HIC",
+      "best_system": "HUMORCHAIN"
+    },
+    {
+      "finding": "HUMORCHAIN achieved the highest global ranking across human comparisons.",
+      "metric": "Arena Elo / Bradley–Terry",
+      "value": "Elo 1554.60; BT 3.57",
+      "dataset": null,
+      "best_system": "HUMORCHAIN"
+    },
+    {
+      "finding": "HUMORCHAIN achieved the highest human single-title humor score.",
+      "metric": "Humor Mean",
+      "value": "0.810",
+      "dataset": null,
+      "best_system": "HUMORCHAIN"
+    },
+    {
+      "finding": "Fine-tuning and the classifier head improved discriminator precision over the untuned baseline.",
+      "metric": "Precision",
+      "value": "Baseline 0.523; LoRA 0.636; LoRA + Classifier (thr = 0.66) 0.670",
+      "dataset": "HUMORCHAIN human-annotated humor preference dataset",
+      "best_system": "Qwen3-VL-4B-Instruct (LoRA + Classifier)"
+    },
+    {
+      "finding": "Adding the discriminator increased the proportion of humorous outputs while adding retry cost.",
+      "metric": "Proportion of Humorous Outputs / Acceptance Rate / Avg. Generations per Accepted Caption / Precision Improvement △",
+      "value": "45.1% before; 67.0% after; Acceptance Rate 36.5%; Avg. Generations per Accepted Caption 2.74×; Precision Improvement △ +22%",
+      "dataset": null,
+      "best_system": "HUMORCHAIN with discriminator"
+    }
+  ],
+  "key_findings": [
+    "Single-strategy prompting changes such as zero-shot, few-shot, rule-based prompting, and CoT produced limited improvements compared with HUMORCHAIN’s explicit multi-stage reasoning.",
+    "The ablated theory-guided multi-stage model J also beat A, F, G, and H in pairwise comparisons, supporting the contribution of humor-theory-guided reasoning even without the discriminator.",
+    "The discriminator and retry loop improved HUMORCHAIN over J in the direct I vs J comparison, with a win rate of 0.745 for I versus 0.255 for J.",
+    "Closed-source LLMs overestimated humor in detection, with high positive rates of 96.2, 87.9, and 94.7 but lower precision than the fine-tuned Qwen3-VL-4B-Instruct classifier.",
+    "The supplementary theory validation found the four adopted theories applied to 86% of 100 OxfordTVG-HIC samples, with 72% having a single dominant theory.",
+    "The main reported failure modes were inadequate image descriptions and non-incongruous images that lacked direct semantic-humor links."
+  ],
+  "limitations": [
+    "Theoretical coverage is incomplete because more recent humor frameworks and multidisciplinary perspectives are not systematically integrated.",
+    "Culturally embedded irony and reference-dependent implicit jokes may be underrepresented or insufficiently captured.",
+    "Humor subjectivity remains a core limitation, and the current annotation/discriminator setup favors majority-preference captions rather than fine-grained individual preferences.",
+    "The multi-stage architecture can propagate early misjudgments to later stages, although the paper argues that the discriminator retry loop mitigates this in practice.",
+    "Failure cases arise when image descriptions miss contextual cues or emotional nuances needed for humor construction.",
+    "Theory-guided Chain-of-Thought reasoning cannot exhaustively cover all humor phenomena and creates a tradeoff between theory coverage and computational complexity."
+  ],
+  "safety_ethics_notes": "HUMORCHAIN includes a compliance detection module that filters group attacks, personal attacks, hate speech, and humiliating or demeaning expressions, including metaphorical references; detected violations trigger automatic rewriting. The paper also notes bias toward majority humor preferences and the need for personalization.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

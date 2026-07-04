@@ -1,0 +1,761 @@
+{
+  "checked_at": "2026-07-03",
+  "checker": "Claude Opus 4.8 subagents (16 batches of 5)",
+  "papers_checked": 80,
+  "claims_checked": 540,
+  "results": [
+    {
+      "key": "t6-benign-violation",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "All checkable claims about the 2010 McGraw & Warren Psychological Science paper (authors, venue, year, core benign-violation two-condition claim, five-experiment finding that benign moral violations elicit amusement alongside disgust, three benign-making levers: alternative norm/weak commitment/psychological distance) are confirmed. The 2012 and 2014 follow-up papers and the Hurricane Sandy study are about other papers not in this transcription and were excluded per instructions."
+    },
+    {
+      "key": "x15-minsky-jokes",
+      "verdict": "confirmed",
+      "claims_checked": 4,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Author (Marvin Minsky), title, year (1980, MIT AI Memo No. 603), and characterization ('casting humor as debugging of faulty reasoning') all confirmed against the abstract's framing of humor as recognizing/suppressing 'bugs -- ineffective or destructive thought processes.' The 'direct ancestor of Inside Jokes' claim is cross-paper lineage, not checkable here."
+    },
+    {
+      "key": "01-androids-electric-sheep",
+      "verdict": "discrepancies_found",
+      "claims_checked": 10,
+      "discrepancies": [
+        {
+          "guide_says": "Dataset: Thousands of cartoons with finalist captions",
+          "paper_says": "The corpus is 704 cartoons (hundreds), with 2.7K high-quality captions (thousands). 'there are 2.7K high quality captions across 704 contests'; 'For each of 704 cartoons'",
+          "evidence_location": "papers/md/01-androids-electric-sheep/pages/page_0016.md and page_0004.md",
+          "severity": "minor"
+        }
+      ],
+      "unverifiable": [],
+      "notes": "Authors, three tasks, and all quantitative claims confirmed: best from-pixels model 62% (62.3) on 5-way matching vs 94% (94.0) human; GPT-4 5-shot 84.5% matching in From Description (human scene descriptions); human explanations preferred over GPT-4's in 67.7% (>2/3). Only the 'thousands of cartoons' phrasing is off — it is thousands of captions but 704 cartoons."
+    },
+    {
+      "key": "02-chatgpt-fun-not-funny",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors (Jentzsch & Kersting), method (prompt-based generation/explanation/detection), 1,008 jokes, 'over 90% collapsed onto the same 25 jokes' (917 of 1008), and 'explained real jokes well but fabricated plausible explanations for non-jokes' all confirmed. Guide's 'GPT-3.5 era' vs paper's 'GPT3-based model' is a harmless characterization of the ChatGPT-early-2023 model, not flagged."
+    },
+    {
+      "key": "03-humorbench",
+      "verdict": "confirmed",
+      "claims_checked": 9,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors (all 8 names/spellings), year (2025, arXiv:2507.21476), method (LLM-judge grading explanations against discrete verifiable elements), dataset (~300 cartoon-caption pairs, NYCC top-3 finalists + Cartoonstock), and all findings (STEM transfer, STEM-only models do well, mixed test-time gains, no LLM >60% on HumorBench-hard; o3 best at 87.5% main / 59.85% hard) confirmed."
+    },
+    {
+      "key": "04-pun-unintended",
+      "verdict": "confirmed",
+      "claims_checked": 11,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors, PunEval 2,589, JOKER 632/632, 7 LLMs + RoBERTa, temp 0, reformulation method, human eval, and 'regressive sycophancy' all confirmed. 'EMNLP 2025' is a venue/status claim the arXiv preprint neither confirms nor contradicts; not flagged per rules."
+    },
+    {
+      "key": "05-apples-to-oranges",
+      "verdict": "confirmed",
+      "claims_checked": 10,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors, 600 jokes (150 each of 4 types), human reference explanations, 4,800 explanations (600x8), zero-shot, topical hardest, no model reliably explains all four, DeepSeek-R1 math/code reasoning not transferring, LLM judge + automatic metrics + topical case study all confirmed."
+    },
+    {
+      "key": "06-good-pun-own-reword",
+      "verdict": "confirmed",
+      "claims_checked": 10,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors (Xu, Yuan, Chen, Yang), 3 tasks with new ICL-suited metrics, biased prompts, SemEval-2017 Task 7 + ExPun, 8 LLMs, lower TNR than TPR, 'lazy pun generation', strong-models-respectable all confirmed. Transcription page-1 header renders the title pun as 'reward' (OCR artifact); body confirms 'reword'."
+    },
+    {
+      "key": "07-expunations",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors (all 8), augments SemEval-2017 pun corpus with keywords + NL explanations + funniness ratings, 'first humor dataset with such fine-grained annotations for puns', supports explanation and generation all confirmed."
+    },
+    {
+      "key": "08-phunny",
+      "verdict": "confirmed",
+      "claims_checked": 9,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors, ACL 2025 (explicitly stated on page 1), novelty/anti-contamination curation, fixed structural schema, three tasks + error analysis, and 'most LLMs struggle to generalize, consistently underperforming the human baseline' all confirmed."
+    },
+    {
+      "key": "09-text-not-all-you-need",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "venue 'CHum 2025': no venue line in transcription; not contradicted"
+      ],
+      "notes": "Author (Ashwin Baluja), text + TTS spoken form method, CoT-as-explanation, and multimodal-beats-text-only across all datasets confirmed."
+    },
+    {
+      "key": "10-joke-master-pun-curriculum",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "venue 'Findings of ACL 2024': not self-stated; not contradicted"
+      ],
+      "notes": "Author list, ChinesePun 2.1k (1,049 homophonic + 1,057 homographic), multi-stage curriculum preference learning with improved DPO, Chinese + English evaluation, 'significantly outperforms all baselines' confirmed."
+    },
+    {
+      "key": "11-clot-leap-of-thought",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "venue 'CVPR 2024': arXiv v3 states no CVPR line; not contradicted"
+      ],
+      "notes": "Authors, 'CoT not conducive to creative problem-solving', instruction-tuning + explorative self-refinement, Oogiri-GO 130k+ multimodal/multilingual, transfer to other creativity tasks confirmed."
+    },
+    {
+      "key": "12-lol-thought-leaps",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "'Published as a conference paper at ICLR 2025' confirmed verbatim; multi-hop reasoning, RL with GPT-4o reasoning extraction, external knowledge injection, improves judgment and generation, positioning against CLoT all confirmed."
+    },
+    {
+      "key": "13-humorgen-persona-distillation",
+      "verdict": "confirmed",
+      "claims_checked": 9,
+      "discrepancies": [],
+      "unverifiable": [
+        "arXiv:2604.09629 / 2026: paper cannot confirm its own arXiv ID; consistent and uncontradicted"
+      ],
+      "notes": "Authors (Edward Ajayi, Prasenjit Mitra), six theory-grounded personas, 7B distillation, DPO + O-GRPO both fail to beat SFT, 'explainer trap', MWAHAHA + Humor Transfer Bench eval, 7B beats 4-18x larger baselines, stand-up regression (BT 1083.9 -> 653.1) all confirmed."
+    },
+    {
+      "key": "14-ai-humor-generation-skills",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Kim & Chilton (Columbia), pipeline (observe/diverge/generate 30/Gen-Z agent ranks top 5), 20 images x 15 captions, 'significantly funnier than GPT-4o', 'on par with top IG captions, p=0.053' all confirmed."
+    },
+    {
+      "key": "15-small-but-funny",
+      "verdict": "confirmed",
+      "claims_checked": 4,
+      "discrepancies": [],
+      "unverifiable": [
+        "ACL 2024 venue: arXiv v1 does not state it; not contradicted"
+      ],
+      "notes": "All seven author names confirmed; dual teacher generator/critic method and 'feedback narrows the small-vs-large gap' confirmed verbatim."
+    },
+    {
+      "key": "16-humor-mechanics-multistep",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [
+        "ICCC 2024 / arXiv:2405.07280: not printed in transcription; not contradicted"
+      ],
+      "notes": "Tikhonov & Shtykovskiy (Inworld.AI), multistep beats single-shot, distant-concept association as preliminary step, and 'universal humor prompt insufficient' all confirmed."
+    },
+    {
+      "key": "17-witscript-3",
+      "verdict": "confirmed",
+      "claims_checked": 3,
+      "discrepancies": [],
+      "unverifiable": [
+        "arXiv:2301.02695 / 2023 not printed; Witscript ICCC 2021 / Witscript 2 ICCC 2022 / CHum 2025 companion are cross-paper claims"
+      ],
+      "notes": "Author Joe Toplyn confirmed; expert-craft heuristics + LLM hybrid for contextual conversational jokes confirmed."
+    },
+    {
+      "key": "18-grounded-satire-rag",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [
+        "arXiv:2605.10853 / 2026: ID not printed; news scraped March 2026 consistent"
+      ],
+      "notes": "RAG over current news -> satirical dictionary definitions (Finnish context), new eval, 100 definitions, six annotators, conditions, 'more political than humorous', 'RAG improves political relevance but not clearly funniness' all confirmed verbatim."
+    },
+    {
+      "key": "19-jokeasy",
+      "verdict": "discrepancies_found",
+      "claims_checked": 8,
+      "discrepancies": [
+        {
+          "guide_says": "2026 · preprint",
+          "paper_says": "The paper's front matter states: 'Accepted at IASDR 2025. This is the author-accepted version.' No 2026 date appears in the paper.",
+          "evidence_location": "papers/md/19-jokeasy/pages/page_0001.md",
+          "severity": "major"
+        }
+      ],
+      "unverifiable": [],
+      "notes": "Author 'Ge et al.', dual-role agent (material scout + prototype writer), visual canvas with editable inspiration blocks, multistage workflow all confirmed; only the year/status (2026 preprint vs accepted IASDR 2025) conflicts."
+    },
+    {
+      "key": "20-multi-agent-comedy-club",
+      "verdict": "confirmed",
+      "claims_checked": 10,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors, 50 rounds/250 paired monologues, five expert annotators, A/B + 15-item rubric, discussion wins 75.6% (189/250), Craft/Clarity delta=0.440, Social Response delta=0.422, occasional aggressive-humor increases all confirmed verbatim."
+    },
+    {
+      "key": "x02-comic",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "arXiv:2603.11048: no arXiv header in transcription; not contradicted"
+      ],
+      "notes": "COMIC expansion, SNL-style sketch videos, character references, production-studio agent roles, LLM critics aligned to YouTube-mined viewer preferences all confirmed."
+    },
+    {
+      "key": "x03-openmic",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "arXiv:2601.08288: 'Preliminary work' label, no arXiv ID; not contradicted"
+      ],
+      "notes": "Authors Wu, Cao, Chen & Li; AutoGen-based; life topic -> 3-5 minute Chinese stand-up + narrated video; jointly optimizing humor, timing, performability confirmed."
+    },
+    {
+      "key": "x01-jape",
+      "verdict": "discrepancies_found",
+      "claims_checked": 6,
+      "discrepancies": [
+        {
+          "guide_says": "JAPE ... used WordNet plus pronunciation dictionaries",
+          "paper_says": "The 1994 JAPE paper describes no WordNet and no pronunciation dictionary; its homonym source is 'a separate homonym base derived from a list ... of homophones in American English, shortened considerably.' (WordNet/pronunciation dictionaries belong to the successor STANDUP, not this paper.)",
+          "evidence_location": "papers/md/x01-jape/pages/page_0004.md",
+          "severity": "minor"
+        },
+        {
+          "guide_says": "schoolchildren reportedly called JAPE's output 'pathetic'",
+          "paper_says": "The 'pathetic' verdict came from the adult judging panel: JAPE-1's 188 jokes were scored by '14 judges', producing 'jokes, but pathetic ones'. Schoolchildren are mentioned only as a hypothetical future evaluation group.",
+          "evidence_location": "papers/md/x01-jape/pages/page_0005.md",
+          "severity": "minor"
+        }
+      ],
+      "unverifiable": [],
+      "notes": "Binsted & Ritchie, exact title, AAAI attribution confirmed; the 'pathetic' quote exists but is misattributed, and WordNet is a STANDUP-era tool."
+    },
+    {
+      "key": "21-meme-co-creativity",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "IUI 2025, three-condition method, 335 human + 307 collaborative images (150/condition sampled), 'more ideas / less perceived effort' confirmed verbatim."
+    },
+    {
+      "key": "22-caption-preferences",
+      "verdict": "confirmed",
+      "claims_checked": 12,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Author list/order, 365 contests (530-895), >2.2M captions, >250M ratings (284,183,913), funny/somewhat/unfunny, ~8 years, NEXT bandit platform, SFT hurts, RLHF/DPO underperform, GPT-4 & Claude trail top humans all confirmed. Paper self-labels 'Preprint'; NeurIPS claim not contradicted."
+    },
+    {
+      "key": "23-creativity-understanding-gap",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Small-scale alignment, 20 caption pairs per contest from 379 contests (#510-#889), 279 train / 100 test, expert-level ranking (67% -> 82.4%) confirmed."
+    },
+    {
+      "key": "24-irs-cartoon-captionist",
+      "verdict": "confirmed",
+      "claims_checked": 9,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "First author Vural, IRS three stages, supervise-the-trace framing, CPT -> SFT -> alignment pipeline, NYCC matching/ranking, theory groundings (incongruity-resolution, script opposition, frame-shifting) confirmed."
+    },
+    {
+      "key": "25-humordb",
+      "verdict": "discrepancies_found",
+      "claims_checked": 9,
+      "discrepancies": [
+        {
+          "guide_says": "Title: 'Is AI Fun? HumorDB: A Curated Dataset and Benchmark to Investigate Graphical Humor'",
+          "paper_says": "The transcribed paper title is 'HumorDB: Can AI understand graphical humor?' (no occurrence of 'Is AI Fun?' anywhere); likely an arXiv-vs-ICCV-camera-ready retitle.",
+          "evidence_location": "papers/md/25-humordb/pages/page_0001.md",
+          "severity": "minor"
+        }
+      ],
+      "unverifiable": [],
+      "notes": "All substantive claims confirmed (authors, ICCV 2025 poster, image-only, three tasks, modified-image memorization control, attention analysis, models lag humans and miss humor-critical region)."
+    },
+    {
+      "key": "26-yesbut",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "YesBut V2 (1,262 multilingual images): this paper is V1 (2,547 images, English only); V2 is a separate later release not present here",
+        "Venue 'EMNLP 2024' not self-identified"
+      ],
+      "notes": "Nandy et al., two-panel contradiction design, three tasks (Detection/Understanding/Completion), 'VLMs struggle' confirmed."
+    },
+    {
+      "key": "27-bottlehumor",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [
+        "Venue 'Findings of ACL 2025' not self-identified (arXiv:2502.18331v2)"
+      ],
+      "notes": "Hwang, West & Shwartz confirmed; information-bottleneck world-knowledge elicitation/refinement and 'right knowledge improves explanations' confirmed."
+    },
+    {
+      "key": "x04-pixelhumor",
+      "verdict": "confirmed",
+      "claims_checked": 3,
+      "discrepancies": [],
+      "unverifiable": [
+        "Venue 'EMNLP Findings 2025' not self-identified (arXiv:2509.12248v2)"
+      ],
+      "notes": "PixelHumor: 2,800 annotated multi-panel online comics from seven creators confirmed."
+    },
+    {
+      "key": "x05-memereacon",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [
+        "Venue 'EMNLP 2025' not self-identified"
+      ],
+      "notes": "First author Zhengyi Zhao; 1,565 annotated instances from five subreddits; image + post + comments kept — confirmed."
+    },
+    {
+      "key": "x06-exfuntube",
+      "verdict": "confirmed",
+      "claims_checked": 4,
+      "discrepancies": [],
+      "unverifiable": [
+        "Venue 'EMNLP 2023' not self-identified (arXiv:2310.14159v3)"
+      ],
+      "notes": "Ko et al. (Dayoon Ko, Sangho Lee, Gunhee Kim); funny short-form clips paired with explanations confirmed."
+    },
+    {
+      "key": "x07-vhub",
+      "verdict": "discrepancies_found",
+      "claims_checked": 8,
+      "discrepancies": [
+        {
+          "guide_says": "Authors are '(Shi, Li, Zhao et al., 2025)'",
+          "paper_says": "The nine-author list contains no author named 'Li'; the first three are Zhengpeng Shi, Yanpeng Zhao, Jianqun Zhou. 'Li' is a misattributed name.",
+          "evidence_location": "papers/md/x07-vhub/x07-vhub.md (page 0001)",
+          "severity": "minor"
+        }
+      ],
+      "unverifiable": [],
+      "notes": "Substantive claims (silent films + UGC, three tasks, sharp text->video drop, audio helps) confirmed verbatim; only the author citation is wrong."
+    },
+    {
+      "key": "28-humorchain",
+      "verdict": "confirmed",
+      "claims_checked": 9,
+      "discrepancies": [],
+      "unverifiable": [
+        "'CVPR 2026' / 'peer-reviewed': arXiv v2 [cs.CL] makes no venue self-statement; not contradicted"
+      ],
+      "notes": "Authors (Peking Univ.), pipeline (visual semantic parsing -> humor/psychology reasoning -> fine-tuned discriminator), theories, datasets (Meme-Image-No-Text, Oogiri-GO, OxfordTVG-HIC), Elo/BT outperformance, first-to-embed claim confirmed."
+    },
+    {
+      "key": "29-homer",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Shang, Sun, Ma & Huang; ICLR 2026 acceptance confirmed in header; GTVH-grounded multi-role framework (conflicting-script extractor, retrieval-augmented hierarchical imaginator, caption generator); beats CLoT/GPT-4o across seven baselines; originality/interpretability confirmed."
+    },
+    {
+      "key": "30-culture-aware-captioning",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Method characterization matches nearly verbatim ('culture as a deeper interpretive condition...'); no quantitative claims in entry."
+    },
+    {
+      "key": "31-how-funny-is-chatgpt",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Gorenz & Schwarz, PLoS ONE 19(7):e0305364 2024, two blind studies, three comedy tasks, Onion comparison, ~200 raters (N=200, N=217), 'funnier than most laypeople', 'no less funny than professional comedy writers' confirmed."
+    },
+    {
+      "key": "32-crowd-score",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors, 2022 arXiv, 52 jokes, four humor-style personalities, vote auditing, few-shot > zero-shot confirmed verbatim."
+    },
+    {
+      "key": "33-gpt4-evaluate-jokes",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "GPT-4 judge with persona system descriptions + many-shot prompting vs human ratings; relative rankings more robust than absolute scores confirmed."
+    },
+    {
+      "key": "34-cards-against-llms",
+      "verdict": "confirmed",
+      "claims_checked": 9,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Fettach, Bied, Toivonen, De Bie; CHum 2026; five frontier models; ten-card slate; 9,894 rounds; all-beat-random-but-modest; models-agree-with-each-other-more; position/content biases confirmed."
+    },
+    {
+      "key": "35-humorrank",
+      "verdict": "confirmed",
+      "claims_checked": 10,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Ajayi & Mitra 2026; GTVH-grounded pairwise judgments via Adaptive Swiss + Bradley-Terry; 9 contestants on MWAHAHA + HTB; Kendall tau=0.889; mechanisms-over-scale; HumorGen-7B 4th; Llama judge ranks own generations 8th of 9 — confirmed."
+    },
+    {
+      "key": "36-who-laughs-with-whom",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Murakami, Kamigaito, Takamura, Okumura 2026; Oogiri voting-log clustering; cluster-specific BTL weights; LLMs resemble particular clusters; persona steering confirmed."
+    },
+    {
+      "key": "37-punchlines-to-predictions",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [
+        "Venue 'CMCL 2025' not self-stated"
+      ],
+      "notes": "Authors (Romanowski, Valois, Fukui); zero-shot fuzzy-matching metric on Open Mic (51 transcripts); ~50% accuracy ('at most 51%'; humans 40.7%); persona tricks don't reliably help — confirmed."
+    },
+    {
+      "key": "38-oogiri-multidimensional",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Sakabe, Kim, Hirasawa, Komachi; AAAI 2026 (copyright line); six dimensions; GPT-4.1/Gemini 2.5 Pro/Claude Sonnet 4; low-to-mid-tier generation; empathy deficit; Novelty-vs-Empathy divergence confirmed."
+    },
+    {
+      "key": "39-oogiri-master",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Murakami, Kamigaito, Takamura, Okumura; ~100 responses x ~100 independent judges; popularity-bias reduction; linguistic-factor analysis; SOTA approaches human on rating; insight-augmented prompting helps — confirmed. (Note: same author team as #36.)"
+    },
+    {
+      "key": "40-one-joke-to-rule-them-all",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Turgeman, Shani, Shahaf; CHum 2026; four datasets; up to 75% on unseen; +1.88-4.05% diversity gain; asymmetric relations; Dad Jokes best enabler yet hardest target — confirmed verbatim."
+    },
+    {
+      "key": "41-robot-walks-into-bar",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Mirowski, Love, Mathewson, Mohamed; FAccT 2024; 3-hour workshops, 20 professional comedians (10 Fringe + 10 online); CSI (mu=54.6) + focus groups; bland/scaffolding finding; safety filtering erases minority perspectives — confirmed verbatim."
+    },
+    {
+      "key": "42-improvised-theatre-llms",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Branch, Mirowski, Mathewson, Ppali & Covaci; month-long Edinburgh Fringe deployment; audience/performer/multi-party/latency/context-relevance framing confirmed."
+    },
+    {
+      "key": "43-theater-stage-laboratory",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "'CHum 2025' venue: arXiv v1 does not mention it; not contradicted"
+      ],
+      "notes": "Position paper; three challenge sets exactly as guide states; Dramatron lineage note consistent."
+    },
+    {
+      "key": "44-standup4ai",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Barriere, Gomez, Hemamou, Callejas & Ravenet; 7 languages; 330+ hours (334.2h); auto-annotated laughter with manually annotated validation subpart confirmed."
+    },
+    {
+      "key": "45-not-all-jokes-land",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Shafiei & Saffari; 304 annotated industry-specific statements (138 contexts); appropriateness focus; first-resource claim confirmed."
+    },
+    {
+      "key": "46-can-ai-take-a-joke",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Quan, Ramakrishnan & Chin; C&C '25 (DOI confirmed); GPT-4o/LLaMA3.3/Gemini 1.5 on shared prompts; Likert human rating; affiliative/self-defeating/no-joke roles; 'fluent but falls short on emotional realism/appropriateness' confirmed. (Guide says 'Llama' and 'Gemini' generically; paper used LLaMA3.3 and Gemini 1.5.)"
+    },
+    {
+      "key": "47-engagement-undermines-safety",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [
+        "'EACL 2026' / 'peer-reviewed': arXiv transcription has no venue line; not contradicted"
+      ],
+      "notes": "Six LLMs, joint humor/stereotypicality/toxicity + information-theoretic incongruity, 'Bias Amplification Loop', and weak-guardrails finding all verbatim-supported."
+    },
+    {
+      "key": "48-harm-or-humor",
+      "verdict": "confirmed",
+      "claims_checked": 4,
+      "discrepancies": [],
+      "unverifiable": [
+        "arXiv:2603.17759 / 2026 / preprint: no arXiv id or date shown in transcription; not contradicted"
+      ],
+      "notes": "Multimodal/multilingual benchmark for overt/covert harmful humor confirmed by title and abstract; no numeric claims in entry."
+    },
+    {
+      "key": "49-humor-bypass-guardrails",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "alternate arXiv:2504.06577 id/title: cross-reference not checkable here"
+      ],
+      "notes": "Cisneros-Velarde; LLMSEC 2025 (pages 17-25); fixed 'Psst...' template wrapping unedited unsafe request, no auxiliary LLM; balance finding (removing humor 46/48 fails; too much humor: knock-knock 4/84, joke-add 9/84) confirmed."
+    },
+    {
+      "key": "50-chumor",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Chumor 1.0: Ruiqi He ... Naihao Deng; 1,951 RZB jokes with human-annotated explanations; native-speaker A/B testing; 'LLMs win in 2-3% of cases' (GPT-4o 2.2%, ERNIE 2.9%) confirmed verbatim. Guide's direct+CoT / 10 LLMs / above-random claims correctly belong to 2.0."
+    },
+    {
+      "key": "50b-chumor-2",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [
+        "'ACL Findings 2025': arXiv v1 header (Dec 2024) does not state acceptance; not contradicted"
+      ],
+      "notes": "Chumor 2.0: ten LLMs, direct + CoT prompting; best accuracy 60.3% ('10 points above random', human 78.3%; best MCC 0.29 vs human 0.60); A/B LLM-wins 2-3% confirmed verbatim."
+    },
+    {
+      "key": "51-cfunmodel",
+      "verdict": "discrepancies_found",
+      "claims_checked": 6,
+      "discrepancies": [
+        {
+          "guide_says": "multi-task across crosstalk generation, recognition, type/level classification, and punchline detection",
+          "paper_says": "CFunModel's tasks are Crosstalk Response Selection, Humor Recognition, Joke Generation/Continuation, Humor Explanation, and Crosstalk Generation (Table 1; Sec 4). 'Humor type classification, humor level classification, and punchline detection' appear only in Related Work as tasks proposed by Chen et al. (2024a) — not tasks of this paper's model.",
+          "evidence_location": "papers/md/51-cfunmodel/pages/page_0002.md (line 69) and page_0003.md (Table 1)",
+          "severity": "major"
+        },
+        {
+          "guide_says": "Builds CFunSet (20k+ jokes incl. Tieba 'JokeBar')",
+          "paper_says": "CFunSet comprises 'more than 160,000 entries'; the 20,000 figure is only the Tieba-JokeBar subset ('over 20,000 jokes collected from Tieba—JokeBar').",
+          "evidence_location": "papers/md/51-cfunmodel/pages/page_0001.md (line 18)",
+          "severity": "minor"
+        }
+      ],
+      "unverifiable": [],
+      "notes": "Findings claim ('surpasses general LLMs on Chinese humor recognition') and year/preprint status confirmed; only the method characterization has issues."
+    },
+    {
+      "key": "52-pun2pun",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Ma, Huang, Xu, Zhou, Wei; ACL 2025 SRW; Constant-Variable Optimization; Overlap metric; near-impossible framing; 'strategy helps stronger models most' confirmed."
+    },
+    {
+      "key": "53-psychology-driven-translation",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Su, Zhu, Chen, Benavides Prado, Witbrock; HDM (CoT + humor theory); gains 7.75%/2.81%/6.13% humour/fluency/coherence (guide ~7.8%/~2.8%/~6.1%) confirmed verbatim."
+    },
+    {
+      "key": "54-not-funny-anymore",
+      "verdict": "confirmed",
+      "claims_checked": 9,
+      "discrepancies": [],
+      "unverifiable": [
+        "'LM4UC' workshop name not stated in paper (only AAAI 2026 copyright line); consistent, not flagged"
+      ],
+      "notes": "Authors/affiliations (Algoverse AI/Andrews/UW), 162 EN->ZH + 76 EN->HI pairs, 7 LLM judges x 3 strategies, Procrustes-aligned literalness metric, strict agreement near/below 20% random baseline, over-literal bias all confirmed."
+    },
+    {
+      "key": "55-jokes-or-gibberish",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Pituxcoosuvarn & Murakami; Digital (MDPI) 2025 5(4):49; NMT vs GPT/GPT-P/GPT-Ex EN->Thai; McNemar; GPT-Ex 62.94% vs MT 50.12% confirmed. Nuance (not flagged): baseline GPT (41.06%) underperforms MT; the guide correctly centers GPT-Ex, matching the paper's own abstract framing."
+    },
+    {
+      "key": "56-getting-serious-unfunny",
+      "verdict": "confirmed",
+      "claims_checked": 8,
+      "discrepancies": [],
+      "unverifiable": [
+        "venue 'ACL 2024': arXiv v2 does not state it; not contradicted"
+      ],
+      "notes": "Author list, 'unfun' minimal-pair method, English + code-mixed English-Hindi, LLMs-strong-at-removing-humor, GPT-4 synthetic data rated highly + adversarial — confirmed verbatim."
+    },
+    {
+      "key": "x09-hahackathon",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Meaney, Wilson, Chiruzzo, Lopez, Magdy; SemEval-2021 Task 7; jointly rated humor and offense (detection + rating) confirmed by title and abstract."
+    },
+    {
+      "key": "x10-humicroedit",
+      "verdict": "confirmed",
+      "claims_checked": 4,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Hossain, Krumm, Gamon, Kautz; SemEval-2020 Task 7; humor via minimal edits to news headlines confirmed."
+    },
+    {
+      "key": "x11-rjokes-last-laugh",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [
+        "'corpus paper LREC 2020' is a cross-paper claim"
+      ],
+      "notes": "Weller & Seppi; exact title; EMNLP 2019; Reddit joke corpus with upvote-derived humor degrees confirmed."
+    },
+    {
+      "key": "x12-ur-funny",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Hasan et al.; EMNLP 2019; multimodal text+audio+video; TED talks (1866 videos) confirmed."
+    },
+    {
+      "key": "x13-redefining-humor-data",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [
+        "year 2026: no explicit publication year in transcription; consistent, uncontradicted"
+      ],
+      "notes": "Arnett, Nguyen & Jiang; social-interaction-vs-binary-labels framing; 'prompt iteration for explanation generation' (methodologically light) confirmed."
+    },
+    {
+      "key": "58-whos-laughing-now",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [
+        "'INLG 2025': arXiv header only; not contradicted"
+      ],
+      "notes": "Loakman, Thorne & Lin; Section 3 generation / Section 4 explanation structure; theory primer (Sec 2.1) and ethics coverage confirmed."
+    },
+    {
+      "key": "59-subjective-language-survey",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Title, arXiv:2508.07959, 2025 preprint; humor section among subjective-language tasks (sentiment, sarcasm, figurative language) confirmed."
+    },
+    {
+      "key": "60-pun-generation-survey",
+      "verdict": "confirmed",
+      "claims_checked": 4,
+      "discrepancies": [],
+      "unverifiable": [
+        "arXiv:2507.04793 / 2025: no arXiv-id line in transcription; 2025 references consistent"
+      ],
+      "notes": "Title matches; first comprehensive pun-generation survey framing confirmed."
+    },
+    {
+      "key": "61-humor-generation-survey-2020",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Amin & Burghardt; LaTeCH-CLfL 2020 (pages 29-41, Dec 12 2020); 'template/rule-based through early neural' confirmed (all pre-2017 systems template-based until Yang & Sheng's LSTM)."
+    },
+    {
+      "key": "62-humor-modeling-survey",
+      "verdict": "confirmed",
+      "claims_checked": 7,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Lemmens & De Marez; ACM Comput. Surv. 58(7) Article 177 (Jan 2026); detection/generation/translation/evaluation across text + multimodal; 1990s origin confirmed verbatim."
+    },
+    {
+      "key": "63-sarcasmbench",
+      "verdict": "confirmed",
+      "claims_checked": 6,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Authors; 2024 preprint; benchmark across six datasets/three prompting methods; 'LLMs trail supervised PLMs' confirmed."
+    },
+    {
+      "key": "64-sarcasm-step-by-step",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [
+        "AAAI 2025 venue not stated in paper text; not contradicted"
+      ],
+      "notes": "Yao et al.; SarcasmCue with CoC/GoC/BoC/ToC (sequential + non-sequential); humor-detection transfer confirmed verbatim."
+    },
+    {
+      "key": "65-humour-style-recognition",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Kenneth, Khosmood & Edalat; four Martin styles; 11.61% affiliative F1 gain confirmed verbatim."
+    },
+    {
+      "key": "x08-can-ai-make-us-laugh",
+      "verdict": "confirmed",
+      "claims_checked": 5,
+      "discrepancies": [],
+      "unverifiable": [],
+      "notes": "Toplyn & Amir, CHum 2025 (pp. 71-78); Witscript vs human expert before live audiences; direct audience-laughter measurement; first formal stand-up evaluation of AI jokes confirmed."
+    }
+  ]
+}

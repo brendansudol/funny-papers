@@ -1,0 +1,170 @@
+{
+  "key": "54-not-funny-anymore",
+  "ref": "#54",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/54-not-funny-anymore/54-not-funny-anymore.md",
+  "source_md_sha256": "d817eee6fde50018dc4bf7d60649ced7c276d06f9170179b594cc6d26144e002",
+  "source_truncated": false,
+  "title": "Not Funny Anymore: LLM Judges Confuse Literal Similarity for Humor in Translated Jokes",
+  "authors": [
+    "Fabricio Rivera",
+    "Rohit Pochugari",
+    "Tessa Chan",
+    "Devansh Katakwar",
+    "Kevin Zhu",
+    "Michael Saxon"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can large language models reliably evaluate whether humor is preserved in cross-lingual joke translation based on cross-lingual reasoning?",
+    "Are poor LM evaluator results in humor translation evaluation driven by over-attending to literalness as a signal for quality?"
+  ],
+  "tasks": [
+    "reference-free humor translation evaluation",
+    "humor preservation evaluation in joke translation"
+  ],
+  "humor_domains": [
+    "translated jokes",
+    "short-form jokes",
+    "one-liners",
+    "puns",
+    "wordplay",
+    "idioms",
+    "cultural references"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Mandarin Chinese",
+    "Hindi"
+  ],
+  "datasets_used": [
+    {
+      "name": "Kaggle short-jokes dataset",
+      "role": "source-material",
+      "size": "162 jokes sampled for Mandarin; 76 jokes for Hindi"
+    },
+    {
+      "name": "English-Chinese and English-Hindi humor preservation benchmarking dataset",
+      "role": "introduced",
+      "size": "162 English-to-Chinese joke-translation pairs and 76 English-to-Hindi joke-translation pairs"
+    }
+  ],
+  "models_evaluated": [
+    "claude-sonnet-4-5-20250929",
+    "gpt-4o",
+    "gemini-2.5-flash-lite",
+    "Qwen3-235B-A22B-Instruct-2507-tput",
+    "Llama-4-Maverick-17B-128E-Instruct-FP8",
+    "Mistral-7B-Instruct-v0.3",
+    "DeepSeek-V3.1"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Reference-free humor translation benchmarking framework",
+      "summary": "The paper evaluates LLM-as-a-Judge systems on joke-translation pairs using only the original joke and its translation, asking models to rate humor preservation on a 1–5 Likert scale and comparing the resulting ratings against human annotations."
+    },
+    {
+      "name": "Token-level semantic alignment / literalness metric",
+      "summary": "The paper introduces a multilingual token-level semantic diagnostic using xlm-r-100langs-bert-base-nli-stsb-mean-tokens embeddings, Procrustes alignment, cosine similarity, and Hungarian matching to compute a per-joke literalness score. Higher scores are interpreted as translations that more closely follow the source wording and structure."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Four bilingual native speakers annotated the Mandarin translations and three annotators annotated the Hindi translations; each rated all jokes on a five-point Likert scale based on semantic preservation of humor. The paper reports Krippendorff’s α of 0.776 for Mandarin and “0.776 (change number)” for Hindi."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Seven LLMs rated each source-translation joke pair under three prompting strategies: vanilla, chain-of-thought, and self-consistency. Prompts instructed models to output a single integer score from 1 to 5 prioritizing humor preservation over surface lexical similarity."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Model ratings were compared to human ratings using strict agreement, ±1 accuracy, MAE, Spearman correlation, Pearson correlation, and binary classification metrics including accuracy, precision, recall, and F1."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "A token-level semantic alignment score was computed as a literalness/wordiness diagnostic, using multilingual embeddings, Procrustes alignment, Hungarian token matching, and mean token-level cosine similarity."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The highest strict agreement in Table 1 was achieved by Gemini with self-consistency prompting.",
+      "metric": "Meaning retention strict accuracy (%)",
+      "value": "23.5",
+      "dataset": null,
+      "best_system": "Gemini"
+    },
+    {
+      "finding": "Average strict accuracy across prompting strategies was highest for Gemini and lowest for OpenAI.",
+      "metric": "Avg. meaning retention strict accuracy (%)",
+      "value": "15.8 for Gemini; 9.1 for OpenAI",
+      "dataset": null,
+      "best_system": "Gemini"
+    },
+    {
+      "finding": "The paper states that Spearman and Pearson correlations are low across models and prompts.",
+      "metric": "Spearman and Pearson correlations",
+      "value": "mostly between −0.15 and 0.27",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The best ±1 accuracy and lowest MAE in Table 3 were achieved by Mistral with vanilla prompting.",
+      "metric": "±1 Accuracy; MAE",
+      "value": "61.5; 1.31",
+      "dataset": null,
+      "best_system": "Mistral"
+    },
+    {
+      "finding": "The highest binary classification accuracy in Table 2 was achieved by Mistral with vanilla prompting.",
+      "metric": "Binary classification accuracy (%)",
+      "value": "75.8",
+      "dataset": null,
+      "best_system": "Mistral"
+    },
+    {
+      "finding": "Human annotator agreement for the Mandarin annotations was reported as Krippendorff’s α of 0.776.",
+      "metric": "Krippendorff’s α",
+      "value": "0.776",
+      "dataset": "English-Chinese and English-Hindi humor preservation benchmarking dataset",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Across 7 models and 3 prompting strategies, strict agreement with human 1–5 humor-preservation ratings was often near or below the 20% random baseline.",
+    "The best strict agreement reported was only 23.5 for Gemini with self-consistency prompting, while model average strict accuracies ranged from 9.1 to 15.8.",
+    "Spearman and Pearson correlations were low, described as mostly between −0.15 and 0.27, indicating that LLM judges poorly tracked human rank order of funniness.",
+    "The token-level literalness analysis showed that LLMs tend to give higher ratings to more literal translations, even when humans judge humor to be lost.",
+    "The error analysis argues that LLM judges fail especially on jokes whose humor depends on idioms, wordplay, or linguistic ambiguity, while alignment is better for content-based humor.",
+    "Chain-of-thought and self-consistency prompting did not eliminate the misalignment between LLM and human humor judgments."
+  ],
+  "limitations": [
+    "The paper states that the dataset is limited to jokes translated from English to Chinese only and that results cannot be assumed to generalize across languages with different humor traditions.",
+    "The dataset relies on synthetic translations generated by ChatGPT rather than human-translated jokes, which may bias it toward machine-friendly structures.",
+    "The paper notes possible self-preference because GPT-4.1 was used as a rater for translations done by gpt4o-mini.",
+    "The dataset is relatively small, with 162 pairs, which can reduce statistical significance.",
+    "The jokes are mostly short-form one-liners and exclude longer forms of humor such as narratives, irony, and satire.",
+    "The paper says heavy reliance on wordplay and puns makes the findings less applicable to humor forms relying on situational context.",
+    "Findings are restricted to current SoTA LLMs including GPT-4, Claude, and Gemini, and future models may behave differently."
+  ],
+  "safety_ethics_notes": "The paper states that all annotators were volunteering friends of the authors; no additional safety or ethics discussion is provided.",
+  "artifacts": {
+    "code_url": "https://github.com/Ftsos/HumorLiteralnessPaper",
+    "data_url": "https://github.com/Ftsos/HumorLiteralnessPaper",
+    "other": "The paper states that the dataset will be publicly released in Hugging Face upon acceptance."
+  }
+}

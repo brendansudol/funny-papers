@@ -1,0 +1,189 @@
+{
+  "key": "16-humor-mechanics-multistep",
+  "ref": "#16",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/16-humor-mechanics-multistep/16-humor-mechanics-multistep.md",
+  "source_md_sha256": "6378a67bd31da7fed3268d4af935f8a32ce9dcd6549d95730421243209ff62a7",
+  "source_truncated": false,
+  "title": "Humor Mechanics: Advancing Humor Generation with Multistep Reasoning",
+  "authors": [
+    "Alexey Tikhonov",
+    "Pavel Shtykovskiy"
+  ],
+  "year": 2024,
+  "venue": "ICCC 2024",
+  "paper_types": [
+    "method",
+    "evaluation-study",
+    "dataset"
+  ],
+  "research_questions": [
+    "Can a humor-generation policy for one-liner jokes be inferred directly from a dataset of human jokes using GPT-4?",
+    "Does a multi-step pipeline that generates, expands, and refines associations improve GPT-4 one-liner joke generation compared with zero-shot prompting and partial ablations?",
+    "Do the generated jokes improve in perceived funniness, understandability, joke-likeness, offensiveness, and novelty under human evaluation?",
+    "How do generated one-liners compare with a cleaned positive subset of Reddit jokes under the same annotation protocol?"
+  ],
+  "tasks": [
+    "one-liner joke generation",
+    "humor generation",
+    "joke funniness evaluation",
+    "joke novelty assessment",
+    "joke quality evaluation"
+  ],
+  "humor_domains": [
+    "one-liners",
+    "Reddit jokes",
+    "puns",
+    "wordplay",
+    "misdirection",
+    "satire",
+    "dark humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "16000 OneLiners",
+      "role": "source-material",
+      "size": "100 random one-liners ranked; top 30 jokes used"
+    },
+    {
+      "name": "Seed dataset of high-quality jokes",
+      "role": "introduced",
+      "size": "30 jokes"
+    },
+    {
+      "name": "Generated jokes from Algorithm 1 and ablations",
+      "role": "introduced",
+      "size": "100 zero-shot; 120 no-assoc; 120 assoc-v1; 120 assoc-v2; 120 full"
+    },
+    {
+      "name": "rJokes corpus",
+      "role": "evaluated-on",
+      "size": "156 jokes"
+    },
+    {
+      "name": "Top 10,000 most frequent English words",
+      "role": "source-material",
+      "size": "top 10,000 most frequent English words"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Multi-step humor generation pipeline",
+      "summary": "The proposed pipeline selects a joke topic, generates 20 associations, expands them, combines and refines them into a compact association prompt, and then asks GPT-4 to generate one-liners using both the associations and an inferred humor policy."
+    },
+    {
+      "name": "Data-driven humor-generation policy inference",
+      "summary": "The authors rank 100 one-liners with human assessors, take the top 30, ask GPT-4 to decompose each joke into humorous building blocks, and then ask GPT-4 to distill repeated elements into a prompt used as a humor-generation policy."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The introduction discusses incongruity-based theories as one of the major families of humor theory, and the generation prompts use ideas such as incongruity, unexpected twists, and setup-punchline subversion."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "The introduction mentions superiority theories as one of Warren, Barsky, and McGraw's three broad theory groups."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "The introduction mentions relief theories as one of Warren, Barsky, and McGraw's three broad theory groups."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The final joke-generation prompt operationalizes a data-driven list of humor strategies: wordplay or pun, misdirection, exaggeration, stereotyping, satire, absurdity or surreal humor, dark humor, and juxtaposition."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Native English speakers on ScaleAI annotated each text with five assessors per label. The workflow labeled understandable, offensive/inappropriate, whether it is a joke, whether the assessor had heard it before, funniness on a 1-5 scale, and a short explanation."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The authors applied Mann-Whitney U rank tests to distributions of funniness, joke, understandable, and known scores to assess statistical significance."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The full pipeline achieved the highest average funniness among all reported methods.",
+      "metric": "Funniness",
+      "value": "2.72",
+      "dataset": "Generated jokes from Algorithm 1 and ablations",
+      "best_system": "full"
+    },
+    {
+      "finding": "The full pipeline produced the most understandable texts in Table 2.",
+      "metric": "Understandable",
+      "value": "93%",
+      "dataset": "Generated jokes from Algorithm 1 and ablations",
+      "best_system": "full"
+    },
+    {
+      "finding": "The full pipeline tied zero-shot GPT-4 for the highest fraction of texts judged to be jokes.",
+      "metric": "IsJoke",
+      "value": "84%",
+      "dataset": "Generated jokes from Algorithm 1 and ablations",
+      "best_system": "full and zero-shot"
+    },
+    {
+      "finding": "The proposed method reduced previously heard jokes relative to zero-shot GPT-4.",
+      "metric": "Known",
+      "value": "17.6% known; 82.4% previously unknown",
+      "dataset": "Generated jokes from Algorithm 1 and ablations",
+      "best_system": "full"
+    },
+    {
+      "finding": "The full pipeline scored higher than the cleaned Reddit joke subsample on funniness.",
+      "metric": "Funniness",
+      "value": "2.72 vs 2.38",
+      "dataset": "Generated jokes from Algorithm 1 and ablations; rJokes corpus",
+      "best_system": "full"
+    },
+    {
+      "finding": "Mann-Whitney U tests supported the strongest conclusion for novelty improvements.",
+      "metric": "Known score p-values",
+      "value": "0.0008% full vs zero-shot GPT-4; 0.46% full vs no-assoc; 0.002% full vs reddit",
+      "dataset": "Generated jokes from Algorithm 1 and ablations; rJokes corpus",
+      "best_system": "full"
+    }
+  ],
+  "key_findings": [
+    "The multi-step pipeline improved average funniness over zero-shot GPT-4, from 2.56 to 2.72.",
+    "The full pipeline had the best understandability score, 93%, compared with 88% for zero-shot GPT-4 and 84% for reddit.",
+    "Novelty improved substantially: zero-shot GPT-4 had 27% Known in Table 2, while the proposed method is described as producing 17.6% known jokes and 82.4% previously unknown jokes.",
+    "The full pipeline and zero-shot GPT-4 tied on IsJoke at 84%, while the cleaned Reddit subsample scored 72%.",
+    "Ablations suggest that the inferred humor policy alone is not enough; association generation and refinement are important parts of the pipeline.",
+    "The full pipeline increased offensiveness relative to partial ablations, with 11% Offensive versus 7% for assoc-v2 and 8% for assoc-v1."
+  ],
+  "limitations": [
+    "The evaluation uses limited sample sizes, and the authors state that some observed differences are on the border of significance.",
+    "Humor is highly subjective, and the authors did not have access to annotators' cultural background information.",
+    "The reported novelty depends on whether individual annotators had heard a joke before, so the true fraction of novel jokes may be lower.",
+    "The study is restricted to English one-liner jokes.",
+    "The comparison with Reddit jokes may be affected by artifacts in the Reddit-derived dataset and by differences between Reddit user votes and assessor judgments.",
+    "The amount of high-quality jokes with funniness in {4,5} is described as negligible."
+  ],
+  "safety_ethics_notes": "The paper explicitly discusses ethical concerns from the subjectivity of humor: jokes that seem harmless to one person may be offensive to another, and some jokes exploit violence, humiliation, and gender or racial stereotypes. The experiments filtered generated and Reddit jokes with the OpenAI Moderation API using a harassment threshold of 0.02.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://github.com/altsoph/humor-mechanics",
+    "other": "The paper also cites ReJ download scripts at https://github.com/Humor-Research/hri_tools and includes prompts in Appendices A and B."
+  }
+}

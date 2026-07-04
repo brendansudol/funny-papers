@@ -1,0 +1,193 @@
+{
+  "key": "50b-chumor-2",
+  "ref": "#50 (2.0)",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/50b-chumor-2/50b-chumor-2.md",
+  "source_md_sha256": "86aafadd50afce070cb68262448aa4128a178dfccbd4131f806d314291a7db4a",
+  "source_truncated": false,
+  "title": "Chumor 2.0: Towards Benchmarking Chinese Humor Understanding",
+  "authors": [
+    "Ruiqi He",
+    "Yushu He",
+    "Longju Bai",
+    "Jiarui Liu",
+    "Zhenjie Sun",
+    "Zenghao Tang",
+    "He Wang",
+    "Hanchen Xia",
+    "Rada Mihalcea",
+    "Naihao Deng"
+  ],
+  "year": 2024,
+  "venue": "arXiv:2412.17729v1 [cs.CL]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can a Chinese humor explanation benchmark be constructed from culturally specific Ruo Zhi Ba jokes?",
+    "How well do current Chinese-capable LLMs judge whether an explanation fully explains a Chinese joke?",
+    "Have LLMs achieved human-level understanding of Chinese humor?",
+    "Does chain-of-thought prompting improve LLM performance on Chinese humor explanation classification?",
+    "Can GPT-4o and ERNIE4-turbo explain jokes as well as humans?"
+  ],
+  "tasks": [
+    "humor explanation",
+    "humor explanation classification",
+    "Chinese humor understanding",
+    "joke explanation preference comparison"
+  ],
+  "humor_domains": [
+    "Ruo Zhi Ba jokes",
+    "Chinese internet jokes",
+    "culturally specific humor",
+    "situational jokes",
+    "puns",
+    "homophonic jokes",
+    "glyph-based jokes",
+    "cross-lingual jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Chumor 2.0",
+      "role": "introduced",
+      "size": "3,339 instances; 1,454 good and 1,887 bad explanations"
+    },
+    {
+      "name": "Ruo Zhi Ba (RZB)",
+      "role": "source-material",
+      "size": "Best Annual Threads between 2018 and 2021; all threads in the Moderator’s Recommendation section"
+    },
+    {
+      "name": "Human explanations for Chumor case study",
+      "role": "introduced",
+      "size": "1,951 jokes; mean of 78 Chinese characters of explanation per joke; total length 151,730 Chinese characters"
+    }
+  ],
+  "models_evaluated": [
+    "Yi-34B",
+    "Llama-3.1-Nemotron-70B-Instruct-HF",
+    "Athene-70B",
+    "Qwen2.5-72B-Instruct",
+    "Mistral-Large-Instruct-2407",
+    "Gemini 1.5 Pro",
+    "GLM-4-plus",
+    "GPT-4 Turbo",
+    "GPT-4o",
+    "ERNIE 4.0 Turbo"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Chumor 2.0",
+      "summary": "A Chinese humor explanation dataset sourced from Ruo Zhi Ba jokes. GPT-4o and ERNIE4-turbo generated explanations, and five native Chinese-speaking authors annotated whether each explanation fully explained the joke."
+    },
+    {
+      "name": "Humor explanation classification task",
+      "summary": "Given a joke and a proposed explanation, a model must choose whether the explanation is “fully explain” or “partially/does not explain.” The paper evaluates models with direct prompting and chain-of-thought prompting."
+    },
+    {
+      "name": "Human-vs-LLM explanation preference study",
+      "summary": "For 1,951 jokes, one author wrote human explanations and GPT-4o and ERNIE4-turbo generated two-sentence explanations. Six native Chinese-speaking college students performed A/B preference annotation comparing human and LLM explanations."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "none",
+      "usage": "cited-in-passing",
+      "detail": "The paper categorizes jokes into cultural, situational, pun-based, homophonic, glyph-based, and cross-lingual types, but does not cite or operationalize a named humor theory."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "Five native Chinese-speaking authors manually annotated GPT-4o and ERNIE4-turbo explanations as either “fully explain the joke” or “partially explain or not explain the joke,” using majority vote."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "LLM predictions were compared with Chumor labels using accuracy, false positive rate, false negative rate, and Matthews Correlation Coefficient; no response was marked incorrect."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Three Chinese native speakers unfamiliar with the work annotated a randomly chosen subset of 200 examples to estimate human performance."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Six native Chinese-speaking college students conducted A/B preference annotation between human and LLM joke explanations; each joke received three preference annotations, majority vote determined winning rate, and all-disagree cases were labeled “Undecided”."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Chumor contains 3,339 humor explanation classification instances, with the paper stating 1,454 good and 1,887 bad explanations.",
+      "metric": "dataset size / label counts",
+      "value": "3,339 instances; 1,454 good; 1,887 bad",
+      "dataset": "Chumor 2.0",
+      "best_system": null
+    },
+    {
+      "finding": "The best LLM accuracy was 60.3%, achieved by ERNIE4-turbo and Gemini1.5-pro, far below human performance of 78.3%.",
+      "metric": "accuracy",
+      "value": "60.3%; human 78.3%",
+      "dataset": "Chumor 2.0",
+      "best_system": "ERNIE4-turbo; Gemini1.5-pro"
+    },
+    {
+      "finding": "The best MCC score achieved by LLMs was 0.29, compared with a human average of 0.60.",
+      "metric": "Matthews Correlation Coefficient",
+      "value": "0.29; human 0.60",
+      "dataset": "Chumor 2.0",
+      "best_system": "ERNIE4-turbo"
+    },
+    {
+      "finding": "Chain-of-thought prompting often hurt performance; ERNIE4-turbo accuracy decreased from 60.3% to 45.2%, and eight of the ten LLMs’ MCC scores decreased under CoT prompting.",
+      "metric": "accuracy; MCC trend",
+      "value": "60.3% to 45.2%; eight of the ten LLMs",
+      "dataset": "Chumor 2.0",
+      "best_system": "ERNIE4-turbo"
+    },
+    {
+      "finding": "In A/B preference evaluation, Figure 4 reports GPT-4o explanations at 59.9% Human wins, 31.8% Tie, 2.2% LLM wins, and 6.2% Undecided; ERNIE4-turbo at 53.7% Human wins, 38% Tie, 2.9% LLM wins, and 5.3% Undecided.",
+      "metric": "preference winning rate",
+      "value": "GPT-4o: 59.9% / 31.8% / 2.2% / 6.2%; ERNIE4-turbo: 53.7% / 38% / 2.9% / 5.3%",
+      "dataset": "Human explanations for Chumor case study",
+      "best_system": "Human explanations"
+    },
+    {
+      "finding": "In sampled explanation error analysis, GPT-4o had more cultural-unawareness errors than ERNIE4-turbo, while ERNIE4-turbo had more contextual and pun-based errors.",
+      "metric": "error type frequency",
+      "value": "Cultural: 29.5% vs 10.5%; Contextual: 22.0% vs 26.0%; Pun-based: 15.5% vs 19.5%",
+      "dataset": "Chumor 2.0",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Chumor is presented as the first Chinese humor explanation dataset and is sourced from Ruo Zhi Ba, a Chinese Reddit-like platform with intellectually challenging and culturally specific jokes.",
+    "All ten evaluated LLMs performed poorly on the explanation classification task, with accuracy ranging between 44.6% and 60.3%.",
+    "Human annotators substantially outperformed LLMs, achieving 78.3% average accuracy and 0.60 MCC on a 200-example subset versus the best LLM results of 60.3% accuracy and 0.29 MCC.",
+    "Chain-of-thought prompting did not reliably help Chinese humor understanding and often increased false positives or false negatives.",
+    "Model performance varied by joke type, with situational jokes easier than some cultural, homophonic, pun-based, glyph-based, and cross-lingual cases.",
+    "Human-written joke explanations were strongly preferred over GPT-4o and ERNIE4-turbo explanations in the A/B study."
+  ],
+  "limitations": [
+    "Due to limited budget and API access, the paper could not evaluate all possible LLMs.",
+    "The research focuses primarily on demonstrating that humor understanding remains challenging, rather than solving the problem.",
+    "Although the authors filtered out excessively offensive RZB content, some jokes may still be perceived as offensive because humor is subjective.",
+    "Preference annotation involved subjective humor interpretation, with a combined average agreement percentage of 61.4%.",
+    "A model response with no generated answer due to safety protocols or filtering sensitive terms was marked incorrect; this occurred 21 times and exclusively with GLM-4plus."
+  ],
+  "safety_ethics_notes": "The authors state that they filtered out excessively offensive content, but some jokes may still offend individuals with different cultural or personal standards. They recommend using Chumor with cultural sensitivity and caution, especially in applications involving diverse audiences or sensitive topics.",
+  "artifacts": {
+    "code_url": "https://github.com/dnaihao/Chumor-dataset",
+    "data_url": "https://huggingface.co/datasets/dnaihao/Chumor",
+    "other": "Project page: https://dnaihao.github.io/Chumor-dataset/; leaderboard: https://huggingface.co/spaces/dnaihao/Chumor"
+  }
+}

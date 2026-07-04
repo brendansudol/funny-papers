@@ -1,0 +1,226 @@
+{
+  "key": "40-one-joke-to-rule-them-all",
+  "ref": "#40",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/40-one-joke-to-rule-them-all/40-one-joke-to-rule-them-all.md",
+  "source_md_sha256": "a53206b423e9c86c2ed1652349a1c263c88844db55ac368a47de2dc040caa13c",
+  "source_truncated": false,
+  "title": "One Joke to Rule them All? On the (Im)possibility of Generalizing Humor Detection",
+  "authors": [
+    "Mor Turgeman",
+    "Chen Shani",
+    "Dafna Shahaf"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the 2nd Workshop on Computational Humor (CHum 2026), pages 1–28",
+  "paper_types": [
+    "evaluation-study",
+    "method"
+  ],
+  "research_questions": [
+    "RQ1: Do LLMs have the capability for humor transfer learning? Can they learn some type(s) of humor and generalize to new humor types?",
+    "RQ2: Between which types of humor is transfer most effective?",
+    "RQ3: How does data diversity influence humor transfer learning? Does training on more diverse datasets (e.g., containing multiple humor types) enhance generalization?"
+  ],
+  "tasks": [
+    "humor detection",
+    "binary humor classification",
+    "cross-dataset humor transfer learning"
+  ],
+  "humor_domains": [
+    "Amazon product questions",
+    "dad jokes",
+    "sarcasm headlines",
+    "one-liners",
+    "puns",
+    "wordplay",
+    "irony",
+    "absurd humor",
+    "satire"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Amazon Questions",
+      "role": "trained-on",
+      "size": "19K records"
+    },
+    {
+      "name": "Amazon Questions",
+      "role": "evaluated-on",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "Amazon Questions",
+      "role": "analyzed",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "One Liners",
+      "role": "trained-on",
+      "size": "32K one-liner sentences"
+    },
+    {
+      "name": "One Liners",
+      "role": "evaluated-on",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "One Liners",
+      "role": "analyzed",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "Sarcasm Headlines",
+      "role": "trained-on",
+      "size": "28K headlines"
+    },
+    {
+      "name": "Sarcasm Headlines",
+      "role": "evaluated-on",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "Sarcasm Headlines",
+      "role": "analyzed",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "Reddit Dad Jokes",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Reddit Dad Jokes",
+      "role": "introduced",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "Reddit Dad Jokes",
+      "role": "trained-on",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "Reddit Dad Jokes",
+      "role": "evaluated-on",
+      "size": "6,250 examples"
+    },
+    {
+      "name": "Reddit Dad Jokes",
+      "role": "analyzed",
+      "size": "6,250 examples"
+    }
+  ],
+  "models_evaluated": [
+    "LLaMA-2-7B",
+    "Mistral-7B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Humor transfer learning evaluation framework",
+      "summary": "The paper proposes a framework for evaluating whether LLMs fine-tuned on one or more humor datasets can generalize to unseen humor types. It uses single-dataset, double-dataset, and triple-dataset training setups while keeping the training size fixed at 5,000 examples."
+    },
+    {
+      "name": "Dad Jokes negative-example generation method",
+      "summary": "For Reddit Dad Jokes, which originally contains only humorous examples, the authors use GPT-4 Turbo in a few-shot setup to minimally modify lower-score jokes so that style and content are preserved while the humorous element is removed. They manually reviewed 3,000 outputs and report that only 2.63% failed to maintain style or content, with no examples retaining the punchline."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper cites incongruity resolution as a shared mechanism that may provide common ground across joke types and discusses evidence from humans that resolvable and unresolvable humor involve different neural paths."
+    },
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "cited-in-passing",
+      "detail": "The related work notes that the Humor Styles Questionnaire defines humor styles with distinct social functions."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Accuracy scores are the main metric for single-, double-, and triple-dataset training experiments; F1-score, recall, precision, standard deviations, and 95% confidence intervals are reported in appendices."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The authors manually reviewed 3,000 GPT-4 Turbo-generated Dad Jokes negative examples to assess generation quality."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "In single-dataset training, Mistral achieved the highest reported transfer accuracy on an unseen dataset when trained on Amazon and tested on Headlines.",
+      "metric": "Accuracy",
+      "value": "75",
+      "dataset": "Sarcasm Headlines",
+      "best_system": "Mistral-7B trained on Amazon"
+    },
+    {
+      "finding": "Training on Dad Jokes transferred strongly to One Liners, while the reverse direction was much weaker.",
+      "metric": "Accuracy",
+      "value": "70-71% vs. 51-62%",
+      "dataset": "One Liners / Reddit Dad Jokes",
+      "best_system": null
+    },
+    {
+      "finding": "In double-dataset training, Amazon + Dad Jokes yielded the strongest transfer for Mistral on both held-out Headlines and One Liners.",
+      "metric": "Accuracy",
+      "value": "74",
+      "dataset": "Sarcasm Headlines; One Liners",
+      "best_system": "Mistral-7B trained on Amazon + Dad Jokes"
+    },
+    {
+      "finding": "In triple-dataset training, both models struggled most to transfer to Dad Jokes.",
+      "metric": "Average accuracy",
+      "value": "56%",
+      "dataset": "Reddit Dad Jokes",
+      "best_system": null
+    },
+    {
+      "finding": "Increasing training diversity improved mean transfer accuracy from single to triple training for both models, with a larger average gain for LLaMA-2.",
+      "metric": "Single → Triple transfer accuracy difference",
+      "value": "↑ 4.05; ↑ 1.88",
+      "dataset": null,
+      "best_system": "LLaMA-2-7B; Mistral-7B"
+    },
+    {
+      "finding": "Reducing in-domain data to 33% in the triple-training setup caused only small average in-domain accuracy drops.",
+      "metric": "Average accuracy drop",
+      "value": "0.49 percentage points; 1.76",
+      "dataset": null,
+      "best_system": "Mistral-7B; LLaMA-2-7B"
+    }
+  ],
+  "key_findings": [
+    "LLMs can transfer some humor-detection ability across humor datasets, but transfer is asymmetric and depends strongly on the source and target humor type.",
+    "Dad Jokes is the strongest source for transfer across the studied datasets, but it is also the hardest target to generalize to from other humor types.",
+    "Amazon occupies a middle ground, transferring reasonably well and benefiting from Dad Jokes, while Headlines and One Liners are easier transfer targets but weaker sources.",
+    "Increasing training diversity generally improves transfer to unseen humor types, with diminishing returns after moving from single- to double-dataset training.",
+    "Mistral-7B consistently generalizes better than LLaMA-2-7B, although both models show the same broad transfer patterns.",
+    "In-domain performance remains relatively stable even when the amount of in-domain training data is reduced to 33% in the triple-dataset setup."
+  ],
+  "limitations": [
+    "The study focuses exclusively on binary classification of short-form, English-language textual humor.",
+    "The study omits LLMs’ ability to rate the funniness of text, which would be valuable for dialogue or conversational humor.",
+    "The scope excludes multimodal formats such as memes and videos.",
+    "Each dataset is used as a stand-in for a humor style, but these assignments are approximate and do not capture the full nuance or variability of humor genres.",
+    "Individual datasets may reflect specific demographics, cultural biases, or artifactual noise.",
+    "The non-humorous Dad Jokes samples were generated by ChatGPT, so the transformation may reflect a more capable LLM’s implicit understanding of humor and may introduce systematic differences.",
+    "The analysis is based on only four datasets and two models, Mistral-7B and LLaMA-2-7B.",
+    "The methodology relies heavily on transfer learning and may not generalize to other approaches such as hybrid neural-symbolic systems."
+  ],
+  "safety_ethics_notes": "Some datasets were collected from publicly available internet sources and may contain offensive content, but a brief examination found no indications of content exceeding the bounds of good taste. The datasets do not contain personally identifiable information except that Reddit Dad Jokes may include public Reddit usernames, which the authors did not use. All datasets were used according to their terms of use and solely for academic research purposes.",
+  "artifacts": {
+    "code_url": "https://github.com/morturr/HumorTransferLearning.git",
+    "data_url": "https://github.com/morturr/HumorTransferLearning.git",
+    "other": null
+  }
+}

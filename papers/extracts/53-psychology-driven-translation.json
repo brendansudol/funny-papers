@@ -1,0 +1,178 @@
+{
+  "key": "53-psychology-driven-translation",
+  "ref": "#53",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/53-psychology-driven-translation/53-psychology-driven-translation.md",
+  "source_md_sha256": "52957d9c7de6a004ef3e5966fa4e7f5651a52cbb2961e7b3539dc93ee8c8d2b0",
+  "source_truncated": false,
+  "title": "Psychology-Driven Enhancement of Humour Translation",
+  "authors": [
+    "Yuchen Su",
+    "Yonghua Zhu",
+    "Yang Chen",
+    "Diana Benavides Prado",
+    "Michael Witbrock"
+  ],
+  "year": 2025,
+  "venue": null,
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a Chain-of-Thought Humour Decomposition Mechanism improve humour translation quality by reducing humour loss and linguistic interference?",
+    "Does HDM work well on other datasets?",
+    "Does HDM work well on other language?",
+    "Does HDM work well on open-source models?",
+    "How do Humour Theory and the Humour Decomposition Mechanism affect the results in ablation?",
+    "Is zero-shot HDM robust to different humour translation prompts?"
+  ],
+  "tasks": [
+    "humour translation",
+    "joke translation"
+  ],
+  "humor_domains": [
+    "short jokes",
+    "question-answer jokes",
+    "puns"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Chinese",
+    "Spanish",
+    "German"
+  ],
+  "datasets_used": [
+    {
+      "name": "Short Jokes Dataset",
+      "role": "evaluated-on",
+      "size": "500 samples randomly selected for experiments; 100 samples randomly selected for ablation/generality analyses"
+    },
+    {
+      "name": "Question-Answer Jokes dataset",
+      "role": "evaluated-on",
+      "size": "100 samples"
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "evaluated-on",
+      "size": "100 samples"
+    }
+  ],
+  "models_evaluated": [
+    "Gemini 1.5 Pro",
+    "Yi-Large",
+    "GPT-3.5 Turbo",
+    "GPT-4 Turbo",
+    "Marco-o1-7B",
+    "Llama3.1-8B-Instruct",
+    "Qwen2.5-0.5B-Instruct",
+    "Qwen2.5-7B-Instruct",
+    "Qwen2.5-14B-Instruct"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Humour Decomposition Mechanism (HDM)",
+      "summary": "HDM is a three-step Chain-of-Thought prompting paradigm for humour translation: first mine intrinsic knowledge or analysis of the source joke, then translate that analysis into the target language, and finally compose a new target-language joke from the translated analysis."
+    },
+    {
+      "name": "Humour-theory-enhanced HDM",
+      "summary": "The paper integrates a humour theory prompt inspired by Toplyn’s joke-generation structure, requiring the model to decompose each joke into topic, angle, and punchline before translation and recomposition."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "Toplyn’s monologue joke generation theory is used to define joke structure as topic, angle, and punchline; these fields are explicitly requested in the Humour Decomposition prompt."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "cited-in-passing",
+      "detail": "The related work states that incongruity theory views humour as arising from incongruity between readers’ expectations and the ending of a story."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "GEMBA is used as a GPT4-based no-reference evaluator for humour, fluency, and coherence, with prompts modified for humour translation evaluation."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "GEMBA-SQM scores scalar quality from 0 to 100, and GEMBA-STARS scores one-to-five star rankings; reported as SQM-H, SQM-F, SQM-C and STAR-H, STAR-F, STAR-C. Results are averaged over three runs, with invalid responses omitted."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The paper reports average gains for HDM of 7.75% in humour, 2.81% in fluency, and 6.13% in coherence for generated translated text.",
+      "metric": "GEMBA automatic evaluation",
+      "value": "7.75% in humour; 2.81% in fluency; 6.13% in coherence",
+      "dataset": "Short Jokes Dataset",
+      "best_system": "HDM"
+    },
+    {
+      "finding": "On English-to-Chinese Short Jokes, GPT4-Turbo + HDM achieved the best Table 1 scores across all reported humour, fluency, and coherence metrics.",
+      "metric": "GEMBA-SQM and GEMBA-STARS",
+      "value": "SQM-H 70.54; STAR-H 3.45; SQM-F 99.45; STAR-F 4.99; SQM-C 97.73; STAR-C 4.96",
+      "dataset": "Short Jokes Dataset",
+      "best_system": "GPT4-Turbo + HDM"
+    },
+    {
+      "finding": "For GPT4-Turbo on English-to-Chinese, HDM beat MAPS by +11.20 SQM-H, +4.33 SQM-F, and +9.11 SQM-C.",
+      "metric": "GEMBA-SQM",
+      "value": "SQM-H 70.54 vs 59.34; SQM-F 99.45 vs 95.12; SQM-C 97.73 vs 88.62",
+      "dataset": "Short Jokes Dataset",
+      "best_system": "GPT4-Turbo + HDM"
+    },
+    {
+      "finding": "On other datasets, HDM improved over the MAPS baseline across all LLMs and metrics, with improvements of at least 1.84% in humour, 1.7% in fluency, and 2.15% in coherence.",
+      "metric": "GEMBA-SQM",
+      "value": "at least 1.84% in humour; 1.7% in fluency; 2.15% in coherence",
+      "dataset": "Question-Answer Jokes dataset; HaHackathon (SemEval-2021 Task 7)",
+      "best_system": "HDM"
+    },
+    {
+      "finding": "On English-to-German with Yi-Large, the paper reports HDM improvements of 2.75% in humour, 3.25% in fluency, and 3% in coherence.",
+      "metric": "GEMBA-SQM",
+      "value": "2.75% in humour; 3.25% in fluency; 3% in coherence",
+      "dataset": "Short Jokes Dataset",
+      "best_system": "Yi-Large + HDM"
+    },
+    {
+      "finding": "In open-source model tests, Qwen2.5-14B-Instruct improved under HDM, while Qwen2.5-0.5B-Instruct lost humour score.",
+      "metric": "GEMBA-SQM",
+      "value": "Qwen2.5-14B-Instruct: SQM-H 51.60 to 61.80, SQM-F 91.40 to 97.40, SQM-C 86.00 to 91.35; Qwen2.5-0.5B-Instruct SQM-H 39.80 to 28.70",
+      "dataset": "Short Jokes Dataset",
+      "best_system": "Qwen2.5-14B-Instruct + HDM"
+    }
+  ],
+  "key_findings": [
+    "HDM outperforms direct LLM translation, DUAL-REFLECT, and MAPS on Table 1 for all four closed-source backbone models across humour, fluency, and coherence metrics.",
+    "The strongest closed-source result is GPT4-Turbo + HDM, which reaches SQM-H 70.54, SQM-F 99.45, and SQM-C 97.73 on English-to-Chinese Short Jokes.",
+    "HDM generalizes beyond the main Short Jokes setup to Question-Answer Jokes and SemEval-2021 samples, where it improves every reported model/metric pair over the MAPS baseline.",
+    "The method also improves English-to-Spanish and English-to-German translation in nearly all reported settings, although Yi-Large EN→SP fluency is slightly lower with HDM than the baseline: 96.30 vs 96.50.",
+    "Ablation shows that HDM is the main contributor, and the topic-angle-punchline humour theory component works better when combined with HDM than when used without HDM.",
+    "Open-source models show mixed behavior: larger Qwen2.5 models improve, but smaller models can decline, especially on SQM-H."
+  ],
+  "limitations": [
+    "The study is limited to four languages: Chinese, English, Spanish, and German.",
+    "All datasets selected in the study are in English, and future work is needed for additional translation directions.",
+    "The evaluation lacks human evaluation, even though the paper states human evaluation remains the gold standard for natural language generation quality.",
+    "The paper relies on GPT4-based GEMBA automatic metrics, which may introduce bias into the final results.",
+    "The applicability of HDM to different types of humour has not been systematically evaluated.",
+    "HDM struggles with puns that depend on pronunciation, character shape, and cultural or linguistic elements, such as the “Fleece Navidad” example.",
+    "For smaller open-source models, the paper observes a significant decline in evaluation scores, especially SQM-H."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": "Short Jokes Dataset: https://www.kaggle.com/datasets/thedevastator/short-jokes-dataset; Question-Answer Jokes: https://www.kaggle.com/datasets/jiriroz/qa-jokes",
+    "other": null
+  }
+}

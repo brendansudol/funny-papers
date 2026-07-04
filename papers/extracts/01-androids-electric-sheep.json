@@ -1,0 +1,207 @@
+{
+  "key": "01-androids-electric-sheep",
+  "ref": "#1",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/01-androids-electric-sheep/01-androids-electric-sheep.md",
+  "source_md_sha256": "00a8cd755951b3b51d95911a98af74d29903e40f60f8bf504918e83ed861f354",
+  "source_truncated": false,
+  "title": "Do Androids Laugh at Electric Sheep? Humor “Understanding” Benchmarks from The New Yorker Caption Contest",
+  "authors": [
+    "Jack Hessel",
+    "Ana Marasović",
+    "Jena D. Hwang",
+    "Lillian Lee",
+    "Jeff Da",
+    "Rowan Zellers",
+    "Robert Mankoff",
+    "Yejin Choi"
+  ],
+  "year": 2023,
+  "venue": "ACL 2023",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can AI models recognize when a caption is appropriate for a given New Yorker cartoon?",
+    "Can AI models identify highly rated or finalist captions among captions written for the same cartoon?",
+    "Can AI models generate explanations of why a caption-and-image combination is funny that are as good as human-authored explanations?",
+    "How much of model performance is limited by visual recognition when comparing From Pixels and From Description settings?",
+    "How do fine-tuning, in-context learning, model scale, and GPT-4 affect matching, ranking, and explanation quality?"
+  ],
+  "tasks": [
+    "caption-cartoon matching",
+    "caption quality ranking",
+    "humor explanation generation"
+  ],
+  "humor_domains": [
+    "New Yorker cartoon captions",
+    "cartoon caption contest",
+    "visual humor",
+    "image-caption humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "introduced",
+      "size": "704 cartoons; 2.7K high quality captions; 651 human-created joke explanations; Matching train/val/test 1.6K / 538 / 538; Quality ranking train/val/test 1.6K / 523 / 523; Explanation train/val/test 391 / 130 / 130"
+    },
+    {
+      "name": "Jain et al. (2020) New Yorker cartoon caption contest dataset",
+      "role": "source-material",
+      "size": "roughly 250 contests (mean/median 6.1K/5.7K unique captions per contest; 1.5M total); over 114M ratings total (mean/median of 445K/471K per contest)"
+    },
+    {
+      "name": "Shahaf et al. (2015); Radev et al. (2016) corpus",
+      "role": "source-material",
+      "size": "contests #1–#507; 2M unique captions (mean/median 5.2K/5.0K per contest); 55 contests removed by hand; 80 low resolution but usable cases identified"
+    }
+  ],
+  "models_evaluated": [
+    "CLIP ViT-L/14@336px",
+    "OFA-Huge",
+    "T5-Large",
+    "T5-11B",
+    "GPT-3 davinci",
+    "GPT-3 text-davinci-002",
+    "GPT-3 text-ada-001",
+    "GPT-3 text-babbage-001",
+    "GPT-3 text-curie-001",
+    "GPT-3 text-davinci-001",
+    "GPT-3.5",
+    "GPT-4"
+  ],
+  "methods_proposed": [
+    {
+      "name": "New Yorker Caption Contest humor-understanding benchmark suite",
+      "summary": "The paper proposes three progressively harder benchmark tasks derived from the caption contest: 5-way caption-cartoon matching, quality ranking between a finalist/high-quality caption and an “okay” caption, and free-text explanation generation."
+    },
+    {
+      "name": "From Pixels and From Description evaluation settings",
+      "summary": "In the From Pixels setting, models receive only cartoon images at test time; in the From Description setting, models receive human-authored annotations of scene location, literal description, uncanny/unusual elements, and relevant Wikipedia entities to factor out visual recognition."
+    },
+    {
+      "name": "OFA-Huge → language model pipeline",
+      "summary": "The paper fine-tunes OFA-Huge to generate the same annotation types from cartoon images, then passes those predicted descriptions to T5 models for downstream multiple-choice and explanation tasks."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The benchmark annotations include descriptions of what is unusual or uncanny in each cartoon, and the related-work discussion notes that most New Yorker caption contest cartoons involve incongruous situations."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "The related-work section summarizes Attardo and Raskin’s “hostility” family of humor theories as claims of superiority over someone or something."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "The related-work section lists “release” of a constraint as one of the three major families of theories of humor."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Matching and quality ranking are evaluated with accuracy averaged over 5 cross-validation splits; quality ranking reports CrowdAcc and NYAcc."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Three people each attempted 100 randomly sampled instances from both matching and quality ranking in an image-only setting; 595 total responses were collected."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For explanation, 3 crowdworkers judged each pair of explanations, and a majority vote determined the winner; Table 3 reports % A wins, # ratings, and Gwet’s γ."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Appendix E reports BLEU-4, ROUGE-L, and word-level perplexity for explanation generation, while noting that human evaluations are better quality measures."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Crowd ratings from the NEXT platform, where readers rate captions as “funny”, “somewhat funny”, or “unfunny”, are used to form crowd-ranked captions and CrowdAcc targets."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "One author wrote 651 reference joke explanations after filtering out cases where the author did not understand the joke."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "In the From Pixels setting, the best matching model was far below the human estimate.",
+      "metric": "Matching Accuracy",
+      "value": "62.3 vs. 94.0 human estimate",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "CLIP ViT-L/14@336px (finetuned)"
+    },
+    {
+      "finding": "In the From Description setting, GPT-4 with 5 in-context examples achieved the best matching accuracy.",
+      "metric": "Matching Accuracy",
+      "value": "84.5",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "GPT-4 (5-shot)"
+    },
+    {
+      "finding": "For quality ranking against crowd preferences, GPT-4 with 5 in-context examples was best but remained below the human estimate.",
+      "metric": "Quality Ranking CrowdAcc",
+      "value": "73.3 vs. 83.7 human estimate",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "GPT-4 (5-shot)"
+    },
+    {
+      "finding": "For quality ranking against New Yorker editor selections, fine-tuned GPT-3 was best and exceeded the human estimate.",
+      "metric": "Quality Ranking NYAcc",
+      "value": "69.8 vs. 64.6 human estimate",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "GPT3-175B (finetuned)"
+    },
+    {
+      "finding": "Human-authored explanations were preferred over the best machine-authored explanations, GPT-4 with 5 in-context examples.",
+      "metric": "% A wins in pairwise human evaluation",
+      "value": "67.7%",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "Human"
+    },
+    {
+      "finding": "With equal amounts of supervision, GPT-4 explanations were preferred over GPT-3 explanations nearly universally.",
+      "metric": "% A wins in pairwise human evaluation",
+      "value": "93.0%",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "5-shot GPT-4"
+    }
+  ],
+  "key_findings": [
+    "The best From Pixels matching model, fine-tuned CLIP ViT-L/14@336px, achieved 62.3 accuracy, while the human estimate was 94.0.",
+    "From Description models performed substantially better on matching, with GPT-4 (5-shot) reaching 84.5 accuracy.",
+    "For quality ranking, fine-tuned GPT-3 achieved the best NYAcc at 69.8, exceeding the human estimate of 64.6, while GPT-4 (5-shot) achieved the best CrowdAcc at 73.3 but trailed the human estimate of 83.7.",
+    "Explanation generation strongly benefited from image context: T5-11B beat the caption-only version in 84.7% of pairwise cases.",
+    "Computer vision remained a bottleneck for explanations: From Description T5-11B was preferred over OFA → T5-11B in 74.6% of cases.",
+    "Human explanations were still preferred over 5-shot GPT-4 explanations in 67.7% of pairwise cases."
+  ],
+  "limitations": [
+    "The New Yorker Cartoon Caption Contest is a narrow slice of humor tied to a particular language, region, history, culture, style, and set of conventions.",
+    "Quality ranking may look prescriptive, but the authors state that New Yorker editorial selections should not be treated as objective ground truth for funniness.",
+    "The tasks operationalize average preferences rather than individual tastes and may reflect bias toward characteristics of prior contest winners or published New Yorker cartoons.",
+    "The explanation corpus was largely written by a single author, so future work should compare person-to-person variance in joke explanations.",
+    "The data may contain offensive jokes, although the authors manually removed a handful of cases observed to target specific protected classes."
+  ],
+  "safety_ethics_notes": "The paper notes that the data may contain offensive jokes, says the authors manually removed a handful of cases targeting specific protected classes, and states that they do not endorse the jokes. Crowdworkers were paid a minimum of $15/hr, adult-content warnings were shown for relevant HITs, worker IDs were hashed in the public release, and the authors report that their IRB considered the work exempt.",
+  "artifacts": {
+    "code_url": "https://capcon.dev/",
+    "data_url": "https://capcon.dev/",
+    "other": "The paper says it releases models, a leaderboard, annotations, and corpus at https://capcon.dev/."
+  }
+}

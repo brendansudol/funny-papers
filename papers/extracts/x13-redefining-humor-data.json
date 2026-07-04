@@ -1,0 +1,158 @@
+{
+  "key": "x13-redefining-humor-data",
+  "ref": "Part 8 (also)",
+  "section": "Part 8 - Datasets & Shared Tasks",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x13-redefining-humor-data/x13-redefining-humor-data.md",
+  "source_md_sha256": "3df31077318e305e3a8f4638a2d6171741871f9a3c30c19146c277a4daa716b9",
+  "source_truncated": false,
+  "title": "Re-defining Humor Data Objects for AI Humor Research",
+  "authors": [
+    "Anna Arnett",
+    "Bang Nguyen",
+    "Meng Jiang"
+  ],
+  "year": 2026,
+  "venue": "arXiv",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study",
+    "position"
+  ],
+  "research_questions": [
+    "How can a humor data point be redefined to represent humor as a social interaction rather than as a binary text label?",
+    "Can an LLM generate a structured receiver explanation R for why humor succeeds or fails given context C, humorous attempt X, and observed reaction Y?",
+    "Does a revised prompt that explicitly assesses text sufficiency and data quality reduce errors in LLM-generated humor explanations?",
+    "What failure modes arise when generating humor explanations from transcripts of multimodal sources such as TED Talks or sitcoms?"
+  ],
+  "tasks": [
+    "humor explanation generation",
+    "humor reasoning",
+    "humor understanding"
+  ],
+  "humor_domains": [
+    "TED Talks",
+    "sitcoms",
+    "audience laughter in transcripts"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "SMILE (TED+sitcoms)",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "31 manually reviewed examples",
+      "role": "evaluated-on",
+      "size": "31 examples"
+    },
+    {
+      "name": "Generated humor reasoning explanation dataset",
+      "role": "introduced",
+      "size": "307 explanation examples"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o mini"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Humor reasoning data object (C, X; Y, R; Z)",
+      "summary": "The paper defines a humor data object as a quintuple consisting of social context C, teller humorous attempt X, receiver reaction Y, receiver explanation R, and teller recovery response Z after humor failure. This reframes humor data around teller and receiver roles rather than only a binary humor label."
+    },
+    {
+      "name": "Text-sufficiency-aware humor explanation prompt",
+      "summary": "The revised prompt asks the LLM to decide whether the transcript alone supports a humor explanation, flag missing context, multimodal dependence, transcription issues, and alignment problems, and then output reasoning steps, a reconstructive flow chart, a one-sentence explanation, and a hallucination flag."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "Martin and Ford's definition of humor as social behavior motivates modeling teller, receiver, social context, reaction, explanation, and recovery in the proposed data object."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "Suls (1972) and humor theory/social cognition motivate making the appreciation process explicit through step-by-step reasoning and flow charts; Prompt 2 asks for setup or expectation, trigger phrase, intended association/reference, and shift/incongruity."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "The authors manually reviewed outputs on the same 31 examples for Prompt 1 and Prompt 2, judging each output as acceptable or unacceptable based on whether it matched their interpretation of the transcript."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Before scaling generation, the authors ran a small pilot and manually inspected whether outputs were valid JSON, whether the reasoning remained solid based on the transcript, and whether the model avoided hallucinated humor explanations."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On the manually reviewed set, Prompt 1 produced 17 acceptable outputs and 14 incorrect outputs.",
+      "metric": "Correct / acceptable vs incorrect",
+      "value": "17 / 31 correct; 14 / 31 incorrect",
+      "dataset": "31 manually reviewed examples",
+      "best_system": "Prompt 1 with GPT-4o mini"
+    },
+    {
+      "finding": "Prompt 1's 14 incorrect outputs were categorized as incomplete context, named-entity explanation failures, and multimodality failures.",
+      "metric": "Prompt 1 error breakdown",
+      "value": "7 incomplete context; 2 named entities not being properly explained; 5 multimodality",
+      "dataset": "31 manually reviewed examples",
+      "best_system": "Prompt 1 with GPT-4o mini"
+    },
+    {
+      "finding": "On the same 31 examples, Prompt 2 produced 27 correctly labeled outputs and 4 errors.",
+      "metric": "Correct / acceptable vs incorrect",
+      "value": "27 / 31 correct; 4 / 31 incorrect",
+      "dataset": "31 manually reviewed examples",
+      "best_system": "Prompt 2 with GPT-4o mini"
+    },
+    {
+      "finding": "The remaining Prompt 2 errors consisted of one missing-context case and three likely multimodal-dependence cases.",
+      "metric": "Prompt 2 error breakdown",
+      "value": "1 missing context; 3 likely multimodal dependence",
+      "dataset": "31 manually reviewed examples",
+      "best_system": "Prompt 2 with GPT-4o mini"
+    },
+    {
+      "finding": "Using the revised prompt, the authors produced a scaled generated dataset of humor explanations.",
+      "metric": "Generated dataset size",
+      "value": "307 explanation examples",
+      "dataset": "Generated humor reasoning explanation dataset",
+      "best_system": "Prompt 2 with GPT-4o mini"
+    }
+  ],
+  "key_findings": [
+    "The paper proposes representing humor as a social interaction with context, humorous attempt, reaction, explanation, and recovery rather than as only a binary label.",
+    "Manual error analysis showed that many poor explanations came from incomplete context, unexplained named entities, multimodal dependence, and unreliable transcript alignment or wording.",
+    "The revised prompt improved manual performance on the same 31 examples from 17 / 31 acceptable outputs to 27 / 31 correctly labeled outputs without changing the base model.",
+    "Prompt 2 was more cautious about forcing explanations when the transcript was insufficient and added labels and flags for text support and data quality.",
+    "The authors generated 307 explanation examples with the revised pipeline, presenting them as a foundation for future humor data synthesis, data augmentation, and humor understanding work.",
+    "Automatic prompt optimization using DSPy/GEPA did not improve performance beyond manual prompt adjustment in the authors' setup."
+  ],
+  "limitations": [
+    "The preliminary work focused primarily on R, the receiver explanation; Z, the teller's recovery response after humor failure, remains future work.",
+    "Most evaluation was manual review on a small subset of 31 examples.",
+    "The generated 307-example dataset is not described as a final gold-standard resource and needs more systematic evaluation.",
+    "Many source examples come from multimodal settings, so transcripts may omit visual cues, timing, delivery, gestures, images, or earlier setup needed to explain laughter.",
+    "Prompt 2 still made 4 errors on the 31-example set: 1 missing-context case and 3 likely multimodal-dependence cases.",
+    "The authors have not yet shown whether the generated explanations improve downstream humor tasks such as humor detection, humor generation, or appropriateness modeling."
+  ],
+  "safety_ethics_notes": "The paper notes that future work should distinguish what is funny from what is socially appropriate, and should study socially appropriate recovery strategies such as clarification, deflection, or apology after failed humor.",
+  "artifacts": {
+    "code_url": "https://github.com/anna-arnett/ai-humor/",
+    "data_url": "https://github.com/anna-arnett/ai-humor/",
+    "other": null
+  }
+}

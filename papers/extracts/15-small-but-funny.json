@@ -1,0 +1,177 @@
+{
+  "key": "15-small-but-funny",
+  "ref": "#15",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/15-small-but-funny/15-small-but-funny.md",
+  "source_md_sha256": "4e35a07a84ca02471277aed550641dff55912a7de11e8682075e735a4c9007f1",
+  "source_truncated": false,
+  "title": "Small But Funny: A Feedback-Driven Approach to Humor Distillation",
+  "authors": [
+    "Sahithya Ravi",
+    "Patrick Huber",
+    "Akshat Shrivastava",
+    "Aditya Sagar",
+    "Ahmed Aly",
+    "Vered Shwartz",
+    "Arash Einolghozati"
+  ],
+  "year": 2024,
+  "venue": "arXiv:2402.18113v1 [cs.CL]",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How does the teacher perform as a critic?",
+    "How do students trained with and without feedback compare?",
+    "How frequently should the teacher intervene?",
+    "How does data size affect student performance?",
+    "Does the length bias of the critic affect student responses?"
+  ],
+  "tasks": [
+    "conditional humor generation",
+    "meaning-preserving humorous paraphrase generation",
+    "humor style transfer",
+    "pairwise humor evaluation"
+  ],
+  "humor_domains": [
+    "conversational humor",
+    "humorous paraphrases"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "EmpatheticDialogues",
+      "role": "source-material",
+      "size": "12,000 sentences from the training set; 1,000 sentences from the validation and test sets; 100 samples from the test set for human evaluation"
+    },
+    {
+      "name": "Teacher-generated literal-humorous pairs from EmpatheticDialogues",
+      "role": "introduced",
+      "size": "36,000 literal-humorous text pairs"
+    },
+    {
+      "name": "Samsum",
+      "role": "evaluated-on",
+      "size": "500 literal inputs"
+    }
+  ],
+  "models_evaluated": [
+    "Llama2-70B",
+    "GPT-4",
+    "BART-large",
+    "BART-FT-WS",
+    "BART-FT",
+    "BART-SD",
+    "BART-BRIO",
+    "BART-DPO",
+    "BART-BRIO-DPO"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Feedback-driven humor distillation",
+      "summary": "A two-phase distillation framework in which an LLM first acts as a teacher by generating humorous paraphrases for literal inputs, and then acts as a critic by providing pairwise feedback on student outputs."
+    },
+    {
+      "name": "Critique-phase feedback incorporation",
+      "summary": "The student generates k = 6 candidates, a diverse pair is selected using maximum pairwise n-gram-based edit distance, and an LLM critic scores the pair with Multiple Choice Prompting. The feedback is incorporated using DPO, BRIO, or a combined BRIO-DPO variant."
+    },
+    {
+      "name": "BART-BRIO-DPO",
+      "summary": "A combined feedback variant where the student is first trained with a BRIO ranking objective using teacher-ranked teacher responses, then initialized for DPO training using preference pairs from the student."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "Win Tie Rate (WTR) compares a student paraphrase against a teacher paraphrase using Multiple Choice Prompting; Llama2-70B and GPT-4 are used as critics."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Some of the authors performed blind pairwise scoring of 100 humorous output pairs for humor and consistency, enabling comparison of LLM judgments with human judgments."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Appendix A reports human WTR-H, WTR-C, and WTR for student models against LLAMA2-70B."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The critic is analyzed with LLM-Human Agreement for humor and consistency, Positional Bias, and Length Bias; WTR is scaled by 100 in the reported tables."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The best main-test student, BART-BRIO-DPO, reached the highest WTR against the Llama2-70B teacher under the Llama2 critic.",
+      "metric": "WTR_llama2, scaled by 100",
+      "value": "65",
+      "dataset": "EmpatheticDialogues-derived test set",
+      "best_system": "BART-BRIO-DPO"
+    },
+    {
+      "finding": "Under the GPT-4 critic, BART-BRIO-DPO also had the highest WTR against the teacher, ahead of BART-DPO and BART-BRIO.",
+      "metric": "WTR_GPT4, scaled by 100",
+      "value": "56",
+      "dataset": "EmpatheticDialogues-derived test set",
+      "best_system": "BART-BRIO-DPO"
+    },
+    {
+      "finding": "On the OOD test set, feedback-trained models improved over BART-FT, with BART-BRIO-DPO achieving the best WTR.",
+      "metric": "WTR_llama2",
+      "value": "49",
+      "dataset": "Samsum OOD test set, 500 examples",
+      "best_system": "BART-BRIO-DPO"
+    },
+    {
+      "finding": "Multiple Choice Prompting with overall WTR achieved the strongest reported human agreement for humor while retaining measurable position and length biases.",
+      "metric": "Ag-H; Ag-C; PB; LB, scores multiplied by 100",
+      "value": "76; 59; 15; 20",
+      "dataset": "100 blind pairs of humorous outputs",
+      "best_system": "MCP WTR critic"
+    },
+    {
+      "finding": "More frequent feedback improved BART-BRIO performance in the data/frequency experiment.",
+      "metric": "WTR_llama2",
+      "value": "66 for 12K data with 10/10 epochs feedback",
+      "dataset": "EmpatheticDialogues-derived data",
+      "best_system": "BART-BRIO"
+    },
+    {
+      "finding": "In human evaluation, BART-DPO had the highest student WTR against LLAMA2-70B among the reported groups.",
+      "metric": "WTR-H; WTR-C; WTR",
+      "value": "51; 34; 50",
+      "dataset": "Human evaluation subset",
+      "best_system": "BART-DPO"
+    }
+  ],
+  "key_findings": [
+    "Feedback-based distillation substantially narrowed the gap between BART-large students and the Llama2-70B teacher on conditional humor generation.",
+    "BART-BRIO-DPO was best in the main automatic evaluation, scoring WTR_GPT4 = 56 and WTR_llama2 = 65 against the teacher, compared with BART-FT at 30 and 28.",
+    "Both BRIO and DPO feedback objectives improved over imitation-only training, and their combination further improved main-test WTR by 4-6% over DPO or BRIO independently according to the paper text.",
+    "The Llama2-70B critic using Multiple Choice Prompting matched human humor judgments with Ag-H up to 76, but showed position and length biases.",
+    "More frequent teacher feedback improved student performance in Table 4, with BART-BRIO at 12K data increasing from 43 with 1/10 epochs feedback to 66 with 10/10 epochs feedback.",
+    "Feedback was more data-efficient than simply scaling imitation data: a feedback model trained on 12K examples outperformed a no-feedback model trained on 36K examples in Table 4."
+  ],
+  "limitations": [
+    "Quantifying humor is inherently subjective and may not be accurately captured using simple metrics.",
+    "The generated humorous outputs sometimes refer to celebrities and events in North America, so the models may not generalize well across demographic and cultural groups.",
+    "Training on LLM feedback can propagate biases from the LLM training data into the smaller model.",
+    "Biases in model evaluation, including length bias and positional bias, can also be propagated to the student.",
+    "Without mitigation strategies, length bias in the teacher can make student outputs almost double compared to the input text.",
+    "More frequent feedback improves performance but increases communication cost with the teacher."
+  ],
+  "safety_ethics_notes": "The paper notes that the public datasets may contain offensive, biased, or hateful content. The authors used the chat variant of Llama2, which is aligned to generate safe warnings and responses when offensive content may be present; Llama2 generated such warnings for about 3-4% of inputs, and these inputs were discarded. The paper also warns that celebrity analogies, especially with negative connotations, may be considered offensive to specific people.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

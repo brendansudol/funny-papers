@@ -1,0 +1,168 @@
+{
+  "key": "27-bottlehumor",
+  "ref": "#27",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/27-bottlehumor/27-bottlehumor.md",
+  "source_md_sha256": "72617d709a3490a4c2b4588f79dbf36d82c000cabd83a2cac3e746e1d86458b1",
+  "source_truncated": false,
+  "title": "BOTTLEHUMOR: Self-Informed Humor Explanation using the Information Bottleneck Principle",
+  "authors": [
+    "EunJeong Hwang",
+    "Peter West",
+    "Vered Shwartz"
+  ],
+  "year": 2025,
+  "venue": null,
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can an unsupervised information-bottleneck-inspired method elicit and select useful world knowledge to improve multimodal humor explanation generation?",
+    "How does BOTTLEHUMOR compare with zero-shot, Chain-of-Thought, and self-refinement prompting baselines across multimodal humor datasets and VLMs?",
+    "Can LLM-based precision and recall over decomposed atomic facts provide a scalable evaluation metric that aligns with human judgments for free-text humor explanations?",
+    "Which components of the method—implications, candidate explanations, and the compression/relevance terms of the information bottleneck objective—contribute to performance?"
+  ],
+  "tasks": [
+    "humor explanation",
+    "multimodal humor explanation generation",
+    "automatic evaluation of humor explanations"
+  ],
+  "humor_domains": [
+    "memes",
+    "New Yorker cartoons",
+    "cartoon captions",
+    "YesBut images",
+    "satire",
+    "multimodal humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "MemeCap",
+      "role": "evaluated-on",
+      "size": "100 test instances per split; three random seeds"
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "evaluated-on",
+      "size": "100 test instances per split; three random seeds"
+    },
+    {
+      "name": "YesBut (V1)",
+      "role": "evaluated-on",
+      "size": "100 test instances per split; three random seeds"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "Gemini 1.5 Flash",
+    "Gemini 1.5 Flash-8B",
+    "Qwen2-VL-7B-Instruct",
+    "Phi-3.5-Vision-Instruct",
+    "Qwen2-1.5B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "BOTTLEHUMOR",
+      "summary": "An unsupervised, off-the-shelf multimodal reasoning method that generates image descriptions, implications, and candidate humor explanations, then iteratively refines them. It selects useful implications with an information-bottleneck objective combining redundancy reduction via cosine similarity and relevance via cross-entropy to candidate explanations."
+    },
+    {
+      "name": "LLM-based precision, recall, and macro-F1 for humor explanations",
+      "summary": "The paper decomposes references and predictions into atomic facts and uses Gemini-Flash-1.5 to verify whether each fact is conveyed, producing precision, recall, and macro-F1 scores. Literal image descriptions are added to the reference facts to avoid penalizing correct visual details absent from human references."
+    },
+    {
+      "name": "SentenceSHAP",
+      "summary": "An adaptation of TokenSHAP that estimates the importance of individual sentences in the prompt by removing sentence combinations, regenerating responses, and comparing cosine similarity to the base response with Sentence Transformer embeddings."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Reports LLM-based precision, recall, and macro-F1 after decomposing references and predictions into atomic facts; literal image descriptions are incorporated into reference facts."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Uses Gemini-Flash-1.5 with temperature 0.2 for both decomposition and verification in the proposed precision/recall metric."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Validates the automatic metric on 130 random samples across all models and datasets via CloudResearch; human annotators judged whether atomic sentences appeared in the corresponding text."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Compared to the best of ZS and CoT, BOTTLEHUMOR improves average F1 across models on all three datasets.",
+      "metric": "F1 points",
+      "value": "4.2, 1.6, and 2.1",
+      "dataset": "MemeCap, NewYorker, and Yes-But",
+      "best_system": "BOTTLEHUMOR"
+    },
+    {
+      "finding": "GPT-4o with BOTTLEHUMOR achieves the highest average F1 in the main results table.",
+      "metric": "Avg. F1",
+      "value": "$56.7_{1.1}$",
+      "dataset": "MemeCap, NewYorker, and YesBut",
+      "best_system": "GPT4o + BottleHumor"
+    },
+    {
+      "finding": "BOTTLEHUMOR improves over zero-shot baselines by up to the largest reported margins on the three datasets.",
+      "metric": "F1 points",
+      "value": "8.2, 4.3, and 2.8",
+      "dataset": "MemeCap, New Yorker, and YesBut",
+      "best_system": "BOTTLEHUMOR"
+    },
+    {
+      "finding": "The full IB selection method outperforms individual IB-component ablations for GPT4o.",
+      "metric": "Precision / Recall / F1",
+      "value": "81.6 / 37.6 / 51.5",
+      "dataset": "100 random instances from each dataset",
+      "best_system": "Cosine+CE"
+    },
+    {
+      "finding": "The proposed LLM-based evaluator aligns with human judgments at a level similar to inter-annotator agreement.",
+      "metric": "agreement and Cohen’s kappa",
+      "value": "77.1% ($\\kappa$ = 54.1); human-human 75.4% ($\\kappa$ = 50.8)",
+      "dataset": "130 random samples across all models and datasets",
+      "best_system": "Gemini-Flash-1.5 evaluator"
+    },
+    {
+      "finding": "In manually analyzed failures where implications hurt performance, dilution of focus was the dominant error.",
+      "metric": "error share",
+      "value": "81.2% dilution of focus; 18.7% irrelevant information",
+      "dataset": "40 randomly sampled explanations",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "BOTTLEHUMOR improves average F1 over the best of zero-shot and CoT prompting by 4.2 points on MemeCap, 1.6 on NewYorker, and 2.1 on Yes-But across models.",
+    "The method primarily boosts recall while maintaining comparable precision, suggesting that selected implications add missing world knowledge but can introduce slight noise.",
+    "CoT causes a substantial performance drop because its reasoning often produces more generic explanations and loses focus on the humor.",
+    "Self-refine baselines perform similarly to zero-shot, while BOTTLEHUMOR outperforms them by average F1 gains of 2.8 on MemeCap, 2.0 on NewYorker, and 3.3 on YesBut.",
+    "The Cosine+CE information-bottleneck selection outperforms Cosine-only and CE-only selection, improving F1 by 4.8 and 2.3 points respectively in the GPT4o component analysis.",
+    "Manual error analysis finds that harmful implications most often dilute focus (81.2%) or introduce irrelevant information (18.7%)."
+  ],
+  "limitations": [
+    "Humor understanding is subjective, and valid interpretations based on personal background knowledge may not be captured by the reference explanations or scores.",
+    "Breaking explanations into atomic sentences for evaluation can miss nuanced meaning that emerges from the combined explanation.",
+    "BOTTLEHUMOR trades efficiency for interpretability and controllable reasoning, requiring up to 20 calls per sample with each call typically involving ≤500 input tokens and ≤128 output tokens.",
+    "The paper estimates that 100 samples cost up to $4–5 USD using GPT-4o and up to $1 USD using Gemini-Flash-1.5-8B.",
+    "Smaller models can be more susceptible to noisy information as iterations progress, as shown by the Flash1.5-8B MemeCap drop at the final hop."
+  ],
+  "safety_ethics_notes": "The paper states that MemeCap, NewYorker, and YesBut are publicly available but may contain offensive content. It also notes that the LLMs and VLMs are trained on large-scale web corpora and may generate biased descriptions, implications, or explanations. Human evaluation used CloudResearch workers from English-speaking countries with at least 93% acceptance rate on 1,000 prior annotations, paid $0.20 per task for an average hourly wage of $13, collected no personal information, and received institutional ethics approval.",
+  "artifacts": {
+    "code_url": "https://github.com/eujhwang/bottle-humor",
+    "data_url": "https://github.com/eujhwang/bottle-humor",
+    "other": null
+  }
+}

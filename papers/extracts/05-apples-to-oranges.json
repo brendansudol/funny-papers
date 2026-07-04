@@ -1,0 +1,164 @@
+{
+  "key": "05-apples-to-oranges",
+  "ref": "#5",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/05-apples-to-oranges/05-apples-to-oranges.md",
+  "source_md_sha256": "277196534f496d2270d9024c8a6d272f65f805505b5ac75c9267b3c3dd4f4525",
+  "source_truncated": false,
+  "title": "Comparing Apples to Oranges: A Dataset & Analysis of LLM Humour Understanding from Traditional Puns to Topical Jokes",
+  "authors": [
+    "Tyler Loakman",
+    "William Thorne",
+    "Chenghua Lin"
+  ],
+  "year": 2025,
+  "venue": "arXiv:2507.13335v2 [cs.CL]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "RQ1: whether different joke formats have an impact on the ability of LLMs to explain humour.",
+    "RQ2: whether findings from existing work on computational humour are generalisable to the different jokes found in everyday life."
+  ],
+  "tasks": [
+    "joke explanation"
+  ],
+  "humor_domains": [
+    "homographic puns",
+    "heterographic puns",
+    "contemporary internet humour",
+    "non-topical Reddit humour",
+    "topical Reddit humour",
+    "topical jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Comparing Apples to Oranges jokes",
+      "role": "introduced",
+      "size": "600 jokes, consisting of 150 of each type: homographic puns, heterographic puns, non-topical Reddit humour, and topical Reddit humour"
+    },
+    {
+      "name": "rJokes corpus",
+      "role": "source-material",
+      "size": "550k jokes; 300 selected for this work, with 150 topical and 150 non-topical Reddit jokes"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "source-material",
+      "size": "3387 simple puns; first 150 jokes from both the homographic and heterographic training data for Subtask 3 used"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "GPT-4o Mini",
+    "Gemini 1.5 Pro",
+    "Gemini 1.5 Flash",
+    "Meta-Llama-3.1-8B-Instruct",
+    "Meta-Llama-3.1-70B-Instruct",
+    "DeepSeek-R1-Distill-Llama-8B",
+    "DeepSeek-R1-Distill-Llama-70B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Comparing Apples to Oranges jokes",
+      "summary": "A balanced dataset of 600 English jokes across homographic puns, heterographic puns, non-topical Reddit jokes, and topical Reddit jokes, each paired with a succinct human-authored reference explanation. The dataset also includes URLs for knowledge needed by topical jokes and IPA phonetic transcriptions, although these fields are not used in the main analyses."
+    },
+    {
+      "name": "Accuracy/completeness rubric for joke explanations",
+      "summary": "The paper proposes a 0–5 scoring rubric with separate criteria for explanation accuracy and explanation completeness, allowing explanations to be judged across pun-based, non-topical, and topical humour."
+    },
+    {
+      "name": "Topical Reddit joke selection pipeline",
+      "summary": "The paper filters r/Jokes by upvote-downvote score and SpaCy named-entity types, then manually verifies the highest-scoring candidates to select jokes whose humour depends on real-world entities or events."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "One author rated all 4800 LLM-generated explanations on 0–5 accuracy and 0–5 completeness scales. A subset of 320 explanations (10 jokes * 4 joke types * 8 models) was re-annotated by 2 third-party native English-speaking computer science students to verify reliability."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Ground-truth explanations were quality-controlled by 3 native English-speaking computer science students, each assessing 200 explanations; all human-authored explanations received maximum scores of 5 on both criteria or were improved. A non-author linguist checked the topical/non-topical categorisation."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Qwen2.5-72B-Instruct was used as an LLM judge over the whole dataset with the same 0–5 accuracy and completeness criteria and the human reference explanation in the prompt."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "SacreBLEU, ROUGE-1, ROUGE-2, ROUGE-L, METEOR, and BERTScore were computed using the human-authored explanations as references."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Model size had a strong and significant impact on explanation quality, with larger variants far more likely to generate “good” explanations.",
+      "metric": "logistic regression coefficient",
+      "value": "β = 1.707, p < 0.001",
+      "dataset": "Comparing Apples to Oranges jokes",
+      "best_system": null
+    },
+    {
+      "finding": "Joke type significantly affected explanation success, with homographic jokes easiest and non-topical and topical jokes harder.",
+      "metric": "logistic regression coefficients",
+      "value": "Homographic β = 0.583, p < 0.001; non-topical β = -0.511, p < 0.001; topical β = -0.574, p < 0.001; pseudo R² = 0.138",
+      "dataset": "Comparing Apples to Oranges jokes",
+      "best_system": null
+    },
+    {
+      "finding": "Human re-annotation showed moderate agreement and high correlations with the primary evaluator.",
+      "metric": "Krippendorff’s alpha / Pearson’s r / binary agreement",
+      "value": "Accuracy α = .574; completeness α = .553; accuracy r = .765; completeness r = .795; both p < .001; 80.5% binary pass/fail agreement",
+      "dataset": "subset of 320 explanations",
+      "best_system": null
+    },
+    {
+      "finding": "The Qwen LLM judge showed substantial agreement with the human evaluation by the paper’s account.",
+      "metric": "Krippendorff’s alpha / Pearson’s r",
+      "value": "Accuracy α = .565; completeness α = .519; accuracy r = .641; completeness r = .602; both p < .001",
+      "dataset": "Comparing Apples to Oranges jokes",
+      "best_system": "Qwen2.5-72B-Instruct"
+    },
+    {
+      "finding": "Automatic reference-based metrics placed topical jokes lowest or tied-lowest on most aggregate metrics.",
+      "metric": "SacreBLEU / ROUGE-L / METEOR / BERTScore",
+      "value": "Topical: SacreBLEU 7.09, ROUGE-L 0.23, METEOR 0.32, BERTScore 0.87; Non-Topical: SacreBLEU 7.86, ROUGE-L 0.25, METEOR 0.32, BERTScore 0.88; Hom.: SacreBLEU 10.15, ROUGE-L 0.28, METEOR 0.39, BERTScore 0.89; Het.: SacreBLEU 8.53, ROUGE-L 0.25, METEOR 0.37, BERTScore 0.88",
+      "dataset": "Comparing Apples to Oranges jokes",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Traditional puns were easier for LLMs to explain than high-rated Reddit jokes, supporting H1.",
+    "Homographic puns were easier than heterographic puns, with the paper attributing the latter’s difficulty to phonetic similarity being only implicit in orthographic text.",
+    "Topical humour was significantly harder than other joke formats because models often failed to identify subtle contemporary real-world references.",
+    "Larger model variants outperformed smaller variants across the model families tested, especially on topical humour.",
+    "GPT-4o consistently outperformed the other models, Llama 70B outperformed most non-GPT models, and the DeepSeek-R1 reasoning models did not outperform the non-reasoning models.",
+    "Completeness scores were generally lower than accuracy scores, suggesting models more often omitted key details than hallucinated entirely incorrect explanations."
+  ],
+  "limitations": [
+    "The work studies only a subset of possible topical jokes and does not assess highly recent jokes for which models may have limited training-data knowledge.",
+    "The analysis is comparatively small-scale, covering 600 jokes with 150 per type.",
+    "Because the jokes come from secondary sources, many may have appeared in LLM training data, although the authors argue readily available explanations are rare.",
+    "A substantial portion of the evaluation was performed by one author, despite reliability checks against third-party annotators and an LLM judge.",
+    "Likert-scale explanation scoring is inherently subjective.",
+    "Many joke formats exist, and more fine-grained categorisation of joke types is possible."
+  ],
+  "safety_ethics_notes": "The paper includes a content warning because some jokes may be offensive or distasteful. The authors state that the dataset contains potentially offensive Reddit material, that explaining a joke is not equivalent to endorsing it, and that explanations were written objectively and without presenting opinions or unverified scandals as facts. The study was approved by the lead author institution’s internal ethics board, and evaluators received participant information sheets and consent forms.",
+  "artifacts": {
+    "code_url": "https://github.com/tylerL404/Comparing-Apples-to-Oranges",
+    "data_url": "https://github.com/tylerL404/Comparing-Apples-to-Oranges",
+    "other": "The released dataset includes human-authored explanations, URLs to webpages containing knowledge needed for topical jokes, and IPA phonetic transcriptions of all jokes."
+  }
+}

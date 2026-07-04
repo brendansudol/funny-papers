@@ -1,0 +1,168 @@
+{
+  "key": "31-how-funny-is-chatgpt",
+  "ref": "#31",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/31-how-funny-is-chatgpt/31-how-funny-is-chatgpt.md",
+  "source_md_sha256": "3987057137b80fa28d787f0ce3867dfadf8c0a3b41e14595b872ddae4cf53718",
+  "source_truncated": false,
+  "title": "How funny is ChatGPT? A comparison of human- and A.I.-produced jokes",
+  "authors": [
+    "Drew Gorenz",
+    "Norbert Schwarz"
+  ],
+  "year": 2024,
+  "venue": "PLoS ONE 19(7): e0305364",
+  "paper_types": [
+    "evaluation-study",
+    "HCI-study"
+  ],
+  "research_questions": [
+    "Can ChatGPT 3.5 produce novel written humor that laypeople rate as funny compared to human-produced jokes?",
+    "How does ChatGPT 3.5's humor production compare with laypeople across acronym, fill-in-the-blank, and roast joke tasks?",
+    "How do ChatGPT 3.5's satirical headlines compare with published The Onion headlines written by professional comedy writers?"
+  ],
+  "tasks": [
+    "humor production",
+    "acronym completion",
+    "fill-in-the-blank joke generation",
+    "roast joke generation",
+    "satirical headline generation",
+    "funniness rating"
+  ],
+  "humor_domains": [
+    "acronyms",
+    "party-game-style prompts",
+    "roast jokes",
+    "conversational humor",
+    "satire",
+    "satirical news headlines",
+    "The Onion-style local news"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Study 1 human-produced comedic responses",
+      "role": "introduced",
+      "size": "945 human-produced comedic responses (105 participants x 1 response per prompt x 3 prompts x 3 tasks)"
+    },
+    {
+      "name": "Study 1 ChatGPT 3.5-produced comedic responses",
+      "role": "introduced",
+      "size": "180 A.I.-produced comedic responses (20 per prompt x 3 prompts for each task x 3 tasks)"
+    },
+    {
+      "name": "Nusbaum et al. joke stem completion task",
+      "role": "source-material",
+      "size": "three roast joke task items"
+    },
+    {
+      "name": "The Onion 'Local' headlines",
+      "role": "source-material",
+      "size": "last 50 ‘Local’ headlines published in The Onion before October 1, 2023; 20 headlines randomly selected as the human-generated set"
+    },
+    {
+      "name": "Study 2 ChatGPT 3.5 satirical headlines",
+      "role": "introduced",
+      "size": "20 new headlines"
+    }
+  ],
+  "models_evaluated": [
+    "ChatGPT 3.5"
+  ],
+  "methods_proposed": [],
+  "humor_theories": [
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "The introduction states that jokes need to be surprising to be perceived as funny."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "grounding/motivation",
+      "detail": "The introduction states that jokes need to be benign and not too offensive, citing benign violation work."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Study 1 recruited N = 200 CloudResearch approved MTurk workers in the United States; each rated 54 responses, with source hidden, on a 7-point Likert scale from 0 = Not Funny at All to 6 = Very Funny."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Study 2 recruited N = 217 USC students; each rated 10 satirical headlines in randomized order, with source hidden, on a 7-point scale from 0 = Not Funny at All to 6 = Very Funny."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "In Study 1, participants rated ChatGPT 3.5 responses funnier overall than human responses.",
+      "metric": "mean funniness rating on 0–6 scale",
+      "value": "M_ChatGPT = 2.63, 95% CI = [2.48, 2.79]; M_Humans = 2.20, 95% CI = [2.06, 2.34]",
+      "dataset": "Study 1 human-produced comedic responses; Study 1 ChatGPT 3.5-produced comedic responses",
+      "best_system": "ChatGPT 3.5"
+    },
+    {
+      "finding": "In Study 1, ChatGPT 3.5 was rated significantly funnier on each of the three task types.",
+      "metric": "paired samples t-tests",
+      "value": "t_Acronym(199) = 4.92, p < .00001; t_Fill-in-the-blank(199) = 2.57, p = .0108; t_Roast(199) = 10.78, p < .00001",
+      "dataset": "Study 1 human-produced comedic responses; Study 1 ChatGPT 3.5-produced comedic responses",
+      "best_system": "ChatGPT 3.5"
+    },
+    {
+      "finding": "ChatGPT 3.5 outperformed the majority of individual human humor producers in Study 1.",
+      "metric": "percent of human producers below ChatGPT 3.5",
+      "value": "73% on the acronym task, 63% on the fill-in-the-blank task, and 87% on the roast joke task",
+      "dataset": "Study 1 human-produced comedic responses; Study 1 ChatGPT 3.5-produced comedic responses",
+      "best_system": "ChatGPT 3.5"
+    },
+    {
+      "finding": "A majority of Study 1 raters preferred the A.I.-generated responses over human-generated responses.",
+      "metric": "participant preference by mean ratings",
+      "value": "69.5% preferred A.I. responses, 26.5% preferred human responses, 4.0% rated both as equally funny",
+      "dataset": "Study 1 human-produced comedic responses; Study 1 ChatGPT 3.5-produced comedic responses",
+      "best_system": "ChatGPT 3.5"
+    },
+    {
+      "finding": "In Study 2, ChatGPT 3.5 satirical headlines were not rated significantly differently from The Onion headlines.",
+      "metric": "mean funniness rating on 0–6 scale; paired t-test",
+      "value": "M_Onion = 2.49, 95% CI = [2.32, 2.66]; M_ChatGPT = 2.37, 95% CI = [2.19, 2.55]; t(216) = 1.48, p = .14",
+      "dataset": "The Onion 'Local' headlines; Study 2 ChatGPT 3.5 satirical headlines",
+      "best_system": null
+    },
+    {
+      "finding": "In Study 2, more participants preferred The Onion headlines than A.I.-produced headlines, but the mean-rating difference was not significant.",
+      "metric": "participant preference by mean ratings",
+      "value": "48.8% preferred The Onion’s headlines, 36.9% preferred the A.I.-produced headlines, and 14.3% showed no preference",
+      "dataset": "The Onion 'Local' headlines; Study 2 ChatGPT 3.5 satirical headlines",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "ChatGPT 3.5 produced jokes rated as funnier than laypeople's jokes across acronym, fill-in-the-blank, and roast joke tasks.",
+    "ChatGPT 3.5 performed above 63% to 87% of human humor producers depending on the humor test.",
+    "ChatGPT 3.5 showed particularly strong performance on the aggressive roast joke task despite being designed not to generate offensive or hateful speech.",
+    "ChatGPT 3.5 produced satirical local-news headlines rated as comparable in funniness to headlines written by professional writers at The Onion.",
+    "Demographic variables did not predict participants’ relative preference for A.I.-produced over human-produced jokes in Study 1."
+  ],
+  "limitations": [
+    "The studies were restricted to text-only jokes and did not test delivery, audiovisual comedy, images, memes, sketch comedy, or stand-up performance.",
+    "The prompts provided clear instructions, constraints, context, and examples; the authors caution that LLMs may produce lower-quality jokes in response to more ambiguous prompts lacking examples, constraints, or social context.",
+    "Only ChatGPT 3.5 was evaluated, and the paper calls for comparisons of competing models and performance over time.",
+    "Study 2 used The Onion’s ‘Local’ news section because ChatGPT 3.5 did not regularly receive the latest world news updates, so the study did not evaluate satire about recent political, entertainment, or sports events.",
+    "Study 2 used a convenience sample of USC psychology subject-pool students.",
+    "The paper evaluates joke quality through lay ratings rather than quantity of output or expert comedy judgments."
+  ],
+  "safety_ethics_notes": "Both studies were approved by the University of Southern California Institutional Review Board (APP-23-04250; Date: 8/31/2023), with electronic consent. The authors note possible economic implications and a serious employment threat for professional comedy writers if LLMs can produce comparable humorous output.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://osf.io/hvtgc/?view_only=6c08679d4b9a4c8892096eb76afabd3c",
+    "other": "The paper states that pre-registration, materials, S1 File, and data are available at the OSF link; it also states that all relevant data are within the manuscript and Supporting Information files."
+  }
+}

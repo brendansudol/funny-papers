@@ -1,0 +1,198 @@
+{
+  "key": "x10-humicroedit",
+  "ref": "Part 8 (pre-LLM anchor)",
+  "section": "Part 8 - Datasets & Shared Tasks",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x10-humicroedit/x10-humicroedit.md",
+  "source_md_sha256": "c90caa3beab9ee71a193365ad4cb133ca7f8c763208be816e61a2f0ed1038896",
+  "source_truncated": false,
+  "title": "SemEval-2020 Task 7: Assessing Humor in Edited News Headlines",
+  "authors": [
+    "Nabil Hossain",
+    "John Krumm",
+    "Michael Gamon",
+    "Henry Kautz"
+  ],
+  "year": 2020,
+  "venue": "SemEval-2020",
+  "paper_types": [
+    "shared-task",
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can systems estimate the mean funniness of a micro-edited news headline on a 0-3 humor scale?",
+    "Can systems determine which of two edited versions of the same original headline is funnier?",
+    "How do participating systems perform across funniness ranges, funniness gaps, and incongruity-driven cases in edited headline humor?"
+  ],
+  "tasks": [
+    "funniness regression for edited news headlines",
+    "pairwise funnier-headline classification",
+    "humor intensity assessment"
+  ],
+  "humor_domains": [
+    "edited news headlines",
+    "micro-edit humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "role": "introduced",
+      "size": "15,095 edited headlines; additional 8,248 annotated FunLines headlines"
+    },
+    {
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "role": "trained-on",
+      "size": "Subtask 1 train: 9,653; FunLines (Train): 8,248. Subtask 2 train: 9,382; FunLines (Train): 1,959"
+    },
+    {
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "role": "evaluated-on",
+      "size": "Subtask 1 dev: 2,420, test: 3,025. Subtask 2 dev: 2,356, test: 2,961"
+    },
+    {
+      "name": "Reddit r/worldnews and r/politics headlines",
+      "role": "source-material",
+      "size": "about 5,000 original headlines"
+    },
+    {
+      "name": "iWeb corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "news headline corpus",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "BASELINE",
+    "CBOW (GloVe)",
+    "BERT",
+    "RoBERTa",
+    "GPT-2",
+    "XLNet",
+    "Transformer-XL",
+    "XLM",
+    "ELMo",
+    "Word2Vec",
+    "FastText",
+    "ERNIE 2.0"
+  ],
+  "methods_proposed": [
+    {
+      "name": "SemEval-2020 Task 7 benchmark",
+      "summary": "The paper defines a shared benchmark for assessing humor caused by single-word micro-edits in news headlines, with Subtask 1 as 0-3 funniness regression and Subtask 2 as pairwise funnier-headline classification."
+    },
+    {
+      "name": "Reward metric for Subtask 2",
+      "summary": "In addition to accuracy, the paper reports a reward metric that gives larger rewards or penalties when the funniness gap between the two edited headlines is larger."
+    },
+    {
+      "name": "GloVe-distance incongruity analysis",
+      "summary": "For Subtask 2 analysis, the paper operationalizes incongruity as the cosine-distance difference between the original word and each replacement word using GloVe vectors, then correlates that difference with the ground-truth pair label."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "Section 6.2.1 tests incongruity theory by assuming larger GloVe cosine distance between the original word and replacement word indicates higher expected incongruity."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "The discussion of example R3 says the humorous effect involves tension relief, which is described as complex to model."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Qualified Amazon Mechanical Turk workers edited headlines, and five judges rated each edited headline on a 0-3 scale; the mean of the five ratings is the funniness score."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Subtask 1 systems are ranked by RMSE against the mean human funniness rating."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Subtask 2 systems are ranked by classification accuracy; the paper also reports a reward metric weighted by the absolute funniness difference between the two edited headlines."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Hitachi was the best system for Subtask 1.",
+      "metric": "RMSE",
+      "value": "0.49725 (a 13.5% improvement over BASELINE)",
+      "dataset": "Humicroedit + FunLines (SemEval-2020 Task 7) test set",
+      "best_system": "Hitachi"
+    },
+    {
+      "finding": "Hitachi was the best system for Subtask 2.",
+      "metric": "Accuracy; Reward",
+      "value": "67.43%; 0.2988 (a 17.93 increase in percentage points over BASELINE)",
+      "dataset": "Humicroedit + FunLines (SemEval-2020 Task 7) test set",
+      "best_system": "Hitachi"
+    },
+    {
+      "finding": "RoBERTa was the best benchmark for Subtask 1 in the official results table.",
+      "metric": "RMSE",
+      "value": "0.52207",
+      "dataset": "Humicroedit + FunLines (SemEval-2020 Task 7) test set",
+      "best_system": "RoBERTa"
+    },
+    {
+      "finding": "RoBERTa was the best benchmark for Subtask 2 in the official results table.",
+      "metric": "Accuracy; Reward",
+      "value": "0.6495; 0.2541",
+      "dataset": "Humicroedit + FunLines (SemEval-2020 Task 7) test set",
+      "best_system": "RoBERTa"
+    },
+    {
+      "finding": "The shared task was the largest shared humor task to date in terms of participation.",
+      "metric": "teams",
+      "value": "48 for Subtask 1 and 31 for Subtask 2",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The top 20 systems for Subtask 2 were all well above the baseline.",
+      "metric": "Accuracy",
+      "value": "at least 59.7%; BASELINE 49.5%",
+      "dataset": "Humicroedit + FunLines (SemEval-2020 Task 7) test set",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "The task attracted more than 300 signups, 86 development-phase teams, and 48 and 31 evaluation-phase teams for the two subtasks.",
+    "Pre-trained language models performed strongly, and the top systems used ensembles of models such as BERT, RoBERTa, GPT-2, XLNet, Transformer-XL and XLM.",
+    "Context-sensitive BERT and RoBERTa embeddings outperformed the context-independent GloVe CBOW benchmark in Table 3.",
+    "For Subtask 1, systems had their minimum error at a funniness score of about 1.0 and larger errors toward the extremes of the funniness scale.",
+    "For Subtask 2, larger ground-truth funniness gaps made ranking easier, and the paper finds that incongruity was positively correlated with more accurate humor ranking.",
+    "The paper identifies world knowledge, cultural references, sarcasm, negative sentiment, and common-sense reasoning as recurring sources of system errors."
+  ],
+  "limitations": [
+    "Extreme funniness scores were less frequent in the dataset, and systems had larger errors toward the extremes of the funniness scale.",
+    "Some headlines showed lack of sufficient agreement between judges; the paper notes that more judges could improve reliability but would increase cost.",
+    "Some teams reported dataset bias around frequent mentions of President Trump and headlines mentioning both “Trump” and “hair” receiving high humor scores.",
+    "FunLines was annotated by a different set of judges, so its rating scale may not be calibrated with the main task dataset.",
+    "Participating systems struggled with world knowledge, cultural references, sarcasm, negative sentiment, tension relief, and common-sense reasoning.",
+    "Most Subtask 2 systems reused Subtask 1 regression systems, and the authors say future versions should make Subtask 2 more independent."
+  ],
+  "safety_ethics_notes": "No explicit safety or ethics section is provided; the paper notes dataset bias involving Trump-related headlines and discusses subjectivity and judge disagreement in humor ratings.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://zenodo.org/record/3969509#.XyWh6fhKh24",
+    "other": "Competition page: https://competitions.codalab.org/competitions/20970; FunLines dataset: https://cs.rochester.edu/u/nhossain/funlines.html; FunLines game website: https://funlines.co"
+  }
+}

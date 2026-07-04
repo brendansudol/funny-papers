@@ -1,0 +1,146 @@
+{
+  "key": "02-chatgpt-fun-not-funny",
+  "ref": "#2",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/02-chatgpt-fun-not-funny/02-chatgpt-fun-not-funny.md",
+  "source_md_sha256": "faa663da2c30c127b90ec36a0d5c1310b6a88dc7b49b5642f0aefeda002efe94",
+  "source_truncated": false,
+  "title": "ChatGPT is fun, but it is not funny! Humor is still challenging Large Language Models",
+  "authors": [
+    "Sophie Jentzsch",
+    "Kristian Kersting"
+  ],
+  "year": 2023,
+  "venue": "arXiv:2306.04563v1 [cs.AI]",
+  "paper_types": [
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Is ChatGPT really funny?",
+    "To what extent is ChatGPT able to capture human humor?",
+    "Are ChatGPT's output jokes originally generated, replicated from training data, modified from learned examples, or hard-coded?",
+    "Can ChatGPT explain why generated jokes are funny, and how does it handle invalid jokes?",
+    "Can ChatGPT distinguish valid jokes from joke-like but unfunny samples when structure, topic, and wordplay are manipulated?"
+  ],
+  "tasks": [
+    "joke generation",
+    "joke explanation",
+    "joke detection / classification"
+  ],
+  "humor_domains": [
+    "standalone jokes",
+    "wordplay puns",
+    "anti-jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "ChatGPT joke generation responses",
+      "role": "introduced",
+      "size": "1008 responded jokes"
+    },
+    {
+      "name": "Top 25 Jokes",
+      "role": "source-material",
+      "size": "25 puns"
+    },
+    {
+      "name": "Joke detection modification conditions",
+      "role": "introduced",
+      "size": "Original N=25, Mod A N=19, Mod B N=25, Mod C N=25, Mod D N=25"
+    }
+  ],
+  "models_evaluated": [
+    "ChatGPT"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Structured prompt-based humor probing",
+      "summary": "The paper evaluates ChatGPT through three prompt-based tasks: repeatedly asking for jokes, asking for explanations of the top generated jokes, and asking ChatGPT to classify original and manually modified joke samples. The detection task operationalizes three observed joke characteristics—structure, wordplay, and topic—by removing one or more of them from the top jokes."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "The authors manually grouped similar generated jokes, judged joke validity and explanation accuracy, manually created modified joke conditions, and grouped ChatGPT's detection responses into [P] joke/pun, [H] potentially humorous, and [N] no joke."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports frequency counts, duplicate counts, coverage of the top jokes, and per-condition classification counts in the joke detection task."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The final list of the top 25 jokes covered 917 of 1008 generated samples.",
+      "metric": "coverage / occurrence count",
+      "value": "917 of 1008 samples",
+      "dataset": "ChatGPT joke generation responses",
+      "best_system": "ChatGPT"
+    },
+    {
+      "finding": "After removing direct duplicates, formatting differences, and grouping similar puns, the generated joke set collapsed from 1008 jokes to 25 top frequent jokes.",
+      "metric": "number of individual responses / groups",
+      "value": "348 after direct duplicate removal; 128 after removing openings and minor formatting differences; 25 top frequent jokes after grouping",
+      "dataset": "ChatGPT joke generation responses",
+      "best_system": "ChatGPT"
+    },
+    {
+      "finding": "The paper states that 909 of 1008 samples were identical to one of the top 25 jokes, with 99 remaining samples.",
+      "metric": "identical samples",
+      "value": "909 of 1008; remaining 99 samples",
+      "dataset": "ChatGPT joke generation responses",
+      "best_system": "ChatGPT"
+    },
+    {
+      "finding": "ChatGPT produced accurate and reasonable explanations for most valid top jokes.",
+      "metric": "accurate explanations",
+      "value": "23 of 25",
+      "dataset": "Top 25 Jokes",
+      "best_system": "ChatGPT"
+    },
+    {
+      "finding": "All original top jokes were classified as jokes in the detection task.",
+      "metric": "[P] joke classifications",
+      "value": "25 [P], 0 [H], 0 [N]",
+      "dataset": "Joke detection modification conditions",
+      "best_system": "ChatGPT"
+    },
+    {
+      "finding": "Removing one characteristic led to mixed classifications, while removing two characteristics led to all samples being classified as no joke.",
+      "metric": "classification counts",
+      "value": "Mod A: 8 [P], 1 [H], 10 [N]; Mod C: 9 [P], 4 [H], 12 [N]; Mod B: 0 [P], 0 [H], 25 [N]; Mod D: 0 [P], 0 [H], 25 [N]",
+      "dataset": "Joke detection modification conditions",
+      "best_system": "ChatGPT"
+    }
+  ],
+  "key_findings": [
+    "ChatGPT's joke generation showed limited versatility: a small set of repeated, existing jokes dominated the 1008 outputs.",
+    "The uneven distribution of repeated jokes and the presence of modified outputs did not support the authors' initial hypothesis that jokes were simply hard-coded in a predefined list.",
+    "ChatGPT could adapt learned joke templates to specific topics, but the resulting original or modified outputs often lacked a valid comic element.",
+    "ChatGPT explained valid wordplay puns impressively well, including direct and acoustic double meanings, but also produced fictional explanations for invalid jokes.",
+    "In joke detection, one joke characteristic alone was not sufficient for ChatGPT to classify a sample as a joke; with two characteristics results were mixed, and with all three characteristics all originals were classified as jokes."
+  ],
+  "limitations": [
+    "Humor is highly subjective, making valid and reliable evaluation difficult.",
+    "The study focuses on one specific form of humor, namely standalone jokes, and does not cover the broader diversity of humor.",
+    "The authors cannot trace outputs back to training data or RLHF examples because they do not have access to the model, training data, or model details.",
+    "The investigation is based solely on prompt outputs from ChatGPT.",
+    "The observations are tied to specific access dates because models such as ChatGPT are constantly changed.",
+    "All prompts were run in empty refreshed chats, so the experiments do not evaluate humor in richer conversational context."
+  ],
+  "safety_ethics_notes": "The Ethics Statement notes ChatGPT's large public impact and risks such as discriminating biases and spreading misinformation. It also states that the system fails to meet open-science requirements because data, training details, and model characteristics are kept private.",
+  "artifacts": {
+    "code_url": "https://github.com/DLR-SC/JokeGPT-WASSA23",
+    "data_url": "https://github.com/DLR-SC/JokeGPT-WASSA23",
+    "other": "ChatGPT web service accessed January-March 2023; detailed access dates are listed in Appendix A."
+  }
+}

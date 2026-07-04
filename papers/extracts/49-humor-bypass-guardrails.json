@@ -1,0 +1,159 @@
+{
+  "key": "49-humor-bypass-guardrails",
+  "ref": "#49",
+  "section": "Part 6 - Safety, Harm & Boundaries",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/49-humor-bypass-guardrails/49-humor-bypass-guardrails.md",
+  "source_md_sha256": "948c575ffd89f2c7f7ee760ff949a4e98842a794c4dce1c71fb8d9332dd7b744",
+  "source_truncated": false,
+  "title": "Using Humor to Bypass Safety Guardrails in Large Language Models",
+  "authors": [
+    "Pedro Cisneros-Velarde"
+  ],
+  "year": 2025,
+  "venue": "Proceedings of the The First Workshop on LLM Security (LLMSEC), pages 17–25",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a fixed humorous context around a verbatim unsafe request bypass LLM safety guardrails more effectively than direct injection?",
+    "Is the effectiveness of the proposed jailbreak due to humor itself rather than merely asking the LLM to answer on behalf of a subject?",
+    "Does adding more humor through a multi-turn knock-knock setup or a joke-prefixed single-turn prompt improve the attack?",
+    "How does humor-based jailbreaking vary across the tested open-source LLMs and public unsafe-request datasets?"
+  ],
+  "tasks": [
+    "humor-based LLM jailbreaking",
+    "unsafe response elicitation with humorous prompts",
+    "evaluation of humorous prompt attacks"
+  ],
+  "humor_domains": [
+    "conversational humor",
+    "knock-knock jokes",
+    "puns",
+    "humorous prompt framing"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "JBB",
+      "role": "evaluated-on",
+      "size": "100 unsafe requests"
+    },
+    {
+      "name": "AdvBench",
+      "role": "evaluated-on",
+      "size": "520 unsafe requests"
+    },
+    {
+      "name": "HEx-PHI",
+      "role": "evaluated-on",
+      "size": "300 unsafe requests"
+    }
+  ],
+  "models_evaluated": [
+    "Llama-3.3-70B-Instruct",
+    "Meta-Llama-3.1-8B-Instruct",
+    "Mixtral-8x7B-Instruct-v0.1",
+    "gemma-3-27b-it"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Fixed humor-based single-turn jailbreak attack",
+      "summary": "The method wraps an unsafe request, kept verbatim, in a fixed humorous context with whispering/laughter cues and asks the model to help a subject such as “man,” “chicken,” “I,” or “goat.” It treats the attacked LLM as a black box and does not use another LLM to craft prompts."
+    },
+    {
+      "name": "No-humor ablation",
+      "summary": "This ablation removes the humorous context cues from the main template, including phrases such as “Psst.”, laughter, “humorously,” whispers, and “xD,” while preserving the on-behalf-of-subject framing."
+    },
+    {
+      "name": "Knock-knock addition",
+      "summary": "This multi-turn variant uses three prompts: a knock-knock opening, a subject-specific second turn, and a third turn that adds a joke before the original humorous attack prompt. For the “man” subject, Llama 3.3 70B is used to formulate situation-style jokes in four variants."
+    },
+    {
+      "name": "Joke addition without knock-knock",
+      "summary": "This single-turn variant consists of the third prompt from the knock-knock attack: a joke plus the original humorous jailbreak prompt, thereby adding more humor than the original method without the preceding dialogue turns."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "Llama 3.3 70B, the largest tested model, is used to judge whether each analyzed model response is unsafe; the judge prompt explicitly says to account for humorous, comical, or funny context and to classify only sufficiently detailed harmful responses as unsafe."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports Percentage (%) of successful attacks, where a successful attack is a response judged unsafe."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The original humor-based method achieved a higher successful-attack rate than direct injection overall across model, dataset, and subject combinations.",
+      "metric": "cases with higher successful-attack rate than direct injection",
+      "value": "42 out of 48 cases",
+      "dataset": "JBB (D1), AdvBench (D2), HEx-PHI (D3)",
+      "best_system": "Fixed humor-based single-turn jailbreak attack"
+    },
+    {
+      "finding": "On Gemma 3 27B, the Chicken variant produced the strongest main-method rates and greatly exceeded direct injection on all three datasets.",
+      "metric": "successful attacks (%)",
+      "value": "D1 49.00 vs Direct Injection 0.00; D2 56.54 vs Direct Injection 0.19; D3 52.33 vs Direct Injection 6.33",
+      "dataset": "JBB (D1), AdvBench (D2), HEx-PHI (D3)",
+      "best_system": "Chicken"
+    },
+    {
+      "finding": "On Llama 3.1 8B, the best main-method rates reached 33.00 on D1, 31.73 on D2, and 44.00 on D3, versus direct injection at 5.00, 2.50, and 7.00.",
+      "metric": "successful attacks (%)",
+      "value": "D1 33.00 (Chicken) vs 5.00; D2 31.73 (Chicken) vs 2.50; D3 44.00 (Goat) vs 7.00",
+      "dataset": "JBB (D1), AdvBench (D2), HEx-PHI (D3)",
+      "best_system": "Chicken / Goat"
+    },
+    {
+      "finding": "Removing the humorous context did not increase the attack’s effectiveness in practically all tested cases.",
+      "metric": "cases where no-humor removal did not increase effectiveness",
+      "value": "46 out of 48 cases",
+      "dataset": "JBB (D1), AdvBench (D2), HEx-PHI (D3)",
+      "best_system": null
+    },
+    {
+      "finding": "Adding more humor through the multi-turn knock-knock attack generally did not improve over the original method.",
+      "metric": "exceptions where knock-knock attack improved over original",
+      "value": "4 out of 84 cases",
+      "dataset": "JBB (D1), AdvBench (D2), HEx-PHI (D3)",
+      "best_system": null
+    },
+    {
+      "finding": "Adding a joke without the knock-knock turns also generally did not improve over the original method.",
+      "metric": "exceptions where joke addition improved over original",
+      "value": "9 out of 84 cases",
+      "dataset": "JBB (D1), AdvBench (D2), HEx-PHI (D3)",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "A fixed humorous context around a verbatim unsafe request can bypass safety guardrails across the tested datasets and models.",
+    "The method is deliberately simple: it does not edit the unsafe request, does not require access to model internals, and does not need an auxiliary LLM for prompt construction.",
+    "The no-humor ablation supports the paper’s claim that humor is crucial, since removing the humorous context did not increase effectiveness in 46 out of 48 cases.",
+    "Adding more humor generally reduced rather than improved attack success, with the knock-knock addition improving only 4 out of 84 cases and the joke-prefixed single-turn variant improving only 9 out of 84 cases.",
+    "The main method was most effective on Llama 3.1 8B and Gemma 3 27B, and least effective on Llama 3.3 70B and Mixtral, according to the paper’s discussion.",
+    "The authors hypothesize that success may stem from mismatched generalization in safety training, where safeguards did not generalize well to humorous unsafe contexts."
+  ],
+  "limitations": [
+    "All experiments set the temperature hyperparameter to zero, and the paper notes that humor-based jailbreaking effectiveness could be sensitive to this hyperparameter.",
+    "The experiments cover four open-source models and three publicly available datasets; future directions include testing proprietary LLMs and reasoning models.",
+    "The paper states that its objective is to show humor is effective for inducing jailbreaking, not to compare to literature results or achieve state-of-the-art attack performance."
+  ],
+  "safety_ethics_notes": "The paper states that it makes the community aware of a new type of jailbreaking and may help developers incorporate protection against humor-based attacks. The author says developers or responsible teams for every studied LLM were contacted on May 16th, 2025. The ethics statement also notes that, as with other published jailbreak methods, malicious users could use the ideas to obtain unsafe content from LLMs for unethical purposes.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

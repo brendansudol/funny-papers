@@ -1,0 +1,196 @@
+{
+  "key": "65-humour-style-recognition",
+  "ref": "#65",
+  "section": "Adjacent - Sarcasm & Humor Styles",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/65-humour-style-recognition/65-humour-style-recognition.md",
+  "source_md_sha256": "076f27eb7fd2efa1c4a06afafecea7b9ca255dcde0c46de0568d7e5fdbb7c337",
+  "source_truncated": false,
+  "title": "A Two-Model Approach for Humour Style Recognition",
+  "authors": [
+    "Mary Ogbuka Kenneth",
+    "Foaad Khosmood",
+    "Abbas Edalat"
+  ],
+  "year": 2024,
+  "venue": null,
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can a text dataset be created for recognising self-enhancing, self-deprecating, affiliative, aggressive, and neutral text?",
+    "How well do classic machine learning classifiers, sentence-embedding models, and DistilBERT perform on humour style recognition?",
+    "Does a two-model approach that first combines affiliative/aggressive humour and then separates them improve humour style recognition, particularly affiliative humour?"
+  ],
+  "tasks": [
+    "humour style recognition",
+    "humour style classification"
+  ],
+  "humor_domains": [
+    "jokes",
+    "online humorous text"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Humour Styles Dataset",
+      "role": "introduced",
+      "size": "1,463 instances: 298 self-enhancing, 265 self-deprecating, 250 affiliative, 318 aggressive, and 332 neutral; text lengths ranging from 4 to 229 words"
+    },
+    {
+      "name": "Online joke websites",
+      "role": "source-material",
+      "size": "983 jokes"
+    },
+    {
+      "name": "ColBERT dataset",
+      "role": "source-material",
+      "size": "280 non-humorous text instances"
+    },
+    {
+      "name": "Short Text Corpus",
+      "role": "source-material",
+      "size": "200 instances consisting of 150 jokes and 50 non-jokes"
+    }
+  ],
+  "models_evaluated": [
+    "Naive Bayes",
+    "BGE + Random Forest",
+    "GTE + Random Forest",
+    "UAE + Random Forest",
+    "MRL + Random Forest",
+    "ALI + Random Forest",
+    "MUL + Random Forest",
+    "BGE + XGBoost",
+    "GTE + XGBoost",
+    "UAE + XGBoost",
+    "MRL + XGBoost",
+    "ALI + XGBoost",
+    "MUL + XGBoost",
+    "DistilBERT"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Two-model approach for humour style recognition",
+      "summary": "The method first trains a four-class classifier for self-enhancing, self-deprecating, neutral, and a combined affiliative/aggressive class. A second binary classifier is then applied to the combined class to distinguish affiliative from aggressive humour."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "The classification labels are based on Martin et al. (2003): self-enhancing, self-deprecating, affiliative, and aggressive humour, with neutral added for non-humorous text."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "The introduction describes relief theory as highlighting humour's role in relaxation."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "cited-in-passing",
+      "detail": "The paper describes incongruity theory as finding something funny when expectations mismatch what actually happens."
+    },
+    {
+      "theory": "superiority",
+      "usage": "grounding/motivation",
+      "detail": "Aggressive humour is described as rooted in superiority theory and as belittling or mocking others."
+    },
+    {
+      "theory": "other",
+      "usage": "cited-in-passing",
+      "detail": "Play theory is mentioned as an evolutionary-psychology account of laughter as a non-aggressive play signal."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "Six Ph.D. candidates from Africa, Asia, and Europe annotated two sets of 100 Short Text Corpus samples; Fleiss’ Kappa was 0.2651 for the first set and 0.2841 for the second set."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Chat-GPT, Claude, Microsoft Copilot, and HuggingChat were used to classify the 14 instances where all three human annotators disagreed, after which a majority label was assigned across seven labels."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Models were evaluated with accuracy, precision, recall, and f1-score using an 80/20 train/test split with fixed seed 100 and 5-fold cross-validation."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "A Wilcoxon signed-rank test compared the single-model and two-model approaches across metrics and humour styles."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The best single-model five-class result in Table 4 achieved 77.8% accuracy and 77.3% f1-score.",
+      "metric": "accuracy / F1-score",
+      "value": "77.8% accuracy and 77.3% f1-score",
+      "dataset": "Humour Styles Dataset",
+      "best_system": "ALI + XGBoost"
+    },
+    {
+      "finding": "The best individual four-class model achieved 85.3% accuracy and 85.1% macro-mean f1-score.",
+      "metric": "accuracy / macro-mean F1-score",
+      "value": "85.3% accuracy and 85.1% macro-mean f1-score",
+      "dataset": "Humour Styles Dataset",
+      "best_system": "MUL + XGBoost"
+    },
+    {
+      "finding": "The best individual binary-class model achieved 80.0% accuracy and 80.0% f1-score.",
+      "metric": "accuracy / F1-score",
+      "value": "80.0% accuracy and 80.0% f1-score",
+      "dataset": "Humour Styles Dataset",
+      "best_system": "ALI + XGBoost"
+    },
+    {
+      "finding": "The best two-model combination achieved 78.0% f1-score and 77.8% accuracy.",
+      "metric": "F1-score / accuracy",
+      "value": "78.0% f1-score and 77.8% accuracy",
+      "dataset": "Humour Styles Dataset",
+      "best_system": "MUL + XGBoost four-class model + ALI + XGBoost binary-class model"
+    },
+    {
+      "finding": "Across the 14 models, the two-model approach increased average f1-score from 70.52 to 75.43 and average accuracy from 71.83 to 75.25.",
+      "metric": "Wilcoxon comparison averages",
+      "value": "F1-score +4.91; accuracy +3.42",
+      "dataset": "Humour Styles Dataset",
+      "best_system": "Two-model approach"
+    },
+    {
+      "finding": "Affiliative humour classification improved by 11.61% in f1-score, with 14 of 14 models improving and p-value 0.0001.",
+      "metric": "F1-score difference / Wilcoxon p-value",
+      "value": "11.61%; p-value 0.0001; 14 of 14 models improved",
+      "dataset": "Humour Styles Dataset",
+      "best_system": "Two-model approach"
+    }
+  ],
+  "key_findings": [
+    "The paper introduces a 1,463-instance English text dataset for four humour styles plus neutral text, with class counts ranging from 250 affiliative to 332 neutral instances.",
+    "Single-model five-class classifiers performed reasonably overall but consistently struggled with affiliative humour, whose f1-scores ranged from 39.2% to 64.9%.",
+    "The proposed two-model approach improves overall average performance across models, raising average f1-score from 70.52 to 75.43 and average accuracy from 71.83 to 75.25.",
+    "The largest gain is for affiliative humour: average f1-score increased by 11.61%, and all 14 tested models improved on that class.",
+    "Aggressive humour did not show a statistically significant improvement under the two-model approach; its average difference was -1.65 with p-value 0.1189."
+  ],
+  "limitations": [
+    "The dataset has only 1,463 instances, which the paper says may limit model generalisation.",
+    "Humour annotation is subjective; Fleiss’ Kappa was 0.2651 and 0.2841 for the two annotated sets, and some instances required LLM-assisted tie-breaking.",
+    "The focus on English-centric jokes may introduce language and cultural biases.",
+    "Most websites except Reader’s Digest and Laugh Factory featured jokes from only one humour type, potentially leading classifiers to learn spurious source-specific correlations.",
+    "The paper is text-only; future work is suggested for multimodal cues, personalised models, larger multilingual datasets, and generative models."
+  ],
+  "safety_ethics_notes": "The paper frames humour style recognition as useful for mental health research and content moderation, including identifying potentially harmful aggressive or self-deprecating humour, while noting cultural and language biases in the English-centric dataset.",
+  "artifacts": {
+    "code_url": "https://github.com/MaryKenneth/Two_Model_Humour_Style",
+    "data_url": "https://github.com/MaryKenneth/Two_Model_Humour_Style",
+    "other": null
+  }
+}

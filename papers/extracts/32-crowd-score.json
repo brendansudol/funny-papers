@@ -1,0 +1,158 @@
+{
+  "key": "32-crowd-score",
+  "ref": "#32",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/32-crowd-score/32-crowd-score.md",
+  "source_md_sha256": "50ae5c960451c47c685345042f366b5a163a59cd5b423ada5e195f326c4e4fac",
+  "source_truncated": false,
+  "title": "Crowd Score: A Method for the Evaluation of Jokes using Large Language Model AI Voters as Judges",
+  "authors": [
+    "Fabrício Góes",
+    "Zisen Zhou",
+    "Piotr Sawicki",
+    "Marek Grzes",
+    "Daniel G. Brown"
+  ],
+  "year": 2022,
+  "venue": "arXiv",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a crowd of LLM-based AI voters be used as judges to rate the funniness of jokes without human judges?",
+    "How much do zero-shot versus few-shot voting prompts, and the choice of the non-funny label, affect binary joke classification accuracy?",
+    "Can humor-style personality induction make different AI voters respond differently to jokes in the expected direction?",
+    "Does the aggregated Crowd Score follow the same trend as human judges' funniness ratings?"
+  ],
+  "tasks": [
+    "joke funniness evaluation",
+    "humor detection",
+    "LLM-as-judge evaluation of jokes"
+  ],
+  "humor_domains": [
+    "jokes",
+    "improvised jokes without wordplay",
+    "aggressive/self-defeating humor",
+    "headline-based jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Toplyn [4] joke dataset",
+      "role": "evaluated-on",
+      "size": "13 inputs (headlines), four jokes generated for each input, total of 52 jokes"
+    },
+    {
+      "name": "Toplyn [4] four-funniest/four-least-funny subset",
+      "role": "evaluated-on",
+      "size": "8 jokes: the four least funny jokes and the four funniest jokes"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-3 (text-davinci-002)"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Crowd Score",
+      "summary": "A method for assessing creative artifacts, instantiated here for jokes, by inducing multiple LLM-based AI voters with different personalities, collecting binary funny/not-funny votes and explanations, validating votes, and aggregating the binary votes into a single score."
+    },
+    {
+      "name": "LLM-based vote auditing",
+      "summary": "For each vote, the LLM is prompted to provide a chain-of-thought-style explanation, and a separate auditing prompt asks whether the reasoning explains the classification. Votes whose explanations fail the audit are discarded before aggregation."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "The four induced voter personalities are based on affiliative, self-enhancing, aggressive and self-defeating humor types from Martin et al. [16]."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-3 text-davinci-002 is used as AI voters with induced humor-style personalities and also as the automated auditor of vote explanations."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "F-score and balanced accuracy are used to evaluate binary funny versus opposite-label voting prompts on an 8-joke subset and the full 52-joke dataset."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Human judges' ratings from Toplyn [4], on a 1 to 4 scale, are used to sort jokes, define funny/not-funny labels using a threshold of 2, and compare against the Crowd Score trend."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "A human expert inspected the auditing results and found that around 40% of votes invalidated by the current auditing prompt should be considered valid."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On the 8-joke voting-question subset, Funny/Boring and Funny/Dull were the best label pairs.",
+      "metric": "F-Score; Balanced Accuracy",
+      "value": "0.89 and 0.88 (zero-shot); 1 and 1 (few-shot)",
+      "dataset": "Toplyn [4] four-funniest/four-least-funny subset",
+      "best_system": "GPT-3 (text-davinci-002) with Funny/Boring or Funny/Dull prompt"
+    },
+    {
+      "finding": "On the full 52-joke dataset, Funny/Boring outperformed the naive Funny/Not Funny label pair, especially in zero-shot prompting.",
+      "metric": "F-Score; Balanced Accuracy",
+      "value": "Funny/Boring: 0.78 and 0.7 (zero-shot), 0.83 and 0.78 (few-shot); Funny/Not Funny: 0.59 and 0.6 (zero-shot), 0.81 and 0.76 (few-shot)",
+      "dataset": "Toplyn [4] joke dataset",
+      "best_system": "GPT-3 (text-davinci-002) with Funny/Boring prompt"
+    },
+    {
+      "finding": "Picking the least appropriate opposite word substantially reduced balanced accuracy.",
+      "metric": "Balanced Accuracy reduction",
+      "value": "26% and 25% for zero-shot and few-shot respectively",
+      "dataset": "Toplyn [4] four-funniest/four-least-funny subset",
+      "best_system": null
+    },
+    {
+      "finding": "The automated auditing step invalidated a minority of all votes, but the authors report that it was over-conservative.",
+      "metric": "Invalidated vote rate",
+      "value": "14% of all votes; around 40% of votes that it still invalidates should be considered valid",
+      "dataset": "Toplyn [4] joke dataset",
+      "best_system": "GPT-3 (text-davinci-002) auditing prompt"
+    },
+    {
+      "finding": "For the funniest and least funny jokes, the Crowd Score largely separated high- and low-rated items.",
+      "metric": "Normalized Crowd Score threshold of 3",
+      "value": "for the top 10 jokes, only one score in 20 was below 3; for the bottom 10 jokes, only 5 in 20 scores above 3",
+      "dataset": "Toplyn [4] joke dataset",
+      "best_system": "Crowd Score"
+    }
+  ],
+  "key_findings": [
+    "Few-shot prompting generally improves voting-question accuracy, but the choice of the opposite word for funny also matters substantially.",
+    "On the full dataset, the Funny/Boring prompt achieved F-Score 0.78 and balanced accuracy 0.7 in zero-shot, compared with 0.59 and 0.6 for the naive Funny/Not Funny prompt.",
+    "Personality induction produced the expected qualitative pattern: aggressive and self-defeating AI voters were more inclined to find the aggressive/self-defeating joke set funny than affiliative and self-enhancing voters.",
+    "Few-shot examples interfered with personality induction, because the paper reports that few-shot prompting overwrites the personality induction and makes all personalities achieve similar results.",
+    "The Crowd Score trend follows human ratings, and it was fairly accurate at detecting the funniest and least funny jokes according to the paper's top-10 and bottom-10 analysis.",
+    "The current auditing prompt invalidated 14% of votes, but a human expert inspection suggested that around 40% of invalidated votes should have been considered valid."
+  ],
+  "limitations": [
+    "The empirical study is a small case study with 52 jokes and four induced humor-style personalities.",
+    "All jokes in the dataset are described as being within the aggressive/self-defeating spectrum, so the personality-induction findings are tied to that joke type.",
+    "The best voting question was found manually; the paper lists automated discovery of voting questions as future work.",
+    "Few-shot prompting can overwrite the intended personality induction, making the personality setup fragile.",
+    "The same LLM is used to generate and audit explanations, and the paper notes that another model could be beneficial to avoid self-evaluation bias.",
+    "The current auditing prompt is over-conservative, with a human expert judging that around 40% of invalidated votes should be considered valid.",
+    "The paper only studies simple binary vote summation for aggregation and leaves other aggregation functions for future work."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": "https://github.com/creapar/crowdscore/",
+    "data_url": null,
+    "other": null
+  }
+}

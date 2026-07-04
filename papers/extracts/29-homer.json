@@ -1,0 +1,265 @@
+{
+  "key": "29-homer",
+  "ref": "#29",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/29-homer/29-homer.md",
+  "source_md_sha256": "d5149b8591c31d319195f19dcba9aeaa890ceef5195ced46b8988c8f0a31dfed",
+  "source_truncated": false,
+  "title": "ON THE WINGS OF IMAGINATION: CONFLICTING SCRIPT-BASED MULTI-ROLE FRAMEWORK FOR HUMOR CAPTION GENERATION",
+  "authors": [
+    "Wenbo Shang",
+    "Yuxi Sun",
+    "Jing Ma",
+    "Xin Huang"
+  ],
+  "year": 2026,
+  "venue": "ICLR 2026",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can the General Theory of Verbal Humor, especially script opposition, be operationalized in a multi-role LLM framework for multimodal funny caption generation?",
+    "Does hierarchical imagination augmented with humor retrieval generate funnier and more diverse captions than state-of-the-art humor-generation methods and generic LLM reasoning strategies?",
+    "Which HOMER modules and humor-relevance scoring components are necessary for performance, and how robust are the retrieval hyperparameters and decoding temperature?",
+    "How reliable are LLM-based and human evaluations of generated humor, and does HOMER generalize to meme images while producing low-toxicity captions?"
+  ],
+  "tasks": [
+    "funny image caption generation",
+    "cartoon caption generation",
+    "meme caption generation",
+    "caption funniness ranking/evaluation"
+  ],
+  "humor_domains": [
+    "New Yorker cartoon captions",
+    "memes",
+    "one-liner jokes",
+    "puns/wordplay"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "New Yorker caption ranking (Humor in AI)",
+      "role": "evaluated-on",
+      "size": "365 cartoons; avg #captions 6,044; 3 groups"
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "evaluated-on",
+      "size": "Electronic sheep: 679 cartoons; avg #captions 6; 2 groups"
+    },
+    {
+      "name": "ImgFlip meme",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "HOMER humor retrieval database",
+      "role": "introduced",
+      "size": "335,570 jokes"
+    },
+    {
+      "name": "Pun of a Day",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Short Jokes",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Reddit Jokes",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "rJokes corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "TED Laughter",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HumorNorm",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "CleanComedy",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "ShortJokes",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "CrowdTruth",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Dad Jokes",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Ranked caption pairs",
+      "role": "trained-on",
+      "size": "split 8:1:1 into training, validation, and test sets"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "Claude-4",
+    "Qwen-VL (7B)",
+    "LLaVA-1.5 (7B)",
+    "GPT-5",
+    "GPT-4.1",
+    "Qwen-Turbo",
+    "LLaMa 3-8B",
+    "Humor-tuned LLaMa 3-8B",
+    "HumorousAI",
+    "LoL",
+    "Phunny",
+    "CLoT",
+    "Detoxify",
+    "RoBERTa-large"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HOMER",
+      "summary": "A GTVH-driven multi-role LLM framework for humorous image captioning. It coordinates a conflicting-script extractor, a retrieval-augmented hierarchical imaginator, and a caption generator conditioned on situation, script opposition, target, narrative strategy, and language."
+    },
+    {
+      "name": "HOMER-pruning / humor-relevance score H",
+      "summary": "A pruning mechanism for expanding imagination trees with retrieved joke tokens. The score combines relevance-opposition based on WordNet semantic similarity and conceptual opposition, humor-frequency, and POS-diversity."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "HOMER is anchored in GTVH knowledge resources: script opposition, situation, target, narrative strategy, and language; these shape extraction, imagination, and generation prompts."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "operationalized",
+      "detail": "The conflicting-script extractor explicitly identifies opposing scripts, and the relevance-opposition score rewards semantically related but conceptually opposing associations."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper states that script opposition leverages surprise, incongruity, and cognitive resolution, motivating the humor mechanism."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-5 is adopted as the primary humor evaluator with temperature 0; GPT-4.1 is also used in additional evaluation. Evaluator reliability is measured by ranking accuracy on human-written caption pairs randomly selected across 200 contests."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Unbiased pass@k is reported for K={1,3,5}; each pass@K calculation is the average value of five trials, with n_i=5 in Appendix B.3."
+    },
+    {
+      "type": "human-eval",
+      "detail": "20 raters scored captions on a five-point funniness scale from 1 not funny to 5 very funny; the main text reports 5600 rating scores and Cohen's kappa κ = 0.49."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Diversity is evaluated using n-gram diversity and NLI Diversity, where non-entailing caption pairs are judged by a RoBERTa-large natural language inference model."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Harmful content is measured with Detoxify across toxicity, severe toxicity, obscene, identity attack, insult, threat, and sexual explicit dimensions."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Statistical significance is assessed with a two-sided Wilcoxon signed-rank test on Pass@k scores, and agreement between LLM evaluator scores and human ratings is measured with Pearson correlation."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "With GPT-4o, HOMER achieved average improvements over seven baselines of 8.62% on pass@1, 6.48% on pass@3, and 5.91% on pass@5.",
+      "metric": "average improvement in pass@k",
+      "value": "8.62% / 6.48% / 5.91%",
+      "dataset": "Humor in AI and Electronic sheep",
+      "best_system": "HOMER (GPT-4o)"
+    },
+    {
+      "finding": "On Humor in AI with GPT-4o, HOMER obtained the best scores across all three ranking groups.",
+      "metric": "pass@1/pass@3/pass@5 (%)",
+      "value": "Top10: 66.41/83.70/89.18; #200-209: 73.40/88.38/92.57; #1000-1009: 76.32/90.50/94.19",
+      "dataset": "New Yorker caption ranking (Humor in AI)",
+      "best_system": "HOMER (GPT-4o)"
+    },
+    {
+      "finding": "On Electronic sheep with GPT-4o, HOMER obtained the best scores for both High-Humor and Low-Humor groups.",
+      "metric": "pass@1/pass@3/pass@5 (%)",
+      "value": "High-Humor: 75.53/89.21/92.10; Low-Humor: 79.45/91.48/93.81",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "HOMER (GPT-4o)"
+    },
+    {
+      "finding": "Human raters gave HOMER the highest mean funniness scores on both evaluated New Yorker datasets.",
+      "metric": "mean human rating ± std on 1-5 scale",
+      "value": "Humor in AI: 3.54 ± 0.59; Electronic sheep: 3.31 ± 0.85",
+      "dataset": "Humor in AI and Electronic sheep",
+      "best_system": "HOMER"
+    },
+    {
+      "finding": "On the meme dataset, HOMER outperformed all listed competitors.",
+      "metric": "pass@1/pass@3/pass@5 (%)",
+      "value": "83.33/96.67/98.86",
+      "dataset": "ImgFlip meme",
+      "best_system": "HOMER"
+    },
+    {
+      "finding": "GPT-5 was the strongest humor evaluator among the tested evaluators.",
+      "metric": "ranking accuracy (%)",
+      "value": "73.5 on Humor in AI; 70.0 on Electronic sheep",
+      "dataset": "Humor in AI and Electronic sheep",
+      "best_system": "GPT-5"
+    }
+  ],
+  "key_findings": [
+    "HOMER consistently outperformed CoT, few-shot, self-consistency, HumorousAI, LoL, Phunny, and CLoT on the two New Yorker benchmarks across four base LLMs.",
+    "The full module combination I+D+C+T_im was best in the GPT-4o ablation table, and removing situation descriptions, conflict scripts, or imagination trees degraded performance.",
+    "The paper identifies conflict scripts as especially important: the largest performance drop is reported for I+D+T_im, which omits conflict script C.",
+    "The humor-relevance score components all matter: removing relevance, frequency, or diversity causes performance drops, and 100% of the joke database gives the best reported pass@k values in Table 22 for all three Humor in AI groups.",
+    "HOMER produced the highest diversity scores reported: 3-gram 0.98 and NLI Diversity 91.5% on Humor in AI, and 3-gram 0.98 and NLI Diversity 92.2% on Electronic Sheep.",
+    "Detoxify results were low, with the main text reporting total toxicity sums of 0.023 on Humor in AI and 0.015 on Electronic Sheep."
+  ],
+  "limitations": [
+    "HOMER struggles with purely formal or inherently non-humorous images, especially when script opposition is difficult to detect.",
+    "The paper notes that humor is inherently subjective because individuals differ in their interpretations of humor and images; inter-rater agreement is κ = 0.49.",
+    "The hyperparameter analysis states that retrieving too few humor instances gives an insufficient imagination space, while retrieving too many introduces noise such as unrelated entities.",
+    "The full model requires three API calls in the imaginator stage and seven LLM calls per output, whereas the naive model can use pre-processed imagination results with zero imaginator API calls."
+  ],
+  "safety_ethics_notes": "The paper evaluates harmfulness with Detoxify over seven dimensions and reports very low toxicity sums: 0.023 on Humor in AI and 0.015 on Electronic Sheep. It also describes a curation policy for the joke database: use publicly available datasets, exclude multimodal or multimodal-application datasets, restrict the corpus to text-only short jokes, remove near-duplicates, and report zero exact-match and normalized overlap with the test set.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "No HOMER code or released dataset URL is stated. Footnotes provide source URLs for ShortJokes, CrowdTruth, and Dad Jokes."
+  }
+}

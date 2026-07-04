@@ -1,0 +1,119 @@
+{
+  "key": "43-theater-stage-laboratory",
+  "ref": "#43",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/43-theater-stage-laboratory/43-theater-stage-laboratory.md",
+  "source_md_sha256": "d44afd9f5e575e80fcef99e12dd0c32c2845fdc2e03b856840012a4804524144",
+  "source_truncated": false,
+  "title": "The Theater Stage as Laboratory: Review of Real-Time Comedy LLM Systems for Live Performance",
+  "authors": [
+    "Piotr Mirowski",
+    "Boyd Branch",
+    "Kory Mathewson"
+  ],
+  "year": 2025,
+  "venue": "arXiv:2501.08474v1 [cs.CL]",
+  "paper_types": [
+    "survey",
+    "position"
+  ],
+  "research_questions": [
+    "How should computational humor and AI comedy systems be evaluated when their intended use is live performance?",
+    "What recent academic and artistic systems have deployed computational humor or LLM-based comedy in real time before live audiences?",
+    "What challenges do live AI comedy systems raise around embodiment, human-machine competition, timing, audience interaction, and human interpretation of AI-generated absurdity?"
+  ],
+  "tasks": [
+    "computational humor generation for live performance",
+    "improvised comedy dialogue generation",
+    "AI-assisted comedy writing and inspiration for live performance",
+    "joke delivery and timing",
+    "audience evaluation of AI-generated humor",
+    "comedy Turing test / human-AI comedy comparison"
+  ],
+  "humor_domains": [
+    "improvised comedy",
+    "robot comedy",
+    "stand-up comedy",
+    "rap battles",
+    "comedy roasts",
+    "PowerPoint karaoke",
+    "theatrical scripts",
+    "absurdist theatre",
+    "sketch comedy"
+  ],
+  "modalities": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "French",
+    "multilingual"
+  ],
+  "datasets_used": [
+    {
+      "name": "OpenSubtitles",
+      "role": "trained-on",
+      "size": null
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Live performance evaluation of computational humor systems",
+      "summary": "The paper argues that AI comedy should be evaluated in live conditions, before audiences sharing physical or online spaces, and under real-time constraints. It frames live audience reception, laughter, surveys, chat interaction, and reviewer response as more realistic tests than decontextualized online judgments."
+    },
+    {
+      "name": "Improvised comedy as an experimental substrate for AI humor",
+      "summary": "The authors propose improvised comedy as a particularly suitable setting for deploying and assessing computational humor because it requires real-time adaptation, listening, memory, audience awareness, and tolerance for failure. This framing also supports collaboration between comedians and AI tools rather than only adversarial human-versus-machine comparisons."
+    },
+    {
+      "name": "Creativity-support framing for AI comedy tools",
+      "summary": "The discussion recommends evaluating AI comedy systems as creativity support tools within the comedy ecosystem. This includes focus groups with comedians, audience and performer surveys, and Creativity Support Tool metrics adapted to live and improvisational contexts."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "live-audience",
+      "detail": "The paper advocates evaluating AI comedy in front of live audiences in physical or online spaces, under real-time constraints, with audience feedback, laughter, cultural context, and critical reception as part of the evaluation setting."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The paper points to audience and performer surveys after performances, focus groups with comedians engaging in writing tasks with LLMs, and Creativity Support Tool metrics as applicable evaluation methods."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Reviewed examples include camera sensors that track audience sentiment after each robot-delivered line and microphones used to measure audience laughter and engagement."
+    },
+    {
+      "type": "live-audience",
+      "detail": "For online and virtual performances, the paper notes that audience engagement can be measured through chat interactions during streaming and, in some cases, laughter on live audio channels."
+    }
+  ],
+  "headline_results": [],
+  "key_findings": [
+    "The paper argues that live professional comedy provides a realistic and challenging testbed for AI humor because audiences expect entertainment, reviewers judge the overall performance, and performers can use real-time feedback and cultural context.",
+    "The review organizes live AI comedy challenges into three broad sets: robotic embodiment, anthropomorphism and human-machine competition; comedic timing and audience interaction; and human interpretation of seemingly absurd AI-generated humor.",
+    "Improvised comedy is presented as especially suitable for AI humor evaluation because it demands listening, split-second reaction, empathy, memory, storytelling skill, and adaptation to an evolving context.",
+    "The paper reports that Improbotics performers struggled with slow timing and delays in AI-generated lines, and that their perception was that audiences preferred timely responses to higher-quality but delayed responses.",
+    "The authors argue that evaluating AI humor through audience reception reframes AI systems as creativity support tools and encourages collaborative relationships between comedians and AI rather than purely adversarial comparisons."
+  ],
+  "limitations": [
+    "Some comedy material is not amenable to live or improvised formats, including memes, comedic videos, and films, because they are pre-written and lack live audience interaction.",
+    "The paper notes concerns from HCI research about poor-quality crowd-sourced evaluation of open-ended text generation, attributed to lack of evaluator buy-in and missing context.",
+    "The authors hypothesize that audiences may have evaluated the novelty of early robot comedy premises in addition to their comedic quality.",
+    "Live audiences and performance spaces impose constraints on evaluation methodologies for computational humor systems.",
+    "Real-time AI improv systems face practical timing issues, including speech recognition, language model latency, text-to-speech, and multi-party chat difficulties."
+  ],
+  "safety_ethics_notes": "The paper discusses ethical concerns around generative AI in creative fields, including cannibalization of creative economies, lack of consent in training data, fear of replacement, and misuse of deep fakes. It argues that live theater can provide a comparatively safe environment for experimentation and that a creativity-support framing can help address ethical questions around AI art and comedy.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

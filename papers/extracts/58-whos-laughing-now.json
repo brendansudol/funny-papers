@@ -1,0 +1,248 @@
+{
+  "key": "58-whos-laughing-now",
+  "ref": "#58",
+  "section": "Part 9 - Surveys & Resources",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/58-whos-laughing-now/58-whos-laughing-now.md",
+  "source_md_sha256": "6e9fed88f8ffd04e3cbe686f4bdcd0a86241e061a652eea97a13985ac2454f65",
+  "source_truncated": false,
+  "title": "Who’s Laughing Now? An Overview of Computational Humour Generation and Explanation",
+  "authors": [
+    "Tyler Loakman",
+    "William Thorne",
+    "Chenghua Lin"
+  ],
+  "year": 2025,
+  "venue": "arXiv:2509.21175v1 [cs.CL]",
+  "paper_types": [
+    "survey",
+    "position"
+  ],
+  "research_questions": [
+    "Why should computational humour processing be treated as an important NLP subdomain and evaluation arena for modern LLM reasoning?",
+    "What approaches have been used for computational humour generation, especially pun generation and non-pun joke generation?",
+    "What approaches have been used for humour explanation, including explanation through classification and natural language explanation?",
+    "What future research directions are needed given humour’s subjectivity, contextual dependence, and ethical ambiguity?"
+  ],
+  "tasks": [
+    "humour generation",
+    "joke creation",
+    "pun generation",
+    "homographic pun generation",
+    "heterographic pun generation",
+    "context-situated pun generation",
+    "set-up and punchline joke generation",
+    "satirical headline generation",
+    "hyperbole generation",
+    "tongue twister generation",
+    "humour explanation",
+    "pun interpretation / word-sense classification",
+    "humour detection",
+    "humour classification by genre and technique",
+    "natural language joke explanation",
+    "meme explanation / captioning",
+    "meme intent description generation",
+    "multimodal meme question answering",
+    "cyberbullying meme explanation"
+  ],
+  "humor_domains": [
+    "puns",
+    "homographic puns",
+    "heterographic puns",
+    "non-topical jokes",
+    "topical jokes",
+    "set-up and punchline jokes",
+    "satirical headlines",
+    "hyperbole",
+    "tongue twisters",
+    "New Yorker cartoon captions",
+    "memes",
+    "multimodal memes",
+    "cyberbullying memes",
+    "drivelology",
+    "conversational humour",
+    "sarcasm",
+    "irony"
+  ],
+  "modalities": [
+    "text",
+    "image",
+    "audio"
+  ],
+  "languages": [
+    "English",
+    "Chinese",
+    "Portuguese",
+    "code-mixed Hindi"
+  ],
+  "datasets_used": [
+    {
+      "name": "Comparing Apples to Oranges jokes",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "ChinesePun",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CUP",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "HYPOGEN hyperbolic phrases dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CLEF 2024 JOKER Task 2",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MEMECAP",
+      "role": "analyzed",
+      "size": "6.3K memes"
+    },
+    {
+      "name": "MeSum",
+      "role": "analyzed",
+      "size": "13K+ memes"
+    },
+    {
+      "name": "MemeIntent",
+      "role": "analyzed",
+      "size": "950 samples"
+    },
+    {
+      "name": "MEMEMQA",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Internet Meme Knowledge Graph",
+      "role": "analyzed",
+      "size": "2 million edges"
+    },
+    {
+      "name": "MultiBully",
+      "role": "analyzed",
+      "size": null
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [],
+  "humor_theories": [
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "Presented as the view that humour and laughter result from releasing psychological energy; the paper says Relief Theory does not offer a simple interpretation that can be easily formulated linguistically and computationally."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "Presented as the view that humour comes from perceiving one individual as superior to another; the paper says Superiority Theory does not offer a simple interpretation that can be easily formulated linguistically and computationally."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "Used to motivate humour as violation of expectations and to explain why humour generation conflicts with the language-modelling objective; the paper also describes pun generation as theoretically grounded in Incongruity Theory."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "grounding/motivation",
+      "detail": "Used to frame humour as harmless norm violation and to motivate the risk-to-reward tradeoff in audience-tailored humour, where sensitive topics may intensify humour for intended audiences but increase offence risk for others."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "The survey reports human-evaluation results from prior work, including AMBiPUN’s 52% success rate and New Yorker caption-explanation preference judgments."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "The survey discusses crowdsourced captions/explanations for meme and visual-humour datasets such as MEMECAP and the New Yorker Cartoon Caption Contest work."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The survey notes that some prior pun-generation work achieved state-of-the-art results in both automatic and human evaluations, but it does not present new automatic evaluation."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The survey argues that recent release benchmark suites emphasize formal reasoning: nine cited benchmarks focus on STEM problem solving or structured reasoning, while only Tau2 touches communicative competence.",
+      "metric": "benchmark count",
+      "value": "nine; only Tau2",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "AMBiPUN is reported to achieve a 52% success rate in human evaluation for homographic pun generation.",
+      "metric": "success rate",
+      "value": "52%",
+      "dataset": null,
+      "best_system": "AMBiPUN"
+    },
+    {
+      "finding": "CLEF 2024 JOKER Task 2 received 54 submissions for humour classification by genre and linguistic technique.",
+      "metric": "submissions",
+      "value": "54",
+      "dataset": "CLEF 2024 JOKER Task 2",
+      "best_system": null
+    },
+    {
+      "finding": "Adding speech audio to text prompts for Gemini 1.5 is reported to improve joke-explanation performance by approximately 2.5% to 4%.",
+      "metric": "explanation performance improvement",
+      "value": "approximately a 2.5% to 4% improvement",
+      "dataset": null,
+      "best_system": "Gemini 1.5"
+    },
+    {
+      "finding": "For New Yorker Cartoon Caption Contest explanations, access to visual information produced a better explanation in 84.7% of cases by human preference judgments.",
+      "metric": "human preference",
+      "value": "84.7%",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": null
+    },
+    {
+      "finding": "In the same New Yorker visual-joke explanation work, human-authored explanations were still preferred in 68% of instances over 5-shot GPT-4 and finetuned GPT-3 outputs.",
+      "metric": "human preference",
+      "value": "68%",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "human-authored explanations"
+    }
+  ],
+  "key_findings": [
+    "Computational humour is presented as an overlooked but important testbed for verbal reasoning, common-sense knowledge, pragmatics, cultural knowledge, and phonetic understanding in LLMs.",
+    "Pun generation dominates the literature because puns are computationally tractable and grounded in incongruity, but the paper argues that work beyond puns remains sparse.",
+    "LLMs and earlier systems struggle especially with heterographic puns because they require phonetic reasoning that is not directly available from text-only representations.",
+    "Natural language humour explanation is treated as a stronger test of understanding than detection or classification, but it is more expensive and labour-intensive to evaluate.",
+    "Multimodal cues can improve humour explanation when humour depends on images or pronunciation, yet reported results still show human-authored explanations outperforming model explanations.",
+    "The paper’s future directions emphasize demographic-aware generation, human-in-the-loop joke workshopping, complex topical humour explanation, and intent-aware explanation for ethically sensitive humour."
+  ],
+  "limitations": [
+    "The paper focuses on breadth of coverage rather than in-depth accounts of the exact technical novelty of existing works.",
+    "The authors state that some relevant research may have been missed despite aiming to be comprehensive.",
+    "The paper does not extensively explore other areas of computational humour processing, including automatic metrics, human evaluation paradigms, available datasets, or approaches to humour detection."
+  ],
+  "safety_ethics_notes": "The paper explicitly discusses ethical concerns around humour generation and explanation, including offensive humour, the impact of computational creative-language generation on the arts and creative industries, anthropomorphism of AI systems and risks to vulnerable users, and whether explaining offensive humour can appear to endorse it. It recommends that researchers working in these domains explicitly state their ethical stance.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

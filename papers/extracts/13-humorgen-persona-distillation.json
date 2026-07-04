@@ -1,0 +1,255 @@
+{
+  "key": "13-humorgen-persona-distillation",
+  "ref": "#13",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/13-humorgen-persona-distillation/13-humorgen-persona-distillation.md",
+  "source_md_sha256": "ddeeebe52187dfaefc89ebf13e0f4d79547853d13cc06689a1f8b4d210c6879c",
+  "source_truncated": false,
+  "title": "HumorGen: Cognitive Synergy for Humor Generation in Large Language Models via Persona-Based Distillation",
+  "authors": [
+    "Edward Ajayi",
+    "Prasenjit Mitra"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a cognitively structured Mixture-of-Thought data-generation framework produce humor training data that lets a 7B student model compete with or outperform larger LLMs?",
+    "Does preference alignment with DPO or O-GRPO improve judged funniness beyond CSF-curated supervised fine-tuning?",
+    "Does training on persona-specific reasoning traces via Cognitive Synergy Distillation improve humor generation or cause an “explainer trap”?",
+    "Does a humor model trained from SemEval-style prompts transfer to out-of-distribution prompt domains in Humor Transfer Bench?",
+    "How reliable are LLM pairwise judges relative to human judgments for high-quality joke comparisons?"
+  ],
+  "tasks": [
+    "textual humor generation",
+    "joke generation from prompts",
+    "headline-based joke generation",
+    "pairwise joke ranking",
+    "humor preference evaluation"
+  ],
+  "humor_domains": [
+    "news headlines",
+    "word-pair prompts",
+    "prompt-based textual jokes",
+    "stand-up",
+    "puns and wordplay",
+    "observational humor",
+    "satire",
+    "absurdist humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "SemEval-2026 Task 1 MWAHAHA data",
+      "role": "source-material",
+      "size": "1,200 news headlines and word-pair prompts"
+    },
+    {
+      "name": "SemEval-2026 Task 1 MWAHAHA data",
+      "role": "evaluated-on",
+      "size": "first 50 headlines from the official 300-prompt test set"
+    },
+    {
+      "name": "Cognitive Synergy Framework synthetic candidate pool",
+      "role": "introduced",
+      "size": "~28,800 candidates; Appendix reports 28,789 candidates across 1,200 prompts"
+    },
+    {
+      "name": "SFT Data (D_SFT)",
+      "role": "trained-on",
+      "size": "N = 12,000"
+    },
+    {
+      "name": "DPO Data (D_DPO)",
+      "role": "trained-on",
+      "size": "N = 6,000 preference pairs"
+    },
+    {
+      "name": "O-GRPO Data (D_GRPO)",
+      "role": "trained-on",
+      "size": "all 24 candidates per prompt across the 1,200 prompts; Table 10 O-GRPO pool N=28,789"
+    },
+    {
+      "name": "Humor Transfer Bench (HTB)",
+      "role": "introduced",
+      "size": "400 prompts (8 domains × 50 prompts)"
+    },
+    {
+      "name": "Humor Transfer Bench (HTB)",
+      "role": "evaluated-on",
+      "size": "400 prompts (8 domains × 50 prompts)"
+    },
+    {
+      "name": "BBC headlines",
+      "role": "source-material",
+      "size": "50 real-world BBC headlines"
+    },
+    {
+      "name": "Shaun Eli stand-up jokes",
+      "role": "trained-on",
+      "size": "998 jokes"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-5",
+    "Kimi-K2",
+    "Gemini-2.5-Pro",
+    "Qwen3-32B",
+    "GPT-OSS-120B",
+    "Base Qwen-7B",
+    "HumorGen-SFT-7B",
+    "HumorGen-DPO-7B",
+    "HumorGen-GRPO-7B",
+    "HumorGen-SFT-Think-7B",
+    "HumorGen-DPO-Think-7B",
+    "HumorGen-GRPO-Think-7B",
+    "HumorGen-Com-7B",
+    "phi2-Humor",
+    "JokeGPT",
+    "Qwen 2.5-32B-Instruct",
+    "Llama 3.3-70B-Instruct",
+    "Qwen 2.5-72B",
+    "GPT-4o"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Cognitive Synergy Framework (CSF)",
+      "summary": "A Mixture-of-Thought humor data-generation framework that instantiates six cognitive personas—Neurotic, Cynic, Observer, Wordsmith, Optimist, and Absurdist—grounded in humor theories. For each prompt it generates diverse candidates, ranks them with pairwise LLM judging, and uses the resulting corpus for distillation."
+    },
+    {
+      "name": "HumorGen",
+      "summary": "A family of 7B student models based on Qwen 2.5-7B-Instruct and fine-tuned on CSF-curated humor data. Variants include SFT, DPO, O-GRPO/GRPO, Think versions trained with reasoning traces, and a comedian-adapted model."
+    },
+    {
+      "name": "Offline Group Relative Policy Optimization (O-GRPO)",
+      "summary": "An offline group-relative alignment variant that uses a fixed candidate pool instead of online sampling. It ranks all 24 candidates per prompt once, computes group-normalized Elo advantages, and trains with advantage-weighted SFT."
+    },
+    {
+      "name": "Cognitive Synergy Distillation (CSD)",
+      "summary": "A process-distillation variant in which the student is trained on persona-specific reasoning traces inside `<think>` tags followed by the joke. At inference, reasoning is stripped before evaluation to compare against non-CSD models."
+    },
+    {
+      "name": "Humor Transfer Bench (HTB)",
+      "summary": "A 400-prompt benchmark with eight prompt domains designed to test transfer in textual humor generation beyond news-headline prompts."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "relief",
+      "usage": "operationalized",
+      "detail": "The Neurotic persona is grounded in Relief Theory and focuses on tension release through internal anxiety, overthinking, and social insecurity."
+    },
+    {
+      "theory": "superiority",
+      "usage": "operationalized",
+      "detail": "The Cynic persona is grounded in Superiority Theory and focuses on social critique, hypocrisy, biting sarcasm, and moral contradictions."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The Observer and Absurdist personas are grounded in Incongruity Theory; Observer targets mundane social mismatches, while Absurdist targets surrealism, non-sequiturs, and fractured causality."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "operationalized",
+      "detail": "The Wordsmith persona is grounded in linguistic theories including Raskin’s Semantic Script Theory of Humor, using ambiguity, phonological similarity, double meanings, puns, and wordplay."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "operationalized",
+      "detail": "The Optimist persona is grounded in Benign Violation Theory and uses wholesome recontextualization or positive reinterpretation of potentially negative situations."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "Automated pairwise evaluation using Llama-3.3-70B and Qwen 2.5-72B judges; the judge selects the funnier joke or tie with randomized presentation order. The paper reports 42,000 pairwise comparisons for HTB and 5,250 for SemEval."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Pairwise outcomes are aggregated into a contest matrix and fit with a Bradley-Terry model via the MM algorithm; results are reported as Elo-scale BT ratings with 95% bootstrap confidence intervals using 100 bootstrap samples. Cross-judge stability is measured with Kendall tau."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Three blinded human evaluators judged 60 curated pairwise comparisons across 12 categories over 50 held-out headlines; the main text reports 170 blind pairwise judgments, while Appendix K reports 180 votes (3 evaluators, 60 pairs each). Metrics include inter-annotator agreement, Krippendorff’s alpha, LLM–human consensus, and micro-average agreement."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On HTB under the Llama 3.3-70B judge, HumorGen-SFT-7B ranked 3rd and HumorGen-DPO-7B ranked 4th, ahead of Gemini-2.5-Pro, GPT-OSS-120B, and Qwen3-32B.",
+      "metric": "Bradley-Terry rating",
+      "value": "HumorGen-SFT-7B 1128.14 [1118.3, 1138.1]; HumorGen-DPO-7B 1123.72 [1115.7, 1134.9]; Gemini-2.5-Pro 1059.07; GPT-OSS-120B 1048.19; Qwen3-32B 990.44",
+      "dataset": "Humor Transfer Bench (HTB)",
+      "best_system": "GPT-5"
+    },
+    {
+      "finding": "HTB rankings were robust across the two LLM judges, with Qwen 2.5-72B placing HumorGen-DPO-Think-7B 3rd, HumorGen-DPO-7B 4th, and HumorGen-SFT-7B 5th.",
+      "metric": "Bradley-Terry rating; Kendall tau",
+      "value": "Kendall tau = 0.8667 (p = 1.54 × 10^{-7}); HumorGen-DPO-Think-7B 1147.52; HumorGen-DPO-7B 1138.05; HumorGen-SFT-7B 1132.41",
+      "dataset": "Humor Transfer Bench (HTB)",
+      "best_system": "GPT-5"
+    },
+    {
+      "finding": "On the SemEval MWAHAHA test subset under the Llama judge, HumorGen-SFT-7B and HumorGen-DPO-7B ranked 4th and 5th behind the three frontier systems and ahead of open-weight general models.",
+      "metric": "Bradley-Terry rating",
+      "value": "HumorGen-SFT-7B 1140.37 [1107.9, 1173.2]; HumorGen-DPO-7B 1135.25 [1101.9, 1160.2]; GPT-OSS-120B 1049.99; Qwen3-32B 1023.18",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data",
+      "best_system": "GPT-5"
+    },
+    {
+      "finding": "On SemEval under the Qwen judge, HumorGen-DPO-7B rose to 3rd and HumorGen-SFT-7B to 4th, both ahead of Gemini-2.5-Pro.",
+      "metric": "Bradley-Terry rating; Kendall tau",
+      "value": "HumorGen-DPO-7B 1202.76 [1175.5, 1227.0]; HumorGen-SFT-7B 1193.81 [1162.0, 1228.2]; Gemini-2.5-Pro 1144.23 [1114.3, 1171.8]; Kendall tau = 0.8286 (p = 9.95 × 10^{-7})",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data",
+      "best_system": "GPT-5"
+    },
+    {
+      "finding": "Preference alignment did not consistently improve over SFT; DPO and SFT had overlapping confidence intervals, while O-GRPO underperformed.",
+      "metric": "Bradley-Terry rating; median advantage",
+      "value": "HTB Llama: SFT 1128.14 vs DPO 1123.72 vs O-GRPO 1071.13; HTB Qwen: DPO 1138.05 vs SFT 1132.41; median advantage = −0.479",
+      "dataset": "Humor Transfer Bench (HTB)",
+      "best_system": "HumorGen-SFT-7B under Llama; HumorGen-DPO-7B under Qwen"
+    },
+    {
+      "finding": "Human validation showed substantial subjectivity but the LLM judge matched human majority preferences above chance in the paper’s “Good vs. Good” regime.",
+      "metric": "human agreement; Krippendorff’s alpha; LLM-human agreement",
+      "value": "Human agreement 31.7%; Krippendorff’s alpha α = 0.425 across three evaluators and α = 0.412 across two; LLM judge matched human consensus on 58.3% of pairs and individual votes at 52.4%",
+      "dataset": null,
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "CSF-curated synthetic data enabled 7B HumorGen variants to outperform substantially larger open-weight/general baselines on HTB and SemEval while remaining behind GPT-5 and Kimi-K2 in most leaderboards.",
+    "DPO did not yield a statistically meaningful improvement over SFT in the main evaluations because their BT confidence intervals overlapped across benchmarks and judges.",
+    "O-GRPO consistently underperformed SFT and DPO; the paper attributes this to a right-skewed advantage distribution with median advantage = −0.479.",
+    "Think/CSD variants usually trailed their non-thinking counterparts, supporting the paper’s “explainer trap” claim that reasoning traces can bias outputs toward explaining rather than delivering jokes.",
+    "Per-persona analysis found Neurotic strongest and Wordsmith weakest: Neurotic had 63.4% pairwise win rate, mean rank 9.3, and top-3 rate 26.6%, while Wordsmith had 34.9%, 16.1, and 3.1%.",
+    "Fine-tuning HumorGen-SFT-7B on 998 Shaun Eli stand-up jokes sharply regressed performance from BT 1083.9 to 653.1, which the authors attribute to mismatch between performance-native stand-up and text-native joke generation."
+  ],
+  "limitations": [
+    "The study is limited to English, text-only humor.",
+    "Evaluation is limited to two benchmarks: SemEval-MWAHAHA and Humor Transfer Bench.",
+    "Human evaluation uses a small annotator pool (N = 3) over 60 sampled pairwise comparisons, limiting statistical coverage.",
+    "Model comparisons are restricted to 15 selected models due to compute constraints.",
+    "The paper notes that humor generation can produce jokes that are offensive to some listeners or culturally insensitive."
+  ],
+  "safety_ethics_notes": "The paper states that humor generation risks producing offensive content and that the framework encourages wordplay and absurdity over denigration or prejudice. Persona prompts include safety constraints against racism, sexism, slurs, and punching down at vulnerable groups. Human evaluators were volunteers recruited by invitation and were not paid; the authors state that all content was written and verified by them and that LLM assistance was used only for grammar correction, language polishing, and LaTeX formatting.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "HTB-authored prompts are described as released under CC BY 4.0, but no repository or download URL is stated in the paper."
+  }
+}

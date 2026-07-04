@@ -1,0 +1,182 @@
+{
+  "key": "42-improvised-theatre-llms",
+  "ref": "#42",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/42-improvised-theatre-llms/42-improvised-theatre-llms.md",
+  "source_md_sha256": "23db96db54a543d3abdcada1d7566e7cb576ac8db99fcb756497d1bf4e270654",
+  "source_truncated": false,
+  "title": "Designing and Evaluating Dialogue LLMs for Co-Creative Improvised Theatre",
+  "authors": [
+    "Boyd Branch",
+    "Piotr Mirowski",
+    "Kory Mathewson",
+    "Sophia Ppali",
+    "Alexandra Covaci"
+  ],
+  "year": 2024,
+  "venue": "arXiv:2405.07111v1 [cs.CL]",
+  "paper_types": [
+    "system",
+    "HCI-study",
+    "evaluation-study",
+    "method"
+  ],
+  "research_questions": [
+    "How can dialogue LLMs be designed and staged to perform improvisational theatre alongside human actors in real-time multi-party chat?",
+    "What technical capabilities and constraints arise when publicly available LLMs are deployed for on-the-spot multi-party improvised dialogue in a professional theatre setting?",
+    "How do audience members and performers experience AI as a co-creative actor, creative partner, and live entertainment subject?",
+    "How do human-in-the-loop interface and curation choices affect the ability of LLM-generated lines to contribute meaningfully to live improv scenes?"
+  ],
+  "tasks": [
+    "multi-party dialogue generation",
+    "improvised theatre dialogue generation",
+    "co-creative improvised storytelling",
+    "live AI-assisted improv comedy performance",
+    "punny or snarky response generation for improv scenes"
+  ],
+  "humor_domains": [
+    "improvised theatre",
+    "improv comedy",
+    "conversational humor",
+    "puns",
+    "live comedy performance"
+  ],
+  "modalities": [
+    "text",
+    "audio",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Edinburgh Festival Fringe 2023 Improbotics live performances",
+      "role": "source-material",
+      "size": "over 1750 people across 26 unique performances with various groups of 20 different improvisers"
+    },
+    {
+      "name": "Audience surveys from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "role": "introduced",
+      "size": "150 unique individual responses over the course of 26 shows"
+    },
+    {
+      "name": "Actor surveys from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "role": "introduced",
+      "size": "21 individual responses over the course of 26 shows"
+    },
+    {
+      "name": "Dialogue system logs from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "role": "analyzed",
+      "size": "all 26 performances"
+    }
+  ],
+  "models_evaluated": [
+    "gpt-3.5-turbo",
+    "text-bison",
+    "llama-2-13b-chat"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Human-in-the-loop multi-party improv dialogue system",
+      "summary": "The system combines continuous speech recognition, an LLM server, operator-entered scene metadata, prompt buttons, and real-time curation of a stream of generated lines. Selected lines are sent via text-to-speech and an earpiece to a human “Cyborg” performer or to a robot on stage."
+    },
+    {
+      "name": "Operator and Curator interfaces for live LLM theatre",
+      "summary": "The Operator interface lets a human type dialogue backup, scene context, character metadata, and rapid prompts such as “getting therapy,” “more snarky,” or “more punny.” The Curator interface shows generated lines from multiple LLMs without revealing which model produced them, allowing a human performer to select lines in real time."
+    },
+    {
+      "name": "Participatory iterative design of AI improv game formats",
+      "summary": "The authors developed and revised game formats with actor feedback so that the show could test LLM capabilities while remaining entertaining. Games included Speed Dating, Wedding Speech, Couples’ Therapy, Meet the Parents, Hero’s Journey, Improvised TED Talk, and Movie Pitch."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "live-audience",
+      "detail": "The system was deployed in a month-long live show at the 2023 Edinburgh Festival Fringe, with 26 unique performances for over 1750 people and various groups of 20 different improvisers."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Anonymous Qualtrics audience surveys collected 150 unique individual responses; all 150 answered the first 5 questions, and the subsequent 15 questions were answered on average by 109 unique individuals."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Anonymous actor surveys collected 21 individual responses over the course of 26 shows, focusing on performing with and as the Cyborg."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A human curator selected lines in real time from an anonymized stream generated by three LLMs, enabling post-performance analysis of model-line selection from the dialogue system logs."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The system was used in public performances at scale during the 2023 Edinburgh Festival Fringe.",
+      "metric": "deployment scale",
+      "value": "over 1750 people across 26 unique performances with various groups of 20 different improvisers",
+      "dataset": "Edinburgh Festival Fringe 2023 Improbotics live performances",
+      "best_system": null
+    },
+    {
+      "finding": "The authors collected audience and actor survey data across the full run of shows.",
+      "metric": "survey responses",
+      "value": "150 unique individual responses; 21 individual responses",
+      "dataset": "Audience surveys from Edinburgh Festival Fringe 2023 Improbotics performances; Actor surveys from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "best_system": null
+    },
+    {
+      "finding": "Audience ratings suggested the AI was perceived as relatively machine-like and weak on natural communication.",
+      "metric": "Q12 averages",
+      "value": "naturalness of communication avg: 33; “unique mind” avg: 45; “machine-like appearance” avg: 64",
+      "dataset": "Audience surveys from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "best_system": null
+    },
+    {
+      "finding": "Audience ratings of the AI as an actor/improviser showed some perceived human similarity and reciprocity but high perceived ignorance of scenes.",
+      "metric": "Q14 averages",
+      "value": "“similar to a human” avg: 53; “motivated toward mutual benefit with other actors” avg: 64; “ignorant of the scenes” avg: 76",
+      "dataset": "Audience surveys from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "best_system": null
+    },
+    {
+      "finding": "More respondents reported being excited about AI tools for creativity than optimistic about AI as storytellers.",
+      "metric": "Q9 response percentages",
+      "value": "37%; 16%",
+      "dataset": "Audience surveys from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "best_system": null
+    },
+    {
+      "finding": "A substantial subset of respondents reported enjoying human-robot co-creation of funny stories.",
+      "metric": "Q6 responses",
+      "value": "40 participants (out of 150)",
+      "dataset": "Audience surveys from Edinburgh Festival Fringe 2023 Improbotics performances",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "A human-in-the-loop pipeline made it feasible to stage LLM-generated dialogue in noisy live multi-party improv, but it introduced delays and depended heavily on operator and curator skill.",
+    "After normalising by the number of generated lines, each of the three LLMs had a comparable chance of being selected by the curator, despite generating different numbers of lines because of temporary unavailability or processing speed.",
+    "Audience members were often curious and engaged by the presence of AI, but they did not perceive the AI as capable of producing consistently meaningful multi-party contextual dialogue.",
+    "Survey results suggested the show increased excitement about using AI tools for creativity more than optimism about robots as autonomous creative storytellers.",
+    "Performers enjoyed surprises, puns, wordplay, and absurd lines from A.L.Ex, but also reported challenges with delay, non-sequiturs, lack of full collaboration, and the need to justify or steer AI contributions.",
+    "The authors argue that live performance can frame AI less as a human replacement and more as an artificial co-creative subject whose limitations are visible to audiences."
+  ],
+  "limitations": [
+    "The authors state that the survey results are presented for discussion rather than statistically significant claims because data were collected “in the wild” at a theatre festival with many uncontrolled variables.",
+    "Survey volume was low relative to attendance: on average, 67 audience members attended each show, but there were 5.8 survey responses per show.",
+    "The study did not collect demographic data in either actor or audience surveys in order to shorten the surveys and because of the likely high margin for error.",
+    "Speech recognition from a single stage microphone produced numerous transcription errors and did not capture physical aspects of communication such as gestures and tone of voice.",
+    "The LLMs had difficulty with turn-taking, speaker/addressee differentiation, and rapidly changing emergent social contexts in improvised scenes.",
+    "Human curation improved possible responses but created delays and did not consistently select the most appropriate lines because the curator had to listen to the stage while reading a delayed stream of generated lines.",
+    "The LLMs were not retrained on improv-specific datasets because of the late release of Llama 2 before the festival and because fine-tuning was not available for Chat GPT-3.5 and PaLM 2 at that time."
+  ],
+  "safety_ethics_notes": "The study had approval from the ethics governing board at the University of Kent, collected anonymous Qualtrics surveys after consent, and included a privacy notice. The discussion raises ethical concerns about generative AI in the arts, including plagiarism, misappropriation of artistic work, copyright, generated-image appropriateness, representational biases, and devaluation of human creative work through automation.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "https://improbotics.org"
+  }
+}

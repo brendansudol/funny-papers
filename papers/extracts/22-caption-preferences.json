@@ -1,0 +1,208 @@
+{
+  "key": "22-caption-preferences",
+  "ref": "#22",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/22-caption-preferences/22-caption-preferences.md",
+  "source_md_sha256": "146f65be0d091cbb4a2189536d554d93bbf29a8f2700b689fc533e62a89bfd85",
+  "source_truncated": false,
+  "title": "Humor in AI: Massive Scale Crowd-Sourced Preferences and Benchmarks for Cartoon Captioning",
+  "authors": [
+    "Jifan Zhang",
+    "Lalit Jain",
+    "Yang Guo",
+    "Jiayi Chen",
+    "Kuan Lok Zhou",
+    "Siddharth Suresh",
+    "Andrew Wagenmaker",
+    "Scott Sievert",
+    "Timothy Rogers",
+    "Kevin Jamieson",
+    "Robert Mankoff",
+    "Robert Nowak"
+  ],
+  "year": 2024,
+  "venue": "Preprint",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can current LLMs recognize humor and generate amusing captions that resonate with human audiences?",
+    "Can the vision-language integration in MLLMs be further improved to close the gap with language-only counterparts in caption generation?",
+    "Can we train a reward model able to better capture humor, and can RLHF still be effectively applied to settings where the distribution of correct responses is highly sensitive?",
+    "Does DPO lead to better in-distribution generation, and produce a model more effectively able to match the distribution of the finetuning data?",
+    "Does the data diversity used for finetuning explain DPO's surprisingly good diversity metrics as compared to PPO and SFT, or are other mechanisms at play?"
+  ],
+  "tasks": [
+    "humorous cartoon caption generation",
+    "cartoon caption ranking/group preference evaluation",
+    "caption diversity evaluation",
+    "preference-based fine-tuning for humorous caption generation"
+  ],
+  "humor_domains": [
+    "New Yorker cartoon captions",
+    "cartoon caption contest",
+    "cartoons"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "New Yorker caption ranking (Humor in AI)",
+      "role": "introduced",
+      "size": "365 contests, 365 cartoons, over 2.2M captions, 284,183,913 ratings"
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "source-material",
+      "size": "contests up to #763; testing (47 contests) and validation split (44 contests) used in the 91-contest test split"
+    }
+  ],
+  "models_evaluated": [
+    "LLaVA v1.6 Mistral-7B",
+    "LLaVA SFT",
+    "Mistral-7B Instruct v0.1 0-Shot",
+    "Mistral-7B Instruct v0.1 BoN",
+    "Mistral-7B Instruct v0.1 SFT",
+    "Mistral-7B Instruct v0.1 RLHF",
+    "Mistral-7B Instruct v0.1 DPO",
+    "GPT-3.5 Turbo",
+    "GPT-4o",
+    "GPT-4o Vision",
+    "Claude-3-Opus",
+    "GPT-4-Turbo",
+    "GPT-4-Turbo Vision",
+    "GPT-4 Vision",
+    "Llama-3-8B Instruct",
+    "Llama-2-7B Chat",
+    "weqweasdas/RM-Mistral-7B",
+    "Eurus-RM-7B",
+    "FsfairX-LLAMA3-RM-v0.1",
+    "Qwen1.5-7B-Chat"
+  ],
+  "methods_proposed": [
+    {
+      "name": "New Yorker caption ranking dataset",
+      "summary": "A large-scale multimodal preference dataset from The New Yorker weekly cartoon caption contest, containing cartoons, submitted captions, and crowd ratings collected through an online rating system over contests 530 to 895."
+    },
+    {
+      "name": "HumorousAI Benchmark",
+      "summary": "A benchmark for funny cartoon caption generation in which models generate ten captions per held-out cartoon and are compared against human submission groups ranked #1-10, #200-209, #1000-1009, and median."
+    },
+    {
+      "name": "Group Comparison (Overall)",
+      "summary": "An evaluation method where a human or LLM judge compares two groups of ten captions and chooses the group that is funnier overall; the paper selects GPT4-Turbo with Hessel et al. descriptions for this benchmark setting."
+    },
+    {
+      "name": "Group Comparison (Best Pick)",
+      "summary": "An evaluation method where the judge first identifies the funniest caption in each group and then chooses which group's best caption is funnier; the paper selects GPT4o-vision with raw cartoon images for this benchmark setting."
+    },
+    {
+      "name": "Preference-pair construction for caption alignment",
+      "summary": "Preference data are built by pairing captions for the same cartoon where the preferred caption has a higher human rating and is at least three combined standard deviations above the rejected caption."
+    },
+    {
+      "name": "GPT evaluator recalibration",
+      "summary": "For group comparisons without chain of thought, the authors recalibrate GPT4 A/B decisions by choosing a validation-set threshold on log-probability differences to reduce option-position bias."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "crowd-votes",
+      "detail": "The New Yorker crowdsourced ratings use a UCB-variant bandit algorithm; users rate captions as funny (reward 3), somewhat funny (reward 2), or unfunny (reward 1), producing rankings and preference data."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT4-family evaluators are tested in pairwise, Group Overall, and Group Best Pick settings, using 5-shot in-context prompting; the main benchmark uses GPT4-Turbo with Hessel et al. descriptions for Overall and GPT4o-vision with raw images for Best Pick."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Prolific crowd workers evaluate caption comparisons, including pairwise/group reliability experiments and Claude-3-Opus versus Human Top 10 comparisons; participants gave informed consent and were paid $12 an hour."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "A former New Yorker cartoon editor evaluates group comparisons and Claude-3-Opus versus Human Top 10 captions; the expert achieves 94.28±2.79 ranking accuracy in Group Overall with cartoon images and prefers Claude only 1.6% of the time."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Caption diversity is measured with expectation-adjusted distinct N-grams (Average EAD) and Sentence-BERT embedding cosine similarity (SBERT); reward models are also compared using Reward Ranking Acc (%)."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The released dataset contains 365 contests/cartoons, over 2.2M captions, and 284,183,913 human ratings.",
+      "metric": "Dataset statistics",
+      "value": "365 contests; 365 cartoons; over 2.2M captions; 284,183,913 ratings",
+      "dataset": "New Yorker caption ranking (Humor in AI)",
+      "best_system": null
+    },
+    {
+      "finding": "The selected GPT4-Turbo Overall group evaluator with Hessel et al. descriptions identified captions ranked #1-10 over #1000-1009 with 77.5±2.96 ranking accuracy, compared with 67±3.33 for the best Pairwise GPT4-Turbo setting and 94.28±2.79 for the human expert.",
+      "metric": "Ranking Accuracy (%)",
+      "value": "77.5±2.96; 67±3.33; 94.28±2.79",
+      "dataset": "New Yorker caption ranking (Humor in AI)",
+      "best_system": "Human (expert)"
+    },
+    {
+      "finding": "Human workers preferred Claude-3-Opus generated caption groups over Human Top 10 captions 35.4% of the time, while the human expert preferred Claude only 1.6% of the time.",
+      "metric": "Preference Rate",
+      "value": "35.4%; 1.6%",
+      "dataset": "New Yorker caption ranking (Humor in AI)",
+      "best_system": "Human Top 10"
+    },
+    {
+      "finding": "Under GPT-based Overall group evaluation, Claude-3-Opus was the strongest closed-source generator, with win rates of 54.40, 70.88, 81.87, and 88.46 against Top 10, #200-#209, #1000-#1009, and Contestant Median groups.",
+      "metric": "Overall Win Rate (%)",
+      "value": "54.40; 70.88; 81.87; 88.46",
+      "dataset": "New Yorker caption ranking (Humor in AI)",
+      "best_system": "Claude-3-Opus"
+    },
+    {
+      "finding": "Among Mistral variants, DPO was best on Best Pick Win Rate, while BoN was best on three Overall Win Rate comparisons.",
+      "metric": "Best Pick Win Rate (%) / Overall Win Rate (%)",
+      "value": "DPO Best Pick: 10.44, 15.93, 14.29, 30.22; BoN Overall: 6.59, 16.48, 21.43, 35.71",
+      "dataset": "New Yorker caption ranking (Humor in AI)",
+      "best_system": "Mistral-7B Instruct v0.1 DPO; Mistral-7B Instruct v0.1 BoN"
+    },
+    {
+      "finding": "For diversity, Mistral DPO substantially exceeded Mistral BoN and approached Human Top 10 on the reported metrics.",
+      "metric": "Average EAD / SBERT",
+      "value": "Human (Top 10): 0.9456 / 0.7452; Mistral-7B Instruct DPO: 0.9206 / 0.7075; Mistral-7B Instruct BoN: 0.8663 / 0.4868",
+      "dataset": "New Yorker caption ranking (Humor in AI)",
+      "best_system": "Human (Top 10); Mistral-7B Instruct DPO among Mistral variants"
+    }
+  ],
+  "key_findings": [
+    "The paper releases a large-scale human preference dataset for cartoon captions, with 365 contests, over 2.2M captions, and 284,183,913 ratings.",
+    "Group-based evaluation makes GPT-based humor judging more reliable than pairwise caption comparison, but a human expert still substantially outperforms both GPT models and average crowd workers.",
+    "Closed-source models can generate captions that GPT evaluators often prefer over lower-ranked human submissions, but human workers and especially the expert still strongly prefer Human Top 10 captions over Claude-3-Opus.",
+    "Language-only models outperform multimodal counterparts in several settings, and the authors find that adding visual inputs to GPT4-Turbo-vision negatively biases ranking accuracy relative to text-only descriptions.",
+    "For open-source Mistral models, SFT generally hurts humor-generation performance, BoN improves Overall Win Rate, DPO improves Best Pick Win Rate, and PPO/RLHF increases reward-model scores without corresponding humor gains.",
+    "Human captions are more diverse than model-generated captions, and Mistral DPO yields the strongest diversity metrics among the Mistral finetuning variants."
+  ],
+  "limitations": [
+    "Humor judgments are subjective, and average human crowd workers are not very reliable predictors of top-ranked captions.",
+    "The main benchmark depends on GPT-based evaluators, which remain below the human expert and require recalibration for A/B option bias.",
+    "The study focuses on The New Yorker cartoon caption contest, so the dataset and benchmark reflect that domain's audience, editorial filtering, and caption style.",
+    "The authors state that supervised fine-tuning aligns to captions in the top 1000, most of which are not particularly funny, which can hurt generation quality.",
+    "The authors hypothesize that RLHF/PPO struggles because humor is sensitive to small wording changes and reward models may give erroneous signals on out-of-distribution generations.",
+    "The paper identifies humor versus offensiveness as an important future issue rather than solving that tradeoff."
+  ],
+  "safety_ethics_notes": "The New Yorker editorial staff filters captions that are not humorous or include personal information and/or offensive content before crowdsourced rating. Human experiments used informed consent and paid participants $12 an hour. The authors note that optimizing humor may increase offensiveness and toxicity, and they identify balancing humor with offensiveness and cultural sensitivity as future work.",
+  "artifacts": {
+    "code_url": "https://github.com/yguooo/cartoon-caption-generation",
+    "data_url": "https://huggingface.co/datasets/yguooo/newyorker_caption_ranking",
+    "other": "Dataset released under Creative Commons Attribution Non Commercial 4.0; codebase released under Apache 2.0."
+  }
+}

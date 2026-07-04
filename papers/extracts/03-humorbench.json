@@ -1,0 +1,235 @@
+{
+  "key": "03-humorbench",
+  "ref": "#3",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/03-humorbench/03-humorbench.md",
+  "source_md_sha256": "e4da3a9fb3dee4f5747e6bb2e823477c9523bc59a1ddd437e8259bea03659131",
+  "source_truncated": false,
+  "title": "Which LLMs Get the Joke? Probing Non-STEM Reasoning Abilities with HumorBench",
+  "authors": [
+    "Reuben Narad",
+    "Siddharth Suresh",
+    "Jiayi Chen",
+    "Pine S.L. Dysart-Bricken",
+    "Bob Mankoff",
+    "Robert Nowak",
+    "Jifan Zhang",
+    "Lalit Jain"
+  ],
+  "year": 2025,
+  "venue": null,
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can LLMs explain sophisticated cartoon-caption humor by identifying the objective elements needed to understand the joke?",
+    "Does progress on STEM reasoning benchmarks transfer to non-STEM humor comprehension?",
+    "Do models trained exclusively on STEM reasoning data improve on HumorBench compared with their base models?",
+    "Does increasing test-time reasoning compute improve humor reasoning performance?",
+    "What types of humor elements remain difficult in the HumorBench Hard subset?"
+  ],
+  "tasks": [
+    "cartoon-caption humor explanation",
+    "objective joke element identification",
+    "humor comprehension evaluation"
+  ],
+  "humor_domains": [
+    "cartoon captions",
+    "New Yorker Caption Contest cartoons",
+    "Cartoonstock cartoons",
+    "wordplay",
+    "cultural references",
+    "toxic or shocking humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "HumorBench",
+      "role": "introduced",
+      "size": "approximately 300 unique cartoon-caption pairs; 499 high-quality unique element annotations"
+    },
+    {
+      "name": "HumorBench Hard",
+      "role": "introduced",
+      "size": "100 unique elements"
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "New Yorker caption ranking (Humor in AI)",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Cartoonstock.com cartoons",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Autograder validation set",
+      "role": "introduced",
+      "size": "300 human expert judgments"
+    },
+    {
+      "name": "GPQA Diamond",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "ARC-AGI",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "LM Arena ELO",
+      "role": "analyzed",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "OpenAI o3",
+    "OpenAI o4-mini",
+    "OpenAI o1",
+    "OpenAI o3-mini",
+    "GPT-4o (gpt-4o-2024-08-06)",
+    "Gemini 2.5 Pro (gemini-2.5-pro-preview-03-25)",
+    "Gemini 1.5 Pro",
+    "Claude 3.7 Sonnet",
+    "Claude Sonnet 4",
+    "Claude Opus 4",
+    "DeepSeek R1",
+    "DeepSeek R1 Zero",
+    "DeepSeek V3",
+    "Llama 4 Maverick 17B 128E",
+    "Llama 4 Scout 17B 16E",
+    "Qwen2.5-72B-Instruct-Turbo",
+    "Qwen Plus",
+    "Grok 3",
+    "Grok 4",
+    "Phi-4 Reasoning Plus",
+    "Phi-4 Base"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HumorBench",
+      "summary": "A benchmark for evaluating LLM humor comprehension from textual cartoon descriptions and captions. Each cartoon-caption pair is annotated with 1–3 concise objective elements that a correct explanation should cover."
+    },
+    {
+      "name": "Objective element annotation scheme",
+      "summary": "The paper separates objective joke-comprehension elements from subjective funniness or audience-preference factors. Elements are designed to be short, direct, verifiable, single-concept statements covering references, wordplay, implications, or similar mechanisms."
+    },
+    {
+      "name": "GPT-4o autograder for element coverage",
+      "summary": "An LLM judge evaluates whether a model’s free-form joke explanation explicitly covers each annotated element. The autograder was validated against 300 human expert judgments and model outputs were truncated to the last 1000 tokens for length control."
+    },
+    {
+      "name": "HumorBench Hard",
+      "summary": "A hard subset consisting of the 100 unique elements most often missed during benchmarking. The paper analyzes this subset by pass rates and by three humor categories: wordplay, cultural references, and toxic or shocking humor."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "For every cartoon-caption pair, the authors hand-annotated one to three objective elements; after iterative refinement, 499 high-quality unique element annotations remained."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-4o was used as an autograder to decide whether each model explanation covered each anticipated answer point; in all evaluations, autograders, and benchmarks, “GPT-4o” refers to gpt-4o-2024-08-06."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The authors created a separate benchmark of 300 human expert judgments on explanations from GPT-4o, Gemini 2.5 Pro, and Claude 3.7 Sonnet to validate the GPT-4o autograder."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "A former chief cartoon editor of the New Yorker reviewed a random subset of 30 annotations and confirmed that all elements were fair and accurately captured the essential components of each joke."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Model performance is reported as accuracy or pass rate: an explanation is credited when the autograder judges that it covers the required objective element."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports Spearman’s rank correlations between HumorBench accuracy and GPQA Diamond, ARC-AGI, and LM Arena ELO."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The GPT-4o autograder achieved 92.00% overall accuracy against 300 human-labeled judgments, with 14.79% FPR and 6.51% FNR.",
+      "metric": "Acc. (%), FPR (%), FNR (%)",
+      "value": "92.00; 14.79; 6.51",
+      "dataset": "Autograder validation set",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "OpenAI o3 led the main HumorBench benchmarking at 87.5% accuracy.",
+      "metric": "Accuracy (%)",
+      "value": "87.5%",
+      "dataset": "HumorBench",
+      "best_system": "OpenAI o3"
+    },
+    {
+      "finding": "DeepSeek R1 strongly outperformed DeepSeek V3 despite being based on the same 671B parameter architecture.",
+      "metric": "Accuracy (%)",
+      "value": "79.8% vs 72.2%",
+      "dataset": "HumorBench",
+      "best_system": "DeepSeek R1"
+    },
+    {
+      "finding": "Claude 3.7 Sonnet with a thinking budget of 1024 tokens outperformed base Claude 3.7 Sonnet.",
+      "metric": "Accuracy (%)",
+      "value": "83.6% vs 80.4%",
+      "dataset": "HumorBench",
+      "best_system": "Claude 3.7 Sonnet with 1024-token thinking budget"
+    },
+    {
+      "finding": "The correlation between HumorBench and ARC-AGI rose to ρ = 0.943 after removing o-series models.",
+      "metric": "Spearman’s rank correlation",
+      "value": "ρ = 0.943 (p = 0.005)",
+      "dataset": "HumorBench and ARC-AGI",
+      "best_system": null
+    },
+    {
+      "finding": "On HumorBench-Hard, the best model was o3 at 59.85% accuracy, and no current LLM exceeded 60% accuracy.",
+      "metric": "Accuracy (%)",
+      "value": "59.85",
+      "dataset": "HumorBench Hard",
+      "best_system": "OpenAI o3"
+    }
+  ],
+  "key_findings": [
+    "HumorBench evaluates humor comprehension rather than subjective funniness by grading free-form explanations against expert-annotated objective joke elements.",
+    "The GPT-4o autograder reached 92.00% overall accuracy on 300 human expert judgments but had a higher false positive rate than false negative rate, so the authors interpret HumorBench scores as upper bounds.",
+    "OpenAI o3 achieved the highest reported main HumorBench accuracy at 87.5%, while Gemini 2.5 Pro, Claude 3.7 Sonnet, and DeepSeek R1 were described as achieving approximately 80%.",
+    "HumorBench performance was positively correlated with GPQA Diamond, ARC-AGI, and LM Arena ELO, with the ARC-AGI correlation reaching ρ = 0.943 (p = 0.005) after excluding o-series models.",
+    "STEM-only reasoning-trained models such as DeepSeek R1 Zero and Phi-4 Reasoning Plus outperformed their base versions, which the paper interprets as evidence that abstract reasoning transfers to humor comprehension.",
+    "Test-time scaling produced mixed effects: increasing reasoning effort generally improved Qwen Plus and o-series models, while increasing Claude 3.7 Sonnet’s thinking budget beyond 1024 tokens hurt performance."
+  ],
+  "limitations": [
+    "HumorBench uses textual descriptions of cartoons, which controls for vision problems but removes the challenge of recognizing visual cues.",
+    "The autograder is mildly lenient despite 92% agreement with humans, so reported scores should be seen as upper bounds.",
+    "Some element annotations may still contain errors or subjective interpretations despite refinement and validation.",
+    "The dataset size of 499 unique elements limits the statistical resolution of fine-grained analyses.",
+    "Cartoonstock images require licensing, and the paper positions a multimodal version that reintroduces original images as future work."
+  ],
+  "safety_ethics_notes": "The paper analyzes a “toxic or shocking” humor category in the hard subset, reporting 25.7% representation in the entire set and 26.6% in the hard subset, but it does not present a broader safety or ethics discussion.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper says it provides source links to original images; NYCC images are available through Hessel et al. (2023) and Jain et al. (2020), while Cartoonstock images require licensing."
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "key": "x11-rjokes-last-laugh",
+  "ref": "Part 8 (pre-LLM anchor)",
+  "section": "Part 8 - Datasets & Shared Tasks",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x11-rjokes-last-laugh/x11-rjokes-last-laugh.md",
+  "source_md_sha256": "9b3ebeb7546aba582c0a4ee8cfbe0e93adfb19a6f639489415ddc6e6279e643f",
+  "source_truncated": false,
+  "title": "Humor Detection: A Transformer Gets the Last Laugh",
+  "authors": [
+    "Orion Weller",
+    "Kevin Seppi"
+  ],
+  "year": 2019,
+  "venue": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing, pages 3621–3625, Hong Kong, China, November 3–7, 2019",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can Reddit r/Jokes upvote ratings be used to label and assess whether a joke is humorous for a specific audience?",
+    "Can a BERT-based Transformer classify funny versus not-funny Reddit jokes better than a CNN baseline and a general-population human majority-vote baseline?",
+    "Do body-only, punchline-only, and full-joke inputs differ in how well they support humor prediction?",
+    "Does the Reddit-trained Transformer transfer effectively to joke-identification and pun-identification datasets?"
+  ],
+  "tasks": [
+    "joke funniness classification",
+    "humor detection",
+    "short joke identification",
+    "pun identification"
+  ],
+  "humor_domains": [
+    "Reddit r/Jokes",
+    "short jokes",
+    "puns"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "rJokes corpus",
+      "role": "introduced",
+      "size": "almost 16,000 labeled instances; 13884 not-funny jokes and 2025 funny jokes"
+    },
+    {
+      "name": "Short Jokes dataset",
+      "role": "evaluated-on",
+      "size": "231,657 short jokes"
+    },
+    {
+      "name": "WMT16 English news crawl",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Pun of the Day",
+      "role": "evaluated-on",
+      "size": "16001 puns and 16002 not-punny sentences"
+    }
+  ],
+  "models_evaluated": [
+    "BERT",
+    "CNN with Highway Layers"
+  ],
+  "methods_proposed": [
+    {
+      "name": "r/Jokes upvote-threshold humor labeling",
+      "summary": "The authors collect jokes from Reddit’s public API, update upvote scores hourly during March and April 2019, and label jokes as funny or not funny using a natural cutoff around 200 upvotes. This yields 13884 not-funny jokes and 2025 funny jokes, with separate body-only, punchline-only, and full-joke variants."
+    },
+    {
+      "name": "BERT-based Transformer humor classifier",
+      "summary": "The proposed model fine-tunes pre-trained BERT with an added output layer for humor classification, using a learning rate of 2e-05, max sequence length of 128, and up to 7 epochs. For the imbalanced Reddit data, the authors use a 75/25 stratified split, upsample the minority class in training to 50 percent, and downsample validation/test data to a 50/50 class split."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Accuracy on Reddit body-only, punchline-only, and full-joke variants; Accuracy, Precision, Recall, and F1 on the Pun of the Day and Short Jokes datasets."
+    },
+    {
+      "type": "human-eval",
+      "detail": "199 unique Amazon Mechanical Turk participants rated an average of 30 jokes each with prompts asking whether they found the joke humorous; majority vote labels were used as the Human (General) baseline in Table 2."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Reddit upvote scores were used as the humor signal for the r/Jokes labels, with scores ranging from 0 to 136,354 upvotes and a cutoff at 200 upvotes."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On the full Reddit jokes test set, the Transformer achieved the highest accuracy, above both the CNN baseline and the general human majority-vote baseline.",
+      "metric": "Accuracy",
+      "value": "0.724 (CNN 0.688; Human (General) 0.663)",
+      "dataset": "rJokes corpus",
+      "best_system": "Transformer"
+    },
+    {
+      "finding": "For Reddit body-only and punchline-only inputs, the Transformer was best, and punchline-only inputs were more accurate than body-only inputs.",
+      "metric": "Accuracy",
+      "value": "Body 0.661; Punchline 0.692",
+      "dataset": "rJokes corpus",
+      "best_system": "Transformer"
+    },
+    {
+      "finding": "On the Pun of the Day dataset, the Transformer achieved the best F1 and accuracy among the reported systems.",
+      "metric": "Accuracy / Precision / Recall / F1",
+      "value": "0.930 / 0.930 / 0.931 / 0.931",
+      "dataset": "Pun of the Day",
+      "best_system": "Transformer"
+    },
+    {
+      "finding": "On Short Jokes Identification, the Transformer outperformed the reported CNN+F+HN result on all listed metrics.",
+      "metric": "Accuracy / Precision / Recall / F1",
+      "value": "0.986 / 0.986 / 0.986 / 0.986 (CNN+F+HN: 0.906 / 0.902 / 0.946 / 0.924)",
+      "dataset": "Short Jokes dataset",
+      "best_system": "Transformer"
+    }
+  ],
+  "key_findings": [
+    "A BERT-based Transformer trained on Reddit upvote-derived labels predicts r/Jokes humor better than the CNN baseline and the general-population human majority-vote baseline on full jokes.",
+    "Across models and humans, punchline-only inputs produce higher Reddit accuracy than body-only inputs, suggesting the punchline carries more predictive weight.",
+    "The Transformer reports higher accuracy and F1 than prior reported systems on both Pun of the Day and Short Jokes identification.",
+    "The authors interpret the Reddit result as evidence that a model can learn humor preferences for a specific subset of the population, namely Reddit r/Jokes users.",
+    "The authors argue that distinguishing jokes from non-jokes is easier than deciding which jokes are funny, given the strong transfer results on Short Jokes and Pun of the Day."
+  ],
+  "limitations": [
+    "The paper states that defining the absolute truth value for a joke’s humor is challenging, if not impossible.",
+    "The Reddit labels reflect a specific audience, Reddit r/Jokes users, and may not match a general population’s humor preferences.",
+    "The r/Jokes source includes varied and not safe for work content, which the authors explicitly say they do not endorse.",
+    "The exact combined Short Jokes dataset from Chen and Soo (2018) was not publicly available, so the authors recreated a similar dataset using the same method and WMT16 English news crawl source.",
+    "The authors hypothesize that body-only performance is affected by variation in joke bodies, which can range from paragraphs to less than a sentence."
+  ],
+  "safety_ethics_notes": "A footnote states that the Reddit r/Jokes thread contains varied and not safe for work content and that the authors do not endorse these jokes.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that code and datasets are publicly available at a link, but the URL is not present in the provided transcription."
+  }
+}

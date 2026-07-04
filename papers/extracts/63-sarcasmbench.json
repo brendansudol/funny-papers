@@ -1,0 +1,220 @@
+{
+  "key": "63-sarcasmbench",
+  "ref": "#63",
+  "section": "Adjacent - Sarcasm & Humor Styles",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/63-sarcasmbench/63-sarcasmbench.md",
+  "source_md_sha256": "c7a4a4d809506e4e44e6d13f3c99f3c428053851c78f2ca7208593741fbaf2a4",
+  "source_truncated": false,
+  "title": "SarcasmBench: Towards Evaluating Large Language Models on Sarcasm Understanding",
+  "authors": [
+    "Yazhou Zhang",
+    "Chunwang Zou",
+    "Zheng Lian",
+    "Prayag Tiwari",
+    "Jing Qin"
+  ],
+  "year": 2024,
+  "venue": "Preprint submitted to INFORMATION PROCESSING & MANAGEMENT",
+  "paper_types": [
+    "benchmark",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Have LLMs really made significant progress in understanding sarcasm?",
+    "Whether LLMs can perform better on sarcasm detection with a limited number of examples in a few-shot setting.",
+    "Whether GPT-4 could perform better if more contextual examples are provided.",
+    "Whether chain-of-thought prompting is sufficient for sarcasm understanding.",
+    "What capabilities multi-modal LLMs show for understanding multi-modal sarcasm."
+  ],
+  "tasks": [
+    "sarcasm detection",
+    "sarcasm classification",
+    "intended sarcasm detection",
+    "multi-modal sarcasm detection"
+  ],
+  "humor_domains": [
+    "sarcasm",
+    "irony",
+    "tweets",
+    "online debates and discussions",
+    "multi-modal social-network posts"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English",
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "SarcasmBench",
+      "role": "introduced",
+      "size": null
+    },
+    {
+      "name": "IAC-V1",
+      "role": "evaluated-on",
+      "size": "Train 1214; Valid 304; Test 417; Sarcastic 973; Non-sarcastic 962"
+    },
+    {
+      "name": "IAC-V2",
+      "role": "evaluated-on",
+      "size": "Train 4031; Valid 1008; Test 1481; Sarcastic 3260; Non-sarcastic 3260"
+    },
+    {
+      "name": "Ghosh",
+      "role": "evaluated-on",
+      "size": "51,189 tweets; 7,804 noisy tweets filtered; Train 32708; Valid 8687; Test 2000; Sarcastic 19546; Non-sarcastic 23839"
+    },
+    {
+      "name": "iSarcasmEval",
+      "role": "evaluated-on",
+      "size": "Train 821; Valid 280; Test 299; Sarcastic 200; Non-sarcastic 1200"
+    },
+    {
+      "name": "Riloff",
+      "role": "evaluated-on",
+      "size": "Train 276; Valid 100; Test 113; Sarcastic 77; Non-sarcastic 412"
+    },
+    {
+      "name": "SemEval 2018 Task 3",
+      "role": "evaluated-on",
+      "size": "Train 2910; Valid 924; Test 784; Sarcastic 2222; Non-sarcastic 2396"
+    },
+    {
+      "name": "MMSD",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "CMMA",
+      "role": "evaluated-on",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "TextCNN",
+    "LSTM",
+    "Bi-LSTM",
+    "AT-LSTM",
+    "BERT",
+    "RoBERTa",
+    "DeBERT",
+    "XLNet",
+    "DC-Net-RoBERTa",
+    "Baichuan 2-7B",
+    "ChatGLM 2-6B",
+    "ChatGLM 3-6B",
+    "LLaMA 2-7B",
+    "LLaMA 3-8B",
+    "Mistral-7B",
+    "Qwen 1.5-7B",
+    "Qwen 2-7B",
+    "ChatGPT",
+    "GPT-4 Turbo",
+    "Claude 3 Haiku",
+    "MMMA",
+    "ResNet+BERT",
+    "MILNet",
+    "Multi-view CLIP",
+    "Retrieval-LLaVA 1.5",
+    "Wenxin 4",
+    "Qwen-VL-Plus",
+    "GPT-4V"
+  ],
+  "methods_proposed": [
+    {
+      "name": "SarcasmBench",
+      "summary": "A benchmark/evaluation framework for assessing large language models on sarcasm understanding. It evaluates eleven LLMs and supervised baselines on six text sarcasm datasets under zero-shot IO, few-shot IO, and few-shot CoT prompting, and also includes a multi-modal sarcasm evaluation on MMSD and CMMA."
+    },
+    {
+      "name": "Prompting-based sarcasm evaluation framework",
+      "summary": "The paper reformulates sarcasm detection as a conditional generative classification task in which an LLM maps a prompted input text to either ‘sarcastic’ or ‘non-sarcastic’. Few-shot demonstrations are selected using KNN search over the training set, and outputs are compared to ground-truth labels using standard classification metrics."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The paper frames sarcasm as involving a contradiction between surface sentiment or literal meaning and true intention, and argues that sarcasm detection is a holistic, intuitive, non-rational cognitive process rather than a step-by-step reasoning task."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Precision, recall, accuracy, and F1 are used as evaluation metrics; for each method, the paper reports the average result over five random seeds on the test sets."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Normalized confusion matrices are used for error analysis of GPT-4 Turbo across six datasets and three prompting approaches."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "In the zero-shot IO analysis, supervised PLMs substantially outperformed traditional DLMs, with RoBERTa averaging 71.3 F1 and DC-Net-RoBERTa 71.5 F1, compared with Bi-LSTM at 66.7 and AT-LSTM at 65.3.",
+      "metric": "Avg. F1",
+      "value": "RoBERTa 71.3; DC-Net-RoBERTa 71.5; Bi-LSTM 66.7; AT-LSTM 65.3",
+      "dataset": "six datasets",
+      "best_system": "DC-Net-RoBERTa"
+    },
+    {
+      "finding": "GPT-4 Turbo led the LLMs in the zero-shot IO setting, with F1 scores of 78.7 on IAC-V1, 76.6 on IAC-V2, 39.8 on iSarcasmEval, 33.3 on Riloff, 76.5 on SemEval Task 3, and 82.2 on Ghosh.",
+      "metric": "F1",
+      "value": "78.7; 76.6; 39.8; 33.3; 76.5; 82.2",
+      "dataset": "IAC-V1; IAC-V2; iSarcasmEval; Riloff; SemEval Task 3; Ghosh",
+      "best_system": "GPT-4 Turbo"
+    },
+    {
+      "finding": "Across prompting methods, GPT-4 consistently and significantly outperformed the other LLMs, with the paper reporting an average improvement of 14.0%↑.",
+      "metric": "average improvement",
+      "value": "14.0%↑",
+      "dataset": "six datasets",
+      "best_system": "GPT-4"
+    },
+    {
+      "finding": "Few-shot IO prompting outperformed zero-shot IO and few-shot CoT, with the paper reporting an average improvement of 4.5%↑; GPT-4’s iSarcasmEval F1 rose from 39.8 in zero-shot to 52.3 in few-shot, a 31.4% improvement.",
+      "metric": "F1 / average improvement",
+      "value": "4.5%↑; 39.8 to 52.3; 31.4%",
+      "dataset": "iSarcasmEval; six datasets",
+      "best_system": "GPT-4 Turbo"
+    },
+    {
+      "finding": "CoT prompting reduced performance for several LLMs: GPT-4 dropped from 68.4 average F1 with IO prompting to 64.7 with CoT, Mistral from 55.8 to 47.5, and Qwen 2 from 53.1 to 39.7.",
+      "metric": "Avg. F1",
+      "value": "GPT-4: 68.4 to 64.7, 5.5% decrease; Mistral: 55.8 to 47.5, 14.8% reduction; Qwen 2: 53.1 to 39.7, 25.1% reduction",
+      "dataset": "six datasets",
+      "best_system": null
+    },
+    {
+      "finding": "On multi-modal sarcasm detection, Retrieval-LLaVA 1.5 achieved the best MMSD results with Acc 90.0, P 89.3, R 89.6, and F1 89.4, while Qwen-VL-Plus had the best CMMA F1 among the reported multi-modal LLMs at 56.1.",
+      "metric": "Acc / P / R / F1",
+      "value": "MMSD: 90.0 / 89.3 / 89.6 / 89.4; CMMA F1: 56.1",
+      "dataset": "MMSD; CMMA",
+      "best_system": "Retrieval-LLaVA 1.5; Qwen-VL-Plus"
+    }
+  ],
+  "key_findings": [
+    "Current prompting-based LLMs did not fully outperform supervised PLM-based sarcasm detection baselines across the six text benchmarks.",
+    "GPT-4 Turbo was the strongest LLM overall and led the LLM group across multiple datasets and prompting methods.",
+    "Few-shot IO prompting generally improved LLM sarcasm detection, and the paper found that moderate numbers of demonstrations, especially 2-shot, were more effective than adding many examples.",
+    "Few-shot CoT prompting was less effective than straightforward IO prompting for sarcasm detection, which the authors attribute to sarcasm being holistic and not well matched to step-by-step logical reasoning.",
+    "Error analysis showed that imbalanced categories and sarcastic samples were key sources of misclassification, with GPT-4 Turbo often struggling to correctly identify sarcastic instances.",
+    "In multi-modal sarcasm detection, zero-shot multi-modal LLMs were weak relative to specialized baselines, but Retrieval-LLaVA 1.5 performed strongly on MMSD when using retrieval-based demonstrations."
+  ],
+  "limitations": [
+    "The study only employed standard prompting methods and chain-of-thought techniques, without exploring more refined prompting methods such as tree-based or graphical approaches.",
+    "The study did not consider variation in model performance on sarcasm across different contexts.",
+    "The authors state that future work should refine context processing mechanisms to enhance models’ understanding of sarcastic language."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

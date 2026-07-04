@@ -1,0 +1,207 @@
+{
+  "key": "35-humorrank",
+  "ref": "#35",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/35-humorrank/35-humorrank.md",
+  "source_md_sha256": "d08fd5027768afd4a58535049a6f64d8e58905be74ab722188df57537466afb1",
+  "source_truncated": false,
+  "title": "HumorRank: A Tournament-Based Leaderboard for Evaluating Humor Generation in Large Language Models",
+  "authors": [
+    "Edward Ajayi",
+    "Prasenjit Mitra"
+  ],
+  "year": 2026,
+  "venue": "Submitted to COLM 2026",
+  "paper_types": [
+    "benchmark",
+    "method",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can pairwise tournament judgments aggregated with Bradley–Terry estimation yield a scalable, globally consistent leaderboard for textual humor generation?",
+    "Do independent LLM judges produce stable humor-generation rankings across SemEval-2026 MWAHAHA and Humor Transfer Bench?",
+    "How much comparison budget can Adaptive Swiss Pairing save while preserving rank fidelity relative to full round-robin evaluation?",
+    "Which humor mechanisms, delivery features, and failure modes distinguish frontier, specialist, mid-tier, and baseline models?",
+    "How do LLM judge preferences compare with blind human humor preference judgments?"
+  ],
+  "tasks": [
+    "headline-conditioned joke generation",
+    "humor generation evaluation",
+    "pairwise humor preference judgment",
+    "LLM humor leaderboard ranking",
+    "humor mechanism, delivery-feature, and failure-mode tagging"
+  ],
+  "humor_domains": [
+    "news-headline jokes",
+    "headline-conditioned textual humor",
+    "verbal humor",
+    "wordplay",
+    "sarcasm",
+    "absurdist humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "SemEval-2026 Task 1 MWAHAHA data",
+      "role": "evaluated-on",
+      "size": "official Task 1 test set (300 prompts)"
+    },
+    {
+      "name": "Humor Transfer Bench (HTB)",
+      "role": "evaluated-on",
+      "size": "400 headline prompts held out from the SemEval distribution"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-5",
+    "Gemini 2.5 Pro",
+    "Claude 3.5 Haiku",
+    "Kimi K2",
+    "Qwen 3 32B",
+    "GPT OSS 120B",
+    "Llama 3.3 70B Instruct",
+    "HumorGen-7B",
+    "Base Qwen 7B",
+    "Qwen 2.5 72B Instruct"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HumorRank",
+      "summary": "A tournament-based leaderboard framework in which contestant LLMs generate jokes for shared prompts, same-prompt pairwise duels are judged by an LLM, and global model rankings are estimated with Bradley–Terry maximum likelihood. The framework also reports Stable Elo scores as a sequence-robust audit metric and produces interpretable humor-feature profiles."
+    },
+    {
+      "name": "GTVH-grounded pairwise LLM-judge protocol",
+      "summary": "A structured A/B/TIE judging prompt asks an LLM comedy critic to choose the funnier joke, provide brief reasoning, and emit winner humor mechanisms, delivery features, and loser failure tags. The feature lists are grounded in the General Theory of Verbal Humor and include mechanisms such as incongruity, wordplay, absurdity, surprise, irony, and sarcasm."
+    },
+    {
+      "name": "Adaptive Swiss Pairing",
+      "summary": "A budget-aware tournament scheduler that preferentially matches models of similar temporary standing while avoiding repeated or over-sampled pairings. Full budget recovers full round-robin, while Swiss 2RR and Swiss 3RR reduce comparisons to fixed-round schedules before final ratings are computed with global Bradley–Terry MLE."
+    },
+    {
+      "name": "Stable Elo audit",
+      "summary": "A sequential Elo reference metric that reduces order dependence by evaluating the complete match history across N=10 randomly shuffled topological orderings and averaging terminal ratings."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "The pairwise judge protocol emits structured humor mechanism, delivery, and failure tags grounded in GTVH resources such as Logical Mechanism, Situation, Target, and Language."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The paper defines humor as cognitive reward arising when an interlocutor resolves a deliberately constructed incongruity, and uses pairwise preference ranking to compare the strength of this reward."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "grounding/motivation",
+      "detail": "Appendix A states that the humor definition requires a harmless and non-threatening context, drawn from benign violation theory."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "Related work lists superiority among classical theories explaining humor."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "Related work lists relief among classical theories explaining humor."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "Appendix A cites Normative-Violation theory (Veatch, 1998) as part of the working definition of humor."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "Primary pairwise judge is Llama 3.3 70B Instruct; secondary validation judge is Qwen 2.5 72B Instruct. For each same-prompt duel, the judge selects A, B, or TIE, returns brief reasoning, and tags GTVH humor mechanisms, delivery features, and failure modes; prompt order is swapped across comparisons."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Global rankings use Bradley–Terry MLE with MM convergence ε < 10^-6, ratings anchored at 1000, and 95% confidence intervals from 200 bootstrap resamples (seed 42). Stable Elo uses K-factor 32 and 10 shuffled orderings; analyses also report Kendall τ, Krippendorff α, win rates, binomial tests, and transitivity score."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A blind human annotation study re-rated 60 stratified SemEval pairs. Three invited annotators with native or near-native English proficiency and prior coursework or research exposure to humor and NLP produced 175 votes; 55 pairs have votes from all three."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On the primary SemEval full round-robin leaderboard judged by Llama 3.3 70B, GPT-5 ranked first and clearly separated from the field.",
+      "metric": "BT Rating / Stable Elo / Win Rate",
+      "value": "BT Rating 1307.5; Stable Elo 1317.6; 95% CL [1289.9, 1325.9]; Win Rate 84.0%",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data",
+      "best_system": "GPT-5"
+    },
+    {
+      "finding": "The specialized HumorGen-7B ranked fourth on the primary SemEval leaderboard, above substantially larger general-purpose models such as GPT OSS 120B.",
+      "metric": "BT Rating / Win Rate",
+      "value": "HumorGen-7B BT = 1092.8, Win Rate 59.8%; GPT OSS 120B BT = 1015.0, Win Rate 49.8%",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data",
+      "best_system": "HumorGen-7B"
+    },
+    {
+      "finding": "On HTB full round-robin with the Llama judge, GPT-5 remained first and HumorGen-7B rose to third.",
+      "metric": "BT Rating / Win Rate",
+      "value": "GPT-5 BT = 1314.7, Win Rate 84.1%; HumorGen-7B BT = 1097.7, Win Rate 60.6%",
+      "dataset": "Humor Transfer Bench (HTB)",
+      "best_system": "GPT-5"
+    },
+    {
+      "finding": "Independent Llama and Qwen LLM judges produced highly stable rankings on both benchmarks.",
+      "metric": "Kendall τ / agreement / Krippendorff α",
+      "value": "Kendall τ = 0.889 (p = 0.0002) in each benchmark; pooled 25,200 labels: 82.9% agreement; Krippendorff α = 0.658",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data; Humor Transfer Bench (HTB)",
+      "best_system": null
+    },
+    {
+      "finding": "Adaptive Swiss Pairing reduced comparison cost while retaining much of the cross-judge rank signal.",
+      "metric": "Pairs per prompt / budget / average cross-LLM-judge τ",
+      "value": "Full RR: 36 pairs/prompt, 100%, τ = 0.889; Swiss 3RR: 12 pairs/prompt, ~33%, τ = 0.861; Swiss 2RR: 8 pairs/prompt, ~22%, τ = 0.806",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data; Humor Transfer Bench (HTB)",
+      "best_system": null
+    },
+    {
+      "finding": "Human agreement was moderate, and LLM judge agreement on the same 60-pair sample was comparable to human-only agreement.",
+      "metric": "Krippendorff α / agreement",
+      "value": "Humans (n=2) α = 0.432; Humans (n=3) α = 0.397; Llama–Qwen α = 0.425; human–human agreement 47.1%; human–Llama agreement 49.7%; Fisher exact p = 0.667",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "GPT-5 ranked first on both SemEval and HTB under the Llama judge, while Base Qwen 7B and Llama 3.3 70B occupied the bottom two ranks in the main SemEval leaderboard.",
+    "HumorGen-7B remained competitive with much larger general-purpose systems, ranking fourth on SemEval under the Llama judge and third on HTB under the Llama judge.",
+    "Llama 3.3 70B and Qwen 2.5 72B judges produced cross-judge stable orderings with Kendall τ = 0.889 on both benchmarks, with only modest mid-tier reordering.",
+    "Swiss 3RR used about one-third of full round-robin comparisons and preserved top and bottom anchor ranks, while Swiss 2RR increased mid-tier volatility.",
+    "Feature tags suggested different comedic signatures: GPT-5 emphasized Conciseness (31.1%) and Incongruity (26.5%), HumorGen-7B led on Absurdity (25.9%), Sarcasm (9.2%), and Escalation (14.5%), and Llama 70B over-indexed on Wordplay (29.5%) while accumulating Weak Punchline (41.1%) and Cliché (50.9%) loser tags.",
+    "The human study found no statistically significant difference between pooled human–human agreement (47.1%) and human–Llama judge agreement (49.7%; Fisher exact p = 0.667), supporting the LLM judge protocol only as directional evidence rather than ground truth."
+  ],
+  "limitations": [
+    "Evaluation is monolingual and conducted only on English data; cross-lingual and cross-cultural humor settings are not examined.",
+    "Experiments are limited to nine contestant models and do not exhaust the full space of contemporary systems.",
+    "The benchmarks cover headline-conditioned textual humor and do not cover interactive or multimodal humor paradigms.",
+    "LLM judges may inherit cultural and stylistic biases from pretraining, and rejected judge configurations showed self-preference or family bias.",
+    "GTVH feature tags are co-produced with duel judgments but were not separately human-audited.",
+    "The paper does not claim a formal convergence proof for Bradley–Terry estimation under Adaptive Swiss Pairing; fidelity is supported empirically.",
+    "The blind human evaluation is small, covering 60 SemEval pairs with three annotators and 55 pairs with full three-way overlap."
+  ],
+  "safety_ethics_notes": "The ethics statement emphasizes that humor is culturally and contextually variable and can overlap with offensive or exclusionary expression, so downstream practitioners must enforce appropriate content moderation. It also warns that LLM judges trained on high-resource, Western-centric text may disadvantage humor conventions from underrepresented linguistic or cultural communities, so HumorRank should be treated as a reproducible diagnostic benchmark rather than a definitive measure of comedic quality.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Live leaderboard: https://humorrank-leaderboard.pages.dev/. The paper states that tournament code, evaluation scripts, and the Adaptive Swiss pairing implementation are provided in the supplementary materials."
+  }
+}

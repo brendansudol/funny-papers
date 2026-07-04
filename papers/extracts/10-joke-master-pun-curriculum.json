@@ -1,0 +1,205 @@
+{
+  "key": "10-joke-master-pun-curriculum",
+  "ref": "#10",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/10-joke-master-pun-curriculum/10-joke-master-pun-curriculum.md",
+  "source_md_sha256": "24cbb2d13817628470c63d8aea1c7fa1827b577c794909ed4f0b090ab4c82f67",
+  "source_truncated": false,
+  "title": "Are U a Joke Master? Pun Generation via Multi-Stage Curriculum Learning towards a Humor LLM",
+  "authors": [
+    "Yang Chen",
+    "Chong Yang",
+    "Tu Hu",
+    "Xinhao Chen",
+    "Man Lan",
+    "Li Cai",
+    "Xinling Zhuang",
+    "Xuan Lin",
+    "Xin Lu",
+    "Aiming Zhou"
+  ],
+  "year": 2024,
+  "venue": null,
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can multi-stage curriculum preference learning improve LLMs’ ability to generate puns that satisfy both pun structure and humor preferences?",
+    "Can an improved triplet preference learning loss alleviate catastrophic forgetting during multi-objective preference alignment for pun generation?",
+    "Does the proposed approach generalize across English and Chinese pun generation datasets, including a newly constructed ChinesePun dataset?"
+  ],
+  "tasks": [
+    "pun generation"
+  ],
+  "humor_domains": [
+    "puns",
+    "homophonic puns",
+    "homographic puns",
+    "wordplay",
+    "Chinese jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "ChinesePun",
+      "role": "introduced",
+      "size": "1,049 homophonic puns, 1,057 homographic puns, and 187,315 words in total"
+    },
+    {
+      "name": "ChinesePun",
+      "role": "trained-on",
+      "size": "1684 samples for training; 839 homophonic and 845 homographic"
+    },
+    {
+      "name": "ChinesePun",
+      "role": "evaluated-on",
+      "size": "422 for testing; 210 homophonic and 212 homographic"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "trained-on",
+      "size": "1918 samples for the training set; 879 homophonic and 1039 homographic"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "evaluated-on",
+      "size": "478 for the testing set; 219 homophonic and 259 homographic"
+    },
+    {
+      "name": "ColBERT dataset",
+      "role": "trained-on",
+      "size": "200,000 examples of jokes and non-jokes"
+    },
+    {
+      "name": "Chinese humor recognition dataset from Chen et al. (2023)",
+      "role": "trained-on",
+      "size": "18709 examples of jokes and 7709 examples of non-jokes"
+    },
+    {
+      "name": "CCL2018 Task4",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "ChinesePun raw joke collection",
+      "role": "source-material",
+      "size": "28,269 jokes"
+    }
+  ],
+  "models_evaluated": [
+    "AmbiPun",
+    "gpt-3.5-turbo",
+    "LLaMA2-7B",
+    "LLaMA2_sft",
+    "LLaMA2_dpo",
+    "Baichuan2-7B",
+    "Baichuan2_sft",
+    "Baichuan2_dpo",
+    "PGCL"
+  ],
+  "methods_proposed": [
+    {
+      "name": "PGCL (Pun Generation with Curriculum Learning)",
+      "summary": "A multi-stage curriculum preference learning framework for pun generation. It first aligns an LLM to pun structure preferences with DPO, then aligns it to humor preferences in a second stage."
+    },
+    {
+      "name": "Improved Humor DPO",
+      "summary": "A triplet preference learning method for the second stage of PGCL. It uses positive puns, structurally valid “rumination” samples from the stage-1 model, and negative samples lacking humor and pun structure, with a loss that orders positive > rumination > negative to reduce catastrophic forgetting."
+    },
+    {
+      "name": "ChinesePun dataset",
+      "summary": "A manually annotated Chinese pun generation dataset containing homophonic and homographic puns, each annotated with pun words and alternative words."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Automatic evaluation reports Structure Succ. as the primary metric for whether generated text incorporates pun word pairs; Dist-1 and Dist-2 at corpus and sentence level for diversity; and Avg-Length."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For human evaluation, 50 pun word pairs are sampled randomly from the test dataset. Annotators conduct a Human A/B-test against ChatGPT for humor, allowing ties, and classify each sentence as “pun” or “non-pun” for Pun Succ.; average IAA is 0.47 for humor capability and 0.58 for pun success."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "ChinesePun annotation was performed by three postgraduate students; disagreements were discussed and the majority vote was used. Fleiss’ kappa on 150 multiply annotated instances is κ = 0.68."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On ChinesePun, PGCL achieved the highest pun success rate and improved over the best baseline by 16%.",
+      "metric": "Pun Succ. %",
+      "value": "44.00% (vs. best baseline 28.00%)",
+      "dataset": "ChinesePun",
+      "best_system": "PGCL"
+    },
+    {
+      "finding": "On SemEval, PGCL achieved the highest pun success rate and improved over the best baseline by 22%.",
+      "metric": "Pun Succ. %",
+      "value": "56.00% (vs. best baseline 34.00%)",
+      "dataset": "SemEval-2017 Task 7 puns",
+      "best_system": "PGCL"
+    },
+    {
+      "finding": "In the ChinesePun humor A/B-test against ChatGPT, PGCL won far more often than it lost.",
+      "metric": "Humor A/B-test vs. ChatGPT %",
+      "value": "Win 64.00%, Lose 22.00%",
+      "dataset": "ChinesePun",
+      "best_system": "PGCL"
+    },
+    {
+      "finding": "In the SemEval humor A/B-test against ChatGPT, PGCL won far more often than it lost.",
+      "metric": "Humor A/B-test vs. ChatGPT %",
+      "value": "Win 68.00%, Lose 14.00%",
+      "dataset": "SemEval-2017 Task 7 puns",
+      "best_system": "PGCL"
+    },
+    {
+      "finding": "On SemEval, PGCL obtained the best structure success rate among systems.",
+      "metric": "Structure Succ. %",
+      "value": "98.95%",
+      "dataset": "SemEval-2017 Task 7 puns",
+      "best_system": "PGCL"
+    },
+    {
+      "finding": "The improved triplet humor DPO outperformed the variant using standard DPO in the second stage on both structure and pun success.",
+      "metric": "Structure Succ. %, Pun Succ. %",
+      "value": "ChinesePun: 89.10 vs 80.46 Structure Succ., 44.00 vs 38.00 Pun Succ.; SemEval: 98.95 vs 91.64 Structure Succ., 56.00 vs 46.00 Pun Succ.",
+      "dataset": "ChinesePun; SemEval-2017 Task 7 puns",
+      "best_system": "PGCL"
+    }
+  ],
+  "key_findings": [
+    "PGCL substantially improves pun generation over ChatGPT, AmbiPun, base LLMs, SFT baselines, and standard DPO baselines on both ChinesePun and SemEval.",
+    "Preference alignment is more effective than instruction tuning for this task: the paper reports that Baichuan2_dpo and LLaMA2_dpo outperform Baichuan2_sft and LLaMA2_sft respectively.",
+    "The structure-then-humor curriculum produces the best humor A/B-test results, while keeping structure success close to the best curriculum ordering.",
+    "The triplet loss helps preserve structure preferences during humor alignment, improving structure success and pun success over a standard second-stage DPO variant.",
+    "ChatGPT shows stronger diversity metrics than fine-tuned models, which the authors attribute to the other models being fine-tuned on the specific dataset."
+  ],
+  "limitations": [
+    "The work concentrates on pun generation, which the authors describe as a niche within creative language and humor production.",
+    "The authors state that the method still fails in recognizing humor’s subjective nature.",
+    "The authors note that what is funny varies with backgrounds and experiences, and future work should address contextual subtleties and personal interpretations.",
+    "Human evaluation uses 50 randomly sampled pun word pairs from the test dataset.",
+    "Human evaluation agreement is moderate, with average inter-annotator agreement of 0.47 for humor capability and 0.58 for pun success."
+  ],
+  "safety_ethics_notes": "The paper states that human annotation/evaluation workers were paid 60 yuan per hour.",
+  "artifacts": {
+    "code_url": "https://github.com/cubenlp/PGCL",
+    "data_url": "https://github.com/cubenlp/PGCL",
+    "other": "The paper says code, data, and resources are publicly available for research purposes at this repository."
+  }
+}

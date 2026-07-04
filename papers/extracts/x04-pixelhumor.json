@@ -1,0 +1,217 @@
+{
+  "key": "x04-pixelhumor",
+  "ref": "Part 3 (also in this section)",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x04-pixelhumor/x04-pixelhumor.md",
+  "source_md_sha256": "428a9880d06ef2dfc5d02c52b5ee142553e1be381dbe50c8765eae06a9587b7e",
+  "source_truncated": false,
+  "title": "Humor in Pixels: Benchmarking Large Multimodal Models Understanding of Online Comics",
+  "authors": [
+    "Yuriel Ryan",
+    "Rui Yang Tan",
+    "Kenny Tsu Wei Choo",
+    "Roy Ka-Wei Lee"
+  ],
+  "year": 2025,
+  "venue": null,
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can a benchmark of annotated multi-panel online comics be constructed to systematically evaluate LMMs’ multimodal humor comprehension?",
+    "How well do state-of-the-art LMMs perform on humor identification, humor classification, humor interpretation, and sequence recognition in comics?",
+    "What limitations do current LMMs exhibit when integrating visual and textual cues for coherent narrative and humor understanding?"
+  ],
+  "tasks": [
+    "humor presence identification",
+    "sound effect identification",
+    "panel contribution / punchline panel identification",
+    "modality contribution attribution",
+    "humor style classification",
+    "humor interpretation / explanation",
+    "visual sequence recognition",
+    "text sequence recognition"
+  ],
+  "humor_domains": [
+    "online comics",
+    "multi-panel comics",
+    "web comics",
+    "visual-textual humor",
+    "puns",
+    "sarcasm",
+    "dark humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "PixelHumor",
+      "role": "introduced",
+      "size": "2,800 comics"
+    },
+    {
+      "name": "Cyanide and Happiness",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Peanuts",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Garfield",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "XKCD",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "PhD Comics",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "They Can Talk",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Saturday Morning Breakfast Cereal (SMBC)",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "Gemini-1.5-Pro",
+    "Qwen2-VL-72B",
+    "Gemma3-27B",
+    "LLaVA-OneVision-7B-SI",
+    "Qwen2-VL-7B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "PixelHumor",
+      "summary": "A benchmark dataset of 2,800 annotated multi-panel online comics from seven creators, with annotations for humor presence, sound-effect contribution, punchline panel, modality contribution, humor styles, interpretation, and sequence recognition."
+    },
+    {
+      "name": "Four-task multimodal humor evaluation framework",
+      "summary": "The paper defines humor identification, humor classification, humor interpretation, and sequence recognition tasks to test LMMs’ ability to detect cues, classify humor styles, explain humor, and reconstruct comic narrative order."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "benign violation",
+      "usage": "operationalized",
+      "detail": "The Dark humor style is defined as involving dark, taboo, or potentially offensive ideas where humor arises from a benign challenging or violation of conventional norms."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "operationalized",
+      "detail": "Surprise is one of the eight PixelHumor humor styles, defined by a twist or unexpected element that subverts expectations."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The benchmark uses an eight-style humor taxonomy—Comparison, Personification, Exaggeration, Pun, Sarcasm, Silliness, Surprise, and Dark—adapted from Taecharungroj and Nueangjamnong (2015)."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Humor identification and humor classification are evaluated with precision, recall, and weighted F1-score against human-annotated ground truth."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Sequence recognition is evaluated with panel accuracy for visual sequencing and text accuracy, Word Error Rate, and Character Error Rate for text sequencing."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Humor interpretation is evaluated by human ratings on a 7-point Likert scale over 350 comics with high annotator agreement."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A preference study over 70 comics asks participants to choose the best interpretation among one human-written and six model-generated explanations, with disagreements resolved by a third annotator."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Humor presence identification was near-perfect for top models, but the paper notes this likely reflects label imbalance because only 33 comics are non-humorous.",
+      "metric": "F1",
+      "value": "0.984",
+      "dataset": "PixelHumor",
+      "best_system": "Gemini-1.5-Pro; Qwen2-VL-72B; Gemma3 27B"
+    },
+    {
+      "finding": "GPT-4o led the harder humor-identification subtasks for sound effects, punchline panel contribution, and modality contribution.",
+      "metric": "F1 on sound effect / panel contribution / modality contribution",
+      "value": "0.821 / 0.765 / 0.626",
+      "dataset": "PixelHumor",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "GPT-4o achieved the best humor style classification score.",
+      "metric": "weighted F1",
+      "value": "0.499",
+      "dataset": "PixelHumor",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "GPT-4o produced the highest-rated humor interpretations in the 350-comic human evaluation.",
+      "metric": "7-point Likert mean / median",
+      "value": "5.801 / 6.500",
+      "dataset": "PixelHumor",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "Human-written explanations were preferred over all generated explanations in most samples in the preference study.",
+      "metric": "Times selected",
+      "value": "48 (68.6%) of 70 samples",
+      "dataset": "PixelHumor",
+      "best_system": "Human"
+    },
+    {
+      "finding": "Sequence recognition remained difficult: Gemini-1.5-Pro had the best panel sequencing accuracy, while GPT-4o had the best text sequencing accuracy and lowest WER/CER.",
+      "metric": "Panel Acc.; Text Acc.; WER; CER",
+      "value": "0.645; 0.326; 0.230; 0.241",
+      "dataset": "PixelHumor",
+      "best_system": "Gemini-1.5-Pro for panel sequencing; GPT-4o for text sequencing"
+    }
+  ],
+  "key_findings": [
+    "All evaluated LMMs achieved F1-scores above 0.98 on humor presence identification, but this task is affected by strong label imbalance because only 33 of 2,800 comics are labeled non-humorous.",
+    "Closed-source models, especially GPT-4o and Gemini-1.5-Pro, generally outperform open-source models on tasks requiring fine-grained narrative understanding and multimodal reasoning.",
+    "Humor style classification is challenging: GPT-4o’s best weighted F1 is 0.499, smaller models often predict too few styles, and models struggle with non-humorous N/A cases.",
+    "Human-written explanations remain ahead of model-generated ones: they were selected as best in 48 of 70 preference-study samples despite GPT-4o’s high Likert scores.",
+    "Sequence recognition exposes major limitations, with best panel accuracy of 0.645 and best text accuracy of 0.326, and qualitative errors showing reliance on conventional reading-order heuristics.",
+    "The paper’s error analysis reports that model performance tends to degrade as the number of comic panels increases, especially for panel contribution, modality contribution, and humor style classification."
+  ],
+  "limitations": [
+    "Humor is inherently subjective, so individual annotator biases may influence interpretations despite annotation guidelines, screening, and training.",
+    "PixelHumor focuses on static visual-textual comics and excludes temporal and dynamic humor in videos and animations.",
+    "The dataset is primarily in English and primarily based in Western media, which may overrepresent Western humor conventions and limit cross-cultural generalizability.",
+    "Humor presence identification is affected by label imbalance because most comics are humorous and only 33 are labeled non-humorous.",
+    "The human interpretation evaluation uses 350 high-agreement comics, and the preference study uses 70 comics, rather than the full 2,800-comic benchmark.",
+    "For copyright reasons, the dataset release provides URLs and associated metadata rather than redistributing the images directly."
+  ],
+  "safety_ethics_notes": "The paper notes that sources such as Cyanide and Happiness may contain violence, sexually explicit material, and dark humor. The authors plan to separate such comics and label them as “potentially harmful,” allow annotators to withdraw or skip uncomfortable samples, pay annotators 20 dollars per hour, release URLs rather than images, and include a usage disclaimer and datasheet warning users about content sensitivities.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://github.com/Social-AI-Studio/PixelHumor",
+    "other": "The paper states that PixelHumor will be released as URLs linking to original sources, with associated metadata, rather than redistributing comic images directly."
+  }
+}

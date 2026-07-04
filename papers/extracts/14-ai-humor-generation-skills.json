@@ -1,0 +1,166 @@
+{
+  "key": "14-ai-humor-generation-skills",
+  "ref": "#14",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/14-ai-humor-generation-skills/14-ai-humor-generation-skills.md",
+  "source_md_sha256": "611dc74ed56ab0b7d55af815412f883af5d587954232e44f9232ddfec1b285ea",
+  "source_truncated": false,
+  "title": "AI Humor Generation: Cognitive, Social and Creative Skills for Effective Humor",
+  "authors": [
+    "Sean Kim",
+    "Lydia B. Chilton"
+  ],
+  "year": 2025,
+  "venue": "arXiv",
+  "paper_types": [
+    "method",
+    "evaluation-study",
+    "HCI-study",
+    "system"
+  ],
+  "research_questions": [
+    "Does giving AI creative, social, and cognitive skills enable it to generate humorous captions that resonate with a target audience?",
+    "For Gen Z Instagram image caption humor, are HumorSkills captions rated funnier than captions from GPT-4o with prompt engineering?",
+    "Are HumorSkills captions rated as funny as the top-rated human-written Instagram comments?",
+    "Does the HumorSkills approach still outperform GPT-4o on non-target image sources such as camera-roll-style photos and museum art?"
+  ],
+  "tasks": [
+    "humorous image caption generation",
+    "humor rating of image captions",
+    "caption ranking and filtering"
+  ],
+  "humor_domains": [
+    "Instagram image caption humor",
+    "Gen Z humor",
+    "meme captions",
+    "camera roll image captions",
+    "museum art image captions"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Instagram humor captioning accounts evaluation images and comments",
+      "role": "evaluated-on",
+      "size": "20 images with 15 captions each"
+    },
+    {
+      "name": "Instagram humorous comments fine-tuning dataset",
+      "role": "trained-on",
+      "size": "80 humorous comments"
+    },
+    {
+      "name": "Flickr Image Dataset",
+      "role": "evaluated-on",
+      "size": "30 images"
+    },
+    {
+      "name": "Museum Art images",
+      "role": "evaluated-on",
+      "size": "30 museum art images: 15 images from the Museum of Modern Art (The MoMA) and 15 images of art from from the Metropolitan Art Museum (The Met)"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "GPT-3.5"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HumorSkills",
+      "summary": "HumorSkills is a multi-step system for Gen Z-style humorous image captioning. It uses GPT-4o for visual detail extraction, visual humor ideation, and narrative/conflict extrapolation, a fine-tuned GPT-3.5 model to generate captions with and without external narratives, and a GPT-4o-based Gen Z humor ranking agent to select the top five captions."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "benign violation",
+      "usage": "grounding/motivation",
+      "detail": "The paper cites benign violation theory to motivate the idea that humor arises when expectations are violated in a surprising but not overly threatening, disturbing, or wrong way."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "The paper discusses semantic script theory as describing how a setup leads listeners toward one interpretation while the punchline supports a different interpretation that is also consistent with the facts."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Online surveys asked target-audience raters to rate captions from 1 to 5, where 1 was 'not funny', 3 was 'somewhat funny', and 5 was 'very funny'; image order and caption order were randomized and raters were not told which captions were AI-generated."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "The target Instagram study used the top five most upvoted Instagram comments for each image as the human-written comparison condition."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Within HumorSkills, a GPT-4o-based Gen Z humor ranking agent ranked 30 generated captions by humor, relatability, and alignment with the image and narrative, then returned the top five."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On the target Instagram caption task, HumorSkills captions were rated 2.27 out of 5 and GPT-4o captions were rated 0.213 points lower, a statistically significant difference reported as p<0.0001.",
+      "metric": "5-point funniness rating; GLMM coefficient",
+      "value": "2.27 out of 5; -0.213 points; p<0.0001",
+      "dataset": "Instagram humor captioning accounts evaluation images and comments",
+      "best_system": "HumorSkills"
+    },
+    {
+      "finding": "On the same target task, top Instagram captions were only 0.08 points higher than HumorSkills on a 5-point scale, with p=0.053, so HumorSkills was not statistically less funny than the top Instagram captions.",
+      "metric": "5-point funniness rating; GLMM coefficient",
+      "value": "0.08 points; p=0.053",
+      "dataset": "Instagram humor captioning accounts evaluation images and comments",
+      "best_system": "Top5 IG captions"
+    },
+    {
+      "finding": "The regression table for the target Instagram study reports 6015 observations, a HumorSkill intercept of 2.273, a GPT-4o coefficient of -0.213, and a Top5 IG coefficient of 0.078.",
+      "metric": "MixedLM regression",
+      "value": "No. Observations: 6015; Intercept 2.273; GPT-4o rating -0.213; Top5 IG rating 0.078",
+      "dataset": "Instagram humor captioning accounts evaluation images and comments",
+      "best_system": "Top5 IG captions"
+    },
+    {
+      "finding": "On camera-roll-style Flickr images, HumorSkills was rated 0.291 points higher than GPT-4o, reported in text as 2.19 vs. 1.9 out of 5 and p=0.022; Table 2 reports the HumorSkill coefficient as 0.291 with P>|z| of 0.000.",
+      "metric": "5-point funniness rating; GLMM coefficient",
+      "value": "0.291 points; 2.19 vs. 1.9 out of 5; p=0.022; Table 2 P>|z| 0.000",
+      "dataset": "Flickr Image Dataset",
+      "best_system": "HumorSkills"
+    },
+    {
+      "finding": "On museum art images, HumorSkills was rated 0.18 points higher than GPT-4o, reported in text as 2.18 vs. 2.00 out of 5 and p=0.023; Table 3 reports the HumorSkill coefficient as 0.175 with P>|z| of 0.000.",
+      "metric": "5-point funniness rating; GLMM coefficient",
+      "value": "0.18 points; 2.18 vs. 2.00 out of 5; p=0.023; Table 3 coefficient 0.175; P>|z| 0.000",
+      "dataset": "Museum Art images",
+      "best_system": "HumorSkills"
+    }
+  ],
+  "key_findings": [
+    "HumorSkills was significantly funnier than GPT-4o with prompt engineering for Gen Z Instagram caption humor.",
+    "HumorSkills was rated almost on par with the top five upvoted Instagram comments and was not statistically less funny than them in the study sample.",
+    "HumorSkills also outperformed GPT-4o on non-target camera-roll-style Flickr images and museum art images.",
+    "The qualitative analysis attributes stronger captions to Gen Z slang and references, narrative extrapolation to relatable conflicts, and visual detail extraction that targets salient oddities in images.",
+    "The paper argues that detail observation, analogous social-situation generation, and audience modeling are human-like skills that can improve LLM humor generation."
+  ],
+  "limitations": [
+    "The study targets only one form of humor for one audience: Gen Z-style Instagram image captions.",
+    "This humor style tends toward absurdities, which the paper says may be easier to generate than humor that must be both logical and surprising.",
+    "Caption humor is more well-defined than forms such as standup comedy or popular humor magazine writing because the image supplies the setup and the system only needs to generate a punchline.",
+    "The paper states that LLMs would likely struggle to make in-joke humor without inside information about friends, backgrounds, and shared experiences.",
+    "The GPT-4o baseline used a simple humor-writing prompt, and the paper notes that better prompts or multiple generations might produce similar results.",
+    "The paper did not conduct ablation studies, so it is unclear which HumorSkills components are most helpful individually.",
+    "Some generated captions are described as not logical enough to make sense but not illogical enough to be absurd, making them sound like mistakes."
+  ],
+  "safety_ethics_notes": "The discussion notes that AI systems with human-like social skills such as humor could either augment human bonding or disingenuously create human bonding. It connects this concern to AI-generated persuasion, scams, dating-app message suggestions, and the broader need to distinguish genuine from disingenuous communication.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

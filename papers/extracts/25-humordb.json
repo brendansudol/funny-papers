@@ -1,0 +1,208 @@
+{
+  "key": "25-humordb",
+  "ref": "#25",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/25-humordb/25-humordb.md",
+  "source_md_sha256": "4918c8306e689a87c38b50a188cf0bc289ba21fee3608997e2273580af2d7c5b",
+  "source_truncated": false,
+  "title": "HumorDB: Can AI understand graphical humor?",
+  "authors": [
+    "Vedaant V Jain",
+    "Felipe dos Santos Alves Feitosa",
+    "Gabriel Kreiman"
+  ],
+  "year": 2025,
+  "venue": "20th International Conference on Computer Vision, ICCV 2025 (Poster)",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can AI systems understand graphical humor in images, as measured against human judgments?",
+    "How do state-of-the-art vision-only models and vision-language models compare with humans on binary humor classification, 1–10 funniness rating, and pairwise humor comparison?",
+    "Do minimally contrastive original/modified image pairs reveal whether models identify humor-inducing elements rather than superficial cues or editing artifacts?",
+    "Can model explanations, attention maps, and layer-wise analyses provide insight into how different architectures process visual humor?"
+  ],
+  "tasks": [
+    "binary visual humor classification",
+    "funniness rating prediction",
+    "pairwise visual humor comparison",
+    "visual humor explanation evaluation"
+  ],
+  "humor_domains": [
+    "graphical humor",
+    "purely visual humor",
+    "photos",
+    "Photoshopped real-life photos",
+    "cartoons",
+    "sketches",
+    "AI-generated images"
+  ],
+  "modalities": [
+    "image"
+  ],
+  "languages": [],
+  "datasets_used": [
+    {
+      "name": "HumorDB",
+      "role": "introduced",
+      "size": "3,542 images; 1,271 pairs; 1,771 funny images and 1,771 not funny images"
+    },
+    {
+      "name": "MSCOCO",
+      "role": "evaluated-on",
+      "size": "250 images in an external set of 650 non-humorous, non-edited images"
+    },
+    {
+      "name": "Places365",
+      "role": "evaluated-on",
+      "size": "400 images in an external set of 650 non-humorous, non-edited images"
+    },
+    {
+      "name": "ImageNet",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "LAION-2B",
+      "role": "trained-on",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "DINOv2 Large",
+    "ViT-Large",
+    "ViT-Huge",
+    "SwinV2-Large",
+    "ConvNeXt-Large",
+    "ViTG-14",
+    "ResNet152",
+    "LLaVA (zero-shot)",
+    "LLaVA (fine-tuned)",
+    "LLaVA (words fine-tuned)",
+    "BLIP (fine-tuned)",
+    "BLIP (words fine-tuned)",
+    "GPT-4o (gpt-4o-2024-05-13)",
+    "Gemini 1.5-002 Flash"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HumorDB",
+      "summary": "A curated visual humor dataset and benchmark containing photos, Photoshopped images, cartoons, sketches, and AI-generated images, with human measurements for binary, range-rating, and pairwise comparison tasks."
+    },
+    {
+      "name": "Minimally contrastive visual humor pairs",
+      "summary": "The dataset includes 1,271 pairs of original humorous images and modified counterparts where the humor-inducing element is removed or altered while preserving visual similarity."
+    },
+    {
+      "name": "Human-keyword-assisted VLM fine-tuning",
+      "summary": "For some fine-tuned vision-language runs, the authors prefixed prompts with words that appeared in at least 30% of human comparison-task responses for an image."
+    },
+    {
+      "name": "Contrastive-pair attention analysis",
+      "summary": "For paired images, the paper approximates humorous regions using pixel-level differences between original and modified images and evaluates transformer attention maps with recall, strict box containment, and outside box ratio."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper cites incongruity theory as the best-known theory of humor and motivates graphical humor as requiring expectations and identification of incongruities; it does not use a theory-specific annotation scheme."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "crowd-votes",
+      "detail": "Online psychophysics experiments through Amazon Mechanical Turk and Prolific collected human labels for Binary, Range, and Comparison tasks; each participant rated 100 images, and each final image received 6-8 Binary or Range ratings or 4-6 comparisons."
+    },
+    {
+      "type": "human-eval",
+      "detail": "VLM explanations were rated by humans on a 1–5 scale for identifying why an image is funny and for factual accuracy of the scene."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A separate in-lab validation study collected ratings for 400 images with >=5 ratings per image, yielding correlations with online data of rho = 0.78 for the binary task and rho = 0.72 for the range task."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Binary and Comparison tasks used accuracy against human-derived labels or majority votes; Range used RMSE against mean human ratings; control-set performance measured the percentage of external non-funny images classified as not funny."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Explanation alignment used All Words Score and Common Words Score based on stemming and synonym matching to human annotations."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Attention maps were evaluated with Recall, Strict Box Containment, and Outside Box Ratio; layer-wise logit attribution measured classification accuracy from each transformer layer."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The final HumorDB dataset is balanced and contains 3,542 images across 1,271 minimally contrastive pairs.",
+      "metric": "dataset size / class balance",
+      "value": "3,542 images; 1,271 pairs; 1,771 funny images; 1,771 not funny images",
+      "dataset": "HumorDB",
+      "best_system": null
+    },
+    {
+      "finding": "Human ratings validated the edits: original images were rated funnier than their modified counterparts for the majority of pairs.",
+      "metric": "original image rated funnier than modified counterpart",
+      "value": "86.4% of pairs",
+      "dataset": "HumorDB",
+      "best_system": "Humans"
+    },
+    {
+      "finding": "On the Range task, LLaVA with human-word fine-tuning achieved the best reported model RMSE on both test sets.",
+      "metric": "RMSE ± SD",
+      "value": "testAllSet: 1.68 ± 0.28; testOnlyPairs: 1.66 ± 0.31",
+      "dataset": "HumorDB",
+      "best_system": "LLaVA(words fine-tuned)"
+    },
+    {
+      "finding": "On the external non-humorous control set, the best reported model classified most images as not funny, supporting the claim that models were learning beyond editing artifacts.",
+      "metric": "percentage classified as not funny",
+      "value": "ViT-G14 (81%), LLaVA FT (80%), SwinV2 (76%), ViTHuge (71%), DinoV2 (62%)",
+      "dataset": "MSCOCO + Places365 control set",
+      "best_system": "ViTG-14"
+    },
+    {
+      "finding": "In human evaluation of VLM explanations, Gemini received the highest ratings for both humor-source identification and factual accuracy.",
+      "metric": "1–5 explanation rating",
+      "value": "Why Funny: 4.1 ± 0.6; Accuracy: 4.24 ± 0.47",
+      "dataset": "HumorDB",
+      "best_system": "Gemini-Flash"
+    },
+    {
+      "finding": "Attention-map analysis showed limited localization of humorous regions even for transformer models.",
+      "metric": "attention Recall / Strict Box Containment / Outside Box Ratio",
+      "value": "ViTG-14: Recall Mean 0.265, SBC Mean 0.425, OBR Mean 0.348; DINOv2: Recall Mean 0.006, SBC Mean 0.552, OBR Mean 0.324",
+      "dataset": "HumorDB",
+      "best_system": "ViTG-14"
+    }
+  ],
+  "key_findings": [
+    "HumorDB’s minimally contrastive pairs made the benchmark harder: the paper reports performance drops on testOnlyPairs and a 10% GPT-4o improvement when evaluating only original images, suggesting that modified images are an important control.",
+    "Pretraining mattered: pretrained vision models consistently outperformed non-pretrained models, while large vision-language models and fine-tuned LLaVA variants outperformed vision-only systems in the Binary task according to the paper’s reported trends.",
+    "The best Range-task model was LLaVA(words fine-tuned), with RMSE 1.68 ± 0.28 on testAllSet and 1.66 ± 0.31 on testOnlyPairs.",
+    "Image type strongly affected Binary performance: models were near chance on sketches, while Photoshopped and AI-generated images were easier; for example, Gemini-Flash scored 84 on Photoshopped images, 82 on AI-Gen images, and 53 on sketches.",
+    "VLM explanations could be fluent and sometimes aligned with human reasoning, but the paper shows cases where models hallucinated or missed the subtle distinction between paired images.",
+    "Attention maps and layer-wise analyses suggested that correct classification does not imply precise visual grounding: models often failed to focus on the small region that made the image funny."
+  ],
+  "limitations": [
+    "The authors state that substantially enlarging HumorDB would likely improve performance but would require additional image modification, curation, and participant annotation.",
+    "Humor is culture-dependent, and the participant pool was predominantly from the United States (54%) and younger demographics (<40 years).",
+    "The benchmark uses majority votes and average ratings, which do not fully capture individual differences in humor perception.",
+    "Several original images came from the internet, and the paper notes that GPT-4o’s 10% improvement on original-only images suggests possible familiarity with similar images from training data.",
+    "The humorous region used for attention evaluation is approximated from pixel-level differences between original and modified image pairs, not from direct human segmentation."
+  ],
+  "safety_ethics_notes": "The dataset construction removed images with explicit/offensive material and removed cases where humor relied on embedded text; the paper also notes cultural dependence and demographic skew in the participant pool.",
+  "artifacts": {
+    "code_url": "https://github.com/kreimanlab/HumorDB",
+    "data_url": "https://github.com/kreimanlab/HumorDB",
+    "other": "The supplementary material states that reference links for internet-collected images are provided in the repository."
+  }
+}

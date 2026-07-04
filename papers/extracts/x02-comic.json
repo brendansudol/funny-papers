@@ -1,0 +1,196 @@
+{
+  "key": "x02-comic",
+  "ref": "Part 2 (also in this cluster)",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x02-comic/x02-comic.md",
+  "source_md_sha256": "a850bb4f0b5d9dda764e81cd4aa049520af84514ae4a5d21e559a147f1ca9e13",
+  "source_truncated": false,
+  "title": "COMIC: Agentic Sketch Comedy Generation",
+  "authors": [
+    "Susung Hong",
+    "Brian Curless",
+    "Ira Kemelmacher-Shlizerman",
+    "Steve Seitz"
+  ],
+  "year": 2026,
+  "venue": null,
+  "paper_types": [
+    "method",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can a fully automated AI system generate short sketch-comedy videos that are funny to human viewers?",
+    "How can LLM-based humor critics be aligned with real viewer preferences without fine-tuning a dedicated critic model?",
+    "Does iterative pairwise competition among scripts, organized into multiple critic-governed islands, improve comedy script quality and diversity?",
+    "Does critic-guided iterative rendering improve long-form comedic video generation compared with single-pass agentic video pipelines and frontier text-to-video models?"
+  ],
+  "tasks": [
+    "sketch comedy video generation",
+    "comedy script generation",
+    "comedy script ranking",
+    "comedic video ranking",
+    "automated humor evaluation",
+    "storyboarding and visual realization for comedy sketches"
+  ],
+  "humor_domains": [
+    "sketch comedy",
+    "YouTube comedy sketches",
+    "professional human sketch comedy",
+    "dialogue-based comedy videos"
+  ],
+  "modalities": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "YouTube sketch comedy channels corpus (Foil Arms & Hog, Key & Peele, SNL, Studio C, Viva La Dirt League)",
+      "role": "introduced",
+      "size": "4,940 data points"
+    },
+    {
+      "name": "Tiered YouTube sketch engagement set",
+      "role": "introduced",
+      "size": "450 total data points"
+    },
+    {
+      "name": "Middle-tier YouTube sketch test videos",
+      "role": "evaluated-on",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "COMIC",
+    "Veo 3.1",
+    "Sora 2",
+    "VideoGen-of-Thought (VGoT)",
+    "MovieAgent",
+    "Claude 3.5 Sonnet",
+    "Claude 3.5 Haiku",
+    "Gemini 3 Flash Preview",
+    "Claude 3.5 Opus",
+    "FLUX.2 [dev]",
+    "ElevenLabs",
+    "Chatterbox-TTS",
+    "Wan 2.1"
+  ],
+  "methods_proposed": [
+    {
+      "name": "COMIC",
+      "summary": "A fully automated multi-agent sketch comedy video generation system that takes character images, voices, text descriptions, and background assets as input and produces 1–2 minute comedy scripts with corresponding video and audio. The pipeline uses agentic roles including writer, critic, editor, scene director, image/video generators, and voice generator."
+    },
+    {
+      "name": "Generate-and-select viewer-aligned critics",
+      "summary": "The paper synthesizes diverse LLM critic personas with a meta-critic and selects critics whose pairwise preferences best match engagement tiers derived from normalized YouTube view counts. Task-specific critics are selected separately for Top vs. Middle and Top vs. Bottom comparisons."
+    },
+    {
+      "name": "Island-based competitive script writing loop",
+      "summary": "Scripts are partitioned into multiple isolated islands, each governed by a different committee of aligned critics. Within each island, scripts undergo round-robin pairwise tournaments, and losing scripts are revised using critic feedback."
+    },
+    {
+      "name": "Script-conditioned video rendering loop",
+      "summary": "For each selected script, a scene director creates storyboards and rendering critics iteratively refine shots. The system uses history-level single-elimination tournaments to choose the best shot revisions and a final scene-level tournament to choose among complete video realizations."
+    },
+    {
+      "name": "Engagement normalization for critic alignment",
+      "summary": "The paper fits per-channel logistic growth models to YouTube view-count trajectories and uses projected carrying capacity as an engagement score for selecting top, middle, and bottom tiers of sketches."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Blind randomized human evaluation of COMIC, VGoT, MovieAgent, Veo 3.1, and Sora 2 with 22 responses per method and 110 responses total; participants rated videos on 7-point Likert scales for funniness, watch-more intent, comparison to human comedy, script quality, narrative quality, realism, and consistency."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Paired A/B ablation comparing full COMIC against a critic-free baseline across funniness, script quality, narrative quality, visual realism, and visual consistency; neutral responses were excluded."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Aligned LLM critics perform pairwise comparisons between scripts or videos, including Single Best, Mean Critic, Task-Wise Best, and Channel-Wise Best aggregation strategies."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Win Rate, Inter-Diversity, and Intra-Diversity are computed from pairwise evaluator probabilities over generated samples versus references."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "YouTube view counts are normalized by video age using per-channel logistic growth models and used as empirical audience engagement signals for critic alignment."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Task-Wise Best critic selection achieved the highest average validation accuracy for script engagement discrimination, beating Mean Critic and Single Best on both comparison tasks.",
+      "metric": "validation accuracy",
+      "value": "0.64 (Top vs. Middle average); 0.83 (Top vs. Bottom average)",
+      "dataset": "Tiered YouTube sketch engagement set",
+      "best_system": "Task-Wise Best"
+    },
+    {
+      "finding": "Task-Wise Best critics also generalized best to held-out scripts.",
+      "metric": "test accuracy",
+      "value": "0.578 (Top vs. Middle); 0.716 (Top vs. Bottom)",
+      "dataset": "Tiered YouTube sketch engagement set",
+      "best_system": "Task-Wise Best"
+    },
+    {
+      "finding": "In human evaluation, COMIC had the highest funniness score, above Sora 2, Veo 3.1, VGoT, and MovieAgent.",
+      "metric": "Funniness, 7-point Likert mean",
+      "value": "3.45",
+      "dataset": "human evaluation videos",
+      "best_system": "COMIC"
+    },
+    {
+      "finding": "On comparison to human comedy, COMIC scored between Slightly Less Funny and Comparable, higher than all baselines.",
+      "metric": "vs. Human, 7-point Likert mean",
+      "value": "3.05",
+      "dataset": "human evaluation videos",
+      "best_system": "COMIC"
+    },
+    {
+      "finding": "In automated video evaluation against middle-tier test videos, COMIC had the highest win rate under both critic aggregation strategies.",
+      "metric": "Win Rate",
+      "value": "0.440 (Single Best); 0.390 (Channel-Wise Best)",
+      "dataset": "Middle-tier YouTube sketch test videos",
+      "best_system": "COMIC"
+    },
+    {
+      "finding": "Human raters preferred full COMIC over the critic-free ablation across all measured dimensions.",
+      "metric": "A/B preference for COMIC vs. No Critics",
+      "value": "57% vs 43% Script; 71% vs 29% Narrative; 88% vs 12% Realism; 100% Consistency; 62% vs 38% Funniness",
+      "dataset": "critic-free ablation user study",
+      "best_system": "COMIC"
+    }
+  ],
+  "key_findings": [
+    "Task-wise critic selection aligned to YouTube engagement tiers outperformed pooled and single-best critic baselines on both validation and held-out test comparisons.",
+    "COMIC outperformed the agentic video baselines VGoT and MovieAgent by large margins across all human-evaluated dimensions.",
+    "COMIC beat Sora 2 and Veo 3.1 on funniness, watch-more intent, comparison to human comedy, script quality, and narrative quality, while Sora 2 and Veo 3.1 scored higher on realism and consistency.",
+    "The automated video evaluation ranking, COMIC > Sora > Veo > MovieAgent approximately VGoT, aligned with the human evaluation results reported in Table 3.",
+    "The multi-island topology yielded higher overall win rate and intra-diversity than a single-island configuration.",
+    "The critic-free ablation was weaker across script, narrative, realism, consistency, and funniness, indicating that iterative multi-agent critic refinement is central to the system’s performance."
+  ],
+  "limitations": [
+    "The iterative refinement process incurs computational costs, although the paper notes that local structures can be parallelized.",
+    "Normalized YouTube view counts are used as a proxy for humor quality, but this may introduce noise from clickbait and algorithmic promotion.",
+    "The paper identifies adding sound effects as future work to enrich the audio-visual experience beyond dialogue.",
+    "The paper identifies model-output attribution and originality quantification as future work when building on large internet corpora.",
+    "COMIC scored lower than Sora 2 and Veo 3.1 on human-rated realism and consistency, partly because COMIC’s longer output durations create more opportunities for visual artifacts."
+  ],
+  "safety_ethics_notes": "The paper notes the need for pipelines to attribute model outputs and quantify originality when building on large internet corpora.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Project page with videos: https://susunghong.github.io/COMIC"
+  }
+}

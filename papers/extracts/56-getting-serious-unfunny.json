@@ -1,0 +1,202 @@
+{
+  "key": "56-getting-serious-unfunny",
+  "ref": "#56",
+  "section": "Part 8 - Datasets & Shared Tasks",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/56-getting-serious-unfunny/56-getting-serious-unfunny.md",
+  "source_md_sha256": "8426413f094504d759d5645dc9901d06536b914054b4202fa6fece9e4fe847b6",
+  "source_truncated": false,
+  "title": "Getting Serious about Humor: Crafting Humor Datasets with Unfunny Large Language Models",
+  "authors": [
+    "Zachary Horvitz",
+    "Jingru Chen",
+    "Rahul Aditya",
+    "Harshvardhan Srivastava",
+    "Robert West",
+    "Zhou Yu",
+    "Kathleen McKeown"
+  ],
+  "year": 2024,
+  "venue": "arXiv:2403.00794v2 [cs.CL]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can large language models generate useful aligned humor/non-humor data by editing humorous texts into non-humorous counterparts?",
+    "How do LLMs compare with human Unfun players at editing away humor and with satirical writers at editing humor into serious headlines?",
+    "Does synthetic unfunny data improve downstream humor detection and create challenging adversarial examples for humor classifiers?",
+    "Does GPT-4’s ability to edit away humor generalize beyond English satirical headlines to code-mixed English-Hindi tweets?"
+  ],
+  "tasks": [
+    "humor detection",
+    "unfun generation / humor removal",
+    "satirical headline generation",
+    "synthetic data generation for humor classification",
+    "adversarial evaluation of humor classifiers"
+  ],
+  "humor_domains": [
+    "satirical news headlines",
+    "The Onion-style satire",
+    "code-mixed English-Hindi tweets",
+    "social media humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Hindi",
+    "English-Hindi code-mixed"
+  ],
+  "datasets_used": [
+    {
+      "name": "Getting Serious with LLMs (unfun pairs)",
+      "role": "introduced",
+      "size": "3,882 synthetic Unfun examples per approach; human-vetted English-Hindi unfuns n = 97 for holdout evaluation"
+    },
+    {
+      "name": "Unfun.me database dumps",
+      "role": "evaluated-on",
+      "size": "11,831 pairs; high quality subset of 867 pairs; training set of 3,882 unfuns, dev set of 186 unfuns, and test set of 375 unfuns"
+    },
+    {
+      "name": "English-Hindi Humor dataset (Khandelwal et al., 2018)",
+      "role": "evaluated-on",
+      "size": "available dataset (n = 2951); split into training, dev, and test shards (60%, 20%, 20%)"
+    },
+    {
+      "name": "Real news headlines included in the Unfun database",
+      "role": "trained-on",
+      "size": "3,882 real news headlines"
+    },
+    {
+      "name": "The Onion headlines",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4",
+    "GPT-3.5-TURBO",
+    "MISTRAL-7B",
+    "MISTRAL-7B-INSTRUCT",
+    "ROBERTA-BASE",
+    "ROBERTA-SWAP",
+    "HING-ROBERTA"
+  ],
+  "methods_proposed": [
+    {
+      "name": "LLM unfunning",
+      "summary": "The paper prompts LLMs with few-shot pairs of humorous and serious texts to edit away humor while preserving as much of the original text as possible, producing aligned humorous/non-humorous pairs for humor detection."
+    },
+    {
+      "name": "ROBERTA-SWAP",
+      "summary": "A lightweight baseline that iteratively masks and replaces low-probability tokens in a satirical headline with the highest-probability RoBERTa prediction, using k = 3 swaps in the experiments."
+    },
+    {
+      "name": "GPT-4 filtering for English-Hindi unfuns",
+      "summary": "For code-mixed English-Hindi tweets, GPT-4 first generates unfunned versions of humorous tweets and is then prompted to classify whether outputs remain humorous; outputs classified as humorous are filtered out."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "ROBERTA-SWAP is motivated by the Incongruity Theory of Humor, which the paper describes as associating humor with surprise; the method replaces low-probability tokens that may create incongruity."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "The paper links humorous headlines to higher perplexities and uses probability ratios under RoBERTa to identify surprising tokens for replacement."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "For Unfun, the paper fine-tunes MISTRAL and ROBERTA humor classifiers on synthetic or human-edited data and reports median holdout accuracies and standard errors over 5 seeds on a balanced holdout set (n = 750). It also reports diversity (TTR) and edit distance."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For Unfun, 10 American native-English-speaking university students annotated n = 100 samples per approach, with three annotations per example and majority-vote labels for real/satire/neither, funniness, grammaticality, and coherence."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For English-Hindi, three bilingual Hindi-English speakers annotated n = 125 samples per approach, with three annotations per example and majority-vote labels for humorous/non-humorous and coherence."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "For English-Hindi, the paper fine-tunes HING-ROBERTA classifiers and reports median accuracies and standard errors over 5 seeds on an original-dataset holdout set (n = 591) and human-vetted unfuns (n = 97)."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-4 is used as a secondary filter for English-Hindi generated unfuns by classifying whether an unfunned tweet is still humorous."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Original Unfun player ratings are used to create the high-quality subset by requiring satirical headline funniness rating >= 0.8 and unfunned headline funniness rating <= 0.2."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On Unfun automatic evaluation, human Unfun Players achieved the highest classifier accuracies, while GPT-4 was the strongest synthetic unfun source and incurred the smallest drop from human-edited training data.",
+      "metric": "Holdout accuracy",
+      "value": "Human Players: MISTRAL 80.3 (0.5), ROBERTA 72.7 (0.4); GPT-4: MISTRAL 76.5 (0.2), ROBERTA 69.9 (0.5); ΔMistral = -3.8%, ΔRoBERTa = -2.8%",
+      "dataset": "Unfun.me database dumps",
+      "best_system": "Human Players overall; GPT-4 among synthetic unfun sources"
+    },
+    {
+      "finding": "Synthetic unfuns from GPT-3.5 and GPT-4 were more likely than human unfuns to be rated as real news headlines by annotators.",
+      "metric": "Rated Real",
+      "value": "GPT-3.5 51%; GPT-4 49%; Human Players 33%",
+      "dataset": "Unfun.me database dumps",
+      "best_system": "GPT-3.5"
+    },
+    {
+      "finding": "LLM-generated satire underperformed The Onion in human funniness judgments.",
+      "metric": "Slightly Funny / Funny",
+      "value": "The Onion 68% / 24%; GPT-3.5 54% / 8%; GPT-4 45% / 10%",
+      "dataset": "Unfun.me database dumps",
+      "best_system": "The Onion"
+    },
+    {
+      "finding": "For English-Hindi tweets, GPT-4 unfuns were rated about as humorous as original non-humorous tweets, and GPT-4 filtering sharply reduced remaining humor.",
+      "metric": "Humor; Coherence; Edit Dist",
+      "value": "Non-Humor: Humor 16.8%, Coherence 92.8%; GPT-4 Unfuns: Edit Dist 6.6, Humor 16.0%, Coherence 93.6%; + GPT-4 Filter: Edit Dist 6.9, Humor 3.6%, Coherence 89.3%; Humor: Humor 48.0%, Coherence 93.6%",
+      "dataset": "English-Hindi Humor dataset (Khandelwal et al., 2018)",
+      "best_system": "GPT-4 + GPT-4 Filter"
+    },
+    {
+      "finding": "On human-vetted English-Hindi unfuns, classifiers trained only on the original dataset performed poorly, while replacing 50% of non-humorous training examples with synthetic unfuns improved unfun accuracy but reduced original-dataset balanced accuracy.",
+      "metric": "Accuracy / Balanced Accuracy",
+      "value": "Original: Unfuns 22.6 (3.7), Original Dataset Balanced Accuracy 67.9 (0.9); (25%) Synth Unfuns: Unfuns 34.0 (8.4), Balanced Accuracy 67.7 (1.7); (50%) Synth Unfuns: Unfuns 57.7 (6.0), Balanced Accuracy 62.1 (0.6)",
+      "dataset": "English-Hindi Humor dataset (Khandelwal et al., 2018)",
+      "best_system": "(50%) Synth Unfuns for unfun holdout accuracy"
+    }
+  ],
+  "key_findings": [
+    "Current LLMs are much stronger at editing humor out of existing jokes than at editing humor into serious text.",
+    "GPT-4 produced the best synthetic Unfun training data, with classifier performance close to human-edited Unfun pairs and above the real-news baseline.",
+    "In human evaluations, GPT-3.5 and GPT-4 unfuns were rated as real news more often than human player unfuns while remaining similarly unfunny and more grammatical/coherent.",
+    "All synthetic humor-generation approaches significantly underperformed The Onion headlines on funniness and realness ratings.",
+    "GPT-4’s unfunning ability generalized to code-mixed English-Hindi tweets, especially when outputs were filtered by GPT-4.",
+    "English-Hindi synthetic unfuns exposed poor generalization in humor classifiers trained on the original corpus, suggesting reliance on superficial features."
+  ],
+  "limitations": [
+    "The paper evaluates only English satirical headlines and code-mixed English-Hindi tweets, leaving broader cultural and genre variation for future work.",
+    "Humor subjectivity complicates evaluation; in Table 3, only 48% of tweets previously annotated as humorous were rated humorous by the paper’s annotators, and 16% of non-humorous tweets were rated humorous.",
+    "Human Unfun players were incentivized to make minimal edits, which may have affected their human-evaluation metrics and lowered their edit distances.",
+    "LLMs, especially GPT-4 and GPT-3.5, tended to modify headlines more than human players, with edit distances of 3.8 and 4.5 versus 2.9.",
+    "Data contamination and memorization are possible concerns for Unfun, although the paper reports only small overlap counts in Appendix A.6 and notes that English-Hindi pairs did not already exist on the internet."
+  ],
+  "safety_ethics_notes": "The paper notes that humor can cause harms when offensive or hurtful jokes reinforce prejudice, and argues that better humor detection is important for AI systems. It also warns that malicious actors could use unfunning to build parallel datasets of offensive text and non-offensive counterparts, potentially training models for offensive joke generation; the authors observed settings where GPT-4 refused to generate offensive jokes but could edit texts to remove humor and offensiveness.",
+  "artifacts": {
+    "code_url": "https://github.com/zacharyhorvitz/Getting-Serious-With-LLMs",
+    "data_url": "https://github.com/zacharyhorvitz/Getting-Serious-With-LLMs",
+    "other": "Source datasets mentioned: https://github.com/epfl-dlab/unfun and https://github.com/Ankh2295/humor-detection-corpus"
+  }
+}

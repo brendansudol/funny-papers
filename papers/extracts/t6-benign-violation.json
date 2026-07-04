@@ -1,0 +1,180 @@
+{
+  "key": "t6-benign-violation",
+  "ref": "T6",
+  "section": "Theory Foundations",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/t6-benign-violation/t6-benign-violation.md",
+  "source_md_sha256": "10ee2efdd96733f43e9ffc326f18dc3256b57631a6d9790c680ceaf568b60414",
+  "source_truncated": false,
+  "title": "Benign Violations: Making Immoral Behavior Funny",
+  "authors": [
+    "A. Peter McGraw",
+    "Caleb Warren"
+  ],
+  "year": 2010,
+  "venue": "Psychological Science",
+  "paper_types": [
+    "theory",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Do moral violations that can be seen as benign elicit laughter and amusement more than similar nonviolations?",
+    "Are people who interpret a situation as both a violation and benign more likely to smile or laugh than people who interpret it as only wrong or only not wrong?",
+    "Do benign moral violations elicit mixed emotions of amusement and disgust rather than strictly positive or strictly negative emotion?",
+    "Do alternative acceptable norms, weak commitment to a violated norm, and psychological distance make moral violations seem benign and therefore humorous?"
+  ],
+  "tasks": [
+    "humor elicitation",
+    "humor perception",
+    "laughter/amusement response measurement",
+    "mixed emotion measurement in humorous moral violations"
+  ],
+  "humor_domains": [
+    "moral violations",
+    "taboo humor",
+    "disgust humor",
+    "immoral scenarios"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Study 1 moral violation/control scenarios",
+      "role": "introduced",
+      "size": "4 scenarios, each with violation and control versions"
+    },
+    {
+      "name": "Snorting Remains scenario",
+      "role": "analyzed",
+      "size": "1 scenario with violation and control versions"
+    },
+    {
+      "name": "Kitten scenario",
+      "role": "source-material",
+      "size": "1 scenario with harmless and harmful versions"
+    },
+    {
+      "name": "Hummer scenario",
+      "role": "source-material",
+      "size": "1 scenario with control and violation versions"
+    },
+    {
+      "name": "Chicken scenario",
+      "role": "source-material",
+      "size": "1 scenario with control and violation versions"
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "benign-violation hypothesis",
+      "summary": "The paper proposes that humor is aroused when a situation is appraised as a violation, appraised as benign, and these two appraisals occur simultaneously. It tests three ways violations can become benign: an alternative norm makes the behavior acceptable, weak commitment to the violated norm, and psychological distance from the violation."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "benign violation",
+      "usage": "operationalized",
+      "detail": "The five studies operationalize the hypothesis by manipulating whether moral violations are also harmless, supported by an alternative norm, weakly threatening because of low norm commitment, or psychologically distant."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper discusses simultaneity, bisociation, synergy, and incongruity as prior ideas that humor requires two contradictory ideas about the same situation to be held simultaneously."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "Superiority theory is discussed as one broad humor theory that can erroneously predict humor in some unexpected tragedies."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "Tension release is discussed as one broad humor theory that can erroneously predict humor in some unexpected tragedies."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Study 1 had 66 people on a large university campus read violation and control versions of four scenarios and answer yes/no questions about whether the behavior was wrong and whether the scenario made them laugh."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "In Study 2, a research assistant blind to condition and hypotheses observed whether each participant smiled or laughed while reading the scenario; participants who smiled or laughed were coded as displaying amusement."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Studies 2–5 used participant self-reports on dichotomous yes/no measures of wrongness, amusement, disgust, and interpretations as wrong or not wrong across manipulated moral-violation scenarios."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "In Study 1, violation versions were more likely than control versions to make participants report laughter.",
+      "metric": "self-reported laughter",
+      "value": "44% vs. 5%; F(1, 58) = 112.4, p < .001",
+      "dataset": "Study 1 moral violation/control scenarios",
+      "best_system": null
+    },
+    {
+      "finding": "In Study 1, a significant percentage of participants both considered the violation-version behavior wrong and reported laughing at it.",
+      "metric": "both wrong and made me laugh",
+      "value": "27% vs. 0%; F(1, 58) = 60.7, p < .001",
+      "dataset": "Study 1 moral violation/control scenarios",
+      "best_system": null
+    },
+    {
+      "finding": "In Study 2, the violation version of the Snorting Remains scenario produced more observed amusement than the control version, and participants who saw the behavior as both wrong and not wrong showed more amusement than others.",
+      "metric": "observed amusement",
+      "value": "32% vs. 8%; χ²(1, N = 73) = 6.5, p = .01; 44% vs. 13%; χ²(1, N = 73) = 8.5, p < .01",
+      "dataset": "Snorting Remains scenario",
+      "best_system": null
+    },
+    {
+      "finding": "In Study 3, the harmless kitten violation was more amusing and produced more mixed amusement-disgust than the harmful version.",
+      "metric": "amused; both disgusted and amused",
+      "value": "61% vs. 28%; χ²(1, N = 36) = 4.1, p < .05; 56% vs. 22%; χ²(1, N = 36) = 4.2, p < .05",
+      "dataset": "Kitten scenario",
+      "best_system": null
+    },
+    {
+      "finding": "In Study 4, nonchurchgoers were more amused than churchgoers by the church-Hummer violation and were more likely to report both amusement and disgust.",
+      "metric": "amused; both disgusted and amused",
+      "value": "92% vs. 62%; χ²(1, N = 39) = 4.1, p < .05; 69% vs. 35%; χ²(1, N = 39) = 4.2, p < .05",
+      "dataset": "Hummer scenario",
+      "best_system": null
+    },
+    {
+      "finding": "In Study 5, participants primed to feel psychologically far from the chicken violation were more amused and more likely to report both amusement and disgust than those primed to feel psychologically near.",
+      "metric": "amused; both disgusted and amused",
+      "value": "73% vs. 39%; χ²(1, N = 40) = 4.6, p < .05; 64% vs. 28%; χ²(1, N = 40) = 5.1, p < .05",
+      "dataset": "Chicken scenario",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Across five studies, benign moral violations elicited laughter, amusement, and mixed amusement-disgust responses.",
+    "Study 2 found that interpreting a behavior as both wrong and not wrong partially mediated the effect of scenario version on behavioral displays of amusement, Sobel t = 2.1, p < .05.",
+    "An alternative norm suggesting acceptability made a violation funnier: the harmless kitten scenario produced more amusement and more amusement-disgust than the harmful kitten scenario.",
+    "Weak commitment to a violated norm made the violation more humorous: nonchurchgoers were more amused than churchgoers by a church raffling off a Hummer SUV.",
+    "Psychological distance increased amusement toward a moral violation without removing disgust: far-distance participants reported more amusement and mixed emotion than near-distance participants in the chicken scenario.",
+    "The paper argues that negative emotion can accompany laughter and amusement, so humor is not necessarily a strictly positive emotional experience."
+  ],
+  "limitations": [
+    "The experiments tested the benign-violation hypothesis in the domain of moral violations; other domains such as tickling, teasing, slapstick, and puns are discussed but not experimentally tested in this paper.",
+    "Participants were people approached on a large university campus or undergraduates at a large university.",
+    "Across the five studies, the authors report no consistent evidence for gender effects; when gender effects were present, women tended to be less amused than men, possibly due to stimulus selection or socially desirable responding, and the authors leave this question to future research.",
+    "The authors suspect that amusement in the Study 4 control condition may have occurred because the brand name Hummer can also be used as a euphemism for a sexual act, creating an unintended benign violation."
+  ],
+  "safety_ethics_notes": "The studies used taboo moral-violation scenarios involving sexual content, animal contact, disrespect for remains, theft, and religious sanctity. The authors declared that they had no conflicts of interest with respect to authorship or publication.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The scenario stimuli are printed in Table 1 and Table 2; no separate code or data release is stated."
+  }
+}

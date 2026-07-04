@@ -1,0 +1,2512 @@
+{
+  "generated_from": "humor-and-llms-field-guide.md",
+  "created": "2026-07-03",
+  "note": "Master catalog of papers referenced in the field guide. `key` is the canonical file/dir name (papers/pdfs/<key>.pdf, papers/md/<key>/). `ref` is the entry number in the guide. Status lifecycle: pending -> downloaded -> converted; or unavailable / download_failed. `verify` is a lowercase phrase expected in the first pages of the PDF (sanity check against grabbing the wrong paper).",
+  "papers": [
+    {
+      "key": "t1-ssth",
+      "ref": "T1",
+      "section": "Theory Foundations",
+      "title": "Semantic Mechanisms of Humor (Script-based Semantic Theory of Humor)",
+      "authors": "Victor Raskin",
+      "year": 1985,
+      "venue": "Reidel/Springer (book)",
+      "tags": [
+        "theory"
+      ],
+      "page_url": "https://link.springer.com/book/10.1007/978-94-009-6472-3",
+      "pdf_candidates": [],
+      "status": "unavailable",
+      "note": "Book; no open-access PDF."
+    },
+    {
+      "key": "t2-gtvh",
+      "ref": "T2",
+      "section": "Theory Foundations",
+      "title": "The General Theory of Verbal Humor (GTVH)",
+      "authors": "Salvatore Attardo & Victor Raskin",
+      "year": 1991,
+      "venue": "HUMOR 4:293-347; expanded in Attardo, Linguistic Theories of Humor (1994)",
+      "tags": [
+        "theory"
+      ],
+      "page_url": null,
+      "pdf_candidates": [],
+      "status": "unavailable",
+      "note": "Paywalled journal article / book; no open-access PDF."
+    },
+    {
+      "key": "t3-inside-jokes",
+      "ref": "T3",
+      "section": "Theory Foundations",
+      "title": "Inside Jokes: Using Humor to Reverse-Engineer the Mind",
+      "authors": "Matthew Hurley, Daniel Dennett & Reginald Adams",
+      "year": 2011,
+      "venue": "MIT Press (book)",
+      "tags": [
+        "theory"
+      ],
+      "page_url": "https://mitpress.mit.edu/9780262518697/inside-jokes/",
+      "pdf_candidates": [],
+      "status": "unavailable",
+      "note": "Book; no open-access PDF."
+    },
+    {
+      "key": "t4-linguistic-analysis-of-jokes",
+      "ref": "T4",
+      "section": "Theory Foundations",
+      "title": "The Linguistic Analysis of Jokes",
+      "authors": "Graeme Ritchie",
+      "year": 2004,
+      "venue": "Routledge (book)",
+      "tags": [
+        "theory"
+      ],
+      "page_url": "https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731",
+      "pdf_candidates": [],
+      "status": "unavailable",
+      "note": "Book; no open-access PDF."
+    },
+    {
+      "key": "t5-incongruity-resolution",
+      "ref": "T5",
+      "section": "Theory Foundations",
+      "title": "Incongruity-Resolution & Appropriate Incongruity",
+      "authors": "Jerry Suls (1972); Elliott Oring (2003)",
+      "year": 1972,
+      "venue": "Book chapters (Suls two-stage model; Oring, Engaging Humor)",
+      "tags": [
+        "theory"
+      ],
+      "page_url": null,
+      "pdf_candidates": [],
+      "status": "unavailable",
+      "note": "Book chapters; no open-access PDF."
+    },
+    {
+      "key": "t6-benign-violation",
+      "ref": "T6",
+      "section": "Theory Foundations",
+      "title": "Benign Violations: Making Immoral Behavior Funny",
+      "authors": "Peter McGraw & Caleb Warren",
+      "year": 2010,
+      "venue": "Psychological Science",
+      "tags": [
+        "theory"
+      ],
+      "page_url": "https://journals.sagepub.com/doi/10.1177/0956797610376073",
+      "pdf_candidates": [
+        "https://leeds-faculty.colorado.edu/mcgrawp/pdf/mcgraw.warren.2010.pdf"
+      ],
+      "verify": "benign violation",
+      "status": "converted",
+      "note": "Author-hosted copy; journal version is paywalled. Distance follow-ups (2012, 2014) are paywalled and not downloaded.",
+      "pdf_path": "papers/pdfs/t6-benign-violation.pdf",
+      "pdf_source": "https://leeds-faculty.colorado.edu/mcgrawp/pdf/mcgraw.warren.2010.pdf",
+      "pdf_bytes": 233627,
+      "pdf_sha256": "5da596fbee46a5f90ade2e327fb69f91e3db10b50e6db8df1c7b27d906a99f54",
+      "page_count": 9,
+      "verify_ok": true,
+      "md_path": "papers/md/t6-benign-violation/t6-benign-violation.md",
+      "md_pages_dir": "papers/md/t6-benign-violation/pages",
+      "md_page_files": 9,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 141
+    },
+    {
+      "key": "x15-minsky-jokes",
+      "ref": "Theory (also worth knowing)",
+      "section": "Theory Foundations",
+      "title": "Jokes and the Logic of the Cognitive Unconscious",
+      "authors": "Marvin Minsky",
+      "year": 1980,
+      "venue": "MIT AI Memo 603",
+      "tags": [
+        "theory"
+      ],
+      "page_url": "https://dspace.mit.edu/handle/1721.1/6300",
+      "pdf_candidates": [
+        "https://dspace.mit.edu/bitstream/handle/1721.1/6300/AIM-603.pdf",
+        "https://dspace.mit.edu/bitstream/handle/1721.1/6300/AIM-603.pdf?sequence=2"
+      ],
+      "status": "converted",
+      "note": "Only 'Also worth knowing' theory item with an open PDF (MIT DSpace). Other items in that list (Coulson, Martin, HSQ, Provine, Berger, Dikkers, classical works) are books/paywalled.",
+      "pdf_path": "papers/pdfs/x15-minsky-jokes.pdf",
+      "pdf_source": "https://dspace.mit.edu/bitstream/handle/1721.1/5701/AIM-603.pdf",
+      "pdf_bytes": 8672677,
+      "pdf_sha256": "0f7554429ff2c5b4c56fa668b77f84e232fb0b85324849d10f9f24011939ee93",
+      "page_count": 25,
+      "md_path": "papers/md/x15-minsky-jokes/x15-minsky-jokes.md",
+      "md_pages_dir": "papers/md/x15-minsky-jokes/pages",
+      "md_page_files": 25,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 168
+    },
+    {
+      "key": "01-androids-electric-sheep",
+      "ref": "#1",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "Do Androids Laugh at Electric Sheep? Humor \"Understanding\" Benchmarks from The New Yorker Caption Contest",
+      "authors": "Hessel et al.",
+      "year": 2023,
+      "venue": "ACL 2023",
+      "tags": [
+        "peer-reviewed",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2209.06293",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2209.06293"
+      ],
+      "verify": "electric sheep",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/01-androids-electric-sheep.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2209.06293",
+      "pdf_bytes": 3694514,
+      "pdf_sha256": "170f6ff564a6f78025f61f204bc4608e79757f03181c061e565b32c17ec35bc6",
+      "page_count": 25,
+      "verify_ok": true,
+      "md_path": "papers/md/01-androids-electric-sheep/01-androids-electric-sheep.md",
+      "md_pages_dir": "papers/md/01-androids-electric-sheep/pages",
+      "md_page_files": 25,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 288
+    },
+    {
+      "key": "02-chatgpt-fun-not-funny",
+      "ref": "#2",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "ChatGPT is fun, but it is not funny! Humor is still challenging LLMs",
+      "authors": "Jentzsch & Kersting",
+      "year": 2023,
+      "venue": "WASSA 2023",
+      "tags": [
+        "workshop"
+      ],
+      "page_url": "https://arxiv.org/abs/2306.04563",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2306.04563"
+      ],
+      "verify": "not funny",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/02-chatgpt-fun-not-funny.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2306.04563",
+      "pdf_bytes": 811205,
+      "pdf_sha256": "1aef545b503cec21a99623aa1fc7017059339e84ba18af0b512bbc78a65f0e53",
+      "page_count": 16,
+      "verify_ok": true,
+      "md_path": "papers/md/02-chatgpt-fun-not-funny/02-chatgpt-fun-not-funny.md",
+      "md_pages_dir": "papers/md/02-chatgpt-fun-not-funny/pages",
+      "md_page_files": 16,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 178
+    },
+    {
+      "key": "03-humorbench",
+      "ref": "#3",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "Which LLMs Get the Joke? Probing Non-STEM Reasoning Abilities with HumorBench",
+      "authors": "Narad et al.",
+      "year": 2025,
+      "venue": "arXiv:2507.21476",
+      "tags": [
+        "preprint",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2507.21476",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2507.21476"
+      ],
+      "verify": "humorbench",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/03-humorbench.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2507.21476",
+      "pdf_bytes": 11505096,
+      "pdf_sha256": "6beed5175d007ec6be491f17eb62fde9b1250596384488c13083f8024313cfaa",
+      "page_count": 14,
+      "verify_ok": true,
+      "md_path": "papers/md/03-humorbench/03-humorbench.md",
+      "md_pages_dir": "papers/md/03-humorbench/pages",
+      "md_page_files": 14,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 120
+    },
+    {
+      "key": "04-pun-unintended",
+      "ref": "#4",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "Pun Unintended: LLMs and the Illusion of Humor Understanding",
+      "authors": "Zangari et al.",
+      "year": 2025,
+      "venue": "EMNLP 2025",
+      "tags": [
+        "peer-reviewed",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2509.12158",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2509.12158"
+      ],
+      "verify": "pun unintended",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/04-pun-unintended.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2509.12158",
+      "pdf_bytes": 5282216,
+      "pdf_sha256": "2b36dca024a4a72a44f9dd74f2640e9316cbefb0fa1d2becf6a03d903d0a35cf",
+      "page_count": 36,
+      "verify_ok": true,
+      "md_path": "papers/md/04-pun-unintended/04-pun-unintended.md",
+      "md_pages_dir": "papers/md/04-pun-unintended/pages",
+      "md_page_files": 36,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 362
+    },
+    {
+      "key": "05-apples-to-oranges",
+      "ref": "#5",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "Comparing Apples to Oranges: LLM Humour Understanding from Traditional Puns to Topical Jokes",
+      "authors": "Loakman, Thorne & Lin",
+      "year": 2025,
+      "venue": "EMNLP Findings 2025",
+      "tags": [
+        "peer-reviewed",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2507.13335",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2507.13335"
+      ],
+      "verify": "apples to oranges",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/05-apples-to-oranges.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2507.13335",
+      "pdf_bytes": 5665024,
+      "pdf_sha256": "06748f94029d86a7c489ab5df8d6a9ae621695dc761b2cc4a6a5a772924f5da0",
+      "page_count": 17,
+      "verify_ok": true,
+      "md_path": "papers/md/05-apples-to-oranges/05-apples-to-oranges.md",
+      "md_pages_dir": "papers/md/05-apples-to-oranges/pages",
+      "md_page_files": 17,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 172
+    },
+    {
+      "key": "06-good-pun-own-reword",
+      "ref": "#6",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "\"A good pun is its own reword\": Can Large Language Models Understand Puns?",
+      "authors": "Xu, Yuan, Chen & Yang",
+      "year": 2024,
+      "venue": "EMNLP 2024",
+      "tags": [
+        "peer-reviewed"
+      ],
+      "page_url": "https://aclanthology.org/2024.emnlp-main.657/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2024.emnlp-main.657.pdf"
+      ],
+      "verify": "reword",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/06-good-pun-own-reword.pdf",
+      "pdf_source": "https://aclanthology.org/2024.emnlp-main.657.pdf",
+      "pdf_bytes": 935532,
+      "pdf_sha256": "970e67d0259ad24ea28aead05c2b217cc5256386c59f951584428854dc6e36cb",
+      "page_count": 17,
+      "verify_ok": true,
+      "md_path": "papers/md/06-good-pun-own-reword/06-good-pun-own-reword.md",
+      "md_pages_dir": "papers/md/06-good-pun-own-reword/pages",
+      "md_page_files": 17,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 260
+    },
+    {
+      "key": "07-expunations",
+      "ref": "#7",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "ExPUNations: Augmenting Puns with Keywords and Explanations",
+      "authors": "Sun et al.",
+      "year": 2022,
+      "venue": "EMNLP 2022",
+      "tags": [
+        "peer-reviewed",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2210.13513",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2210.13513"
+      ],
+      "verify": "expunations",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/07-expunations.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2210.13513",
+      "pdf_bytes": 4105029,
+      "pdf_sha256": "dfc945b7fe621094129c107ffeb166fe912a675ba85f47c9cbe3924908cab4ed",
+      "page_count": 16,
+      "verify_ok": true,
+      "md_path": "papers/md/07-expunations/07-expunations.md",
+      "md_pages_dir": "papers/md/07-expunations/pages",
+      "md_page_files": 16,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 239
+    },
+    {
+      "key": "08-phunny",
+      "ref": "#8",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "\"What do you call a dog that is incontrovertibly true? Dogma\": Testing LLM Generalization through Humor (Phunny)",
+      "authors": "Cocchieri et al.",
+      "year": 2025,
+      "venue": "ACL 2025",
+      "tags": [
+        "peer-reviewed",
+        "benchmark",
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/2025.acl-long.1117/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2025.acl-long.1117.pdf"
+      ],
+      "verify": "phunny",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/08-phunny.pdf",
+      "pdf_source": "https://aclanthology.org/2025.acl-long.1117.pdf",
+      "pdf_bytes": 1162980,
+      "pdf_sha256": "33527be80e3fed243839ff74907e5798ce50dc43479aa36c92d1e6249f09f97e",
+      "page_count": 16,
+      "verify_ok": true,
+      "md_path": "papers/md/08-phunny/08-phunny.md",
+      "md_pages_dir": "papers/md/08-phunny/pages",
+      "md_page_files": 16,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 144
+    },
+    {
+      "key": "09-text-not-all-you-need",
+      "ref": "#9",
+      "section": "Part 1 - Explaining & Understanding Jokes",
+      "title": "Text Is Not All You Need: Multimodal Prompting Helps LLMs Understand Humor",
+      "authors": "Ashwin Baluja",
+      "year": 2025,
+      "venue": "CHum 2025",
+      "tags": [
+        "workshop",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2412.05315",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2412.05315"
+      ],
+      "verify": "not all you need",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/09-text-not-all-you-need.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2412.05315",
+      "pdf_bytes": 349126,
+      "pdf_sha256": "9e6f8c8c0b2798c9805284591a6a9b11fa50d151bf5f9bca39df1cd5e25ff05b",
+      "page_count": 9,
+      "verify_ok": true,
+      "md_path": "papers/md/09-text-not-all-you-need/09-text-not-all-you-need.md",
+      "md_pages_dir": "papers/md/09-text-not-all-you-need/pages",
+      "md_page_files": 9,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 96
+    },
+    {
+      "key": "10-joke-master-pun-curriculum",
+      "ref": "#10",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Are U a Joke Master? Pun Generation via Multi-Stage Curriculum Learning towards a Humor LLM",
+      "authors": "Chen et al.",
+      "year": 2024,
+      "venue": "Findings of ACL 2024",
+      "tags": [
+        "peer-reviewed",
+        "method",
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/2024.findings-acl.51/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2024.findings-acl.51.pdf"
+      ],
+      "verify": "joke master",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/10-joke-master-pun-curriculum.pdf",
+      "pdf_source": "https://aclanthology.org/2024.findings-acl.51.pdf",
+      "pdf_bytes": 1707154,
+      "pdf_sha256": "63603991747fa7c8bd1d47b9d0534a95e764b2f271b77d6fad9b13866900111f",
+      "page_count": 13,
+      "verify_ok": true,
+      "md_path": "papers/md/10-joke-master-pun-curriculum/10-joke-master-pun-curriculum.md",
+      "md_pages_dir": "papers/md/10-joke-master-pun-curriculum/pages",
+      "md_page_files": 13,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 194
+    },
+    {
+      "key": "11-clot-leap-of-thought",
+      "ref": "#11",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Let's Think Outside the Box: Leap-of-Thought in LLMs with Creative Humor Generation (CLoT)",
+      "authors": "Zhong et al.",
+      "year": 2024,
+      "venue": "CVPR 2024",
+      "tags": [
+        "peer-reviewed",
+        "method",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2312.02439",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2312.02439"
+      ],
+      "verify": "leap-of-thought",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/11-clot-leap-of-thought.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2312.02439",
+      "pdf_bytes": 16000404,
+      "pdf_sha256": "d7295756c15c787e4062eaea29e097a20de395a388732b3a7c7e60d6e38221cc",
+      "page_count": 41,
+      "verify_ok": true,
+      "md_path": "papers/md/11-clot-leap-of-thought/11-clot-leap-of-thought.md",
+      "md_pages_dir": "papers/md/11-clot-leap-of-thought/pages",
+      "md_page_files": 41,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 393
+    },
+    {
+      "key": "12-lol-thought-leaps",
+      "ref": "#12",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Innovative Thinking, Infinite Humor: Humor Research of Large Language Models through Structured Thought Leaps (LoL)",
+      "authors": "Wang et al.",
+      "year": 2025,
+      "venue": "ICLR 2025",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2410.10370",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2410.10370"
+      ],
+      "verify": "infinite humor",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/12-lol-thought-leaps.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2410.10370",
+      "pdf_bytes": 7411686,
+      "pdf_sha256": "96127bcda7e71b3f4fb7d2345205b21d0b99beb56b01f6f0418657351f747104",
+      "page_count": 25,
+      "verify_ok": true,
+      "md_path": "papers/md/12-lol-thought-leaps/12-lol-thought-leaps.md",
+      "md_pages_dir": "papers/md/12-lol-thought-leaps/pages",
+      "md_page_files": 25,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 315
+    },
+    {
+      "key": "13-humorgen-persona-distillation",
+      "ref": "#13",
+      "section": "Part 2 - Generating Jokes",
+      "title": "HumorGen: Cognitive Synergy for Humor Generation in Large Language Models via Persona-Based Distillation",
+      "authors": "Ajayi & Mitra",
+      "year": 2026,
+      "venue": "arXiv:2604.09629",
+      "tags": [
+        "preprint",
+        "method",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2604.09629",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2604.09629"
+      ],
+      "verify": "humorgen",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/13-humorgen-persona-distillation.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2604.09629",
+      "pdf_bytes": 4513935,
+      "pdf_sha256": "90b08acd17fe68fc9188430cef2f23a391f87fabf3bdc1c98f73bfb9bb5fc364",
+      "page_count": 26,
+      "verify_ok": true,
+      "md_path": "papers/md/13-humorgen-persona-distillation/13-humorgen-persona-distillation.md",
+      "md_pages_dir": "papers/md/13-humorgen-persona-distillation/pages",
+      "md_page_files": 26,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 276
+    },
+    {
+      "key": "14-ai-humor-generation-skills",
+      "ref": "#14",
+      "section": "Part 2 - Generating Jokes",
+      "title": "AI Humor Generation: Cognitive, Social and Creative Skills for Effective Humor",
+      "authors": "Kim & Chilton",
+      "year": 2025,
+      "venue": "arXiv:2502.07981",
+      "tags": [
+        "preprint",
+        "HCI study",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2502.07981",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2502.07981"
+      ],
+      "verify": "humor generation",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/14-ai-humor-generation-skills.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2502.07981",
+      "pdf_bytes": 10521435,
+      "pdf_sha256": "06591a700ba5e2f2c852ac5a3d8222393ecb2979eec71a235b6403f2392a8b66",
+      "page_count": 18,
+      "verify_ok": true,
+      "md_path": "papers/md/14-ai-humor-generation-skills/14-ai-humor-generation-skills.md",
+      "md_pages_dir": "papers/md/14-ai-humor-generation-skills/pages",
+      "md_page_files": 18,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 168
+    },
+    {
+      "key": "15-small-but-funny",
+      "ref": "#15",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Small But Funny: A Feedback-Driven Approach to Humor Distillation",
+      "authors": "Ravi et al.",
+      "year": 2024,
+      "venue": "ACL 2024",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2402.18113",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2402.18113"
+      ],
+      "verify": "small but funny",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/15-small-but-funny.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2402.18113",
+      "pdf_bytes": 1563976,
+      "pdf_sha256": "0d7c234328356c49ea39cbd7d23003aff8868c599157391871763eddf20b4eaf",
+      "page_count": 12,
+      "verify_ok": true,
+      "md_path": "papers/md/15-small-but-funny/15-small-but-funny.md",
+      "md_pages_dir": "papers/md/15-small-but-funny/pages",
+      "md_page_files": 12,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 140
+    },
+    {
+      "key": "16-humor-mechanics-multistep",
+      "ref": "#16",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Humor Mechanics: Advancing Humor Generation with Multistep Reasoning",
+      "authors": "Tikhonov & Shtykovskiy",
+      "year": 2024,
+      "venue": "ICCC 2024",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://computationalcreativity.net/iccc24/papers/ICCC24_paper_128.pdf",
+      "pdf_candidates": [
+        "https://computationalcreativity.net/iccc24/papers/ICCC24_paper_128.pdf",
+        "https://arxiv.org/pdf/2405.07280"
+      ],
+      "verify": "humor mechanics",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/16-humor-mechanics-multistep.pdf",
+      "pdf_source": "https://computationalcreativity.net/iccc24/papers/ICCC24_paper_128.pdf",
+      "pdf_bytes": 278588,
+      "pdf_sha256": "bfacaa96aaabe8a319ae7548b061d9d19c51872585eec7303cf9d1ab0f616fcf",
+      "page_count": 11,
+      "verify_ok": true,
+      "md_path": "papers/md/16-humor-mechanics-multistep/16-humor-mechanics-multistep.md",
+      "md_pages_dir": "papers/md/16-humor-mechanics-multistep/pages",
+      "md_page_files": 11,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 120
+    },
+    {
+      "key": "17-witscript-3",
+      "ref": "#17",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Witscript 3: A Hybrid AI System for Improvising Jokes in a Conversation",
+      "authors": "Joe Toplyn",
+      "year": 2023,
+      "venue": "arXiv:2301.02695",
+      "tags": [
+        "preprint",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2301.02695",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2301.02695"
+      ],
+      "verify": "witscript",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/17-witscript-3.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2301.02695",
+      "pdf_bytes": 180422,
+      "pdf_sha256": "35f715b1000ef1b8952591f75b9fd4dac370ab238e393f9dfabf57d4fdd35318",
+      "page_count": 5,
+      "verify_ok": true,
+      "md_path": "papers/md/17-witscript-3/17-witscript-3.md",
+      "md_pages_dir": "papers/md/17-witscript-3/pages",
+      "md_page_files": 5,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 81
+    },
+    {
+      "key": "18-grounded-satire-rag",
+      "ref": "#18",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Grounded Satirical Generation with RAG",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2026,
+      "venue": "arXiv:2605.10853",
+      "tags": [
+        "preprint",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2605.10853",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2605.10853"
+      ],
+      "verify": "satir",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/18-grounded-satire-rag.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2605.10853",
+      "pdf_bytes": 537285,
+      "pdf_sha256": "a3ada909e137e368e31b8242c673509fe9cb5bbef5816a62c35ef2f0758b8766",
+      "page_count": 10,
+      "verify_ok": true,
+      "md_path": "papers/md/18-grounded-satire-rag/18-grounded-satire-rag.md",
+      "md_pages_dir": "papers/md/18-grounded-satire-rag/pages",
+      "md_page_files": 10,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 97
+    },
+    {
+      "key": "19-jokeasy",
+      "ref": "#19",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Jokeasy: Exploring Human-AI Collaboration in Thematic Joke Generation",
+      "authors": "Ge et al.",
+      "year": 2026,
+      "venue": "IASDR 2025 (arXiv:2602.09496)",
+      "tags": [
+        "peer-reviewed",
+        "HCI study"
+      ],
+      "page_url": "https://arxiv.org/abs/2602.09496",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2602.09496"
+      ],
+      "verify": "jokeasy",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/19-jokeasy.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2602.09496",
+      "pdf_bytes": 5335433,
+      "pdf_sha256": "15cb07a6b0facab451f6d8ef7b4be85a539db557db7416133fe67a35f4ec238e",
+      "page_count": 19,
+      "verify_ok": true,
+      "md_path": "papers/md/19-jokeasy/19-jokeasy.md",
+      "md_pages_dir": "papers/md/19-jokeasy/pages",
+      "md_page_files": 19,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 93
+    },
+    {
+      "key": "20-multi-agent-comedy-club",
+      "ref": "#20",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Multi-Agent Comedy Club: Investigating Community Discussion Effects on LLM Humor Generation",
+      "authors": "Hong, Li, Rong, Shen & Lu",
+      "year": 2026,
+      "venue": "arXiv:2602.14770",
+      "tags": [
+        "preprint",
+        "method",
+        "HCI study"
+      ],
+      "page_url": "https://arxiv.org/abs/2602.14770",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2602.14770"
+      ],
+      "verify": "comedy club",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/20-multi-agent-comedy-club.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2602.14770",
+      "pdf_bytes": 6017941,
+      "pdf_sha256": "a79f9b7a8765900c93de05ae2dc1e3cee7df7a06218c568129d928794737d352",
+      "page_count": 18,
+      "verify_ok": true,
+      "md_path": "papers/md/20-multi-agent-comedy-club/20-multi-agent-comedy-club.md",
+      "md_pages_dir": "papers/md/20-multi-agent-comedy-club/pages",
+      "md_page_files": 18,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 191
+    },
+    {
+      "key": "x02-comic",
+      "ref": "Part 2 (also in this cluster)",
+      "section": "Part 2 - Generating Jokes",
+      "title": "COMIC: Content Optimization via Multi-agent Iterative Competition",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2026,
+      "venue": "arXiv:2603.11048",
+      "tags": [
+        "preprint"
+      ],
+      "page_url": "https://arxiv.org/abs/2603.11048",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2603.11048"
+      ],
+      "verify": "comic",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x02-comic.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2603.11048",
+      "pdf_bytes": 5949084,
+      "pdf_sha256": "f8a98c19fd8dd3a63ad60ca804b756d018b274a4f62da00481ccb7ddbf52eb56",
+      "page_count": 24,
+      "verify_ok": true,
+      "md_path": "papers/md/x02-comic/x02-comic.md",
+      "md_pages_dir": "papers/md/x02-comic/pages",
+      "md_page_files": 24,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 138
+    },
+    {
+      "key": "x03-openmic",
+      "ref": "Part 2 (also in this cluster)",
+      "section": "Part 2 - Generating Jokes",
+      "title": "OpenMic: multi-agent Chinese stand-up generation",
+      "authors": "Wu, Cao, Chen & Li",
+      "year": 2026,
+      "venue": "arXiv:2601.08288",
+      "tags": [
+        "preprint"
+      ],
+      "page_url": "https://arxiv.org/abs/2601.08288",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2601.08288"
+      ],
+      "verify": "stand-up",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x03-openmic.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2601.08288",
+      "pdf_bytes": 2438949,
+      "pdf_sha256": "a848447029694275993286339a6e9a1096cd55b6832ebe4f68a48ba40d2d5783",
+      "page_count": 14,
+      "verify_ok": true,
+      "md_path": "papers/md/x03-openmic/x03-openmic.md",
+      "md_pages_dir": "papers/md/x03-openmic/pages",
+      "md_page_files": 14,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 165
+    },
+    {
+      "key": "x01-jape",
+      "ref": "Part 2 (pre-LLM foundations)",
+      "section": "Part 2 - Generating Jokes",
+      "title": "An implemented model of punning riddles (JAPE)",
+      "authors": "Binsted & Ritchie",
+      "year": 1994,
+      "venue": "AAAI 1994",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/cmp-lg/9406022",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/cmp-lg/9406022"
+      ],
+      "verify": "punning riddles",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x01-jape.pdf",
+      "pdf_source": "https://arxiv.org/pdf/cmp-lg/9406022",
+      "pdf_bytes": 107313,
+      "pdf_sha256": "e63b5f17a8e84bda704841299c430e4d4bdc8cae7beafef03e575f20c64bb280",
+      "page_count": 6,
+      "verify_ok": true,
+      "md_path": "papers/md/x01-jape/x01-jape.md",
+      "md_pages_dir": "papers/md/x01-jape/pages",
+      "md_page_files": 6,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 85
+    },
+    {
+      "key": "21-meme-co-creativity",
+      "ref": "#21",
+      "section": "Part 2 - Generating Jokes",
+      "title": "One Does Not Simply Meme Alone: Co-Creativity Between LLMs and Humans",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2025,
+      "venue": "IUI 2025",
+      "tags": [
+        "peer-reviewed",
+        "HCI study"
+      ],
+      "page_url": "https://arxiv.org/abs/2501.11433",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2501.11433"
+      ],
+      "verify": "meme",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/21-meme-co-creativity.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2501.11433",
+      "pdf_bytes": 2329324,
+      "pdf_sha256": "42bf38b0f11e5b5619fe93c34d5b6db04e625da1c809f3c8a5dbf088273cdf46",
+      "page_count": 11,
+      "verify_ok": true,
+      "md_path": "papers/md/21-meme-co-creativity/21-meme-co-creativity.md",
+      "md_pages_dir": "papers/md/21-meme-co-creativity/pages",
+      "md_page_files": 11,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 156
+    },
+    {
+      "key": "22-caption-preferences",
+      "ref": "#22",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "Humor in AI: Massive Scale Crowd-Sourced Preferences and Benchmarks for Cartoon Captioning",
+      "authors": "Zhang et al.",
+      "year": 2024,
+      "venue": "NeurIPS 2024 (D&B)",
+      "tags": [
+        "peer-reviewed",
+        "dataset",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2406.10522",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2406.10522"
+      ],
+      "verify": "cartoon caption",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/22-caption-preferences.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2406.10522",
+      "pdf_bytes": 1004733,
+      "pdf_sha256": "19edd3c4c73eafef16c9d6424ebaedb2eddb79c15a7041c94bf19f63978cc9c6",
+      "page_count": 22,
+      "verify_ok": true,
+      "md_path": "papers/md/22-caption-preferences/22-caption-preferences.md",
+      "md_pages_dir": "papers/md/22-caption-preferences/pages",
+      "md_page_files": 22,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 230
+    },
+    {
+      "key": "23-creativity-understanding-gap",
+      "ref": "#23",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "Bridging the Creativity Understanding Gap: Small-Scale Human Alignment Enables Expert-Level Humor Ranking",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2025,
+      "venue": "EMNLP Findings 2025",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2502.20356",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2502.20356"
+      ],
+      "verify": "creativity understanding gap",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/23-creativity-understanding-gap.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2502.20356",
+      "pdf_bytes": 9654063,
+      "pdf_sha256": "6967fe28569e7dacfeb14653c80c0701c1529cca86b98d5dd958450301432911",
+      "page_count": 15,
+      "verify_ok": true,
+      "md_path": "papers/md/23-creativity-understanding-gap/23-creativity-understanding-gap.md",
+      "md_pages_dir": "papers/md/23-creativity-understanding-gap/pages",
+      "md_page_files": 15,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 136
+    },
+    {
+      "key": "24-irs-cartoon-captionist",
+      "ref": "#24",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "Learning to Think Like a Cartoon Captionist: Incongruity-Resolution Supervision for Multimodal Humor Understanding",
+      "authors": "Vural et al.",
+      "year": 2026,
+      "venue": "arXiv:2604.15210",
+      "tags": [
+        "preprint",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2604.15210",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2604.15210"
+      ],
+      "verify": "captionist",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/24-irs-cartoon-captionist.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2604.15210",
+      "pdf_bytes": 7358994,
+      "pdf_sha256": "a402c6065972f205b809b60c5ee9c286585a6d16cfd538cd784dd9a26af437a5",
+      "page_count": 38,
+      "verify_ok": true,
+      "md_path": "papers/md/24-irs-cartoon-captionist/24-irs-cartoon-captionist.md",
+      "md_pages_dir": "papers/md/24-irs-cartoon-captionist/pages",
+      "md_page_files": 38,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 297
+    },
+    {
+      "key": "25-humordb",
+      "ref": "#25",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "HumorDB: Can AI Understand Graphical Humor? (earlier arXiv title: Is AI Fun? HumorDB)",
+      "authors": "Jain, dos Santos Alves Feitosa & Kreiman",
+      "year": 2025,
+      "venue": "ICCV 2025",
+      "tags": [
+        "peer-reviewed",
+        "dataset",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2406.13564",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2406.13564"
+      ],
+      "verify": "humordb",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/25-humordb.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2406.13564",
+      "pdf_bytes": 11452891,
+      "pdf_sha256": "5d9d4741a4f8bf753798737bef6095a3ccb0575504fc7094044251ee355c3820",
+      "page_count": 17,
+      "verify_ok": true,
+      "md_path": "papers/md/25-humordb/25-humordb.md",
+      "md_pages_dir": "papers/md/25-humordb/pages",
+      "md_page_files": 17,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 174
+    },
+    {
+      "key": "26-yesbut",
+      "ref": "#26",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "YesBut: A High-Quality Annotated Multimodal Dataset for Evaluating Satire Comprehension of VLMs",
+      "authors": "Nandy et al.",
+      "year": 2024,
+      "venue": "EMNLP 2024",
+      "tags": [
+        "peer-reviewed",
+        "dataset",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2409.13592",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2409.13592"
+      ],
+      "verify": "yesbut",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/26-yesbut.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2409.13592",
+      "pdf_bytes": 4099531,
+      "pdf_sha256": "83bc0bb712f848b1b5c9df86602b8bbfdf2feabd0d7a3ebd250a1741bf7d1667",
+      "page_count": 18,
+      "verify_ok": true,
+      "md_path": "papers/md/26-yesbut/26-yesbut.md",
+      "md_pages_dir": "papers/md/26-yesbut/pages",
+      "md_page_files": 18,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 163
+    },
+    {
+      "key": "27-bottlehumor",
+      "ref": "#27",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "BottleHumor: Self-Informed Humor Explanation using the Information Bottleneck Principle",
+      "authors": "Hwang, West & Shwartz",
+      "year": 2025,
+      "venue": "Findings of ACL 2025",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2502.18331",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2502.18331"
+      ],
+      "verify": "bottlehumor",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/27-bottlehumor.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2502.18331",
+      "pdf_bytes": 7961349,
+      "pdf_sha256": "ec6aef14aa49c2638fc786446302bab3fe32d94848209c6cb8047e94be52456d",
+      "page_count": 22,
+      "verify_ok": true,
+      "md_path": "papers/md/27-bottlehumor/27-bottlehumor.md",
+      "md_pages_dir": "papers/md/27-bottlehumor/pages",
+      "md_page_files": 22,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 226
+    },
+    {
+      "key": "x04-pixelhumor",
+      "ref": "Part 3 (also in this section)",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "Humor in Pixels: Benchmarking Large Multimodal Models Understanding of Online Comics (PixelHumor)",
+      "authors": "(see paper)",
+      "year": 2025,
+      "venue": "EMNLP Findings 2025",
+      "tags": [
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2509.12248",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2509.12248"
+      ],
+      "verify": "pixel",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x04-pixelhumor.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2509.12248",
+      "pdf_bytes": 1229513,
+      "pdf_sha256": "73d4de9087ea8b34f9bf996c41e28115afa820c0307f012f56d889131dc658d7",
+      "page_count": 27,
+      "verify_ok": true,
+      "md_path": "papers/md/x04-pixelhumor/x04-pixelhumor.md",
+      "md_pages_dir": "papers/md/x04-pixelhumor/pages",
+      "md_page_files": 27,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 309
+    },
+    {
+      "key": "x05-memereacon",
+      "ref": "Part 3 (also in this section)",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "MemeReaCon: meme understanding with image, post and comments",
+      "authors": "Zhao et al.",
+      "year": 2025,
+      "venue": "EMNLP 2025",
+      "tags": [
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2505.17433",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2505.17433"
+      ],
+      "verify": "meme",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x05-memereacon.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2505.17433",
+      "pdf_bytes": 4538153,
+      "pdf_sha256": "92fabbfa91c739cb5f5a941079bd7123e9aaff05dd9fcea73dedbf27b2b234d7",
+      "page_count": 21,
+      "verify_ok": true,
+      "md_path": "papers/md/x05-memereacon/x05-memereacon.md",
+      "md_pages_dir": "papers/md/x05-memereacon/pages",
+      "md_page_files": 21,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 257
+    },
+    {
+      "key": "x06-exfuntube",
+      "ref": "Part 3 (video humor)",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "Can Language Models Laugh at YouTube Short-form Videos? (ExFunTube)",
+      "authors": "Ko et al.",
+      "year": 2023,
+      "venue": "EMNLP 2023",
+      "tags": [
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2310.14159",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2310.14159"
+      ],
+      "verify": "short-form videos",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x06-exfuntube.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2310.14159",
+      "pdf_bytes": 12619748,
+      "pdf_sha256": "5c7cbae84acb4dacf7059f03202df79cea753b0f5046c9f4b5a504f3f2e11c98",
+      "page_count": 20,
+      "verify_ok": true,
+      "md_path": "papers/md/x06-exfuntube/x06-exfuntube.md",
+      "md_pages_dir": "papers/md/x06-exfuntube/pages",
+      "md_page_files": 20,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 226
+    },
+    {
+      "key": "x07-vhub",
+      "ref": "Part 3 (video humor)",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "v-HUB: minimally verbal video humor understanding benchmark",
+      "authors": "Shi, Li, Zhao et al.",
+      "year": 2025,
+      "venue": "arXiv:2509.25773",
+      "tags": [
+        "preprint",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2509.25773",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2509.25773"
+      ],
+      "verify": "humor",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x07-vhub.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2509.25773",
+      "pdf_bytes": 6582665,
+      "pdf_sha256": "77f78477f22f14cc77a63ac67de1e5297d3194a78e8f0e1f99e246c46170d8c0",
+      "page_count": 24,
+      "verify_ok": true,
+      "md_path": "papers/md/x07-vhub/x07-vhub.md",
+      "md_pages_dir": "papers/md/x07-vhub/pages",
+      "md_page_files": 24,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 253
+    },
+    {
+      "key": "28-humorchain",
+      "ref": "#28",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "HUMORCHAIN: Theory-Guided Multi-Stage Reasoning for Interpretable Multimodal Humor Generation",
+      "authors": "Zhang, Luo, Zhang & Su",
+      "year": 2026,
+      "venue": "CVPR 2026",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2511.21732",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2511.21732"
+      ],
+      "verify": "humorchain",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/28-humorchain.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2511.21732",
+      "pdf_bytes": 1682220,
+      "pdf_sha256": "75246b379821615dd2ed4f20a9497627379f1bf875da1cd647b805582941a303",
+      "page_count": 22,
+      "verify_ok": true,
+      "md_path": "papers/md/28-humorchain/28-humorchain.md",
+      "md_pages_dir": "papers/md/28-humorchain/pages",
+      "md_page_files": 22,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 232
+    },
+    {
+      "key": "29-homer",
+      "ref": "#29",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "On the Wings of Imagination: Conflicting Script-based Multi-role Framework for Humor Caption Generation (HOMER)",
+      "authors": "Shang, Sun, Ma & Huang",
+      "year": 2026,
+      "venue": "ICLR 2026",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2602.06423",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2602.06423"
+      ],
+      "verify": "wings of imagination",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/29-homer.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2602.06423",
+      "pdf_bytes": 1702099,
+      "pdf_sha256": "6c33e0e4c5082335bee807f48be50a0fa2fc1bd77db8ef87fbc7a797f999f986",
+      "page_count": 29,
+      "verify_ok": true,
+      "note": "Verify phrase split across line wrap in PDF text layer; title confirmed manually.",
+      "md_path": "papers/md/29-homer/29-homer.md",
+      "md_pages_dir": "papers/md/29-homer/pages",
+      "md_page_files": 29,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 294
+    },
+    {
+      "key": "30-culture-aware-captioning",
+      "ref": "#30",
+      "section": "Part 3 - Multimodal & Visual Humor",
+      "title": "Culture-Aware Humorous Captioning: Multimodal Humor Generation across Cultural Contexts",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2026,
+      "venue": "arXiv:2604.18091",
+      "tags": [
+        "preprint",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2604.18091",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2604.18091"
+      ],
+      "verify": "culture",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/30-culture-aware-captioning.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2604.18091",
+      "pdf_bytes": 1534174,
+      "pdf_sha256": "bc3823a935a09cbcf986bbc69aadc1975c614893940de8308206efd04a143ae5",
+      "page_count": 18,
+      "verify_ok": true,
+      "md_path": "papers/md/30-culture-aware-captioning/30-culture-aware-captioning.md",
+      "md_pages_dir": "papers/md/30-culture-aware-captioning/pages",
+      "md_page_files": 18,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 177
+    },
+    {
+      "key": "31-how-funny-is-chatgpt",
+      "ref": "#31",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "How Funny is ChatGPT? A Comparison of Human- and A.I.-Produced Jokes",
+      "authors": "Gorenz & Schwarz",
+      "year": 2024,
+      "venue": "PLOS One 2024",
+      "tags": [
+        "peer-reviewed"
+      ],
+      "page_url": "https://doi.org/10.1371/journal.pone.0305364",
+      "pdf_candidates": [
+        "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0305364&type=printable"
+      ],
+      "verify": "chatgpt",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/31-how-funny-is-chatgpt.pdf",
+      "pdf_source": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0305364&type=printable",
+      "pdf_bytes": 592185,
+      "pdf_sha256": "8b80c30fb41dd69f7de9ff85665e6071b4cbbb46d4ad03208798b3b63ab48a8f",
+      "page_count": 13,
+      "verify_ok": true,
+      "md_path": "papers/md/31-how-funny-is-chatgpt/31-how-funny-is-chatgpt.md",
+      "md_pages_dir": "papers/md/31-how-funny-is-chatgpt/pages",
+      "md_page_files": 13,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 104
+    },
+    {
+      "key": "32-crowd-score",
+      "ref": "#32",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "Crowd Score: A Method for the Evaluation of Jokes using Large Language Models",
+      "authors": "Goes et al.",
+      "year": 2022,
+      "venue": "arXiv:2212.11214",
+      "tags": [
+        "preprint",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2212.11214",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2212.11214"
+      ],
+      "verify": "crowd score",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/32-crowd-score.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2212.11214",
+      "pdf_bytes": 280365,
+      "pdf_sha256": "d0b86216a0467652bdfaec42e298e01403cf12ca5a7c92196a9f03c7f5f0659a",
+      "page_count": 11,
+      "verify_ok": true,
+      "md_path": "papers/md/32-crowd-score/32-crowd-score.md",
+      "md_pages_dir": "papers/md/32-crowd-score/pages",
+      "md_page_files": 11,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 83
+    },
+    {
+      "key": "33-gpt4-evaluate-jokes",
+      "ref": "#33",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "Is GPT-4 Good Enough to Evaluate Jokes?",
+      "authors": "Goes et al.",
+      "year": 2023,
+      "venue": "ICCC 2023",
+      "tags": [
+        "peer-reviewed",
+        "method"
+      ],
+      "page_url": "https://computationalcreativity.net/iccc23/papers/ICCC-2023_paper_89.pdf",
+      "pdf_candidates": [
+        "https://computationalcreativity.net/iccc23/papers/ICCC-2023_paper_89.pdf"
+      ],
+      "verify": "evaluate jokes",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/33-gpt4-evaluate-jokes.pdf",
+      "pdf_source": "https://computationalcreativity.net/iccc23/papers/ICCC-2023_paper_89.pdf",
+      "pdf_bytes": 131645,
+      "pdf_sha256": "e8e1608f1a02e35bae047034487a7ac0ee4bbc05642ef6ba09fde383b6b64ade",
+      "page_count": 5,
+      "verify_ok": true,
+      "md_path": "papers/md/33-gpt4-evaluate-jokes/33-gpt4-evaluate-jokes.md",
+      "md_pages_dir": "papers/md/33-gpt4-evaluate-jokes/pages",
+      "md_page_files": 5,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 74
+    },
+    {
+      "key": "34-cards-against-llms",
+      "ref": "#34",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "Cards Against LLMs: Benchmarking Humor Alignment in Large Language Models",
+      "authors": "Fettach, Bied, Toivonen & De Bie",
+      "year": 2026,
+      "venue": "CHum 2026",
+      "tags": [
+        "workshop",
+        "benchmark"
+      ],
+      "page_url": "https://aclanthology.org/2026.chum-1.4/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2026.chum-1.4.pdf",
+        "https://arxiv.org/pdf/2604.08757"
+      ],
+      "verify": "cards against",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/34-cards-against-llms.pdf",
+      "pdf_source": "https://aclanthology.org/2026.chum-1.4.pdf",
+      "pdf_bytes": 926798,
+      "pdf_sha256": "223ccb6d4f78e5fe2eeabb7ec70b9bd4e6461007db1269ee43289e4b3daaf27a",
+      "page_count": 14,
+      "verify_ok": true,
+      "md_path": "papers/md/34-cards-against-llms/34-cards-against-llms.md",
+      "md_pages_dir": "papers/md/34-cards-against-llms/pages",
+      "md_page_files": 14,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 118
+    },
+    {
+      "key": "35-humorrank",
+      "ref": "#35",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "HumorRank: A Tournament-Based Leaderboard for Evaluating Humor Generation",
+      "authors": "Ajayi & Mitra",
+      "year": 2026,
+      "venue": "arXiv:2604.19786",
+      "tags": [
+        "preprint",
+        "benchmark",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2604.19786",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2604.19786"
+      ],
+      "verify": "humorrank",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/35-humorrank.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2604.19786",
+      "pdf_bytes": 7443613,
+      "pdf_sha256": "03f27ca60983dd4e9e5115015ec4a0f543f091f82aa3d819fcd636d3c015fdff",
+      "page_count": 41,
+      "verify_ok": true,
+      "md_path": "papers/md/35-humorrank/35-humorrank.md",
+      "md_pages_dir": "papers/md/35-humorrank/pages",
+      "md_page_files": 41,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 269
+    },
+    {
+      "key": "36-who-laughs-with-whom",
+      "ref": "#36",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "Who Laughs with Whom? Disentangling Humor Preferences across User Clusters and LLMs",
+      "authors": "Murakami, Kamigaito, Takamura & Okumura",
+      "year": 2026,
+      "venue": "arXiv:2601.03103",
+      "tags": [
+        "preprint"
+      ],
+      "page_url": "https://arxiv.org/abs/2601.03103",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2601.03103"
+      ],
+      "verify": "who laughs",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/36-who-laughs-with-whom.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2601.03103",
+      "pdf_bytes": 1344909,
+      "pdf_sha256": "fe430801eac096dc872ff94d279fb8a423e438a462be45c4e8f648270e82e3b3",
+      "page_count": 21,
+      "verify_ok": true,
+      "md_path": "papers/md/36-who-laughs-with-whom/36-who-laughs-with-whom.md",
+      "md_pages_dir": "papers/md/36-who-laughs-with-whom/pages",
+      "md_page_files": 21,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 185
+    },
+    {
+      "key": "37-punchlines-to-predictions",
+      "ref": "#37",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "From Punchlines to Predictions: A Metric to Assess LLM Performance in Identifying Humor in Stand-Up Comedy",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2025,
+      "venue": "CMCL 2025",
+      "tags": [
+        "workshop",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2504.09049",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2504.09049"
+      ],
+      "verify": "punchlines",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/37-punchlines-to-predictions.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2504.09049",
+      "pdf_bytes": 622662,
+      "pdf_sha256": "81aaefe14a03f64ab07cd79337219acd84a54d6092e1929a7eeb388b8cff01d0",
+      "page_count": 11,
+      "verify_ok": true,
+      "md_path": "papers/md/37-punchlines-to-predictions/37-punchlines-to-predictions.md",
+      "md_pages_dir": "papers/md/37-punchlines-to-predictions/pages",
+      "md_page_files": 11,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 118
+    },
+    {
+      "key": "38-oogiri-multidimensional",
+      "ref": "#38",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "Assessing the Capabilities of LLMs in Humor: A Multi-dimensional Analysis of Oogiri Generation and Evaluation",
+      "authors": "Sakabe, Kim, Hirasawa & Komachi",
+      "year": 2026,
+      "venue": "AAAI 2026",
+      "tags": [
+        "peer-reviewed",
+        "dataset",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2511.09133",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2511.09133"
+      ],
+      "verify": "oogiri",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/38-oogiri-multidimensional.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2511.09133",
+      "pdf_bytes": 25046266,
+      "pdf_sha256": "86981ed2b89572fbef469fd765bf7efd92ada132e7e35f19735e427cdb53b13b",
+      "page_count": 21,
+      "verify_ok": true,
+      "md_path": "papers/md/38-oogiri-multidimensional/38-oogiri-multidimensional.md",
+      "md_pages_dir": "papers/md/38-oogiri-multidimensional/pages",
+      "md_page_files": 21,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 172
+    },
+    {
+      "key": "39-oogiri-master",
+      "ref": "#39",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "Oogiri-Master: Benchmarking Humor Understanding via Oogiri",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2025,
+      "venue": "arXiv:2512.21494",
+      "tags": [
+        "preprint",
+        "benchmark",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2512.21494",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2512.21494"
+      ],
+      "verify": "oogiri",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/39-oogiri-master.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2512.21494",
+      "pdf_bytes": 411965,
+      "pdf_sha256": "8f388a0969257bf921b0949c61ce05dddd4f7d11a7ba3eb8280e1990687e5588",
+      "page_count": 12,
+      "verify_ok": true,
+      "md_path": "papers/md/39-oogiri-master/39-oogiri-master.md",
+      "md_pages_dir": "papers/md/39-oogiri-master/pages",
+      "md_page_files": 12,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 138
+    },
+    {
+      "key": "40-one-joke-to-rule-them-all",
+      "ref": "#40",
+      "section": "Part 4 - Evaluation Methodology",
+      "title": "One Joke to Rule them All? On the (Im)possibility of Generalizing Humor Detection",
+      "authors": "Turgeman, Shani & Shahaf",
+      "year": 2026,
+      "venue": "CHum 2026",
+      "tags": [
+        "workshop",
+        "method"
+      ],
+      "page_url": "https://aclanthology.org/2026.chum-1.1/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2026.chum-1.1.pdf",
+        "https://arxiv.org/pdf/2508.19402"
+      ],
+      "verify": "rule them all",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/40-one-joke-to-rule-them-all.pdf",
+      "pdf_source": "https://aclanthology.org/2026.chum-1.1.pdf",
+      "pdf_bytes": 8954399,
+      "pdf_sha256": "02032de4239fb809c95e32e6a74c76823034ddfe9e3da1754afa61d805a4c6b6",
+      "page_count": 28,
+      "verify_ok": true,
+      "md_path": "papers/md/40-one-joke-to-rule-them-all/40-one-joke-to-rule-them-all.md",
+      "md_pages_dir": "papers/md/40-one-joke-to-rule-them-all/pages",
+      "md_page_files": 28,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 235
+    },
+    {
+      "key": "41-robot-walks-into-bar",
+      "ref": "#41",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?",
+      "authors": "Mirowski, Love, Mathewson & Mohamed",
+      "year": 2024,
+      "venue": "FAccT 2024",
+      "tags": [
+        "peer-reviewed",
+        "HCI study"
+      ],
+      "page_url": "https://arxiv.org/abs/2405.20956",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2405.20956"
+      ],
+      "verify": "robot walks into a bar",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/41-robot-walks-into-bar.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2405.20956",
+      "pdf_bytes": 962029,
+      "pdf_sha256": "006bb805dc3e7525400c14243c108ea9a2bb8c9b0e65fce7bfbdb4763dc48f58",
+      "page_count": 15,
+      "verify_ok": true,
+      "md_path": "papers/md/41-robot-walks-into-bar/41-robot-walks-into-bar.md",
+      "md_pages_dir": "papers/md/41-robot-walks-into-bar/pages",
+      "md_page_files": 15,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 208
+    },
+    {
+      "key": "42-improvised-theatre-llms",
+      "ref": "#42",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "Designing and Evaluating Dialogue LLMs for Co-Creative Improvised Theatre",
+      "authors": "Branch, Mirowski, Mathewson, Ppali & Covaci",
+      "year": 2024,
+      "venue": "arXiv:2405.07111",
+      "tags": [
+        "preprint",
+        "HCI study"
+      ],
+      "page_url": "https://arxiv.org/abs/2405.07111",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2405.07111"
+      ],
+      "verify": "improvised theatre",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/42-improvised-theatre-llms.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2405.07111",
+      "pdf_bytes": 4859059,
+      "pdf_sha256": "a41a9d89ea8a094e491b2b27ac9bc38e93c835f4fbb3fde763b9f989c1f09a42",
+      "page_count": 13,
+      "verify_ok": true,
+      "md_path": "papers/md/42-improvised-theatre-llms/42-improvised-theatre-llms.md",
+      "md_pages_dir": "papers/md/42-improvised-theatre-llms/pages",
+      "md_page_files": 13,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 188
+    },
+    {
+      "key": "43-theater-stage-laboratory",
+      "ref": "#43",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "The Theater Stage as Laboratory: Review of Real-Time Comedy LLM Systems for Live Performance",
+      "authors": "Mirowski, Mathewson & Branch",
+      "year": 2025,
+      "venue": "CHum 2025",
+      "tags": [
+        "workshop",
+        "survey"
+      ],
+      "page_url": "https://arxiv.org/abs/2501.08474",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2501.08474"
+      ],
+      "verify": "theater stage",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/43-theater-stage-laboratory.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2501.08474",
+      "pdf_bytes": 197549,
+      "pdf_sha256": "127a06d95bf01cccab32ea5615d654f1228d0be8498f9aa916ba8a1ef9dc8e6a",
+      "page_count": 8,
+      "verify_ok": true,
+      "md_path": "papers/md/43-theater-stage-laboratory/43-theater-stage-laboratory.md",
+      "md_pages_dir": "papers/md/43-theater-stage-laboratory/pages",
+      "md_page_files": 8,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 95
+    },
+    {
+      "key": "44-standup4ai",
+      "ref": "#44",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "StandUp4AI: A New Multilingual Dataset for Humor Detection in Stand-up Comedy Videos",
+      "authors": "Barriere, Gomez, Hemamou, Callejas & Ravenet",
+      "year": 2025,
+      "venue": "arXiv:2505.18903",
+      "tags": [
+        "preprint",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2505.18903",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2505.18903"
+      ],
+      "verify": "standup4ai",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/44-standup4ai.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2505.18903",
+      "pdf_bytes": 2255764,
+      "pdf_sha256": "a5f9cb8c5e99e87d918f876b4a1c37deef1b3b9c4c1e8c376537d1dc13460b35",
+      "page_count": 8,
+      "verify_ok": true,
+      "md_path": "papers/md/44-standup4ai/44-standup4ai.md",
+      "md_pages_dir": "papers/md/44-standup4ai/pages",
+      "md_page_files": 8,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 89
+    },
+    {
+      "key": "45-not-all-jokes-land",
+      "ref": "#45",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "Not All Jokes Land: Evaluating LLMs' Understanding of Workplace Humor",
+      "authors": "Shafiei & Saffari",
+      "year": 2025,
+      "venue": "arXiv:2506.01819",
+      "tags": [
+        "preprint",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2506.01819",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2506.01819"
+      ],
+      "verify": "jokes land",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/45-not-all-jokes-land.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2506.01819",
+      "pdf_bytes": 222907,
+      "pdf_sha256": "abadb506344871a4ba49c06c533460f3ad282dfaeedaea1829566005c5814231",
+      "page_count": 8,
+      "verify_ok": true,
+      "md_path": "papers/md/45-not-all-jokes-land/45-not-all-jokes-land.md",
+      "md_pages_dir": "papers/md/45-not-all-jokes-land/pages",
+      "md_page_files": 8,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 80
+    },
+    {
+      "key": "46-can-ai-take-a-joke",
+      "ref": "#46",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "Can AI Take a Joke - Or Make One? A Study of Humor Generation and Recognition in LLMs",
+      "authors": "Quan, Ramakrishnan & Chin",
+      "year": 2025,
+      "venue": "Creativity & Cognition 2025",
+      "tags": [
+        "peer-reviewed",
+        "HCI study"
+      ],
+      "page_url": "https://dl.acm.org/doi/10.1145/3698061.3734388",
+      "pdf_candidates": [
+        "https://dl.acm.org/doi/pdf/10.1145/3698061.3734388"
+      ],
+      "verify": "take a joke",
+      "status": "converted",
+      "note": "Bot-walled for scripted clients; downloaded manually in browser.",
+      "pdf_path": "papers/pdfs/46-can-ai-take-a-joke.pdf",
+      "pdf_source": "manual browser download (user), 2026-07-03",
+      "pdf_bytes": 1186871,
+      "pdf_sha256": "8df516452691e710b95318f2505b91e36c80bf2517c36a744d2e8b83fd0b4b3b",
+      "page_count": 7,
+      "verify_ok": true,
+      "md_path": "papers/md/46-can-ai-take-a-joke/46-can-ai-take-a-joke.md",
+      "md_pages_dir": "papers/md/46-can-ai-take-a-joke/pages",
+      "md_page_files": 7,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 82
+    },
+    {
+      "key": "47-engagement-undermines-safety",
+      "ref": "#47",
+      "section": "Part 6 - Safety, Harm & Boundaries",
+      "title": "Engagement Undermines Safety: How Stereotypes and Toxicity Shape Humor in Language Models",
+      "authors": "Dogra et al.",
+      "year": 2026,
+      "venue": "EACL 2026",
+      "tags": [
+        "peer-reviewed"
+      ],
+      "page_url": "https://arxiv.org/abs/2510.18454",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2510.18454"
+      ],
+      "verify": "engagement",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/47-engagement-undermines-safety.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2510.18454",
+      "pdf_bytes": 2192564,
+      "pdf_sha256": "3e9a0294ce6d0d43fbe17109b785757b2f4d037d32b9784ecfc05b46b6c93235",
+      "page_count": 19,
+      "verify_ok": true,
+      "md_path": "papers/md/47-engagement-undermines-safety/47-engagement-undermines-safety.md",
+      "md_pages_dir": "papers/md/47-engagement-undermines-safety/pages",
+      "md_page_files": 19,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 188
+    },
+    {
+      "key": "48-harm-or-humor",
+      "ref": "#48",
+      "section": "Part 6 - Safety, Harm & Boundaries",
+      "title": "Harm or Humor: A Multimodal, Multilingual Benchmark for Overt and Covert Harmful Humor",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2026,
+      "venue": "arXiv:2603.17759",
+      "tags": [
+        "preprint",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2603.17759",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2603.17759"
+      ],
+      "verify": "harm or humor",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/48-harm-or-humor.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2603.17759",
+      "pdf_bytes": 4815497,
+      "pdf_sha256": "e95bfb56ebcbb56f1af2611f8a6156473ed27c85195f27e18967e89bad960e22",
+      "page_count": 19,
+      "verify_ok": true,
+      "md_path": "papers/md/48-harm-or-humor/48-harm-or-humor.md",
+      "md_pages_dir": "papers/md/48-harm-or-humor/pages",
+      "md_page_files": 19,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 219
+    },
+    {
+      "key": "49-humor-bypass-guardrails",
+      "ref": "#49",
+      "section": "Part 6 - Safety, Harm & Boundaries",
+      "title": "Using Humor to Bypass Safety Guardrails in Large Language Models",
+      "authors": "Pedro Cisneros-Velarde",
+      "year": 2025,
+      "venue": "LLMSEC 2025",
+      "tags": [
+        "workshop"
+      ],
+      "page_url": "https://aclanthology.org/2025.llmsec-1.3/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2025.llmsec-1.3.pdf",
+        "https://arxiv.org/pdf/2504.06577"
+      ],
+      "verify": "guardrails",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/49-humor-bypass-guardrails.pdf",
+      "pdf_source": "https://aclanthology.org/2025.llmsec-1.3.pdf",
+      "pdf_bytes": 185036,
+      "pdf_sha256": "4a61392be075c6551d17cc07c9526ac25971eacad1a44423115d2858325f6512",
+      "page_count": 9,
+      "verify_ok": true,
+      "md_path": "papers/md/49-humor-bypass-guardrails/49-humor-bypass-guardrails.md",
+      "md_pages_dir": "papers/md/49-humor-bypass-guardrails/pages",
+      "md_page_files": 9,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 121
+    },
+    {
+      "key": "50-chumor",
+      "ref": "#50",
+      "section": "Part 7 - Cross-Cultural & Translation",
+      "title": "Chumor 1.0: A Truly Funny and Challenging Chinese Humor Understanding Dataset from Ruo Zhi Ba",
+      "authors": "He et al.",
+      "year": 2024,
+      "venue": "arXiv:2406.12754",
+      "tags": [
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2406.12754",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2406.12754"
+      ],
+      "verify": "chumor",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/50-chumor.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2406.12754",
+      "pdf_bytes": 1974785,
+      "pdf_sha256": "94d909194b17830d175e77446baf516d97e507ce11f80cd9e394a1db049ef479",
+      "page_count": 13,
+      "verify_ok": true,
+      "md_path": "papers/md/50-chumor/50-chumor.md",
+      "md_pages_dir": "papers/md/50-chumor/pages",
+      "md_page_files": 13,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 174
+    },
+    {
+      "key": "50b-chumor-2",
+      "ref": "#50 (2.0)",
+      "section": "Part 7 - Cross-Cultural & Translation",
+      "title": "Chumor 2.0: Towards Benchmarking Chinese Humor Understanding",
+      "authors": "He et al.",
+      "year": 2025,
+      "venue": "ACL Findings 2025 (arXiv:2412.17729)",
+      "tags": [
+        "peer-reviewed",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2412.17729",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2412.17729"
+      ],
+      "verify": "chumor",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/50b-chumor-2.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2412.17729",
+      "pdf_bytes": 2521408,
+      "pdf_sha256": "ff4ce3fdc670180c2d3589332f451b98ab6198a8f5bd956d0254558253a91eaf",
+      "page_count": 18,
+      "verify_ok": true,
+      "md_path": "papers/md/50b-chumor-2/50b-chumor-2.md",
+      "md_pages_dir": "papers/md/50b-chumor-2/pages",
+      "md_page_files": 18,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 298
+    },
+    {
+      "key": "51-cfunmodel",
+      "ref": "#51",
+      "section": "Part 7 - Cross-Cultural & Translation",
+      "title": "CFunModel: A \"Funny\" Language Model Capable of Chinese Humor Generation and Processing",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2025,
+      "venue": "arXiv:2503.20417",
+      "tags": [
+        "preprint",
+        "dataset",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2503.20417",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2503.20417"
+      ],
+      "verify": "cfun",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/51-cfunmodel.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2503.20417",
+      "pdf_bytes": 868859,
+      "pdf_sha256": "0cff870c994c8f650899058d401157c78236addcf12d9cb3d3be1ee4424d2e5c",
+      "page_count": 9,
+      "verify_ok": true,
+      "md_path": "papers/md/51-cfunmodel/51-cfunmodel.md",
+      "md_pages_dir": "papers/md/51-cfunmodel/pages",
+      "md_page_files": 9,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 134
+    },
+    {
+      "key": "52-pun2pun",
+      "ref": "#52",
+      "section": "Part 7 - Cross-Cultural & Translation",
+      "title": "Pun2Pun: Benchmarking LLMs on Textual-Visual Chinese-English Pun Translation",
+      "authors": "Ma, Huang, Xu, Zhou & Wei",
+      "year": 2025,
+      "venue": "ACL 2025 SRW",
+      "tags": [
+        "workshop",
+        "benchmark"
+      ],
+      "page_url": "https://aclanthology.org/2025.acl-srw.23/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2025.acl-srw.23.pdf"
+      ],
+      "verify": "pun2pun",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/52-pun2pun.pdf",
+      "pdf_source": "https://aclanthology.org/2025.acl-srw.23.pdf",
+      "pdf_bytes": 7946259,
+      "pdf_sha256": "15c89a9dea1defa55169431ad2f98405220c8e4cbbc907470742e7d756193b10",
+      "page_count": 24,
+      "verify_ok": true,
+      "md_path": "papers/md/52-pun2pun/52-pun2pun.md",
+      "md_pages_dir": "papers/md/52-pun2pun/pages",
+      "md_page_files": 24,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 293
+    },
+    {
+      "key": "53-psychology-driven-translation",
+      "ref": "#53",
+      "section": "Part 7 - Cross-Cultural & Translation",
+      "title": "Psychology-Driven Enhancement of Humour Translation",
+      "authors": "Su, Zhu, Chen, Benavides Prado & Witbrock",
+      "year": 2025,
+      "venue": "arXiv:2507.09259",
+      "tags": [
+        "preprint",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2507.09259",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2507.09259"
+      ],
+      "verify": "translation",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/53-psychology-driven-translation.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2507.09259",
+      "pdf_bytes": 3892464,
+      "pdf_sha256": "cedb5649543bd4802cdc473d7db21deb7ae618e4dab3f311f884497e87e5b4d7",
+      "page_count": 16,
+      "verify_ok": true,
+      "md_path": "papers/md/53-psychology-driven-translation/53-psychology-driven-translation.md",
+      "md_pages_dir": "papers/md/53-psychology-driven-translation/pages",
+      "md_page_files": 16,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 127
+    },
+    {
+      "key": "54-not-funny-anymore",
+      "ref": "#54",
+      "section": "Part 7 - Cross-Cultural & Translation",
+      "title": "Not Funny Anymore: LLM Judges Confuse Literal Similarity for Humor in Translated Jokes",
+      "authors": "Rivera et al.",
+      "year": 2026,
+      "venue": "LM4UC @ AAAI 2026",
+      "tags": [
+        "workshop",
+        "dataset",
+        "method"
+      ],
+      "page_url": "https://openreview.net/forum?id=fdrM652upk",
+      "pdf_candidates": [
+        "https://openreview.net/pdf?id=fdrM652upk"
+      ],
+      "verify": "translated jokes",
+      "status": "converted",
+      "note": "Bot-walled for scripted clients; downloaded manually in browser.",
+      "pdf_path": "papers/pdfs/54-not-funny-anymore.pdf",
+      "pdf_source": "manual browser download (user), 2026-07-03",
+      "pdf_bytes": 512791,
+      "pdf_sha256": "5db58d03dcdb55eddac4aa1e1d2532b0b8630d7b042514128f5db6c9fbcd914e",
+      "page_count": 7,
+      "verify_ok": true,
+      "md_path": "papers/md/54-not-funny-anymore/54-not-funny-anymore.md",
+      "md_pages_dir": "papers/md/54-not-funny-anymore/pages",
+      "md_page_files": 7,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 84
+    },
+    {
+      "key": "55-jokes-or-gibberish",
+      "ref": "#55",
+      "section": "Part 7 - Cross-Cultural & Translation",
+      "title": "Jokes or Gibberish? Humor Retention in Translation: NMT vs. LLM",
+      "authors": "Pituxcoosuvarn & Murakami",
+      "year": 2025,
+      "venue": "Digital (MDPI) 5(4):49",
+      "tags": [
+        "peer-reviewed"
+      ],
+      "page_url": "https://www.mdpi.com/2673-6470/5/4/49",
+      "pdf_candidates": [
+        "https://www.mdpi.com/2673-6470/5/4/49/pdf"
+      ],
+      "verify": "retention",
+      "status": "converted",
+      "note": "Bot-walled for scripted clients; downloaded manually in browser.",
+      "pdf_path": "papers/pdfs/55-jokes-or-gibberish.pdf",
+      "pdf_source": "manual browser download (user), 2026-07-03",
+      "pdf_bytes": 704411,
+      "pdf_sha256": "1a3ecfefa377eb009d7760e3c253cfb82a37fa2da771966a626c47d06ea32949",
+      "page_count": 16,
+      "verify_ok": true,
+      "md_path": "papers/md/55-jokes-or-gibberish/55-jokes-or-gibberish.md",
+      "md_pages_dir": "papers/md/55-jokes-or-gibberish/pages",
+      "md_page_files": 16,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 142
+    },
+    {
+      "key": "56-getting-serious-unfunny",
+      "ref": "#56",
+      "section": "Part 8 - Datasets & Shared Tasks",
+      "title": "Getting Serious about Humor: Crafting Humor Datasets with Unfunny Large Language Models",
+      "authors": "Horvitz et al.",
+      "year": 2024,
+      "venue": "ACL 2024",
+      "tags": [
+        "peer-reviewed",
+        "method",
+        "dataset"
+      ],
+      "page_url": "https://arxiv.org/abs/2403.00794",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2403.00794"
+      ],
+      "verify": "getting serious",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/56-getting-serious-unfunny.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2403.00794",
+      "pdf_bytes": 523050,
+      "pdf_sha256": "65b1e362b8f036194c9e66e40aecd91d0287e0131f2ab8bae6f331ce80131e91",
+      "page_count": 15,
+      "verify_ok": true,
+      "md_path": "papers/md/56-getting-serious-unfunny/56-getting-serious-unfunny.md",
+      "md_pages_dir": "papers/md/56-getting-serious-unfunny/pages",
+      "md_page_files": 15,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 183
+    },
+    {
+      "key": "57-mwahaha",
+      "ref": "#57",
+      "section": "Part 8 - Datasets & Shared Tasks",
+      "title": "SemEval-2026 Task 1: MWAHAHA - Models Write Automatic Humor And Humans Annotate",
+      "authors": "Castro, Chiruzzo, Gongora et al.",
+      "year": 2026,
+      "venue": "SemEval-2026",
+      "tags": [
+        "workshop",
+        "dataset",
+        "benchmark"
+      ],
+      "page_url": null,
+      "pdf_candidates": [],
+      "status": "unavailable",
+      "note": "Task-overview paper not yet published (SemEval-2026 proceedings pending as of July 2026)."
+    },
+    {
+      "key": "x09-hahackathon",
+      "ref": "Part 8 (pre-LLM anchor)",
+      "section": "Part 8 - Datasets & Shared Tasks",
+      "title": "SemEval-2021 Task 7: HaHackathon, Detecting and Rating Humor and Offense",
+      "authors": "Meaney, Wilson, Chiruzzo, Lopez & Magdy",
+      "year": 2021,
+      "venue": "SemEval-2021",
+      "tags": [
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/2021.semeval-1.9/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2021.semeval-1.9.pdf"
+      ],
+      "verify": "hahackathon",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x09-hahackathon.pdf",
+      "pdf_source": "https://aclanthology.org/2021.semeval-1.9.pdf",
+      "pdf_bytes": 314649,
+      "pdf_sha256": "099560a0abab75a787c55d5f2617fc3d15eaa48b96ae2ee2cef43dd5146dada3",
+      "page_count": 15,
+      "verify_ok": true,
+      "md_path": "papers/md/x09-hahackathon/x09-hahackathon.md",
+      "md_pages_dir": "papers/md/x09-hahackathon/pages",
+      "md_page_files": 15,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 156
+    },
+    {
+      "key": "x10-humicroedit",
+      "ref": "Part 8 (pre-LLM anchor)",
+      "section": "Part 8 - Datasets & Shared Tasks",
+      "title": "SemEval-2020 Task 7: Assessing Humor in Edited News Headlines (Humicroedit & FunLines)",
+      "authors": "Hossain, Krumm, Gamon & Kautz",
+      "year": 2020,
+      "venue": "SemEval-2020",
+      "tags": [
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/2020.semeval-1.7/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2020.semeval-1.7.pdf",
+        "https://arxiv.org/pdf/2008.00304"
+      ],
+      "verify": "edited news headlines",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x10-humicroedit.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2008.00304",
+      "pdf_bytes": 521493,
+      "pdf_sha256": "585842786f8b9f4713c359ad274ef53f797aa6b7c8cb6d2c25be5ff9e6939983",
+      "page_count": 13,
+      "verify_ok": true,
+      "md_path": "papers/md/x10-humicroedit/x10-humicroedit.md",
+      "md_pages_dir": "papers/md/x10-humicroedit/pages",
+      "md_page_files": 13,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 139
+    },
+    {
+      "key": "x11-rjokes-last-laugh",
+      "ref": "Part 8 (pre-LLM anchor)",
+      "section": "Part 8 - Datasets & Shared Tasks",
+      "title": "Humor Detection: A Transformer Gets the Last Laugh (rJokes)",
+      "authors": "Weller & Seppi",
+      "year": 2019,
+      "venue": "EMNLP 2019",
+      "tags": [
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/D19-1372/",
+      "pdf_candidates": [
+        "https://aclanthology.org/D19-1372.pdf",
+        "https://arxiv.org/pdf/1909.00252"
+      ],
+      "verify": "last laugh",
+      "status": "converted",
+      "note": "The companion rJokes corpus paper (LREC 2020) is not downloaded separately.",
+      "pdf_path": "papers/pdfs/x11-rjokes-last-laugh.pdf",
+      "pdf_source": "https://aclanthology.org/D19-1372.pdf",
+      "pdf_bytes": 192385,
+      "pdf_sha256": "08aa97529b6fb5d543fb43db339ad432dd980fccde17436d859cb133dbf9421f",
+      "page_count": 5,
+      "verify_ok": true,
+      "md_path": "papers/md/x11-rjokes-last-laugh/x11-rjokes-last-laugh.md",
+      "md_pages_dir": "papers/md/x11-rjokes-last-laugh/pages",
+      "md_page_files": 5,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 70
+    },
+    {
+      "key": "x12-ur-funny",
+      "ref": "Part 8 (pre-LLM anchor)",
+      "section": "Part 8 - Datasets & Shared Tasks",
+      "title": "UR-FUNNY: A Multimodal Language Dataset for Understanding Humor",
+      "authors": "Hasan et al.",
+      "year": 2019,
+      "venue": "EMNLP 2019",
+      "tags": [
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/D19-1211/",
+      "pdf_candidates": [
+        "https://aclanthology.org/D19-1211.pdf",
+        "https://arxiv.org/pdf/1904.06618"
+      ],
+      "verify": "ur-funny",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x12-ur-funny.pdf",
+      "pdf_source": "https://aclanthology.org/D19-1211.pdf",
+      "pdf_bytes": 3411215,
+      "pdf_sha256": "80f393c0e93e9790216e519b27baa3231481dc3171afe93b28955f04c815ce9f",
+      "page_count": 11,
+      "verify_ok": true,
+      "md_path": "papers/md/x12-ur-funny/x12-ur-funny.md",
+      "md_pages_dir": "papers/md/x12-ur-funny/pages",
+      "md_page_files": 11,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 114
+    },
+    {
+      "key": "x13-redefining-humor-data",
+      "ref": "Part 8 (also)",
+      "section": "Part 8 - Datasets & Shared Tasks",
+      "title": "Re-defining Humor Data Objects for AI Humor Research",
+      "authors": "Arnett, Nguyen & Jiang",
+      "year": 2026,
+      "venue": "arXiv:2605.25171",
+      "tags": [
+        "preprint"
+      ],
+      "page_url": "https://arxiv.org/abs/2605.25171",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2605.25171"
+      ],
+      "verify": "humor data",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x13-redefining-humor-data.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2605.25171",
+      "pdf_bytes": 184888,
+      "pdf_sha256": "3d7a61891e3ef2f605d201d775748836ae2cc56ba8c757e55756ab765c827209",
+      "page_count": 10,
+      "verify_ok": true,
+      "md_path": "papers/md/x13-redefining-humor-data/x13-redefining-humor-data.md",
+      "md_pages_dir": "papers/md/x13-redefining-humor-data/pages",
+      "md_page_files": 10,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 93
+    },
+    {
+      "key": "58-whos-laughing-now",
+      "ref": "#58",
+      "section": "Part 9 - Surveys & Resources",
+      "title": "Who's Laughing Now? An Overview of Computational Humour Generation and Explanation",
+      "authors": "Loakman, Thorne & Lin",
+      "year": 2025,
+      "venue": "INLG 2025",
+      "tags": [
+        "peer-reviewed",
+        "survey"
+      ],
+      "page_url": "https://arxiv.org/abs/2509.21175",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2509.21175"
+      ],
+      "verify": "laughing now",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/58-whos-laughing-now.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2509.21175",
+      "pdf_bytes": 1021962,
+      "pdf_sha256": "a369279503f9e8604f9a2cfd9d6720cd2ebdcd00edf4aad5e62ba793416e93fa",
+      "page_count": 15,
+      "verify_ok": true,
+      "md_path": "papers/md/58-whos-laughing-now/58-whos-laughing-now.md",
+      "md_pages_dir": "papers/md/58-whos-laughing-now/pages",
+      "md_page_files": 15,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 180
+    },
+    {
+      "key": "59-subjective-language-survey",
+      "ref": "#59",
+      "section": "Part 9 - Surveys & Resources",
+      "title": "Large Language Models for Subjective Language Understanding: A Survey",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2025,
+      "venue": "arXiv:2508.07959",
+      "tags": [
+        "preprint",
+        "survey"
+      ],
+      "page_url": "https://arxiv.org/abs/2508.07959",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2508.07959"
+      ],
+      "verify": "subjective language",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/59-subjective-language-survey.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2508.07959",
+      "pdf_bytes": 11666539,
+      "pdf_sha256": "a35bb3990e05a556105f183b06774df1835eaf1e159d7c9389a3db96c097b372",
+      "page_count": 50,
+      "verify_ok": true,
+      "md_path": "papers/md/59-subjective-language-survey/59-subjective-language-survey.md",
+      "md_pages_dir": "papers/md/59-subjective-language-survey/pages",
+      "md_page_files": 50,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 404
+    },
+    {
+      "key": "60-pun-generation-survey",
+      "ref": "#60",
+      "section": "Part 9 - Surveys & Resources",
+      "title": "A Survey of Pun Generation: Datasets, Evaluations and Methodologies",
+      "authors": "(authors unconfirmed in guide)",
+      "year": 2025,
+      "venue": "arXiv:2507.04793",
+      "tags": [
+        "preprint",
+        "survey"
+      ],
+      "page_url": "https://arxiv.org/abs/2507.04793",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2507.04793"
+      ],
+      "verify": "pun generation",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/60-pun-generation-survey.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2507.04793",
+      "pdf_bytes": 2500965,
+      "pdf_sha256": "7d8a8c1ad54b8d39130bac7f4a89c5646e830d46d3cf4d2d9f88a812d7497f59",
+      "page_count": 22,
+      "verify_ok": true,
+      "md_path": "papers/md/60-pun-generation-survey/60-pun-generation-survey.md",
+      "md_pages_dir": "papers/md/60-pun-generation-survey/pages",
+      "md_page_files": 22,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 251
+    },
+    {
+      "key": "61-humor-generation-survey-2020",
+      "ref": "#61",
+      "section": "Part 9 - Surveys & Resources",
+      "title": "A Survey on Approaches to Computational Humor Generation",
+      "authors": "Amin & Burghardt",
+      "year": 2020,
+      "venue": "LaTeCH-CLfL 2020",
+      "tags": [
+        "workshop",
+        "survey"
+      ],
+      "page_url": "https://aclanthology.org/2020.latechclfl-1.4/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2020.latechclfl-1.4.pdf"
+      ],
+      "verify": "computational humor generation",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/61-humor-generation-survey-2020.pdf",
+      "pdf_source": "https://aclanthology.org/2020.latechclfl-1.4.pdf",
+      "pdf_bytes": 511017,
+      "pdf_sha256": "e8524acfa3b0518116cf43f861fa5e274c4b8c9abbf403960035da24f77158d3",
+      "page_count": 13,
+      "verify_ok": true,
+      "md_path": "papers/md/61-humor-generation-survey-2020/61-humor-generation-survey-2020.md",
+      "md_pages_dir": "papers/md/61-humor-generation-survey-2020/pages",
+      "md_page_files": 13,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 121
+    },
+    {
+      "key": "62-humor-modeling-survey",
+      "ref": "#62",
+      "section": "Part 9 - Surveys & Resources",
+      "title": "Computational Humor Modeling: A Survey on the State of the Art",
+      "authors": "Lemmens & De Marez",
+      "year": 2026,
+      "venue": "ACM Computing Surveys 58(7):177",
+      "tags": [
+        "peer-reviewed",
+        "survey"
+      ],
+      "page_url": "https://dl.acm.org/doi/10.1145/3778357",
+      "pdf_candidates": [
+        "https://dl.acm.org/doi/pdf/10.1145/3778357"
+      ],
+      "verify": "computational humor",
+      "status": "converted",
+      "note": "ACM DL; likely paywalled/bot-blocked.",
+      "pdf_path": "papers/pdfs/62-humor-modeling-survey.pdf",
+      "pdf_source": "https://repository.uantwerpen.be/docman/irua/bbec99motoMec",
+      "pdf_bytes": 478668,
+      "pdf_sha256": "ed36b1b442cf64f5058506abb490c74f2e28a17d8f837b440446118cb13cb453",
+      "page_count": 38,
+      "verify_ok": true,
+      "md_path": "papers/md/62-humor-modeling-survey/62-humor-modeling-survey.md",
+      "md_pages_dir": "papers/md/62-humor-modeling-survey/pages",
+      "md_page_files": 38,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 354
+    },
+    {
+      "key": "63-sarcasmbench",
+      "ref": "#63",
+      "section": "Adjacent - Sarcasm & Humor Styles",
+      "title": "SarcasmBench: Towards Evaluating Large Language Models on Sarcasm Understanding",
+      "authors": "Zhang, Zou, Lian, Tiwari & Qin",
+      "year": 2024,
+      "venue": "arXiv:2408.11319",
+      "tags": [
+        "preprint",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2408.11319",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2408.11319"
+      ],
+      "verify": "sarcasmbench",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/63-sarcasmbench.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2408.11319",
+      "pdf_bytes": 3030962,
+      "pdf_sha256": "eb6f208a3e6e3c97ac4cf8acdc4a114867e69fc093e21f9d7058b6b5eae3b86a",
+      "page_count": 18,
+      "verify_ok": true,
+      "md_path": "papers/md/63-sarcasmbench/63-sarcasmbench.md",
+      "md_pages_dir": "papers/md/63-sarcasmbench/pages",
+      "md_page_files": 18,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 242
+    },
+    {
+      "key": "64-sarcasm-step-by-step",
+      "ref": "#64",
+      "section": "Adjacent - Sarcasm & Humor Styles",
+      "title": "Is Sarcasm Detection a Step-by-Step Reasoning Process in Large Language Models?",
+      "authors": "Yao et al.",
+      "year": 2025,
+      "venue": "AAAI 2025",
+      "tags": [
+        "peer-reviewed"
+      ],
+      "page_url": "https://arxiv.org/abs/2407.12725",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2407.12725"
+      ],
+      "verify": "sarcasm",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/64-sarcasm-step-by-step.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2407.12725",
+      "pdf_bytes": 1498413,
+      "pdf_sha256": "ed10575b091bb2d24ce2ac2d84d2bb31a53c9537923390f5b89b94ef5d4f0cc7",
+      "page_count": 17,
+      "verify_ok": true,
+      "md_path": "papers/md/64-sarcasm-step-by-step/64-sarcasm-step-by-step.md",
+      "md_pages_dir": "papers/md/64-sarcasm-step-by-step/pages",
+      "md_page_files": 17,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 182
+    },
+    {
+      "key": "65-humour-style-recognition",
+      "ref": "#65",
+      "section": "Adjacent - Sarcasm & Humor Styles",
+      "title": "A Two-Model Approach for Humour Style Recognition",
+      "authors": "Kenneth, Khosmood & Edalat",
+      "year": 2024,
+      "venue": "arXiv:2410.12842",
+      "tags": [
+        "preprint",
+        "method"
+      ],
+      "page_url": "https://arxiv.org/abs/2410.12842",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2410.12842"
+      ],
+      "verify": "humour style",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/65-humour-style-recognition.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2410.12842",
+      "pdf_bytes": 4115408,
+      "pdf_sha256": "17fe4fc6cbbec744e8617585cea659818564e84f702a874527e0073b22c2f70e",
+      "page_count": 16,
+      "verify_ok": true,
+      "md_path": "papers/md/65-humour-style-recognition/65-humour-style-recognition.md",
+      "md_pages_dir": "papers/md/65-humour-style-recognition/pages",
+      "md_page_files": 16,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 167
+    },
+    {
+      "key": "x08-can-ai-make-us-laugh",
+      "ref": "#17 (companion)",
+      "section": "Part 2 - Generating Jokes",
+      "title": "Can AI Make Us Laugh? Comparing Jokes Generated by Witscript and a Human Expert",
+      "authors": "Joe Toplyn",
+      "year": 2025,
+      "venue": "CHum 2025",
+      "tags": [
+        "workshop"
+      ],
+      "page_url": "https://aclanthology.org/2025.chum-1.8/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2025.chum-1.8.pdf"
+      ],
+      "verify": "witscript",
+      "status": "converted",
+      "pdf_path": "papers/pdfs/x08-can-ai-make-us-laugh.pdf",
+      "pdf_source": "https://aclanthology.org/2025.chum-1.8.pdf",
+      "pdf_bytes": 564575,
+      "pdf_sha256": "f5f3cc0de8e3b8ce93275c1240eb0a6d3eb637e7b47b59585f006d4b988ec945",
+      "page_count": 8,
+      "verify_ok": true,
+      "md_path": "papers/md/x08-can-ai-make-us-laugh/x08-can-ai-make-us-laugh.md",
+      "md_pages_dir": "papers/md/x08-can-ai-make-us-laugh/pages",
+      "md_page_files": 8,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 64
+    }
+  ]
+}

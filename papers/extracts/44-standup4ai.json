@@ -1,0 +1,183 @@
+{
+  "key": "44-standup4ai",
+  "ref": "#44",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/44-standup4ai/44-standup4ai.md",
+  "source_md_sha256": "71045d38c5ab4cedff707a5b3d46aadcd567f84495641f8c9a1f9c50f0f7a4db",
+  "source_truncated": false,
+  "title": "StandUp4AI: A New Multilingual Dataset for Humor Detection in Stand-up Comedy Videos",
+  "authors": [
+    "Valentin Barriere",
+    "Nahuel Gomez",
+    "Leo Hemamou",
+    "Sofia Callejas",
+    "Brian Ravenet"
+  ],
+  "year": 2025,
+  "venue": null,
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a large multilingual stand-up comedy video dataset support computational modeling of humor and audience laughter across seven languages?",
+    "Can complementary timestamp errors from Whisper and WhisperX be used to discover laughter events missed by an off-the-shelf laughter detector?",
+    "Does framing humor detection as word-level sequence labeling, rather than binary sequence classification, provide usable baselines for predicting audience laughter during stand-up performances?"
+  ],
+  "tasks": [
+    "humor detection",
+    "automatic laughter detection",
+    "word-level laughter prediction",
+    "sequence labeling of laughter after words"
+  ],
+  "humor_domains": [
+    "stand-up comedy",
+    "stand-up comedy videos",
+    "conversational humor"
+  ],
+  "modalities": [
+    "text",
+    "audio",
+    "video"
+  ],
+  "languages": [
+    "English",
+    "French",
+    "Spanish",
+    "Italian",
+    "Portuguese",
+    "Hungarian",
+    "Czech"
+  ],
+  "datasets_used": [
+    {
+      "name": "StandUp4AI",
+      "role": "introduced",
+      "size": "3,617 videos; 334.2 hours; 2,887,402 words; 128,194 laughter labels"
+    },
+    {
+      "name": "StandUp4AI manually annotated test set",
+      "role": "evaluated-on",
+      "size": "70 videos (10 per language)"
+    },
+    {
+      "name": "StandUp4AI candidate laughter annotation subset",
+      "role": "trained-on",
+      "size": "376 outburst candidates on 50 videos; 208 real outbursts of laughter"
+    }
+  ],
+  "models_evaluated": [
+    "Omine et al. (2024) laughter detection model",
+    "Whisper",
+    "WhisperX",
+    "Random Forest",
+    "xlm-roberta-base"
+  ],
+  "methods_proposed": [
+    {
+      "name": "ASR-Based Automatic Laughter Detection",
+      "summary": "The method exploits complementary timestamp errors from Whisper and WhisperX around laughter: Whisper tends to merge laughter duration with the next word, while WhisperX tends to merge it with the previous one. Intersections between the two transcripts are used to insert candidate laughter segments, which are then filtered with a Random Forest classifier using acoustic features."
+    },
+    {
+      "name": "Word-level laughter prediction as sequence labeling",
+      "summary": "Instead of treating humor detection as binary sequence classification, each word is labeled to indicate whether laughter occurs right after it or continues through it. This allows models to predict when laughter should start and stop across a performance rather than only at the end of a sequence."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "The introduction motivates humor as emerging when a situation surprisingly deviates from expectations, with setup, punchline, and tags used to describe joke structure."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "The authors manually annotated 70 videos, 10 per language, with laughter timestamps at 0.1 seconds using the audio file and Audacity; ASR outputs were manually checked."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "The authors manually annotated candidate laughter segments detected in 50 videos as real laughter or other events."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The Random Forest candidate laughter classifier was evaluated with precision, recall, and F1."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The full laughter detection system was evaluated against the manually annotated test set using Intersection over Union with threshold 0.2, reporting precision, recall, and F1."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Word-level sequence labeling models were evaluated with classification metrics, including F1 scores by language and average F1."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "StandUp4AI contains 3,617 stand-up videos across seven languages.",
+      "metric": "dataset size",
+      "value": "334.2 hours; 2,887,402 words; 128,194 laughter labels",
+      "dataset": "StandUp4AI",
+      "best_system": null
+    },
+    {
+      "finding": "The ASR-based candidate extraction produced 376 outburst candidates on 50 videos, of which 208 were real laughter events not previously detected by the off-the-shelf model.",
+      "metric": "candidate yield",
+      "value": "376 candidates; 208 real outbursts; approximately 3 new outbursts of laughter per video",
+      "dataset": "StandUp4AI candidate laughter annotation subset",
+      "best_system": "ASR-Based Automatic Laughter Detection"
+    },
+    {
+      "finding": "The Random Forest candidate laughter classifier achieved the best reported class F1 of 0.85 for laughter and macro F1 of 0.83.",
+      "metric": "F1",
+      "value": "Laughter F1 0.85; Macro F1 0.83",
+      "dataset": "StandUp4AI candidate laughter annotation subset",
+      "best_system": "Random Forest"
+    },
+    {
+      "finding": "On the manually annotated test set, the filtered ASR-based laughter detection method outperformed the Omine et al. (2024) off-the-shelf detector.",
+      "metric": "F1 at IoU threshold 0.2",
+      "value": "0.58 vs 0.51",
+      "dataset": "StandUp4AI manually annotated test set",
+      "best_system": "Filtered (RF)"
+    },
+    {
+      "finding": "For word-level sequence labeling on the manually annotated test set, the multilingual model trained on enhanced laughter labels achieved the best average F1.",
+      "metric": "Avg. F1",
+      "value": "42.4",
+      "dataset": "StandUp4AI manually annotated test set",
+      "best_system": "Multiling. Enhanced"
+    },
+    {
+      "finding": "On the automatic test set, the multilingual enhanced model achieved the best average F1.",
+      "metric": "Avg. F1",
+      "value": "28.7",
+      "dataset": "StandUp4AI automatic test set",
+      "best_system": "Multiling. Enhanced"
+    }
+  ],
+  "key_findings": [
+    "The paper introduces StandUp4AI, a multilingual stand-up comedy video dataset with 3,617 videos, 334.2 hours, 2,887,402 words, and 128,194 laughter labels across seven languages.",
+    "The ASR-based method found 208 real outbursts of laughter among 376 candidates on 50 videos that were not previously detected by the off-the-shelf laughter detection model.",
+    "Filtering ASR-derived laughter candidates with a Random Forest improved manually evaluated laughter detection from F1 0.51 for Omine et al. (2024) to F1 0.58 at IoU threshold 0.2.",
+    "For word-level laughter prediction, the multilingual model trained with enhanced labels achieved Avg. F1 42.4, compared with 42.2 for multilingual raw labels and 39.4 for monolingual enhanced models.",
+    "The paper releases additional multimodal features, including Action Units, poses, and camera angle changes, but the reported baseline experiments use unimodal text models."
+  ],
+  "limitations": [
+    "The humor detection experiments focus only on unimodal textual models; multimodal models are left for future work.",
+    "The paper does not model different intensities of laughter because of significant variability in acoustic intensity across collected videos.",
+    "The authors state that a more thorough analysis of ASR errors would be beneficial, especially for dialectal language, slang, and vulgarity.",
+    "The dataset relies on YouTube videos that may be deleted.",
+    "The authors do not release the video or audio content, only metadata and annotations."
+  ],
+  "safety_ethics_notes": "The paper notes that the data relies on YouTube videos and that the authors release metadata and annotations rather than the video or audio content.",
+  "artifacts": {
+    "code_url": "https://tinyurl.com/EMNLPHumourStandUpPublic",
+    "data_url": "https://tinyurl.com/EMNLPHumourStandUpPublic",
+    "other": "The paper states that released features include Action Units from LibreFace, poses from MMDetection and MMPose, and camera angle changes from PySceneDetect."
+  }
+}

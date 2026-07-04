@@ -1,0 +1,195 @@
+{
+  "key": "23-creativity-understanding-gap",
+  "ref": "#23",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/23-creativity-understanding-gap/23-creativity-understanding-gap.md",
+  "source_md_sha256": "c7676d7cea680fec0b389416ca2919d4139012c440f8717bd61c4ddfdbdae8c7",
+  "source_truncated": false,
+  "title": "Bridging the Creativity Understanding Gap: Small-Scale Human Alignment Enables Expert-Level Humor Ranking in LLMs",
+  "authors": [
+    "Kuan Lok Zhou",
+    "Jiayi Chen",
+    "Siddharth Suresh",
+    "Reuben Narad",
+    "Timothy T. Rogers",
+    "Lalit K Jain",
+    "Robert D Nowak",
+    "Bob Mankoff",
+    "Jifan Zhang"
+  ],
+  "year": 2025,
+  "venue": "EMNLP Findings 2025",
+  "paper_types": [
+    "method",
+    "evaluation-study",
+    "position"
+  ],
+  "research_questions": [
+    "Can LLM humor ranking on the New Yorker Cartoon Caption Contest be decomposed into visual understanding, humor reasoning, and alignment with human crowd preferences?",
+    "Do improved cartoon descriptions and LLM-generated humor explanations improve pairwise humorous caption ranking?",
+    "Can persona-based prompting align LLM judgments with the New Yorker Caption Contest crowd, or is supervised fine-tuning on preference data required?",
+    "Can a preference-aligned LLM reach human expert-level accuracy on easy and harder New Yorker caption ranking tasks?",
+    "What do failures and successes in humor preference alignment imply for creative understanding and AGI?"
+  ],
+  "tasks": [
+    "pairwise cartoon caption ranking",
+    "humor explanation generation",
+    "humor evaluation",
+    "cartoon description refinement"
+  ],
+  "humor_domains": [
+    "cartoon captions",
+    "New Yorker Cartoon Caption Contest"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "source-material",
+      "size": "679 contests selected from contests #1 to #763; 3 caption pairs per contest; human descriptions"
+    },
+    {
+      "name": "New Yorker caption ranking (Humor in AI)",
+      "role": "source-material",
+      "size": "365 contests: #530 to #895; 6000+ ranked captions per contest; GPT-4o generated descriptions"
+    },
+    {
+      "name": "New Yorker caption ranking (Humor in AI)",
+      "role": "trained-on",
+      "size": "A large corpus of New Yorker caption contest caption ranking data released by Zhang et al. (2024)"
+    },
+    {
+      "name": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "role": "introduced",
+      "size": "379 contests from contest #510 to #889; 20 constructed caption pairs per contest; 279 cartoons for training and 100 for testing"
+    },
+    {
+      "name": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "role": "trained-on",
+      "size": "5,580 pairs of captions from 279 training cartoons"
+    },
+    {
+      "name": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "role": "evaluated-on",
+      "size": "100 cartoons for testing; human expert evaluation used 50 contests selected from the testing set with two distinct caption pairs each"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "Claude 3.5 Sonnet",
+    "Gemini 2.0 Flash Thinking",
+    "o1-preview",
+    "o1",
+    "o3-mini"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Three-component humor ranking framework",
+      "summary": "The paper decomposes humorous caption ranking into visual understanding, cartoon-caption humor reasoning, and alignment with human crowd preferences. The full pipeline uses refined cartoon descriptions, o1-preview-generated explanations, and preference-aligned ranking."
+    },
+    {
+      "name": "GPT-4o-assisted human-in-the-loop description refinement",
+      "summary": "The authors assess GPT-4o-generated cartoon descriptions, identify inaccurate descriptions, iteratively correct them with human feedback, and generate both canny and uncanny descriptions for ranking experiments."
+    },
+    {
+      "name": "Persona-based preference alignment prompts",
+      "summary": "The paper designs nine persona prompts intended to simulate New Yorker Caption Contest audience preferences, including lawyers, researchers, students, Bob Mankoff, Larry Wood, and cartoon authors, and tests them across four LLMs."
+    },
+    {
+      "name": "GPT-4o supervised fine-tuning on crowd preferences with humor explanations",
+      "summary": "The authors fine-tune GPT-4o to choose the funnier caption from pairs using cartoon descriptions, two candidate captions, and o1-preview explanations, with labels derived from crowd rankings."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "crowd-votes",
+      "detail": "Ground-truth caption rankings come from the New Yorker Caption Contest bandit-based crowdsource rating system, where users score captions as “funny”, “somewhat funny”, or “unfunny” and a complete crowdsourced ranking is obtained."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Models are evaluated by accuracy (%) on pairwise ranking tasks: ranks #1–10 versus #1000–1009 and ranks #30–39 versus #300–309."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Five renowned human experts in the New Yorker Cartoon Caption Contest world selected the funnier caption from pairs; the paper reports average accuracy, highest accuracy, majority accuracy, Fleiss Kappa, and agreement rate."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Human reviewers iteratively corrected inaccurate cartoon descriptions; the paper also states that a humor expert found over 85% of o1-preview explanations effectively captured a cartoon’s humor."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Quality assessment found that 23.5% of the machine-generated cartoon descriptions contained inaccuracies, corresponding to 89/379 descriptions.",
+      "metric": "description error rate",
+      "value": "23.5% (89/379)",
+      "dataset": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "best_system": null
+    },
+    {
+      "finding": "Using refined descriptions improved GPT-4o prompting accuracy from 70% to 73%, and improved finetuned model performance from 81.3% to 82.4%.",
+      "metric": "accuracy",
+      "value": "70% to 73%; 81.3% to 82.4%",
+      "dataset": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "For top 10 versus 1000–1009 caption ranking, o1-preview explanations gave 76% GPT-4o accuracy, compared with 73% for no explanations and 71% for GPT-4o explanations.",
+      "metric": "accuracy",
+      "value": "76%",
+      "dataset": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "best_system": "o1-preview explanations + GPT-4o ranking"
+    },
+    {
+      "finding": "Persona-based prompting produced only modest gains: the best GPT-4o persona was Female Lawyer at 76.5%, versus 73.5 for the empty baseline on the size 200 subset.",
+      "metric": "accuracy",
+      "value": "76.5%",
+      "dataset": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "best_system": "GPT-4o with Female Lawyer prompt"
+    },
+    {
+      "finding": "On 10vs1000, GPT-4o SFT w/ Expl. achieved 82.4_{\\pm1.2}, outperforming GPT-4o Prompting at 67.3_{\\pm1.5} and Expert Average Accuracy at 78_{\\pm2.6}, while below Best Expert Accuracy at 85.33_{\\pm2.9}.",
+      "metric": "accuracy (%)",
+      "value": "82.4_{\\pm1.2}",
+      "dataset": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "best_system": "GPT-4o SFT w/ Expl. (Ours)"
+    },
+    {
+      "finding": "On the harder 30vs300 task, GPT-4o SFT w/ Expl. achieved 63.2_{\\pm1.5}, compared with GPT-4o Prompting at 53.9_{\\pm1.6}, Expert Average Accuracy at 61.6_{\\pm3.0}, Expert Majority Vote at 66_{\\pm6.8}, and Best Expert Accuracy at 68_{\\pm3.8}.",
+      "metric": "accuracy (%)",
+      "value": "63.2_{\\pm1.5}",
+      "dataset": "Refined New Yorker Cartoon Caption Contest caption-pair dataset",
+      "best_system": "GPT-4o SFT w/ Expl. (Ours)"
+    }
+  ],
+  "key_findings": [
+    "The authors identify visual description quality as a real bottleneck: 23.5% (89/379) of GPT-4o-generated cartoon descriptions had errors, and correcting them improved downstream ranking accuracy.",
+    "o1-preview explanations improved caption ranking accuracy to 76% in Table 1, while GPT-4o-generated explanations reduced it to 71%, showing that explanation quality matters.",
+    "Persona-based prompting was weak for preference alignment: the best GPT-4o prompt reached 76.5% on a size 200 subset, only 3% above the 73.5 baseline without a persona.",
+    "Supervised fine-tuning on 5,580 crowd preference pairs substantially improved GPT-4o, reaching 82.4_{\\pm1.2} on 10vs1000 and 63.2_{\\pm1.5} on 30vs300 when using o1-preview explanations.",
+    "The fine-tuned model exceeded expert average accuracy on both reported tasks but still slightly underperformed the best individual expert on the 10vs1000 task."
+  ],
+  "limitations": [
+    "The study is based solely on the New Yorker Cartoon Caption Contest dataset, which may limit generalization to other humor forms and creative tasks.",
+    "The paper primarily evaluates caption understanding through pairwise ranking, which may not capture broader humor understanding or humor generation challenges.",
+    "The preference data are subjective and reflect the tastes of a specific audience, such as New Yorker readers.",
+    "Collecting high-quality curated human preference data is resource-intensive and may not scale easily to other creative domains.",
+    "The framework does not explicitly address detection or mitigation of offensive, culturally insensitive, or derogatory humorous content."
+  ],
+  "safety_ethics_notes": "The paper warns that it contains potentially offensive content due to the nature of humor, and its limitations state that humorous content can be culturally insensitive or derogatory and that the current framework does not explicitly mitigate offensive content. Appendix D states the work is for research purposes and complies with CC-BY-4.0 and CC-BY-NC-4.0 dataset licenses.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "No code or data URL is stated. Appendix D states that the experiments used OpenAI, Anthropic and Google APIs, cost around $4,000 USD, and that LLMs were used to rephrase some parts of the paper."
+  }
+}

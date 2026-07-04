@@ -1,0 +1,185 @@
+{
+  "key": "64-sarcasm-step-by-step",
+  "ref": "#64",
+  "section": "Adjacent - Sarcasm & Humor Styles",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/64-sarcasm-step-by-step/64-sarcasm-step-by-step.md",
+  "source_md_sha256": "5b08c008261397bba929dfcdeb84326417407ff906432e81a6fb4abce37724e1",
+  "source_truncated": false,
+  "title": "Is Sarcasm Detection A Step-by-Step Reasoning Process in Large Language Models?",
+  "authors": [
+    "Ben Yao",
+    "Yazhou Zhang",
+    "Qiuchi Li",
+    "Jing Qin"
+  ],
+  "year": 2025,
+  "venue": "AAAI 2025",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Is human sarcasm detection a step-by-step reasoning process?"
+  ],
+  "tasks": [
+    "sarcasm detection",
+    "humor detection"
+  ],
+  "humor_domains": [
+    "sarcasm",
+    "irony",
+    "online debate sarcasm",
+    "Twitter irony/sarcasm",
+    "TV-show conversational sarcasm",
+    "humor in conversations"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "IAC-V1",
+      "role": "evaluated-on",
+      "size": "Avg. Length 68; #Train 1,595; #Dev 80; #Test 320"
+    },
+    {
+      "name": "IAC-V2",
+      "role": "evaluated-on",
+      "size": "Avg. Length 43; #Train 5,216; #Dev 262; #Test 1,042"
+    },
+    {
+      "name": "SemEval 2018 Task 3",
+      "role": "evaluated-on",
+      "size": "Avg. Length 14; #Train 3,634; #Dev 200; #Test 784"
+    },
+    {
+      "name": "MUStARD",
+      "role": "evaluated-on",
+      "size": "690 samples total of 3,000 utterances; Avg. Length 14; #Train 552; #Dev -; #Test 138"
+    },
+    {
+      "name": "CMMA",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "UR-FUNNY (repo)",
+      "role": "evaluated-on",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "Claude 3.5 Sonnet",
+    "Llama 3-8B",
+    "Llama 3-70B",
+    "Qwen 2-1.5B",
+    "Qwen 2-7B",
+    "Qwen 2-72B",
+    "MFN",
+    "SVM+BERT"
+  ],
+  "methods_proposed": [
+    {
+      "name": "SarcasmCue",
+      "summary": "A prompting framework for sarcasm detection that compares sequential and non-sequential ways of using cues. It contains chain of contradiction, graph of cues, bagging of cues, and tensor of cues."
+    },
+    {
+      "name": "Chain of Contradiction (CoC)",
+      "summary": "A linear CoT-style method that asks the LLM to identify surface sentiment, deduce true intention, and then judge whether the two are inconsistent. It operationalizes sarcasm as contradiction between apparent sentiment and intended meaning."
+    },
+    {
+      "name": "Graph of Cues (GoC)",
+      "summary": "A graph-based prompting method in which ten linguistic, contextual, and emotional cues are vertices and LLM voting greedily selects the most valuable next cue until a confidence threshold or cue limit is reached. It remains a step-by-step method but is not restricted to a single fixed chain."
+    },
+    {
+      "name": "Bagging of Cues (BoC)",
+      "summary": "A non-sequential ensemble prompting method that randomly samples multiple subsets from a pool of ten cues, obtains independent LLM predictions from each subset, and aggregates them by majority vote."
+    },
+    {
+      "name": "Tensor of Cues (ToC)",
+      "summary": "A non-sequential method that extracts linguistic, contextual, and emotional cues, takes final hidden-layer embeddings for each view, fuses them through a token-wise tensor product, and prepends the fused cue sequence to the sarcasm prompt. The LLM is frozen and the fully connected projection layers are trained with cross-entropy loss."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper treats sarcasm's quintessential property as the contradiction or incongruity between surface sentiment and true intention; CoC explicitly extracts both and predicts sarcasm when they do not align."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Accuracy and Macro-F1 are reported on IAC-V1, IAC-V2, SemEval 2018 Task 3, and MUStARD; the table also reports Avg. of F1 and marks significance improvement over the best baseline via unpaired t-test (p < 0.05)."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Accuracy and Macro-F1 are reported for the humor-detection extension on CMMA and UR-FUNNY-V2."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On GPT-4o, CoC achieved the best average Macro-F1 among the reported methods and improved over the best prompting baseline ToT.",
+      "metric": "Avg. of F1",
+      "value": "70.73 vs 67.88; 4.2% improvement",
+      "dataset": "IAC-V1, IAC-V2, SemEval 2018 Task 3, MUStARD",
+      "best_system": "CoC (GPT-4o)"
+    },
+    {
+      "finding": "On Claude 3.5 Sonnet, CoC achieved the best average Macro-F1 and improved over the best baseline IO.",
+      "metric": "Avg. of F1",
+      "value": "74.74 vs 73.26; 2.0% improvement",
+      "dataset": "IAC-V1, IAC-V2, SemEval 2018 Task 3, MUStARD",
+      "best_system": "CoC (Claude 3.5 Sonnet)"
+    },
+    {
+      "finding": "On Llama 3-8B, ToC substantially outperformed the best baseline ToT.",
+      "metric": "Avg. of F1",
+      "value": "65.24 vs 50.31; 29.7% improvement",
+      "dataset": "IAC-V1, IAC-V2, SemEval 2018 Task 3, MUStARD",
+      "best_system": "ToC (Llama 3-8B)"
+    },
+    {
+      "finding": "On Qwen 2-7B, ToC substantially outperformed the best baseline IO.",
+      "metric": "Avg. of F1",
+      "value": "68.39 vs 43.22; 58.2% improvement",
+      "dataset": "IAC-V1, IAC-V2, SemEval 2018 Task 3, MUStARD",
+      "best_system": "ToC (Qwen 2-7B)"
+    },
+    {
+      "finding": "In the humor-detection extension with GPT-4o as backbone, BoC achieved the best average F1 across CMMA and UR-FUNNY-V2.",
+      "metric": "Avg. of F1",
+      "value": "67.48",
+      "dataset": "CMMA, UR-FUNNY-V2",
+      "best_system": "BoC"
+    }
+  ],
+  "key_findings": [
+    "SarcasmCue consistently outperforms the paper's SoTA prompting baselines, with reported F1 improvements of 4.2%, 2.0%, 29.7%, and 58.2%.",
+    "For stronger proprietary LLMs, especially GPT-4o and Claude 3.5 Sonnet, sequential cue methods such as CoC and GoC are often strongest, with Claude 3.5 Sonnet + CoC reaching 74.74 Avg. of F1.",
+    "For smaller open-source LLMs, the non-sequential ToC method is strongest, reaching 65.24 Avg. of F1 on Llama 3-8B and 68.39 Avg. of F1 on Qwen 2-7B.",
+    "The paper concludes that the comparison between sequential and non-sequential strategies does not provide clear empirical evidence that sarcasm detection must be step-by-step, but the Llama 3-8B and Qwen 2-7B results support a non-sequential nature.",
+    "The ablation study reports that removing any single cue type hurts performance, with linguistic cues having the most significant impact across most settings.",
+    "The error analysis finds that CoC, GoC, and BoC have higher false positive rates, while ToC has the lowest overall error rate and more balanced false positive and false negative rates."
+  ],
+  "limitations": [
+    "The paper states that SarcasmCue incorporates only three types of cues, while other potentially useful cues are not integrated.",
+    "ToC requires access to the LLM structure and supervised training of additional neural layers, so the paper implements it only for open-source LLMs rather than GPT-4o or Claude 3.5 Sonnet.",
+    "For MUStARD, the paper uses only textual information despite the dataset being multimodal.",
+    "The case study notes that highly ambiguous situations may require a blend of methods or additional contextual information."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": "https://github.com/qiuchili/llm_sarcasm_detection",
+    "data_url": null,
+    "other": null
+  }
+}

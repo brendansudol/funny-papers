@@ -1,0 +1,212 @@
+{
+  "key": "52-pun2pun",
+  "ref": "#52",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/52-pun2pun/52-pun2pun.md",
+  "source_md_sha256": "4c1bab5a3abe3db883884bff3ab1249951e964effc081b029ac2494039b5cf24",
+  "source_truncated": false,
+  "title": "Pun2Pun: Benchmarking LLMs on Textual-Visual Chinese-English Pun Translation via Pragmatics Model and Linguistic Reasoning",
+  "authors": [
+    "Yiran Rex Ma",
+    "Shan Huang",
+    "Yuting Xu",
+    "Ziyu Zhou",
+    "Yuanxi Wei"
+  ],
+  "year": 2025,
+  "venue": "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 4: Student Research Workshop)",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can cross-lingual pun translation between Chinese and English be quantitatively evaluated while preserving both linguistic mechanisms and humorous effects?",
+    "How well do current LLMs and RLMs perform on progressive pun-understanding and pun-translation subtasks for textual and visual puns?",
+    "Does an adapted Constant-Variable Optimization strategy improve Chinese-English pun translation compared with vanilla and one-shot prompting?",
+    "What patterns emerge across homophonic versus homographic puns, textual versus visual puns, and mechanism interchange during translation?"
+  ],
+  "tasks": [
+    "pun type classification",
+    "pun element locating",
+    "pun mechanism decomposition",
+    "visual pun appreciation",
+    "Chinese-English pun translation"
+  ],
+  "humor_domains": [
+    "puns",
+    "homophonic puns",
+    "homographic puns",
+    "textual puns",
+    "visual puns",
+    "caption-embedded image puns"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "Chinese",
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Pun2Pun",
+      "role": "introduced",
+      "size": "5.5k textual examples across English and Chinese, plus 1k caption-embedded images"
+    },
+    {
+      "name": "Liu (2018)",
+      "role": "source-material",
+      "size": "947 phonic, 528 graphic"
+    },
+    {
+      "name": "Chen et al. (2024)",
+      "role": "source-material",
+      "size": "524 phonic, 528 graphic"
+    },
+    {
+      "name": "Simpson et al. (2019)",
+      "role": "source-material",
+      "size": "1268 phonic, 1610 graphic"
+    },
+    {
+      "name": "Chinese and English public social media sources",
+      "role": "source-material",
+      "size": "1k caption-embedded images"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "OpenAI o1-mini",
+    "OpenAI o3-mini",
+    "DeepSeek-V3",
+    "DeepSeek-R1",
+    "Qwen-VL-Max",
+    "QwQ-32B-Preview",
+    "QVQ-72B-Preview",
+    "Claude 3.5 Sonnet"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Pun2Pun benchmark",
+      "summary": "A Chinese-English benchmark for textual and visual pun translation, with progressive subtasks covering classification, locating/decomposition, visual appreciation, and translation."
+    },
+    {
+      "name": "Adapted Constant-Variable Optimization (CVO) strategy",
+      "summary": "A translation strategy that decomposes source puns into SM1, SM2, and SPM constants, enumerates target-language variables, reconstructs a target pun, and optimizes word choices for semantic and pragmatic overlap."
+    },
+    {
+      "name": "Overlap (Ovl) metric",
+      "summary": "A CVO-derived LLM-judged metric for hit translations, weighting structure preservation, contextual reconstruction, and pragmatic retention as 0.25, 0.25, and 0.50 respectively."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes homophonic versus homographic pun mechanisms for task labels, decomposition, and translation analysis."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The Constant-Variable Optimization model and Overlap metric are adapted as a pragmatic model of pun translation, using SM1/TM1, SM2/TM2, and SPM/TPM correspondences."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "Communicative Translation Theory, Functional Equivalence, Delabastita's pun-translation strategies, and cognitive-pragmatic models are discussed as translation-studies motivation."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Accuracy is used for Task I classification; Cosine Similarity is used for translation with text-embedding-v3 from Qwen Team and reported relative to 70."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "gpt-4o-mini is used for Agent-Accuracy on Tasks II and III, binary Hit for translation validity, and Ovl scoring for hit translations."
+    },
+    {
+      "type": "human-eval",
+      "detail": "In the optimization study, two authors independently evaluated 20 randomly selected textual examples over five refinement iterations using 5-point scales for innovativeness, content retention, and target language fluency."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Three authors independently reviewed and curated Pun2Pun examples; disagreements were resolved by team discussion, with challenging cases referred to external translation experts."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On Pun2Pun Textual English translation, deepseek-v3 with CVO achieved the highest Hit rates.",
+      "metric": "Hit",
+      "value": "43.16% homophonic, 47.02% homographic",
+      "dataset": "Pun2Pun Textual",
+      "best_system": "deepseek-v3/CVO"
+    },
+    {
+      "finding": "On Pun2Pun Textual Chinese translation, deepseek-r1 with CVO achieved the highest Hit rates.",
+      "metric": "Hit",
+      "value": "26.31% homophonic, 24.73% homographic",
+      "dataset": "Pun2Pun Textual",
+      "best_system": "deepseek-r1/CVO"
+    },
+    {
+      "finding": "On Pun2Pun Visual translation, the best English Hit was achieved by gpt-4o/1-Shot and the best Chinese Hit by claude-3.5-sonnet/1-Shot.",
+      "metric": "Hit",
+      "value": "23.34% English, 17.80% Chinese",
+      "dataset": "Pun2Pun Visual",
+      "best_system": "gpt-4o/1-Shot for English; claude-3.5-sonnet/1-Shot for Chinese"
+    },
+    {
+      "finding": "On Pun2Pun Visual translation, claude-3.5-sonnet/1-Shot produced the best Ovl scores.",
+      "metric": "Ovl",
+      "value": "40.21% English, 23.66% Chinese",
+      "dataset": "Pun2Pun Visual",
+      "best_system": "claude-3.5-sonnet/1-Shot"
+    },
+    {
+      "finding": "For deepseek-v3 on Pun2Pun Textual English translation, CVO substantially improved Hit over Vanilla.",
+      "metric": "Hit",
+      "value": "10.94/15.41 → 43.16/47.02",
+      "dataset": "Pun2Pun Textual English",
+      "best_system": "deepseek-v3/CVO"
+    },
+    {
+      "finding": "For Pun2Pun Textual Chinese Ovl, deepseek-r1/Vanilla achieved the highest Ovl scores.",
+      "metric": "Ovl",
+      "value": "62.37% homophonic, 67.13% homographic",
+      "dataset": "Pun2Pun Textual Chinese",
+      "best_system": "deepseek-r1/Vanilla"
+    }
+  ],
+  "key_findings": [
+    "Pun understanding tasks are generally much easier than pun translation, with many textual classification scores exceeding 90% accuracy.",
+    "Pun2Pun translation remains difficult: the paper states that hit rates rarely exceed 40% for textual puns and 20% for visual puns.",
+    "CVO improves translation for some model families, especially deepseek-v3 on English textual puns and deepseek-r1 on Chinese textual puns, but its effects are mixed across models.",
+    "Homophonic puns are generally harder to translate well than homographic puns, with a particularly pronounced disparity in English-to-Chinese translation.",
+    "Models often remain too close to source semantics; the paper argues that greater semantic divergence can correlate with more effective pun recreation.",
+    "Mechanism interchange between homophonic and homographic puns emerges as a useful cross-lingual adaptation pattern."
+  ],
+  "limitations": [
+    "The paper does not systematically quantify annotation consistency or inter-rater reliability.",
+    "The CVO implementation is described as only a rudimentary approximation of the theoretical model.",
+    "The evaluated models are primarily large-scale and proprietary, limiting insight into smaller open-source models.",
+    "Few-shot prompting is not systematically explored for exemplar variance or impact.",
+    "The evaluation relies heavily on LLM-as-a-judge methods, especially gpt-4o-mini, introducing possible bias and consistency issues.",
+    "The paper lacks human judgment validation for the main quantitative results.",
+    "There are no gold-standard reference translations for pun translation.",
+    "Puns are evaluated in contextual isolation rather than broader discourse settings.",
+    "The benchmark is limited to Chinese-English translation, limiting generalizability to other language pairs and writing systems."
+  ],
+  "safety_ethics_notes": "The paper states that meticulous filtering procedures were used to minimize biased content, but it cannot guarantee complete neutrality; some samples may contain ethically sensitive, offensive, or culturally aggressive content, and the authors do not endorse such language or implications.",
+  "artifacts": {
+    "code_url": "https://github.com/rexera/Pun2Pun",
+    "data_url": "https://github.com/rexera/Pun2Pun",
+    "other": "The paper states that the Pun2Pun dataset, inference scripts, and evaluation scripts are available at the GitHub URL."
+  }
+}

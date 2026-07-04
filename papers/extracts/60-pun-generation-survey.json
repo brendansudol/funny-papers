@@ -1,0 +1,306 @@
+{
+  "key": "60-pun-generation-survey",
+  "ref": "#60",
+  "section": "Part 9 - Surveys & Resources",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/60-pun-generation-survey/60-pun-generation-survey.md",
+  "source_md_sha256": "536c81d44938ea6c65d5e6e939b62954f56e33b802d58bbe3a2e22787b7e5075",
+  "source_truncated": false,
+  "title": "A Survey of Pun Generation: Datasets, Evaluations and Methodologies",
+  "authors": [
+    "Yuchen Su",
+    "Yonghua Zhu",
+    "Ruofan Wang",
+    "Zijian Huang",
+    "Diana Benavides-Prado",
+    "Michael Witbrock"
+  ],
+  "year": 2025,
+  "venue": null,
+  "paper_types": [
+    "survey"
+  ],
+  "research_questions": [
+    "What pun datasets have been used or constructed for pun generation research?",
+    "How have pun generation methods evolved across conventional methods, classic DNNs, fine-tuned pre-trained language models, prompting, and visual-language models?",
+    "What automatic and human evaluation metrics are used to assess pun generation quality?",
+    "What challenges and future directions remain for multilingual, multimodal, and prompt-based pun generation?"
+  ],
+  "tasks": [
+    "pun generation",
+    "pun evaluation",
+    "pun recognition/detection",
+    "pun interpretation/explanation",
+    "visual pun comprehension"
+  ],
+  "humor_domains": [
+    "puns",
+    "homophonic puns",
+    "heterographic puns",
+    "homographic puns",
+    "visual puns",
+    "advertising puns",
+    "church marquees",
+    "newspaper comics",
+    "code-mixed Hindi-English puns"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English",
+    "Chinese",
+    "Japanese",
+    "French",
+    "Hindi",
+    "Arabic",
+    "Spanish"
+  ],
+  "datasets_used": [
+    {
+      "name": "Wikipedia",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "BookCorpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "C4",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "The Pile",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Dakshina",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "ParaBank",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Gutenberg BookCorpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Annamoradnejad and Zoghi (2020) jokes dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Paron",
+      "role": "analyzed",
+      "size": "3,850"
+    },
+    {
+      "name": "Paron-edit",
+      "role": "analyzed",
+      "size": "1,182"
+    },
+    {
+      "name": "Lucas (2004) tiny pun corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Church",
+      "role": "analyzed",
+      "size": "373"
+    },
+    {
+      "name": "Pun-Yang",
+      "role": "analyzed",
+      "size": "2,423"
+    },
+    {
+      "name": "Pun-Kao",
+      "role": "analyzed",
+      "size": "435"
+    },
+    {
+      "name": "Puns (Jaech et al., 2016)",
+      "role": "analyzed",
+      "size": "75"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "analyzed",
+      "size": "2,878"
+    },
+    {
+      "name": "SemEval-P",
+      "role": "analyzed",
+      "size": "1,607"
+    },
+    {
+      "name": "SemEval-G",
+      "role": "analyzed",
+      "size": "1,271"
+    },
+    {
+      "name": "ExPUNations (ExPun)",
+      "role": "analyzed",
+      "size": "1,999"
+    },
+    {
+      "name": "CUP",
+      "role": "analyzed",
+      "size": "2,396"
+    },
+    {
+      "name": "ChinesePun",
+      "role": "analyzed",
+      "size": "2,106"
+    },
+    {
+      "name": "ChinesePun-P",
+      "role": "analyzed",
+      "size": "1,049"
+    },
+    {
+      "name": "ChinesePun-G",
+      "role": "analyzed",
+      "size": "1,057"
+    },
+    {
+      "name": "Pun Rebus Art",
+      "role": "analyzed",
+      "size": "1,011"
+    },
+    {
+      "name": "UNPIE",
+      "role": "analyzed",
+      "size": "1,000"
+    },
+    {
+      "name": "UNPIE-P",
+      "role": "analyzed",
+      "size": "500"
+    },
+    {
+      "name": "UNPIE-G",
+      "role": "analyzed",
+      "size": "500"
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Survey tree for pun generation",
+      "summary": "The paper organizes pun generation research into datasets, methods, and evaluation, with datasets grouped as generic, derived, and human-annotated and methods grouped by technological development timeline."
+    },
+    {
+      "name": "Five-group methodology taxonomy",
+      "summary": "The survey classifies pun generation methods into conventional template/rule systems, classic deep neural networks, fine-tuned pre-trained language models, prompted pre-trained language models, and visual-language models."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "surprise theory",
+      "usage": "operationalized",
+      "detail": "The survey summarizes Surprisal as an automatic funniness metric based on local and global surprise around a pun word and its alternative word."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The survey summarizes information-theoretic ambiguity and distinctiveness metrics for linguistic humor in puns."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "The survey groups automatic metrics into funniness, diversity, and fluency: Ambiguity, Distinctiveness, Surprisal, Unusualness, Dist-1, Dist-2, Perplexity Score, and Structure Succ."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Human evaluation metrics summarized include Success, Funniness, Fluency, Informativeness, Coherence, and Readability; the paper notes use of Likert scales such as 1 (not at all) to 5 (extremely) and binary True/False success judgments."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The survey reports that Chen et al. (2024) used a human A/B test in which annotators compared paired puns generated by their methods and ChatGPT and selected the more humorous pun."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "The survey reports that Zeng et al. (2024) replaced human reviewers with GPT-4 to assess readability, funniness, and coherence."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The paper collection process initially identified around 150 publications and filtered them to approximately 30 papers focused on pun generation.",
+      "metric": "paper collection/filtering",
+      "value": "around 150 publications; approximately 30 papers",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "Paron is listed as a derived heterographic pun dataset collected from advertisements.",
+      "metric": "Corpus (C)",
+      "value": "3,850",
+      "dataset": "Paron",
+      "best_system": null
+    },
+    {
+      "finding": "SemEval is described as the first expert-annotated pun dataset and one of the most commonly used datasets in the pun generation community.",
+      "metric": "Corpus (C)",
+      "value": "2,878",
+      "dataset": "SemEval-2017 Task 7 puns",
+      "best_system": null
+    },
+    {
+      "finding": "The two SemEval enhancements listed are ExPUNations and CUP.",
+      "metric": "Corpus (C)",
+      "value": "1,999; 2,396",
+      "dataset": "ExPUNations (ExPun); CUP",
+      "best_system": null
+    },
+    {
+      "finding": "ChinesePun is listed as the first dataset for Chinese homophonic and homographic puns, designed for pun understanding and generation tasks.",
+      "metric": "Corpus (C)",
+      "value": "2,106",
+      "dataset": "ChinesePun",
+      "best_system": null
+    },
+    {
+      "finding": "The multimodal and multilingual pun datasets listed are Pun Rebus Art and UNPIE.",
+      "metric": "Corpus (C)",
+      "value": "1,011; 1,000",
+      "dataset": "Pun Rebus Art; UNPIE",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "The survey presents pun generation as a creative NLG task that must balance humour, double meaning, coherence, and contextual appropriateness.",
+    "The paper categorizes puns into homophonic, heterographic, homographic, and visual puns based on phonetic, graphic, and meaning relationships.",
+    "Pun datasets are organized as generic corpora, derived datasets, and human-annotated datasets, with SemEval-2017 Task 7 puns described as especially widely referenced.",
+    "Methodological development is described as moving from conventional template and rule systems to classic DNNs, fine-tuned PLMs, prompting, and preliminary visual-language-model work.",
+    "The survey argues that English textual pun generation dominates existing research, while multilingual and multimodal pun generation remain underexplored.",
+    "The paper emphasizes that both automatic and human evaluation have important weaknesses: automatic metrics miss semantic or logical quality, while human judgments are subjective and culturally dependent."
+  ],
+  "limitations": [
+    "Some relevant works may have been missed due to variations in search keywords.",
+    "The survey’s exploration of other pun categories is limited, including recursive puns and antanaclasis.",
+    "The study does not cover the entire historical scope nor the latest advancements following the survey because the field is rapidly developing.",
+    "Surprisal-based automatic evaluation is context-dependent and local Surprisal is highly sensitive to the choice of local window size.",
+    "Dist-1 and Dist-2 fail to capture semantic diversity, and Perplexity Score does not necessarily imply semantic coherence or logical consistency.",
+    "Human evaluation is subjective, especially for readability and funniness, and many studies do not provide detailed evaluator background information."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "https://github.com/ysu132/Pun-Generation-Survey"
+  }
+}

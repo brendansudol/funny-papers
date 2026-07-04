@@ -1,0 +1,228 @@
+{
+  "key": "11-clot-leap-of-thought",
+  "ref": "#11",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/11-clot-leap-of-thought/11-clot-leap-of-thought.md",
+  "source_md_sha256": "b71664b11926df1751975950c5432efc62be074cdb16cef7206495c506dc2447",
+  "source_truncated": false,
+  "title": "Let’s Think Outside the Box: Exploring Leap-of-Thought in Large Language Models with Creative Humor Generation",
+  "authors": [
+    "Shanshan Zhong",
+    "Zhongzhan Huang",
+    "Shanghua Gao",
+    "Wushao Wen",
+    "Liang Lin",
+    "Marinka Zitnik",
+    "Pan Zhou"
+  ],
+  "year": 2024,
+  "venue": "arXiv:2312.02439v3 [cs.AI]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can the Leap-of-Thought ability of large language models be explored and assessed?",
+    "Can Oogiri-style multimodal and multilingual humor generation serve as a testbed for LoT because it requires unexpected, humorous, and associative responses?",
+    "Do existing LLMs and CoT-like prompting frameworks exhibit sufficient LoT ability on Oogiri-style humor tasks?",
+    "Can the proposed Creative Leap-of-Thought paradigm improve LLM LoT ability for Oogiri humor generation and transfer to other creative tasks?"
+  ],
+  "tasks": [
+    "Oogiri-style humor generation",
+    "Image&Text to Text (IT2T) humor generation",
+    "Image to Text (I2T) humor generation",
+    "Text to Text (T2T) humor generation",
+    "humor response selection",
+    "humor response ranking"
+  ],
+  "humor_domains": [
+    "Oogiri",
+    "multimodal humor",
+    "multilingual Internet humor",
+    "image-based humorous responses",
+    "text-based humorous prompts",
+    "fill-in-the-blank comic or image-text humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English",
+    "Chinese",
+    "Japanese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Oogiri-GO",
+      "role": "introduced",
+      "size": "134,148 samples (89,744 I2T; 34,072 T2T; 10,332 IT2T); 95% training and 5% test; 77.95% annotated with human preferences"
+    },
+    {
+      "name": "Bokete",
+      "role": "source-material",
+      "size": "over 200,000 unfiltered raw samples collected across Bokete, Twitter, and Weibo before screening"
+    },
+    {
+      "name": "Twitter",
+      "role": "source-material",
+      "size": "over 200,000 unfiltered raw samples collected across Bokete, Twitter, and Weibo before screening"
+    },
+    {
+      "name": "Weibo",
+      "role": "source-material",
+      "size": "over 200,000 unfiltered raw samples collected across Bokete, Twitter, and Weibo before screening"
+    },
+    {
+      "name": "Cloud Guessing Game (CGG)",
+      "role": "introduced",
+      "size": "30 unambiguous and difficulty challenging white cloud images for each category; three choice questions for each white cloud image"
+    },
+    {
+      "name": "Divergent Association Task (DAT) benchmark",
+      "role": "evaluated-on",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT4v",
+    "LLaVA-1.5",
+    "MiniGPT-v2",
+    "mPLUG-Owl_Multilingual",
+    "VisualGLM-6B",
+    "Qwen-VL",
+    "Qwen-VL+AIT",
+    "Qwen-VL+CLoT",
+    "InstructionBLIP",
+    "mPLUG-Owl_LLAMA2",
+    "Otter",
+    "CogVLM-17B",
+    "CogVLM-17B+AIT",
+    "CogVLM-17B+CLoT",
+    "GPT-3.5",
+    "GPT-4",
+    "LLAMA2-7B",
+    "LLAMA2-13B",
+    "LLAMA2-70B",
+    "Baichuan2-7B",
+    "Baichuan2-13B",
+    "Qwen-7B",
+    "Qwen-14B",
+    "ChatGLM3-6B",
+    "Vicuna-v1.5-7B",
+    "Vicuna-v1.5-13B",
+    "Qwen-VL+CoT",
+    "Qwen-VL+CoT-SC",
+    "Qwen-VL+PLoT"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Creative Leap-of-Thought (CLoT)",
+      "summary": "A two-stage paradigm for improving LLM Leap-of-Thought ability: first train on LoT-oriented Oogiri instructions, then perform explorative self-refinement with weakly-associated conditions and model-selected high-quality generated data."
+    },
+    {
+      "name": "Associable Instruction Tuning (AIT)",
+      "summary": "Transforms Oogiri-GO into instruction data for associable generation and discrimination. Templates include original generation prompts, prompts with noun conditions, selection questions, and ranking questions, and train LoRA for the target LLM."
+    },
+    {
+      "name": "Explorative Self-Refinement",
+      "summary": "Prompts the tuned LLM to generate multiple humor candidates under empty or randomly sampled noun conditions, ranks candidates, selects the best against ground truth responses, discards samples where the ground truth remains best, and retrains on the resulting data."
+    },
+    {
+      "name": "CLoT inference",
+      "summary": "At inference time, the model generates responses under multiple weakly-associated conditions, ranks them, and then selects the best from the top-2 ranked candidates."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes Leap-of-Thought or mental leap as non-sequential associative thinking, drawing parallels between seemingly unrelated concepts; Oogiri tasks, instruction templates, weakly-associated conditions, and self-refinement are built around this idea."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Oogiri choice questions use classification accuracy for 2T1, 3T1, 4T1, and 5T2 settings; ranking questions use NDCG and top-1 accuracy. CGG uses classification accuracy, and DAT uses average semantic distance (ASD)."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Ranking questions are built from Oogiri-GO samples with human preference annotations, namely the number of likes; 77.95% of Oogiri-GO samples have such preferences."
+    },
+    {
+      "type": "human-eval",
+      "detail": "User preference study with 154 valid questionnaires and 2772 votes; users chose the most creative and humorous response among six randomly permuted model outputs for eighteen questions across IT2T, I2T, and T2T."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On multimodal multilingual Oogiri tasks, Qwen-VL+CLoT achieved the best averages and improved over Qwen-VL across IT2T, I2T, and T2T.",
+      "metric": "Avg. of choice accuracy (%) and ranking NDCG (%)",
+      "value": "IT2T 42.7 (+9.1); I2T 40.5 (+10.4); T2T 38.5 (+8.2)",
+      "dataset": "Oogiri-GO",
+      "best_system": "Qwen-VL+CLoT"
+    },
+    {
+      "finding": "On English multimodal non-multilingual evaluation, CogVLM-17B+CLoT substantially improved over CogVLM-17B.",
+      "metric": "Avg. of choice accuracy (%) and ranking NDCG (%)",
+      "value": "I2T 51.6 (+21.7); T2T 48.3 (+16.4)",
+      "dataset": "Oogiri-GO",
+      "best_system": "CogVLM-17B+CLoT"
+    },
+    {
+      "finding": "On English T2T evaluation against large text-only LLMs, the CLoT systems had the highest averages.",
+      "metric": "Avg. of choice accuracy (%) and ranking NDCG (%)",
+      "value": "CogVLM-17B+CLoT 44.2; Qwen-VL+CLoT 43.4; GPT-3.5 36.0; GPT-4 32.0",
+      "dataset": "Oogiri-GO English T2T",
+      "best_system": "CogVLM-17B+CLoT"
+    },
+    {
+      "finding": "In the user preference study, Qwen-VL+CLoT received the largest share of votes for creative and humorous responses.",
+      "metric": "User voting percentage",
+      "value": "42.0% average votes (IT2T 43.9; I2T 51.7; T2T 30.3)",
+      "dataset": "Oogiri-GO user study",
+      "best_system": "Qwen-VL+CLoT"
+    },
+    {
+      "finding": "On multilingual I2T, CLoT outperformed CoT-like reasoning frameworks applied to Qwen-VL.",
+      "metric": "Choice accuracy (%) and ranking NDCG (%)",
+      "value": "2T1 50.5; 3T1 39.8; 4T1 35.1; 5T2 22.7; Rank 64.4",
+      "dataset": "Oogiri-GO multilingual I2T",
+      "best_system": "Qwen-VL+CLoT"
+    },
+    {
+      "finding": "On other creative tasks, CLoT improved Qwen-VL beyond Oogiri humor.",
+      "metric": "CGG accuracy and DAT ASD",
+      "value": "about 8% on the CGG task and 5% on the DAT task",
+      "dataset": "Cloud Guessing Game (CGG); Divergent Association Task (DAT) benchmark",
+      "best_system": "Qwen-VL+CLoT"
+    }
+  ],
+  "key_findings": [
+    "Oogiri-GO is a multimodal, multilingual Oogiri dataset with 134,148 samples across English, Chinese, and Japanese and three input-output settings: I2T, T2T, and IT2T.",
+    "Existing advanced LLMs and multimodal LLMs, including GPT4v, GPT-4, Qwen-VL, and CogVLM-17B, show insufficient LoT ability on Oogiri-style humor selection and ranking tasks.",
+    "Associable Instruction Tuning improves Qwen-VL and CogVLM-17B, but CLoT’s explorative self-refinement provides additional gains beyond AIT.",
+    "CoT, CoT-SC, and prompt-based LoT with “let’s think outside the box” do not reliably enhance LoT performance, whereas trained CLoT variants do.",
+    "Human voters preferred Qwen-VL+CLoT outputs most often, with 42.0% average votes across the user study.",
+    "CLoT transferred beyond Oogiri to Cloud Guessing Game and Divergent Association Task evaluations, improving Qwen-VL by about 8% and 5%, respectively."
+  ],
+  "limitations": [
+    "The paper repeatedly notes that humor is subjective.",
+    "Oogiri-GO does not include English IT2T data, attributed to cultural differences and the complex OCR, image editing, and machine translation process needed to create that type of data.",
+    "Translated examples may not fully convey the intended meaning of the original Chinese Oogiri responses because of cultural factors and other constraints.",
+    "Additional rounds of self-refinement did not yield significant further improvements under the paper’s current setup because the diversity of creative data and the noun condition set is hard to expand.",
+    "Direct fine-tuning on Oogiri-GO is reported to be insufficient for strong LoT ability because it lacks targeted associative exercises and because creativity in the data is uneven.",
+    "The authors state that instruction tuning methods such as LoRA may cause partial forgetting of inherent model knowledge, motivating future continuous-learning work."
+  ],
+  "safety_ethics_notes": "The authors emphasize filtering Oogiri-GO to remove bias, violence, explicit content, offensive language, and related inappropriate material. They first use Qwen-VL with safety-checking prompts and NudeNet labels for machine screening, reducing raw data to about 160,000 samples, then conduct two rounds of manual screening by different individuals, yielding more than 130,000 samples.",
+  "artifacts": {
+    "code_url": "https://zhongshsh.github.io/CLoT/",
+    "data_url": "https://zhongshsh.github.io/CLoT/",
+    "other": "The abstract states that the dataset, code, and models will be released online at the project URL."
+  }
+}

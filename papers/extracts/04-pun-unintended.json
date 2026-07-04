@@ -1,0 +1,190 @@
+{
+  "key": "04-pun-unintended",
+  "ref": "#4",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/04-pun-unintended/04-pun-unintended.md",
+  "source_md_sha256": "327e6b26e1ab847b5dd538ea3e50d2afafa272f36b0bdfb4115ac872e9766452",
+  "source_truncated": false,
+  "title": "Pun Unintended: LLMs and the Illusion of Humor Understanding",
+  "authors": [
+    "Alessandro Zangari",
+    "Matteo Marcuzzo",
+    "Andrea Albarelli",
+    "Mohammad Taher Pilehvar",
+    "Jose Camacho-Collados"
+  ],
+  "year": 2025,
+  "venue": "arXiv",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How well can LLMs detect puns on new and existing datasets?",
+    "How robust are LLMs at detecting puns?",
+    "To what extent can LLMs explain puns?"
+  ],
+  "tasks": [
+    "pun detection",
+    "pun explanation / rationale generation",
+    "pun word-pair and sense identification"
+  ],
+  "humor_domains": [
+    "puns",
+    "heterographic puns",
+    "homographic puns",
+    "wordplay"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "PunEval + PunnyPattern + PunBreak + NAP",
+      "role": "introduced",
+      "size": "PunEval: 2,589 samples; PunnyPattern: 1,200 samples; PunBreak: 1,100 samples; NAP: 256 samples"
+    },
+    {
+      "name": "PunEval + PunnyPattern + PunBreak + NAP",
+      "role": "trained-on",
+      "size": "PunEval training split: 1,071 samples"
+    },
+    {
+      "name": "PunEval + PunnyPattern + PunBreak + NAP",
+      "role": "evaluated-on",
+      "size": "PunEval test: 1,341 samples; NAP: 256 samples; PunnyPattern: 1,200 samples; PunBreak: 1,100 samples"
+    },
+    {
+      "name": "JOKER corpus",
+      "role": "evaluated-on",
+      "size": "632 puns and 632 non-puns"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "source-material",
+      "size": "4,030 samples"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o-2024-08-06",
+    "Qwen2.5-72B",
+    "Llama3.3-70B",
+    "Gemini2.0-Flash",
+    "Mistral3-24B",
+    "DeepSeek-R1",
+    "DeepSeek-R1-Distill-Llama-70B",
+    "RoBERTa-large"
+  ],
+  "methods_proposed": [
+    {
+      "name": "PunEval",
+      "summary": "The authors refine the Xu et al. (2024) version of the SemEval pun dataset by correcting typographical errors and 13 incorrect annotations, yielding 2,589 samples split into 1,071 training, 1,341 testing, and 177 validation samples with pun-pair and sense annotations."
+    },
+    {
+      "name": "NAP (Newly Annotated Puns)",
+      "summary": "A new 256-instance collection built from 128 puns from websites, personal recollections, and original creations, each rephrased into a non-pun and manually inspected; each pun is annotated with pun pair and senses."
+    },
+    {
+      "name": "PunnyPattern",
+      "summary": "A robustness benchmark of 1,200 samples built around six common pun language patterns, pairing 600 puns with 600 verified non-puns that retain the same surface patterns to test shortcut reliance."
+    },
+    {
+      "name": "PunBreak",
+      "summary": "A robustness benchmark of 1,100 examples that replaces pun words with synonym/hypernym, alternative-word synonym/hypernym, homophone-like nonsensical expressions, or random nonsensical words, plus control examples, to test whether LLMs classify ruined puns as non-puns."
+    },
+    {
+      "name": "Semi-structured rationale evaluation",
+      "summary": "The paper prompts models to output pun decisions with pun words and optionally senses in a parseable format, evaluates pun-pair overlap with Pun Pair Agreement (PPA), and manually categorizes rationale errors into context, pun pair, word-sense, and sense-similarity mistakes."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes puns through a structural account with a pun word w_p, alternative word w_a, and their senses s_p and s_a; it distinguishes heterographic and homographic puns and treats valid puns as requiring context-supported dual meanings plus phonetic or orthographic similarity."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Pun detection is evaluated over 3 runs using F1-score, precision, recall, and accuracy; robustness is measured on PunnyPattern and PunBreak; rationale overlap is measured with Pun Pair Agreement (PPA), a 0–2 score for matching the true pun pair."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Five native English speakers were hired for manual error analysis of rationales, with 80 incorrect answers sampled from each of GPT-4o, Llama3.3, and DeepSeek-R1 on PunBreak; the pilot study had Fleiss’s κ = 0.41."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "GPT-4o obtained the strongest headline pun-detection results among the LLMs on the main datasets.",
+      "metric": "F1-score (%)",
+      "value": "86.9 ± 0.8 on NAP with W; 83.3 ± 0.4 on JOKER with W; 93.0 ± 0.3 on PunEval with R+W+S",
+      "dataset": "NAP; JOKER; PunEval",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "Fine-tuned RoBERTa-large performed well on PunEval but much worse on the newer or more adversarial datasets, motivating the shortcut-learning analysis.",
+      "metric": "F1-score (%)",
+      "value": "92.5 ± 0.3 on PunEval; 64.0 ± 0.1 on NAP; 65.7 ± 0.1 on JOKER",
+      "dataset": "PunEval; NAP; JOKER",
+      "best_system": "RoBERTa-large"
+    },
+    {
+      "finding": "On PunnyPattern, all models lost precision and F1 relative to PunEval, with GPT-4o still the best overall model.",
+      "metric": "F1-score / precision / recall (%)",
+      "value": "GPT-4o: F1 83.1 (-4.2), precision 79.7 (-18.2), recall 88.1 (+9.4); across all models, average drop of 16-23% in precision and 4-13% in F1",
+      "dataset": "PunnyPattern",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "On PunBreak, even GPT-4o frequently classified altered non-puns as puns, especially homophone-like substitutions.",
+      "metric": "Recall on the true class / accuracy (%)",
+      "value": "Homophone 32.5 ± 2.3; Random 57.5 ± 1.4; Pun syn 37.3 ± 4.1; Alt syn 58.7 ± 4.8; Pun 92.8 ± 3.2; Rand sent 99.0 ± 0.0",
+      "dataset": "PunBreak",
+      "best_system": "GPT-4o with W prompt"
+    },
+    {
+      "finding": "Rationale keyword agreement was highest for GPT-4o overall, while DeepSeek-R1 reached the best PunEval W+S score.",
+      "metric": "Pun Pair Agreement (0–2)",
+      "value": "GPT-4o: 1.5 on NAP W, 1.5 on NAP W+S, 1.5 on JOKER W, 1.4 on JOKER W+S, 1.6 on PunEval W, 1.6 on PunEval W+S; R1: 1.7 on PunEval W+S",
+      "dataset": "NAP; JOKER; PunEval",
+      "best_system": "GPT-4o; DeepSeek-R1"
+    },
+    {
+      "finding": "Manual rationale analysis found context and pun-pair errors were the dominant failure modes, and DeepSeek-R1 made fewer total errors than GPT-4o and Llama3.3.",
+      "metric": "Error counts on 80 misclassified samples per model",
+      "value": "GPT-4o: total errors 128, avg. errors 1.6; Llama3.3: total errors 111, avg. errors 1.4; R1: total errors 87, avg. errors 1.2",
+      "dataset": "PunBreak",
+      "best_system": "DeepSeek-R1"
+    }
+  ],
+  "key_findings": [
+    "LLMs achieve high pun-detection scores on existing or standard-style datasets, but performance drops when non-puns preserve familiar pun templates or differ from puns by subtle word substitutions.",
+    "Requiring semi-structured rationales usually improves detection compared with few-shot prompting, except for Mistral3, and the paper reports an average +3% F1 improvement over the few-shot configuration on the new datasets aside from Mistral.",
+    "The PunEval dataset contains recurring language patterns; in its test split, 171 out of 173 samples containing the extracted patterns are puns, and excluding them causes a 2-3% F1 drop and a 2-6% precision drop across models.",
+    "PunBreak shows that models often “fix” or force ruined puns into a pun interpretation, especially when the replacement is phonetically or semantically close to the original pun word.",
+    "The most frequent manually identified rationale errors are missing contextual support for the predicted senses and selecting word pairs that are not sufficiently phonetically or orthographically related.",
+    "Only three models correctly identified the pun-related words in more than 70% of cases, according to the conclusion."
+  ],
+  "limitations": [
+    "The newly contributed datasets have not been comprehensively validated by language experts.",
+    "The manual error analysis remains limited by the subjectivity of several questions and by the inherently subjective nature of pun perception.",
+    "Some annotations may be incorrect, and some generated or altered examples may contain accidental puns.",
+    "Many puns may have appeared online or in model training data, so the paper may not fully disentangle contamination from measured bias, especially for PunnyPattern, which includes many examples sourced from PunEval.",
+    "The evaluation is conducted solely on English puns.",
+    "Prompt design was tailored for Llama 3.1 and reused for all LLMs, and the authors did not extensively optimize prompts for each model."
+  ],
+  "safety_ethics_notes": "The paper states that puns were sourced from prior research, authors, LLM generation, or open sources and used only for research; the JOKER dataset was not released at the original authors’ request. The datasets contain no personal information, but some puns may be offensive to certain audiences. Human judges were paid 15-20£ per hour, above the relevant minimum wage, and could skip questions when they lacked sufficient knowledge.",
+  "artifacts": {
+    "code_url": "https://github.com/alezanga/punintended",
+    "data_url": "https://github.com/alezanga/punintended",
+    "other": null
+  }
+}

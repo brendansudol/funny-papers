@@ -1,0 +1,161 @@
+{
+  "key": "46-can-ai-take-a-joke",
+  "ref": "#46",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/46-can-ai-take-a-joke/46-can-ai-take-a-joke.md",
+  "source_md_sha256": "470253093d50ceef3c7c9abc3e2d8b30c668d9aca2403aeefedccb50a89a5c5f",
+  "source_truncated": false,
+  "title": "Can AI Take a Joke—Or Make One? A Study of Humor Generation and Recognition in LLMs",
+  "authors": [
+    "Kexin Quan",
+    "Pavithra Ramakrishnan",
+    "Jessie Chin"
+  ],
+  "year": 2025,
+  "venue": "Creativity and Cognition (C&C ’25), June 23–25, 2025, Virtual, United Kingdom",
+  "paper_types": [
+    "dataset",
+    "evaluation-study",
+    "HCI-study"
+  ],
+  "research_questions": [
+    "How effectively can LLMs generate and interpret humor in emotionally sensitive, support-oriented conversations?",
+    "How well do LLMs generate distinct humor styles?",
+    "How effectively do LLMs recognize humor in emotional contexts?",
+    "How accurately do LLMs identify Counselor versus Friend speaker roles in emotionally sensitive supportive statements?"
+  ],
+  "tasks": [
+    "humor generation",
+    "humor style alignment",
+    "humor style recognition",
+    "speaker role identification",
+    "emotional appropriateness rating",
+    "humor strength rating"
+  ],
+  "humor_domains": [
+    "emotionally sensitive support-oriented conversations",
+    "conversational humor",
+    "affiliative humor",
+    "self-defeating humor",
+    "wordplay/puns",
+    "dry humor",
+    "aggressive humor",
+    "no-joke neutral supportive statements"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Humor Generation Dataset",
+      "role": "introduced",
+      "size": "60 AI-generated statements—20 from each LLM"
+    },
+    {
+      "name": "Humor Recognition Dataset",
+      "role": "introduced",
+      "size": "20 human-authored responses"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "Gemini 1.5",
+    "LLaMA3.3"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Dual humor generation and recognition evaluation protocol",
+      "summary": "The study evaluates LLM humor generation with shared prompts combining three contextual keywords and an assigned humor style, then uses human raters to assess style alignment, emotional appropriateness, and humor strength. It also evaluates humor recognition by asking LLMs to classify both humor style and speaker role for human-written supportive statements."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "The study uses humor styles such as affiliative and self-defeating as generation targets and recognition labels, citing prior work on humor styles."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Two human raters independently labeled each LLM-generated statement with the perceived humor type, blind to the original prompt; accuracy was calculated as the percentage of labels matching the intended style."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Human raters rated each generated statement on 5-point Likert scales for appropriateness for emotionally sensitive audiences and humor strength."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "For the recognition dataset, each LLM prediction was compared to intended labels for humor style and speaker role, and accuracy was reported as the proportion of correct classifications out of 20 statements."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "ChatGPT achieved the strongest generated humor style alignment for clear categories, with perfect No Joke alignment and near-perfect Self-Defeating alignment.",
+      "metric": "style alignment accuracy (mean, standard deviation)",
+      "value": "No Joke: μ = 1.00, σ = 0.00; Self-Defeating: μ = 0.93, σ = 0.051",
+      "dataset": "Humor Generation Dataset",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "Gemini showed moderate generated style alignment for Self-Defeating and No Joke but struggled with Affiliative humor.",
+      "metric": "style alignment accuracy (mean, standard deviation)",
+      "value": "Self-Defeating: μ = 0.71, σ = 0.00; No Joke: μ = 0.60, σ = 0.00; Affiliative: μ = 0.13, σ = 0.129",
+      "dataset": "Humor Generation Dataset",
+      "best_system": "Gemini 1.5"
+    },
+    {
+      "finding": "LLaMA3 had lower and more variable generated style alignment on Affiliative humor.",
+      "metric": "style alignment accuracy (mean, standard deviation)",
+      "value": "Affiliative: μ = 0.50, σ = 0.257",
+      "dataset": "Humor Generation Dataset",
+      "best_system": "LLaMA3.3"
+    },
+    {
+      "finding": "ChatGPT scored highest in emotional appropriateness for generated outputs, especially Affiliative and No Joke responses.",
+      "metric": "5-point Likert appropriateness rating (mean, standard deviation)",
+      "value": "Affiliative: μ = 4.35, σ = 0.13; No Joke: μ = 4.13, σ = 1.24",
+      "dataset": "Humor Generation Dataset",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "Affiliative humor was rated the funniest across models, with ChatGPT and LLaMA3 both reaching the reported top mean humor strength.",
+      "metric": "5-point Likert humor strength rating (mean)",
+      "value": "μ = 3.66",
+      "dataset": "Humor Generation Dataset",
+      "best_system": "GPT-4o and LLaMA3.3"
+    },
+    {
+      "finding": "For recognition, ChatGPT led humor classification while LLaMA3 led role classification, but all reported accuracies were modest.",
+      "metric": "classification accuracy (mean)",
+      "value": "Humor classification: ChatGPT μ = 0.65, Gemini 1.5 μ = 0.60, LLaMA3 μ = 0.60; Role classification: LLaMA3 μ = 0.60, ChatGPT μ = 0.55, Gemini 1.5 μ = 0.55",
+      "dataset": "Humor Recognition Dataset",
+      "best_system": "GPT-4o for humor classification; LLaMA3.3 for role classification"
+    }
+  ],
+  "key_findings": [
+    "GPT-4o produced the strongest alignment with intended humor styles, especially for No Joke and Self-Defeating categories, while Affiliative humor remained challenging across models.",
+    "GPT-4o also received the highest reported emotional appropriateness ratings, suggesting better tone control in support-oriented contexts.",
+    "Affiliative humor was rated the funniest across models, with ChatGPT and LLaMA3 both reported at μ = 3.66 for humor strength.",
+    "Humor and role recognition were only modestly accurate: ChatGPT performed best on humor classification, while LLaMA3 performed best on speaker role identification.",
+    "The authors argue that current LLM humor is often fluent but derivative or formulaic, and that human oversight is important in emotionally sensitive applications."
+  ],
+  "limitations": [
+    "The dataset size is relatively small and constrained in scope.",
+    "The small, homogeneous rater pool may introduce subjective bias and reduce annotation reliability.",
+    "The study uses static, single-turn responses rather than fluid, evolving real conversations.",
+    "The authors state that future work should include a broader variety of humor types, emotional tones, and interaction scenarios, as well as more numerous and diverse raters."
+  ],
+  "safety_ethics_notes": "The paper emphasizes human oversight for humor-sensitive applications such as counseling, peer support, mental health, and educational tutoring, because misaligned humor can undermine rapport, emotional safety, and trust.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

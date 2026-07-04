@@ -1,0 +1,143 @@
+{
+  "key": "33-gpt4-evaluate-jokes",
+  "ref": "#33",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/33-gpt4-evaluate-jokes/33-gpt4-evaluate-jokes.md",
+  "source_md_sha256": "bbccf259ed23380949f983ec14ebdeb29e1bb34f1fd576e53f43d6e24ba5e6f5",
+  "source_truncated": false,
+  "title": "Is GPT-4 Good Enough to Evaluate Jokes?",
+  "authors": [
+    "Fabricio Goes",
+    "Piotr Sawicki",
+    "Marek Grześ",
+    "Dan Brown",
+    "Marco Volpe"
+  ],
+  "year": 2023,
+  "venue": "ICCC 2023",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can GPT-4 assess the funniness of jokes in a way that matches human ratings when evaluated by rankings rather than individual scores?",
+    "Which GPT-4 system descriptions or roles produce joke rankings closest to human funniness rankings?",
+    "How do different amounts and types of prompt instructions and examples affect GPT-4's joke evaluations?"
+  ],
+  "tasks": [
+    "joke funniness evaluation",
+    "joke ranking"
+  ],
+  "humor_domains": [
+    "jokes",
+    "puns",
+    "wordplay"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "ExPUNations (ExPun)",
+      "role": "evaluated-on",
+      "size": "1500 jokes; 200 jokes and respective average scores used to generate the suggested system description"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Suggested description (SG) via many-shot prompting",
+      "summary": "The paper proposes generating a reusable GPT-4 system description by prompting GPT-4 once with 200 jokes and their average scores, then using the resulting description for later joke evaluation without including the examples in every inference."
+    },
+    {
+      "name": "Ranking-based GPT-4 humor evaluation methodology",
+      "summary": "Instead of comparing raw 1-to-5 funniness scores directly, the paper compares human and GPT-4 joke rankings using Spearman rank correlation to reduce scaling effects and focus on evaluator behavior."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "The four humor styles from Martin et al. (2003)—affiliative, self-enhancing, aggressive, and self-defeating—are used as GPT-4 system descriptions."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-4 rates jokes on a 1-to-5 funniness scale and returns rankings from least to most funny under 7 system descriptions and 5 instruction levels."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Average human funniness scores from the Sun et al. (2022) annotations are used as the reference ranking; the cited annotators had to correctly label 80% of 20 manually annotated samples to qualify as reliable evaluators."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Spearman rank correlation coefficient is used to compare the joke rankings derived from human scores and GPT-4 scores."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The suggested system description generated from many-shot prompting produced the most positive correlation with human joke rankings among the tested system descriptions.",
+      "metric": "Spearman rank correlation coefficient",
+      "value": "between 0.16 and 0.31",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": "GPT-4 with suggested description (SG)"
+    },
+    {
+      "finding": "The evaluation covered all combinations of 7 system descriptions and 5 levels of prompt instructions.",
+      "metric": "experimental combinations and sampled jokes",
+      "value": "35 combinations; 10 different samples of 5 jokes for each; totalling 1750 jokes",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": null
+    },
+    {
+      "finding": "The extra-example instruction condition included examples in a score range that appeared in a notable portion of the dataset.",
+      "metric": "share of jokes rated in range [2.2-2.4]",
+      "value": "10%",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": null
+    },
+    {
+      "finding": "Most jokes were low-scoring relative to the examples for scores 3 and 5, limiting the usefulness of those instructions.",
+      "metric": "number of jokes scored more than 3 by human evaluators",
+      "value": "one joke",
+      "dataset": "ExPUNations (ExPun)",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "GPT-4 with the many-shot-generated suggested description (SG) ranked jokes closest to humans, but the reported correlation was still weak, between 0.16 and 0.31.",
+    "Aggressive humour (AG) and affiliative humour (AH) system descriptions showed a very weak positive correlation with human rankings.",
+    "Self-enhancing humour (SE), self-defeating humour (SD), the naive humour expert description (HE), and no description (NONE) presented no correlation with human counterparts because their intervals intersected zero.",
+    "The baseline instruction prompt without detailed examples or explanations already showed positive correlation with human rankings.",
+    "Only the prompt with explanations, examples, and extra examples (EXP_EXA_EXT) increased the average Spearman coefficients above the baseline; prompts with only examples, only explanations, or both reduced the average coefficients.",
+    "The authors argue that ranking comparisons are more robust than direct score comparisons for non-deterministic models such as GPT-4 because they reduce scaling problems."
+  ],
+  "limitations": [
+    "The best reported correlations are weak, between 0.16 and 0.31.",
+    "The study evaluates only GPT-4.",
+    "The experiments use 1500 jokes extracted from the Sun et al. (2022) dataset, with samples of 5 jokes for each prompt condition.",
+    "GPT-4 is restricted to 8192 tokens, which limits the number of jokes that can be included as examples when generating system descriptions.",
+    "Setting temperature to 0 in GPT-4 does not guarantee deterministic behavior, although the authors state it makes responses more robust with less variability.",
+    "The instruction examples for scores 1, 3, and 5 were poorly matched to the dataset distribution because only one joke scored more than 3 by human evaluators."
+  ],
+  "safety_ethics_notes": "The paper notes that the source annotations include offensiveness and that the suggested system description is not particularly fond of offensive or inappropriate content; it does not include a dedicated safety or ethics discussion.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

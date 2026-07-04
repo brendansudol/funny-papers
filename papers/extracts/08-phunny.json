@@ -1,0 +1,162 @@
+{
+  "key": "08-phunny",
+  "ref": "#8",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/08-phunny/08-phunny.md",
+  "source_md_sha256": "534e8742faa16fbf3dcf9cca550e4f523be95257c53666e6c1eb905bf1c905c5",
+  "source_truncated": false,
+  "title": "“What do you call a dog that is incontrovertibly true? Dogma”: Testing LLM Generalization through Humor",
+  "authors": [
+    "Alessio Cocchieri",
+    "Luca Ragazzi",
+    "Paolo Italiani",
+    "Giuseppe Tagliavini",
+    "Gianluca Moro"
+  ],
+  "year": 2025,
+  "venue": "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 22922–22937",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Do LLMs truly adapt to new linguistic humor tasks and generalize like humans, or do they reproduce memorized patterns from training data?",
+    "Can LLMs comprehend structured puns by identifying coherent puns and rejecting misleading non-puns with appropriate explanations?",
+    "Can LLMs resolve structured puns by generating the correct punchline for a given setup?",
+    "Can LLMs generate new PHUNNY-style puns under free and subject-constrained conditions?"
+  ],
+  "tasks": [
+    "pun comprehension",
+    "misleading non-pun rejection",
+    "pun resolution",
+    "pun generation"
+  ],
+  "humor_domains": [
+    "puns",
+    "structured puns",
+    "wordplay"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Phunny",
+      "role": "introduced",
+      "size": "350 hand-crafted structured puns"
+    },
+    {
+      "name": "Phunny",
+      "role": "evaluated-on",
+      "size": "1,050 puns for Comprehension: 350 coherent and 700 misleading; 350 coherent puns for Resolution; 50 puns for Free Generation; 104 unique subjects for Constrained Generation"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "GPT-4o-mini",
+    "o3-mini",
+    "Gemini-2.0-Flash",
+    "Gemini-2.0-Flash-Thinking",
+    "LLaMA-3.1-8B",
+    "LLaMA-3.3-70B",
+    "Phi-3.5",
+    "Phi-4-14B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "PHUNNY benchmark",
+      "summary": "A humor-based QA benchmark of 350 manually crafted English structured puns in the format “What do you call a X that Y? XZ,” where the punchline is a real word formed by appending a suffix to the subject without being a derivative or compound."
+    },
+    {
+      "name": "PHUNNY task suite",
+      "summary": "The paper defines three macro-tasks—Pun Comprehension, Pun Resolution, and Pun Generation—using coherent puns, semantically similar misleading swaps, semantically dissimilar misleading swaps, and free or constrained generation settings."
+    },
+    {
+      "name": "Contamination-check pipeline",
+      "summary": "For each complete pun, the authors retrieve the top-10 DuckDuckGo web search results and use Gemini-1.5-Flash to verify whether the pun appears in retrieved documents, excluding 20 contaminated entries."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Comprehension uses Coherent Pun Accuracy (CPA), Misleading Pun Accuracy (MPA), and MPA split into MPA+ and MPA-; Resolution uses Accuracy (ACC), Valid Prefix Accuracy (VPA), and Existing Word Accuracy (EWA); Generation uses Accuracy (ACC) plus creativity measures C_S and C_A in the Free setting."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Gemini-1.5-Flash is used to judge semantic equivalence between model explanations and gold rationales for coherent comprehension, to verify derivation and semantic relatedness in generation, and to detect possible contamination from web pages."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Human baselines were collected from 60 volunteers: 20 for comprehension, 20 for resolution, and 20 for generation. Participants were native English speakers or fluent English speakers at C1 level or higher, received the same instructions as models, and each completed 30 randomly sampled instances."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For Resolution, after exact match, derivative match, substring match, and prefix filtering, remaining cases were judged by humans; the paper states this was required for only a small percentage of cases, around 3% in the worst case per model."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "For coherent pun comprehension, o3-mini was the strongest LLM with CPA 78.3, while the human baseline reached CPA 87.9.",
+      "metric": "CPA",
+      "value": "78.3 (o3-mini); 87.9 (Humans)",
+      "dataset": "Phunny",
+      "best_system": "Humans"
+    },
+    {
+      "finding": "For misleading puns, all LLMs were far below humans: Phi-3.5 had the highest LLM MPA at 47.7, o3-mini scored 4.7, and humans scored 90.9.",
+      "metric": "MPA",
+      "value": "47.7 (Phi-3.5); 4.7 (o3-mini); 90.9 (Humans)",
+      "dataset": "Phunny",
+      "best_system": "Humans"
+    },
+    {
+      "finding": "In pun resolution, o3-mini achieved ACC 93.9, VPA 98.0, and EWA 99.1, surpassing the human ACC of 85.7.",
+      "metric": "ACC / VPA / EWA",
+      "value": "93.9 / 98.0 / 99.1",
+      "dataset": "Phunny",
+      "best_system": "o3-mini"
+    },
+    {
+      "finding": "In constrained pun generation, o3-mini achieved Constr. ACC 93.5, above the human baseline of 88.7.",
+      "metric": "Constr. ACC",
+      "value": "93.5 (o3-mini); 88.7 (Humans)",
+      "dataset": "Phunny",
+      "best_system": "o3-mini"
+    },
+    {
+      "finding": "In free pun generation, o3-mini achieved Free ACC 100.0 but with lower creativity, C_S 38.0 and C_A 52.0, while humans had Free ACC 92.8, C_S 82.3, and C_A 95.2.",
+      "metric": "Free ACC / C_S / C_A",
+      "value": "100.0 / 38.0 / 52.0 (o3-mini); 92.8 / 82.3 / 95.2 (Humans)",
+      "dataset": "Phunny",
+      "best_system": "o3-mini for Free ACC; Humans for C_S and C_A"
+    }
+  ],
+  "key_findings": [
+    "PHUNNY contains 350 manually crafted English structured puns and uses a contamination-check pipeline that removed 20 entries found on the web.",
+    "LLMs show acceptable performance on coherent pun recognition but perform very poorly at rejecting misleading puns, often fabricating explanations for non-existent wordplay.",
+    "Reasoning-focused models perform strongly on pun resolution, with o3-mini reaching 93.9 ACC and exceeding the human baseline of 85.7 ACC.",
+    "In generation, o3-mini attains the highest accuracy, but humans produce more diverse free-generation outputs, with higher C_S and C_A scores than all tested LLMs.",
+    "The paper’s error analysis finds recurring failures in structural constraint following: missing the required subject prefix, producing derivative answers, and inventing nonexistent words.",
+    "The CoT versus direct-answering comparison for open-source models suggests CoT benefits are size-dependent, helping LLaMA-3.3 (70B) but often not smaller models."
+  ],
+  "limitations": [
+    "The dataset construction limits answer words to nouns and adjectives, excluding verbs.",
+    "The benchmark focuses only on suffix additions in punchlines and does not cover prefix additions or fill-in-the-blank approaches.",
+    "All puns were manually crafted in English, so results may not transfer to other languages with different pun structures and purposes.",
+    "The authors note future work is needed on perturbation-based tasks using the contaminated subset of web-mined puns to analyze data leakage more directly."
+  ],
+  "safety_ethics_notes": "The authors state that humor is contextual and culturally situated and may pose risks of harmful stereotypes, bias, or offensive content. During pun construction, they excluded subjects and answers that could be interpreted as harmful or derogatory, omitted sensitive or historically marginalized topics, and critically reviewed contributions to ensure respectful humor.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://disi-unibo-nlp.github.io/Phunny",
+    "other": "https://disi-unibo-nlp.github.io/publications/"
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "key": "12-lol-thought-leaps",
+  "ref": "#12",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/12-lol-thought-leaps/12-lol-thought-leaps.md",
+  "source_md_sha256": "64e8814760c1ae26ac6e43c2824f3f9d7a938ee95c5780564216df0d52c4abd1",
+  "source_truncated": false,
+  "title": "INNOVATIVE THINKING, INFINITE HUMOR: HUMOR RESEARCH OF LARGE LANGUAGE MODELS THROUGH STRUCTURED THOUGHT LEAPS",
+  "authors": [
+    "Han Wang",
+    "Yilin Zhao",
+    "Dian Li",
+    "Xiaohan Wang",
+    "Gang Liu",
+    "Xuguang Lan",
+    "Hui Wang"
+  ],
+  "year": 2025,
+  "venue": "Published as a conference paper at ICLR 2025",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can injecting and augmenting external knowledge into humorous conversation data mitigate sparse knowledge-graph paths and improve multi-hop humor reasoning?",
+    "Can judgment-oriented supervised fine-tuning plus Direct Preference Optimization with GPT-4o-extracted rationales improve LLM humor judgment and generation?",
+    "How does LoL compare with GPT-4o, Qwen, LLaMA3, CLoT, QwQ, and other baselines on Chinese and English humor judgment tasks and humor generation preference tests?"
+  ],
+  "tasks": [
+    "humor judgment",
+    "humorous answer selection",
+    "humorous answer ranking",
+    "humorous answer rewriting",
+    "witty response generation",
+    "humor generation",
+    "Divergent Associate Thinking creativity validation"
+  ],
+  "humor_domains": [
+    "Oogiri",
+    "humorous conversations",
+    "witty responses",
+    "puns",
+    "irony",
+    "edited news headlines",
+    "community humor",
+    "Ruozhiba"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "Oogiri-GO",
+      "role": "trained-on",
+      "size": "95% of the samples"
+    },
+    {
+      "name": "Oogiri-GO",
+      "role": "evaluated-on",
+      "size": "remaining 5%"
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "Chinese Community Data",
+      "role": "introduced",
+      "size": null
+    },
+    {
+      "name": "Chinese Community Data",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "Chinese Community Data",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "Ruozhiba dataset",
+      "role": "source-material",
+      "size": "first 200 samples from the validation subset for the user study"
+    },
+    {
+      "name": "Ruozhiba dataset",
+      "role": "evaluated-on",
+      "size": "200 text-based questions for human evaluation"
+    },
+    {
+      "name": "Chinese Word Vectors",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "GPT-4",
+    "Llama 3 8B",
+    "Llama 3 70B",
+    "Qwen1.5-7B",
+    "Qwen1.5-14B",
+    "Qwen1.5-32B",
+    "Qwen2-7B",
+    "Qwen2-57B",
+    "Qwen2.5-32B",
+    "Baichuan2-13B",
+    "CLoT-7B",
+    "QwQ-32B",
+    "QwQ+LoL-32B",
+    "LoL-32B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "LoL",
+      "summary": "A two-stage framework for humor reasoning that first trains judgment and understanding abilities with supervised fine-tuning, then improves generation through Direct Preference Optimization with rationales."
+    },
+    {
+      "name": "Automatic Instruction Expansion (AIE)",
+      "summary": "A three-agent instruction-evolution system that uses a generator, imaginator, and selector/critic to enrich seed humorous conversations with broader and deeper contextual knowledge while controlling over-divergence from the original joke."
+    },
+    {
+      "name": "Judgement-oriented instruction templates",
+      "summary": "Human-designed templates train selection, ranking, answer rewriting, and teacher-student judgment skills from question-answer data with human-voting annotations."
+    },
+    {
+      "name": "Teacher-Student Prompt Loop",
+      "summary": "Two GPT-4o agents simulate trial-and-error, reflection, and backtracking: a teacher gives feedback and hints while a student revises answers until the response aligns with the ideal humorous answer or reaches a step limit."
+    },
+    {
+      "name": "Guided Explorative Self-Improvement Tuning (GESIT)",
+      "summary": "An online DPO training procedure where the SFT model is copied into a frozen judge and a trainable policy; sampled response pairs are judged, rationales are generated by GPT-4o, and the augmented preference data are mixed back into training."
+    },
+    {
+      "name": "LoL inference step",
+      "summary": "At inference time, the model generates multiple candidate responses from sampled prompts and then uses its own judgment ability to select the funniest answer."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Top-1 accuracy / acc% on single-choice humor judgment tasks: 2T1, 2T1(hard), 3T1, and 4T1."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Human-voting annotations and Likes from humor games and communities are used to construct positive/negative pairs and choice-question labels."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Divergent Association Task (DAT) scores are computed with Chinese Word Vectors to evaluate associative generalization and divergent thinking."
+    },
+    {
+      "type": "human-eval",
+      "detail": "User-preference study over four LLMs on 200 text-based questions; the paper reports 15 valid questionnaires and 3000 votes."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Three experts assessed logical coherence of responses on 200 examples from GPT-4o, GPT-4, and QWEN2-57B."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On diverse English benchmarks, LoL’s average accuracy increased over LLAMA3-70B and GPT-4o.",
+      "metric": "average accuracy increase",
+      "value": "4.55% and 5.91% respectively",
+      "dataset": "English benchmarks",
+      "best_system": "LoL"
+    },
+    {
+      "finding": "On diverse Chinese benchmarks, LoL’s average accuracy increased over GPT-4o.",
+      "metric": "average accuracy increase",
+      "value": "16.22%",
+      "dataset": "Chinese benchmarks",
+      "best_system": "LoL"
+    },
+    {
+      "finding": "On English choice questions, OURS-32B achieved the best score on five of six columns; GPT-4o was best only on SemEval 2021 2T1(hard).",
+      "metric": "accuracy (%)",
+      "value": "96.58 (SemEval 2021 2T1), 57.45 (SemEval 2021 2T1(hard)), 48.06 (SemEval 2021 3T1), 35.90 (SemEval 2021 4T1), 64.57 (SemEval 2020 2T1), 97.20 (Oogiri-GO 2T1); GPT-4o 60.77 on SemEval 2021 2T1(hard)",
+      "dataset": "HaHackathon (SemEval-2021 Task 7); Humicroedit + FunLines (SemEval-2020 Task 7); Oogiri-GO",
+      "best_system": "LoL-32B"
+    },
+    {
+      "finding": "On Chinese choice questions, OURS-32B was best on both reported benchmark tasks.",
+      "metric": "accuracy (%)",
+      "value": "90.95 (2T1), 69.97 (2T1(hard))",
+      "dataset": "Chinese Benchmark",
+      "best_system": "LoL-32B"
+    },
+    {
+      "finding": "On the ruozhiba 2T1 validation, LoL achieved the top score, ahead of QwQ and GPT-4o.",
+      "metric": "2T1 accuracy",
+      "value": "95.35 (LoL), 90.80 (QwQ), 76.40 (GPT-4o)",
+      "dataset": "ruozhiba dataset",
+      "best_system": "LoL"
+    },
+    {
+      "finding": "In ablations, ALL+AIE(DIET) substantially improved over QWEN1.5-32B on Oogiri-GO-en and SemEval 2021 3T1.",
+      "metric": "accuracy",
+      "value": "97.20 vs 68.01 (Oogiri-GO-en 2T1); 45.46 vs 35.38 (SemEval 2021 3T1)",
+      "dataset": "Oogiri-GO; HaHackathon (SemEval-2021 Task 7)",
+      "best_system": "ALL+AIE(DIET)"
+    }
+  ],
+  "key_findings": [
+    "LoL improves humor judgment on nearly all reported English and Chinese choice-question benchmarks, with especially large gains on Chinese 2T1 tasks.",
+    "Judgment-oriented data construction, especially teacher-student feedback and AIE, is presented as important for training models to distinguish humorous from non-humorous answers.",
+    "The paper reports that AIE improves divergent associative thinking in DAT validation and that LoL has the highest stabilized DAT score among compared systems.",
+    "Guided Explorative Self-Improvement Tuning is reported to strengthen the logical coherence of generated answers in expert evaluation.",
+    "In the human preference study, users were reported to have a strong inclination to select LoL outputs as the most creative and humorous among LoL, GPT-4o, QWEN1.5-32B, and CLoT."
+  ],
+  "limitations": [
+    "The paper states that humor is subjective and that a unified score may contain significant noise from topics and background.",
+    "The failure-case analysis says the level of creativity is uneven because creativity in the training samples varies significantly.",
+    "Some human-preferred responses beat LoL in the failure cases, showing that LoL’s outputs are not always the most preferred for all users.",
+    "The ablation discussion notes that using AIE only on Oogiri-GO-en caused a slight decrease in some performance, possibly due to overfitting to divergence of thought in that dataset.",
+    "The text reports human preference trends but the transcribed paper text does not provide exact numeric win-rate values from Figure 6(b) or Figure 6(c)."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://github.com/Leymore/ruozhiba/tree/main?tab=readme-ov-file",
+    "other": "https://www.wjx.cn/"
+  }
+}

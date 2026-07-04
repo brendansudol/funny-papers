@@ -1,0 +1,174 @@
+{
+  "key": "20-multi-agent-comedy-club",
+  "ref": "#20",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/20-multi-agent-comedy-club/20-multi-agent-comedy-club.md",
+  "source_md_sha256": "43f6619fe624a415a445b0254a769ee45ef8d95df41a6185d3119e9aee7a3abf",
+  "source_truncated": false,
+  "title": "Multi-Agent Comedy Club: Investigating Community Discussion Effects on LLM Humor Generation",
+  "authors": [
+    "Shiwei Hong",
+    "Lingyao Li",
+    "Ethan Z. Rong",
+    "Chenxinran Shen",
+    "Zhicong Lu"
+  ],
+  "year": 2026,
+  "venue": "arXiv:2602.14770v2 [cs.CL]",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can broadcast community discussion be operationalized as a usable conditioning signal that improves an LLM’s subsequent creative writing?",
+    "Does enabling public reception, logging it as discussion traces, and retrieving it as social memory improve long-form stand-up comedy generation over a no-discussion baseline when within-round revision is removed?",
+    "What quality-versus-social-risk tradeoffs arise when community discussion conditions later humor generation?"
+  ],
+  "tasks": [
+    "stand-up comedy monologue generation",
+    "long-form humor generation",
+    "humor evaluation",
+    "reception-grounded creative writing"
+  ],
+  "humor_domains": [
+    "stand-up comedy",
+    "long-form comedy monologues",
+    "social satire",
+    "online community reception of comedy"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Multi-Agent Comedy Club paired resource",
+      "role": "introduced",
+      "size": "50 rounds; 250 monologues per condition; 250 paired instances; 5,384 interaction events in the discussion run"
+    },
+    {
+      "name": "Fixed topic list",
+      "role": "source-material",
+      "size": "50 topics"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o-mini"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Multi-Agent Comedy Club sandbox",
+      "summary": "A controlled 35-agent stand-up comedy community with one host, five performers, three critics, and twenty-six audience agents. The experimental switch enables or skips broadcast post-performance discussion while holding topics, personas, model, decoding, and no-within-round-revision constant."
+    },
+    {
+      "name": "Broadcast discussion with bounded social memory",
+      "summary": "In the discussion condition, critic reviews, audience posts, and free-dialogue turns are reconstructed into threads, curated into high-signal reception items, embedded in a vector store, and retrieved under a fixed memory budget to condition later performer generations."
+    },
+    {
+      "name": "Diagnostic human evaluation protocol for long-form humor",
+      "summary": "The protocol combines forced A/B preference with 15 Likert items covering immediate amusement, craft and clarity, humor styles, value-judgment pressure, memorability, share willingness, and social/task attraction."
+    },
+    {
+      "name": "HarmShift and Benefit–Safety analysis",
+      "summary": "The paper defines HarmShift as the net movement toward aggressive and self-defeating humor relative to affiliative and self-enhancing humor, and defines Benefit and Safety composites to examine quality-risk tradeoffs across paired instances."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "The related-work section cites classical semantic theories in which humor arises from conflicting scripts and cognitive reinterpretation, but this theory is not used directly in the generation method or annotation scheme."
+    },
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "Q7–Q10 adapt the Humor Styles Questionnaire dimensions: Affiliative, Self-enhancing, Aggressive, and Self-defeating."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The rubric operationalizes reader-response formalisms for perceived intent and justified landing, defamiliarization for novel expression, and social/task attraction measures for downstream reception."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Five raters evaluated each matched pair with a forced A/B preference question and 1–5 Likert ratings for Q1–Q15 on both texts; presentation was anonymized, randomized, and shuffled across non-consecutive rounds."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "The abstract describes the evaluation as 250 paired monologues judged by five expert annotators using A/B preference and a 15-item rubric."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Discussion-enabled outputs won the instance-level majority preference in 189 of 250 paired instances and received most individual votes.",
+      "metric": "Q0 majority-win rate / individual vote share",
+      "value": "75.6% (189/250; Wilson 95% CI [69.9, 80.5]); 70.1% individual votes (876/1249)",
+      "dataset": "Multi-Agent Comedy Club paired resource",
+      "best_system": "Discussion-enabled Multi-Agent Comedy Club"
+    },
+    {
+      "finding": "Discussion improved the primary Craft/Clarity profile over the no-discussion baseline.",
+      "metric": "mean Δ on Craft/Clarity (Q1–Q6)",
+      "value": "Δ=0.440",
+      "dataset": "Multi-Agent Comedy Club paired resource",
+      "best_system": "Discussion-enabled Multi-Agent Comedy Club"
+    },
+    {
+      "finding": "Discussion improved the primary Social Response profile over the no-discussion baseline.",
+      "metric": "mean Δ on Social Response (Q12–Q15)",
+      "value": "Δ=0.422",
+      "dataset": "Multi-Agent Comedy Club paired resource",
+      "best_system": "Discussion-enabled Multi-Agent Comedy Club"
+    },
+    {
+      "finding": "The largest craft/outcome improvements included Immediate Amusement and Justified Landing.",
+      "metric": "Q1 Immediate Amusement; Q4 Justified Landing",
+      "value": "Q1: 2.85 vs 2.33, Δ=0.52, 95% CI [0.44, 0.59]; Q4: 3.12 vs 2.63, Δ=0.49, 95% CI [0.42, 0.56]",
+      "dataset": "Multi-Agent Comedy Club paired resource",
+      "best_system": "Discussion-enabled Multi-Agent Comedy Club"
+    },
+    {
+      "finding": "Discussion also increased risk-associated humor-style and moral-pressure dimensions, especially aggressive humor.",
+      "metric": "Q9 Aggressive; Q10 Self-defeating; Q11 Value Judgment Pressure",
+      "value": "Q9: 2.69 vs 2.26, Δ=0.42, 95% CI [0.36, 0.49]; Q10: 2.18 vs 1.93, Δ=0.25, 95% CI [0.20, 0.30]; Q11: 1.76 vs 1.61, Δ=0.16, 95% CI [0.12, 0.19]",
+      "dataset": "Multi-Agent Comedy Club paired resource",
+      "best_system": "Discussion-enabled Multi-Agent Comedy Club"
+    },
+    {
+      "finding": "Rubric difference scores were substantially more reliable than forced preference judgments.",
+      "metric": "Inter-rater reliability",
+      "value": "Q0 Fleiss’ κ=0.237 [0.171, 0.299]; Q0 Gwet’s AC1=0.253 [0.188, 0.321]; Δ mean (Q1–Q15) ICC(3,5)=0.710 [0.640, 0.765]",
+      "dataset": "Multi-Agent Comedy Club paired resource",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Broadcast community discussion, stored and retrieved as social memory, improved GPT-4o-mini stand-up monologues over an otherwise matched no-discussion baseline.",
+    "The gains were strongest on craft, clarity, amusement, memorability, share willingness, and task attraction, not merely on overall forced preference.",
+    "The system’s quality improvements came with tradeoffs: aggressive humor, self-defeating humor, and value-judgment pressure all increased in the discussion condition.",
+    "Round-level and persona-level analyses showed the same qualitative pattern, and one-way ANOVA found no reliable performer-persona effects on Craft, Social response, moral pressure, or HarmShift.",
+    "Only 57/250 instances (22.8%) fell in the above-average Benefit and above-average Safety win-win quadrant, and Benefit and Safety were weakly correlated overall (Spearman ρ = -0.046, p = 0.472)."
+  ],
+  "limitations": [
+    "All agents in the simulation are driven by GPT-4o-mini, limiting conclusions about other model families and scales.",
+    "The evaluation uses 50 rounds and a fixed topic list; longer horizons and more diverse topic distributions could reveal different feedback dynamics.",
+    "The selected topics may inadvertently favor certain comedic styles or performer personas, potentially biasing comparative results.",
+    "Humor evaluation is subjective and culturally situated, and the annotator pool may not reflect preferences across cultures and age groups.",
+    "Evaluating decontextualized monologues outside the simulated community may not fully capture the social dynamics the sandbox is intended to study."
+  ],
+  "safety_ethics_notes": "The paper notes that stand-up comedy can involve sensitive topics, taboos, and controversial viewpoints; the simulation may generate offensive or inappropriate content. The authors used persona-based guidelines but no additional content filtering, warn that feedback loops could amplify some comedic styles while marginalizing others, informed raters about possible offensive content, allowed voluntary participation and skipping/stopping, collected no personally identifying rater information, and state that released artifacts are for research rather than end-user deployment.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that the sandbox configuration and code will be released under the MIT License, and generated artifacts including paired monologues, reconstructed discussion threads, and event logs will be released under CC BY-NC 4.0; no URLs are provided."
+  }
+}

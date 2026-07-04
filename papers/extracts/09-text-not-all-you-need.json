@@ -1,0 +1,153 @@
+{
+  "key": "09-text-not-all-you-need",
+  "ref": "#9",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/09-text-not-all-you-need/09-text-not-all-you-need.md",
+  "source_md_sha256": "946bfcdfa88653e8d99eba8cf686d3626919a021b85bbb35359d1169c7c687e3",
+  "source_truncated": false,
+  "title": "Text Is Not All You Need: Multimodal Prompting Helps LLMs Understand Humor",
+  "authors": [
+    "Ashwin Baluja"
+  ],
+  "year": 2025,
+  "venue": "CHum 2025",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Does providing an LLM with both the text of a joke and a TTS-generated spoken version improve humor understanding and explanation compared with text-only prompting?",
+    "Does audio input help preserve phonetic ambiguity that is important for understanding puns?",
+    "How do multimodal prompt configurations and TTS voice choices affect humor explanation quality?"
+  ],
+  "tasks": [
+    "humor explanation",
+    "joke explanation",
+    "pun detection"
+  ],
+  "humor_domains": [
+    "puns",
+    "homographic puns",
+    "heterographic puns",
+    "jokes"
+  ],
+  "modalities": [
+    "text",
+    "audio"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "evaluated-on",
+      "size": "810 & 647 puns (homographic & heterographic), and 1077 non-puns"
+    },
+    {
+      "name": "Context-Situated Puns",
+      "role": "evaluated-on",
+      "size": "821 & 1739 puns (homographic & heterographic)"
+    },
+    {
+      "name": "ExplainTheJoke",
+      "role": "evaluated-on",
+      "size": "350 jokes"
+    }
+  ],
+  "models_evaluated": [
+    "Gemini-1.5-Flash",
+    "GPT-4o",
+    "OpenAI tts-1-hd",
+    "Gazelle v0.2"
+  ],
+  "methods_proposed": [
+    {
+      "name": "TTS-based multimodal prompting",
+      "summary": "The method converts each text joke into audio using OpenAI’s tts-1-hd and prompts an audio-capable LLM with both the original text and the spoken form. The prompt includes task definitions, six few-shot pun explanation examples with chain-of-thought reasoning, and instructions not to mention the input modality."
+    },
+    {
+      "name": "Multimodal aggregation prompting",
+      "summary": "The paper tests a setup where text-only and audio-only explanations are generated separately and then combined through an aggregation prompt. The paper reports that a single combined audio-text prompt outperformed this separate strategy and was used going forward."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-4o judged pairwise explanation quality. For SemEval, Gemini-1.5-Flash explanations were compared against human explanations; for Context-Situated Puns and ExplainTheJoke, baseline text-only and multimodal outputs were compared directly. Pairwise comparisons were run twice with swapped order to mitigate positional bias, and results were reported as win and tie rates."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The appendix analyzes transcription logits from Gazelle v0.2 to test whether audio preserves phonetic ambiguity, including the word “Where” and the pun “Patience is a heavy weight.”"
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On SemEval heterographic puns, multimodal prompting outperformed the text-only baseline when judged against human explanations.",
+      "metric": "Win %, Tie %",
+      "value": "with audio: 51.74 Win %, 4.56 Tie %; Baseline: 47.76 Win %, 5.64 Tie %",
+      "dataset": "SemEval-2017 Task 7 puns",
+      "best_system": "with audio"
+    },
+    {
+      "finding": "On SemEval homographic puns, multimodal prompting outperformed the text-only baseline when judged against human explanations.",
+      "metric": "Win %, Tie %",
+      "value": "with audio: 72.59 Win %, 6.36 Tie %; Baseline: 68.89 Win %, 8.40 Tie %",
+      "dataset": "SemEval-2017 Task 7 puns",
+      "best_system": "with audio"
+    },
+    {
+      "finding": "On Context-Situated Puns heterographs, multimodal prompting was preferred more often than the text-only baseline in direct pairwise comparison.",
+      "metric": "Win %, Tie %",
+      "value": "with audio: 36.49 Win %; Baseline: 33.87 Win %; Tie %: 29.65",
+      "dataset": "Context-Situated Puns",
+      "best_system": "with audio"
+    },
+    {
+      "finding": "On Context-Situated Puns homographs, multimodal prompting was preferred more often than the text-only baseline in direct pairwise comparison.",
+      "metric": "Win %, Tie %",
+      "value": "with audio: 36.85 Win %; Baseline: 35.08 Win %; Tie %: 28.08",
+      "dataset": "Context-Situated Puns",
+      "best_system": "with audio"
+    },
+    {
+      "finding": "On ExplainTheJoke, multimodal prompting outperformed the text-only baseline despite many ties.",
+      "metric": "Win %, Tie %",
+      "value": "with audio: 15.44 Win %; Baseline: 12.81 Win %; Tie %: 71.75",
+      "dataset": "ExplainTheJoke",
+      "best_system": "with audio"
+    },
+    {
+      "finding": "In the SemEval ablation, audio-only prompting performed far worse than the full system.",
+      "metric": "Model Win %",
+      "value": "No text, Audio Only: 25.50 heterograph, 55.86 homograph; Our System: 51.74 heterograph, 72.59 homograph",
+      "dataset": "SemEval-2017 Task 7 puns",
+      "best_system": "Our System"
+    }
+  ],
+  "key_findings": [
+    "Providing both text and TTS-generated audio improved explanation quality across all three evaluated datasets.",
+    "On SemEval, multimodal prompting increased win rates over the text-only baseline for both heterographic puns and homographic puns when judged against human explanations.",
+    "On Context-Situated Puns, where no human explanations were available, GPT-4o preferred multimodal outputs over text-only outputs more often for both heterographs and homographs.",
+    "On ExplainTheJoke, multimodal prompting still improved direct pairwise win rate, suggesting benefits beyond phonetic ambiguity in puns.",
+    "Audio-only prompting was substantially worse than the combined text-audio system, indicating that audio should supplement rather than replace text.",
+    "The logit analysis showed that audio transcription assigned high probability to homophones such as “wear” and “ware” for “Where,” and made “weight” and “wait” the top two tokens in a realistic pun scenario."
+  ],
+  "limitations": [
+    "The approach is highly prompt-sensitive, and small variations in phrasing or structure can produce significant differences in output quality.",
+    "The TTS-based approach does not fully capture timing, cadence, rhythm, and other subtleties of real human speech.",
+    "The evaluation relies on automated LLM-based judging, which may not fully capture the nuanced quality of humor explanations.",
+    "The paper notes that future work should include more robust evaluation strategies such as human assessments or stronger judge models as they are released.",
+    "The study leaves open deeper investigation of voice characteristics and additional modalities such as video."
+  ],
+  "safety_ethics_notes": "The paper states that large language models can produce offensive and incorrect statements, and that explaining comedy may involve harmful stereotypes and offensive content; users should exercise caution and avoid prompting the LLM with potentially offensive jokes to avoid perpetuating incorrect stereotypes. The work is released for research purposes only.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Prompts are included in Appendix A."
+  }
+}

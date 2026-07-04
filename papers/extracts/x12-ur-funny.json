@@ -1,0 +1,147 @@
+{
+  "key": "x12-ur-funny",
+  "ref": "Part 8 (pre-LLM anchor)",
+  "section": "Part 8 - Datasets & Shared Tasks",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x12-ur-funny/x12-ur-funny.md",
+  "source_md_sha256": "3915948c7f63b00f1a9296ad374af7b4cb047308925ef040190cf2a86f6370ac",
+  "source_truncated": false,
+  "title": "UR-FUNNY: A Multimodal Language Dataset for Understanding Humor",
+  "authors": [
+    "Md Kamrul Hasan",
+    "Wasifur Rahman",
+    "Amir Zadeh",
+    "Jianyuan Zhong",
+    "Md Iftekhar Tanveer",
+    "Louis-Philippe Morency",
+    "Mohammed (Ehsan) Hoque"
+  ],
+  "year": 2019,
+  "venue": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing",
+  "paper_types": [
+    "dataset",
+    "benchmark",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can a diverse multimodal language dataset be constructed for humor detection from text, visual, and acoustic information?",
+    "How well do baseline neural and non-neural models perform on binary humor detection/laughter prediction in UR-FUNNY?",
+    "What roles do punchline, context, and individual modalities play in detecting humor?"
+  ],
+  "tasks": [
+    "multimodal humor detection",
+    "punchline/laughter prediction"
+  ],
+  "humor_domains": [
+    "TED talks",
+    "public speeches/presentations"
+  ],
+  "modalities": [
+    "text",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "UR-FUNNY (repo)",
+      "role": "introduced",
+      "size": "16,514 video segments: 8,257 humor instances and 8,257 non-humor instances; 90.23 hours; 1,866 videos"
+    },
+    {
+      "name": "TED talks",
+      "role": "source-material",
+      "size": "1,866 videos from 1,741 different speakers and across 417 topics"
+    }
+  ],
+  "models_evaluated": [
+    "Contextual Memory Fusion Network (C-MFN)",
+    "C-MFN (P)",
+    "C-MFN (C)",
+    "Random Forest"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Contextual Memory Fusion Network (C-MFN)",
+      "summary": "A contextual extension of Memory Fusion Network for multimodal humor detection. It encodes context with unimodal LSTMs and a multimodal Transformer-style self-attention encoder, then initializes MFN memories with these context representations to model the punchline."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "surprise theory",
+      "usage": "operationalized",
+      "detail": "The paper uses the idea that humorous scenarios involve a gradual buildup followed by a sudden twist/punchline, citing Ramachandran (1998), to define context and punchline around TED laughter markers."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Binary accuracy on the standard speaker-independent train, validation, and test folds of UR-FUNNY; models were trained using categorical cross-entropy."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Human performance was calculated by averaging two annotators over a shuffled set of 100 humor and 100 non-humor cases; annotators received the same context and punchline inputs as the models."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The best reported model was C-MFN using text, acoustic, and visual modalities together.",
+      "metric": "Binary accuracy",
+      "value": "65.23%",
+      "dataset": "UR-FUNNY (repo)",
+      "best_system": "Contextual Memory Fusion Network (C-MFN)"
+    },
+    {
+      "finding": "The strongest Random Forest baseline was lower than the best C-MFN result.",
+      "metric": "Accuracy",
+      "value": "57.78% vs 65.23%",
+      "dataset": "UR-FUNNY (repo)",
+      "best_system": "Contextual Memory Fusion Network (C-MFN)"
+    },
+    {
+      "finding": "C-MFN with all modalities outperformed the punchline-only and context-only variants when using text, acoustic, and visual inputs.",
+      "metric": "Binary accuracy",
+      "value": "65.23% vs 64.47% vs 58.45%",
+      "dataset": "UR-FUNNY (repo)",
+      "best_system": "Contextual Memory Fusion Network (C-MFN)"
+    },
+    {
+      "finding": "For full C-MFN, all modalities together performed better than text alone and nonverbal modalities alone.",
+      "metric": "Binary accuracy",
+      "value": "T+A+V 65.23; T 64.44; A+V 57.99",
+      "dataset": "UR-FUNNY (repo)",
+      "best_system": "Contextual Memory Fusion Network (C-MFN)"
+    },
+    {
+      "finding": "Human performance remained substantially higher than the best model result.",
+      "metric": "Human performance / annotator agreement",
+      "value": "82.5%; annotators agree 84% of times",
+      "dataset": "UR-FUNNY (repo)",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "UR-FUNNY contains equal splits of 8,257 humor and 8,257 non-humor instances drawn from TED talks, with text, visual, and acoustic modalities aligned at word level.",
+    "The standard train, validation, and test folds are speaker independent, with no shared speakers across folds.",
+    "Punchline information is more predictive than context alone, but the full C-MFN using both context and punchline performs best.",
+    "Using all three modalities produces the highest accuracy, and the paper reports that visual and acoustic modalities usually improve over text alone.",
+    "The best C-MFN accuracy of 65.23% is far below the reported human performance of 82.5%, indicating a large remaining gap."
+  ],
+  "limitations": [
+    "The paper defines humor detection as predicting whether context and punchline are likely to trigger laughter, using TED laughter markers as the indicator of humor.",
+    "Because TED camera angle and position change frequently, the only consistently available source of visual information was the speaker’s face.",
+    "The best model remains well below the reported human performance: 65.23% versus 82.5%.",
+    "Human performance was calculated on a shuffled set of only 100 humor and 100 non-humor cases using two annotators."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://github.com/ROC-HCI/UR-FUNNY",
+    "other": "The paper states that UR-FUNNY is publicly available for research, alongside extracted features, and that the dataset and accompanying experiments are publicly available."
+  }
+}

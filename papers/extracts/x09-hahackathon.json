@@ -1,0 +1,190 @@
+{
+  "key": "x09-hahackathon",
+  "ref": "Part 8 (pre-LLM anchor)",
+  "section": "Part 8 - Datasets & Shared Tasks",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x09-hahackathon/x09-hahackathon.md",
+  "source_md_sha256": "61bcbfe1d9e82879c77ab342c5471b641b2139df2bd353231555e60186cd4198",
+  "source_truncated": false,
+  "title": "SemEval-2021 Task 7: HaHackathon, Detecting and Rating Humor and Offense",
+  "authors": [
+    "J.A. Meaney",
+    "Steven R. Wilson",
+    "Luis Chiruzzo",
+    "Adam Lopez",
+    "Walid Magdy"
+  ],
+  "year": 2021,
+  "venue": "Proceedings of the 15th International Workshop on Semantic Evaluation (SemEval-2021), Bangkok, Thailand (online), August 5–6, 2021",
+  "paper_types": [
+    "shared-task",
+    "dataset",
+    "benchmark",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can systems detect whether an English text is intended to be humorous based on majority human judgments?",
+    "Can systems predict average human humor ratings and offense ratings for short English texts?",
+    "Can systems predict humor controversy, defined as whether variance in humor ratings is higher than the median variance in the training set?",
+    "Which modeling choices and auxiliary techniques helped participating systems in the HaHackathon shared task?"
+  ],
+  "tasks": [
+    "humor detection",
+    "humor rating prediction",
+    "humor controversy detection",
+    "offense rating prediction"
+  ],
+  "humor_domains": [
+    "Twitter humor",
+    "short jokes",
+    "setup/punchline jokes",
+    "offensive humor",
+    "irony",
+    "sarcasm"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "introduced",
+      "size": "10,000 texts"
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "evaluated-on",
+      "size": "80:10:10 training, development and test sets"
+    },
+    {
+      "name": "Twitter",
+      "role": "source-material",
+      "size": "8,000 tweets"
+    },
+    {
+      "name": "Kaggle Short Jokes dataset",
+      "role": "source-material",
+      "size": "20% of texts; 2,000 texts"
+    }
+  ],
+  "models_evaluated": [
+    "Naive Bayes",
+    "support vector regressor",
+    "BERT-base",
+    "BERT",
+    "RoBERTa",
+    "RoBERTa-large",
+    "ALBERT",
+    "ERNIE 2.0",
+    "DeBERTa",
+    "XLNet",
+    "BERTweet",
+    "RNN",
+    "BERT+CNN"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HaHackathon shared task and dataset",
+      "summary": "The paper introduces a SemEval shared task combining humor and offense detection/rating using 10,000 English texts from Twitter and the Kaggle Short Jokes dataset, each annotated by 20 Prolific annotators across four age groups."
+    },
+    {
+      "name": "Humor controversy detection task",
+      "summary": "The paper defines a novel binary task in which a humorous text is labelled controversial if the variance in its humor ratings is higher than the median humor rating variance in the training set."
+    },
+    {
+      "name": "Benchmark systems",
+      "summary": "The organizers provide linear benchmarks using Naive Bayes with bag-of-words features for classification and a support vector regressor with TF-IDF features for regression, plus a BERT-base classification/regression baseline run for one epoch."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "none",
+      "usage": "cited-in-passing",
+      "detail": "The shared task is not grounded in a formal humor theory; annotation used practical cues such as setup/punchline structure and absurd content, and the discussion mentions incongruity only in an error-analysis example."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "crowd-votes",
+      "detail": "Each text was annotated by 20 Prolific annotators: 5 members of each age group 18-25, 26-40, 41-55, and 56-70."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Annotators answered whether the text was intended to be humorous, generally offensive, and personally offensive; affirmative humor/offense answers were rated from 1-5, with an 'I don’t get it' option for humor."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Task 1a and Task 1c were evaluated with F-score and accuracy; Task 1b and Task 2 were evaluated with RMSE."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "PALI ranked first on humor detection.",
+      "metric": "F1 / Accuracy",
+      "value": "0.9854 / 0.9820",
+      "dataset": "HaHackathon (SemEval-2021 Task 7) test set",
+      "best_system": "PALI"
+    },
+    {
+      "finding": "abcbpc ranked first on humor rating prediction.",
+      "metric": "RMSE",
+      "value": "0.4959",
+      "dataset": "HaHackathon (SemEval-2021 Task 7) test set",
+      "best_system": "abcbpc"
+    },
+    {
+      "finding": "PALI ranked first by F1 on humor controversy detection.",
+      "metric": "F1 / Accuracy",
+      "value": "0.6302 / 0.4943",
+      "dataset": "HaHackathon (SemEval-2021 Task 7) test set",
+      "best_system": "PALI"
+    },
+    {
+      "finding": "DeepBlueAI ranked first on offense rating prediction.",
+      "metric": "RMSE",
+      "value": "0.4120",
+      "dataset": "HaHackathon (SemEval-2021 Task 7) test set",
+      "best_system": "DeepBlueAI"
+    },
+    {
+      "finding": "The inter-annotator agreement for humor ratings was much lower than for humor class labels and offense ratings.",
+      "metric": "Krippendorff’s α",
+      "value": "Class label 0.736; Humor rating 0.124; Offense rating 0.518",
+      "dataset": "HaHackathon (SemEval-2021 Task 7)",
+      "best_system": null
+    },
+    {
+      "finding": "A perfect humor-rating threshold heuristic could have reached leaderboard-level controversy scores, but participant systems did not have access to ground-truth test humor scores.",
+      "metric": "Accuracy / F1",
+      "value": "accuracy 0.580 at threshold over 2; F1-score 0.635 at threshold 1.45",
+      "dataset": "HaHackathon (SemEval-2021 Task 7) test set",
+      "best_system": "hypothetical threshold-based model"
+    }
+  ],
+  "key_findings": [
+    "The task combined humor and offense for the first time in a SemEval shared task, using 10,000 texts annotated for humor and offense by a broad range of annotators.",
+    "Transformer-based pre-trained language models dominated the participant systems, often with ensembling, task-adaptive training, domain adaptation, pseudo-labelling, adversarial training, or multi-task learning.",
+    "Humor detection was comparatively successful, with the best system reaching F1 0.9854, while humor controversy was much harder, with the best F1 only 0.6302.",
+    "Multi-task learning setups tended to be more successful across subtasks, and the paper reports correlations between humor rating, humor controversy, and offense rating.",
+    "Systems generally performed better on Kaggle texts for humor subtasks, while offense-rating RMSE was consistently lower on Twitter texts, partly reflecting different offense-rating distributions.",
+    "Error analysis highlighted irony and sarcasm as difficult for both annotation and modeling, including cases where all top systems predicted humor but annotators did not assign a majority humorous label."
+  ],
+  "limitations": [
+    "Agreement on humor ratings was low, with Krippendorff’s α = 0.124, and the controversy task explicitly depended on variance in these subjective ratings.",
+    "Humor controversy detection proved difficult, and even a simple threshold-style approach could be competitive only under unrealistic access to perfect humor ratings.",
+    "Kaggle texts and Twitter texts had different label distributions, especially for offense, which affected subset performance comparisons.",
+    "The dataset was intentionally restricted to US English texts and US native-English-speaking annotators to reduce cultural and linguistic confounds, so the paper does not establish cross-cultural generality.",
+    "Some high-ranking teams, including PALI, stce, and mmmm, did not provide detailed system papers, limiting analysis of their approaches."
+  ],
+  "safety_ethics_notes": "The dataset intentionally includes potentially offensive content, including texts selected with hate-speech-related target keywords. Annotators rated both general and personal offense, though only generally offensive ratings were used in the task; tweet ids and usernames were to be retained for non-commercial research use in line with the Twitter Academic Developer Policy.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that the texts and annotations will continue to be available on the Codalab website, and cites the Kaggle Short Jokes source at https://www.kaggle.com/abhinavmoudgil95/short-jokes."
+  }
+}

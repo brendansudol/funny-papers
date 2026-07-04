@@ -1,0 +1,161 @@
+{
+  "key": "x01-jape",
+  "ref": "Part 2 (pre-LLM foundations)",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x01-jape/x01-jape.md",
+  "source_md_sha256": "868520609d2f8017e343c997923bfc27ae4498d3ab273699e0666e20e7fee1c9",
+  "source_truncated": false,
+  "title": "An implemented model of punning riddles",
+  "authors": [
+    "Kim Binsted",
+    "Graeme Ritchie"
+  ],
+  "year": 1994,
+  "venue": "AAAI 1994",
+  "paper_types": [
+    "method",
+    "system",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a formal symbolic model generate simple question-answer word-substitution punning riddles from a humour-independent lexicon?",
+    "Can separating schemata for lexical/semantic relations from templates for surface form account for the selected subtype of punning riddles?",
+    "How recognizable and good are JAPE-1's generated riddles when judged by volunteers?"
+  ],
+  "tasks": [
+    "punning riddle generation",
+    "question-answer joke generation",
+    "pun generation"
+  ],
+  "humor_domains": [
+    "puns",
+    "punning riddles",
+    "question-answer jokes",
+    "word-substitution puns",
+    "homonym substitution puns"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "The Crack-a-Joke Book",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "American English homophone list",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "volunteer-provided JAPE-1 lexicon",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "JAPE-1 generated joke set",
+      "role": "evaluated-on",
+      "size": "188 jokes in near-surface form"
+    }
+  ],
+  "models_evaluated": [
+    "JAPE-1"
+  ],
+  "methods_proposed": [
+    {
+      "name": "JAPE-1",
+      "summary": "A computer program that generates a restricted subtype of punning riddle: homonym-substitution riddles with noun phrase punchlines. It uses a humour-independent lexicon, a homonym base, six schemata, templates, and simple post-production checks."
+    },
+    {
+      "name": "Schema-template model of punning riddles",
+      "summary": "Schemata specify the lexical and semantic relations among a real phrase, a homonymous substituted word, the fake phrase, and the constructed meaning. Templates then map an instantiated schema into a question-answer joke surface form."
+    },
+    {
+      "name": "Post-production checker",
+      "summary": "JAPE-1 applies simple checks to reject outputs where lexemes used in the question and punchline are accidentally identical, or where the lexemes used for the nonsense noun phrase and its meaning form a genuine common noun phrase."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper treats puns as exploiting phonological ambiguity, where the riddlee is asked to accept phonological, morphological, or syntactic similarity as semantic comparison; JAPE-1 operationalizes this through homonym word substitution in schemata and templates."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "JAPE-1 produced 188 jokes in near-surface form, distributed in batches to 14 judges, who scored them from 0 (“Not a joke. Doesn’t make any sense.”) to 5 (“Really good”) and also gave qualitative comments."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "During the evaluation procedure, a “common knowledge judge” checked volunteer-written lexical entries for errors and excessively obscure suggestions before they were entered into JAPE-1’s lexicon."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "JAPE-1 produced a set of jokes for evaluation from volunteer-provided lexical data.",
+      "metric": "output count",
+      "value": "188 jokes in near-surface form",
+      "dataset": "JAPE-1 generated joke set",
+      "best_system": "JAPE-1"
+    },
+    {
+      "finding": "Across all jokes produced from the volunteer lexical data, the average score was low.",
+      "metric": "mean human score on 0–5 scale",
+      "value": "1.5 points",
+      "dataset": "JAPE-1 generated joke set",
+      "best_system": "JAPE-1"
+    },
+    {
+      "finding": "The highest-scoring outputs showed strong judge disagreement: every joke receiving a 5 from one judge received a low score from the other judge.",
+      "metric": "maximum-score cases and paired scores",
+      "value": "nine jokes; three got zeroes, three got ones, and three got twos",
+      "dataset": "JAPE-1 generated joke set",
+      "best_system": "JAPE-1"
+    },
+    {
+      "finding": "For the “pool queue” example, a more appropriate template produced a joke that judges rated better than the non-joke output from the less appropriate template.",
+      "metric": "average human score",
+      "value": "two points",
+      "dataset": "JAPE-1 generated joke set",
+      "best_system": "JAPE-1"
+    },
+    {
+      "finding": "An output produced from an overly general lexical definition, “What kind of device has wings? An aeroplane hanger,” scored very poorly.",
+      "metric": "human score",
+      "value": "half a point",
+      "dataset": "JAPE-1 generated joke set",
+      "best_system": "JAPE-1"
+    }
+  ],
+  "key_findings": [
+    "JAPE-1 can generate pieces of text that are recognizably jokes from a relatively unbiased, humour-independent lexicon.",
+    "The generated jokes were generally weak: the average score was 1.5 points on a 0–5 scale, and the paper characterizes the output as “jokes, but pathetic ones.”",
+    "Schemata and templates varied in quality, with some template choices producing non-jokes and more appropriate templates producing better-rated variants.",
+    "Lexical entry quality mattered: volunteer definitions that were too general produced poor jokes such as the “aeroplane hanger” example.",
+    "The paper argues that improving lexical precision, adding lexical slots, refining templates, removing poor schema-template links, and extending to spoonerisms and sub-word puns could improve JAPE-1."
+  ],
+  "limitations": [
+    "The evaluation was explicitly not statistically rigorous.",
+    "The paper states that there were too few jokes and joke judges for the scores to be statistically significant.",
+    "There was no control group of human-produced jokes judged under the same conditions.",
+    "JAPE-1 is restricted to riddles that use word substitution, put the substituted word in the punchline, substitute a homonym, and use a common noun phrase punchline.",
+    "The authors did not have access to a suitable large lexicon and relied on volunteer-written lexical entries.",
+    "Volunteer definitions were often too general for JAPE-1’s purposes.",
+    "The homonym base was shortened considerably and contains only common, concrete nouns and adjectives."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

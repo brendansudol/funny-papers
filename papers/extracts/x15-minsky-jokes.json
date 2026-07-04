@@ -1,0 +1,99 @@
+{
+  "key": "x15-minsky-jokes",
+  "ref": "Theory (also worth knowing)",
+  "section": "Theory Foundations",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x15-minsky-jokes/x15-minsky-jokes.md",
+  "source_md_sha256": "a02b1a3be30880a10587f16ef0ae070d2726128c8afb551974ccba1b2ab1a21f",
+  "source_truncated": false,
+  "title": "Jokes and the Logic of the Cognitive Unconscious",
+  "authors": [
+    "Marvin Minsky"
+  ],
+  "year": 1980,
+  "venue": "Massachusetts Institute of Technology Artificial Intelligence Laboratory, A.I. Memo No. 603",
+  "paper_types": [
+    "theory"
+  ],
+  "research_questions": [
+    "How can humorous nonsense be explained in a way that makes it continuous with Freud’s account of jokes about forbidden subjects such as aggression and sexuality?",
+    "What role do knowledge about knowledge, common-sense reasoning failures, and unconscious censor-like mechanisms play in humor?",
+    "Why do jokes become less funny when repeated, and what does this imply about learning and mental censorship?",
+    "How do analogy, metaphor, frame-shifting, and faulty reasoning contribute to humor?"
+  ],
+  "tasks": [],
+  "humor_domains": [
+    "jokes",
+    "humorous nonsense",
+    "puns",
+    "sexual humor",
+    "aggressive humor",
+    "ethnic humor",
+    "logical paradoxes",
+    "wordplay"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Cognitive censor theory of humor",
+      "summary": "The essay proposes that humor helps minds learn to recognize and suppress 'bugs'—ineffective or destructive thought processes—through censor-like mechanisms analogous to Freud’s emotional censors but applied to reasoning and cognition."
+    },
+    {
+      "name": "Frame-substitution account of humor",
+      "summary": "The essay argues that many forms of humor involve unexpected frame-substitution, where a situation is first represented from one viewpoint and then suddenly reinterpreted through another frame, often revealing a faulty or prohibited inference."
+    },
+    {
+      "name": "Two-brain A/B censor model",
+      "summary": "The essay sketches a model in which an A-brain interacts with the world while a B-brain monitors internal A-states and can suppress undesirable processes such as meandering, circling, or confusion before they fully develop."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "relief",
+      "usage": "grounding/motivation",
+      "detail": "Freud’s theory is described as explaining jokes through unconscious censors, forbidden thoughts, release of psychic energy, and laughter, but the essay argues that this account works less well for humorous nonsense."
+    },
+    {
+      "theory": "frame-shifting / conceptual blending",
+      "usage": "operationalized",
+      "detail": "The essay explains humor through frames, defaults, analogies, metaphor, and 'unexpected frame-substitution,' in which a scene is suddenly viewed in a different way."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper’s own account treats humor as related to learning and communicating about bugs in common-sense reasoning, with laughter disrupting faulty reasoning while focusing attention for censor learning."
+    }
+  ],
+  "evaluation_methods": [],
+  "headline_results": [],
+  "key_findings": [
+    "The essay argues that common-sense logic is too unreliable for practical use without learned mechanisms that prevent recurring reasoning failures.",
+    "Minsky proposes that the mind builds 'cognitive censors' that suppress unproductive mental states, analogous to Freud’s emotional censors but directed at faulty reasoning and nonsense.",
+    "Humor is presented as a mechanism for learning and communicating about cognitive bugs, especially failures involving paradox, analogy, metaphor, and frame-shifting.",
+    "The essay claims that jokes become less funny when repeated because censor learning has already occurred for that joke or joke type.",
+    "Laughter is theorized to both disrupt further reasoning along a prohibited or ridiculous path and focus attention on the absurdity so censor-learning can absorb it.",
+    "The paper argues that humor lacks sharp boundaries because it evolved from overlapping mechanisms involving laughter, faulty reasoning, taboos, prohibitions, conciliation, aggression, sexuality, and unconscious suppression."
+  ],
+  "limitations": [
+    "The paper is a theoretical essay and reports no experiments, datasets, computational implementation, or quantitative evaluation.",
+    "Minsky explicitly says he makes no plea for his particular evolutionary scenario, only that something of the general sort must have happened.",
+    "The essay argues that it is probably futile to ask precisely what humor is, because 'humor' points to different web-models in different minds rather than a sharply bounded thing.",
+    "The paper notes that adult humor complicates the theory because later cultural and individual development can exploit and rearrange earlier mechanisms.",
+    "The author states that psychological theories can usually describe only fragments of a larger web of interacting subsystems rather than completely explain a surface behavior."
+  ],
+  "safety_ethics_notes": "The paper contains a note on ethnic humor, suggesting that it may involve aggression and also a representational tendency to project stupidity jokes onto alien stereotypes; it warns that this can become a runaway process and that prejudice will be hard to eradicate without understanding the value and role of stereotypes in ordinary thinking.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

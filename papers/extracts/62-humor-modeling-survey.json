@@ -1,0 +1,483 @@
+{
+  "key": "62-humor-modeling-survey",
+  "ref": "#62",
+  "section": "Part 9 - Surveys & Resources",
+  "extracted_at": "2026-07-03",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/62-humor-modeling-survey/62-humor-modeling-survey.md",
+  "source_md_sha256": "0cc39461fb257b2982fe028c9e54da6bed69ba6401b5e1564015566f4e0f683d",
+  "source_truncated": false,
+  "title": "Computational Humor Modeling: A Survey on the State of the Art",
+  "authors": [
+    "Jens Lemmens",
+    "Victor De Marez"
+  ],
+  "year": 2026,
+  "venue": "ACM Comput. Surv. 58, 7, Article 177 (January 2026)",
+  "paper_types": [
+    "survey"
+  ],
+  "research_questions": [
+    "What are the current trends, advancements, and remaining gaps in recent computational humor modeling research with AI systems?",
+    "How do recent datasets, shared tasks, detection models, generation models, annotation practices, evaluation methods, and explainability work compare across humor tasks, modalities, genres, and languages?",
+    "To what extent do gaps identified by earlier computational humor surveys—evaluation, links to humor theory, English/text-only focus, and multimodality—remain relevant?"
+  ],
+  "tasks": [
+    "humor detection",
+    "humor generation",
+    "humor rating",
+    "caption ranking",
+    "caption matching",
+    "humor explanation",
+    "pun generation",
+    "pun detection",
+    "pun translation",
+    "humor-aware information retrieval",
+    "humor mechanism classification",
+    "humor target classification",
+    "offensiveness rating",
+    "hurtfulness rating",
+    "prejudice-spreading humor detection",
+    "sense of humor evaluation",
+    "meme caption generation",
+    "laughter detection",
+    "cross-cultural humor recognition"
+  ],
+  "humor_domains": [
+    "jokes",
+    "puns",
+    "wordplay",
+    "one-liners",
+    "satirical news headlines",
+    "edited news headlines",
+    "political parody",
+    "memes",
+    "cartoon captions",
+    "sitcoms",
+    "stand-up comedy",
+    "open mic comedy",
+    "Chinese crosstalk",
+    "conversational humor",
+    "performance humor",
+    "social media humor",
+    "COVID-19 humor",
+    "hurtful humor",
+    "football coach interviews",
+    "Oogiri"
+  ],
+  "modalities": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "en",
+    "es",
+    "zh",
+    "fr",
+    "hi",
+    "pt",
+    "ar",
+    "te",
+    "de",
+    "ru",
+    "en-ur",
+    "en-hi",
+    "ja",
+    "multi"
+  ],
+  "datasets_used": [
+    {
+      "name": "HAHA2019",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "role": "analyzed",
+      "size": "approximately 5,000 news headlines"
+    },
+    {
+      "name": "Political parody in social media",
+      "role": "analyzed",
+      "size": "131,666 English tweets from 184 real politicians and their parody accounts"
+    },
+    {
+      "name": "CHEESE!",
+      "role": "analyzed",
+      "size": "audio and video recordings of 11 human-human interactions in French that each last approximately 15 minutes"
+    },
+    {
+      "name": "Chinese humor corpus",
+      "role": "analyzed",
+      "size": "3,365 Chinese jokes"
+    },
+    {
+      "name": "rJokes corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "M2H2",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Laughing Machine",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "OpenMic",
+      "role": "analyzed",
+      "size": "over 40 hours of annotated open mic clips"
+    },
+    {
+      "name": "Telugu humor dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MHD",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MUMOR",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CHoRaL",
+      "role": "analyzed",
+      "size": "785,000 COVID-19 humor posts from Facebook"
+    },
+    {
+      "name": "Arabic humor detection dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Telugu humor in social media",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MemePlate",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "FigMemes",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CUP",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Tanaka et al. meme humor dataset",
+      "role": "analyzed",
+      "size": "7,500 memes"
+    },
+    {
+      "name": "SCRIPTS",
+      "role": "analyzed",
+      "size": "90 stand-up comedy transcripts from 68 comedians"
+    },
+    {
+      "name": "MET-Meme",
+      "role": "analyzed",
+      "size": "more than 10,000 memes"
+    },
+    {
+      "name": "COVID-19 Humor dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "English-Urdu code-mixed humor dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Chinese humor dataset (Chen et al. 2023)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "New Yorker Caption Contest corpus",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MemeCap",
+      "role": "analyzed",
+      "size": "more than 6,000 memes"
+    },
+    {
+      "name": "Chinese comical crosstalk dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "OxfordTVG-HIC",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Pandemic Humor",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "TalkFunny!",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Passau-SFCH",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "MUCH",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Chumor 1.0",
+      "role": "analyzed",
+      "size": "1,951 jokes"
+    },
+    {
+      "name": "Getting Serious with LLMs (unfun pairs)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "HumorHindiNet",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Hindi meme humor dataset (Kumari et al. 2024)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Multimodal and multilingual stand-up comedy corpus",
+      "role": "analyzed",
+      "size": "37 hours of video material scraped from YouTube"
+    },
+    {
+      "name": "Chinese Pun Rebus Art Dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Oogiri-GO",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "HAHA@IberLEF 2021 dataset",
+      "role": "analyzed",
+      "size": "36,000 tweets (24,000 for training, and 6,000 for development and testing, each), of which 15,000 were humorous"
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "HUrtful HUmour (HUHU) dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "CLEF 2024 JOKER Task 1 dataset",
+      "role": "analyzed",
+      "size": "more than 60,000 English texts, of which 4,492 were humorous"
+    },
+    {
+      "name": "CLEF 2024 JOKER Task 2 dataset",
+      "role": "analyzed",
+      "size": "approximately 2,500 humorous texts"
+    },
+    {
+      "name": "JOKER-2023 wordplay corpus",
+      "role": "analyzed",
+      "size": "1,405 English wordplay instances, with 5,838 translations to French"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "ExPUNations (ExPun)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "UR-FUNNY (repo)",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Kaggle humor detection dataset",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Cards Against Humanity game data",
+      "role": "analyzed",
+      "size": null
+    },
+    {
+      "name": "Meme Generator dataset",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Survey collection and filtering methodology",
+      "summary": "The paper collects recent computational humor work using keyword search across Google Scholar, Semantic Scholar, ACL Anthology, ACM Computing Surveys, IEEE Xplore, and the European Journal of Humor Research, supplemented by backward and forward citation search. Inclusion is governed by a decision tree requiring relevance to computational humor modeling, recent publication, peer review or specified exceptions, and special rules for shared tasks."
+    },
+    {
+      "name": "Multidimensional evaluation template for humor generation",
+      "summary": "As a future evaluation direction, the authors propose evaluating generative humor models along diversity in humor mechanisms, appropriateness in pragmatic and social context, and originality. They argue that the validity of such a paradigm should be tested by correlation with human evaluations."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The survey uses Martin and Ford’s distinction between jokes, performance humor, and conversational humor to classify recent humor datasets."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The survey repeatedly discusses incongruity as a basis for feature engineering, meme-caption modeling, pun recognition, surprise measures, and theory-driven detection/generation systems."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "The paper states that Liu and Hou applied incongruity theory of humor, specifically Script-Based Semantic Theory, to verbal humor using setup uncertainty and setup-punchline incongruity."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "The survey discusses surprise-disambiguation theory in THInC, Tian et al.’s pun generation framework, and PunIntended, as well as distribution-based surprise measures for humorous headlines."
+    },
+    {
+      "theory": "superiority",
+      "usage": "grounding/motivation",
+      "detail": "Superiority theory is included among the humor theories represented in the THInC ensemble discussed by the survey."
+    },
+    {
+      "theory": "relief",
+      "usage": "grounding/motivation",
+      "detail": "Relief theory is included among the humor theories represented in THInC, and the survey reports that THInC’s ablation study found relief theory contributed most to the model’s performance."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "cited-in-passing",
+      "detail": "The survey states that Li et al.’s attention analyses aligned with benign violation theory, but describes the alignment as correlational rather than symbolic or rule-based."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "The survey reports that humor detection is typically evaluated with precision, recall, F1-score, and/or accuracy, with less frequent use of AUC, TPR, TNR, cross-entropy loss, Cohen’s Kappa, Pearson/Spearman correlation, RMSE, BLEU, ROUGE, BERTScore, Dist-n, and NDCG depending on task."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For generation, the survey discusses human comparison, A/B testing, binary success rate, qualitative analysis, and scoring of fine-grained aspects such as funniness, creativity/originality/authenticity, ambiguity, offensiveness, persuasiveness, coherence, relevance/informativeness, overall score, and Creativity Support Index."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "The survey discusses work using GPT-4 to evaluate jokes and to judge pun explanations, while noting weak correlation with human evaluators in one study and risks of hallucinated or superficial explanations."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "The survey describes datasets using crowd or user signals, including Facebook Haha reactions in CHoRaL and Amazon Mechanical Turk judgments for comparing human- and ChatGPT-generated humor."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "The paper discusses annotation practices involving multiple annotators, demographic reporting, intended versus perceived humor labels, and offensiveness annotations to account for subjectivity and personal sensitivities."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The survey found that most recent humor datasets contain jokes.",
+      "metric": "dataset count",
+      "value": "26 out of 39 datasets",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The survey found a substantial recent shift toward multimodal humor datasets.",
+      "metric": "dataset count",
+      "value": "20 out of 39 datasets",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "Conversational humor is underrepresented in datasets despite being the largest share of daily humor experiences cited by the paper.",
+      "metric": "dataset count / daily humor share",
+      "value": "2 of the 39 datasets; 70%, 17%, and 11%",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The SemEval-2020 Task 7 winner used an ensemble of pre-trained transformers and won both subtasks.",
+      "metric": "RMSE / accuracy",
+      "value": "0.497 and 0.674",
+      "dataset": "Humicroedit + FunLines (SemEval-2020 Task 7)",
+      "best_system": "ensemble model consisting of various pre-trained transformers"
+    },
+    {
+      "finding": "In HaHackathon, top systems performed much better on intended humor detection than on humor and offensiveness rating.",
+      "metric": "F1-score / RMSE / F1-score",
+      "value": "F1-score>0.96; around 0.50–0.55 RMSE; 0.62–0.63 F1-score",
+      "dataset": "HaHackathon (SemEval-2021 Task 7)",
+      "best_system": null
+    },
+    {
+      "finding": "On New Yorker caption tasks, few-shot GPT-4 was best among reported models but below human performance.",
+      "metric": "accuracy",
+      "value": "85% and 73%, compared to a human upper bound of 94% and human performance of 87%",
+      "dataset": "New Yorker Caption Contest corpus",
+      "best_system": "few-shot GPT-4"
+    }
+  ],
+  "key_findings": [
+    "Recent computational humor datasets remain dominated by jokes, while conversational humor is proportionally underrepresented relative to its role in daily humor experiences.",
+    "Multimodal humor work has grown, especially for detection, with fusion models commonly combining BERT-based text representations with visual and audio encoders such as ViT/CLIP and HuBERT/Wav2Vec.",
+    "Humor generation papers since 2022 all use pre-trained language models, but findings are mixed because results are prompt-dependent and evaluation practices are not standardized.",
+    "Detection research shows no single dominant architecture: pre-trained language models, older neural methods, statistical models, and hybrid feature-based systems are all still used, sometimes competitively on specific tasks.",
+    "Recent datasets show a positive trend away from English-only research, with the survey stating that all 11 identified humor datasets published in 2024 contain at least 1 non-English language.",
+    "Interpretability and explainability work suggests that high-performing humor systems often rely on superficial cues, and LLM free-text explanations can be plausible but unfaithful or lacking nuance."
+  ],
+  "limitations": [
+    "The survey focuses on manuscripts published since 2022, while dataset and shared task papers are included only from January 2020 onward.",
+    "Papers tailored specifically towards irony and sarcasm are excluded.",
+    "Non-peer-reviewed papers are included only if the presented model is patented or if code/data was shared and novel experiments were presented.",
+    "For shared task papers, the survey includes only overview papers or papers of winning teams.",
+    "Because the field of AI is evolving rapidly, the survey’s state-of-the-art snapshot is time-bounded by the search and inclusion criteria."
+  ],
+  "safety_ethics_notes": "The survey repeatedly highlights humor subjectivity, personal and cultural sensitivities, offensive and hurtful humor, prejudice-spreading humor, and hateful meme risks. It presents HaHackathon as a positive step because it combines humor detection with offensiveness detection and discusses MemeCraft’s automatic filtering of offensive memes and post-production hatefulness detection as safety mechanisms.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Latest updates: https://dl.acm.org/doi/10.1145/3778357"
+  }
+}
