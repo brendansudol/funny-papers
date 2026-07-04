@@ -8,10 +8,10 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 - ✅ Dataset library: 26 of 34 public datasets vendored, ~8.8GB (`data/`)
 - ✅ Structured extracts + one-pagers + cross-paper analysis (`papers/extracts/`, `papers/summaries/`, `papers/ANALYSIS.md`)
 - ✅ Guide-vs-paper discrepancy check; all 8 fixes applied ([papers/DISCREPANCIES.md](papers/DISCREPANCIES.md))
+- ✅ Git + GitHub: public repo at https://github.com/brendansudol/funny-papers. `data/` is gitignored (~8.8GB, rebuilds from `data/datasets.json` via the scripts); `papers/pdfs/` is versioned. Secrets stay in `.env` (ignored).
 
 ## Housekeeping (cheap, do soon)
 
-- **`git init`** — the repo isn't version-controlled. Gitignore `data/` and `papers/pdfs/` (~9GB of rebuildable artifacts); the catalogs, manifests, scripts, markdown, extracts, and summaries are the versionable core. Everything gitignored rebuilds from `papers.json`/`datasets.json` via the scripts.
 - **BibTeX file** (`papers/papers.bib`) — generate from `papers.json` + extracts (extracts have verified author lists). Cheap; useful the moment any writing happens.
 - **Figure images for visual-humor papers** — transcriptions have `[Figure: …]` placeholders; rerun pdf-to-md with `--keep-images` for the few papers where the figure *is* the content (HumorDB, YesBut, PixelHumor, cartoon papers).
 
