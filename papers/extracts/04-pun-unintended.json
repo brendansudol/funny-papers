@@ -186,5 +186,296 @@
     "code_url": "https://github.com/alezanga/punintended",
     "data_url": "https://github.com/alezanga/punintended",
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "5",
+        "population": "Native English speakers hired for manual error analysis; three men and two women, students at the authors' university from undergraduate to postgraduate levels and diverse backgrounds including Computer Science, Theology, and Literature.",
+        "recruitment": "Hired for participation/evaluation; interviewed by authors in a virtual meeting after an initial pilot study; compensated 15-20£ per hour; could skip questions if lacking sufficient knowledge.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Manual error analysis of model rationales: 80 incorrect PunBreak answers sampled from each of GPT-4o, Llama3.3, and DeepSeek-R1; annotators answered 7-9 multiple-choice/Likert questions per item; pilot Fleiss's κ = 0.41. Appendix also states each annotator reviewed a batch of 40 examples.",
+        "detail": "Used for RQ3 manual evaluation of rationale errors: context, pun-pair, word-sense, and sense-similarity errors. The paper reports aggregated error counts, not per-annotator counts."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Authors/research team and unspecified human reviewers involved in dataset construction and verification.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Manual inspection/modification of Mistral3-rephrased NAP non-puns; annotation of NAP pun pairs and senses; correction of typographical errors and 13 incorrect PunEval annotations; manual identification of six language patterns; manual review/revision/discarding of GPT-4o-generated PunnyPattern examples; efforts to avoid accidental puns in PunBreak substitutions.",
+        "detail": "The paper usually describes these activities as 'we' or 'human oversight' and does not give a separate participant count or annotator demographics for these dataset-construction steps."
+      }
+    ],
+    "judges": [
+      {
+        "type": "automatic-metric",
+        "name": "F1-score, precision, recall, accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary pun-detection and robustness results compare model yes/no outputs against dataset labels over 3 runs."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Pun Pair Agreement (PPA)",
+        "role": "primary",
+        "blind": null,
+        "detail": "RQ3 keyword rationale metric: tokenizes, lemmatizes, strips punctuation, and scores predicted pun-pair overlap with the gold pun pair from 0 to 2; incorrect pun labels receive 0."
+      },
+      {
+        "type": "human-lay",
+        "name": "Five native English annotators",
+        "role": "primary",
+        "blind": null,
+        "detail": "Manual error analysis of rationales on sampled false positives from PunBreak for GPT-4o, Llama3.3, and DeepSeek-R1. The paper does not state that annotators were blinded to model identity."
+      },
+      {
+        "type": "author",
+        "name": "Authors/research team",
+        "role": "data-labeling",
+        "blind": false,
+        "detail": "Constructed and/or refined datasets: corrected PunEval typographical/annotation issues, annotated NAP pun pairs and senses, manually inspected and modified generated non-puns, identified patterns, and manually reviewed generated examples."
+      },
+      {
+        "type": "human-expert",
+        "name": "Legacy SemEval/Xu/JOKER dataset annotations",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "PunEval is based on Xu et al.'s refined SemEval 2017 pun dataset, with further author corrections; JOKER subset provides pun/non-pun examples with pun-word and sense annotations. The paper relies on these existing labels but does not restate original annotator counts or procedures."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "LLM pun-detection and rationale outputs for evaluation",
+        "mode": "single-sample",
+        "n": "One output per model/prompt/sample/run; metrics averaged over 3 runs.",
+        "selector": "none",
+        "detail": "Repeated runs were averaged; the paper does not report best-of-N selection or majority voting over generated outputs. Reasoning prompts allowed free-text reasoning before the final structured answer but still used a single final answer per call."
+      },
+      {
+        "scope": "NAP non-pun rephrasing",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "128 puns were each rephrased into a non-pun using Mistral3; all generated samples were manually inspected and modified as needed. The number of generations/candidates per source pun is not reported."
+      },
+      {
+        "scope": "PunnyPattern example generation",
+        "mode": "best-of-n",
+        "n": "Not fixed or not reported; GPT-4o was queried multiple times until 100 puns for each of six patterns were obtained.",
+        "selector": "human",
+        "detail": "GPT-4o generated missing puns and equal numbers of non-pun sentences containing the same expressions; generated examples were manually reviewed, and poorly crafted ones were revised or discarded."
+      },
+      {
+        "scope": "PunBreak homophone-like substitutions",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "GPT-4o-mini generated homophone replacements for 100 heterographic and 100 homographic puns; Google Translate was used to ensure substituted words sounded similar. The paper does not report candidate counts or whether multiple alternatives were selected from."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": "GPT-4o-2024-08-06",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated as a comparison LLM; GPT-4o was also used to generate PunnyPattern examples, but the paper does not separately state access route or inference dates."
+      },
+      {
+        "name": "Qwen2.5",
+        "version_or_snapshot": "72B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an instruction-tuned comparison LLM; exact model ID/snapshot and access provider are not reported."
+      },
+      {
+        "name": "Llama3.3",
+        "version_or_snapshot": "70B",
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Evaluated through hosted instances on OpenRouter; paper describes it as instruction-tuned but does not give an exact provider model ID or snapshot."
+      },
+      {
+        "name": "Gemini2.0-Flash",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Evaluated through OpenRouter; no dated API/model snapshot is reported."
+      },
+      {
+        "name": "Mistral3",
+        "version_or_snapshot": "24B",
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Evaluated through OpenRouter and also used for NAP rephrasing; no exact hosted model ID or snapshot is reported."
+      },
+      {
+        "name": "DeepSeek-R1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a reasoning model; table lists R1 as 671B. Access provider and snapshot are not reported."
+      },
+      {
+        "name": "DeepSeek-R1-Distill-Llama",
+        "version_or_snapshot": "70B",
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Evaluated through OpenRouter; described as a distilled version of DeepSeek-R1 based on Llama-3.3-70B-Instruct."
+      },
+      {
+        "name": "RoBERTa-large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned on the PunEval training split on a local server using the latest Hugging Face dumps available; link given as FacebookAI/roberta-large, but no exact revision is reported."
+      },
+      {
+        "name": "GPT-4o-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to generate homophone replacements for PunBreak; access route, snapshot, and inference date are not reported."
+      },
+      {
+        "name": "scikit-learn logistic regression",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Four logistic regressors with n-gram features were trained on the PunEval training split to identify common pun language patterns; scikit-learn is cited but version is not reported."
+      },
+      {
+        "name": "spaCy en_core_web_lg",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for lemmatization in PPA keyword evaluation; exact package/model version is not reported."
+      },
+      {
+        "name": "Google Translate",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "Used in PunBreak construction to ensure homophone substitutions sounded similar; no version or date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Final LLM detection/rationale evaluation",
+        "calls_per_item": "One call per prompt/sample/run; results are averaged over 3 runs.",
+        "candidates_per_item": "One final answer per call; no best-of-N selection reported.",
+        "token_budget": null,
+        "sampling_parameters": "Temperature = 0 throughout all experiments; beam search used for models that support it, beam size = 2.",
+        "compute_or_cost": null,
+        "detail": "Prompts included 0S, FS, W, W+S for all evaluated LLMs; R+ reasoning variants were applied only to the five non-reasoning LLMs."
+      },
+      {
+        "scope": "Prompt validation on PunEval validation split",
+        "calls_per_item": "Final +R prompt used a single prompt call; zero-shot-CoT alternatives used two calls and were not selected as final.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Temperature = 0; beam-search details as above where supported.",
+        "compute_or_cost": null,
+        "detail": "GPT-4o was used to compare final prompts, JSON prompts, reasoning prompts, and zero-shot-CoT variants."
+      },
+      {
+        "scope": "RoBERTa-large fine-tuning/evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Fine-tuned on a local server; hardware and cost not reported.",
+        "detail": "Trained on the PunEval training split for max 4 epochs with early stopping on validation F1; batch size 32; learning rate 1.5e-5."
+      },
+      {
+        "scope": "NAP Mistral3 rephrasing",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Mistral3 was used to rephrase 128 puns into non-puns; all generated samples were manually inspected and modified as needed, but call counts, candidate counts, and sampling settings are not reported."
+      },
+      {
+        "scope": "PunnyPattern GPT-4o generation",
+        "calls_per_item": "Multiple queries, not numerically specified, until 100 puns per pattern were obtained.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Temperature = 1.0 for the GPT-4o generation prompt shown in Appendix Fig. 8.",
+        "compute_or_cost": null,
+        "detail": "Generated puns and non-puns for six language patterns; examples were manually reviewed, revised, or discarded."
+      },
+      {
+        "scope": "PunBreak GPT-4o-mini homophone generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "GPT-4o-mini generated homophone replacements; Google Translate was used as a check. Calls, candidates, token limits, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Pun detection and rationale quality",
+        "present": false,
+        "description": "No systematic human performance baseline is reported. Humans provide gold labels, dataset verification, and manual error analysis; Fig. 1 is illustrative rather than a controlled human-vs-model evaluation.",
+        "directly_comparable": false,
+        "detail": "Human and model outputs were not evaluated under matched task conditions for headline detection or rationale scores."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "NAP was newly annotated partly to avoid potential contamination from existing datasets.",
+        "PunEval split was constructed so no pun word or alternative word in training appears in test/validation for the RoBERTa training setup.",
+        "PunnyPattern and PunBreak are newly constructed robustness datasets with manual oversight and alterations.",
+        "Authors explicitly analyze recurring PunEval patterns and evaluate robustness on pattern-preserving non-puns and altered puns."
+      ],
+      "basis": "Several evaluated sources are public or pre-existing before the tested 2024-2025 LLMs, including SemEval-derived PunEval and JOKER; many puns are online and may appear in training data. The authors explicitly state they may not have fully disentangled prior exposure from bias measurements, especially for PunnyPattern, which includes many examples sourced from PunEval. Newly created/altered datasets reduce but do not eliminate risk because they are partly derived from public puns and no decontamination test is reported."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Generated dataset items involving LLMs were manually inspected/reviewed, and rationale error analysis used human annotators; no LLM evaluator is used to determine scores.",
+      "detail": "LLMs were evaluated as systems and were used to generate or rephrase some dataset items, but the reported evaluation judgments are automatic metrics against labels and human manual error analysis, not LLM-as-judge scoring."
+    },
+    "reporting_gaps": [
+      "No inference dates are reported for any LLM/API or hosted-service calls.",
+      "Access route/provider is not fully reported for GPT-4o, Qwen2.5, DeepSeek-R1, GPT-4o-mini, or GPT-4o generation; OpenRouter is reported only for Llama3.3, Mistral3, DeepSeek-R1-Distill-Llama, and Gemini2.0-Flash testing.",
+      "Exact hosted model IDs, API snapshots, and revisions are missing for most models other than GPT-4o-2024-08-06; RoBERTa is described as using the latest Hugging Face dump without an exact revision.",
+      "Token budgets, maximum output lengths, stop sequences, and parsing-failure handling are not reported for LLM inference.",
+      "Cost and hardware details are not reported for LLM inference or for the local RoBERTa server.",
+      "Candidate counts and call counts are not fully reported for LLM-generated NAP rephrasings, PunnyPattern generations, or PunBreak homophone substitutions; PunnyPattern only says GPT-4o was queried multiple times until enough examples were obtained.",
+      "The aggregation procedure for multiple human annotator responses in the manual error analysis is not fully specified, and Appendix statements about 80 samples per model versus each annotator reviewing 40 examples leave annotation coverage unclear.",
+      "Recruitment geography and fuller demographic details for human annotators are not reported beyond native English status, student status, broad fields, gender count, and compensation.",
+      "The newly contributed datasets were not comprehensively validated by language experts, and the paper notes possible incorrect annotations or accidental puns.",
+      "No decontamination test or audit of whether benchmark items appeared in model training data is reported."
+    ]
   }
 }

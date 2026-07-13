@@ -157,5 +157,165 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "human raters; the paper later characterizes the rater pool as small and homogeneous but gives no demographics",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "60 AI-generated statements; each statement was independently labeled for perceived humor type and rated on 5-point appropriateness and humor-strength scales",
+        "detail": "For the Humor Generation Dataset, two human raters independently labeled each LLM-generated statement with the perceived humor type, blind to the original prompt. The same rater pool rated emotional appropriateness and humor strength."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": "1",
+        "population": "researcher crafting study materials; not further described",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "20 human-authored supportive statements with intended speaker-role and humor-condition labels",
+        "detail": "The Humor Recognition Dataset contains 20 responses crafted by a researcher to simulate emotionally sensitive scenarios, varying by speaker role (Counselor or Friend) and humor condition (Affiliative, Self-Defeating, or No Joke)."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "Two human raters independently classified each generated statement for perceived humor type; they were blind to the original prompt. Style-alignment accuracy was calculated from whether these labels matched the intended style."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Human raters rated generated statements on 5-point Likert scales for appropriateness in emotionally neutral/sensitive situations and humor strength. The paper does not state whether raters were blind to model identity or other metadata for these ratings."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "For the recognition task, model predictions were compared to intended labels for humor style and speaker role attached to the 20 researcher-crafted human-written statements."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "accuracy / average Likert aggregation",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper computed proportions/percentages correct for style alignment, humor classification, and role classification, and averaged Likert ratings by LLM and humor type."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Humor Generation Dataset: LLM-generated statements",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports 60 final AI-generated statements, 20 from each LLM, produced from shared prompts combining three keywords and an assigned humor style. It does not report whether each final statement came from a single raw generation, whether outputs were regenerated or filtered, or whether any best-of-N selection was used."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": "GPT-4o",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Also described as ChatGPT-4o/GPT-4o. No API endpoint, snapshot, inference date, or access method is reported."
+      },
+      {
+        "name": "Gemini",
+        "version_or_snapshot": "1.5",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reported as Gemini 1.5. No exact endpoint/snapshot, inference date, or access method is reported."
+      },
+      {
+        "name": "Meta LLaMA",
+        "version_or_snapshot": "LLaMA3.3",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Also referred to as LLAMA3/Llama3 in parts of the paper. No model size, checkpoint, deployment method, or inference date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Humor generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The prompt template is provided: generate a sentence in a specified humor style incorporating three keywords and suitable for general/emotionally sensitive situations. The paper reports 20 final generated statements per model but not number of calls, retries, candidate counts, token limits, decoding parameters, compute, or cost."
+      },
+      {
+        "scope": "Humor and speaker-role recognition",
+        "calls_per_item": "One described pass per statement-model pair; 20 statements were passed to each of ChatGPT, Llama, and Gemini, with no repeated calls reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The prompt asked each LLM to choose a humor style from No Joke, Self-Defeating, and Affiliative, choose Counselor or Friend, and briefly explain the choice. Token limits, decoding settings, output parsing details, compute, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor generation",
+        "present": false,
+        "description": "No human-authored responses to the same keyword/style generation prompts were evaluated as a baseline. Human raters evaluated only LLM-generated statements.",
+        "directly_comparable": false,
+        "detail": "The study compares generated outputs across ChatGPT/GPT-4o, Gemini 1.5, and LLaMA3.3, not against matched human-generated humor."
+      },
+      {
+        "scope": "Humor style and speaker-role recognition",
+        "present": false,
+        "description": "The recognition items were human-authored and used as test stimuli/ground truth, but the paper reports no human classifier performance on the same 20 statements.",
+        "directly_comparable": false,
+        "detail": "LLM predictions were compared to intended labels; no directly comparable human recognition baseline is provided."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The paper describes both evaluation datasets as developed for this study rather than drawn from a public legacy benchmark.",
+        "The recognition statements were crafted by a researcher for the study."
+      ],
+      "basis": "The main evaluated items are newly introduced study-specific prompts/statements, and the supplied paper gives no indication that the benchmark datasets were public before the evaluated model versions. This lowers benchmark-memorization risk. Residual uncertainty remains because model inference dates and decontamination checks are not reported, and at least some joke content may resemble common public jokes or templates."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Generated-output conclusions rely on two human raters for style labels and Likert ratings; recognition conclusions compare evaluated LLM predictions to researcher-intended labels.",
+      "detail": "The evaluated LLMs perform generation and classification tasks, but the paper does not use a separate LLM as an evaluator, metric, or judge of another model’s outputs."
+    },
+    "reporting_gaps": [
+      "Rater demographics, recruitment, geography, expertise, and language background are not reported; the paper only notes a small, homogeneous rater pool.",
+      "Inter-rater agreement, adjudication procedures, and the exact aggregation method for the two raters’ labels/ratings are not fully reported.",
+      "Model access method, exact API/provider endpoint or checkpoint, inference dates, and LLaMA3.3 deployment/model-size details are not reported.",
+      "Generation-time inference settings are not reported, including temperature, top-p, seed, max tokens, number of calls, retries, candidate counts, filtering, or best-of-N selection.",
+      "Recognition-time inference settings are not reported, including decoding parameters, retries, token limits, and how model explanations/outputs were parsed when computing accuracy.",
+      "The full prompt/keyword set, full generated dataset, full recognition statements, and complete label distributions are not provided in the supplied paper text; only samples are shown.",
+      "The humor-style inventory is underspecified or inconsistent: Methods/examples mention styles such as aggressive, wordplay/puns, and dry humor, while the reported evaluation categories/results focus on Affiliative, Self-Defeating, and No Joke.",
+      "The researcher-created intended labels for the recognition dataset are not reported as independently validated by human annotators.",
+      "No matched human performance baseline is reported for either generation or recognition.",
+      "Compute and monetary cost are not reported."
+    ]
   }
 }

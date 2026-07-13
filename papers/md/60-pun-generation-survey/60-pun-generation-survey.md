@@ -6,13 +6,13 @@
 
 # A Survey of Pun Generation: Datasets, Evaluations and Methodologies
 
-**Yuchen Su<sup>1*</sup>, Yonghua Zhu<sup>2</sup>, Ruofan Wang<sup>1</sup>, Zijian Huang<sup>1</sup>,  
-Diana Benavides-Prado<sup>3</sup>, Michael Witbrock<sup>1</sup>,**  
+Yuchen Su<sup>1*</sup>, Yonghua Zhu<sup>2</sup>, Ruofan Wang<sup>1</sup>, Zijian Huang<sup>1</sup>,  
+Diana Benavides-Prado <sup>3</sup>, Michael Witbrock<sup>1</sup>,  
 <sup>1</sup>School of Computer Science, University of Auckland, New Zealand  
 <sup>2</sup>Singapore University of Technology and Design, Singapore  
 <sup>3</sup>School of Electronic Engineering and Computer Science, Queen Mary University of London  
-`{ysu132, rwan551, zhua764}@aucklanduni.ac.nz, yonghua_zhu@sutd.edu.sg`  
-`d.benavidesprado@qmul.ac.uk, m.witbrock@auckland.ac.nz`
+{ysu132, rwan551, zhua764}@aucklanduni.ac.nz, yonghua_zhu@sutd.edu.sg  
+d.benavidesprado@qmul.ac.uk, m.witbrock@auckland.ac.nz
 
 ## Abstract
 
@@ -22,20 +22,20 @@ Pun generation seeks to creatively modify linguistic elements in text to produce
 
 A pun is a kind of rhetorical style that leverages the polysemy or phonetic similarity of words to produce expressions with double or multiple meanings (Delabastita, 2016). Beyond mere wordplay, puns serve as a crucial mechanism of linguistic creativity, enriching communication and making it more engaging (Carter, 2015). For example, the pun sentence “I used to be a banker, but I lost interest” plays on the pun words “interest”, encompassing both a lack of enthusiasm for banking as a profession and the idea of financial loss. This ability to encode multiple layers of meaning fosters cognitive flexibility, encouraging individuals to interpret language in innovative ways (Zheng and Wang, 2023). Due to the unique capacity of puns, they are widely used in advertising (Djafarova, 2008; Van Mulken et al., 2005), literature (Giorgadze, 2014), and various other fields.
 
+\*Corresponding author  
+<sup>1</sup>https://github.com/ysu132/Pun-Generation-Survey
+
 Natural language generation (NLG) tasks involve the creation of human-like text by computers based on given data or input (Gatt and Krahmer, 2018), with pun generation being a notable and challenging aspect of such tasks. There are various approaches utilised in automatic pun generation, including template-based methods (Hong and Ong, 2009), deep neural network approaches (He et al., 2019), and pre-trained language models (PLMs) employing various training and inference styles (Mittal et al., 2022; Xu et al., 2024a). These methods are applied to different types of puns, with a particular focus on homophonic (Yu et al., 2020), homographic (Yu et al., 2018; Luo et al., 2019), heterographic puns (Xu et al., 2024a) and visual puns (Rebrii et al., 2022).
 
 Despite the long-standing research interest in pun generation, a comprehensive literature review in this field has not been conducted, to the best of our knowledge. Some existing relevant surveys focus on generating creative writing and explore tasks such as poetry composition (Bena and Kalita, 2020; Elzohbi and Zhao, 2023), storytelling (Gieseke et al., 2021; Alhussain and Azmi, 2021), arts (Shahriar, 2022) and metaphor (Rai and Chakraverty, 2020; Ge et al., 2023). It is noteworthy that Amin and Burghardt (2020) outlined methods to humour generation, discussing various systems based on templates and neural networks, along with their respective strengths and weaknesses. However, they did not cover the pun research nor incorporate relevant technologies associated with large language models (LLMs). Therefore, we aim to address this gap by conducting the first comprehensive survey on pun generation, which can provide valuable guidance for researchers engaged in the study of puns.
 
 In this survey, we review the past three decades of research and examine the current state of natural language pun generation, analysing the datasets and categorising these methods in five groups
 
-<sup>*</sup>Corresponding author  
-<sup>1</sup>https://github.com/ysu132/Pun-Generation-Survey
-
 
 
 <!-- page 0002 -->
 
-[Figure: Survey tree for "Pun Generation". Branches include Dataset (Generic Datasets—E.g. Wikipedia; BookCorpus; Derived Datasets—E.g. (Hempelmann, 2003) (Bell et al., 2011); Human Annotated—E.g. SemEval (Miller et al., 2017) CUP (Sun et al., 2022b) UNPIE (Chung et al., 2024)); Methods (conventional Methods—Manual/Automatic with examples; Classic DNNs; Language Models—Fine-Turning with Auto-encoding, Auto-regressive, Encoder-decoder, and Prompting; Visual-Language Models); Evaluation (Automatic Evaluation—Dist-1 & Dist-2, Ambiguity; Human Evaluation—Success, Funniness).]
+[Figure: Survey tree for "Pun Generation". Branches include Dataset (Generic Datasets: E.g. Wikipedia; BookCorpus; Derived Datasets: E.g. (Hempelmann, 2003) (Bell et al., 2011); Human Annotated: E.g. SemEval (Miller et al., 2017) CUP (Sun et al., 2022b) UNPIE (Chung et al., 2024)); Methods (conventional Methods: Manual, Automatic; Classic DNNs; Language Models: Fine-Turning with Auto-encoding, Auto-regressive, Encoder-decoder, and Prompting; Visual-Language Models); Evaluation (Automatic Evaluation; Human Evaluation), with example citations and metrics.]
 
 Figure 1: The survey tree for pun generation.
 
@@ -43,11 +43,11 @@ based on their technological development timeline: (1) Conventional methods, whi
 
 Overall, the paper is organised as follows: Section 2 reviews the main categories of puns and provides examples for each category. Section 3, 4 and 5 summarise the relevant datasets, methods, and evaluation metrics, as shown in figure 1. We also discuss the challenges and outline future research directions in Section 6, as well as conclude with final remarks in Section 7.
 
-## 2 Pun Categories
+## 2 Pun Categories
 
 This section outlines the main four types of puns: i) *Homophonic puns*, ii) *Heterographic puns*, iii) *Homographic puns* and iv) *Visual pun*.
 
-### 2.1 Homophonic Puns
+### 2.1 Homophonic Puns
 
 Homophonic puns rely on the dual meanings of homophones, which are words that sound alike but have different meanings (Attardo, 2009). This is illustrated in example (a):
 
@@ -55,7 +55,7 @@ Homophonic puns rely on the dual meanings of homophones, which are words that so
 
 which uses the “orifice” as the pivotal pun word. The term “orifice” refers to the human mouth, while its pronunciation is similar to “office”. This similarity allows it to be interpreted as a dentist working in an office, thereby creating a humorous pun effect.
 
-### 2.2 Heterographic Puns
+### 2.2 Heterographic Puns
 
 Heterographic puns emphasise differences in spelling with the same pronunciation to achieve their rhetorical effect, which are also classified as homophonic puns in some studies (Sun et al., 2022b; Miller et al., 2017). An example of a heterographic pun is shown as (b):
 
@@ -63,7 +63,7 @@ Heterographic puns emphasise differences in spelling with the same pronunciation
 
 The word "peace" can be interpreted as tranquility in life, while it shares the same pronunciation as "piece" which refers to a puzzle piece. Therefore, the pun can be recognized as seeking either peace in life or the missing piece of a puzzle.
 
-### 2.3 Homographic Puns
+### 2.3 Homographic Puns
 
 Homographic puns exploit words spelled the same homographs but possess different meanings (Attardo, 2009), as shown in example (c):
 
@@ -71,7 +71,7 @@ Homographic puns exploit words spelled the same homographs but possess different
 
 <!-- page 0003 -->
 
-[Figure: A white computer mouse on a floor next to/over two mousetraps; the traps show the label “VICTOR”.]
+[Figure: photograph of a white computer mouse caught in a mousetrap, with another mousetrap in the background.]
 
 Figure 2: A visual pun example features a white mouse and a mousetrap, where the combination exploits the double meaning of the word “mouse”.
 
@@ -83,7 +83,7 @@ The phrase “stick to their word” refers to the act of keeping a promise in c
 
 Visual puns are a form of artistic expression that utilises images or visual elements to create double meanings (Smith et al., 2008). A typical example of a visual pun from Wikipedia[^2] is shown in Figure 2. The figure leverages the multiple meanings of the word "mouse" based on the computer device and animal, thereby creating a pun effect by combining the computer mouse and mousetrap.
 
-# 3 Dataset
+## 3 Dataset
 
 In this section, we present the current datasets that have been used and constructed for pun research. We classified the datasets into generic datasets, derived datasets and human-annotated datasets. For the detailed table of the pun dataset, please refer to Appendix C.
 
@@ -115,7 +115,7 @@ In this section, we provide an overview of existing approaches to pun generation
 
 Early conventional methods are typically through template-based construction. In linguistics, a template refers to a textual structure consisting of predefined slots that can be populated with various variables (Amin and Burghardt, 2020). Binsted and Ritchie (1994) developed the simple question-answer system of pun-generator Joke Analysis and Production Engine (JAPE), which was improved in subsequent versions including JAPE-2 (Binsted, 1996) and JAPE-3. The model incorporates two primary structures: schemata, which are used to explore the relationships between different keywords, and templates, which are designed to generate the basic framework for puns. Inspired by JAPE, Manurung et al. (2008) designed the STANDUP system, which expands and varies the elements generated by puns through further semantic and phonological analysis, for children with complex communication needs. Furthermore, Tyler et al. (2020) expanded upon the JAPE system by incorporating more recent knowledge bases and designed the PAUL BOT system, enhancing its capabilities and flexibility in automated pun generation.
 
-Additionally, HCPP (Venour, 2000) and WISCRAIC (McKay, 2002) systems both implement models for the specific subclass of puns about homonym common phrase and idiom-based witticisms according to semantic associations, respectively. Hempelmann (2003) studies target recoverability, arguing that a robust model for target alternative words recovery provides the necessary foundation for heterographic pun generation. Ritchie (2005) considered pun generation from the broader perspective of NLG. They analyse the differences in mechanisms between pun generation and conventional NLG, as well as the computational methods that could potentially accomplish this task. As for the research on non-English puns, Dybala et al. (2008) designed a Japanese pun generator as part of a conversational system, while Dehouck and Delaborde (2025) proposed a generator for automatically generating French puns based on a given name and a word or phrase using rules.
+Additionally, HCPP (Venour, 2000) and WIS-CRAIC (McKay, 2002) systems both implement models for the specific subclass of puns about homonym common phrase and idiom-based witticisms according to semantic associations, respectively. Hempelmann (2003) studies target recoverability, arguing that a robust model for target alternative words recovery provides the necessary foundation for heterographic pun generation. Ritchie (2005) considered pun generation from the broader perspective of NLG. They analyse the differences in mechanisms between pun generation and conventional NLG, as well as the computational methods that could potentially accomplish this task. As for the research on non-English puns, Dybala et al. (2008) designed a Japanese pun generator as part of a conversational system, while Dehouck and Delaborde (2025) proposed a generator for automatically generating French puns based on a given name and a word or phrase using rules.
 
 Since building templates manually is a tedious and time-consuming task, Hong and Ong (2009) proposed Template-Based Pun Extractor and Generator (T-PEG) automatically identify, extract and represent the word relationships in a template, and then use these templates as patterns for the computer to generate its own puns. Valitutti et al. (2009) generated funny puns by implementing GraphLaugh to automatically generate different types of lexical associations and visualize them through a dynamic graph. They also explored a method for automatically generating humour through the substitution of words in short texts (Valitutti et al., 2013).
 
@@ -132,134 +132,134 @@ In general, classic DNNs can generate puns that are more flexible compared to co
 <!-- page 0005 -->
 
 <table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Model</th>
-      <th>Type</th>
-      <th>Language</th>
-      <th>Dataset</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="5" align="center">Classic Deep Neural Networks</td>
-    </tr>
-    <tr>
-      <td>Neural Pun (Yu et al., 2018)</td>
-      <td>LSTM</td>
-      <td>hog</td>
-      <td>English</td>
-      <td>Wikipedia &amp; (Miller et al., 2017)</td>
-    </tr>
-    <tr>
-      <td>Pun-GAN (Luo et al., 2019)</td>
-      <td>LSTM</td>
-      <td>hog</td>
-      <td>English</td>
-      <td>Wikipedia &amp; (Miller et al., 2017)</td>
-    </tr>
-    <tr>
-      <td>SurGen (He et al., 2019)</td>
-      <td>LSTM</td>
-      <td>hop</td>
-      <td>English</td>
-      <td>BookCorpus &amp; (Miller et al., 2017)</td>
-    </tr>
-    <tr>
-      <td>LCR (Yu et al., 2020)</td>
-      <td>LSTM</td>
-      <td>hop</td>
-      <td>English</td>
-      <td>BookCorpus &amp; (Hu et al., 2019)</td>
-    </tr>
-    <tr>
-      <td>AFPun-GAN (Diao et al., 2020)</td>
-      <td>ON-LSTM</td>
-      <td>hog</td>
-      <td>English</td>
-      <td>Wikipedia &amp; (Miller et al., 2017)</td>
-    </tr>
-    <tr>
-      <td colspan="5" align="center">Pre-trained Language Models</td>
-    </tr>
-    <tr>
-      <td>Ext Ambipun(Mittal et al., 2022)</td>
-      <td>T5</td>
-      <td>hog</td>
-      <td>English</td>
-      <td>(Annamoradnejad and Zoghi, 2020)</td>
-    </tr>
-    <tr>
-      <td>Sim Ambipun(Mittal et al., 2022)</td>
-      <td>T5</td>
-      <td>hog</td>
-      <td>English</td>
-      <td>(Annamoradnejad and Zoghi, 2020)</td>
-    </tr>
-    <tr>
-      <td>Gen Ambipun(Mittal et al., 2022)</td>
-      <td>T5</td>
-      <td>hog</td>
-      <td>English</td>
-      <td>(Annamoradnejad and Zoghi, 2020)</td>
-    </tr>
-    <tr>
-      <td>UnifiedPun(Tian et al., 2022)</td>
-      <td>GPT-2 &amp; BERT</td>
-      <td>hog&amp;hog</td>
-      <td>English</td>
-      <td>(Annamoradnejad and Zoghi, 2020)</td>
-    </tr>
-    <tr>
-      <td>Context-pun(Sun et al., 2022b)</td>
-      <td>T5</td>
-      <td>hog&amp;heg</td>
-      <td>English</td>
-      <td>(Sun et al., 2022b)</td>
-    </tr>
-    <tr>
-      <td>PunIntended (Zeng et al., 2024)</td>
-      <td>BERT</td>
-      <td>hop&amp;hog</td>
-      <td>English</td>
-      <td>(Sun et al., 2022a)</td>
-    </tr>
-    <tr>
-      <td>PGCL (Chen et al., 2024)</td>
-      <td>LLaMA2-7B</td>
-      <td>hop&amp;hog</td>
-      <td>English</td>
-      <td>(Miller et al., 2017)</td>
-    </tr>
-    <tr>
-      <td>PGCL (Chen et al., 2024)</td>
-      <td>Baichuan2-7B</td>
-      <td>hop&amp;hog</td>
-      <td>Chinese</td>
-      <td>(Chen et al., 2024)</td>
-    </tr>
-    <tr>
-      <td>Hinglish (Sarrof, 2025)</td>
-      <td>GPT-3.5</td>
-      <td>hop</td>
-      <td>Multi-language</td>
-      <td>C4 &amp; The Pile &amp; Dakshina</td>
-    </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Method</th>
+<th>Model</th>
+<th>Type</th>
+<th>Language</th>
+<th>Dataset</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="5" align="center">Classic Deep Neural Networks</td>
+</tr>
+<tr>
+<td>Neural Pun (Yu et al., 2018)</td>
+<td>LSTM</td>
+<td>hog</td>
+<td>English</td>
+<td>Wikipedia &amp; (Miller et al., 2017)</td>
+</tr>
+<tr>
+<td>Pun-GAN (Luo et al., 2019)</td>
+<td>LSTM</td>
+<td>hog</td>
+<td>English</td>
+<td>Wikipedia &amp; (Miller et al., 2017)</td>
+</tr>
+<tr>
+<td>SurGen (He et al., 2019)</td>
+<td>LSTM</td>
+<td>hog</td>
+<td>English</td>
+<td>BookCorpus &amp; (Miller et al., 2017)</td>
+</tr>
+<tr>
+<td>LCR (Yu et al., 2020)</td>
+<td>LSTM</td>
+<td>hop</td>
+<td>English</td>
+<td>BookCorpus &amp; (Hu et al., 2019)</td>
+</tr>
+<tr>
+<td>AFPun-GAN (Diao et al., 2020)</td>
+<td>ON-LSTM</td>
+<td>hog</td>
+<td>English</td>
+<td>Wikipedia &amp; (Miller et al., 2017)</td>
+</tr>
+<tr>
+<td colspan="5" align="center">Pre-trained Language Models</td>
+</tr>
+<tr>
+<td>Ext Ambipun(Mittal et al., 2022)</td>
+<td>T5</td>
+<td>hog</td>
+<td>English</td>
+<td>(Annamoradnejad and Zoghi, 2020)</td>
+</tr>
+<tr>
+<td>Sim Ambipun(Mittal et al., 2022)</td>
+<td>T5</td>
+<td>hog</td>
+<td>English</td>
+<td>(Annamoradnejad and Zoghi, 2020)</td>
+</tr>
+<tr>
+<td>Gen Ambipun(Mittal et al., 2022)</td>
+<td>T5</td>
+<td>hog</td>
+<td>English</td>
+<td>(Annamoradnejad and Zoghi, 2020)</td>
+</tr>
+<tr>
+<td>UnifiedPun(Tian et al., 2022)</td>
+<td>GPT-2 &amp; BERT</td>
+<td>hog&amp;hog</td>
+<td>English</td>
+<td>(Annamoradnejad and Zoghi, 2020)</td>
+</tr>
+<tr>
+<td>Context-pun(Sun et al., 2022b)</td>
+<td>T5</td>
+<td>hog&amp;heg</td>
+<td>English</td>
+<td>(Sun et al., 2022b)</td>
+</tr>
+<tr>
+<td>PunIntended (Zeng et al., 2024)</td>
+<td>BERT</td>
+<td>hop&amp;hog</td>
+<td>English</td>
+<td>(Sun et al., 2022a)</td>
+</tr>
+<tr>
+<td>PGCL (Chen et al., 2024)</td>
+<td>LLaMA2-7B</td>
+<td>hop&amp;hog</td>
+<td>English</td>
+<td>(Miller et al., 2017)</td>
+</tr>
+<tr>
+<td>PGCL (Chen et al., 2024)</td>
+<td>Baichuan2-7B</td>
+<td>hop&amp;hog</td>
+<td>Chinese</td>
+<td>(Chen et al., 2024)</td>
+</tr>
+<tr>
+<td>Hinglish (Sarrof, 2025)</td>
+<td>GPT-3.5</td>
+<td>hop</td>
+<td>Multi-language</td>
+<td>C4 &amp; The Pile &amp; Dakshina</td>
+</tr>
+</tbody>
 </table>
 
 Table 1: Methods of neural network models and pre-trained language models for pun generation task. Hog, hop and heg denote the types of homographic puns, homophonic puns and heterographic puns, respectively.
 
 existing methods heavily rely on annotated data and limited types of corpora, which restricts further improvement in the quality of pun generation.
 
-### 4.3 Pre-trained Language Models
+## 4.3 Pre-trained Language Models
 
 Early PLMs, such as Word2Vec (Mikolov, 2013) and GloVe (Pennington et al., 2014), are distributed word representation methods trained on large-scale unlabeled text data, capable of capturing both the semantic and contextual information of words. These models are utilised to address various subtasks involved in pun generation, which has a bunch of semantic prior knowledge than classic DNNs. For example, Mittal et al. (2022) proposed to get the context words from Word2Vec based on pun words. Yu et al. (2020) designed a constraint selection algorithm based on lexical semantic relevance and obtained the word embeddings from Continuous Bag of Words (CBOW) (Mikolov, 2013).
 
 Most contemporary PLMs are built upon the Transformer architecture (Vaswani, 2017), which has shown outstanding performance across various natural language processing tasks (Min et al., 2023). The main model categories are classified into: (1) auto-encoding models, such as BERT (Devlin et al., 2019), (2) auto-regressive models, such as the GPT-2 (Radford et al., 2019), and (3) encoder-decoder models, such as T5 (Raffel et al., 2020). Pun generation tasks are primarily implemented through fine-tuning and prompting strategies.
 
-#### 4.3.1 PLMs with Fine-Tuning
+### 4.3.1 PLMs with Fine-Tuning
 
 Fine-tuning PLMs is to further train the model on a specific dataset to make it better suited to the needs of a specific task. For auto-encoding models, since the bidirectional encoding characteristics of the model are not suitable for generation tasks, most current work on pun generation employs it as the discriminator in GANs. For example, Zeng et al. (2024) and Tian et al. (2022) both used the BERT-base model, leveraging the [CLS] token representation for classification.
 
@@ -297,9 +297,6 @@ The automatic evaluation metrics can be categorized into funniness, diversity an
 
 $$
 Amb(M) = - \sum_{k \in \{a,b\}} P(m_k \mid \vec{w}) \log P(m_k \mid \vec{w})
-$$
-
-$$
 \tag{1}
 $$
 
@@ -308,10 +305,7 @@ where $\vec{w}$ is a vector of observed content words in a sentence and $m_k$ is
 Distinctiveness evaluates the differences between word sets that support distinct meanings within a sentence using the symmetrized Kullback-Leibler divergence $D_{KL}$, defined as follows:
 
 $$
-Dist(F_a, F_b) = D_{KL}(F_a || F_b) + D_{KL}(F_b || F_a)
-$$
-
-$$
+Dist(F_a, F_b) = D_{KL}(F_a \| F_b) + D_{KL}(F_b \| F_a)
 \tag{2}
 $$
 
@@ -414,7 +408,7 @@ where $S$ is the log-likelihood ratio of two events, $x_1, \ldots, x_n$ is a seq
 </tbody>
 </table>
 
-Table 2: Main methods for automatic and human evaluation of pun generation. PPLs., D1&2., Succ., Ambi., Dist., Surp., and Unus. denote the metrics of Perplexity Score, Dist-1 & Dist-2, Structure Succ., Ambiguity, Distinctiveness, Surprisal, and Unusualness, respectively. Similarly, Succ., Funn., Gram., Flun., Info., Cohe., and Read. represent Success, Funniness, Grammar, Fluency, Informativeness, Coherence, and Readability. ✓ indicates metrics that are used, while × indicates metrics that are not used. The symbol “-” signifies that the method is not applicable to this evaluation.
+**Table 2:** Main methods for automatic and human evaluation of pun generation. PPLs., D1&2., Succ., Ambi., Dist., Surp., and Unus. denote the metrics of Perplexity Score, Dist-1 & Dist-2, Structure Succ., Ambiguity, Distinctiveness, Surprisal, and Unusualness, respectively. Similarly, Succ., Funn., Gram., Flun., Info., Cohe., and Read. represent Success, Funniness, Grammar, Fluency, Informativeness, Coherence, and Readability. ✓ indicates metrics that are used, while × indicates metrics that are not used. The symbol “-” signifies that the method is not applicable to this evaluation.
 
 probabilities from language models are also utilised for pun evaluation (He et al., 2019; Pauls and Klein, 2012), which is formulated as follows:
 
@@ -487,7 +481,7 @@ Multimodal information enables a more reliable understanding of the world (Stein
 
 ### 6.3 PLMs Prompting Design
 
-While prompt engineering has proven effective in enhancing text generation capabilities of LLMs (Liu et al., 2023), current research still faces significant limitations in generating puns, such as an over-reliance on overly simplistic or single-faceted prompts. Chain-of-thought prompting is a powerful technique that significantly improves the reasoning capabilities of LLMs (Wei et al., 2022). Therefore, the quality of pun generation can be enhanced by transferring CoT technique from other fields, such as using iterative bootstrapping (Sun et al., 2023), knowledge enhancement (Dhuliawala et al., 2023; He et al., 2024b), question decomposition (Trivedi et al., 2022) and self-ensemble (Yin et al., 2024). Furthermore, the result can be improved by optimizing CoT’s prompt construction, including by semi-automatic prompting (Shum et al., 2023) and automatic prompting (Zhang et al., 2022), as well as exploring diverse topological variants (Chu et al., 2024), such as chain structures (Olausson et al., 2023), tree structures (Ning et al., 2023), and graph structures (Besta et al., 2024).
+While prompt engineering has proven effective in enhancing text generation capabilities of LLMs (Liu et al., 2023), current research still faces significant limitations in generating puns, such as an over-reliance on overly simplistic or single-faceted prompts. Chain-of-thought prompting is a powerful technique that significantly improves the reasoning capabilities of LLMs (Wei et al., 2022). Therefore, the quality of pun generation can be enhanced by transferring CoT technique from other fields, such as using iterative bootstrapping (Sun et al., 2023), knowledge enhancement (Dhuliawala et al., 2023; He et al., 2024), question decomposition (Trivedi et al., 2022) and self-ensemble (Yin et al., 2024). Furthermore, the result can be improved by optimizing CoT’s prompt construction, including by semi-automatic prompting (Shum et al., 2023) and automatic prompting (Zhang et al., 2022), as well as exploring diverse topological variants (Chu et al., 2024), such as chain structures (Olausson et al., 2023), tree structures (Ning et al., 2023), and graph structures (Besta et al., 2024).
 
 
 
@@ -509,21 +503,13 @@ This research is supported by the Strong AI Lab and the Natural, Artificial, and
 
 Anne Abeillé, Lionel Clément, and François Toussenel. 2003. Building a treebank for french. *Treebanks: Building and using parsed corpora*, pages 165–187.
 
-Alfred V. Aho and Jeffrey D. Ullman. 1972. *The Theory of Parsing, Translation and Compiling*, volume 1. Prentice-Hall, Englewood Cliffs, NJ.
-
-Elaf Alhazmi, Quan Z. Sheng, W. Zhang, Munazza Zaib, and Ahoud Abdulrahmn F. Alhazmi. 2024. Distractor generation in multiple-choice tasks: A survey of methods, datasets, and evaluation. In *Conference on Empirical Methods in Natural Language Processing.*
+Elaf Alhazmi, Quan Z. Sheng, W. Zhang, Munazza Zaib, and Ahoud Abdulrahmn F. Alhazmi. 2024. Distractor generation in multiple-choice tasks: A survey of methods, datasets, and evaluation. In *Conference on Empirical Methods in Natural Language Processing*.
 
 Arwa I Alhussain and Aqil M Azmi. 2021. Automatic story generation: A survey of approaches. *ACM Computing Surveys (CSUR)*, 54(5):1–38.
 
 Sawsan Alqahtani, Garima Lalwani, Yi Zhang, Salvatore Romeo, and Saab Mansour. 2021. Using optimal transport as alignment objective for fine-tuning multilingual contextualized embeddings. *arXiv preprint arXiv:2110.02887.*
 
-American Psychological Association. 1983. *Publications Manual.* American Psychological Association, Washington, DC.
-
 Miriam Amin and Manuel Burghardt. 2020. A survey on approaches to computational humor generation. In *Proceedings of the 4th Joint SIGHUM Workshop on Computational Linguistics for Cultural Heritage, Social Sciences, Humanities and Literature*, pages 29–41.
-
-Rie Kubota Ando and Tong Zhang. 2005. A framework for learning predictive structures from multiple tasks and unlabeled data. *Journal of Machine Learning Research*, 6:1817–1853.
-
-Galen Andrew and Jianfeng Gao. 2007. Scalable training of L1-regularized log-linear models. In *Proceedings of the 24th International Conference on Machine Learning*, pages 33–40.
 
 Issa Annamoradnejad and Gohar Zoghi. 2020. Colbert: Using bert sentence embedding in parallel neural networks for computational humor. *arXiv preprint arXiv:2004.12765.*
 
@@ -535,13 +521,7 @@ Giorgio Francesco Arcodia et al. 2007. Chinese: A language of compound words. *S
 
 DeepFloyd Lab at StabilityAI. 2023. DeepFloyd IF: a novel state-of-the-art open-source text-to-image model with a high degree of photorealism and language understanding. https://www.deepfloyd.ai/deepfloyd-if. Retrieved on 2023-11-08.
 
-Salvatore Attardo. 2009. *Linguistic theories of humor.* Walter de Gruyter.
-
-Dzmitry Bahdanau. 2014. Neural machine translation by jointly learning to align and translate. *arXiv preprint arXiv:1409.0473.*
-
-
-
-<!-- page 0010 -->
+Salvatore Attardo. 2009. *Linguistic theories of humor*. Walter de Gruyter.
 
 Zeynep Gençer Baloğlu. 2022. The category of reduplication in japanese and the classification problems. *Dil Araştırmaları*, 16(30):67–82.
 
@@ -551,11 +531,17 @@ Robert Beard. 2017. Derivation. *The handbook of morphology*, pages 44–65.
 
 Nancy D Bell, Scott Crossley, and Christian F Hempelmann. 2011. Wordplay in church marquees.
 
-Brendan Bena and Jugal Kalita. 2020. Introducing aspects of creativity in automatic poetry generation. *arXiv preprint arXiv:2002.02511*.
+Brendan Bena and Jugal Kalita. 2020. Introducing aspects of creativity in automatic poetry generation. *arXiv preprint arXiv:2002.02511.*
 
-Maciej Besta, Nils Blach, Ales Kubicek, Robert Gerstenberger, Michal Podstawsky, Lukas Gianinazzi, Joanna Gajda, Tomasz Lehmann, Hubert Niewiadomski, Piotr Nyczyk, et al. 2024. Graph of thoughts: Solving elaborate problems with large language models. In *Proceedings of the AAAI Conference on Artificial Intelligence*, volume 38, pages 17682–17690.
+Maciej Besta, Nils Blach, Ales Kubicek, Robert Gerstenberger, Michal Podstawski, Lukas Gianinazzi, Joanna Gajda, Tomasz Lehmann, Hubert Niewiadomski, Piotr Nyczyk, et al. 2024. Graph of thoughts: Solving elaborate problems with large language models. In
 
-James Betker, Gabriel Goh, Li Jing, Tim Brooks, Jianfeng Wang, Linjie Li, Long Ouyang, Juntang Zhuang, Joyce Lee, Yufei Guo, et al. 2023. Improving image generation with better captions. *Computer Science. https://cdn. openai. com/papers/dall-e-3. pdf*, 2(3):8.
+
+
+<!-- page 0010 -->
+
+*Proceedings of the AAAI Conference on Artificial Intelligence*, volume 38, pages 17682–17690.
+
+James Betker, Gabriel Goh, Li Jing, Tim Brooks, Jianfeng Wang, Linjie Li, Long Ouyang, Juntang Zhuang, Joyce Lee, Yufei Guo, et al. 2023. Improving image generation with better captions. *Computer Science*. https://cdn. openai. com/papers/dall-e-3. pdf, 2(3):8.
 
 Kim Binsted. 1996. Machine humour: An implemented model of puns.
 
@@ -567,15 +553,11 @@ Lyubov Bobchynets. 2022. Lexico-semantic means of pun creation in spanish jokes 
 
 Hugh Bredin. 1996. Onomatopoeia as a figure and a linguistic principle. *New Literary History*, 27(3):555–569.
 
-Jim Breen. 2004. Jmdict: a japanese-multilingual dictionary. In *Proceedings of the workshop on multilingual linguistic resources*, pages 65–72.
-
-Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeff Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. 2020. Language models are few-shot learners. *ArXiv*, abs/2005.14165.
+Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeff Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Ma teus z Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. 2020. Language models are few-shot learners. *ArXiv*, abs/2005.14165.
 
 Garland Cannon. 1988. Chinese borrowings in english. *American Speech*, 63(1):3–33.
 
 Ronald Carter. 2015. *Language and creativity: The art of common talk*. Routledge.
-
-Ashok K. Chandra, Dexter C. Kozen, and Larry J. Stockmeyer. 1981. Alternation. *Journal of the Association for Computing Machinery*, 28(1):114–133.
 
 Xuemei Chen and Tiefu Zhang. 2023. Individual variations in british humour appreciation among chinese–english bilinguals: Role of socialisation and acculturation. *International Journal of Bilingualism*, 27(1):3–21.
 
@@ -587,23 +569,15 @@ Jiwan Chung, Seungwon Lim, Jaehyun Jeon, Seungbeen Lee, and Youngjae Yu. 2024. C
 
 K Clark. 2020. Electra: Pre-training text encoders as discriminators rather than generators. *arXiv preprint arXiv:2003.10555*.
 
-Kareem Darwish. 2013. Arabizi detection and conversion to arabic. *arXiv preprint arXiv:1306.6755*.
-
-Mathieu Dehouck and Marine Delaborde. 2023. Génération automatique de jeux de mots à base de prénoms. In *18e Conférence en Recherche d’Information et Applications, 16e Rencontres Jeunes Chercheurs en RI, 30e Conférence sur le Traitement Automatique des Langues Naturelles, 25e Rencontre des Étudiants Chercheurs en Informatique pour le Traitement Automatique des Langues*, pages 1–2. ATALA.
-
 Mathieu Dehouck and Marine Delaborde. 2025. Rule-based approaches to the automatic generation of puns based on given names in french. In *Proceedings of the 1st Workshop on Computational Humor (CHum)*, pages 18–22.
 
 Dirk Delabastita. 2016. *Traductio: Essays on punning and translation*. Routledge.
-
-
-
-<!-- page 0011 -->
 
 Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. BERT: Pre-training of deep bidirectional transformers for language understanding. In *Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)*, pages 4171–4186, Minneapolis, Minnesota. Association for Computational Linguistics.
 
 Shehzaad Dhuliawala, Mojtaba Komeili, Jing Xu, Roberta Raileanu, Xian Li, Asli Celikyilmaz, and Jason Weston. 2023. Chain-of-verification reduces hallucination in large language models. *arXiv preprint arXiv:2309.11495*.
 
-Yufeng Diao, Liang Yang, Xiaocha Fan, Yonghe Chu, Di Wu, Shaowu Zhang, and Hongfei Lin. 2020. Afpun-gan: Ambiguity-fluency generative adversarial network for pun generation. In *Natural Language Processing and Chinese Computing: 9th CCF International Conference, NLPCC 2020, Zhengzhou, China, October 14–18, 2020, Proceedings, Part I 9*, pages 604–616. Springer.
+Yufeng Diao, Liang Yang, Xiaochao Fan, Yonghe Chu, Di Wu, Shaowu Zhang, and Hongfei Lin. 2020. Afpun-gan: Ambiguity-fluency generative adversarial network for pun generation. In *Natural Language Processing and Chinese Computing: 9th CCF International Conference, NLPCC 2020, Zhengzhou, China, October 14–18, 2020, Proceedings, Part I 9*, pages 604–616. Springer.
 
 Francisco Javier Díaz Pérez. 2008. Wordplay in film titles: Translating english puns into spanish. *Babel: International Journal of Translation/Revue Internationale de la Traduction/Revista Internacional de Traducción*, 54(1).
 
@@ -613,19 +587,21 @@ Elmira Djafarova. 2008. Why do advertisers use puns? a linguistic perspective. *
 
 Ryan Rony Dsilva. 2024. Augmenting Large Language Models with Humor Theory To Understand Puns.
 
-San Duanmu. 2007. *The phonology of standard Chinese*. Oxford University Press.
+
+
+<!-- page 0011 -->
+
+San Duanmu. 2007. *The phonology of standard Chinese.* Oxford University Press.
 
 Pawel Dybala, Michal Ptaszynski, Shinsuke Higuchi, Rafal Rzepka, and Kenji Araki. 2008. Humor prevails!-implementing a joke generator into a conversational system. In *AI 2008: Advances in Artificial Intelligence: 21st Australasian Joint Conference on Artificial Intelligence Auckland, New Zealand, December 1-5, 2008. Proceedings 21*, pages 214–225. Springer.
 
-Mohamad Elzohbi and Richard Zhao. 2023. Creative data generation: A review focusing on text and poetry. *arXiv preprint arXiv:2305.08493*.
+Mohamad Elzohbi and Richard Zhao. 2023. Creative data generation: A review focusing on text and poetry. *arXiv preprint arXiv:2305.08493.*
 
 Paula Fortuna and Sérgio Nunes. 2018. A survey on automatic detection of hate speech in text. *ACM Computing Surveys (CSUR)*, 51(4):1–30.
 
-Vaishali Ganganwar, Manvajinder Mohit Singh, Priyank Patil, and Saurabh Joshi. 2024. Sarcasm and humor detection in code-mixed hindi data: A survey. In *International Conference on Computing and Machine Learning*, pages 453–469. Springer.
+Vaishali Ganganwar, Manvainder, Mohit Singh, Priyank Patil, and Saurabh Joshi. 2024. Sarcasm and humor detection in code-mixed hindi data: A survey. In *International Conference on Computing and Machine Learning*, pages 453–469. Springer.
 
-Leo Gao, Stella Biderman, Sid Black, Laurence Golding, Travis Hoppe, Charles Foster, Jason Phang, Horace He, Anish Thite, Noa Nabeshima, et al. 2020. The pile: An 800gb dataset of diverse text for language modeling. *arXiv preprint arXiv:2101.00027*.
-
-Luyu Gao, Aman Madaan, Shuyan Zhou, Uri Alon, Pengfei Liu, Yiming Yang, Jamie Callan, and Graham Neubig. 2023. Pal: Program-aided language models. In *International Conference on Machine Learning*, pages 10764–10799. PMLR.
+Leo Gao, Stella Biderman, Sid Black, Laurence Golding, Travis Hoppe, Charles Foster, Jason Phang, Horace He, Anish Thite, Noa Nabeshima, et al. 2020. The pile: An 800gb dataset of diverse text for language modeling. *arXiv preprint arXiv:2101.00027.*
 
 Albert Gatt and Emiel Krahmer. 2018. Survey of the state of the art in natural language generation: Core tasks, applications and evaluation. *Journal of Artificial Intelligence Research*, 61:65–170.
 
@@ -633,11 +609,9 @@ Mengshi Ge, Rui Mao, and Erik Cambria. 2023. A survey on computational metaphor 
 
 Lena Gieseke, Paul Asente, Radomír Měch, Bedrich Benes, and Martin Fuchs. 2021. A survey of control mechanisms for creative pattern generation. In *Computer Graphics Forum*, volume 40, pages 585–609. Wiley Online Library.
 
-Rachel Giora. 2003. *On our mind: Salience, context, and figurative language*. Oxford University Press.
+Rachel Giora. 2003. *On our mind: Salience, context, and figurative language.* Oxford University Press.
 
-Meri Giorgadze. 2014. Linguistic features of pun, its typology and classification. *European Scientific Journal*.
-
-Meri Giorgadze. 2015. Categories of visual puns. *European Scientific Journal*, 2:362.
+Meri Giorgadze. 2014. Linguistic features of pun, its typology and classification. *European Scientific Journal.*
 
 Sam Glucksberg, Roger J Kreuz, and Susan H Rho. 1986. Context can constrain lexical access: Implications for models of language comprehension. *Journal of Experimental Psychology: Learning, Memory, and Cognition*, 12(3):323.
 
@@ -647,29 +621,21 @@ Gemini Team Google. 2023. Gemini: A Family of Highly Capable Multimodal Models. 
 
 Google Assistant. 2024. Conversational responses database. https://assistant.google.com. Retrieved from https://assistant.google.com.
 
-Tamara M Green. 2020. *The Greek & Latin Roots of English*. Rowman & Littlefield.
-
-Dan Gusfield. 1997. *Algorithms on Strings, Trees and Sequences*. Cambridge University Press, Cambridge, UK.
-
-
-
-<!-- page 0012 -->
+Tamara M Green. 2020. *The Greek & Latin Roots of English.* Rowman & Littlefield.
 
 Megan Hamilton. 2024. Clipping in french and japanese. *Schwa*, page 11.
 
 Martin Haspelmath. 2009. Lexical borrowing: Concepts and issues. *Loanwords in the world’s languages: A comparative handbook*, 35:54.
 
-He He, Nanyun Peng, and Percy Liang. 2019. Pun generation with surprise. *arXiv preprint arXiv:1904.06828*.
-
-Ruiqi He, Yushu He, Longju Bai, Jiarui Liu, Zhenjie Sun, Zenghao Tang, He Wang, Hanchen Xia, Rada Mihalcea, and Naihao Deng. 2024a. Chumor 2.0: Towards benchmarking chinese humor understanding. *arXiv preprint arXiv:2412.17729*.
+He He, Nanyun Peng, and Percy Liang. 2019. Pun generation with surprise. *arXiv preprint arXiv:1904.06828.*
 
 Xiaodong He and Li Deng. 2017. Deep learning for image-to-text generation: A technical overview. *IEEE Signal Processing Magazine*, 34(6):109–116.
 
-Zhiwei He, Tian Liang, Wenxiang Jiao, Zhuosheng Zhang, Yujiu Yang, Rui Wang, Zhaopeng Tu, Shuming Shi, and Xing Wang. 2024b. Exploring human-like translation strategy with large language models. *Transactions of the Association for Computational Linguistics*, 12:229–246.
+Zhiwei He, Tian Liang, Wenxiang Jiao, Zhuosheng Zhang, Yujiu Yang, Rui Wang, Zhaopeng Tu, Shuming Shi, and Xing Wang. 2024. Exploring human-like translation strategy with large language models. *Transactions of the Association for Computational Linguistics*, 12:229–246.
 
-Kevin Heffernan, Onur Çelebi, and Holger Schwenk. 2022. Bitext mining using distilled sentence representations for low-resource languages. *arXiv preprint arXiv:2205.12654*.
+Kevin Heffernan, Onur Çelebi, and Holger Schwenk. 2022. Bitext mining using distilled sentence representations for low-resource languages. *arXiv preprint arXiv:2205.12654.*
 
-Christian F Hempelmann. 2003. *Paronomasic puns: Target recoverability towards automatic generation*. Ph.D. thesis, Purdue University.
+Christian F Hempelmann. 2003. *Paronomasic puns: Target recoverability towards automatic generation.* Ph.D. thesis, Purdue University.
 
 Bryan Anthony Hong and Ethel Ong. 2009. Automatically extracting word relationships as templates for pun generation. In *Proceedings of the Workshop on Computational Approaches to Linguistic Creativity*, pages 24–31.
 
@@ -681,15 +647,15 @@ OV Ishchenko and OM Verhovtsova. 2023. On the issue of word clipping. page 34.
 
 Aaron Jaech, Rik Koncel-Kedziorski, and Mari Ostendorf. 2016. Phonological pun-derstanding. In *Proceedings of the 2016 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies*, pages 654–663.
 
-Miloš Jakubíček, Adam Kilgarriff, Vojtěch Kovář, Pavel Rychlỳ, and Vít Suchomel. 2013. The tenten corpus family. In *7th international corpus linguistics conference CL*, volume 2013, pages 125–127. Valladolid.
 
-Aswan Fakhir Jasim. The effectiveness of using puns on students’achievement in vocabulary.
+
+<!-- page 0012 -->
+
+Miloš Jakubíček, Adam Kilgarriff, Vojtěch Kovář, Pavel Rychlý, and Vít Suchomel. 2013. The tenten corpus family. In *7th international corpus linguistics conference CL*, volume 2013, pages 125–127. Valladolid.
 
 Fred Jelinek, Robert L Mercer, Lalit R Bahl, and James K Baker. 1977. Perplexity—a measure of the difficulty of speech recognition tasks. *The Journal of the Acoustical Society of America*, 62(S1):S63–S63.
 
-Albert Qiaochu Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de Las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, Lélio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock, Teven Le Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, and William El Sayed. 2023. Mistral 7b. *ArXiv*, abs/2310.06825.
-
-Ankur Joshi, Saket Kale, Satish Chandel, and D Kumar Pal. 2015. Likert scale: Explored and explained. *British journal of applied science & technology*, 7(4):396–403.
+Albert Qiaochu Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de Las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, L’elio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock, Teven Le Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, and William El Sayed. 2023. Mistral 7b. *ArXiv*, abs/2310.06825.
 
 Antonios Kalloniatis and Panagiotis Adamidis. 2024. Computational humor recognition: a systematic literature review. *Artificial Intelligence Review*, 58(2):43.
 
@@ -707,15 +673,9 @@ Dana Lahat, Tülay Adali, and Christian Jutten. 2015. Multimodal data fusion: an
 
 Pierre Largy. 1996. The homophone effect in written french: The case of verb-noun inflection errors. *Language and cognitive processes*, 11(3):217–256.
 
-Kristin Lems. 2013. Laughing all the way: Teaching english using puns. In *English Teaching Forum*, volume 51, pages 26–33. ERIC.
-
 Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, and Bill Dolan. 2015. A diversity-promoting objective function for neural conversation models. *arXiv preprint arXiv:1510.03055*.
 
 Zhongguo Li and Maosong Sun. 2009. Punctuation as implicit annotations for chinese word segmentation. *Computational Linguistics*, 35(4):505–512.
-
-
-
-<!-- page 0013 -->
 
 Weixin Liang, Yuhui Zhang, Hancheng Cao, Binglu Wang, Daisy Yi Ding, Xinyu Yang, Kailas Vodrahalli, Siyu He, Daniel Scott Smith, Yian Yin, et al. 2024. Can large language models provide useful feedback on research papers? a large-scale empirical analysis. *NEJM AI*, 1(8):AIoa2400196.
 
@@ -741,9 +701,13 @@ Viorica Marian, James Bartolotti, Sarah Chabal, and Anthony Shook. 2012. Clearpo
 
 Justin McKay. 2002. Generation of idiom-based witticisms to aid second language learning. *Stock et al*, pages 77–87.
 
-Mohammad M Mehawesh, Alshunnag Mo’tasim-Bellah, Naser M Alnawasrah, and Noor N Saadeh. 2023. Challenges in translating puns in some selections of arabic poetry into english. *Journal of Language Teaching and Research*, 14(4):995–1004.
+Mohammad M Mehawesh, Alshunnaq Mo’tasim-Bellah, Naser M Alnawasrah, and Noor N Saadeh. 2023. Challenges in translating puns in some selections of arabic poetry into english. *Journal of Language Teaching and Research*, 14(4):995–1004.
 
 Tomas Mikolov. 2013. Efficient estimation of word representations in vector space. *arXiv preprint arXiv:1301.3781*, 3781.
+
+
+
+<!-- page 0013 -->
 
 Tristan Miller. 2016. Adjusting sense representations for word sense disambiguation and automatic pun interpretation.
 
@@ -767,13 +731,7 @@ Xuefei Ning, Zinan Lin, Zixuan Zhou, Zifu Wang, Huazhong Yang, and Yu Wang. 2023
 
 John J Ohala, Leanne Hinton, and Johanna Nichols. 1997. Sound symbolism. In *Proc. 4th Seoul International Conference on Linguistics [SICOL]*, pages 98–103.
 
-Theo X Olausson, Alex Gu, Benjamin Lipkin, Cedegao E Zhang, Armando Solar-Lezama, Joshua B
-
-
-
-<!-- page 0014 -->
-
-Tenenbaum, and Roger Levy. 2023. Linc: A neurosymbolic approach for logical reasoning by combining language models with first-order logic provers. *arXiv preprint arXiv:2310.15164*.
+Theo X Olausson, Alex Gu, Benjamin Lipkin, Cedegao E Zhang, Armando Solar-Lezama, Joshua B Tenenbaum, and Roger Levy. 2023. Linc: A neurosymbolic approach for logical reasoning by combining language models with first-order logic provers. *arXiv preprint arXiv:2310.15164*.
 
 OpenAI. 2023a. Gpt-3.5-turbo. https://platform.openai.com/docs/models/gpt-3-5-turbo. Accessed: 2025-01-05.
 
@@ -785,13 +743,9 @@ Adam Pauls and Dan Klein. 2012. Large-scale syntactic language modeling with tre
 
 Jeffrey Pennington, Richard Socher, and Christopher D Manning. 2014. Glove: Global vectors for word representation. In *Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP)*, pages 1532–1543.
 
-Jonas Pfeiffer, Ivan Vulić, Iryna Gurevych, and Sebastian Ruder. 2020. Mad-x: An adapter-based framework for multi-task cross-lingual transfer. *arXiv preprint arXiv:2005.00052*.
-
-Ingo Plag. 2018. *Word-formation in English*. Cambridge university press.
-
 Alec Radford. 2018. Improving language understanding by generative pre-training.
 
-Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. 2021. Learning transferable visual models from natural language supervision. In *International conference on machine learning*, pages 8748–8763. PmLR.
+Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. 2021. Learning transferable visual models from natural language supervision. In *International conference on machine learning*, pages 8748–8763. PMLR.
 
 Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever, et al. 2019. Language models are unsupervised multitask learners. *OpenAI blog*, 1(8):9.
 
@@ -805,9 +759,11 @@ C Ramakristanaiah, P Namratha, Rajendra Kumar Ganiya, and Midde Ranjit Reddy. 20
 
 Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, and Mark Chen. 2022. Hierarchical text-conditional image generation with clip latents. *arXiv preprint arXiv:2204.06125*, 1(2):3.
 
-Chandra Sekhar Rao. 2018. The significance of the words borrowed into english language. *Journal for Research Scholars and Professionals of Language Teaching*, 6(2).
 
-Mohammad Sadegh Rasooli and Joel R. Tetreault. 2015. Yara parser: A fast and accurate dependency parser. *Computing Research Repository*, arXiv:1503.06733. Version 2.
+
+<!-- page 0014 -->
+
+Chandra Sekhar Rao. 2018. The significance of the words borrowed into english language. *Journal for Research Scholars and Professionals of Language Teaching*, 6(2).
 
 Oleksandr Rebrii, Inna Rebrii, and Olha Pieshkova. 2022. When words and images play together in a multimodal pun: From creation to translation. *Lublin Studies in Modern Languages and Literature*, 46(2):85–97.
 
@@ -817,7 +773,7 @@ Susanne Rensinghoff and Emília Nemcová. 2010. On word length and polysemy in f
 
 Graeme Ritchie. 2005. Computational mechanisms for pun generation. In *Proceedings of the Tenth European Workshop on Natural Language Generation (ENLG-05)*.
 
-Brian Roark, Lawrence Wolf-Sonkin, Christo Kirov, Sabrina J Mielke, Cibu Johny, Isin Demirshahin, and Keith Hall. 2020. Processing south asian languages written in the latin script: the dakshina dataset. *arXiv preprint arXiv:2007.01176*.
+Brian Roark, Lawrence Wolf-Sonkin, Christo Kirov, Sabrina J Mielke, Cibu Johny, Işin Demirsahin, and Keith Hall. 2020. Processing south asian languages written in the latin script: the dakshina dataset. *arXiv preprint arXiv:2007.01176*.
 
 Guillermo Rojo. 2016. Corpes xxi. *Lingüística de corpus y lingüística histórica iberorrománica*, page 197.
 
@@ -825,19 +781,11 @@ Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Björn Omme
 
 Benoît Sagot. 2010. The lefff, a freely available and large-coverage morphological and syntactic lexicon for french. In *7th international conference on Language Resources and Evaluation (LREC 2010)*.
 
-
-
-<!-- page 0015 -->
-
-Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, and Xi Chen. 2016. Improved techniques for training gans. *Advances in neural information processing systems*, 29.
-
 Mercedes Sánchez Sánchez. 2005. El corpus de referencia del español actual (crea). el crea oral. *Oralia: Análisis del discurso oral*, 8:37–56.
 
 Yash Raj Sarrof. 2025. Homophonic pun generation in code mixed hindi english. In *Proceedings of the 1st Workshop on Computational Humor (CHum)*, pages 23–31.
 
 Mary Ellen Scullen. 2008. New insights into french reduplication. In *Romance Phonology and Variation: Selected papers from the 30th Linguistic Symposium on Romance Languages, Gainesville, Florida, February 2000*, pages 177–189. John Benjamins Publishing Company.
-
-Rustam Shadiev, Wu-Yuin Hwang, Nian-Shing Chen, and Yueh-Min Huang. 2014. Review of speech-to-text recognition technology for enhancing learning. *Journal of Educational Technology & Society*, 17(4):65–84.
 
 Sakib Shahriar. 2022. Gan computers generate arts? a survey on visual arts, music, and literary text generation using generative adversarial network. *Displays*, 73:102237.
 
@@ -873,6 +821,10 @@ Hiroko Takanashi. 2007. Orthographic puns: The case of japanese kyoka.
 
 Yufei Tian, Divyanshu Sheth, and Nanyun Peng. 2022. A unified framework for pun generation with humor principles. *arXiv preprint arXiv:2210.13055*.
 
+
+
+<!-- page 0015 -->
+
 Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, et al. 2023. Llama 2: Open foundation and fine-tuned chat models. *arXiv preprint arXiv:2307.09288*.
 
 Ashirova Madina To’rayevna. 2025. Definition and meaning of compound words. *Western European Journal of Medicine and Medical Science*, 3(03):4–7.
@@ -887,10 +839,6 @@ Alessandro Valitutti, Hannu Toivonen, Antoine Doucet, and Jukka M Toivanen. 2013
 
 Margot Van Mulken, Renske Van Enschot-van Dijk, and Hans Hoeken. 2005. Puns, relevance and appreciation in advertisements. *Journal of pragmatics*, 37(5):707–721.
 
-
-
-<!-- page 0016 -->
-
 A Vaswani. 2017. Attention is all you need. *Advances in Neural Information Processing Systems*.
 
 Christopher Venour. 2000. *The computational generation of a class of pun*. Queen’s University.
@@ -899,27 +847,21 @@ Guan Wang, Sijie Cheng, Xianyuan Zhan, Xiangang Li, Sen Song, and Yang Liu. 2023
 
 Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny Zhou, et al. 2022. Chain-of-thought prompting elicits reasoning in large language models. *Advances in neural information processing systems*, 35:24824–24837.
 
-Ying Wu and Qi Pan. 2012. Strategies on translation of english puns. *Theory & Practice in Language Studies (TPLS)*, 2(10).
-
-Bright Xu. 2019. Nlp chinese corpus: Large scale chinese corpus for nlp.
-
 Dan Xu. 2012. Reduplication in languages: A case study of languages of china. *Plurality and classifiers across languages in China*.
 
 Liang Xu, Xuanwei Zhang, and Qianqian Dong. 2020. Cluecorpus2020: A large-scale chinese corpus for pre-training language model. *arXiv preprint arXiv:2003.01355*.
 
-Zhijun Xu, Siyu Yuan, Lingjie Chen, and Deqing Yang. 2024a. " a good pun is its own record": Can large language models understand puns? *arXiv preprint arXiv:2404.13599*.
+Zhijun Xu, Siyu Yuan, Lingjie Chen, and Deqing Yang. 2024a. " a good pun is its own reword": Can large language models understand puns? *arXiv preprint arXiv:2404.13599*.
 
-Zhijun Xu, Siyu Yuan, Lingjie Chen, and Deqing Yang. 2024b. “a good pun is its own record”: Can large language models understand puns? In *Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP)*.
+Zhijun Xu, Siyu Yuan, Lingjie Chen, and Deqing Yang. 2024b. “a good pun is its own reword”: Can large language models understand puns? In *Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP)*.
 
-Aiyuan Yang, Bin Xiao, Bingning Wang, Borong Zhang, Ce Bian, Chao Yin, Chenxu Lv, Da Pan, Dian Wang, Dong Yan, et al. 2023. Baichuan 2: Open large-scale language models. *arXiv preprint arXiv:2309.10305*.
+Aiyuan Yang, Bin Xiao, Binning Wang, Borong Zhang, Ce Bian, Chao Yin, Chenxu Lv, Da Pan, Dian Wang, Dong Yan, et al. 2023. Baichuan 2: Open large-scale language models. *arXiv preprint arXiv:2309.10305*.
 
 Diyi Yang, Alon Lavie, Chris Dyer, and Eduard Hovy. 2015. Humor recognition and humor anchor extraction. In *Proceedings of the 2015 conference on empirical methods in natural language processing*, pages 2367–2376.
 
 Zhangyue Yin, Qiushi Sun, Qipeng Guo, Zhiyuan Zeng, Xiaonan Li, Tianxiang Sun, Cheng Chang, Qinyuan Cheng, Ding Wang, Xiaofeng Mou, et al. 2024. Aggregation of reasoning: A hierarchical framework for enhancing answer selection in large language models. *arXiv preprint arXiv:2405.12939*.
 
 Toshihiko Yokogawa. 2001. Generation of japanese puns based on similarity of articulation. In *Proceedings Joint 9th IFSA World Congress and 20th NAFIPS International Conference (Cat. No. 01TH8569)*, volume 4, pages 2259–2264. IEEE.
-
-Lantao Yu, Weinan Zhang, Jun Wang, and Yong Yu. 2017. Seqgan: Sequence generative adversarial nets with policy gradient. In *Proceedings of the AAAI conference on artificial intelligence*, volume 31.
 
 Zhiwei Yu, Jiwei Tan, and Xiaojun Wan. 2018. A neural approach to pun generation. In *Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, pages 1650–1660.
 
@@ -931,6 +873,10 @@ Chenshuang Zhang, Chaoning Zhang, Mengchun Zhang, and In So Kweon. 2023a. Text-t
 
 Chenshuang Zhang, Chaoning Zhang, Sheng Zheng, Mengchun Zhang, Maryam Qamar, Sung-Ho Bae, and In So Kweon. 2023b. A survey on audio diffusion models: Text to speech synthesis and enhancement in generative ai. *arXiv preprint arXiv:2303.13336*.
 
+
+
+<!-- page 0016 -->
+
 Tuo Zhang, Tiantian Feng, Yibin Ni, Mengqin Cao, Ruying Liu, Katharine Butler, Yanjun Weng, Mi Zhang, Shrikanth S Narayanan, and Salman Avestimehr. 2024. Creating a lens of chinese culture: A multimodal dataset for chinese pun rebus art understanding. *arXiv preprint arXiv:2406.10318*.
 
 Zhuosheng Zhang, Aston Zhang, Mu Li, and Alex Smola. 2022. Automatic chain of thought prompting in large language models. *arXiv preprint arXiv:2210.03493*.
@@ -941,40 +887,36 @@ Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Z
 
 Wei Zheng and Xiaolu Wang. 2023. Humor experience facilitates ongoing cognitive tasks: Evidence from pun comprehension. *Frontiers in Psychology*, 14:1127275.
 
-
-
-<!-- page 0017 -->
-
 Wei Zheng, Yizhen Wang, and Xiaolu Wang. 2020. The effect of salience on chinese pun comprehension: a visual world paradigm study. *Frontiers in Psychology*, 11:116.
 
 Yukun Zhu. 2015. Aligning books and movies: Towards story-like visual explanations by watching movies and reading books. *arXiv preprint arXiv:1506.06724*.
 
-## A Pun Categories
+## A Pun Categories
 
 We outline the characteristics of different types of puns for clearer differentiation, including phonetic, graphic, meaning, and example, as shown in Table 3. "Same", "similar" and "different" respectively indicate whether the pun word and its substitute word same, similar, or different in phonic, graphic and meaning.
 
-## B Additional Evaluation
+## B Additional Evaluation
 
 In this section, we outline the limitations of the evaluation metrics and supplement additional supporting details.
 
-### B.1 Limitations
+### B.1 Limitations
 
-#### B.1.1 Automatic Evaluation
+#### B.1.1 Automatic Evaluation
 
 Methods such as Surprisal-based evaluation are influenced by context dependency. In particular, local Surprisal is highly sensitive to the choice of the local window size. In addition, metrics such as Dist-1 and Dist-2, which measure lexical and n-gram diversity based on statistical and information-theoretic principles, fail to capture semantic diversity. Similarly, the Perplexity score (PPLs) evaluates text based on the probability of model-generated words, where a lower PPLs indicates better predictive performance but does not necessarily imply semantic coherence or logical consistency.
 
-#### B.1.2 Human Evaluation
+#### B.1.2 Human Evaluation
 
 Although human evaluation is considered the gold standard, it still exhibits a significant degree of subjectivity in metrics such as readability and funniness. This subjectivity primarily stems from differences in participants’ cultural backgrounds and knowledge levels (Chen and Zhang, 2023). However, many studies claim to have employed qualified workers or annotators, while they failed to provide detailed information about the evaluators’ backgrounds, which can easily lead to variability in the final assessments. Therefore, imposing clearer selection criteria for participants may help mitigate the impact of subjectivity in evaluation.
 
-### B.2 Supplement Details
+### B.2 Supplement Details
 
 **Suprisal.** Based on (He et al., 2019), the pun word $w^p$ is more surprising relative to its alternative word $w^a$ in the local context, while is less in the global context. Therefore, $S_{ratio}$ is defined as a ratio to balance the metric:
 
 $$
-S_{ratio} =
+S_{ratio} :=
 \begin{cases}
--1, & S_{local} < 0 \text{ or } S_{global} < 0, \\
+-1, & S_{local} < 0 \text{ or } S_{global} < 0,\\
 S_{local}/S_{global}, & \text{otherwise.}
 \end{cases}
 \tag{9}
@@ -982,36 +924,26 @@ $$
 
 where $S_{local}$ and $S_{local}$ are local surprisal and global surprisal, respectively. A higher value of $S_{ratio}$ indicates a better-quality pun.
 
-## C Dataset
+## C Dataset
 
 The pun dataset for different types are summarized in Table 4. We list the datasets in five dimensions:
 
 - The type of puns.
-
 - The source of the datasets.
-
 - The total number of the datasets.
-
 - The language of the datastes.
-
 - Is the dataset publicly available?
 
-Early pun datasets, such as Paron (Sobkowiak, 1991) and Church (Bell et al., 2011), were primarily constructed from publicly available sources with a strong preference for specific domains, such as advertisements, church and newspaper comics, which are more suitable for use in domain-specific applications. Among the listed datasets, SemEval (Miller et al., 2017) is the first expert-annotated pun dataset, covering both homophonic and heterographic puns, and has since become the most widely references in subsequent research. Furthermore, recent developments have introduced some multimodal and multilingual pun datasets, which have expanded the scope and potential directions for research in pun generation.
-
-## D Paper Collection
-
-This section outlines the approach that we used to collect relevant papers in this survey. We initially searched for the keywords "pun research", "computational humour", and "pun dataset" on arXiv and Google Scholar, identifying a total of around 150 publications. Then, we filtered the papers that specifically focused on pun generation, resulting in approximately 30 papers. Subsequently, we applied the forward and backward snowball technique
 
 
-
-<!-- page 0018 -->
+<!-- page 0017 -->
 
 | Type | Phonetics | Graphic | Meaning | Example |
 |---|---|---|---|---|
 | Homophonic Puns | Similar | Different | Different | Dentists don’t like a hard day at the <u>orifice</u> (office). |
 | Heterographic Puns | Same | Different | Different | Life is a puzzle, look here for the missing <u>peace</u> (piece). |
 | Homographic Puns | Same | Same | Different | Always trust a glue salesman. They tend to <u>stick</u> to their word. |
-| Visual Puns | N/A | N/A | Different | [Figure: a computer mouse on a mousetrap, with another mousetrap nearby] |
+| Visual Puns | N/A | N/A | Different | [Figure: visual pun showing a computer mouse on a mousetrap, with another mousetrap nearby.] |
 
 Table 3: List of pun categories. N/A indicates that the element is not applicable.
 
@@ -1053,25 +985,35 @@ Table 5: System of pun generation using conventional methods. Hog, hop and heg d
 
 
 
-<!-- page 0019 -->
+<!-- page 0018 -->
 
-by examining the references and citations of these seed papers to identify additional relevant studies. We carefully reviewed all identified papers and ultimately compiled the findings into this survey.
+Early pun datasets, such as Paron (Sobkowiak, 1991) and Church (Bell et al., 2011), were primarily constructed from publicly available sources with a strong preference for specific domains, such as advertisements, church and newspaper comics, which are more suitable for use in domain-specific applications. Among the listed datasets, SemEval (Miller et al., 2017) is the first expert-annotated pun dataset, covering both homophonic and heterographic puns, and has since become the most widely references in subsequent research. Furthermore, recent developments have introduced some multimodal and multilingual pun datasets, which have expanded the scope and potential directions for research in pun generation.
 
-## E Conventional Systems
+## D Paper Collection
+
+This section outlines the approach that we used to collect relevant papers in this survey. We initially searched for the keywords "pun research", "computational humour", and "pun dataset" on arXiv and Google Scholar, identifying a total of around 150 publications. Then, we filtered the papers that specifically focused on pun generation, resulting in approximately 30 papers. Subsequently, we applied the forward and backward snowball technique by examining the references and citations of these seed papers to identify additional relevant studies. We carefully reviewed all identified papers and ultimately compiled the findings into this survey.
+
+## E Conventional Systems
 
 In this section, we summarize the pun generation systems with conventional methods in Section 4.1, as shown in table 5. We here list the types of puns, task scenarios and languages corresponding to the system’s applications.
 
-## F Related Surveys
+## F Related Surveys
 
 To our knowledge, there are currently only surveys on computational humour research, while no focusing exclusively on puns. Amin and Burghardt (2020) provides a survey on humour generation, including generation systems, evaluation methods, and datasets. However, it does not specifically analyze the category of puns and only summarizes papers published prior to 2020. Nijholt et al. (2017) concluded a survey on designing humour and interacting with social media, virtual agents, social robots and smart environments. In addition, other humour studies have been examined from the perspectives of detection (Ramakristanaiah et al., 2021; Ganganwar et al., 2024) and recognition (Kalloniatis and Adamidis, 2024). Furthermore, there are some relevant surveys on creating writing, such as composition of poetry (Bena and Kalita, 2020; Elzohbi and Zhao, 2023), storytelling (Gieseke et al., 2021; Alhussain and Azmi, 2021), arts (Shahriar, 2022) and metaphor (Rai and Chakraverty, 2020; Ge et al., 2023). Our survey provides a comprehensive overview of various methods focused on pun generation, including those published in recent years.
 
-## G Potential Research in Visual Puns
+## G Potential Research in Visual Puns
 
 In Section 4.4, we reviewed studies on visual puns. However, to the best of our knowledge, research on the generation and evaluation of visual puns remains limited. Existing research primarily leverages multimodal models to generate textual descriptions incorporating visual pun elements as an intermediate task, using visual cues to aid in the comprehension of textual puns (Rebrii et al., 2022; Chung et al., 2024). Therefore, text-to-image generation presents a promising research direction in this field, as it can help mitigate comprehension challenges that arise in single-modality interpretation.
 
 One potential approach is to simulate the multimodal training paradigm of CLIP (Radford et al., 2021) by constructing a pun-specific semantic vector space based on pun corpora. For text-to-image generation, this method would first encode the dual meanings of the pun, integrating both its original and pun-specific semantics, and then generate visual pun images by aligning them within the trained pun semantic space. For example, a mousetrap catches a white mouse, as illustrated in Figure 2. The word mouse can refer to both an animal and an electronic device. By encoding the dual meanings of this sentence, the trained pun-specific semantic space can generate a corresponding visual pun representation.
 
-Additionally, multimodal approaches may be particularly suitable for non-English languages that rely on strokes rather than spelling. For example, in Chinese, certain character errors or newly coined characters can create pun-like effects, triggering humour through visual wordplay. Finally, models such as DeepFloyd IF (at StabilityAI, 2023), Stable Diffusion v1–5 (Rombach et al., 2021), and DALL-E (Ramesh et al., 2022), which are based on variational auto-encoders, diffusion models, and autoregressive models, also offer powerful image generation capabilities. While these models are not specifically designed for visual pun generation, integrating pun-related features could make them a promising direction for this task.
+Additionally, multimodal approaches may be particularly suitable for non-English languages that rely on strokes rather than spelling. For example, in Chinese, certain character errors or newly coined characters can create pun-like effects, triggering humour through visual wordplay. Finally, models such as DeepFloyd IF (at StabilityAI, 2023), Stable Diffusion v1–5 (Rombach et al., 2021), and DALL-E (Ramesh et al., 2022), which are based
+
+
+
+<!-- page 0019 -->
+
+on variational auto-encoders, diffusion models, and autoregressive models, also offer powerful image generation capabilities. While these models are not specifically designed for visual pun generation, integrating pun-related features could make them a promising direction for this task.
 
 ## H Application
 
@@ -1079,23 +1021,17 @@ This section explores the relevance of pun generation within the broader field o
 
 ### H.1 Relevance
 
-Pun generation is a specialized NLG task that shares core objectives with broader NLG, such as generating coherent and contextually appropriate
+Pun generation is a specialized NLG task that shares core objectives with broader NLG, such as generating coherent and contextually appropriate text (Gatt and Krahmer, 2018). However, its focus on humour and wordplay introduces unique challenges, requiring models to balance polysemy, phonetics, and coherence. Methodologies like Sequence-to-Sequence models and fine-tuned pre-trained language models (PLMs), as used in (Yu et al., 2018) for puns and (Raffel et al., 2020) for NLG tasks, highlight shared technical foundations. Pun generation advances NLG by improving models’ handling of semantic ambiguity, as seen in (Luo et al., 2019), which introduced ambiguity rewards. Recent prompting strategies, such as those in (Xu et al., 2024a), enhance NLG creativity, benefiting tasks like dialogue generation. By tackling these complexities, pun generation drives innovations in NLG, particularly in multilingual and multimodal contexts (Chung et al., 2024).
 
-
-
-<!-- page 0020 -->
-
-text (Gatt and Krahmer, 2018). However, its focus on humour and wordplay introduces unique challenges, requiring models to balance polysemy, phonetics, and coherence. Methodologies like Sequence-to-Sequence models and fine-tuned pre-trained language models (PLMs), as used in (Yu et al., 2018) for puns and (Raffel et al., 2020) for NLG tasks, highlight shared technical foundations. Pun generation advances NLG by improving models’ handling of semantic ambiguity, as seen in (Luo et al., 2019), which introduced ambiguity rewards. Recent prompting strategies, such as those in (Xu et al., 2024a), enhance NLG creativity, benefiting tasks like dialogue generation. By tackling these complexities, pun generation drives innovations in NLG, particularly in multilingual and multimodal contexts (Chung et al., 2024).
-
-## H.2 Applications
+### H.2 Applications
 
 Pun generation finds practical utility across multiple domains. In advertising, puns create memorable slogans, as seen in KitKat’s 2023 campaign, “Have a break, have a KitKat, "playing on break" as pause and physical snap (KitKat, 2023). Xu et al. (2024b) showed LLMs like GPT-4 can generate coherent advertising puns, which helps marketers. In conversational systems, puns enhance engagement, with Google Assistant using phrases like “I’m on a roll” for baking queries (Google Assistant, 2024). Chen et al. (2024) fine-tuned LLaMA2 for dialogue puns, improving user satisfaction. In education, puns foster linguistic creativity, as demonstrated by (Tyler et al., 2020). PAUL BOT, which aids children’s communication. In entertainment, puns enrich narratives and gaming, with (Chung et al., 2024) using DALL-E 3 for visual puns in interactive storytelling. Future applications include personalized marketing and therapeutic humor, leveraging multimodal models to create immersive experiences.
 
-# I Multilingual Puns
+## I Multilingual Puns
 
 This section introduce morphological process in different languages, pun research from linguistic perspective and their linguistic resource available.
 
-## I.1 Morphological Process
+### I.1 Morphological Process
 
 We outline the mainly morphological process of different languages to analyze potential approaches for multilingual pun processing. Table 6 shows the application of various morphological processes in English, Chinese, Arabic, Spanish, French and Japanese.
 
@@ -1105,19 +1041,11 @@ We outline the mainly morphological process of different languages to analyze po
 
 **Clipping** is the process of whereby a multisyllabic word is shortened by removing one or more of its parts, such as back-clipping, fore-clipping and mixed clipping (Ishchenko and Verhovtsova, 2023) to form a new, shorter word. This morphological process is observed in several languages, including French and Japanese (Hamilton, 2024).
 
-**Borrowing** is the way of incorporating lexical items from other languages directly into the native lexicon (Haspelmath, 2009). It is worth noting that word formation through borrowing is particularly common in Chinese (Cannon, 1988), English and Japanese (Rao, 2018; Stanlaw, 1987). For example, a large number of English words originate from Latin, French, Greek, and other languages (Green, 2020), such as cliche and cuisine (from French).
-
-**Conversion** refers to the process of assigning a new grammatical function or part of speech to an existing word without altering its form (Tachmyradova and Nurymova, 2020). Compared to other languages, English has the extremely prevalent phenomenon (Balteiro, 2006).
-
-**Reduplication** involves the repetition of all or part of a word to convey various grammatical meanings, rhetorical effects, or expressive tones (Moravcsik and Greenberg, 1978), including Chinese (Xu, 2012), French (Scullen, 2008) and Japanese (Baloğlu, 2022).
-
-**Onomatopoeia** refers to the formation of words that phonetically imitate the sounds associated with natural phenomena or actions (Bredin, 1996). Some studies focus on languages characterized by lexicons rich in sound-symbolic expressions, especially in African and Asian languages such as Japanese (Ohala et al., 1997).
-
-Understanding morphological process can provide valuable insights into the mechanisms underlying pun generation. For example, conversion
+**Borrowing** is the way of incorporating lexical items from other languages directly into the native lexicon (Haspelmath, 2009). It is worth noting that word formation through borrowing is particularly common in Chinese (Cannon, 1988), English and Japanese (Rao, 2018; Stanlaw, 1987). For example,
 
 
 
-<!-- page 0021 -->
+<!-- page 0020 -->
 
 | MoP | En. | Ch. | Ar. | Sp. | Fr. | Ja. |
 |---|---|---|---|---|---|---|
@@ -1131,9 +1059,17 @@ Understanding morphological process can provide valuable insights into the mecha
 
 Table 6: Language family characteristics and pun findings in some major languages. MoP represents the morphological process. ▲ indicates that the morphological process is highly productive in the given language, whereas ● signifies the specific morphological process used in a limited or less research. En., Ch., Ar., Sp., Fr. and Ja. are English, Chinese, Arabic, Spanish, French and Japanese, separately.
 
-shows some certain similarities with homographic puns, as both involve assigning different meanings or grammatical functions to the same spelling. Therefore, examining the morphological strategies that are prevalent in different languages provide a promising direction for exploring multilingual pun generation.
+a large number of English words originate from Latin, French, Greek, and other languages (Green, 2020), such as cliche and cuisine (from French).
 
-### I.2 Puns in Different Languages
+**Conversion** refers to the process of assigning a new grammatical function or part of speech to an existing word without altering its form (Tachmyradova and Nurymova, 2020). Compared to other languages, English has the extremely prevalent phenomenon (Balteiro, 2006).
+
+**Reduplication** involves the repetition of all or part of a word to convey various grammatical meanings, rhetorical effects, or expressive tones (Moravcsik and Greenberg, 1978), including Chinese (Xu, 2012), French (Scullen, 2008) and Japanese (Baloğlu, 2022).
+
+**Onomatopoeia** refers to the formation of words that phonetically imitate the sounds associated with natural phenomena or actions (Bredin, 1996). Some studies focus on languages characterized by lexicons rich in sound-symbolic expressions, especially in African and Asian languages such as Japanese (Ohala et al., 1997).
+
+Understanding morphological process can provide valuable insights into the mechanisms underlying pun generation. For example, conversion shows some certain similarities with homographic puns, as both involve assigning different meanings or grammatical functions to the same spelling. Therefore, examining the morphological strategies that are prevalent in different languages provide a promising direction for exploring multilingual pun generation.
+
+## I.2 Puns in Different Languages
 
 From a linguistic perspective, we explore some methods used for generating puns across different languages, providing insights for automatic pun generation.
 
@@ -1143,28 +1079,27 @@ From a linguistic perspective, we explore some methods used for generating puns 
 
 **Arabic.** Most current research on Arabic puns focuses on translation tasks, especially on a few Arabic anthologies. Aqad et al. (2019) investigate the semantic dimensions of puns in the translation of the Quran. Mehawesh et al. (2023) highlight that the Arabic root-based morphological system differs fundamentally from that of English, and that Arabic frequently employs rhythm, repetition, and syllabic patterns to enhance punning effects, while English lacks a directly comparable rhythmic system.
 
-**Japanese.** There are some studies on Japanese puns focusing on phonological features. Kawahara and Shinohara (2009) showed that Japanese puns need to maintain consonant similarity when they are created, and that the criterion for this depends on psychoacoustic information, while Yokogawa (2001) further quantified phonological similarity using features such as manner and place of articulation. Notably, Takanashi (2007) shows that using kanji and kana orthography to process Kyoka, which is a genre of playful Japanese poetry to characteristically employ puns for humour.
+**Japanese.** There are some studies on Japanese puns focusing on phonological features. Kawahara and Shinohara (2009) showed that Japanese puns need to maintain consonant similarity when they are created, and that the criterion for this depends on psychoacoustic information, while Yokogawa (2001) further quantified phonological similarity using features such as manner and place of articulation. Notably, Takanashi (2007) shows that using kanji and kana orthography to process Kyoka,
 
-**Spanish.** Some studies on puns explored the pun translation in Spanish film titles into English (Díaz-Pérez, 2014; Díaz Pérez, 2008), while other studies analyzed the lexico-semantic applied in Spanish humour including homonymy, polysemy and intra-phrasal syllables (Bobchynets, 2022).
+
+
+<!-- page 0021 -->
+
+which is a genre of playful Japanese poetry to characteristically employ puns for humour.
+
+**Spanish.** Some studies on puns explored the pun translation in Spanish film titles into English (Díaz-Pérez, 2014; Díaz Pérez, 2008), while other studies analyzed the lexico-semantic applied in Spanish humour including homonymy, polysemy and intraphrasal syllables (Bobchynets, 2022).
 
 ### I.3 Resource Available
 
 We investigate the available linguistic resources across multiple languages provide a reference on multilingual puns for future research.
 
-**English.** There is a large corpus of material available for the study of English puns, as introduced in Section 3. **Chinese.** In addition to the Chinese pun database mentioned in Section 3, several open Chinese linguistic resources are also available, such as THULAC (Li and Sun, 2009), Peking University CCL Corpus <sup>3</sup>, and CLUECorpus2020 (Xu et al., 2020). **French.** Various French language resources have been developed for language modeling, including those by (Sagot, 2010) and (Abeillé et al., 2003). **Arabic.** Jakubíček et al. (2013) constructed a large-scale Arabic general corpus using web crawling techniques. Additionally,
+**English.** There is a large corpus of material available for the study of English puns, as introduced in Section 3. **Chinese.** In addition to the Chinese pun database mentioned in Section 3, several open Chinese linguistic resources are also available, such as THULAC (Li and Sun, 2009), Peking University CCL Corpus<sup>3</sup>, and CLUECorpus2020 (Xu et al., 2020). **French.** Various French language resources have been developed for language modeling, including those by (Sagot, 2010) and (Abeillé et al., 2003). **Arabic.** Jakubíček et al. (2013) constructed a large-scale Arabic general corpus using web crawling techniques. Additionally, Linguistic Data Consortium (LDC) produced Arabic Gigaword<sup>4</sup>, which contains approximately 1 million news documents totaling 400 million words of Arabic text. **Spanish.** Some Spanish linguistic resources have been developed by Real Academia Española (RAE) such as CREA (Sánchez, 2005) and (Rojo, 2016) which provide extensive collections of both written and spoken samples from Latin American and European varieties of Spanish. **Japanese.** A range of Japanese corpora are available for lexicological research and language modeling. Notable examples include the Balanced Corpus of Contemporary Written Japanese (BCCWJ) (Maekawa et al., 2014), the Corpus of Spontaneous Japanese (CSJ) (Maekawa et al., 2000) and jaTenTen, a web corpus compiled for large-scale linguistic analysis (Jakubíček et al., 2013).
 
-<sup>3</sup>http://ccl.pku.edu.cn:8080/ccl_corpus/
-
-
-
-<!-- page 0022 -->
-
-Linguistic Data Consortium (LDC) produced Arabic Gigaword[^4], which contains approximately 1 million news documents totaling 400 million words of Arabic text. **Spanish.** Some Spanish linguistic resources have been developed by Real Academia Española (RAE) such as CREA (Sánchez, 2005) and (Rojo, 2016) which provide extensive collections of both written and spoken samples from Latin American and European varieties of Spanish. **Japanese.** A range of Japanese corpora are available for lexicological research and language modeling. Notable examples include the Balanced Corpus of Contemporary Written Japanese (BCCWJ) (Maekawa et al., 2014), the Corpus of Spontaneous Japanese (CSJ) (Maekawa et al., 2000), and jaTenTen, a web corpus compiled for large-scale linguistic analysis (Jakubíček et al., 2013).
-
-## J Puns in LLMs
+## J Puns in LLMs
 
 Puns are considered a valuable tool for evaluating LLMs in their ability to understand linguistic humour and wordplay (Xu et al., 2024a). They help reveal the models’ capabilities and limitations in tasks that require semantic ambiguity, phonetic similarity, and contextual reasoning. Specifically, puns enable a systematic assessment of LLMs’ proficiency in nuanced linguistic reasoning within creative language applications, particularly in tasks such as pun recognition, explanation, and generation (Blinov et al., 2019; Dsilva, 2024).
 
 Recent studies (Xu et al., 2024b; Kim and Chilton, 2025) have revealed several insights regarding puns in LLMs: (1) While most large language models (LLMs) are highly sensitive to prompt bias in recognition tasks, some demonstrate more stable performance and achieve higher recognition accuracy. Moreover, their performance can be further improved by incorporating definitions and examples. (2) Most LLMs are capable of recognizing pun words. Although alternative words may not significantly affect the recognition of a pun, they play an important role in clearly explaining its meaning. Some LLMs demonstrate explanation quality comparable to, or even surpassing, that of humans. However, common errors observed among LLMs include: incorrect identification of pun type, misidentification of the pun word and insufficient analysis of the dual meanings. (3) LLMs show particular skill in generating homographic puns. Providing contextual words significantly improve the quality of these puns. However, a “Lazy Pun Generation” pattern has been observed, where the model tends to reuse the same pun words repeatedly, indicating a lack of creativity. While some of LLMs have achieved state-of-the-art performance in generation tasks, their humour generation still falls short compared to that of humans.
 
-[^4]: https://catalog.ldc.upenn.edu/LDC2003T12
+<sup>3</sup>http://ccl.pku.edu.cn:8080/ccl_corpus/  
+<sup>4</sup>https://catalog.ldc.upenn.edu/LDC2003T12

@@ -193,5 +193,272 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that OOGIRI-CORPUS and OOGIRI-MASTER will be provided under the CC BY-NC-SA 4.0 license. Source platform: https://chinsukoustudy.com/"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": "Approximately 100 human judges per prompt is stated in the abstract/introduction; no total unique participant count or unique voter count is reported.",
+        "population": "Users of the public Japanese Oogiri competition platform Oogiri Sogo who submitted prompts/responses and voted on responses.",
+        "recruitment": "Organic participation on Oogiri Sogo; researchers crawled the public platform rather than recruiting these users for the study.",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "2,165 prompts crawled; after excluding prompts with fewer than 100 total votes, 908 prompts remained. OOGIRI-CORPUS contains 82,536 prompt–response pairs, averaging 95.9 responses/prompt and 171.6 votes/prompt; votes per response average 1.8 and votes per top-1 response average 10.3.",
+        "detail": "Platform users voted for responses they found funny during a voting phase in which vote counts were not displayed. The paper reports votes and platform items; it does not report unique voter IDs, demographics, or overlap between response creators and voters."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "21 workers per item who passed attention checks; the paper also refers to “the 21 crowdworkers” in aggregate, but does not clearly distinguish total unique workers from per-item worker counts.",
+        "population": "Crowdworkers from Yahoo! Crowdsourcing used for the OOGIRI-MASTER human baseline.",
+        "recruitment": "Recruited through Yahoo! Crowdsourcing; workers were informed that annotated results would be used for research and were compensated according to the platform’s regulations at 10 yen per 20 tasks.",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "600 benchmark items; each item was answered by 21 workers who passed attention checks, and the human baseline answer was determined by majority vote.",
+        "detail": "The paper states that neither the crowdsourcing service nor the Oogiri platform discloses detailed user attributes, so demographic comparison was not possible."
+      }
+    ],
+    "judges": [
+      {
+        "type": "platform-vote",
+        "name": "Oogiri Sogo vote counts",
+        "role": "data-labeling",
+        "blind": true,
+        "detail": "Votes from Oogiri Sogo determine funniness signals. For analysis, the top three responses by vote count per prompt were defined as high-rated and the bottom three as low-rated; low-rated responses all had zero votes. For benchmark construction, high-rated and low-rated responses are used as positives/negatives. Blindness is only with respect to other users’ vote counts, which were not displayed during the voting phase."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Yahoo! Crowdsourcing workers",
+        "role": "primary",
+        "blind": null,
+        "detail": "Workers solved OOGIRI-MASTER items using the same baseline prompt shown to LLMs. Each item was answered by 21 workers passing attention checks; final human baseline labels were determined by majority vote."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy against OOGIRI-MASTER labels",
+        "role": "primary",
+        "blind": null,
+        "detail": "Benchmark results report accuracy for each task and average accuracy across the five tasks, comparing model or human answers with the vote-derived benchmark labels."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "GPT-5 scored 2,000 sampled prompt–response pairs on eight higher-order linguistic features on a 1–5 scale for the linguistic feature analysis. The appendix prompt includes the prompt and response and asks for JSON scores and reasoning; the paper does not explicitly state blinding with respect to vote labels."
+      },
+      {
+        "type": "LLM",
+        "name": "Target LLM being evaluated",
+        "role": "secondary",
+        "blind": null,
+        "detail": "In insight-augmented prompting, each target LLM first computed LLM-scored feature values for each prompt–response pair; those scores were then included as context for the same model’s benchmark answer."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Feature computation and statistical analysis",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The feature analysis used MeCab for tokenization/POS features, text-embedding-3-large for semantic distance, mDeBERTa-v3-base fine-tuned on XNLI/multilingual NLI for entailment probabilities, rinna Japanese GPT-2 for surprisal/nPMI, and independent two-sample Student’s t-tests plus Cohen’s d to compare high- and low-rated groups."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "All reported experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates humor understanding/judgment through MCQA, binary classification, and feature scoring. It does not report a humor generation experiment or best-of-N output selection."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "gpt-oss-20b",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an open LLM on OOGIRI-MASTER; checkpoint/snapshot, serving setup, and inference date are not reported."
+      },
+      {
+        "name": "DeepSeek-R1-14b",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an open LLM on OOGIRI-MASTER; the paper states it shares architecture and parameter count with the Japanese-continued-pretraining variant, but does not report an exact checkpoint/snapshot or inference date."
+      },
+      {
+        "name": "DeepSeek-R1-14b_ja",
+        "version_or_snapshot": "cyberagent/DeepSeek-R1-Distill-Qwen-14B-Japanese is cited for the Japanese continued-pretraining variant; snapshot not reported.",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on OOGIRI-MASTER to test continued pretraining on a Japanese corpus; exact runtime setup and inference date are not reported."
+      },
+      {
+        "name": "LLM-jp-3.1-13b_ja",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an open LLM on OOGIRI-MASTER; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "Claude-Opus-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Evaluated as a proprietary API-based LLM; exact API snapshot/version and inference date are not reported."
+      },
+      {
+        "name": "Gemini-2.5-Pro",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Evaluated as a proprietary API-based LLM; exact API snapshot/version and inference date are not reported."
+      },
+      {
+        "name": "GPT-5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used both as a benchmark model and as the LLM scorer for 2,000 higher-order feature evaluations; exact API snapshot/version and inference date are not reported."
+      },
+      {
+        "name": "text-embedding-3-large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to obtain prompt/response embeddings for semantic distance. The OpenAI reference is marked accessed 2025-10-21, but the paper does not report the actual embedding inference date or API snapshot."
+      },
+      {
+        "name": "MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to obtain NLI probabilities for entailment, neutral, and contradiction; exact checkpoint snapshot and runtime setup are not reported."
+      },
+      {
+        "name": "rinna/japanese-gpt2-medium",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as GPT-2 for surprisal and nPMI computation; exact checkpoint snapshot and runtime setup are not reported."
+      },
+      {
+        "name": "MeCab",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for Japanese morphological analysis, tokenization, and POS tagging; version and dictionary/settings are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "OOGIRI-MASTER baseline prompt for API-based proprietary models",
+        "calls_per_item": "Results for API-based models were averaged over three trials.",
+        "candidates_per_item": "Binary_class uses one prompt–response pair for funny/not-funny classification; Binary_same and Binary_diff use two response options; Triple uses three response options; Quad uses four response options.",
+        "token_budget": null,
+        "sampling_parameters": "Temperature was set to 0 for all models; other decoding parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "Applies to Claude-Opus-4, Gemini-2.5-Pro, and GPT-5 as API-based models. Exact prompt templates for all tasks beyond the shown absolute-judgment example are not fully reported."
+      },
+      {
+        "scope": "OOGIRI-MASTER baseline prompt for open LLMs",
+        "calls_per_item": null,
+        "candidates_per_item": "Binary_class uses one prompt–response pair for funny/not-funny classification; Binary_same and Binary_diff use two response options; Triple uses three response options; Quad uses four response options.",
+        "token_budget": null,
+        "sampling_parameters": "Temperature was set to 0 for all models; other decoding parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "The paper does not report the number of trials, hardware, serving stack, quantization, max tokens, or other runtime settings for the open LLMs."
+      },
+      {
+        "scope": "OOGIRI-MASTER insight-augmented prompting",
+        "calls_per_item": "Two-step procedure reported: first, the target LLM computed feature scores for each prompt–response pair; second, those scores were included for task answering. Exact number of model/API calls and batching are not reported; API-based model results were averaged over three trials.",
+        "candidates_per_item": "Same benchmark task options as baseline; prompts additionally included five basic features and six LLM-scored features for candidate prompt–response pairs.",
+        "token_budget": null,
+        "sampling_parameters": "Temperature was set to 0 for all models; other decoding parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "Basic features were precomputed and inserted directly. LLM-scored features were ambiguity exploitation, associative distance, benign violation, incongruity resolution, metaphor use, and perspective shift."
+      },
+      {
+        "scope": "GPT-5 higher-order linguistic feature scoring in §4",
+        "calls_per_item": "2,000 prompt–response pairs were evaluated in batches using GPT-5; exact batch size and number of API calls are not reported.",
+        "candidates_per_item": "One set of eight 1–5 feature scores per prompt–response pair.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "API cost considerations motivated sampling 2,000 pairs; actual cost is not reported.",
+        "detail": "The 2,000 pairs comprised 1,000 randomly selected from high-rated groups and 1,000 from low-rated groups. The prompt asks for JSON scores and concise reasoning."
+      },
+      {
+        "scope": "Automatic feature computation for embeddings, NLI, surprisal/nPMI, and basic linguistic features",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper names the tools/models but does not report runtime budgets, hardware, API-call counts, cache use, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "OOGIRI-MASTER baseline prompt",
+        "present": true,
+        "description": "Yahoo! Crowdsourcing workers solved the same 600 benchmark items with the same baseline prompt shown to LLMs; each item was answered by 21 workers passing attention checks and aggregated by majority vote. The reported human average accuracy was 68.7%.",
+        "directly_comparable": true,
+        "detail": "Comparable to LLM results under the baseline prompt because humans and LLMs used the same item set and baseline instruction. It is not matched to the feature-augmented LLM condition."
+      },
+      {
+        "scope": "OOGIRI-MASTER insight-augmented prompting",
+        "present": false,
+        "description": null,
+        "directly_comparable": false,
+        "detail": "No human baseline with inserted linguistic feature values or the “use features only when uncertain” instruction is reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "For OOGIRI-MASTER, the authors state that they sampled different data points from the §4 analysis dataset to prevent data contamination between analysis and benchmark construction."
+      ],
+      "basis": "OOGIRI-MASTER is newly constructed in the paper but is sampled from OOGIRI-CORPUS, which was crawled from the public Oogiri Sogo website. Prompt IDs 87–2254 were available when accessed, but the paper does not report the crawl/access date, model training cutoffs, or any decontamination test against public Oogiri Sogo data. The stated mitigation addresses overlap with the paper’s analysis dataset, not possible pretraining exposure of public prompts, responses, or vote-derived labels in proprietary or open LLMs."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Claims about higher-order linguistic features such as perspective shift, ambiguity exploitation, benign violation, and incongruity resolution depend on GPT-5 feature scores. Insight-augmented prompting results also partly depend on LLM-generated feature scores from the target model.",
+      "human_validation": "Vote-derived human funniness labels are used as the comparison target, and a separate human baseline is reported for benchmark solving, but the paper does not report human validation or inter-annotator reliability for the GPT-5/target-LLM higher-order feature scores themselves.",
+      "detail": "Headline benchmark accuracy is computed against platform-vote-derived labels rather than LLM judgments, so LLM judging is not the sole basis of the paper. However, important analytical and prompting-improvement claims rely on LLM-scored feature values."
+    },
+    "reporting_gaps": [
+      "No total unique participant count, demographics, geography, or user-overlap information is reported for Oogiri Sogo submitters/voters.",
+      "The paper reports 21 crowdworkers per item and also refers to “the 21 crowdworkers,” but does not clearly state whether exactly the same 21 unique workers completed all benchmark items.",
+      "Crowdworker demographics/attributes are not reported; the paper notes that neither Yahoo! Crowdsourcing nor Oogiri Sogo discloses detailed user attributes.",
+      "Attention-check content, number of attention-check items, and exclusion counts beyond retaining 21 passing workers per item are not reported.",
+      "Exact benchmark item IDs, random seeds, and sampling procedure details for the 100 prompts per task are not reported.",
+      "Exact API snapshots/versions and inference dates are not reported for GPT-5, Claude-Opus-4, Gemini-2.5-Pro, or text-embedding-3-large.",
+      "Exact checkpoint snapshots, runtime environment, hardware, quantization, and serving details are not reported for the open LLMs or Hugging Face models used for NLI and GPT-2 computations.",
+      "Token limits, max output lengths, top-p/top-k, stop criteria, and most decoding parameters are not reported; only temperature=0 is specified for benchmark inference.",
+      "For insight-augmented prompting, the exact number of feature-scoring calls per item, batching strategy, and whether all scoring steps were repeated in each API trial are not reported.",
+      "For GPT-5 higher-order feature scoring in §4, batch size, sampling/decoding parameters, API snapshot, and actual cost are not reported.",
+      "No decontamination test or model-training exposure analysis is reported for public Oogiri Sogo data; model training cutoffs are not reported.",
+      "No human validation, calibration, or inter-annotator reliability is reported for LLM-scored higher-order linguistic features.",
+      "The paper provides the absolute-judgment and higher-order feature-scoring prompts, but not full prompt templates for every MCQA and insight-augmented condition."
+    ]
   }
 }

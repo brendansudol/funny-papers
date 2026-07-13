@@ -4,12 +4,13 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 
 ## Done (for context)
 
-- ✅ Paper library: 80/86 guide entries with PDF + full-text markdown (`papers/`)
-- ✅ Dataset library: 26 of 34 public datasets vendored, ~8.8GB (`data/`)
+- ✅ Paper library: 107/112 guide entries with PDF + full-text markdown (`papers/`)
+- ✅ Dataset library: 38 of 49 artifacts vendored, ~9.4GB (`data/`)
 - ✅ Structured extracts + one-pagers + cross-paper analysis (`papers/extracts/`, `papers/summaries/`, `papers/ANALYSIS.md`)
+- ✅ Evidence-strength profiles + synthesis support/counterevidence/confidence map ([papers/EVIDENCE.md](../papers/EVIDENCE.md))
 - ✅ Guide-vs-paper discrepancy check; all 8 fixes applied ([papers/DISCREPANCIES.md](../papers/DISCREPANCIES.md))
-- ✅ Git + GitHub: public repo at https://github.com/brendansudol/funny-papers. `data/` is gitignored (~8.8GB, rebuilds from `data/datasets.json` via the scripts); `papers/pdfs/` is versioned. Secrets stay in `.env` (ignored).
-- ✅ Docs: [README.md](../README.md) (front door), [CLAUDE.md](../CLAUDE.md) (agent ops guide), [docs/query-cookbook.md](query-cookbook.md) (verified jq/python recipes over catalogs + extracts)
+- ✅ Git + GitHub: public repo at https://github.com/brendansudol/funny-papers. `data/` is gitignored (~9.4GB, rebuilds from `data/datasets.json` via the scripts); `papers/pdfs/` is versioned. Secrets stay in `.env` (ignored).
+- ✅ Docs: [README.md](../README.md) (front door), [AGENTS.md](../AGENTS.md) (agent ops guide; imported by `CLAUDE.md`), [docs/query-cookbook.md](query-cookbook.md) (verified jq/python recipes over catalogs + extracts)
 
 ## Housekeeping (cheap, do soon)
 
@@ -18,30 +19,30 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 
 ## Make the library more usable
 
-- **RAG / semantic search index** — chunk + embed the ~1,400 markdown pages (and/or one-pagers) for "ask the library a question, get paper+page citations." Local and simple (sqlite + embeddings). The extracts make good metadata filters (task, dataset, theory).
-- **Citation lineage graph** — extract each paper's references, map who-cites-whom among the 86 entries, and render the lineages the guide describes in prose (Hessel → caption-preferences → HumorBench; Crowd Score → HumorRank). Could output a Mermaid/DOT graph into the repo or an Artifact page.
+- **RAG / semantic search index** — chunk + embed the ~1,680 markdown pages (and/or one-pagers) for "ask the library a question, get paper+page citations." Local and simple (sqlite + embeddings). The extracts make good metadata filters (task, dataset, theory).
+- **Citation lineage graph** — extract each paper's references, map who-cites-whom among the 112 entries, and render the lineages the guide describes in prose (Hessel → caption-preferences → HumorBench; Crowd Score → HumorRank). Could output a Mermaid/DOT graph into the repo or an Artifact page.
 - **Library browser page** — a single searchable HTML page (Artifact or local file) over the catalog: filter by task/theory/dataset/model, click through to one-pagers. Mostly a `build_*.py` script over existing JSON. Natural extension: publish it (plus summaries/manifests) via GitHub Pages since the repo is already public.
 - **Claude Code project skill / MCP server over the library** — wrap the cookbook queries + full-text grep + summary lookup as a skill or local MCP server, so any future session (here or in other repos) can ask the library questions without rediscovering the layout.
 
 ## Keep it alive
 
-- **arXiv watcher** — weekly scheduled job (Claude Code `/schedule` routine): query arXiv for new humor+LLM papers, filter against `papers.json`, propose new entries in the guide's format. The guide is compiled June 2026 and the field moves monthly.
+- **arXiv watcher** — weekly scheduled job (Claude Code `/schedule` routine): query arXiv for new humor+LLM papers, filter against `papers.json`, propose new entries in the guide's format. The guide was revised July 2026 and the field moves monthly.
 - **Venue-status checker** — periodic pass over `preprint`-tagged entries to see if they've since landed at a venue (the guide's compilation note explicitly flags this drift). The discrepancy check found one already (#19 → IASDR 2025).
-- **Dataset gap watch** — recheck the blocked datasets occasionally: github.com/SDS-NLP/Oogiri-Eval (404 as of July 2026), MWAHAHA post-competition data in the organizers' repo, MemeReaCon release.
-- **One-time unblocks (user action needed):** Chumor 2.0 (accept HF click-through + `hf auth login`), MWAHAHA (free Codabench account), CAH rounds data (email mail@cardsagainsthumanity.com), workplace-humor dataset (email authors — anonymous repo expired).
+- **Dataset gap watch** — recheck the blocked datasets occasionally: github.com/SDS-NLP/Oogiri-Eval (404 as of July 2026), MemeReaCon release, and the anonymized HinS OSF link once it has a stable public project URL.
+- **One-time unblocks (user action needed):** Chumor 2.0 (accept HF click-through + `hf auth login`), D-HUMOR (sign the authors' data-use agreement), CAH rounds data (email mail@cardsagainsthumanity.com), workplace-humor dataset (email authors — anonymous repo expired).
 
 ## Build the actual bot
 
-- **Eval harness first** — Part 4's core lesson: measurement drives everything. Concretely: pairwise/tournament LLM judging (HumorRank-style, GTVH-grounded rubric) + multi-dimensional scoring (#38's Novelty/Clarity/Relevance/Intelligence/Empathy axes, noting LLM judges over-weight Novelty vs. human Empathy). Vendored data to seed it: caption-ranking (250M votes), Phunny, rJokes, Oogiri-GO.
+- **Eval harness first** — Part 4's core lesson: measurement drives everything. Use randomized, source-blind **human pairwise preference** as the criterion measure, with target-audience metadata, ties/skips, position reversal, repeated items, and uncertainty over system rankings. Multi-dimensional human ratings (#38's Novelty/Clarity/Relevance/Intelligence/Empathy axes) should diagnose *why* preferences differ. Only after measuring agreement and bias on that target sample should an LLM judge be calibrated as a screening surrogate; report its human correlation, position/length/self-preference biases, and rank stability (Does Bigger Mean Funnier?; #34; #54; #57). Vendored data to seed it: caption-ranking (250M votes), Phunny, Jester, rJokes, Oogiri-GO, and MWAHAHA.
 - **Reproduction runs** — before building anything new, reproduce 1–2 headline numbers with a current model using vendored data + code (HumorBench has its autograder in `data/humorbench/`; PunEval has splits + perturbations). Validates the harness and gives baselines.
 - **Contamination audit for eval data** — before trusting eval numbers, check which vendored benchmarks are plausibly in current models' training data (rJokes and SemEval puns almost certainly are; Phunny was built specifically with contamination controls — start from its methodology). Determines which datasets can anchor the harness honestly.
-- **Generation experiments** — the guide's synthesis says generic CoT loses to structured approaches. Implementable from the extracts/full texts: script-opposition control (HOMER, #29), persona diversity (HumorGen's six cognitive personas, #13), generate–evaluate–revise loops (#15, #16), leap-of-thought (CLoT, #11). Each is a small pipeline testable against the eval harness.
-- **Theory-grounded joke schema** — operationalize GTVH's six Knowledge Resources as a generation/annotation schema (the guide calls GTVH "the most engineerable theory"; HOMER and HumorRank both operationalize it).
-- **Safety guardrails from day one** — Part 6 findings: engagement-maximizing humor amplifies harm (#47), humor is a jailbreak vector (#49), over-filtering flattens edge (#41). Benign-violation theory (T6) as the design frame for the boundary.
+- **Generation experiments** — compare structured approaches without presuming the winner: script-opposition control (HOMER, #29), persona diversity (HumorGen's six cognitive personas, #13), generate–evaluate–revise loops (#15, #16), and leap-of-thought (CLoT, #11). Hold the base model, prompt information, output/token budget, and best-of-*N* budget fixed, include the simple MWAHAHA-style frontier baseline, and use blind human evaluation.
+- **Theory-grounded joke schema** — operationalize GTVH's six Knowledge Resources as a generation/annotation schema. HOMER and HumorRank both show that it is an engineerable vocabulary; treat it as a useful control surface, not a complete theory of what people find funny.
+- **Safety guardrails from day one** — Part 6 findings: engagement-maximizing humor amplifies harm (#47), humor is a jailbreak vector (#49), over-filtering flattens edge (#41). Use benign-violation theory (T6) as one diagnostic lens alongside target, identity, power, relationship, and audience uptake.
 
 ## Analysis ideas (cheap, high-interest)
 
-- **Cross-paper contradiction/agreement mining** — the extracts make it cheap to ask "where do papers disagree?" (e.g., #2 "not funny" vs #31 "funnier than laypeople"; the guide's Synthesis 1 explains it as task-format dependence — test that framing against all 80 extracts).
+- **Cross-paper contradiction/agreement mining** — the extracts make it cheap to ask "where do papers disagree?" (e.g., #2 "not funny" vs #31 "funnier than laypeople"; the guide's Synthesis 1 explains it as task-format dependence — test that framing against all 107 extracts).
 - **Extract spot-verification pass** — the discrepancy check validated the *guide*; a sampled Opus pass over extracts themselves (numbers vs. transcription) would certify the comparison database for downstream use.
 - **Auto-generated reading paths** — cluster papers by extract fields (task × theory × modality) and compare against the guide's hand-written reading paths; differences are interesting either way.
 - **Field timeline / trends view** — papers by year × task × model generation from the extracts: watch the 2023→2026 shift (detection → explanation → generation → evaluation methodology), which theories rise/fall, when each frontier model shows up in evals. One `build_*.py` script + a chart or two.

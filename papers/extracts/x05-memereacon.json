@@ -175,5 +175,329 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "6",
+        "population": "English-speaking/proficient-English Ph.D. students familiar with internet culture and memes",
+        "recruitment": "Recruited from the authors' research institution; trained with detailed guidelines and iteratively trained on 200 samples",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Each benchmark instance was independently annotated by 3 annotators; a held-out set of 500 instances was annotated by all 6 annotators for Fleiss' Kappa; final benchmark contains 1,565 annotated instances. Annotators could skip uncomfortable instances. Compensation was $0.19 per annotation, with reported average hourly wage of $14.82.",
+        "detail": "Annotators labeled Context-Meme Interplay, Meme Types, Comment Stance and Affective Consistence, Post Connection, and Post Intent. Reported IAA on the 500-instance held-out set: CMI κ=0.86, MT κ=0.88, CSAC κ=0.75, PC κ=0.79, PI κ=0.81."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Reddit users posting and commenting in five English subreddits: r/memes, r/meme, r/ProgrammerHumor, r/BritishMemes, and r/RelationshipMemes",
+        "recruitment": "Publicly available Reddit posts collected with the Python Reddit API Wrapper",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Posts were submitted between January 2022 and May 2025. The initial pool contained over 3,000 potential candidates; the final dataset contains 1,565 annotated instances. Each instance preserves a meme image, post title/body, and a selected top-rated comment when available.",
+        "detail": "Filtering removed deleted/suspended/broken-link posts, very short contexts except strong cultural abbreviations, and non-meme images. The selected comment was the single highest-voted non-deleted non-bot comment with at least 3 words; posts lacking such a comment were included with comment marked [none]. Usernames and PII were removed."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "6 Ph.D. student annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Primary human source for benchmark labels and reference texts. Each instance was annotated independently by 3 annotators; disagreements were resolved by majority vote."
+      },
+      {
+        "type": "human-expert",
+        "name": "senior annotator",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "For rare cases of complete disagreement, with 3 unique labels for an instance, a senior annotator made the determination based on guidelines and discussion."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Reddit highest-voted comment",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Reddit votes determined which single top comment was selected as the proxy for dominant community reaction or interpretation; this selected comment became part of the task input, not a model-output score."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "accuracy and macro F1-score",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to score CMI-C and CSAC-C classification outputs against human-annotated labels."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BERTScore",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for PC-G and PI-G generative-task scoring; paper reports use of microsoft/deberta-xlarge-mnli as the embedding model."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "ROUGE-L",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for PC-G and PI-G generative-task scoring against human-written reference annotations."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Context Relevance Score",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Diagnostic metric ranging from 0 to 1, computed from semantic relevance between model responses and contextual elements using BERTScore with a relevance threshold of 0.7 and difficulty weights."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper states that the authors categorized errors into context, visual, semantic, and cultural patterns for error analysis; coder count, sample size, and blinding for this analysis are not reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "CMI-C and CSAC-C classification tasks",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "These are classification tasks scored with accuracy and macro F1; prompts ask for option letters. Best-of-N generation is not applicable as a reported design feature."
+      },
+      {
+        "scope": "PC-G and PI-G zero-shot free-form generation tasks across evaluated models",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Prompts request 3-5 sentence post-connection explanations or a brief sentence for post intent. The paper does not state whether one or multiple candidate responses were sampled per item, nor any selection procedure."
+      },
+      {
+        "scope": "Qwen2.5-Omni with Chain-of-Thought variant",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper reports a Qwen2.5-Omni w/ CoT condition and says VRM models are instructed to explain reasoning before the final classification, but does not report candidate counts or decoding settings."
+      },
+      {
+        "scope": "Qwen2.5-Omni with Self-Consistency variant",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports Qwen2.5-Omni w/ SC improvements, but does not specify the number of samples, sampling parameters, aggregation rule, or selection rule."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Qwen2.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Text-only unimodal baseline. Exact size/checkpoint/instruct variant is not stated. Appendix C says all inferences are conducted through vLLM or HuggingFace Transformers."
+      },
+      {
+        "name": "Flamingo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Image-only unimodal baseline. Exact checkpoint/size is not stated. Image-only inputs used a manually composited image containing post text."
+      },
+      {
+        "name": "LLaVA-OneVision-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a VLM; table abbreviates as LLaVA-One Vision. No checkpoint revision or inference date reported."
+      },
+      {
+        "name": "Phi-4-MM-5.6B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a VLM; table abbreviates as Phi-4-MM. No checkpoint revision or inference date reported."
+      },
+      {
+        "name": "InternVL3-8B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a VLM; table abbreviates as InternVL3. No checkpoint revision or inference date reported."
+      },
+      {
+        "name": "Qwen2.5-VL-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a VLM. No checkpoint revision or inference date reported."
+      },
+      {
+        "name": "Qwen2.5-Omni-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a VLM, including additional w/ CoT and w/ SC variants. No checkpoint revision, self-consistency sample count, or inference date reported."
+      },
+      {
+        "name": "QvQ-72B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision reasoning model; table abbreviates as QvQ. No checkpoint/snapshot or inference date reported."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision reasoning model. Also used via the OpenAI API to summarize meme descriptions for text-only model inputs. No API snapshot or inference date reported."
+      },
+      {
+        "name": "Grok-3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision reasoning model; text lists Grok3 and table lists Grok-3. No access method, snapshot, or inference date reported."
+      },
+      {
+        "name": "Claude-3.7-sonnet-thinking",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision reasoning model; table abbreviates as Claude-3.7. No API snapshot or inference date reported."
+      },
+      {
+        "name": "Gemini-2.5-Pro",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision reasoning model; table lists Gemini-2.5-pro. No API snapshot or inference date reported."
+      },
+      {
+        "name": "microsoft/deberta-xlarge-mnli",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the BERTScore embedding model for generative evaluation and CRS-related semantic relevance. No model revision or package version reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main MemeReaCon model evaluations across CMI-C, CSAC-C, PC-G, and PI-G",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "All evaluations were zero-shot with no fine-tuning. Prompts are provided in appendix tables, but calls per item, decoding parameters, max tokens, hardware, latency, and cost are not reported."
+      },
+      {
+        "scope": "VRM prompting",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "For classification tasks, VRM models receive the same inputs as VLMs but are additionally instructed to explain their reasoning before the final classification. No reasoning-token budget or output-length limit is reported."
+      },
+      {
+        "scope": "Qwen2.5-Omni CoT and self-consistency variants",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports CoT and SC conditions for Qwen2.5-Omni, but does not report SC sample count, aggregation or voting rule, temperature, top-p, seed, or candidate-selection procedure."
+      },
+      {
+        "scope": "Text-only baseline input adaptation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Text-only models were given detailed meme-image descriptions; these descriptions were summarized using GPT-4o via the OpenAI API. The paper does not report how descriptions were created before summarization, how many GPT-4o calls were made, or the GPT-4o decoding settings."
+      },
+      {
+        "scope": "Image-only baseline input adaptation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "For image-only models, post text was rendered onto the image as a composite manually. The exact rendering procedure and any quality checks are not reported."
+      },
+      {
+        "scope": "Automatic metric computation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "BERTScore uses microsoft/deberta-xlarge-mnli; CRS uses a BERTScore relevance threshold of 0.7",
+        "compute_or_cost": null,
+        "detail": "ROUGE-L, BERTScore, and CRS settings are only partially specified; exact library versions and CRS difficulty weights are not fully reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Model performance on MemeReaCon tasks",
+        "present": false,
+        "description": "No human performance baseline is reported for the classification or generation tasks. Human annotators provide gold labels/reference annotations and IAA, not a matched human-vs-model task performance comparison.",
+        "directly_comparable": false,
+        "detail": "Because humans and models were not evaluated under materially matched task conditions, there is no directly comparable human baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "MemeReaCon is introduced as a new benchmark in this paper rather than a legacy public benchmark.",
+        "Task labels and reference annotations were newly produced by human annotators.",
+        "The collection includes posts through May 2025, making at least some source items recent relative to several evaluated model families."
+      ],
+      "basis": "The curated MemeReaCon benchmark and labels were newly created, which lowers risk relative to legacy benchmarks. However, the raw memes, post text, and comments were public Reddit content from January 2022 to May 2025, and many source items may predate some evaluated 2024/2025 models or be present in web-scale training data. The paper reports no decontamination test, no model training-data exclusion evidence, and no inference dates or proprietary model snapshots. Therefore contamination risk is conservatively assessed as moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Gold labels and references were produced by human annotators with reported Fleiss' Kappa; no LLM-as-evaluator human validation is applicable because no LLM judge is reported.",
+      "detail": "Headline results are determined by human annotations plus automatic metrics such as accuracy, macro F1, BERTScore, ROUGE-L, and CRS. GPT-4o was used to summarize meme descriptions for text-only baseline inputs, but the paper does not use an LLM as a metric or evaluator."
+    },
+    "reporting_gaps": [
+      "No exact model checkpoints, API snapshots, or inference dates are reported for the evaluated models.",
+      "Access method is not clearly reported for proprietary models such as Grok-3, Claude-3.7-sonnet-thinking, and Gemini-2.5-Pro; Appendix C's statement that all inferences used vLLM or HuggingFace Transformers does not resolve proprietary-model access details.",
+      "Sampling and decoding parameters are not reported, including temperature, top-p, max tokens, seeds, stop criteria, and number of candidates per item.",
+      "The self-consistency condition lacks sample count, aggregation/voting rule, and selection details.",
+      "The exact number of evaluated examples per task/model is not explicitly stated beyond the final dataset size of 1,565 instances.",
+      "No human baseline performance is reported for any task.",
+      "Free-form generation evaluation relies on automatic metrics; no human evaluation of generated explanations or intents is reported.",
+      "CRS is only partially specified: the BERTScore threshold is given, but exact difficulty weights and implementation details are not fully reported.",
+      "Error-analysis methodology is underspecified: sample size, coder identities/count, annotation protocol, adjudication, and blinding are not reported.",
+      "No decontamination or training-data-overlap analysis is reported despite using public Reddit content and recent proprietary models.",
+      "Annotator demographics and geography are not reported beyond Ph.D. student status, English proficiency, and familiarity with internet culture/memes.",
+      "The number of skipped annotations and the frequency of complete disagreements requiring senior-annotator adjudication are not reported.",
+      "GPT-4o image-description summarization for text-only baselines lacks prompt, snapshot, date, sampling settings, and quality-control details.",
+      "Manual compositing/rendering of post text for image-only baselines lacks procedural detail and validation.",
+      "Some ablation reporting appears difficult to reconcile with the main results table, especially Table 14's model blocks and original scores, leaving exact model attribution for that analysis unclear."
+    ]
   }
 }

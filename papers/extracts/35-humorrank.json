@@ -203,5 +203,287 @@
     "code_url": null,
     "data_url": null,
     "other": "Live leaderboard: https://humorrank-leaderboard.pages.dev/. The paper states that tournament code, evaluation scripts, and the Adaptive Swiss pairing implementation are provided in the supplementary materials."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Invited Master’s students with native or near-native English proficiency and prior coursework or research exposure to humor and NLP",
+        "recruitment": "Recruited by invitation; completed the task without payment",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "175 nominal A/B/Tie votes across 60 SemEval pairs; 55 pairs have votes from all three annotators",
+        "detail": "Blind human annotation study. Annotators saw the headline and two anonymized jokes, with model identities hidden and left/right order randomized per pair. The paper reports human-only dyad and three-rater Krippendorff alpha, plus human–LLM judge agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "Llama 3.3 70B Instruct",
+        "role": "primary",
+        "blind": true,
+        "detail": "Primary production pairwise judge for SemEval and HTB full round-robin tournaments. For each same-prompt duel, it selected A, B, or TIE, returned brief reasoning, and emitted winner humor-mechanism tags, delivery-feature tags, and loser failure tags. The prompt template contains the headline and Joke A/B, not model identities. Also used in abandoned numeric-scoring judge experiments."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen 2.5 72B Instruct",
+        "role": "validation",
+        "blind": true,
+        "detail": "Secondary production LLM judge used to replicate full round-robin duels and validate cross-judge rank stability; also used for Qwen-judge feature and failure-mode distributions and HTB Swiss budget tables."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5",
+        "role": "validation",
+        "blind": null,
+        "detail": "Rejected pairwise screening judge in Appendix B. On five shared SemEval headlines, GPT-5-as-judge showed 87.5% self-win when judging its own model’s output and was not used for production rankings."
+      },
+      {
+        "type": "LLM",
+        "name": "Gemini 2.5 Pro",
+        "role": "validation",
+        "blind": null,
+        "detail": "Rejected judge configuration in Appendix B, including a 120-headline absolute-scoring pilot and pairwise screening on five shared SemEval headlines. Gemini-as-judge showed 87.5% self-win and was not used for production rankings."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-OSS 120B",
+        "role": "validation",
+        "blind": null,
+        "detail": "Rejected pairwise screening judge in Appendix B. The paper reports approximately 75% self-win in the screening runs and excludes it from production judging."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen3-32B",
+        "role": "validation",
+        "blind": null,
+        "detail": "Rejected pairwise screening judge in Appendix B. It ranked itself fourth with approximately 57.5% self-win and was not used for production judging."
+      },
+      {
+        "type": "human-expert",
+        "name": "Three invited annotators H1–H3",
+        "role": "validation",
+        "blind": true,
+        "detail": "Human validators re-rated 60 stratified SemEval duels with anonymized joke options. Their labels were used to compute human-only, human–Llama, and human–Qwen agreement statistics, not to construct the main leaderboard."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Bradley–Terry maximum-likelihood estimation",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary leaderboard aggregation method. Fits global BT ratings from pairwise outcomes using MM convergence epsilon < 1e-6, ratings anchored at 1000, with 95% confidence intervals from 200 bootstrap resamples using seed 42."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Stable Elo",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Sequence-robust audit metric using K-factor 32 and N=10 randomly shuffled orderings of the match history; reported alongside BT ratings."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Kendall tau, Krippendorff alpha, agreement rates, binomial tests, transitivity score",
+        "role": "validation",
+        "blind": null,
+        "detail": "Statistical analyses used to quantify cross-judge rank stability, human/LLM agreement, pairwise separation, and tournament consistency."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Production joke generation for nine contestant models on SemEval-2026 MWAHAHA and HTB prompts",
+        "mode": "single-sample",
+        "n": "1 joke per model per prompt",
+        "selector": "none",
+        "detail": "The system prompt asks each candidate model to generate a funny joke and output only the joke text. The paper does not report best-of-N generation or post-generation selection before tournament judging."
+      },
+      {
+        "scope": "Appendix B judge-configuration screening candidate pools",
+        "mode": "not-reported",
+        "n": "Track A reports approximately 11–15 humor candidates per headline in numeric-scoring pilots; Exp. 4 reports 4 models per headline",
+        "selector": "unclear",
+        "detail": "These pilots were used to evaluate failed judge paradigms. The paper reports scoring or pairwise evaluation of candidate pools but does not fully specify how those candidates were generated or selected."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT",
+        "version_or_snapshot": "5",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Contestant model in the production tournament and rejected pairwise screening judge. The paper does not report provider endpoint, API snapshot, deployment ID, or inference date."
+      },
+      {
+        "name": "Gemini",
+        "version_or_snapshot": "2.5 Pro",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Contestant model and rejected judge configuration in Appendix B. No exact API snapshot, endpoint, or inference date is reported."
+      },
+      {
+        "name": "Claude",
+        "version_or_snapshot": "3.5 Haiku",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Contestant model. No API snapshot, endpoint, or inference date is reported."
+      },
+      {
+        "name": "Kimi",
+        "version_or_snapshot": "K2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Contestant model. No exact deployment, endpoint, or inference date is reported."
+      },
+      {
+        "name": "Qwen",
+        "version_or_snapshot": "3 32B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Contestant model and rejected pairwise screening judge. The paper does not report checkpoint hash, hosting setup, or inference date."
+      },
+      {
+        "name": "GPT-OSS",
+        "version_or_snapshot": "120B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Contestant model and rejected pairwise screening judge. The paper does not report checkpoint hash, hosting setup, or inference date."
+      },
+      {
+        "name": "Llama",
+        "version_or_snapshot": "3.3 70B Instruct",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Contestant model and primary production judge. The paper says full round-robin judging on SemEval and HTB required approximately 48 hours of dedicated NVIDIA H100 80GB GPU compute for the primary Llama judge pipeline; it does not report checkpoint hash or inference date."
+      },
+      {
+        "name": "HumorGen",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Specialized contestant model described as a Qwen-7B specialist trained via Cognitive Synergy Fusion and supervised fine-tuning in the HumorGen pipeline. The paper cites a Hugging Face URL but does not report checkpoint hash or inference date."
+      },
+      {
+        "name": "Base Qwen",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Zero-shot architecture-control contestant. The exact Qwen generation/checkpoint and inference setup are not specified."
+      },
+      {
+        "name": "Qwen",
+        "version_or_snapshot": "2.5 72B Instruct",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Secondary production LLM judge for cross-judge validation. Described as an open-weight judge, but the paper does not report checkpoint hash, hardware/access setup, or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Production candidate joke generation",
+        "calls_per_item": "1 generation call per model–prompt is implied by the single-output prompt; total candidate-generation calls are not explicitly reported",
+        "candidates_per_item": "1 joke per model per prompt; nine contestant models on 300 SemEval prompts and 400 HTB prompts",
+        "token_budget": "Appendix G Table 19 reports Max New Tokens = 256; the Reproducibility Statement also says token limits were inherited from respective model APIs without artificial truncation",
+        "sampling_parameters": "Temperature T = 0.7; top-p = 0.9 set explicitly wherever the provider API exposes it; system prompt: “You are a joke generator. Given a headline or topic, generate a funny joke. Output ONLY the joke text. No thinking tags, no reasoning, no explanation, no extra words.”",
+        "compute_or_cost": "Candidate-generation compute and monetary cost are not separately reported; the paper mentions practical compute and API budget constraints",
+        "detail": "Production generation covers headline-conditioned textual jokes for SemEval-2026 MWAHAHA and HTB."
+      },
+      {
+        "scope": "Production full round-robin LLM judging",
+        "calls_per_item": "One JSON evaluation call per scheduled pairwise duel per LLM judge; SemEval Full RR = 10,800 calls per judge; HTB Full RR = 14,400 calls per judge; 25,200 pairwise calls per judge across both benchmarks",
+        "candidates_per_item": "2 jokes per duel, with A/B/TIE output; K=9 gives 36 unordered model pairs per prompt",
+        "token_budget": "Judge Max New Tokens = 512; maximum retry threshold = 3; backoff base = 2.0; retry cap = 4.0",
+        "sampling_parameters": "Judge temperature T = 0.1; structured JSON judge prompt; prompt order is described as swapped across comparisons to mitigate position bias",
+        "compute_or_cost": "Approximately 48 hours of dedicated NVIDIA H100 80GB GPU compute for the primary Llama judge pipeline over SemEval and HTB; Qwen replication required additional inference budget; no monetary cost reported",
+        "detail": "Primary judge was Llama 3.3 70B Instruct; secondary validation judge was Qwen 2.5 72B Instruct."
+      },
+      {
+        "scope": "Adaptive Swiss Pairing budget ablations",
+        "calls_per_item": "If run directly: Swiss 3RR = 12 pairs/prompt and Swiss 2RR = 8 pairs/prompt. SemEval: 3,600 and 2,400 judgments; HTB: 4,800 and 3,200 judgments",
+        "candidates_per_item": "2 jokes per scheduled duel",
+        "token_budget": "Same judge token budget as production judging when LLM labels are used",
+        "sampling_parameters": "Same pairwise judge prompt and T = 0.1 judging setup; ASP uses temporary scores only for pairing and final ratings use BT MLE",
+        "compute_or_cost": "No separate compute or cost reported; several appendix figures describe Swiss runs as simulated/subsampled from the full setting",
+        "detail": "Full RR is 36 pairs/prompt. Swiss 3RR is treated as the recommended reduced-budget mode; Swiss 2RR is treated as a minimum-budget stress test."
+      },
+      {
+        "scope": "Judge-configuration screening and failed judge paradigms",
+        "calls_per_item": "Numeric Track A: 17,317 individual scores for Exp. 1, approximately 12k scores for Exp. 2, approximately 12k scores for Exp. 3, and a 120-headline Gemini absolute pilot with 4 models/headline. Pairwise Track B: GPT-5 and Gemini judges each evaluated 180 duels on five shared headlines; GPT-OSS and Qwen32 used ten headlines for additional coverage",
+        "candidates_per_item": "Numeric pilots used approximately 11–15 candidates per headline in Exp. 1–3; pairwise pilots used 2 jokes per duel",
+        "token_budget": null,
+        "sampling_parameters": "Failed paradigms included absolute 0–100 scoring, structured 4×1–5 scoring, scalar 1–20 funniness scoring, and an early verbose chain-of-thought pairwise prompt",
+        "compute_or_cost": null,
+        "detail": "These runs justified abandoning absolute scoring, rejecting self-preferring proprietary/same-family judges, and revising the pairwise prompt to reduce spurious ties."
+      },
+      {
+        "scope": "Rating/statistical computation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "BT MM convergence epsilon < 1e-6; ratings anchored at 1000; 200 bootstrap resamples with seed 42; Stable Elo K-factor 32 with 10 shuffled orderings",
+        "compute_or_cost": "No compute time reported for rating/statistical computation",
+        "detail": "Automatic aggregation and analysis rather than model inference."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor-generation leaderboard",
+        "present": false,
+        "description": "The paper does not include human-generated jokes as contestants and does not compare model jokes against human-authored jokes under matched tournament conditions.",
+        "directly_comparable": false,
+        "detail": "Human input is used for validation of judge agreement, not as a generation baseline."
+      },
+      {
+        "scope": "LLM judge agreement validation",
+        "present": true,
+        "description": "Three blind human annotators re-rated the same 60 anonymized SemEval duels used for comparison with Llama and Qwen judge labels.",
+        "directly_comparable": true,
+        "detail": "Human–human pooled agreement was 47.1%; human–Llama agreement was 49.7% with Fisher exact p = 0.667; Llama–Qwen agreement on the same 60 pairs was 50.0% with alpha = 0.425. This is a directly matched comparison for preference-label agreement, not for generation quality."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "HTB is described as 400 headline prompts held out from the SemEval distribution to test cross-benchmark generalization",
+        "SemEval uses the official Task 1 test set, not training prompts, according to the paper",
+        "All contestants are evaluated on the same prompts, which controls comparative prompt exposure within the tournament but does not decontaminate models"
+      ],
+      "basis": "The evaluated benchmarks are described as publicly available, and the paper reports no decontamination test, no model-specific training-data audit, and no discussion of benchmark or prompt contamination. Because models include later proprietary and open-weight systems with undisclosed training data, prior exposure to public prompts or benchmark distributions cannot be ruled out. The task is generative and comparative rather than answer-key recall, and HTB held-out prompts reduce but do not eliminate contamination concerns."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "The main leaderboard rankings, GPT-5/HumorGen placement claims, cross-judge stability results, Swiss budget-fidelity conclusions, and GTVH feature/failure-mode profiles are determined primarily by Llama and Qwen LLM judgments.",
+      "human_validation": "Small directional validation: three invited annotators produced 175 votes on 60 stratified SemEval pairs, with 55 pairs having all three votes. The paper explicitly treats human annotations as directional agreement evidence rather than ground truth; GTVH feature tags were not separately human-audited.",
+      "detail": "The headline empirical conclusions rest on LLM-as-judge pairwise preferences aggregated with BT MLE. Human evaluation is limited in size and validates agreement patterns only, not the full tournament or feature labels."
+    },
+    "reporting_gaps": [
+      "No exact API snapshots, deployment IDs, provider endpoints, checkpoint hashes, or inference dates are reported for the contestant models or LLM judges.",
+      "Access mode is not mapped per model; the paper mentions local and API-based models but does not specify which contestant used which access path. Only the primary Llama judge pipeline is tied to H100 hardware.",
+      "Candidate-generation token limits are reported inconsistently: the Reproducibility Statement says token limits were inherited from respective model APIs without artificial truncation, while Appendix G Table 19 reports Max New Tokens = 256.",
+      "Candidate-generation total calls, latency, retry/failure rates, and monetary API costs are not reported.",
+      "The paper says prompt order is swapped across comparisons but does not fully specify the balancing/randomization procedure; reported match counts correspond to one judgment per unordered pair per prompt, not an explicitly duplicated A/B and B/A design.",
+      "Human annotator demographics are limited to student status, English proficiency, and coursework/research exposure; age, gender, cultural background, geography, and ethics/IRB handling are not reported.",
+      "The human-evaluation vote accounting has limited granularity: the paper reports 175 votes, 60 pairs, and 55 fully overlapping pairs, but does not provide individual annotator vote counts in the main design description.",
+      "GTVH mechanism, delivery, and failure tags are co-emitted by the same LLM judge response that decides the duel and are not separately human-audited.",
+      "The early verbose chain-of-thought pairwise pilot is reported only as a pilot with approximately 62% tie rate; its judge model and full sample details are not fully specified.",
+      "The paper does not discuss training-data or benchmark contamination and reports no decontamination tests for SemEval, HTB, contestant models, or LLM judges.",
+      "It is not always explicit whether Swiss 2RR/3RR budget ablations involved fresh LLM calls or simulated/subsampled labels from the full round-robin match history."
+    ]
   }
 }

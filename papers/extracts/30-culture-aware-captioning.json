@@ -188,5 +188,400 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Human annotators; expertise, cultural background, and demographics not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "Chinese"
+        ],
+        "observations": "A fixed 20% subset of the 1,000 test samples was scored by human annotators using the six 10-point dimensions; the remaining 80% was scored by an LLM-as-a-Judge and final metrics were averaged over the full test set.",
+        "detail": "Section 7.1 states a human-machine hybrid protocol. It does not report the number of annotators, ratings per item, adjudication, compensation, or inter-annotator agreement. Western-context inference/evaluation/output used English; Eastern-context inference/evaluation/output used Chinese."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Humans involved in data quality control; identities and expertise not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "Chinese"
+        ],
+        "observations": "High-quality captioned data were constructed with candidate generation, automatic screening, manual spot-checking, and additional review of ambiguous cases when necessary.",
+        "detail": "Section 5 describes manual spot-checking for training supervision and benchmark reference construction, but gives no annotator count, sampling rate for spot checks, or detailed annotation protocol. Section 7.5 calls the high-quality captions used in judge validation 'human reference captions,' while Section 5 describes a generated-candidate-plus-screening pipeline; human authorship/count is therefore not fully specified."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Humans who manually predefined better-worse labels for judge validation; no further details reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "Chinese"
+        ],
+        "observations": "400 image instances were used for pairwise judge validation: image + high-quality caption + low-quality caption, with manually predefined better-worse labels. The first 200 cases had relatively large quality gaps and the remaining 200 had smaller, more ambiguous differences.",
+        "detail": "These labels served as the reference for computing agreement of GPT-5.1, Gemini-3-Flash-Preview, and Claude Sonnet 4.5 in Figure 3."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Human annotators scored the fixed 20% test subset on Image Relevance, Contextual Fit, Semantic Richness, Reasonableness, Humor, and Creativity. Expertise/blinding were not reported."
+      },
+      {
+        "type": "LLM",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "An LLM-as-a-Judge scored the remaining 80% of test samples under the same six-dimensional rubric. The paper validates GPT-5.1, Gemini-3-Flash-Preview, and Claude Sonnet 4.5 and says GPT-5.1 performs best, but Section 7.1 does not explicitly name the final absolute-score judge."
+      },
+      {
+        "type": "LLM",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "For GRPO preference alignment, an LLM judge ranked K=8 sampled rollouts plus the reference caption for each training sample; rewards were constructed from each rollout's rank relative to the reference. The judge model name and prompt details are not reported in the supplied text."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Manually predefined better-worse labels on the 400-instance judge validation set were used as the reference labels for LLM-judge agreement."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5.1",
+        "role": "validation",
+        "blind": null,
+        "detail": "Evaluated as a pairwise judge on the 400-instance validation set. Reported agreement with manual labels: 68.2, 77.3, 71.6, and 79.2 across the four language/difficulty settings shown in Figure 3."
+      },
+      {
+        "type": "LLM",
+        "name": "Gemini-3-Flash-Preview",
+        "role": "validation",
+        "blind": null,
+        "detail": "Evaluated as a pairwise judge on the 400-instance validation set. Reported agreement: 63.7, 71.9, 65.1, and 77.6 across the four settings."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude Sonnet 4.5",
+        "role": "validation",
+        "blind": null,
+        "detail": "Evaluated as a pairwise judge on the 400-instance validation set. Reported agreement: 61.8, 69.5, 67.3, and 75.4 across the four settings."
+      },
+      {
+        "type": "automatic-metric",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Automatic screening was part of the caption-data construction pipeline and helped determine retained captions; the screening model/metric and thresholds are not specified."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Manual spot-checking and ambiguous-case review were part of data construction. Annotator details and decision rules are not reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Benchmark/test-time caption generation for Tables 2, 3, and 4",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Models were required to generate a short humorous caption for the input image and cultural-context condition, but the paper does not state whether outputs were single-sample, greedy, or selected from multiple candidates; no decoding or post-processing procedure is reported."
+      },
+      {
+        "scope": "Training and benchmark reference-caption construction",
+        "mode": "best-of-n",
+        "n": "not reported",
+        "selector": "unclear",
+        "detail": "For standard caption samples, candidate captions were generated for each image-context pair and one caption was retained after screening. The number of candidates, generation models, and exact selector composition are not reported; the pipeline included automatic screening, manual spot-checking, and review of ambiguous cases."
+      },
+      {
+        "scope": "GRPO preference-alignment rollouts",
+        "mode": "not-reported",
+        "n": "K = 8 sampled rollouts plus one reference caption per training sample",
+        "selector": "none",
+        "detail": "The K rollouts were not reported as a best-of-N inference output. They were jointly ranked by an LLM judge against a reference caption, and all sampled rollouts received rank-derived rewards for GRPO updates."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a general-purpose multimodal baseline in Table 2. No API snapshot, inference date, access route, or decoding setup is reported."
+      },
+      {
+        "name": "gemini-3-flash-preview",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a Table 2 generation baseline and also represented in judge validation as Gemini-3-Flash-Preview. Reference [68] is official Gemini API documentation accessed 2026-04-02, but this is not reported as the inference date."
+      },
+      {
+        "name": "Claude Sonnet 4.5_pred",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a Table 2 generation baseline under this exact row name. No inference date, API snapshot, or decoding setup is reported."
+      },
+      {
+        "name": "Claude Sonnet 4.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a pairwise judge in Figure 3. Reference [69] is the Claude Sonnet 4.5 system card accessed 2026-04-02; this is not reported as the inference date."
+      },
+      {
+        "name": "InternVL3-8B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a baseline in Tables 2 and 3. Checkpoint/source, inference date, access route, and decoding parameters are not reported."
+      },
+      {
+        "name": "LLaVA-OneVision-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a Table 2 baseline. No checkpoint hash, inference date, access route, or decoding parameters are reported."
+      },
+      {
+        "name": "MiniCPM-V 2.6",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a baseline in Tables 2 and 3. No inference-date or decoding details are reported."
+      },
+      {
+        "name": "MiniGPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a Table 2 baseline. No checkpoint or inference details are reported."
+      },
+      {
+        "name": "GLM-4V-9B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a Table 2 baseline. No checkpoint, access, or decoding details are reported."
+      },
+      {
+        "name": "Qwen2.5-VL-7B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a Table 2 baseline. No checkpoint hash or inference details are reported."
+      },
+      {
+        "name": "Qwen3-VL-8B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the backbone baseline in Tables 2, 3, and 4. No checkpoint hash, inference date, or decoding setup is reported."
+      },
+      {
+        "name": "Qwen3-VL-8B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Adopted as the CuHAlign backbone and fine-tuned with LoRA. The paper alternates between Qwen3-VL-8B in the method section and Qwen3-VL-8B-Instruct in the baseline tables; exact checkpoint provenance is not reported."
+      },
+      {
+        "name": "cogvlm2-llama3-chat-19B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a Table 2 baseline. No checkpoint hash, inference date, or decoding setup is reported."
+      },
+      {
+        "name": "QwenVL+CLoT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the prior relevant method baseline in Table 2. Exact implementation/checkpoint and inference settings are not reported."
+      },
+      {
+        "name": "CuHAlign",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Authors' trained model, based on Qwen3-VL-8B with LoRA and three stages: Western SFT, judge-based GRPO with degradation-aware constraint, and Eastern adaptation. No released checkpoint, training compute, or inference-date details are reported."
+      },
+      {
+        "name": "GPT-5.1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Run as a pairwise LLM judge in Figure 3; likely selected for judge use based on the reported validation result, but the supplied text does not give an API snapshot, access route, or inference date."
+      },
+      {
+        "name": "unnamed LLM-as-a-Judge",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "The main 80% automatic scoring judge and the GRPO ranking judge are described functionally; the supplied text does not unambiguously name the final absolute-score judge or the GRPO judge."
+      },
+      {
+        "name": "unnamed candidate-generation model(s) for data construction",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "High-quality captioned data were built from generated candidates followed by screening; the paper says subsets differ partly in the model used for candidate generation, but does not name those models."
+      },
+      {
+        "name": "unnamed unified text encoder",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used to map degradation-evidence texts and generated outputs into a shared representation space for the Degradation-aware Prototype Repulsion Constraint. The encoder identity is not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main benchmark caption generation under Western and Eastern cultural contexts",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Benchmark contains 1,000 images. Models were evaluated on the same test split, separately under Western and Eastern contexts. Western setting used English prompts/evaluation/outputs; Eastern setting used Chinese prompts/evaluation/outputs. Calls per item, candidate counts, decoding parameters, token limits, and cost are not reported."
+      },
+      {
+        "scope": "No-context comparison in Table 3",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "InternVL3-8B-Instruct, MiniCPM-V 2.6, Qwen3-VL-8B-Instruct, and CuHAlign were compared on the same 1,000 test samples under no context, Western context, and Eastern context. Generation budget and decoding settings are not reported."
+      },
+      {
+        "scope": "Hybrid evaluation scoring for main results",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "A fixed 20% subset was scored by human annotators and the remaining 80% by an LLM-as-a-Judge using the six-dimensional 10-point rubric. The number of LLM calls, score aggregation details, LLM sampling settings, and human ratings per item are not reported."
+      },
+      {
+        "scope": "Judge validation experiment",
+        "calls_per_item": null,
+        "candidates_per_item": "2 captions per image instance: one high-quality caption and one low-quality caption",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "400 image instances from the test set were used. GPT-5.1, Gemini-3-Flash-Preview, and Claude Sonnet 4.5 performed pairwise judgments. The paper does not report prompt token limits, repetition, sampling parameters, or cost."
+      },
+      {
+        "scope": "GRPO preference-alignment generation and judging",
+        "calls_per_item": null,
+        "candidates_per_item": "K = 8 sampled rollouts plus 1 reference caption per training sample",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The LLM judge outputs a joint ranking over the candidate set; rewards are rank-relative to the reference. The exact number of judge calls per training sample, rollout decoding settings, reward mapping f, and judge prompt are not reported."
+      },
+      {
+        "scope": "Caption/reference data construction pipeline",
+        "calls_per_item": null,
+        "candidates_per_item": "plural candidate captions per image-context pair; one retained after screening; number not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The same construction pipeline of candidate generation, automatic screening, manual spot-checking, and ambiguous-case review was applied to training supervision and benchmark reference construction. Candidate-generation model names, number of candidates, prompts, decoding settings, screening thresholds, and cost are not reported."
+      },
+      {
+        "scope": "CuHAlign supervised training/adaptation setup",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Stage 1 uses 3,000 Western-context image-text samples for SFT. Stage 3 uses 1,000 image-text pairs: 50% new Eastern-context images, 30% Eastern captions for images already in the training pool, and 20% Western replay. LoRA is used, but optimizer, epochs, batch size, hardware, training time, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Culture-aware humorous caption generation benchmark",
+        "present": false,
+        "description": "No human caption-generation system or human-authored outputs are reported as a competing baseline scored under the same six-dimensional evaluation protocol. Reference captions and manually predefined labels are used as anchors/validation targets, not as a directly comparable human performance baseline.",
+        "directly_comparable": false,
+        "detail": "Tables 2-4 compare MLLMs, the Qwen3-VL backbone, QwenVL+CLoT, and CuHAlign; no row reports human generator performance."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The constructed train, development, and benchmark splits are image-disjoint within the authors' 5,000-image filtered pool.",
+        "The benchmark references are newly constructed under both Western and Eastern contexts rather than copied as a conventional captioning benchmark in the supplied text.",
+        "All compared models are evaluated on the same test split."
+      ],
+      "basis": "The paper introduces a new culture-aware benchmark, but its raw images are collected from CLoT, a prior public dataset, and no decontamination test or model-training-data audit is reported. Several evaluated proprietary and open models may have been trained after CLoT or on web/image-caption data, and exact inference dates/snapshots are missing. The image-disjoint split controls leakage from the authors' fine-tuning data into their benchmark, but it does not rule out pretraining or prior-benchmark exposure for evaluated external models."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Main model comparisons in Table 2, the explicit-context results in Table 3, ablation conclusions in Table 4, and CuHAlign's preference-alignment training all rely substantially on LLM judgments; 80% of the main evaluation set is LLM-scored and GRPO rewards are generated by an LLM judge.",
+      "human_validation": "The paper uses human scoring for a fixed 20% test subset and constructs a 400-instance pairwise judge validation set with manually predefined better-worse labels. GPT-5.1, Gemini-3-Flash-Preview, and Claude Sonnet 4.5 are compared against those labels, with GPT-5.1 highest in all four reported settings.",
+      "detail": "Because headline quantitative results are computed from a hybrid protocol dominated by LLM-scored items, and because the proposed method's preference-alignment stage is judge-based, LLM judging is a primary determinant of both evaluation outcomes and the trained method. Human validation is present but limited and not reported with annotator counts or inter-annotator agreement."
+    },
+    "reporting_gaps": [
+      "Number of human annotators, recruitment, demographics, cultural/language background, expertise, compensation, and geography are not reported.",
+      "Number of human ratings per item, aggregation method, adjudication, inter-annotator agreement, and blinding/randomization for human evaluation are not reported.",
+      "The exact fixed 20% human-scored subset selection procedure is not described, and separate human-only versus LLM-only scores are not reported.",
+      "The final LLM used for the 80% absolute-score evaluation is not unambiguously named in Section 7.1; the GRPO ranking judge is also unnamed.",
+      "LLM judge prompts, scoring calibration procedure, temperature/top-p/max-token settings, repetition, and API snapshots/inference dates are not reported.",
+      "Test-time caption-generation budgets for all evaluated models are missing: calls per item, number of candidates, decoding parameters, token limits, post-processing, and whether any best-of-N selection was used.",
+      "Evaluated model provenance is incomplete: checkpoint hashes, API model snapshots, access routes, inference dates, and implementation details are not reported for most baselines.",
+      "Data-construction details are incomplete: candidate-generation models, number of generated candidates per image-context pair, automatic screening criteria/thresholds, manual spot-check rate, annotator counts, and ambiguous-case resolution process are not reported.",
+      "Training details for CuHAlign are incomplete: LoRA hyperparameters, optimizer, learning rates, batch sizes, epochs, hardware, training time, and compute/cost are not reported.",
+      "GRPO details are incomplete: exact reward mapping function f, relative-advantage transformation, number of training samples used in Stage 2, rollout decoding settings, and LLM judge call structure are not reported.",
+      "Degradation-aware constraint details are incomplete: degradation annotation size/process, text encoder identity, prototype construction details beyond averaging, threshold m, and lambda are not reported.",
+      "No decontamination analysis is reported for using CLoT-derived images with later proprietary or open models.",
+      "Artifact availability is not reported in the supplied text: no code URL, data URL, prompts, or model checkpoint link is provided.",
+      "The paper acknowledges that the Chinese–Eastern and English–Western setup may not disentangle language effects from cultural effects, and it only instantiates two coarse-grained cultural conditions."
+    ]
   }
 }

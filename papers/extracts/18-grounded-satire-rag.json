@@ -167,5 +167,255 @@
     "code_url": "https://github.com/dlylinyao/ONLY/tree/CHUM",
     "data_url": "https://github.com/dlylinyao/ONLY/tree/CHUM",
     "other": "The paper presents a local web application for generating definitions and searching relevant news; it states that the repository of the application will be made public upon acceptance."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Finnish annotators",
+        "recruitment": "Paper states it employed six annotators; no further recruitment details are reported.",
+        "geography": "Finnish cultural background; exact location not reported.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each annotator rated 100 randomly shuffled generated definitions on two 1–5 Likert questions: Q1 “Is it funny?” and Q2 “Is it political?”",
+        "detail": "Half of the six annotators were Finnish. The paper uses this subgroup to analyze cultural-context effects and reports subgroup Krippendorff’s alpha."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Annotators from different cultural backgrounds, reported as the international group",
+        "recruitment": "Paper states it employed six annotators; no further recruitment details are reported.",
+        "geography": "Different cultural backgrounds; countries/regions not specified.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each annotator rated 100 randomly shuffled generated definitions on two 1–5 Likert questions: Q1 “Is it funny?” and Q2 “Is it political?”",
+        "detail": "The other half of the six annotators came from different cultural backgrounds. The paper compares this group with Finnish annotators using Mann-Whitney U tests and subgroup agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "Six human annotators rated the 100 definitions. The paper says definitions were randomly shuffled so annotators did not know which model or experimental condition produced each sample. No annotator expertise is reported."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen/Qwen2.5-7B-Instruct",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as an LLM judge to assign 1–5 funny and political scores to the same definitions using the evaluation prompt in Appendix A. The prompt instructs the model to use only the provided text and output JSON."
+      },
+      {
+        "type": "LLM",
+        "name": "meta-llama/Llama-3.1-8B-Instruct",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as an LLM judge to assign 1–5 funny and political scores to the same definitions using the evaluation prompt in Appendix A."
+      },
+      {
+        "type": "LLM",
+        "name": "mistralai/Mistral-7B-Instruct-v0.3",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as an LLM judge to assign 1–5 funny and political scores to the same definitions using the evaluation prompt in Appendix A."
+      },
+      {
+        "type": "LLM",
+        "name": "CohereLabs/aya-expanse-8b",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as an LLM judge to assign 1–5 funny and political scores to the same definitions using the evaluation prompt in Appendix A; reported as having the highest overall correlation with human judgments."
+      },
+      {
+        "type": "LLM",
+        "name": "utter-project/EuroLLM-9B-Instruct",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as an LLM judge to assign 1–5 funny and political scores to the same definitions using the evaluation prompt in Appendix A."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Krippendorff’s alpha; Mann-Whitney U test; Wilcoxon signed-rank test; Spearman correlation with 95% confidence intervals",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to compute inter-annotator agreement, cultural-background and word-source comparisons, RAG vs non-RAG comparisons, and LLM-human agreement."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Evaluation corpus of generated satirical dictionary definitions",
+        "mode": "single-sample",
+        "n": "1 retained definition per word-condition; 50 words × 2 conditions = 100 definitions",
+        "selector": "none",
+        "detail": "The paper generated definitions for 50 words: 25 topic-modeled news-related words and 25 randomly selected English words. For each word, it generated one definition with RAG and one without RAG. No best-of-N generation or post-generation candidate selection is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "meta-llama/Meta-Llama-3-8B-Instruct",
+        "version_or_snapshot": "Ollama llama3:latest footnoted; mutable tag",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for satirical definition generation via the ollama library. The paper does not report an immutable model revision, decoding setup, or inference date."
+      },
+      {
+        "name": "NLP-Town/bert-base-multilingual-uncased-sentiment",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for sentiment analysis of scraped Yle article body text; outputs one to five stars. The paper says it is from Hugging Face but does not report revision or runtime access mode."
+      },
+      {
+        "name": "paraphrase-multilingual-MiniLM-L12-v2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to convert news articles into embeddings for topic modeling before UMAP and BERTopic clustering. No model revision or inference date is reported."
+      },
+      {
+        "name": "all-MiniLM-L6-v2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to embed news articles for semantic search/retrieval. No model revision or inference date is reported."
+      },
+      {
+        "name": "Qwen/Qwen2.5-7B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an LLM judge. Exact model identifier is named, but no immutable snapshot, inference date, or access mode is reported."
+      },
+      {
+        "name": "meta-llama/Llama-3.1-8B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an LLM judge. Exact model identifier is named, but no immutable snapshot, inference date, or access mode is reported."
+      },
+      {
+        "name": "mistralai/Mistral-7B-Instruct-v0.3",
+        "version_or_snapshot": "v0.3 in model name",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an LLM judge. Model version is embedded in the name, but no immutable revision, inference date, or access mode is reported."
+      },
+      {
+        "name": "CohereLabs/aya-expanse-8b",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an LLM judge. Exact model identifier is named, but no immutable snapshot, inference date, or access mode is reported."
+      },
+      {
+        "name": "utter-project/EuroLLM-9B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an LLM judge. Exact model identifier is named, but no immutable snapshot, inference date, or access mode is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Satirical definition generation for the evaluation corpus",
+        "calls_per_item": null,
+        "candidates_per_item": "One retained definition per word-condition; 100 generated definitions total for 50 words under RAG and non-RAG conditions.",
+        "token_budget": "Prompt requires output under 50 words. In the RAG condition, retrieval returns up to 3 snippets per input, each 160 characters, with cosine similarity threshold 0.1. No numeric token limit is reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Definitions were generated from news articles scraped on March 3, 2026. The paper does not state whether any retries occurred or how many model calls were made per retained definition."
+      },
+      {
+        "scope": "LLM-as-a-judge evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "Each of five LLM judges produced one JSON object containing one funny score and one political score per definition; no repeated judgments or majority voting are reported.",
+        "token_budget": "Prompt restricts output to exactly one JSON object with two integer values; no max-token setting is reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The same 100 definitions were scored by Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.3, Aya-Expanse-8B, and EuroLLM-9B-Instruct."
+      },
+      {
+        "scope": "Sentiment filtering of scraped news",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Articles were split into batches that fit within the sentiment model’s token limit, but the numeric token limit and batch counts are not reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The sentiment model outputs 1–5 star labels for article batches; the paper computes mean article-level scores and says news with a label lower than one are discarded."
+      },
+      {
+        "scope": "Topic modeling and semantic retrieval",
+        "calls_per_item": null,
+        "candidates_per_item": "Topic modeling supplies 25 topic-based candidate words for evaluation; semantic retrieval returns up to 3 snippets per input word or phrase.",
+        "token_budget": "Retrieved snippets are 160 characters each and include timestamp, category, and title. No embedding token budget is reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports use of UMAP and BERTopic after MiniLM embeddings for topic modeling, and cosine similarity retrieval with a 0.1 threshold for RAG context selection."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Satirical definition generation quality",
+        "present": false,
+        "description": "No human-written satirical dictionary definitions are generated or evaluated as a baseline. The generation comparisons are between LLM-generated RAG vs non-RAG outputs and topic-modeled vs random input words.",
+        "directly_comparable": false,
+        "detail": "Human annotators provide judgments, but there is no matched human-generation condition."
+      },
+      {
+        "scope": "LLM-as-a-judge reliability",
+        "present": true,
+        "description": "Six human annotators rated the same 100 definitions on funny and political dimensions, and LLM scores were compared with human mean scores using Spearman correlation.",
+        "directly_comparable": true,
+        "detail": "This is a directly comparable evaluator baseline for the rating task, not a human baseline for content generation."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The evaluation corpus consists of 100 definitions generated within the study rather than a pre-existing public benchmark.",
+        "The paper introduces the annotated corpus and human labels, so the human-rated benchmark was not public before the study.",
+        "Source news was scraped on March 3, 2026 with 30-day timestamp filtering, making the source material current rather than a legacy benchmark.",
+        "The LLM-judge prompt instructs models to use only the provided text and not external knowledge."
+      ],
+      "basis": "The main evaluated items and labels are newly generated/annotated for this paper, so benchmark memorization risk is low. Residual uncertainty remains because the Yle source articles are public, model snapshots and inference dates are not reported, the generation model is referenced through a mutable Ollama llama3:latest tag, and no decontamination test is described."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "RQ5 and the conclusion that LLMs correlate well with humans on political relevance but poorly on humor depend on LLM-judge scores. RQ1–RQ4 generation-quality claims rely primarily on human annotations and statistical tests, not on LLM judges.",
+      "human_validation": "The LLM judges are validated against mean scores from six human annotators on the same 100 definitions, with Spearman correlations and 95% confidence intervals reported.",
+      "detail": "LLM judging is an object of evaluation rather than the primary basis for the RAG/topic-word performance claims."
+    },
+    "reporting_gaps": [
+      "No annotator demographics are reported beyond Finnish vs different cultural backgrounds; no age, gender, native language, country, satire expertise, recruitment channel, compensation, or qualification criteria are given.",
+      "The paper does not report exact model revisions, immutable snapshots, or inference dates for the generator, sentiment model, embedding models, or LLM judges.",
+      "The generator is linked to Ollama llama3:latest, a mutable tag, without a fixed checksum or release identifier.",
+      "No decoding or sampling parameters are reported for generation or LLM judging, such as temperature, top_p, max tokens, seed, stop sequences, or retry policy.",
+      "No hardware, runtime, compute budget, or monetary cost is reported.",
+      "The number of scraped Yle articles, number passing timestamp/sentiment filters, corpus size, number of topic clusters, and exact selected words are not reported in the paper.",
+      "The paper does not state whether LLM-judge calls were batched or one call per definition, whether outputs ever violated JSON format, or how parsing failures were handled.",
+      "The paper reports one retained definition per condition but does not state whether failed or unsatisfactory generations were retried.",
+      "No human-written satire baseline is included for direct comparison with model-generated definitions.",
+      "No training-data contamination analysis or decontamination test is reported.",
+      "For LLM judges, the paper does not explicitly state whether condition metadata was hidden, although the Appendix prompt instructs use of only the provided text."
+    ]
   }
 }

@@ -231,5 +231,415 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper says it provides source links to original images; NYCC images are available through Hessel et al. (2023) and Jain et al. (2020), while Cartoonstock images require licensing."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "New Yorker Caption Contest readers and Cartoonstock cartoon/caption creators whose cartoons or captions became source material",
+        "recruitment": "NYCC is described as a weekly feature where readers submit funny captions; the paper selected NYCC captions ranked among the top 3 finalists from public datasets and used Cartoonstock cartoons with their original accompanying captions.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Approximately 300 unique cartoon-caption pairs were sourced from NYCC and Cartoonstock.com; the paper does not report counts of human creators or submitters.",
+        "detail": "This is source-material provenance, not a recruited evaluation sample in this paper."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Paper authors/research team or expert annotators",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Initially 655 unique element annotations; after iterative refinement, 499 high-quality unique element annotations remained, with 1–3 elements per cartoon-caption pair.",
+        "detail": "The paper says “we hand-annotated” objective joke elements and describes the rubrics as expert-annotated, but it does not report the number or identities of element annotators or whether annotation was independent/blinded."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human experts judging model explanations for autograder validation",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "300 human expert judgments on explanations from GPT-4o, Gemini 2.5 Pro, and Claude 3.7 Sonnet.",
+        "detail": "The 300 figure is a count of judgments, not a participant count. The paper does not report how many experts produced these judgments."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "Former chief cartoon editor of the New Yorker",
+        "recruitment": "Invited by the authors",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Reviewed a random subset of 30 annotations and confirmed that all elements were fair and accurately captured the essential components of each joke.",
+        "detail": "This was an additional annotation-quality validation step, not a model-performance baseline."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The authors/research team hand-annotated 1–3 objective elements for every cartoon-caption pair; these element annotations are the ground-truth rubrics used for grading."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o / gpt-4o-2024-08-06",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as the autograder to judge whether each model explanation explicitly covered each anticipated answer point, producing PASS/FAIL labels that determine HumorBench and HumorBench-Hard accuracy. The paper states that in all evaluations, autograders, and benchmarks, “GPT-4o” refers to gpt-4o-2024-08-06."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o / gpt-4o-2024-08-06",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "During dataset refinement, sample explanations were evaluated ten times by the autograder; elements with verdict disagreement above 30% were flagged for review, refinement, or removal."
+      },
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Human experts supplied 300 judgments used to validate the GPT-4o autograder. Against these judgments, the autograder achieved 92.00% overall accuracy, 14.79% FPR, and 6.51% FNR."
+      },
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "A former chief cartoon editor of the New Yorker reviewed 30 randomly selected annotations and confirmed that all elements were fair and accurate."
+      },
+      {
+        "type": "LLM",
+        "name": "o3",
+        "role": "secondary",
+        "blind": null,
+        "detail": "An LLM categorization pipeline built on o3 categorized each element as in or out of three predefined categories: wordplay, cultural references, and toxic or shocking humor. These labels determine the Table 3 hard-subset category analysis."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy/pass rate and Spearman rank correlation",
+        "role": "primary",
+        "blind": null,
+        "detail": "Model results are computed from PASS/FAIL element judgments as accuracy or pass rate. The paper also computes Spearman rank correlations between HumorBench accuracy and external benchmark scores for GPQA Diamond, ARC-AGI, and LM Arena ELO."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main HumorBench model explanations",
+        "mode": "single-sample",
+        "n": "1 explanation per model/item as described; no multiple-candidate selection reported",
+        "selector": "none",
+        "detail": "The benchmark prompt asks an LLM to explain the joke for each cartoon description and caption. The paper does not describe best-of-N generation, self-consistency, reranking, or selection among multiple generated explanations."
+      },
+      {
+        "scope": "Dataset refinement sample explanations",
+        "mode": "single-sample",
+        "n": "1 sample explanation per cartoon-caption pair is described",
+        "selector": "none",
+        "detail": "For each cartoon-caption pair, the authors generated a sample explanation, alternating randomly between GPT-4o and Claude 3.7 Sonnet. Each fixed explanation was then evaluated ten times by the autograder; repeated judging was not best-of-N generation."
+      },
+      {
+        "scope": "Autograder validation explanations",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The validation set used explanations from GPT-4o, Gemini 2.5 Pro, and Claude 3.7 Sonnet, but the paper does not specify candidate counts, selection procedures, or whether any generations were regenerated/retried."
+      },
+      {
+        "scope": "HumorBench-Hard construction",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "automatic-metric",
+        "detail": "The hard subset was defined as the 100 unique elements most often missed during benchmarking; this is subset selection based on benchmark outcomes, not selection among generated explanations."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": "gpt-4o-2024-08-06",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used both as an evaluated explainer and as the autograder. The paper gives the exact GPT-4o release but not the inference date or API endpoint."
+      },
+      {
+        "name": "OpenAI o3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard; also used in OpenAI o-series test-time reasoning-effort experiments. No snapshot or inference date is reported."
+      },
+      {
+        "name": "OpenAI o4-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard; also used in OpenAI o-series reasoning-effort experiments. No snapshot or inference date is reported."
+      },
+      {
+        "name": "OpenAI o1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard. No snapshot or inference date is reported."
+      },
+      {
+        "name": "OpenAI o3-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard. No snapshot or inference date is reported."
+      },
+      {
+        "name": "Gemini 2.5 Pro",
+        "version_or_snapshot": "gemini-2.5-pro-preview-03-25",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard; also used to generate explanations in the autograder validation set. No inference date or endpoint is reported."
+      },
+      {
+        "name": "Gemini 1.5 Pro",
+        "version_or_snapshot": "gemini-1.5-pro",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard. No inference date or endpoint is reported."
+      },
+      {
+        "name": "Claude 3.7 Sonnet",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard; used in prompt validation, dataset-refinement sample explanations, autograder-validation explanations, and thinking-budget experiments. No snapshot or inference date is reported."
+      },
+      {
+        "name": "Claude Sonnet 4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Shown in main benchmarking results. No snapshot or inference date is reported."
+      },
+      {
+        "name": "Claude Opus 4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Shown in main benchmarking results. No snapshot or inference date is reported."
+      },
+      {
+        "name": "DeepSeek R1",
+        "version_or_snapshot": "deepseek-ai/DeepSeek-R1",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard. The paper also compares it with DeepSeek V3 and R1-Zero. No inference date or endpoint is reported."
+      },
+      {
+        "name": "DeepSeek R1 Zero",
+        "version_or_snapshot": "deepseek/deepseek-r1-zero",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated as a STEM-only reasoning-trained model and on HumorBench-Hard. The paper notes that it includes reasoning traces in final outputs. No inference date or endpoint is reported."
+      },
+      {
+        "name": "DeepSeek V3",
+        "version_or_snapshot": "deepseek-ai/DeepSeek-V3",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated as the base counterpart for DeepSeek R1/R1-Zero and on HumorBench-Hard. No inference date or endpoint is reported."
+      },
+      {
+        "name": "Llama 4 Maverick",
+        "version_or_snapshot": "meta-llama/Llama-4-Maverick-17B-128E",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard. No inference date or endpoint is reported."
+      },
+      {
+        "name": "Llama 4 Scout",
+        "version_or_snapshot": "meta-llama/Llama-4-Scout-17B-16E",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated on HumorBench-Hard and appears in benchmark-comparison figure. No inference date or endpoint is reported."
+      },
+      {
+        "name": "Qwen2.5-72B-Instruct-Turbo",
+        "version_or_snapshot": "Qwen/Qwen2.5-72B-Instruct-Turbo",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard. No inference date or endpoint is reported."
+      },
+      {
+        "name": "Qwen Plus",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used in test-time thinking-budget experiments. No snapshot, inference date, or endpoint is reported."
+      },
+      {
+        "name": "Grok 3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on HumorBench and HumorBench-Hard. No snapshot or inference date is reported."
+      },
+      {
+        "name": "Grok 4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Shown in main benchmarking results. No snapshot or inference date is reported."
+      },
+      {
+        "name": "Phi-4 Reasoning Plus",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in the STEM-only reasoning transfer comparison against Phi-4 Base. The paper notes that it includes reasoning traces in final outputs. No snapshot, endpoint, or inference date is reported."
+      },
+      {
+        "name": "Phi-4 Base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as the base counterpart for Phi-4 Reasoning Plus. No snapshot, endpoint, or inference date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Shared main benchmark setup",
+        "calls_per_item": null,
+        "candidates_per_item": "No best-of-N or multiple candidates reported",
+        "token_budget": "Prompt instructs models to explain in less than 200 words; all model outputs were truncated to the last 1000 tokens for length control.",
+        "sampling_parameters": "Temperature set to 1 where possible; external tool calling deactivated.",
+        "compute_or_cost": "Run cost is plotted in Figure 3, but exact numeric costs are not reported in the text/tables provided.",
+        "detail": "All models were given the same task prompt and scaffolding. The paper says different models had different API endpoints and parameters were kept consistent where possible."
+      },
+      {
+        "scope": "GPT-4o autograder for final evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The autograder prompt asks for reasoning and a PASS/FAIL judgment for each anticipated answer point. The paper does not report autograder temperature, top-p, max tokens, retries, or number of judge calls per element in the final benchmark."
+      },
+      {
+        "scope": "Dataset refinement autograder loop",
+        "calls_per_item": "10 autograder evaluations per sample explanation/element during refinement",
+        "candidates_per_item": "1 sample explanation per cartoon-caption pair is described",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Sample explanations were generated alternating randomly between GPT-4o and Claude 3.7 Sonnet. Elements with autograder verdict disagreement exceeding 30% were flagged; the cycle repeated until fewer than 5% of annotations triggered inconsistency flags."
+      },
+      {
+        "scope": "OpenAI o-series test-time scaling",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Reasoning effort varied as low, medium, and high for o3 and o4-mini; exact token budgets are not reported.",
+        "sampling_parameters": "Temperature 1 where possible; external tool calling deactivated.",
+        "compute_or_cost": null,
+        "detail": "Figure 5 reports HumorBench score versus mean output tokens for o3 and o4-mini under different reasoning-effort settings."
+      },
+      {
+        "scope": "Claude 3.7 Sonnet test-time scaling",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Thinking budgets varied: 0, 1024, 2048, 4096, 8192, and 16384 tokens.",
+        "sampling_parameters": "Temperature 1 where possible; external tool calling deactivated.",
+        "compute_or_cost": null,
+        "detail": "The paper reports that Claude 3.7 Sonnet with a 1024-token thinking budget reached 83.6% and base Claude 3.7 Sonnet reached 80.4%; increasing beyond 1024 tokens hurt performance. Most completions were far below their budgets."
+      },
+      {
+        "scope": "Qwen Plus test-time scaling",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Thinking budgets varied: 50, 200, 400, 600, 1000, and 2000 tokens.",
+        "sampling_parameters": "Temperature 1 where possible; external tool calling deactivated.",
+        "compute_or_cost": null,
+        "detail": "The paper reports that increasing the reasoning budget generally improved Qwen Plus, but Qwen Plus rarely used more than 400 tokens even when budgeted 2000."
+      },
+      {
+        "scope": "R1-Zero and Phi-4 Reasoning Plus length-control evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Final outputs truncated to the last 1000 tokens for fair comparison because these models include reasoning traces in final outputs.",
+        "sampling_parameters": "Temperature 1 where possible; external tool calling deactivated.",
+        "compute_or_cost": null,
+        "detail": "Used to compare STEM-only reasoning-trained models with their base counterparts."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "HumorBench and HumorBench-Hard model performance",
+        "present": false,
+        "description": "No human participants were asked to perform the same joke-explanation task under matched conditions, and no human accuracy/pass-rate baseline is reported.",
+        "directly_comparable": false,
+        "detail": "Human experts validated annotations and the GPT-4o autograder, but their judgments are not a directly comparable human performance baseline for humor explanation."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "HumorBench’s textual descriptions and objective element rubrics were newly created and refined for this paper.",
+        "The final grading target is the newly annotated objective element set rather than an existing multiple-choice benchmark."
+      ],
+      "basis": "HumorBench is newly introduced, but its cartoon-caption source material comes from public NYCC datasets and Cartoonstock.com, and NYCC humor benchmarks existed before this work. Many evaluated models are later or proprietary models, and the paper reports no decontamination test, memorization check, held-out/private item construction, or contamination analysis. Newly created rubrics reduce but do not eliminate risk because memorized cartoons/captions or prior explanations could still help with the task."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Main model rankings and accuracies, HumorBench-Hard construction and scores, transferability correlations based on HumorBench scores, test-time scaling conclusions, and the hard-subset humor-category analysis.",
+      "human_validation": "The GPT-4o autograder was validated against 300 human expert judgments, achieving 92.00% accuracy overall with 14.79% FPR and 6.51% FNR. A former New Yorker chief cartoon editor also reviewed 30 annotations. The full benchmark outputs were not human-graded.",
+      "detail": "Headline conclusions primarily depend on GPT-4o PASS/FAIL judgments over element coverage. The paper explicitly notes the autograder is mildly lenient and that HumorBench scores should be interpreted as upper bounds. The Table 3 category analysis additionally depends on an o3-based LLM categorization pipeline."
+    },
+    "reporting_gaps": [
+      "The paper does not report the number, identities, recruitment, independence, or blinding of the human element annotators who hand-annotated the objective elements.",
+      "The paper reports 300 human expert judgments for autograder validation but not the number of experts, their recruitment, adjudication procedure, or blinding.",
+      "The exact number of cartoon-caption pairs is reported only approximately, and the paper does not provide source-by-source counts for NYCC versus Cartoonstock in the main text.",
+      "Most evaluated models lack exact snapshots/versions; inference dates are not reported for any model.",
+      "API endpoints/providers and access mode are not specified per model, despite the paper noting that models had different API endpoints.",
+      "The number of generation calls, retry policy, seeds, and whether exactly one final response was generated per model/item are not explicitly specified for the main benchmark.",
+      "Sampling parameters beyond temperature = 1 where possible and tool-calling deactivation are not reported; top-p, max output tokens, stop criteria, and autograder sampling parameters are missing.",
+      "The paper plots benchmark run cost but does not report exact numeric costs or a reproducible cost calculation in the provided text/tables.",
+      "The final-evaluation autograder call count per element is not reported; only the dataset-refinement loop reports ten autograder evaluations per sample explanation.",
+      "No directly comparable human performance baseline on the HumorBench joke-explanation task is reported.",
+      "The o3 humor-category categorization pipeline prompt, validation, and sampling settings are not reported.",
+      "The paper does not discuss data contamination or provide a decontamination/memorization test for public NYCC or Cartoonstock source material."
+    ]
   }
 }

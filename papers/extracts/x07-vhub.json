@@ -2,11 +2,11 @@
   "key": "x07-vhub",
   "ref": "Part 3 (video humor)",
   "section": "Part 3 - Multimodal & Visual Humor",
-  "extracted_at": "2026-07-03",
+  "extracted_at": "2026-07-12",
   "extraction_model": "gpt-5.5",
   "extraction_reasoning_effort": "high",
   "source_md": "papers/md/x07-vhub/x07-vhub.md",
-  "source_md_sha256": "2420bdf386ca46f1ea60baea064ab7e19cf19efa3411b915775b283e77c76cb1",
+  "source_md_sha256": "ba7918d3187197b8fac18552d58ad11af9d0f07d66754ff1e7a7c66959156033",
   "source_truncated": false,
   "title": "v-HUB: A Benchmark for Video Humor Understanding from Vision and Sound",
   "authors": [
@@ -21,32 +21,30 @@
     "Zilong Zheng"
   ],
   "year": 2026,
-  "venue": "arXiv:2509.25773v3 [cs.CV]",
+  "venue": "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 38544–38567",
   "paper_types": [
     "benchmark",
     "dataset",
     "evaluation-study"
   ],
   "research_questions": [
-    "How can a visual-centric video humor understanding benchmark be curated for evaluating multimodal large language models from vision and sound?",
-    "How well do current MLLMs perform on caption matching, humor explanation, and open-ended QA for visual-centric humorous videos?",
-    "Do MLLMs rely more on linguistic descriptions than raw visual and auditory cues when understanding video humor?",
-    "Does adding environmental sound improve video humor understanding for OmniLLMs?",
-    "How do visual text, background knowledge, and video era affect MLLM performance on video humor understanding?"
+    "How capable are current multimodal large language models at understanding visual-centric humorous videos?",
+    "How do model results differ across Text-Only, Video-Only, and Video+Audio settings?",
+    "Does environmental sound improve video humor understanding for OmniLLMs?",
+    "How do visual text, explicit background knowledge, and video era affect models’ video humor understanding?"
   ],
   "tasks": [
     "caption matching",
     "humor explanation",
-    "open-ended video QA"
+    "open-ended QA"
   ],
   "humor_domains": [
     "visual-centric video humor",
-    "non-verbal short videos",
+    "non-verbal humor",
     "silent comedies",
-    "Charlie Chaplin’s silent films",
-    "user-generated funny videos",
-    "environmental-sound-enhanced humor",
-    "visual-text video humor"
+    "user-generated short funny videos",
+    "environmental sound-enhanced humor",
+    "visual text in humorous videos"
   ],
   "modalities": [
     "text",
@@ -60,15 +58,15 @@
     {
       "name": "v-HUB",
       "role": "introduced",
-      "size": "1218 videos; 4.7h total duration; average duration around 14s; 267 silent humor clips from Charlie Chaplin and 951 user-generated short funny videos"
+      "size": "1218 videos; 267 silent humor clips from Charlie Chaplin and 951 user-generated short funny videos; total duration 4.7h; average duration around 14s; 81 temporal, 742 descriptive, and 395 causal QA pairs"
     },
     {
       "name": "Charlie Chaplin’s Silent Films",
       "role": "source-material",
-      "size": "62 silent films reviewed; 729 funny clips collected; 267 silent humor clips in the final dataset"
+      "size": "62 silent films reviewed; 729 funny clips collected; 267 final silent humor clips"
     },
     {
-      "name": "X @humansnocontext videos",
+      "name": "X @humansnocontext short funny videos",
       "role": "source-material",
       "size": "18080 short funny videos collected from tweets posted between March 28, 2023 and October 12, 2024"
     },
@@ -81,33 +79,33 @@
   "models_evaluated": [
     "Gemini-2.5-Flash",
     "GPT-4o",
-    "Qwen2.5-VL",
-    "Intern3.5-VL",
-    "Video-SALMONN-2",
-    "MiniCPM2.6-o",
-    "Qwen2.5-Omni",
+    "Qwen2.5-VL (72B)",
+    "Intern3.5-VL (8B)",
+    "Video-SALMONN-2 (7B)",
+    "MiniCPM2.6-o (8B)",
+    "Qwen2.5-Omni (7B)",
     "Qwen2.5-72B",
     "Qwen2.5-7B"
   ],
   "methods_proposed": [
     {
-      "name": "v-HUB benchmark",
-      "summary": "A visual-centric video humor understanding benchmark built from non-verbal short videos, Charlie Chaplin silent films, and user-generated funny videos, annotated with captions, descriptions, explanations, prior knowledge, humor levels, and humor-source labels."
+      "name": "v-HUB",
+      "summary": "A visual-centric video humor understanding benchmark built from Charlie Chaplin silent film clips and user-generated short funny videos, with annotations for humor level, captions, video descriptions, humor sources, background knowledge, and humor explanations."
     },
     {
-      "name": "Three-task evaluation framework",
-      "summary": "The benchmark supports Caption Matching, Humor Explanation, and Open-ended QA to test subtle humor inference, independent humor discovery, and fundamental video reasoning over temporal, descriptive, and causal questions."
+      "name": "v-HUB task suite",
+      "summary": "The benchmark supports Caption Matching, Humor Explanation, and Open-ended QA to test discriminative matching, free-form humor rationale generation, and general video reasoning over humorous videos."
     },
     {
       "name": "Video+Audio evaluation setting",
-      "summary": "The paper evaluates OmniLLMs with both visual frames and environmental sound to test whether non-speech audio such as background music and sound effects improves video humor understanding."
+      "summary": "The paper proposes evaluating OmniLLMs with both raw video and environmental sound to test whether background music and sound effects enhance video humor understanding."
     }
   ],
   "humor_theories": [
     {
       "theory": "other",
       "usage": "operationalized",
-      "detail": "The authors follow Buijzen and Valkenburg (2004) to categorize videos into five categories by humor type for diversity analysis."
+      "detail": "The paper follows Buijzen and Valkenburg (2004) to categorize videos into five humor-type categories for diversity analysis."
     }
   ],
   "evaluation_methods": [
@@ -121,77 +119,404 @@
     },
     {
       "type": "automatic-metric",
-      "detail": "AutoDQ extracts key events from generated explanations and compares them to ground-truth annotations using entailment analysis, reporting recall, precision, and F1 score; unless otherwise specified, the paper reports F1 scores."
+      "detail": "Humor Explanation is also evaluated with AutoDQ, which extracts key events from model outputs and compares them to ground-truth annotations using entailment; the paper reports recall, precision, and F1 score, and uses F1 unless otherwise specified."
     },
     {
       "type": "human-eval",
-      "detail": "The authors randomly sampled 50 model-generated explanations for human evaluation; one annotator rated each explanation from 0 to 100, then scores were normalized by a factor of 100."
+      "detail": "The authors randomly sampled 50 model-generated explanations; one annotator rated explanations from 0 to 100, then scores were normalized by a factor of 100 to [0, 1]."
     },
     {
       "type": "expert-annotation",
-      "detail": "Eight annotators created and refined annotations through three rounds; Krippendorff’s alpha was used for humor-evaluation consensus, with more than 90% of data showing High consensus and 0.3% showing Low consensus."
+      "detail": "Eight annotators created and refined annotations through three rounds; Krippendorff’s alpha was used for humor-evaluation consensus, with more than 90% of data showing ‘High’ consensus and 0.3% showing ‘Low’ consensus."
     }
   ],
   "headline_results": [
     {
-      "finding": "v-HUB contains 1218 visual-centric humorous videos after filtering, including 267 Charlie Chaplin clips and 951 user-generated videos.",
-      "metric": "dataset size",
-      "value": "1218 videos; 4.7h; average duration around 14s",
+      "finding": "The final v-HUB dataset contains 1218 videos with high annotation consensus.",
+      "metric": "dataset size / duration / annotation consensus",
+      "value": "1218 videos; 4.7h; average duration around 14s; more than 90% ‘High’ consensus; 0.3% ‘Low’ consensus",
       "dataset": "v-HUB",
       "best_system": null
     },
     {
-      "finding": "Qwen2.5-VL performs substantially better from human-written descriptions than from raw video, dropping on Caption Matching and Open-ended QA in the Video-Only setting.",
-      "metric": "Accuracy / SentBERT",
-      "value": "Caption Matching 0.726 to 0.666; Open-ended QA SentBERT 0.760 to 0.445",
+      "finding": "In the main Caption Matching results, the best Text-Only system outperformed the best Video-Only and Video+Audio systems.",
+      "metric": "Accuracy",
+      "value": "Text-Only 0.762; Video-Only 0.666; Video+Audio 0.617",
+      "dataset": "v-HUB",
+      "best_system": "GPT-4o / Qwen2.5-VL / Qwen2.5-Omni"
+    },
+    {
+      "finding": "Qwen2.5-VL performed worse when given raw video than when given human-written descriptions on Caption Matching.",
+      "metric": "Accuracy",
+      "value": "Text-Only 0.726; Video-Only 0.666",
       "dataset": "v-HUB",
       "best_system": "Qwen2.5-VL"
     },
     {
-      "finding": "Adding audio improves Caption Matching for several OmniLLMs, including MiniCPM2.6-o and Qwen2.5-Omni.",
-      "metric": "Accuracy",
-      "value": "MiniCPM2.6-o 0.362 to 0.442; Qwen2.5-Omni 0.553 to 0.617",
-      "dataset": "v-HUB",
-      "best_system": "Qwen2.5-Omni"
-    },
-    {
-      "finding": "Visual text improves Gemini-2.5-Flash when sound does not contribute to humor in the Video+Audio setting.",
-      "metric": "Accuracy / SentBERT",
-      "value": "Matching Accuracy 0.569 to 0.715; Open-ended QA SentBERT 0.416 to 0.437",
-      "dataset": "v-HUB",
-      "best_system": "Gemini-2.5-Flash"
-    },
-    {
-      "finding": "Providing background knowledge improves Qwen2.5-Omni humor explanation in the Video+Audio setting.",
-      "metric": "SentBERT / AutoDQ",
-      "value": "SentBERT 0.459 to 0.512; AutoDQ 0.127 to 0.176",
-      "dataset": "v-HUB",
-      "best_system": "Qwen2.5-Omni"
-    },
-    {
-      "finding": "Gemini-2.5-Flash performs better on contemporary user-generated funny videos than on last-century Charlie Chaplin silent films in the Video-Only setting.",
+      "finding": "Qwen2.5-VL’s Open-ended QA performance dropped substantially from Text-Only input to Video-Only input.",
       "metric": "SentBERT",
-      "value": "Explanation 0.469 vs 0.422; Open-ended QA 0.434 vs 0.386",
+      "value": "Text-Only 0.760; Video-Only 0.445",
       "dataset": "v-HUB",
-      "best_system": "Gemini-2.5-Flash"
+      "best_system": "Qwen2.5-VL"
+    },
+    {
+      "finding": "Adding audio improved MiniCPM2.6-o on Caption Matching compared with Video-Only input.",
+      "metric": "Accuracy",
+      "value": "Video-Only 0.362; Video+Audio 0.442",
+      "dataset": "v-HUB",
+      "best_system": "MiniCPM2.6-o"
+    },
+    {
+      "finding": "Providing explicit background knowledge improved Qwen2.5-Omni humor explanation in the Video+Audio setting.",
+      "metric": "SentBERT / AutoDQ",
+      "value": "with background knowledge: SentBERT 0.512, AutoDQ 0.176; without background knowledge: SentBERT 0.459, AutoDQ 0.127",
+      "dataset": "v-HUB",
+      "best_system": "Qwen2.5-Omni"
     }
   ],
   "key_findings": [
-    "The final benchmark is explicitly visual-centric: all 1218 videos rely on visual modality for humor, and the paper reports groups including Visual, Visual+Text, Visual+Audio, and Visual+Audio+Text.",
-    "MLLMs rely heavily on linguistic cues: Text-Only settings generally outperform Video-Only and Video+Audio settings across the three tasks.",
-    "Humor explanation is harder than open-ended QA because models must discover the humorous element without a question pointing to it.",
-    "Environmental sound gives most OmniLLMs a measurable improvement, but the gains remain much smaller than the advantage of human-written text descriptions.",
-    "Visual text and explicit background knowledge both help video humor understanding, reinforcing the value of linguistic and knowledge-based cues.",
-    "Models perform worse on last-century Charlie Chaplin silent films than on contemporary user-generated funny videos, suggesting sensitivity to temporal and cultural context."
+    "Current MLLMs perform better with human-written text descriptions than with raw video, indicating heavy reliance on linguistic cues for humor understanding.",
+    "Models generally do better on Open-ended QA than on Humor Explanation, suggesting they can reason about humorous elements when prompted but struggle to discover them independently.",
+    "Environmental sound gives several OmniLLMs measurable gains, such as MiniCPM2.6-o improving from 0.362 to 0.442 accuracy on Caption Matching, but audio does not close the gap to Text-Only performance.",
+    "Visual text helps models in the Video+Audio setting, and explicit background knowledge improves performance on background-dependent humor videos.",
+    "MLLMs perform better on contemporary user-generated funny videos than on last-century Charlie Chaplin silent films in the Video-Only setting."
   ],
   "limitations": [
-    "The authors use region-level cultural categorization as a weakly supervised proxy because assigning a single culture label to visual-centric humorous videos is ambiguous and subjective.",
-    "All data annotations were created manually in English, and the authors note that LLM humor understanding may vary across languages because languages can interpret and express the same visual content differently."
+    "The paper uses region-level categorization as a proxy for cultural background because assigning a single culture label to visual-centric humorous videos is ambiguous and subjective; the authors acknowledge that a geographical region may encompass multiple cultures.",
+    "All data annotations were created manually in English, and the authors note that LLMs’ ability to understand humor may vary across languages."
   ],
-  "safety_ethics_notes": "The paper states adherence to the ACL Code of Ethics, respect for intellectual property and privacy rights, and restriction of the dataset to non-commercial academic use. The authors manually screened user-generated content for safety and privacy risks, defined harmful-content categories, and explicitly warn against misuse of the dataset for malicious or mocking content.",
+  "safety_ethics_notes": "The authors state that they follow the ACL Code of Ethics, restrict the dataset to non-commercial academic use, respect intellectual property and privacy rights, screen user-generated content for safety and privacy risks, and warn against using the dataset to generate malicious or mocking content.",
   "artifacts": {
     "code_url": null,
     "data_url": null,
-    "other": "Prompts are provided in Appendix E; the dataset is restricted to non-commercial academic research use, but no URL is stated in the paper."
+    "other": "The paper states that v-HUB is released for research purposes only and that commercial use is prohibited, but no URL is provided in the transcription."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "8 qualified annotators",
+        "population": "Crowdworkers mainly from China, all with at least undergraduate education and an English background.",
+        "recruitment": "Recruited based on sufficient English proficiency, broad cultural knowledge, and observational skills; received training and annotation guidelines/manuals; qualification stage required annotation of 15 video samples, manually scored against guidelines; fair compensation with hourly wages exceeding the local minimum wage.",
+        "geography": "Mainly China",
+        "languages": [
+          "English"
+        ],
+        "observations": "Final dataset annotations covered 1,218 videos; each data entry underwent three rounds of annotation by different annotators. Humor ratings and video captions were independently provided; other annotation tasks were sequentially reviewed/refined. More than 90% of humor-evaluation data showed 'High' consensus and 0.3% showed 'Low' consensus.",
+        "detail": "Annotation tasks included humor evaluation, descriptive and creative captions, video descriptions, humor-source labels, visual-text labels, background knowledge, and humor explanations. The paper reports Krippendorff's alpha was used for humor-evaluation consensus but gives categorical consensus rather than exact alpha values."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2 annotators",
+        "population": "Annotators for speech-reliance and humor-presence filtering; relationship to the eight qualified annotators is not stated.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Each video was independently reviewed to confirm clear humor and whether the humor was primarily conveyed through visual cues and understandable independently of speech; only videos where both annotators agreed were retained.",
+        "detail": "This filtering was paired with Whisper-based transcription filtering for speech reliance."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "1 annotator",
+        "population": "Human evaluator for model-generated humor explanations; relationship to the main annotator pool is not stated.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Rated 50 randomly sampled model-generated explanations on a 0–100 scale; scores were normalized by dividing by 100 to produce values in [0,1].",
+        "detail": "Used for the supplementary human evaluation in Table 9. Blindness to model identity or setting is not reported."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Creators/owners of source videos, including Charlie Chaplin silent films, videos reposted by the X account @humansnocontext, and YouTube videos from Xie et al. (2024).",
+        "recruitment": "Existing videos were curated from 62 Charlie Chaplin silent films, tweets from @humansnocontext posted between March 28, 2023 and October 12, 2024, and a subset of YouTube videos from Xie et al. (2024).",
+        "geography": "The paper says the dataset covers diverse cultural backgrounds, but creator geography/counts are not reported.",
+        "languages": [],
+        "observations": "Source-material counts include 729 Chaplin funny clips collected, 18,080 short funny videos from X collected, and 1,769 surprising YouTube videos used for diversification; the final dataset contains 267 Chaplin clips and 951 user-generated funny videos.",
+        "detail": "These creators were not recruited study participants; creator counts and demographics are not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Eight qualified annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Created and refined ground-truth annotations for humor evaluation, captions, descriptions, humor-source labels, background knowledge, and humor explanations. Humor ratings and captions were independent; descriptions and explanations were sequentially reviewed and refined, so blinding varied by task and is not fully specified."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Two filtering annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Independently judged clear humor presence and whether humor was visually understandable without speech; both had to agree for videos to be retained."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Whisper",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to transcribe audio during speech-reliance minimization; videos with transcribed text exceeding 10 characters were excluded, and videos containing non-English speech were retained but muted."
+      },
+      {
+        "type": "author",
+        "name": "Authors/manual reviewers",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper says the authors manually filtered harmful content before annotation, reviewed qualification results, and conducted a final review if a specific annotation issue was modified in all three rounds for a video. Exact personnel and blinding are not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used as an assistive tool to generate candidate QA pairs and humor categories from video content; all outputs were subsequently reviewed and revised by human annotators."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary metric for Caption Matching; judged whether the model selected the correct caption option."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BERTScore",
+        "role": "primary",
+        "blind": null,
+        "detail": "Semantic-similarity metric used for open-ended responses; package version bert-score 0.3.13 is reported, but the underlying scorer model/configuration is not specified."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Sent-BERT",
+        "role": "primary",
+        "blind": null,
+        "detail": "Sentence-level semantic-similarity metric used for Humor Explanation and Open-ended QA; sentence-transformers package version 5.1.1 is reported, but the exact embedding model is not specified."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "METEOR",
+        "role": "primary",
+        "blind": null,
+        "detail": "Automatic metric used for Humor Explanation and Open-ended QA; NLTK version 3.9.1 is reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "AutoDQ",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for Humor Explanation. AutoDQ extracts key events from model outputs and compares them with ground-truth annotations using entailment analysis, reporting recall, precision, and F1; the paper reports F1 unless otherwise specified. The exact entailment/extraction implementation is not specified."
+      },
+      {
+        "type": "human-crowd",
+        "name": "One human evaluator",
+        "role": "validation",
+        "blind": null,
+        "detail": "Rated 50 randomly sampled model-generated humor explanations for accuracy and logicality on a 0–100 scale, normalized to [0,1]."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Model evaluation: Humor Explanation and Open-ended QA responses",
+        "mode": "single-sample",
+        "n": "1 evaluated response per prompt is implied; no multiple candidates or best-of-N selection is reported",
+        "selector": "none",
+        "detail": "The paper evaluates model-generated explanations/answers directly against ground truth using automatic metrics and, for a subset of explanations, one human evaluator. It does not describe generating multiple candidates, reranking, or selecting the best output."
+      },
+      {
+        "scope": "Model evaluation: Caption Matching",
+        "mode": "single-sample",
+        "n": "1 option-letter response per item is implied; each item presents 5 caption options",
+        "selector": "none",
+        "detail": "For each video with a creative caption, four descriptive captions from other videos are randomly sampled as distractors. The model is prompted to output only one option letter; no best-of-N selection is reported."
+      },
+      {
+        "scope": "Benchmark construction: GPT-4o QA-pair and humor-category generation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "GPT-4o generated candidate QA pairs and humor categories, and human annotators reviewed/revised them. The number of candidates per video, number of calls, and any selection strategy before human revision are not reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Gemini-2.5-Flash",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Proprietary model evaluated under Text-Only, Video-Only, and Video+Audio settings; no API snapshot, checkpoint, access route, or inference date is reported."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Proprietary model evaluated under Text-Only and Video-Only settings and used assistively to generate candidate QA pairs and humor categories; no API snapshot, checkpoint, access route, or inference date is reported."
+      },
+      {
+        "name": "Qwen2.5-VL",
+        "version_or_snapshot": "72B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Public MLLM evaluated under Text-Only and Video-Only settings; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "Intern3.5-VL",
+        "version_or_snapshot": "8B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Public MLLM evaluated under Text-Only and Video-Only settings; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "Video-SALMONN-2",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Public OmniLLM evaluated under Text-Only, Video-Only, and Video+Audio settings; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "MiniCPM2.6-o",
+        "version_or_snapshot": "8B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Public OmniLLM evaluated under Text-Only, Video-Only, and Video+Audio settings; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "Qwen2.5-Omni",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Public OmniLLM evaluated under Text-Only, Video-Only, and Video+Audio settings; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "Qwen2.5-72B",
+        "version_or_snapshot": "72B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Base LLM compared with Qwen2.5-VL under the Text-Only setting; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "Qwen2.5-7B",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Base LLM compared with Qwen2.5-Omni under the Text-Only setting; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "Whisper",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for speech-to-text transcription during speech-reliance filtering; model size/version, access route, and inference date are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Text-Only model evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "Caption Matching uses 5 input caption options per video; generated output candidates per item are not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Models receive detailed human-written video descriptions and no visual/audio input. Prompts are provided, but the paper does not report max tokens, temperature/top-p, retry policy, number of calls per item, hardware, or cost."
+      },
+      {
+        "scope": "Video-Only model evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "Caption Matching uses 5 input caption options per video; generated output candidates per item are not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Models receive raw video frames without audio. The paper does not report frame sampling rate/count, frame resolution, video preprocessing, max tokens, decoding parameters, retry policy, hardware, or cost."
+      },
+      {
+        "scope": "Video+Audio model evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "Caption Matching uses 5 input caption options per video; generated output candidates per item are not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Omni-capable models receive video frames and audio signals. The paper does not report audio preprocessing, frame sampling, max tokens, decoding parameters, retry policy, hardware, or cost."
+      },
+      {
+        "scope": "GPT-4o benchmark-construction generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "GPT-4o generated QA pairs for each video using prompts shown in Table 16 and generated candidate humor categories; human annotators reviewed/revised outputs. Number of calls/candidates and decoding settings are not reported."
+      },
+      {
+        "scope": "Whisper speech-reliance filtering",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Whisper transcribed audio to help exclude speech-heavy videos; videos with transcribed text over 10 characters were excluded. Model version, batch/call counts, hardware, and cost are not reported."
+      },
+      {
+        "scope": "Automatic metric computation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports NLTK 3.9.1, bert-score 0.3.13, and sentence-transformers 5.1.1 for metrics, but does not specify BERTScore/Sent-BERT underlying model configurations or AutoDQ entailment/extraction model settings."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "v-HUB task performance",
+        "present": false,
+        "description": "No human baseline performance is reported for Caption Matching, Humor Explanation, or Open-ended QA under matched Text-Only, Video-Only, or Video+Audio conditions. Humans provide ground-truth annotations and a small validation evaluation of model explanations, but they do not perform the benchmark tasks as a baseline.",
+        "directly_comparable": false,
+        "detail": "The Text-Only setting uses human-written descriptions as inputs, but this is not a human performance baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "v-HUB is introduced as a new benchmark with newly curated and manually reviewed annotations.",
+        "GPT-4o-generated candidate QA pairs and humor categories were manually reviewed/revised by human annotators."
+      ],
+      "basis": "The v-HUB benchmark itself appears newly introduced in this paper rather than a public benchmark predating the evaluated models, which lowers exact-label contamination risk. However, many source videos were public before or during the release/training periods of evaluated models: Charlie Chaplin films are legacy public cultural material, @humansnocontext tweets were collected from March 2023 to October 2024, and 1,769 YouTube videos came from Xie et al. (2024). Later 2025 proprietary/open models could have encountered some source videos or related descriptions online. The paper reports no decontamination test or explicit leakage analysis, so a conservative moderate risk remains."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "GPT-4o-generated candidate QA pairs and humor categories were manually reviewed/revised by annotators; a separate one-annotator human evaluation rated 50 model-generated explanations.",
+      "detail": "No LLM is reported as an evaluator of model outputs. Main results are determined by accuracy, BERTScore, Sent-BERT, METEOR, AutoDQ, and a small human evaluation. AutoDQ uses entailment analysis, but the paper does not specify it as an LLM judge."
+    },
+    "reporting_gaps": [
+      "No exact API snapshots, checkpoints, access routes, or inference dates are reported for Gemini-2.5-Flash, GPT-4o, Qwen2.5-VL, Intern3.5-VL, Video-SALMONN-2, MiniCPM2.6-o, Qwen2.5-Omni, Qwen2.5-72B, Qwen2.5-7B, or Whisper.",
+      "No decoding/sampling parameters are reported for model evaluation or GPT-4o dataset-construction generation: temperature, top-p, max output tokens, seeds, retries, and number of calls per item are absent.",
+      "No best-of-N or multi-candidate generation protocol is described; if only one output was generated, the paper does not explicitly state the inference count.",
+      "Video preprocessing details are missing for model evaluation, including number of frames, frame sampling strategy, resolution, and whether preprocessing differed by model.",
+      "Audio preprocessing details for Video+Audio evaluation are not reported.",
+      "Compute, hardware, runtime, and monetary cost are not reported.",
+      "The exact BERTScore scorer model, Sent-BERT embedding model, and AutoDQ entailment/extraction implementation are not specified; only package versions are given for NLTK, bert-score, and sentence-transformers.",
+      "Human evaluation details are incomplete: the distribution of the 50 sampled explanations across models/settings, evaluator qualifications, and whether the evaluator was blind to model identity or setting are not reported.",
+      "The relationship among the two filtering annotators, eight qualified annotators, and one human evaluator is not stated.",
+      "Annotator demographic details beyond mainly China, undergraduate education, and English background are not reported; the recruitment platform and exact payment amount are not reported.",
+      "Exact Krippendorff's alpha values and thresholds for 'Low,' 'Medium,' and 'High' consensus are not reported.",
+      "No contamination/decontamination analysis is reported for public source videos, the HumorQA/Xie et al. video subset, or possible overlap with model training data."
+    ]
   }
 }

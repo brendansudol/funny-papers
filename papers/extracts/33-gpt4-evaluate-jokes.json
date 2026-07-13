@@ -139,5 +139,127 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human evaluators from the Sun et al. (2022) ExPUNations annotation dataset reused by this paper.",
+        "recruitment": "The paper states that Sun et al. (2022) recruited human evaluators; no platform or recruitment details are reported here. Evaluators had to correctly label 80% of 20 manually annotated samples to qualify as reliable evaluators.",
+        "geography": null,
+        "languages": [],
+        "observations": "The current paper extracted 1500 jokes and used average human funniness scores from the prior annotations; Sun et al. annotations also included understandability, offensiveness, and intended joke labels. The number of ratings/annotations is not reported in this paper.",
+        "detail": "No new human participants were recruited for this study; human data are inherited from the cited dataset."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Sun et al. (2022) human evaluators",
+        "role": "primary",
+        "blind": null,
+        "detail": "Their average funniness scores are used to derive the human joke rankings against which GPT-4 rankings/scores are compared."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4",
+        "role": "primary",
+        "blind": null,
+        "detail": "GPT-4 rates jokes on a 1-to-5 funniness scale and returns rankings under 7 system descriptions and 5 instruction levels. GPT-4 also generated the suggested system description once from 200 jokes and their average scores."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Spearman rank correlation coefficient",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to compare rankings derived from human average funniness scores and GPT-4 scores/rankings."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Suggested system description generation",
+        "mode": "single-sample",
+        "n": "1",
+        "selector": "none",
+        "detail": "A GPT-4 prompt containing 200 randomly sampled jokes and their respective average scores was executed just once; the unique generated system description was used for all experiments. No alternative generated descriptions or selection procedure are reported."
+      },
+      {
+        "scope": "GPT-4 joke rating/ranking responses",
+        "mode": "single-sample",
+        "n": "1 per prompted 5-joke sample, as described; no best-of-N reported",
+        "selector": "none",
+        "detail": "For each combination of system description and instruction level, GPT-4 produced ratings/rankings for sampled sets of 5 jokes. The paper does not describe generating multiple candidate evaluations and selecting among them."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "OpenAI GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper refers to GPT-4 and GPT-4 chat-mode system descriptions, but does not report an API snapshot/version, endpoint, access mode, or inference dates."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-4 joke evaluation/ranking across 7 system descriptions × 5 instruction levels",
+        "calls_per_item": null,
+        "candidates_per_item": "One GPT-4 rating/ranking output per prompted sample is described; no multiple candidates or best-of-N selection are reported.",
+        "token_budget": "The paper notes GPT-4 is restricted to 8192 tokens, but does not report per-call input/output token counts or max_tokens settings.",
+        "sampling_parameters": "temperature=0; top P=1; frequency penalty=0; presence penalty=0",
+        "compute_or_cost": "No numeric compute or cost reported.",
+        "detail": "The study randomly selected 10 different samples of 5 jokes for each of 35 combinations, totaling 1750 joke presentations; the same joke could be sampled more than once. Prompts asked GPT-4 to rate jokes from 1 to 5 and rank/sort them from least to most funny."
+      },
+      {
+        "scope": "GPT-4 generation of the suggested system description (SG)",
+        "calls_per_item": "One prompt executed once total.",
+        "candidates_per_item": "1 generated system description; no alternatives reported.",
+        "token_budget": "Prompt used 200 randomly sampled jokes and their respective average scores; authors note GPT-4's 8192-token restriction as limiting the number of examples.",
+        "sampling_parameters": "Not separately reported for the SG-generation call; the paper reports temperature=0, top P=1, frequency penalty=0, and presence penalty=0 for OpenAI GPT-4 experiments.",
+        "compute_or_cost": "Authors state the reusable SG description is cheaper than many-shot prompting because examples need not be included for every inference, but provide no numeric cost.",
+        "detail": "The 200 jokes and scores used in this prompt are omitted from the paper."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Joke funniness ranking/evaluation",
+        "present": true,
+        "description": "Average human funniness scores from Sun et al. (2022) are used to create human rankings for the same joke texts sampled from the 1500-joke dataset; GPT-4 rankings/scores are compared to these rankings with Spearman correlation.",
+        "directly_comparable": true,
+        "detail": "The comparison is on the same joke items and funniness construct, but the human ratings are from a prior dataset rather than newly collected under identical 5-joke prompt conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [],
+      "basis": "The evaluated jokes and human scores come from public prior datasets cited as Sun et al. (2022) and SemEval/Hossain et al., predating the 2023 GPT-4 study/release context. The paper reports no decontamination test or private held-out benchmark. In addition, the proposed SG system description is generated from 200 randomly sampled jokes and average scores from the same 1500-joke dataset, while no hold-out exclusion or overlap check with evaluation samples is reported. Evaluation samples are also repeatedly drawn from the same pool, with the paper noting that the same joke can be sampled more than once."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "All headline claims about whether GPT-4 can evaluate jokes similarly to humans, which system descriptions perform best, and which instruction levels improve correlations.",
+      "human_validation": "Average human funniness scores from the prior Sun et al. (2022) dataset provide the reference ranking; no new human validation of GPT-4 judgments is reported.",
+      "detail": "GPT-4 judgments are one side of every reported human-vs-model rank-correlation result, and GPT-4 also creates the many-shot-derived SG system description that is central to the best-performing condition."
+    },
+    "reporting_gaps": [
+      "The paper does not report the number of human evaluators, number of ratings per joke, demographics, geography, recruitment platform, compensation, or language background of annotators.",
+      "The paper summarizes the prior human annotation qualification test but does not report blinding, full annotation protocol, or aggregation details beyond using average funniness scores.",
+      "Dataset language(s) are not explicitly stated in this paper.",
+      "GPT-4 version/snapshot, API endpoint, access mode, and inference dates are not reported.",
+      "Exact 200 jokes and scores used to generate the SG system description are omitted.",
+      "No random seed is reported for selecting the 200 SG examples or the 10 evaluation samples per condition.",
+      "No hold-out split is reported between SG-generation examples and evaluation samples; possible overlap is not ruled out.",
+      "The exact sampled joke IDs and whether the same sampled sets were reused across system descriptions/instruction levels are not reported.",
+      "The exact number of GPT-4 API calls, retries, failures, malformed outputs, or parsing/cleanup procedures is not reported.",
+      "Per-call max output tokens, actual token usage, runtime, and numeric cost are not reported.",
+      "No GPT-4 training-data contamination or benchmark-exposure analysis is reported.",
+      "No code, data, or artifact URL is provided in the paper."
+    ]
   }
 }

@@ -214,5 +214,336 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Volunteer annotators/evaluators for pairwise humorous image caption comparisons; demographic details not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Pairwise comparison totals reported as observations, not participant counts: A vs B 300; A vs C 300; B vs D 300; C vs E 300; D vs F 300; E vs F 300; J vs A 300; J vs F 300; J vs G 300; J vs H 300; I vs A 300; I vs F 300; I vs G 794; I vs H 1007; I vs J 300. Response options were A funnier, B funnier, TIE, or Both Not Funny.",
+        "detail": "Appendix H calls participants volunteers and instructs them to judge independently. Number of unique volunteers, items per volunteer, assignment procedure, and demographics are not reported. Caption language is English; annotator language background is not reported."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Volunteer annotators/evaluators for single-title binary humor evaluation; demographic details not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Annotators saw an image and one caption and assigned 1 = humorous or 0 = not humorous. Reported Humor Mean scores include A 0.412, B 0.418, C 0.362, D 0.394, E 0.382, F 0.398, G 0.195, and I 0.810.",
+        "detail": "The paper does not report the number of unique annotators, number of ratings/items in the single-title evaluation, or whether annotators overlapped with the pairwise task."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "5 annotators per image–caption pair; total unique annotators not reported",
+        "population": "Annotators for the human-preference-guided humor discriminator dataset.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "5,320 image–caption pairs were annotated; 2,511 were labeled positive and 2,809 negative. Training set: 5,054 samples, with 2,391 positive and 2,663 negative. Validation set: 266 samples, with 120 positive and 146 negative. A pair was labeled humorous if at least two annotators labeled it humorous.",
+        "detail": "Each pair was independently annotated by five annotators following guidelines. The paper does not report the annotator pool size, demographics, recruitment, or agreement statistics."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "volunteer annotators",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary judges for pairwise comparison results, Win Rate, Hard Win Rate, significance tests, Bradley–Terry, and Arena Elo. The paper says captions were labeled A and B, but does not explicitly report blinding to method identity, randomization, or ordering."
+      },
+      {
+        "type": "human-lay",
+        "name": "volunteer annotators",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary judges for single-title binary humor labels used to compute human Humor Mean scores."
+      },
+      {
+        "type": "human-lay",
+        "name": "five annotators per image–caption pair",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Produced human labels for the 5,320-pair discriminator dataset and its 266-sample validation set; labels were aggregated using the at-least-two-of-five humorous threshold."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Distinct-1/2; BERTScore/BERT Cross Score; CLIPScore; Embedding Average; Greedy Matching",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Automatic metrics used in single-title evaluation for lexical diversity, semantic similarity/creativity, visual–semantic alignment, and sentence/word-level relevance."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "confusion matrices, precision, positive rate, acceptance rate, average generations per accepted caption",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to evaluate humor discriminator variants and closed-source LLM humor detection systems against the human-labeled validation set."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen3-VL-4B-Instruct LoRA + classifier head humor discriminator",
+        "role": "secondary",
+        "blind": null,
+        "detail": "LLM-based discriminator judged generated image–caption pairs as humorous or non-humorous, triggered rewriting, accepted positive predictions, and supplied the top-rated fallback candidate after the retry limit. It also produced reported detector predictions in Table 8."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5-2025-08-07",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Within HUMORCHAIN, GPT-5 generated image descriptions, plausibility/incongruity/has-human-or-animal-or-cartoon judgments, selected generation pathways, generated captions, and ran the safety classifier for compliance judgments."
+      },
+      {
+        "type": "LLM",
+        "name": "Gemini-2.5-Flash; GPT-4.1; Claude-3.5-Haiku-20241022",
+        "role": "validation",
+        "blind": null,
+        "detail": "Closed-source LLMs evaluated as 0/1 humor detection systems with structured outputs on the discriminator validation set."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Supplementary theory-coverage validation is reported as 'we validate' on 100 OxfordTVG-HIC samples and statistical analysis of 25% of generated captions; no independent annotators or procedure are specified."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Internal prompt baselines A–F on Meme-Image-No-Text",
+        "mode": "single-sample",
+        "n": "one final caption/title per image per method; no multiple-candidate or best-of-N selection reported",
+        "selector": "none",
+        "detail": "Groups A–F vary zero-shot, few-shot, rule-based/theory prompts, and CoT. The paper reports generated captions for evaluation but does not report candidate pools or selection beyond producing the method output."
+      },
+      {
+        "scope": "Method J: Theory-Guided Multi-Stage Reasoning without discriminator",
+        "mode": "single-sample",
+        "n": "one final caption/title per image; discriminator and retry loop ablated",
+        "selector": "none",
+        "detail": "J retains cognitive humor theory and staged reasoning but excludes the humor discriminator and retry loop."
+      },
+      {
+        "scope": "Method I / HUMORCHAIN with discriminator feedback",
+        "mode": "best-of-n",
+        "n": "up to a 5-retry limit; average generations per accepted caption 2.74×; acceptance rate 36.5%",
+        "selector": "LLM-judge",
+        "detail": "Generated captions classified as non-humorous by the fine-tuned Qwen3-VL-4B-Instruct discriminator trigger rewriting. Failed cases after the retry limit default to the discriminator’s top-rated candidate."
+      },
+      {
+        "scope": "External CLoT comparison on Oogiri-GO / Group G",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper states that captions for randomly sampled Oogiri-GO images were generated separately by HUMORCHAIN and CLoT, but does not report CLoT decoding, candidate count, or selection procedure."
+      },
+      {
+        "scope": "OxfordTVG-HIC / Group H comparison",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper reports generating new HUMORCHAIN captions for randomly sampled OxfordTVG-HIC images and comparing them against existing humorous captions from OxfordTVG-HIC; Group H is not described as newly generated by the authors."
+      },
+      {
+        "scope": "Candidate caption creation for the discriminator annotation dataset",
+        "mode": "not-reported",
+        "n": "multiple candidate captions generated; number per image not reported",
+        "selector": "random",
+        "detail": "The authors generated multiple candidate captions using the HUMORCHAIN/theory-guided framework and randomly sampled image–title pairs for human annotation. The candidate-generation and filtering details before annotation are not fully specified."
+      },
+      {
+        "scope": "Supplementary Qwen3-VL-235B-A22B-Instruct backbone robustness experiment",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Supplement reports n=100 and that J outperforms A with a 0.74 win rate on Qwen3-VL-235B-A22B-Instruct, but does not report candidate counts, decoding settings, or selection."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-5",
+        "version_or_snapshot": "GPT-5-2025-08-07",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Backbone reasoning model used in the main experiments for HUMORCHAIN and internal baselines/ablations; token pricing and stage parameters are reported, but API/access route and inference date are not."
+      },
+      {
+        "name": "Qwen3-VL-4B-Instruct baseline",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Un-tuned baseline humor discriminator variant evaluated on the validation set; precision 0.523."
+      },
+      {
+        "name": "Qwen3-VL-4B-Instruct + LoRA binary classifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Fine-tuned discriminator variant evaluated on the validation set; precision 0.636."
+      },
+      {
+        "name": "Qwen3-VL-4B-Instruct + LoRA + classifier head",
+        "version_or_snapshot": "threshold = 0.66",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Fine-tuned humor discriminator used in the HUMORCHAIN retry loop and Table 8 detection comparison; precision 0.670."
+      },
+      {
+        "name": "Gemini-2.5-Flash",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Closed-source LLM evaluated for humor detection with recommended parameters; no API snapshot or inference date reported."
+      },
+      {
+        "name": "GPT-4.1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Closed-source LLM evaluated for humor detection; the paper also writes GPT-4-1 in prose. No snapshot or inference date reported."
+      },
+      {
+        "name": "Claude-3.5-Haiku",
+        "version_or_snapshot": "Claude-3.5-Haiku-20241022",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Closed-source LLM evaluated for humor detection; inference date and access route not reported."
+      },
+      {
+        "name": "CLoT (SYSU)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "External CLoT model used as Group G for comparison on Oogiri-GO; implementation/checkpoint, decoding, and access details are not reported."
+      },
+      {
+        "name": "Qwen3-VL-235B-A22B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used only in a supplementary backbone-agnostic robustness experiment with n=100; inference settings not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-5-2025-08-07 HUMORCHAIN stage parameters",
+        "calls_per_item": "Stages described: image description, strategy judgment, one selected generation strategy, and safety classifier; exact call count per item including rewrites is not fully reported.",
+        "candidates_per_item": null,
+        "token_budget": "max_tokens = 4000 for Image Description, Strategy Judgment, Object Analogy, Absurdity, Contrast Irony, Emotion Analogy, and Safety Classifier.",
+        "sampling_parameters": "Image Description temperature 0.2; Strategy Judgment temperature 0.1; Object Analogy temperature 0.9; Absurdity temperature 0.8; Contrast Irony temperature 0.9; Emotion Analogy temperature 0.85; Safety Classifier temperature 0.1.",
+        "compute_or_cost": null,
+        "detail": "Parameters are reported in Appendix K.1 for the theory-guided multi-stage reasoning framework."
+      },
+      {
+        "scope": "Average token consumption and dollar cost for caption generation methods without discriminator, n=100",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Average input/output tokens: A 398.15/16.65; B 492.00/16.40; C 500.00/17.60; D 619.00/16.75; E 377.00/683.00; F 438.00/686.00; HUMORCHAIN without discriminator 2344.00/529.00.",
+        "sampling_parameters": null,
+        "compute_or_cost": "Average cost: A $0.0007; B $0.0008; C $0.0008; D $0.0009; E $0.0073; F $0.0074; HUMORCHAIN without discriminator $0.0082.",
+        "detail": "Table 10 states costs are calculated using official token pricing of the backbone model GPT-5-2025-08-07, with 100 samples. The discriminator module is excluded."
+      },
+      {
+        "scope": "HUMORCHAIN discriminator/retry inference",
+        "calls_per_item": "One discriminator decision per generated candidate is implied by the generate–evaluate–refine loop; exact total calls per item are not reported.",
+        "candidates_per_item": "Up to 5 retries; failed cases default to the discriminator’s top-rated candidate; average generations per accepted caption 2.74×; acceptance rate 36.5%.",
+        "token_budget": "Qwen3-VL-4B-Instruct out_seq_length = 32768.",
+        "sampling_parameters": "greedy: false; seed: 3407; top_p: 0.8; top_k: 20; temperature: 0.7; repetition_penalty: 1.0; presence_penalty: 1.5; out_seq_length: 32768.",
+        "compute_or_cost": "No dollar cost reported for the discriminator or retry loop; retry cost summarized as 2.74× average generations per accepted caption.",
+        "detail": "Appendices K.2 and Section 3.2.3 provide discriminator sampling parameters and retry/fallback policy."
+      },
+      {
+        "scope": "Closed-source LLM humor detection comparison",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "The paper states that Gemini-2.5-Flash, GPT-4.1, and Claude-3.5-Haiku-20241022 were evaluated using recommended parameters, but exact values are not reported.",
+        "compute_or_cost": null,
+        "detail": "Table 8 confusion matrices sum to 266 validation examples for each model. Models used unified 0/1 binary classification with structured outputs."
+      },
+      {
+        "scope": "Qwen3-VL-235B-A22B-Instruct supplementary robustness generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Supplement reports n=100 and a J-vs-A win rate of 0.74, but no inference budget or decoding parameters."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humorous image caption generation",
+        "present": false,
+        "description": "No human-written captions generated under matched experimental conditions are reported as a baseline. OxfordTVG-HIC Group H uses existing humorous captions, but the paper does not describe them as a human baseline or specify authorship/creation conditions.",
+        "directly_comparable": false,
+        "detail": "Human annotators evaluate model/caption-source outputs, but human captioner performance under the same task setup is not measured."
+      },
+      {
+        "scope": "Humor detection / discriminator evaluation",
+        "present": false,
+        "description": "Human annotations define the gold labels for validation, but the paper does not report a human detector accuracy/precision baseline under matched conditions.",
+        "directly_comparable": false,
+        "detail": "The five-annotator labels are a reference standard, not a reported human-performance baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Paper-stated dataset controls include manual screening of Meme-Image-No-Text images for neutrality and reduced cultural ambiguity, but not decontamination.",
+        "Paper reports random sampling from Oogiri-GO and OxfordTVG-HIC for external comparisons.",
+        "The discriminator dataset uses newly collected human labels, though images/captions are sourced/generated from the aforementioned datasets."
+      ],
+      "basis": "Oogiri-GO and OxfordTVG-HIC are cited public datasets from 2024 and 2023, evaluated with a later GPT-5 snapshot named GPT-5-2025-08-07 and other models. The paper does not report training-data decontamination, benchmark leakage checks, or whether the primary Meme-Image-No-Text dataset was private/newly created. Random sampling and manual screening address evaluation consistency, not model contamination. Therefore public-benchmark contamination risk remains at least moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Claims about the discriminator increasing the proportion of humorous outputs, reducing non-humorous outputs, and improving HUMORCHAIN via retry/fallback depend on an LLM-based Qwen3-VL-4B-Instruct discriminator. HUMORCHAIN’s delivered outputs are selected or filtered by that LLM judge.",
+      "human_validation": "The discriminator is trained and evaluated against five-annotator human labels; Method I vs J is also evaluated with human pairwise comparison over 300 observations, and main generation performance is assessed by human pairwise and single-title evaluations.",
+      "detail": "The headline comparative generation results are not primarily based on LLM-as-judge scoring; they rely on human preference judgments plus automatic metrics. However, the method itself uses an LLM judge for output acceptance/selection, and important discriminator/pipeline claims depend on that LLM classifier."
+    },
+    "reporting_gaps": [
+      "Number of unique volunteers/annotators for pairwise and single-title evaluation is not reported.",
+      "Annotator demographics, recruitment method, geography, compensation, cultural background, and language background are not reported.",
+      "The paper does not report whether pairwise/single-title annotators were blinded to model identity, whether caption order was randomized, or whether task assignment was counterbalanced.",
+      "The number of items/ratings in single-title evaluation is not reported separately from the reported Humor Mean scores.",
+      "Inter-annotator agreement statistics are not reported for pairwise evaluation, single-title evaluation, or the five-annotator discriminator dataset.",
+      "The paper mentions significance tests for pairwise comparisons but does not provide test type, p-values, confidence intervals, or multiple-comparison handling in the supplied tables.",
+      "Meme-Image-No-Text dataset size, source provenance, release status, and construction details are underspecified beyond manual screening for neutrality/cultural ambiguity.",
+      "Exact image sample counts are partly inferable from pairwise totals but the paper does not consistently distinguish images, pairs, judgments, and annotator votes.",
+      "CLoT implementation/checkpoint, inference parameters, candidate counts, and access route are not reported.",
+      "OxfordTVG-HIC Group H caption authorship and selection procedure are not described sufficiently to determine whether it is a human baseline.",
+      "API/access route, inference date, and provider snapshot details are not reported for GPT-5, Gemini, GPT-4.1, Claude, Qwen, or CLoT beyond model names/snapshots listed in the paper.",
+      "Generation parameters for internal baselines A–F and for closed-source LLM humor-detection comparisons are not fully specified; closed-source models are said to use recommended parameters without values.",
+      "Candidate counts for most generation methods are not reported; HUMORCHAIN reports a 5-retry limit and average generations per accepted caption but not the full retry distribution.",
+      "Training hardware, training time, inference latency, and full compute cost for LoRA fine-tuning and discriminator inference are not reported.",
+      "No contamination or decontamination analysis is reported for public legacy benchmarks used with later proprietary models.",
+      "Code, data URLs, and artifact availability are not reported in the supplied paper."
+    ]
   }
 }

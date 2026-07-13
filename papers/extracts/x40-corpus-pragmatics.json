@@ -1,0 +1,337 @@
+{
+  "key": "x40-corpus-pragmatics",
+  "ref": "Part 1 (corpus-pragmatics annotation)",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x40-corpus-pragmatics/x40-corpus-pragmatics.md",
+  "source_md_sha256": "3d31059cffd9c8b898ed6731716b18bf2dbd7e20cad87315b5a029f5f7931c56",
+  "source_truncated": false,
+  "title": "Assessing the Potential of LLM-assisted Annotation for Corpus Pragmatics: The Case of Humor",
+  "authors": [
+    "Antonio Bianco",
+    "Nicola Brocca",
+    "Davide Garassino"
+  ],
+  "year": 2026,
+  "venue": "Corpus Pragmatics (2026) 10:33",
+  "paper_types": [
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "RQ1: Can LLMs detect humorous tweets?",
+    "RQ1a: How do they perform compared to expert and novice annotators?",
+    "RQ1b: What kinds of errors do they most often make?",
+    "RQ2: Can LLMs annotate humor functions according to a given taxonomy?",
+    "RQ2a: How do they perform compared to expert and novice annotators?",
+    "RQ2b: Which humor functions are most frequently misinterpreted?"
+  ],
+  "tasks": [
+    "humor detection",
+    "humor function annotation"
+  ],
+  "humor_domains": [
+    "Italian political discourse on X",
+    "political tweets",
+    "irony",
+    "puns",
+    "register humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "Italian"
+  ],
+  "datasets_used": [
+    {
+      "name": "Corpus-pragmatics humor annotations",
+      "role": "introduced",
+      "size": "original dataset of 7,552 tweets; 200 tweets selected for this study, including 90 humorous and 110 non-humorous tweets; 90 humorous tweets used for humor-function annotation"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4o",
+    "LLaMA-3.3-70B-Instruct"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Few-shot LLM-assisted humor annotation protocol",
+      "summary": "The paper uses few-shot prompts containing definitions and examples to ask GPT-4o and LLaMA-3.3-70B-Instruct to label Italian political tweets for humor detection and humor functions. For Task 1, 200 target tweets were presented in batches of ten; a similar but more complex prompting strategy was used for Task 2."
+    },
+    {
+      "name": "Five-function humor annotation taxonomy",
+      "summary": "The paper operationalizes five communicative functions for humorous political tweets: Self-deprecating, Aggressive, Affiliative, Defensive, and (Self-)Enhancing humor, with an additional NA label for annotator uncertainty."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "operationalized",
+      "detail": "Semantic Script Theory is used to define humor through script overlap and opposition; Script Opposition is the criterion adopted to distinguish humorous from non-humorous tweets."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "The General Theory of Verbal Humor grounds the humor-detection criteria, especially Script Opposition; other knowledge resources remain in the background, and register humor is discussed as a GTVH-relevant case."
+    },
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "Martin et al. (2003) is used in defining communicative functions such as self-deprecating, aggressive, affiliative, and self-enhancing humor; defensive humor is added from political-pragmatics work."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "An expert annotator, described as an Italian PhD student specializing in the linguistics of humor and political discourse, served as the baseline for both tasks."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A novice human annotator, an Italian Master’s student in Linguistics with no prior expertise in humor studies, annotated the same items after training through the codebook."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Agreement with the expert baseline was measured using Cohen’s kappa and Gwet’s AC1; confusion matrices were also reported."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "38",
+        "population": "Italian politicians",
+        "recruitment": "They were selected to ensure maximum balance among the represented parties and coalitions.",
+        "geography": "Italy",
+        "languages": [
+          "Italian"
+        ],
+        "observations": "7,552 tweets published during the 2022 election campaign from 25 August to 25 September 2022.",
+        "detail": "Tweets were automatically extracted prior to Twitter’s transition to X through Tweepy and the Twitter API."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "Italian PhD student specializing in the linguistics of humor and political discourse",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Italian"
+        ],
+        "observations": "Previously annotated all 7,552 tweets for humorous versus non-humorous content; served as baseline for the 200-tweet Task 1 sample and the 90-tweet Task 2 humor-function sample.",
+        "detail": "Referred to as EXP; annotations were used as the reference rather than a true multi-expert gold standard."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "Italian Master’s student in Linguistics with no prior expertise in humor studies",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Italian"
+        ],
+        "observations": "Annotated 200 tweets for humor detection and 90 humorous tweets for humor functions.",
+        "detail": "Referred to as NOV; trained exclusively through a codebook containing theoretical information and examples."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "EXP",
+        "role": "primary",
+        "blind": null,
+        "detail": "Expert annotator used as the benchmark against which NOV, GPT-4o, and LLaMA-3.3 were evaluated."
+      },
+      {
+        "type": "human-lay",
+        "name": "NOV",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Novice human annotator used as a human comparison point for the two LLMs."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Produced labels for humor detection and humor functions under few-shot prompting."
+      },
+      {
+        "type": "LLM",
+        "name": "LLaMA-3.3-70B-Instruct",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Produced labels for humor detection and humor functions under few-shot prompting via the Hugging Face web interface."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Cohen’s kappa and Gwet’s AC1",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to quantify agreement between EXP and each other annotator/model."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Authors performed qualitative analysis of agreement and disagreement patterns, especially cases where LLMs appeared to rely on lexical or graphical cues."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "No humor generation experiment",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates annotation/classification, not generated humor."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper cites OpenAI (2025) and notes GPT-4o is typically accessed via the ChatGPT interface, but does not report an exact snapshot, API/interface used for the study, or inference date."
+      },
+      {
+        "name": "LLaMA-3.3-70B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "The paper states that LLaMA-3.3 70b-Instruct was accessed via the Hugging Face web interface (https://huggingface.co), but does not report an exact snapshot or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Task 1 humor detection",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The prompt sequence included a definition of humor and examples, a second prompt with further examples, and then the 200 target tweets in batches of ten to avoid exceeding prompt length limits."
+      },
+      {
+        "scope": "Task 2 humor-function annotation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "A similar prompting strategy was used for the 90 humorous tweets, with more complex prompts for the five humor-function categories."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Task 1 humor detection",
+        "present": true,
+        "description": "EXP was the benchmark; NOV was a human novice comparison on the same 200 tweets.",
+        "directly_comparable": true,
+        "detail": "EXP, NOV, GPT-4o, and LLaMA-3.3 all annotated the same 200 tweets using Humor and Non-Humor labels."
+      },
+      {
+        "scope": "Task 2 humor-function annotation",
+        "present": true,
+        "description": "EXP was the benchmark; NOV was a human novice comparison on the same 90 humorous tweets.",
+        "directly_comparable": true,
+        "detail": "EXP, NOV, GPT-4o, and LLaMA-3.3 all annotated the same 90 humorous tweets using the humor-function labels."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Examples used in prompts were Italian political tweets that were not part of the main analysis dataset.",
+        "Hyperlinks were removed from tweets before Task 1 to prevent potential processing biases."
+      ],
+      "basis": "The paper’s source material consists of public tweets from the 2022 Italian election campaign, which predate the reported LLMs, so the raw tweet text may have been present in model training data. The paper does not report a decontamination test; however, the specific expert annotations and study sample are presented as part of this work rather than as a legacy public benchmark."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "The central claims compare LLM annotations against an expert human baseline and a novice human comparison; LLMs are evaluated as annotators rather than used as judges of another system.",
+      "detail": "No LLM-as-judge procedure is used to score model outputs."
+    },
+    "reporting_gaps": [
+      "No exact GPT-4o access mode, model snapshot, or inference date is reported.",
+      "No exact LLaMA-3.3 snapshot or inference date is reported.",
+      "No sampling parameters such as temperature, decoding settings, seed, or number of repeated runs are reported.",
+      "No token budget, runtime, compute, or cost is reported.",
+      "The study does not report a true gold standard based on multiple expert annotators and formal consensus.",
+      "The paper states prompts are available in the online Appendix, but the main text does not reproduce the full prompts or all few-shot examples."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "For humor detection, GPT-4o had the highest agreement with the expert baseline, slightly above the novice annotator.",
+      "metric": "Cohen’s kappa; Gwet’s AC1",
+      "value": "Cohen’s kappa = 0.75 (z = 10.6, p < .001); Gwet’s AC1 = 0.87 (SE = 0.05, p < .001)",
+      "dataset": "Corpus-pragmatics humor annotations",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "For humor detection, the novice annotator also reached substantial agreement with the expert baseline.",
+      "metric": "Cohen’s kappa; Gwet’s AC1",
+      "value": "Cohen’s kappa = 0.72 (z = 10.3, p < .001); Gwet’s AC1 = 0.86 (SE = 0.05, p < .001)",
+      "dataset": "Corpus-pragmatics humor annotations",
+      "best_system": "NOV"
+    },
+    {
+      "finding": "For humor detection, LLaMA-3.3 agreed less with the expert than GPT-4o and the novice annotator, but still reached substantial agreement by the Landis and Koch interpretation used in the paper.",
+      "metric": "Cohen’s kappa; Gwet’s AC1",
+      "value": "Cohen’s kappa = 0.66 (z = 9.47, p < .001); Gwet’s AC1 = 0.83 (SE = 0.05, p < .001)",
+      "dataset": "Corpus-pragmatics humor annotations",
+      "best_system": "LLaMA-3.3-70B-Instruct"
+    },
+    {
+      "finding": "For humor-function annotation, the human-human pair outperformed both LLMs.",
+      "metric": "Cohen’s kappa; Gwet’s AC1",
+      "value": "EXP / NOV: Cohen’s kappa = 0.62 (z = 9.17, p < .001); Gwet’s AC1 = 0.83 (SE = 0.04, p < .001)",
+      "dataset": "Corpus-pragmatics humor annotations",
+      "best_system": "NOV"
+    },
+    {
+      "finding": "For humor-function annotation, GPT-4o and LLaMA-3.3 reached only fair agreement by Cohen’s kappa, with GPT-4o slightly ahead.",
+      "metric": "Cohen’s kappa; Gwet’s AC1",
+      "value": "EXP / GPT-4o: Cohen’s kappa = 0.37 (z = 5.53, p < .001); Gwet’s AC1 = 0.70 (SE = 0.06, p < .001); EXP / LLaMA-3.3: Cohen’s kappa = 0.33 (z = 5.15, p < .001); Gwet’s AC1 = 0.69 (SE = 0.06, p < .001)",
+      "dataset": "Corpus-pragmatics humor annotations",
+      "best_system": "GPT-4o"
+    },
+    {
+      "finding": "The expert-labeled humorous subset was highly skewed toward aggressive humor.",
+      "metric": "Function counts; chi-square",
+      "value": "Aggressive = 71, Affiliative = 12, Defensive = 1, Self-deprecating = 4, (Self-)Enhancing = 2; χ²(4) = 199.22, p < .0001",
+      "dataset": "Corpus-pragmatics humor annotations",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "GPT-4o and LLaMA-3.3-70B-Instruct can detect humorous versus non-humorous Italian political tweets with high agreement against the expert baseline.",
+    "GPT-4o slightly outperformed the novice human annotator on humor detection according to both Cohen’s kappa and Gwet’s AC1.",
+    "Classifying communicative functions of humor was substantially harder for both LLMs than binary humor detection.",
+    "For humor functions, the novice human annotator achieved higher agreement with the expert than either LLM.",
+    "Qualitative analysis suggests that the LLMs often relied on lexical, graphical, and semantic cues such as emojis, punctuation, quotation marks, and dysphemisms rather than deeper pragmatic inference.",
+    "The authors conclude that LLMs are useful for initial large-scale annotation support but not reliable substitutes for human interpretation of nuanced, context-dependent humor functions."
+  ],
+  "limitations": [
+    "The paper states that the main limitation is the absence of a true gold standard: annotations by one expert were used as the reference, whereas a robust gold standard would require multiple experts and a formal consensus procedure.",
+    "The absence of a true gold standard prevented the use of standard evaluation measures such as the F1 score.",
+    "Humor interpretation was limited by the challenge of reconstructing the social and interactional context of individual tweets.",
+    "The study focuses on a small selected sample of 200 Italian political tweets, including 90 humorous tweets for the second task.",
+    "The humor-function distribution is highly skewed, with aggressive humor accounting for 71 of the 90 expert-labeled humorous tweets.",
+    "The paper notes that future work should incorporate co-text and extend to multimodal humor including images and GIFs."
+  ],
+  "safety_ethics_notes": "The paper notes reproducibility, opacity of model parameters/training data, privacy, and prompt reuse concerns for commercial closed-source LLMs, and presents LLaMA as more appealing for Open Science. The declarations state that the research followed relevant institutional and international guidelines and that there are no ethical issues associated with the work.",
+  "artifacts": {
+    "code_url": "https://doi.org/10.17605/OSF.IO/WPCR6",
+    "data_url": "https://doi.org/10.17605/OSF.IO/WPCR6",
+    "other": "Supplementary information is available at https://doi.org/10.1007/s41701-026-00235-7; the OSF repository contains annotations, prompts, codebooks, and an R script."
+  }
+}

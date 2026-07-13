@@ -164,5 +164,312 @@
     "code_url": "https://github.com/eujhwang/bottle-humor",
     "data_url": "https://github.com/eujhwang/bottle-humor",
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Original human contributors/annotators in the public MemeCap, New Yorker Cartoon, and YesBut datasets whose images, accompanying texts, and/or humor interpretations/reference explanations are used by this paper.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The paper uses the datasets' reference explanations/humor interpretations as evaluation references; it samples 100 test instances from each dataset and repeats with three random seeds. The paper does not report original dataset contributor counts or demographics.",
+        "detail": "Ethics statement says the datasets include images, accompanying texts, and humor interpretations collected from humans and may contain offensive content. Details of the original human data collection are not provided in this paper."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "CloudResearch workers located in English-speaking countries with at least 93% acceptance rate on 1,000 prior annotations.",
+        "recruitment": "CloudResearch",
+        "geography": "English-speaking countries, e.g. US, UK, Canada, Australia, and New Zealand.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Human validation of the automatic metric used 130 random samples across all models and datasets. Annotators judged whether an atomic sentence was conveyed in another text; the paper reports agreement between the LLM evaluator and two human annotators and between the two human annotators, but does not report the unique worker count.",
+        "detail": "Workers were paid $0.20 per evaluation task, reported as an average hourly wage of $13. The paper states no personal information was used and institutional ethics approval was obtained."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Manual analysts for error analysis; identity and count not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "40 randomly sampled explanations across different models where implications negatively impacted performance were manually analyzed and categorized.",
+        "detail": "The paper reports two error categories from this manual analysis: dilution of focus and introducing irrelevant information. It does not report coder count, coder identity, blinding, coding protocol details, or inter-annotator agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "Gemini-Flash-1.5 / Gemini 1.5 Flash",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for the proposed automatic evaluation metric: decomposes references and predictions into atomic facts and verifies whether each fact is conveyed. Both decomposition and verification use temperature 0.2. These judgments determine the reported precision, recall, and macro-F1 scores in the main results and ablations."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "LLM-based precision, recall, and macro-F1 pipeline",
+        "role": "primary",
+        "blind": null,
+        "detail": "Reference and predicted explanations are decomposed into atomic facts; Gemini-Flash-1.5 verifies fact presence to compute precision and recall, then macro-F1 is reported. Literal image descriptions are added to reference facts to avoid penalizing correct visual details absent from human references."
+      },
+      {
+        "type": "human-lay",
+        "name": "Original dataset reference writers/annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Human reference explanations/humor interpretations from MemeCap, New Yorker, and YesBut serve as gold references for the automatic metric. The paper does not report their counts or annotation conditions."
+      },
+      {
+        "type": "LLM",
+        "name": "VLM-generated literal image descriptions",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Literal image descriptions generated in the BOTTLEHUMOR pipeline are incorporated into evaluation references before fact decomposition. The paper does not clearly specify whether these descriptions are fixed across systems or which model's descriptions are used for this augmentation."
+      },
+      {
+        "type": "human-crowd",
+        "name": "CloudResearch annotators",
+        "role": "validation",
+        "blind": null,
+        "detail": "Validated the automatic metric on 130 random samples by judging whether an atomic sentence appeared in the corresponding text. The paper reports LLM-human agreement of 77.1% (Cohen's kappa 54.1) and human-human agreement of 75.4% (kappa 50.8). Blinding to model/method identity is not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen2-1.5B",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to compute cross-entropy values for the relevance term in BOTTLEHUMOR's implication selection and for selecting top candidate explanations. This affects which intermediate information is used to generate final answers."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Sentence Transformer cosine similarity / clustering / SentenceSHAP",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Sentence Transformer embeddings are used for redundancy measurement, implication clustering when generated implications exceed 15, and SentenceSHAP feature-importance analysis. These automatic scores support selection and interpretability analyses rather than the main evaluation metric."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Manual error analysis of 40 explanations where implications hurt performance; the paper does not report analyst identity/count or blinding."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "BOTTLEHUMOR main final-explanation generation",
+        "mode": "both",
+        "n": "H=2 hops; k=3 reasoning chains; top-3 implications selected per hop; candidate explanations kept to a maximum of 3; final answer is one generated response conditioned on selected implications and selected candidate answers. Image descriptions are limited to at most 5 sentences; implication prompts generate up to 3 implications; if implications exceed 15, they are clustered and centroid-nearest implications are selected.",
+        "selector": "automatic-metric",
+        "detail": "Intermediate implication selection uses an IB-inspired objective combining Sentence Transformer cosine similarity for compression/redundancy and Qwen2-1.5B cross-entropy for relevance, with alpha=0.7 in main experiments. Candidate explanations are selected by cross-entropy. The final answer is generated rather than selected from final-answer candidates."
+      },
+      {
+        "scope": "Zero-shot and Chain-of-Thought baselines",
+        "mode": "single-sample",
+        "n": "One final explanation is generated directly from image and caption; exact call accounting is not reported.",
+        "selector": "none",
+        "detail": "CoT adds instructions to produce brief intermediate reasoning before the final explanation. No best-of-N selection is reported."
+      },
+      {
+        "scope": "Self-refine baselines SR and SR-NOC",
+        "mode": "single-sample",
+        "n": "Refinement steps set to 2; exact number of generator/critic calls per instance is not reported.",
+        "selector": "none",
+        "detail": "SR uses a critic's feedback based on correctness, soundness, completeness, faithfulness, and clarity; SR-NOC refines without a critic. The paper describes iterative refinement, not best-of-N output selection."
+      },
+      {
+        "scope": "IB component analysis for GPT-4o",
+        "mode": "best-of-n",
+        "n": "100 random instances from each dataset; generated implications are selected using Random, Cosine, CE, or Cosine+CE methods.",
+        "selector": "automatic-metric",
+        "detail": "Cosine, CE, and Cosine+CE select among generated implications using automatic scores; the Random ablation uses random selection. This analysis evaluates how the selection mechanism affects final performance."
+      },
+      {
+        "scope": "Intermediate candidate-explanation quality analysis",
+        "mode": "best-of-n",
+        "n": "For 50 examples from each dataset and outputs generated by GPT-4o and Flash1.5, each iteration generates 3 candidate explanations; the paper reports the highest F1 score among them at h0, h1, and h2.",
+        "selector": "automatic-metric",
+        "detail": "This is an oracle-style reporting choice for analysis using the proposed F1 metric; it is separate from final BOTTLEHUMOR answer generation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Closed-source VLM evaluated in experiments. The paper does not report API snapshot/version, access route, or inference dates."
+      },
+      {
+        "name": "Gemini 1.5 Flash-8B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a closed-source VLM in experiments; tables label the model as Flash1.5. The paper does not report snapshot/version, access route, or inference dates."
+      },
+      {
+        "name": "Gemini 1.5 Flash / Gemini-Flash-1.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for automatic evaluation; both decomposition and verification use this model with temperature 0.2. Snapshot/version and inference dates are not reported."
+      },
+      {
+        "name": "Qwen2-VL-7B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source VLM evaluated in experiments. The exact checkpoint name is given, but hardware/access route and inference dates are not reported."
+      },
+      {
+        "name": "Phi-3.5-Vision-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source VLM evaluated in experiments. Hardware/access route and inference dates are not reported."
+      },
+      {
+        "name": "Qwen2-1.5B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open/efficient LLM used to compute cross-entropy values for implication relevance and candidate selection. The paper does not specify an instruct/base checkpoint, hardware/access route, or inference dates."
+      },
+      {
+        "name": "Sentence Transformer",
+        "version_or_snapshot": "BAAI/bge-large-en-v1.5",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for all sentence embeddings, including cosine similarity, clustering, and SentenceSHAP. Inference dates and hardware/access route are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "BOTTLEHUMOR generation",
+        "calls_per_item": "Up to 20 calls per sample.",
+        "candidates_per_item": "H=2; k=3 reasoning chains; top-3 implications and up to 3 candidate explanations retained; image descriptions limited to 5 sentences; implication prompts generate up to 3 implications; generated implications above 15 are clustered and reduced by centroid selection.",
+        "token_budget": "Each call typically involves ≤500 input tokens and ≤128 output tokens.",
+        "sampling_parameters": "alpha=0.7 for the IB objective; H=2 and k=3. Decoding temperature/top-p for BOTTLEHUMOR generation is not reported.",
+        "compute_or_cost": "For 100 samples, estimated cost up to $4–5 USD using GPT-4o and up to $1 USD using Gemini-Flash-1.5-8B.",
+        "detail": "Experiments use 100 randomly sampled test instances per dataset, repeated with three random seeds, and report average performance and standard deviation."
+      },
+      {
+        "scope": "Zero-shot and Chain-of-Thought baselines",
+        "calls_per_item": "Not explicitly reported; described as direct generation from image and caption.",
+        "candidates_per_item": "No multiple-candidate selection reported.",
+        "token_budget": "Prompt asks for an explanation under 150 words, but API/model token limits are not reported for baselines.",
+        "sampling_parameters": "Temperature set to 0.8 for all baselines.",
+        "compute_or_cost": null,
+        "detail": "CoT adds instructions to analyze the image/context and explain reasoning briefly before the final response."
+      },
+      {
+        "scope": "Self-refine baselines SR and SR-NOC",
+        "calls_per_item": "Exact calls per item not reported; refinement steps set to 2.",
+        "candidates_per_item": "No best-of-N selection reported; candidate answers/feedback are used for iterative refinement.",
+        "token_budget": "Prompt asks for an explanation under 150 words, but token limits are not reported.",
+        "sampling_parameters": "Temperature set to 0.8 for all baselines.",
+        "compute_or_cost": null,
+        "detail": "SR uses a critic prompt with correctness, soundness, completeness, faithfulness, and clarity criteria; SR-NOC performs refinement without a critic."
+      },
+      {
+        "scope": "LLM-based evaluation metric",
+        "calls_per_item": "Exact calls per item not reported; the method requires decomposition of reference and predicted explanations and per-atomic-fact verification for precision and recall.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Gemini-Flash-1.5 temperature=0.2 for both decomposition and verification.",
+        "compute_or_cost": null,
+        "detail": "Literal image descriptions are decomposed and added to reference facts before evaluation. The number of atomic facts and verification calls is not reported."
+      },
+      {
+        "scope": "IB component analysis",
+        "calls_per_item": null,
+        "candidates_per_item": "Generated implications selected under four approaches: Random, Cosine, CE, and Cosine+CE.",
+        "token_budget": null,
+        "sampling_parameters": "Conducted with GPT-4o on 100 random instances from each dataset; main Cosine+CE setting uses alpha=0.7.",
+        "compute_or_cost": null,
+        "detail": "Figure 4 reports precision, recall, and F1 for the four selection approaches."
+      },
+      {
+        "scope": "Intermediate candidate-explanation analysis",
+        "calls_per_item": null,
+        "candidates_per_item": "Three candidate explanations per iteration; highest F1 among the three is reported.",
+        "token_budget": null,
+        "sampling_parameters": "50 examples sampled from each dataset; outputs generated by GPT-4o and Flash1.5; evaluated at h0, h1, and h2.",
+        "compute_or_cost": null,
+        "detail": "The analysis reports precision, recall, and F1 for the best candidate at each hop, not necessarily the final generation protocol."
+      },
+      {
+        "scope": "SentenceSHAP feature-importance analysis",
+        "calls_per_item": "Base response plus responses for randomly sampled sentence-removal prompt combinations; exact number of sampled combinations and sampling ratio are not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Cosine similarity between the base response and ablated-prompt responses is computed with Sentence Transformer BAAI/bge-large-en-v1.5.",
+        "compute_or_cost": null,
+        "detail": "Used to visualize sentence/implication contribution to final explanations; not used as the main evaluation metric."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor explanation generation performance",
+        "present": false,
+        "description": "No human generation baseline is evaluated under matched conditions. Human reference explanations are used as gold references for automatic scoring, but humans do not generate new explanations for direct comparison with model outputs in this study.",
+        "directly_comparable": false,
+        "detail": "Main model comparisons are based on LLM-scored precision, recall, and F1, not on human-rated system outputs."
+      },
+      {
+        "scope": "LLM-based evaluator validation",
+        "present": true,
+        "description": "Two human annotators' atomic-sentence judgments are compared with Gemini-Flash-1.5 evaluator judgments on 130 random samples. LLM-human agreement is 77.1% (kappa=54.1), and human-human agreement is 75.4% (kappa=50.8).",
+        "directly_comparable": true,
+        "detail": "This is a matched validation baseline for the evaluator's atomic fact-verification task, not a human baseline for humor explanation generation."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper evaluates later VLMs/LLMs on public benchmark test portions from MemeCap, New Yorker, and YesBut and states that the datasets are publicly available. The models are described as trained on large-scale web corpora, and no decontamination, training-data overlap analysis, private held-out set, or newly created evaluation items are reported. Some benchmarks predate some evaluated model releases, but exact model training cutoffs and benchmark availability relative to each model are not reported, so the public-before-model field is left null. The risk is assessed as moderate because public benchmark/reference exposure could affect absolute performance, although the main method compares prompting strategies on the same sampled test sets."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Main precision/recall/F1 comparisons between BOTTLEHUMOR and baselines, reported improvement margins, IB component ablations, alpha ablation, and intermediate explanation-quality analyses rely on the Gemini-based automatic metric.",
+      "human_validation": "The paper validates the metric on 130 random samples via CloudResearch; reported LLM-human agreement is 77.1% (kappa=54.1), similar to human-human agreement of 75.4% (kappa=50.8).",
+      "detail": "There is no full human evaluation of system-level rankings or final explanation quality. Human validation is limited to atomic fact-conveyance judgments for a sample of metric decisions."
+    },
+    "reporting_gaps": [
+      "Unique CloudResearch annotator count is not reported; the paper reports two human annotators for agreement but does not clarify whether these are two total workers or two judgments per item.",
+      "Blinding of CloudResearch annotators to model/system identity is not reported.",
+      "Original dataset human contributor counts, demographics, recruitment, and annotation conditions are not reported in this paper.",
+      "Manual error-analysis annotator identity/count, coding protocol, blinding, adjudication, and inter-annotator agreement are not reported.",
+      "Exact model snapshots/API versions, inference dates, and access routes are not reported for GPT-4o, Gemini, Qwen2-VL, Phi-3.5-Vision, Qwen2-1.5B, or the sentence-embedding model.",
+      "Hardware, runtime, and compute budget for open-source models are not reported.",
+      "Decoding parameters for BOTTLEHUMOR generation are not reported; only baseline temperature 0.8 and evaluator temperature 0.2 are specified.",
+      "Exact calls per item for baselines, self-refinement, and the evaluation metric are not fully reported; evaluation calls depend on the unreported number of atomic facts.",
+      "The prompt or procedure for decomposing references/predictions into atomic facts is not fully shown in the provided appendix figures, although decomposition is central to the metric.",
+      "The number of atomic facts, total human annotation decisions, and distribution of the 130 validation samples across models/datasets are not reported.",
+      "The paper does not clearly specify whether literal image descriptions added to evaluation references are fixed across all systems or generated separately by particular VLMs.",
+      "Random seed values and sampled instance identifiers for the three 100-instance test splits are not reported in the paper text.",
+      "No contamination or training-data overlap analysis is reported for the public benchmark test items.",
+      "SentenceSHAP sampling ratio/number of ablated prompts is not reported.",
+      "Cost estimates are reported only for GPT-4o and Gemini-Flash-1.5-8B for 100 samples; costs/compute for Qwen2-VL and Phi are not reported."
+    ]
   }
 }

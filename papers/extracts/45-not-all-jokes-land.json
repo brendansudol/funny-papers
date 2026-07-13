@@ -144,5 +144,178 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that the dataset is publicly available at repository, but no repository URL appears in the provided transcription."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "male experienced annotators with industry experience",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Reviewed 340 LLM-generated samples for quality and removed irrelevant, repetitive, or nonsensical samples; independently assessed the retained samples for appropriateness, required knowledge, industry context, and humor type.",
+        "detail": "The paper states that two experienced annotators reviewed generated samples, reducing the dataset from 340 to 304, and that two male annotators independently annotated each sample. Ethical considerations add that the annotation process was carried out by two experienced annotators with industry experience."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "male reviewer; expertise not reported",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Resolved disagreements between the two annotators.",
+        "detail": "The paper states that, in cases of disagreement between annotators, a third male reviewer was consulted to resolve conflicts. It does not report how many disagreements occurred."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Two male experienced annotators with industry experience supplied the final human annotations for appropriateness, required knowledge, industry context, and humor type after initial LLM-generated labels were discarded."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "A third male reviewer resolved annotator disagreements; the paper does not report this reviewer’s expertise or blinding."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o; Claude3.5 Sonnet; Gemini 1.5 Flash; Llama-3.2-1B-Instruct; Qwen2.5-72B-Instruct",
+        "role": "primary",
+        "blind": null,
+        "detail": "These were the systems under test. They produced appropriateness-label predictions for humorous workplace sentences, and those predictions determined the reported model-specific F1 results. GPT-4o and Claude3.5 Sonnet were evaluated only on the subset they did not generate."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "F1-score",
+        "role": "primary",
+        "blind": null,
+        "detail": "The paper reports per-class F1-scores and weighted-average F1-scores for appropriateness classification, plus Llama-3.2-1B-Instruct F1-scores by humor type."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Initial workplace-humor dataset generation using Claude 3.5 Sonnet and ChatGPT-4o",
+        "mode": "single-sample",
+        "n": "Prompt requested 10 samples at a time; total initial pool was 340 samples, 170 from each model.",
+        "selector": "human",
+        "detail": "No best-of-N generation for a fixed item is reported. After LLM generation, two experienced annotators removed irrelevant, repetitive, or nonsensical samples, reducing the dataset to 304. Initial LLM-provided labels were discarded before human annotation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Claude3.5 Sonnet",
+        "version_or_snapshot": null,
+        "inference_date": "November 2024",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for initial sample generation and evaluated on the GPT-4o-generated subset. The paper provides an Anthropic URL but no API/service route, dated snapshot, or exact serving version. It says all experiment responses were collected in November 2024; the initial data-generation date is not separately reported."
+      },
+      {
+        "name": "ChatGPT-4o / GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": "November 2024",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for initial sample generation and evaluated on the Claude3.5 Sonnet-generated subset. The paper uses both ChatGPT-4o and GPT-4o naming and provides a chatgpt.com URL, but no dated snapshot or exact serving version. It says all experiment responses were collected in November 2024; the initial data-generation date is not separately reported."
+      },
+      {
+        "name": "Gemini 1.5 Flash",
+        "version_or_snapshot": null,
+        "inference_date": "November 2024",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on the dataset subsets. The paper provides a gemini.google.com URL but no exact snapshot, API/backend details, or serving version beyond the model name."
+      },
+      {
+        "name": "Llama-3.2-1B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": "November 2024",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on both dataset subsets and used for the humor-type analysis. The paper identifies the model but does not report inference backend, hardware, checkpoint hash, or decoding implementation."
+      },
+      {
+        "name": "Qwen2.5-72B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": "November 2024",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on both dataset subsets. The paper identifies the model but does not report inference backend, hardware, checkpoint hash, or decoding implementation."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Initial LLM generation of humorous workplace samples",
+        "calls_per_item": null,
+        "candidates_per_item": "Prompt requested 10 samples in CSV-like format; the initial pool contained 340 samples, 170 from Claude 3.5 Sonnet and 170 from ChatGPT-4o.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper gives the generation prompt and optional appended diversity instructions. It does not report the number of prompt calls, retries, temperature, top-p, max tokens, stop criteria, cost, or compute for generation."
+      },
+      {
+        "scope": "Appropriateness-classification evaluation",
+        "calls_per_item": "The paper states that the evaluation prompt was paired with a humorous sentence from the dataset and then given to the model.",
+        "candidates_per_item": "One appropriateness label requested: the prompt says to only state the level without further explanation.",
+        "token_budget": null,
+        "sampling_parameters": "Temperature set to zero in all experiments.",
+        "compute_or_cost": null,
+        "detail": "Claude3.5 Sonnet and GPT-4o were each tested only on the subset they were not involved in generating; Gemini 1.5 Flash, Llama-3.2-1B-Instruct, and Qwen2.5-72B-Instruct were evaluated on both subsets. All experiment responses were collected in November 2024. The paper does not report token limits, retries, hardware, latency, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Workplace humor appropriateness classification",
+        "present": false,
+        "description": "Human annotators supplied the reference labels, but the paper does not report human classification performance as a baseline under matched conditions.",
+        "directly_comparable": false,
+        "detail": "There is no separate human-vs-model evaluation or held-out human baseline; human work is used for dataset construction and adjudication."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The benchmark dataset is newly introduced in this work rather than a legacy public benchmark.",
+        "GPT-4o and Claude3.5 Sonnet were evaluated only on the subset generated by the other model, reducing direct self-generation exposure.",
+        "Initial LLM labels were discarded and replaced by human annotations."
+      ],
+      "basis": "The paper introduces a newly generated and human-annotated 304-sample dataset, and reports that experiment responses were collected in November 2024. There is no evidence in the paper that the benchmark was public before evaluation, although no exact public-release date or decontamination test is reported. Because the items were newly created for the study and the two generator models were not evaluated on their own generated subset, contamination risk appears low, but not eliminated."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Claims about LLMs’ ability to judge workplace-humor appropriateness, comparative model performance, subset difficulty, and the Llama-3.2-1B-Instruct humor-type analysis depend on LLM appropriateness-label predictions scored against human labels.",
+      "human_validation": "Final dataset labels were produced by two male human annotators, with disagreements resolved by a third male reviewer; initial LLM labels were discarded.",
+      "detail": "The LLMs are the systems under test rather than external judges of another model’s generated output. However, the headline empirical results are based on their appropriateness judgments for dataset sentences, evaluated using F1 against human annotations."
+    },
+    "reporting_gaps": [
+      "No repository URL is present in the supplied transcription, despite the paper stating that the dataset is publicly available at a repository.",
+      "No exact API snapshots, dated model versions, checkpoint hashes, or serving-version identifiers are reported for Claude3.5 Sonnet, GPT-4o, or Gemini 1.5 Flash.",
+      "Access route is not reported clearly for any model: the paper provides vendor/model URLs but does not state API vs web interface vs local inference.",
+      "For Llama-3.2-1B-Instruct and Qwen2.5-72B-Instruct, the paper does not report inference backend, hardware, quantization, checkpoint hash, or runtime configuration beyond temperature.",
+      "The date of initial dataset generation is not separately reported; only experiment-response collection in November 2024 is stated.",
+      "Generation decoding parameters such as temperature, top-p, max tokens, number of calls, retries, and stop criteria are not reported.",
+      "Evaluation token limits, retries, parsing rules for invalid outputs, latency, compute, and cost are not reported.",
+      "Annotator recruitment, geography, age, language proficiency, and detailed qualifications are not reported beyond gender and experience/industry experience for the two main annotators.",
+      "The third reviewer’s expertise and recruitment are not reported.",
+      "No inter-annotator agreement statistics, disagreement counts, or adjudication rates are reported.",
+      "The paper does not report whether annotators were blinded to the generating model or to the initial LLM labels, beyond saying that initial labels were discarded.",
+      "No human baseline performance is reported under conditions comparable to the model evaluation.",
+      "No formal contamination or memorization analysis is reported, and the exact dataset public-release date is not stated."
+    ]
   }
 }

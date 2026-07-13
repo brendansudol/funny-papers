@@ -203,5 +203,454 @@
     "code_url": "https://capcon.dev/",
     "data_url": "https://capcon.dev/",
     "other": "The paper says it releases models, a leaderboard, annotations, and corpus at https://capcon.dev/."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "New Yorker cartoonists whose captionless cartoons appeared in the contest corpus",
+        "recruitment": "Cartoons were drawn from 14 years of weekly New Yorker Cartoon Caption Contests and prior released corpora.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "704 cartoons used in the benchmark after filtering; the paper does not report the number of distinct cartoonists.",
+        "detail": "Cartoons supply the visual stimuli for matching, quality ranking, explanation, and annotation tasks."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "New Yorker Caption Contest entrants/readers submitting captions",
+        "recruitment": "The New Yorker invites readers weekly to submit English-language captions.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Jain et al. source: roughly 250 contests from #508 onward, mean/median 6.1K/5.7K unique captions per contest, 1.5M total. Shahaf/Radev source: contests #1–#507, 2M unique captions, mean/median 5.2K/5.0K per contest. The constructed high-quality set contains 2.7K captions across 704 contests.",
+        "detail": "These are human-authored contest captions; the paper does not report the number of distinct entrants."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "New Yorker editors",
+        "recruitment": "Editorial selection process of The New Yorker Caption Contest.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Editors choose three finalists from submissions for contests where official finalists are available; these finalists are automatically added to the benchmark high-quality caption set and support NYAcc labels.",
+        "detail": "The number and identities of editors are not reported."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": null,
+        "population": "Readers/crowd raters using the NEXT platform",
+        "recruitment": "Crowd ratings gathered through the NEXT platform used by The New Yorker/Jain et al. corpus.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Over 114M ratings total, with mean/median 445K/471K ratings per contest; raters mark captions as “funny”, “somewhat funny”, or “unfunny”.",
+        "detail": "The paper reports ratings, not participant counts; the number of distinct raters is not reported."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "21 qualified out of 30 manually graded in the qualification round; exact number completing production annotation HITs not reported",
+        "population": "Amazon Mechanical Turk workers with 10K prior approved HITs and at least 97% acceptance rate",
+        "recruitment": "Mechanical Turk qualification/training round for description/link HITs; workers from AU, CA, NZ, GB, and US were allowed.",
+        "geography": "AU, CA, NZ, GB, US for the description/link qualification round",
+        "languages": [
+          "English"
+        ],
+        "observations": "For 704 cartoons, the paper gathered 2 scene-location annotations, 3 literal descriptions, 3 unusual/uncanny descriptions, and 2 sets of 2–3 English Wikipedia links per cartoon. The description HIT was run 3 times per cartoon and the Wikipedia-link HIT 2 times per cartoon. Annotations were gathered in mid-to-late 2021.",
+        "detail": "Workers were paid at least $15/hour; adult-content warnings were shown. Low-resolution images received extra pay and at least one annotation by an author using the same HIT interface."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "One author of the paper",
+        "recruitment": "Internal author annotation after crowdworker explanation attempts were unsatisfactory.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The author sampled one high-quality caption per contest, reported understanding 651 of 704 sampled captions, and wrote 651 joke explanations; mean/median length 60/59 words, 39.3K words total.",
+        "detail": "These human-authored explanations serve as references and as the human side in pairwise explanation evaluations."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "3",
+        "population": "Two authors and one person familiar with the project",
+        "recruitment": "Internal/project-familiar participants; Lisa Watkins is thanked for contributing to human performance estimates.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Each attempted 100 randomly sampled instances from both matching and quality ranking; 595 total responses were collected.",
+        "detail": "Participants saw the images but not the human-authored descriptions, corresponding to the From Pixels setting. Matching instances were sampled so there were no repeated options."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "29 qualified out of 51 who attempted the pairwise-judgment qualification; exact number completing final judgments not reported",
+        "population": "Amazon Mechanical Turk workers qualified for pairwise explanation judgments",
+        "recruitment": "Second Mechanical Turk qualification round about 9 months after the description/link annotations; workers rated manually selected good/bad joke explanations and were manually screened.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Pairwise explanation HITs were run 2.7K times; Table 3 reports 393, 393, 390, 396, 396, 384, and 390 ratings for Q1–Q7 respectively, with 3 crowdworkers per test instance and majority vote determining winners.",
+        "detail": "Workers were asked to choose the more complete, relevant, and convincing explanation; the interface stated that explanations may be human- or machine-written."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "New Yorker editors",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Selected official finalists; official finalists are treated as high-quality captions and define NYAcc targets where available."
+      },
+      {
+        "type": "platform-vote",
+        "name": "NEXT platform crowd ratings",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Reader ratings of captions as funny/somewhat funny/unfunny provide per-caption mean scores; top crowd-ranked captions are used as high-quality candidates and CrowdAcc targets."
+      },
+      {
+        "type": "author",
+        "name": "One paper author",
+        "role": "data-labeling",
+        "blind": false,
+        "detail": "Authored 651 reference joke explanations after filtering out cases the author did not understand."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Mechanical Turk cartoon description/link annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided scene locations, literal descriptions, uncanny/unusual descriptions, and English Wikipedia links that are used as From Description inputs and OFA training targets."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Mechanical Turk pairwise explanation judges",
+        "role": "primary",
+        "blind": true,
+        "detail": "For explanation evaluation, 3 crowdworkers per test instance chose between unlabeled pairs of explanations; majority vote determined the winner in Table 3."
+      },
+      {
+        "type": "human-expert",
+        "name": "Three human performance-estimate participants",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Two authors and one project-familiar person answered matching and quality-ranking instances from images only; their accuracy is reported as the human estimate in Table 2."
+      },
+      {
+        "type": "LLM",
+        "name": "Text-only T5-Large quality-ranking classifier",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "For contests without direct crowd ratings, the authors trained T5-Large classifiers on crowd-labeled good/bad captions and used them to discard the 25% of entries with the lowest predicted score and help sample “okay” negative captions."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Matching and quality-ranking results are computed as accuracy averaged over 5 cross-validation splits; quality ranking reports NYAcc and CrowdAcc depending on label source."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BLEU-4, ROUGE-L, word-level perplexity",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Appendix E reports automatic explanation metrics against human-written references; the paper states human evaluations are better quality measures."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Sentence-BERT paraphrase-MiniLM-L6-v2 with hierarchical clustering; string deduplication",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to semantically deduplicate high-quality caption candidates and “okay” caption pools during task construction."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Evaluated explanation-generation systems for Table 3 and Appendix E",
+        "mode": "single-sample",
+        "n": "1 evaluated explanation per model/item; no best-of-N selection reported",
+        "selector": "none",
+        "detail": "T5, OFA→T5, GPT-3, GPT-3.5, GPT-4, and caption-only systems are compared using a single generated explanation per instance in pairwise or automatic evaluation; repeated human voting over a fixed output is not generation selection."
+      },
+      {
+        "scope": "OFA-Huge image-to-annotation generation used in OFA→LM From Pixels pipeline",
+        "mode": "best-of-n",
+        "n": "beam search n=5",
+        "selector": "model-self-selection",
+        "detail": "For each image, OFA is queried with four annotation prompts and the top-1 prediction according to beam search with n=5 is selected."
+      },
+      {
+        "scope": "GPT-style multiple-choice predictions for matching and quality ranking",
+        "mode": "single-sample",
+        "n": "one response/prediction per prompt; no self-consistency or best-of-N reported",
+        "selector": "none",
+        "detail": "GPT-3 uses zero-shot or 5-shot completion prompts; GPT-3.5/GPT-4 use Chat API prompts, with zero-shot chain-of-thought in some settings. Repeated sampling/selection is not reported for evaluated predictions."
+      },
+      {
+        "scope": "Appendix G unconditional creative caption/cartoon generation demonstration",
+        "mode": "best-of-n",
+        "n": "3 outputs",
+        "selector": "human",
+        "detail": "The paper presents an unconditional sample cherry-picked from 3 outputs using a curated brainstorming prompt."
+      },
+      {
+        "scope": "Appendix G conditional creative caption generation demonstration for Contest #818 scene",
+        "mode": "best-of-n",
+        "n": "5 outputs",
+        "selector": "human",
+        "detail": "The paper presents a conditional sample cherry-picked from 5 outputs using the same sampling parameters."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "CLIP ViT-L/14@336px",
+        "version_or_snapshot": "ViT-L/14@336px in tables/appendix; main text contains `ViT-L/14@366px`",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned for multiple-choice matching/ranking; 428M parameters; zero-shot variant also evaluated. The paper reports resizing/padding to a 336px square input."
+      },
+      {
+        "name": "OFA-Huge",
+        "version_or_snapshot": "OFA Huge, 930M parameters",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned to generate four annotation types from images; composed with T5-Large/T5-11B for downstream tasks. Direct OFA fine-tuning for explanation was attempted in early experiments but was less effective."
+      },
+      {
+        "name": "T5-Large",
+        "version_or_snapshot": "770M parameters",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned for From Description tasks and used in OFA→T5-Large; a text-only T5-Large classifier was also trained for quality-ranking data construction."
+      },
+      {
+        "name": "T5-11B",
+        "version_or_snapshot": "11.3B parameters",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned for From Description tasks, OFA→T5-11B, and caption-only baseline."
+      },
+      {
+        "name": "OpenAI `davinci`",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Fine-tuned through the OpenAI fine-tuning API as GPT3-175B; the paper states precise API details, including which parameters are updated and which version of `davinci` is used, were not available."
+      },
+      {
+        "name": "OpenAI `text-davinci-002`",
+        "version_or_snapshot": "text-davinci-002",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used for main GPT-3 zero-shot and 5-shot/in-context experiments and Appendix G demonstrations; described as 175B."
+      },
+      {
+        "name": "OpenAI `text-ada-001`",
+        "version_or_snapshot": "text-ada-001",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used in GPT-3 scaling experiments with 5 in-context examples."
+      },
+      {
+        "name": "OpenAI `text-babbage-001`",
+        "version_or_snapshot": "text-babbage-001",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used in GPT-3 scaling experiments with 5 in-context examples."
+      },
+      {
+        "name": "OpenAI `text-curie-001`",
+        "version_or_snapshot": "text-curie-001",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used in GPT-3 scaling experiments with 5 in-context examples."
+      },
+      {
+        "name": "OpenAI `text-davinci-001`",
+        "version_or_snapshot": "text-davinci-001",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used in GPT-3 scaling experiments with 5 in-context examples."
+      },
+      {
+        "name": "GPT-3.5",
+        "version_or_snapshot": "May 12, 2023 versions",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Evaluated through OpenAI Chat API in zero-shot+CoT and 5-shot settings; exact snapshot/model ID is not reported."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": "May 12, 2023 versions",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Evaluated through OpenAI Chat API in zero-shot+CoT and 5-shot settings after initial submission; exact snapshot/model ID is not reported."
+      },
+      {
+        "name": "Sentence-BERT `paraphrase-MiniLM-L6-v2`",
+        "version_or_snapshot": "paraphrase-MiniLM-L6-v2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used to compute embeddings for semantic deduplication and clustering of high-quality candidates and “okay” captions."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "From Description test-time annotation input",
+        "calls_per_item": "one forward pass at test time is required after randomly sampling a single valid annotation tuple",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "At test time, one tuple is randomly selected and fixed for all comparisons; training uses all valid annotation tuples.",
+        "compute_or_cost": null,
+        "detail": "Each cartoon has 2 locations × 3 descriptions × 3 uncanny descriptions × 2 entity-link sets, but the authors construct 6 annotator-consistent tuples and sample one at test time."
+      },
+      {
+        "scope": "OFA-Huge annotation generation in OFA→LM pipeline",
+        "calls_per_item": "4 OFA queries per image, one each for location, description, uncanny description, and entities",
+        "candidates_per_item": "beam search n=5 with top-1 selected",
+        "token_budget": null,
+        "sampling_parameters": "Prompts: “Where does this take place?”, “Describe this image.”, “What’s unusual about this image?”, and “What entities are there?”",
+        "compute_or_cost": "Fine-tuned on 8 A100 GPUs; maximum 7 epochs; warmup ratio 6%; learning rate 5e-5; label-smoothed cross-entropy with smoothing 0.1.",
+        "detail": "OFA was fine-tuned separately for each cross-validation split with validation-set early stopping."
+      },
+      {
+        "scope": "T5-Large/T5-11B explanation generation",
+        "calls_per_item": null,
+        "candidates_per_item": "1 evaluated output per item; no alternate-candidate selection reported",
+        "token_budget": null,
+        "sampling_parameters": "For explanation, T5 samples with temperature 1.0 and nucleus sampling p=.95.",
+        "compute_or_cost": "T5, CLIP, and OFA were trained using 8 A100 GPUs in PyTorch. T5-11B used DeepSpeed; T5-Large used Accelerate. T5-Large learning-rate search over {1e-4, 1e-5, 5e-5}, batch size 64; T5-11B learning rate 1e-5, batch size 64.",
+        "detail": "Output length/token limits are not reported."
+      },
+      {
+        "scope": "CLIP fine-tuning/evaluation",
+        "calls_per_item": "scores multiple-choice answer options; exact forward-pass accounting not reported",
+        "candidates_per_item": "5 choices for matching; 2 choices for quality ranking",
+        "token_budget": null,
+        "sampling_parameters": "No generative sampling; zero-shot prompt reported as `a new yorker cartoon with` plus the candidate caption. Fine-tuning uses image augmentations: random horizontal flipping, random color jittering, and random grayscaling.",
+        "compute_or_cost": "Trained using 8 A100 GPUs; batch size 32; 200-step linear warmup; per-split learning-rate search over {5e-5, 1e-5, 5e-6}.",
+        "detail": "Images are resized and padded to keep the full cartoon in the 336px square input."
+      },
+      {
+        "scope": "GPT-3 zero-shot and 5-shot Completion API experiments",
+        "calls_per_item": "not explicitly reported; prompts are single-instance task prompts",
+        "candidates_per_item": null,
+        "token_budget": "Figure 10 gives a randomly selected in-context explanation prompt of 1095 tokens; no global token budget is reported.",
+        "sampling_parameters": "5 random labeled in-context examples for few-shot prompts; evaluated decoding parameters are not fully reported. Figure 10 qualitative samples use temperature .8 from different GPT-3 engines.",
+        "compute_or_cost": null,
+        "detail": "Appendix B.5 gives prompt examples for zero-shot and in-context tasks."
+      },
+      {
+        "scope": "OpenAI GPT-3 `davinci` fine-tuning API",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "For explanation fine-tuning, default settings are used; for multiple choice, `prompt_loss_weight` is set to zero. Validation is not used by the API for early stopping; train and validation sets are concatenated.",
+        "compute_or_cost": "Approximately (3 tasks) × (5 cross-validation splits) × ($40 per fine-tune) = $600.",
+        "detail": "The precise fine-tuning API internals and `davinci` version are not available to the authors."
+      },
+      {
+        "scope": "GPT-3.5/GPT-4 Chat API experiments",
+        "calls_per_item": "not explicitly reported; prompts produce a single answer/explanation in reported evaluations",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Default hyperparameters in all cases; 5 random labeled in-context examples for few-shot; zero-shot GPT-3.5/GPT-4 use chain-of-thought prompts.",
+        "compute_or_cost": "GPT-4 queries cost on the order of $4K; GPT-3.5 is described as an order of magnitude less expensive than GPT-4.",
+        "detail": "Exact model snapshot IDs, token limits, and exact query dates are not reported."
+      },
+      {
+        "scope": "Appendix G creative caption-generation demonstrations with `text-davinci-002`",
+        "calls_per_item": "3 unconditional outputs for the shown unconditional sample; 5 conditional outputs for the shown conditional sample",
+        "candidates_per_item": "3 for unconditional demonstration; 5 for conditional demonstration",
+        "token_budget": "Prompt is 2,407 tokens.",
+        "sampling_parameters": "temperature=.8, top_p=.9, frequency_penalty=.2, presence_penalty=.05",
+        "compute_or_cost": null,
+        "detail": "Shown outputs are explicitly cherry-picked demonstrations, not the main benchmark evaluation."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Matching and quality ranking versus From Pixels systems",
+        "present": true,
+        "description": "Three humans answered image-only matching and quality-ranking instances; Table 2 reports Human Estimate From Pixels: 94.0 matching accuracy, 83.7 CrowdAcc, 64.6 NYAcc.",
+        "directly_comparable": true,
+        "detail": "Humans and From Pixels models both had access to cartoon images rather than human-authored descriptions, though the paper cautions human performance is not an upper bound because labels aggregate editor/crowd preferences."
+      },
+      {
+        "scope": "Matching and quality ranking versus From Description systems",
+        "present": true,
+        "description": "The same Human Estimate From Pixels is shown in Table 2 alongside From Description model results.",
+        "directly_comparable": false,
+        "detail": "From Description models receive human-authored scene annotations at test time, while the human estimate participants saw images and not the descriptions."
+      },
+      {
+        "scope": "Explanation generation",
+        "present": true,
+        "description": "Human-authored explanations by one paper author are compared head-to-head against machine explanations; in Q7, human explanations beat 5-shot GPT-4 in 67.7% of pairwise cases.",
+        "directly_comparable": true,
+        "detail": "The pairwise evaluation presents unlabeled human and model explanations for the same cartoon/caption to the same crowd judges. Generation conditions are not identical because the human references were authored as a corpus by one author rather than collected as a timed participant baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Five cross-validation splits hold out entire contests for supervised fine-tuning/evaluation.",
+        "Matching distractors are balanced so each answer appears once as correct and four times as incorrect, limiting answer-only biases.",
+        "Human-authored cartoon descriptions and joke explanations were newly collected by the authors and were not described as coming from public prior benchmark data.",
+        "Quality-ranking “okay” captions are filtered/deduplicated and paired by the authors rather than using only preexisting public pairings."
+      ],
+      "basis": "The paper does not report a contamination or memorization analysis. Although the assembled benchmark and annotations are new, the underlying New Yorker contests, captions, finalist selections, and prior caption-contest corpora substantially predate the evaluated proprietary LLMs, and GPT-3/GPT-4 training data are opaque. Memorizing public caption-cartoon or finalist associations could help matching and NYAcc-style ranking, and possibly crowd-ranking where prior ratings/corpora were public. The risk is therefore assessed as high for headline LLM results despite cross-validation and newly created annotations."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Quality-ranking benchmark construction for contests without crowd ratings partly depends on a text-only T5-Large quality classifier used to filter low-scoring negative candidates; headline explanation-quality claims are based on human pairwise judgments, not LLM judges.",
+      "human_validation": "No direct human validation of the T5 filtering decisions is reported. Positive/high-quality labels come from New Yorker editors and/or crowd ratings; explanation outputs are judged by MTurk crowdworkers.",
+      "detail": "No LLM is used to score or rank the evaluated model outputs in the main results. However, an LLM-style T5 classifier is used as a data-construction filter, so LLM-judge dependence is secondary rather than none."
+    },
+    "reporting_gaps": [
+      "Exact number of unique MTurk workers who completed production description/link annotations is not reported; only 21 qualified out of 30 are reported.",
+      "Exact number of unique MTurk workers who completed final pairwise explanation judgments is not reported; only 29 qualified out of 51 and approximately 2.7K HITs/ratings are reported.",
+      "Participant demographics beyond limited MTurk qualification/geography for description/link workers are not reported.",
+      "Geographic eligibility for the second, pairwise-explanation MTurk study is not reported.",
+      "The reason for 595 human performance-estimate responses rather than the 600 implied by 3 people attempting 100 matching and 100 quality-ranking instances is not explained.",
+      "Exact GPT-3.5 and GPT-4 snapshot/model IDs are not reported; the paper only states May 12, 2023 versions.",
+      "Exact OpenAI API inference dates are not reported for GPT-3, GPT-3.5, or GPT-4.",
+      "The precise `davinci` version and fine-tuning internals for the OpenAI fine-tuning API are unavailable/not reported.",
+      "Token limits, maximum output lengths, and most decoding parameters for evaluated GPT-3/GPT-3.5/GPT-4 generations are not reported beyond default hyperparameters for GPT-3.5/GPT-4 and illustrative GPT-3 samples.",
+      "Number of generated candidates per evaluated OpenAI explanation is not explicitly stated; no best-of-N is reported for evaluated outputs.",
+      "Ordering/randomization details for pairwise explanation choices are not reported, although pairs are unlabeled with respect to source.",
+      "No decontamination, memorization, or training-data overlap test is reported for proprietary or pretrained models.",
+      "The paper reports training hardware for local models but not wall-clock training time or inference cost for local models.",
+      "The paper contains a CLIP input-size inconsistency: the model is written as `ViT-L/14@366px` in main text but `ViT-L/14@336px` in tables/appendix."
+    ]
   }
 }

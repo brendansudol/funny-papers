@@ -143,5 +143,166 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that code and datasets are publicly available at a link, but the URL is not present in the provided transcription."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Unrecruited Reddit r/Jokes users, including posters and upvoters; the paper notes the forum had over 16 million members, but does not report the number of actual posters or voters in the dataset.",
+        "recruitment": "Organic Reddit activity scraped through Reddit’s public API; not recruited by the authors.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Almost 16,000 labeled Reddit joke instances; upvote scores ranged from 0 to 136,354; the authors used a 200-upvote cutoff yielding 13,884 not-funny jokes and 2,025 funny jokes.",
+        "detail": "Reddit posts supplied joke body/punchline text and Reddit platform upvote scores supplied the humor signal. Data collection ran hourly through March and April 2019 and updated previously gathered jokes’ upvote scores."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "199 unique participants",
+        "population": "Amazon Mechanical Turk participants, described by the authors as a general population/a general audience.",
+        "recruitment": "Amazon Mechanical Turk.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants rated an average of 30 jokes each; majority-vote labels were used for the Human (General) results in Table 2 for body-only, punchline-only, and full-joke inputs.",
+        "detail": "Prompt: “do you find this joke humorous?” For body-only or punchline-only samples, the prompt was prefaced with context such as “Below is the punchline of a joke. Based on this punchline, do you think you would find this joke humorous?”"
+      }
+    ],
+    "judges": [
+      {
+        "type": "platform-vote",
+        "name": "Reddit r/Jokes upvote scores",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Upvote scores determined the raw humor signal for the Reddit corpus; scores ranged from 0 to 136,354."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The authors selected a “natural divide” at 200 upvotes as the cutoff for labeling Reddit jokes as funny versus not funny."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk majority vote",
+        "role": "primary",
+        "blind": null,
+        "detail": "The most frequently chosen tag from MTurk participant ratings was used to compute the Human (General) baseline percentages/accuracies in Table 2."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy, Precision, Recall, F1",
+        "role": "primary",
+        "blind": null,
+        "detail": "Accuracy was reported for Reddit body, punchline, and full-joke experiments. Accuracy, Precision, Recall, and F1 were reported for Pun of the Day and Short Jokes identification comparisons."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "All experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates classification models for humor/joke/pun identification and does not generate humor or select among generated candidates."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "BERT-based Transformer",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper says it uses pre-trained BERT (Devlin et al., 2018), a multi-layer bidirectional Transformer encoder initially trained on a 3.3-billion-word corpus, with an additional output layer for fine-tuning. The specific BERT variant/checkpoint is not reported."
+      },
+      {
+        "name": "CNN with Highway Layers",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a baseline, described as a CNN with Highway Layers following Chen and Soo (2018) and Srivastava et al. (2015). Implementation details, exact architecture settings, and training settings are not reported in this paper."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "BERT/Transformer Reddit humor-classification experiments",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Max sequence length of 128.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports learning rate 2e-05 and training for a maximum of 7 epochs with checkpoints. It does not report batch size, optimizer details beyond learning rate, hardware, runtime, cost, number of runs, or inference passes per item."
+      },
+      {
+        "scope": "BERT/Transformer transfer evaluation on Short Jokes and Pun of the Day",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Same model format as previously mentioned; max sequence length 128 is the only stated sequence budget.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The Reddit-trained model was immediately applied to Short Jokes and Pun datasets without further fine-tuning. For those datasets, the authors say they did not use the Reddit upsampling/downsampling steps."
+      },
+      {
+        "scope": "CNN with Highway Layers Reddit baseline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No inference budget, token/input limit, training budget, compute, cost, or sampling details are reported for the CNN baseline."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Reddit r/Jokes body-only, punchline-only, and full-joke humor classification",
+        "present": true,
+        "description": "199 unique MTurk participants rated jokes or joke parts; majority vote produced the Human (General) baseline in Table 2, with reported values 0.493 body, 0.592 punchline, and 0.663 full.",
+        "directly_comparable": true,
+        "detail": "The human baseline is presented in the same Table 2 as model accuracies on the Reddit joke variants. Caveat: humans were asked whether they personally found/would find the joke humorous, while the model target labels were derived from Reddit upvote scores, reflecting a different audience."
+      },
+      {
+        "scope": "Short Jokes identification and Pun of the Day pun identification",
+        "present": false,
+        "description": "No new human performance baseline is reported for these transfer datasets; comparisons are to prior computational systems from previous work.",
+        "directly_comparable": false,
+        "detail": "The Pun table includes prior systems using “Human Centric Features,” but this is not a human performance baseline in this paper."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The Reddit r/Jokes corpus was collected in March-April 2019, after the cited 2018 BERT work, and was split into a stratified 75/25 train versus remaining validation/test portion.",
+        "The Short Jokes and Pun of the Day evaluations used the Reddit-trained model without further fine-tuning on those datasets, according to the paper."
+      ],
+      "basis": "The paper does not discuss data contamination, memorization, or de-duplication. Risk is lowered for the newly collected Reddit corpus because it postdates BERT pretraining, but the paper gives no duplicate/repost controls across train/test and no exact validation/test split details. Risk remains moderate overall because the Short Jokes Kaggle/WMT16-derived dataset and Pun of the Day dataset/source material were public legacy resources or public sources, and no decontamination check against BERT pretraining data or other model exposure is reported."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Not applicable as LLM judging is not used; the paper includes a separate MTurk human baseline for the Reddit experiments.",
+      "detail": "No LLM is used as an evaluator or metric. Results are determined by Reddit upvote-derived labels, MTurk majority votes for the human baseline, and automatic classification metrics."
+    },
+    "reporting_gaps": [
+      "Specific BERT variant/checkpoint, casing, model size, and exact pretrained snapshot are not reported.",
+      "Inference dates and model access mode are not reported for BERT or the CNN baseline.",
+      "CNN with Highway Layers implementation, architecture hyperparameters, training procedure, and inference budget are not reported.",
+      "No hardware, runtime, compute cost, batch size, random seeds, number of repeated runs, variance, confidence intervals, or statistical significance tests are reported.",
+      "The exact sizes and separation of validation versus test sets are unclear: the paper states a 75/25 split and says validation and test sets came from the remaining 25%, but does not give exact counts or subdivision.",
+      "No de-duplication or contamination checks are reported for Reddit reposts, overlap across train/test, or overlap with public Short Jokes/Pun resources.",
+      "For Reddit upvote labels, the paper does not report the number of voters per joke, number of distinct voters, number of distinct posters, exposure time per joke, or how Reddit score mechanics/downvotes were handled.",
+      "MTurk demographics, geography, compensation, qualifications, quality-control procedures, ratings per item, majority-vote thresholds/tie handling, and blinding to Reddit labels/source are not reported.",
+      "The provided paper text states that code and datasets are publicly available “at this link,” but the actual URL is not present in the supplied transcription.",
+      "The exact recreated Short Jokes negative-sampling counts, splits, and full reproduction details are not reported; the authors note that Chen and Soo’s exact combined dataset was not publicly available."
+    ]
   }
 }

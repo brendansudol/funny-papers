@@ -1,0 +1,418 @@
+{
+  "key": "x24-open-mic-humor-quotient",
+  "ref": "Part 5 (laughter-and-performance anchor)",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x24-open-mic-humor-quotient/x24-open-mic-humor-quotient.md",
+  "source_md_sha256": "8aa0b0df937b9da56f3491aa24b108394dfe887fd7b9b1c618188670c7b69d82",
+  "source_truncated": false,
+  "title": "“So You Think You’re Funny?”: Rating the Humour Quotient in Standup Comedy",
+  "authors": [
+    "Anirudh Mittal",
+    "Pranav Jeevan",
+    "Prerak Gandhi",
+    "Diptesh Kanojia",
+    "Pushpak Bhattacharyya"
+  ],
+  "year": 2021,
+  "venue": "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, pages 10073–10079",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can live audience laughter be used to automatically assign a five-point humour quotient rating to stand-up comedy clips?",
+    "How well do laughter-derived humour ratings agree with human annotators instructed to judge clips based on audience laughter feedback?",
+    "Can multimodal audio and text models predict the humour quotient of laughter-muted stand-up clips, and which textual features perform best?"
+  ],
+  "tasks": [
+    "humour rating",
+    "funniness scoring",
+    "automatic humour quotient annotation from audience laughter"
+  ],
+  "humor_domains": [
+    "stand-up comedy",
+    "long contextual jokes"
+  ],
+  "modalities": [
+    "text",
+    "audio"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Open Mic humor quotient dataset",
+      "role": "introduced",
+      "size": "~40 hours; Table 1 totals 1055 clips, including 927 ~2 minute stand-up comedy clips and 128 ~2 minute TED talk clips"
+    },
+    {
+      "name": "English standup comedy shows from the web",
+      "role": "source-material",
+      "size": "36 shows from 32 comedians; segmented into 927 ~2 minute clips"
+    },
+    {
+      "name": "TED Talks",
+      "role": "source-material",
+      "size": "128 ~2 minute audio clips"
+    },
+    {
+      "name": "Stand-Up Comedy Transcripts",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GloVe",
+    "BERT-base",
+    "BERT-large",
+    "DistilBERT",
+    "RoBERTa-base",
+    "RoBERTa-large",
+    "XLM"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Audience-laughter humour quotient scoring",
+      "summary": "The paper detects the sum of audience-laughter durations in each clip, normalizes it by clip duration, and maps the resulting score to a 0–4 Likert-scale rating using thresholds based on the mean and standard deviation of all scores."
+    },
+    {
+      "name": "Multimodal Bi-LSTM humour-rating model",
+      "summary": "The model feeds laughter-muted audio features and text embeddings into separate Bi-LSTM pathways followed by Dense layers, concatenates the two representations, and outputs a one-hot five-point humour rating."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "live-audience",
+      "detail": "Recorded audience laughter in stand-up clips is used as the primary rating signal; laughter intervals are detected and summed, then normalized by clip duration."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Three human annotators, 2 males and 1 female aged 21–33, rated clips based solely on audience laughter feedback in a closed-room environment without external noise."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Quadratic Weighted Kappa (QWK) is used to compare the scoring mechanism with human annotations and with neural model outputs; Cohen’s Kappa, Fleiss’ Kappa, and Krippendorff’s alpha are reported for inter-annotator agreement."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The laughter-based scoring mechanism achieved substantial agreement with human annotators on average.",
+      "metric": "Quadratic Weighted Kappa",
+      "value": "Average 0.595; Human A 0.659, Human B 0.562, Human C 0.563",
+      "dataset": "Open Mic humor quotient dataset",
+      "best_system": null
+    },
+    {
+      "finding": "Human annotators showed substantial agreement with one another.",
+      "metric": "Cohen’s Kappa / Fleiss’ Kappa / Krippendorff’s alpha",
+      "value": "Average pairwise Cohen’s Kappa 0.634; Fleiss’ Kappa 0.632; Krippendorff’s alpha 0.632",
+      "dataset": "Open Mic humor quotient dataset",
+      "best_system": null
+    },
+    {
+      "finding": "The best neural model used RoBERTa-large textual features with audio features and achieved the highest agreement with the scoring mechanism.",
+      "metric": "Quadratic Weighted Kappa",
+      "value": "0.813",
+      "dataset": "Open Mic humor quotient dataset",
+      "best_system": "RoBERTa-large"
+    },
+    {
+      "finding": "RoBERTa-large outperformed the GloVe baseline by the paper’s reported margin.",
+      "metric": "Quadratic Weighted Kappa",
+      "value": "RoBERTa-large 0.813 vs GloVe 0.691; improvement of 12% points",
+      "dataset": "Open Mic humor quotient dataset",
+      "best_system": "RoBERTa-large"
+    },
+    {
+      "finding": "In the ablation test, audio-based features outperformed text-based features.",
+      "metric": "Quadratic Weighted Kappa",
+      "value": "audio-based features 0.66 QWK; text-based features 0.48 QWK",
+      "dataset": "Open Mic humor quotient dataset",
+      "best_system": "audio-based features"
+    }
+  ],
+  "key_findings": [
+    "The paper creates and releases an English multimodal stand-up comedy dataset scored on a five-point humour scale using normalized audience laughter duration.",
+    "The automated laughter-derived scoring mechanism agrees with human annotations at an average QWK of 0.595.",
+    "Among the evaluated textual features combined with audio in the neural model, RoBERTa-large performs best with QWK 0.813 against the scoring mechanism.",
+    "Audio-only features outperform text-only features in the reported ablation, with 0.66 QWK versus 0.48 QWK.",
+    "The model identifies non-funny and most-funny clips well, while errors are concentrated among intermediate classes such as 2/3 and 3/4.",
+    "The paper reports that sarcastic, ironic, morbid or dark humour, and subtle comparisons are cases where the model often assigns lower scores despite audience laughter."
+  ],
+  "limitations": [
+    "The paper states that humour is subjective and culturally dependent, and notes possible annotator effects related to country-specificity, gender, race, and sensitivity to content.",
+    "Only three human annotators were used; the authors state that future work should evaluate the scoring mechanism with more human annotators.",
+    "The dataset is limited to English stand-up comedy clips plus TED talk clips used as unfunny samples, and the stand-up clips were selected based on clarity of audience laughter.",
+    "The model has difficulty with sarcastic and ironic statements, dark humour, and subtle comparisons that generate audience laughter.",
+    "The experiments use audio and text only; the authors state that future work should compare audio, video, and text features.",
+    "The paper contains a dataset-size caveat: Section 3 states 'Finally, we acquire 519 ~2 minute audio clips', while Table 1 and the discussion refer to 1055 clips/cases."
+  ],
+  "safety_ethics_notes": "The introduction notes that humour can depend on stereotypes and cultural knowledge and that cultural appropriation can be offensive to minority cultures. The discussion identifies country-specific comprehension, insensitivity toward females, and bias against a country or race as possible sources of annotator disagreement, and observes that the female annotator scored some such clips lower than the male annotators. The authors say they chose comedians from diverse gender, nationality, and cultural categories to reduce bias.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The paper states that the Open Mic dataset and code are released, and that the dataset is released under the CC-BY-SA-NC 4.0 license; no URL is present in the provided transcription."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "32 comedians",
+        "population": "English-language stand-up comedians in 36 shows available on the web",
+        "recruitment": "Authors selected shows based on clarity of audience feedback laughter; comedians were chosen from diverse categories of gender, nationality, and culture; clips with laughter from audience interaction/personal jokes were ignored.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "927 approximately 2-minute stand-up comedy clips were manually segmented from the 36 shows.",
+        "detail": "These comedians were source-content creators, not recruited study participants."
+      },
+      {
+        "role": "live-audience",
+        "participant_count": null,
+        "population": "Recorded live audiences for the stand-up comedy shows",
+        "recruitment": "Natural audience attendance/recorded audience feedback; study-specific recruitment not reported.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Audience laughter in stand-up clips was detected, summed, normalized by clip duration, and used as the primary humour-rating signal.",
+        "detail": "Audience counts and demographics are not reported. The paper treats laughter feedback from these larger audiences as reducing individual annotation subjectivity."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "TED talk speakers used for unfunny comparison samples",
+        "recruitment": "Authors gathered TED talk audio clips with speech delivery modes similar to stand-up comedy.",
+        "geography": null,
+        "languages": [],
+        "observations": "128 approximately 2-minute TED talk audio clips and transcript files were created as 'unfunny' samples.",
+        "detail": "The number of TED speakers, exact talks, and language of TED clips are not explicitly reported in the supplied text."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Human annotators: 2 males and 1 female, ages 21–33",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Annotators rated the humour quotient for each clip in the dataset based solely on audience laughter feedback; the exact item count is ambiguous because the paper reports both 1055 cases/clips and, elsewhere, 519 clips.",
+        "detail": "Annotations were performed in a closed-room environment without external noise. Annotators were instructed not to use their own perception of humour but to focus on audience laughter feedback."
+      }
+    ],
+    "judges": [
+      {
+        "type": "live-audience",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Recorded audience laughter in stand-up clips is the core human feedback signal used to assign humour quotient labels."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "laughter-detection library from Gillick and Wlodarczak (2019), modified by the authors",
+        "role": "primary",
+        "blind": null,
+        "detail": "The system detects laugh intervals and outputs the sum of laugh durations per clip; threshold parameters were tuned to minimum laughter probability 0.7 and minimum laughter duration 0.1."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Authors define the normalized laughter score as total detected laughter duration divided by clip duration, then map scores to 0–4 ratings using thresholds based on the mean and standard deviation. Authors also selected TED talk clips as unfunny samples."
+      },
+      {
+        "type": "human-lay",
+        "name": "Three human annotators",
+        "role": "validation",
+        "blind": null,
+        "detail": "Annotators rated clips based solely on audience laughter feedback; their ratings were compared with the automated scoring mechanism using QWK and with each other using agreement statistics."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Quadratic Weighted Kappa, Cohen’s Kappa, Fleiss’ Kappa, Krippendorff’s alpha",
+        "role": "validation",
+        "blind": null,
+        "detail": "QWK is used to compare automated scoring with human annotations and neural model outputs; Cohen’s Kappa, Fleiss’ Kappa, and Krippendorff’s alpha are used for inter-annotator agreement."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "All experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper does not perform humour generation or select among multiple generated outputs; it creates labels and trains/evaluates rating models."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "laughter-detection",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Cited as Gillick and Wlodarczak (2019); authors modified it to output the sum of laughter durations. Exact version, code snapshot, and execution environment are not reported."
+      },
+      {
+        "name": "Sitcom laughtrack mute tool",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Cited as Green (2018) and used to mute audience laughter before extracting model input audio features; exact version/snapshot is not reported."
+      },
+      {
+        "name": "GloVe",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as baseline textual features; exact embedding corpus, dimensionality, and checkpoint are not reported."
+      },
+      {
+        "name": "BERT_base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to generate contextual text embeddings; exact checkpoint, casing, and software/runtime version are not reported."
+      },
+      {
+        "name": "BERT_large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to generate contextual text embeddings; exact checkpoint, casing, and software/runtime version are not reported."
+      },
+      {
+        "name": "DistilBERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to generate contextual text embeddings; exact checkpoint is not reported."
+      },
+      {
+        "name": "RoBERTa_base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to generate contextual text embeddings; exact checkpoint and software/runtime version are not reported."
+      },
+      {
+        "name": "RoBERTa_large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Best reported textual-feature model; exact checkpoint and software/runtime version are not reported."
+      },
+      {
+        "name": "XLM",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to generate text embeddings; exact XLM variant/checkpoint is not reported."
+      },
+      {
+        "name": "Multimodal Bi-LSTM humour-rating network",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Authors’ model with separate Bi-LSTM pathways for audio features and text embeddings, dense layers, concatenation, and a 5-point one-hot classifier. Training implementation, random seed, and runtime environment are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Automated laughter-based label creation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Minimum laughter-detection probability threshold set to 0.7; minimum laughter duration set to 0.1; no sampling reported.",
+        "compute_or_cost": null,
+        "detail": "For each clip, detected laughter durations are summed and divided by clip duration. Ratings are assigned by thresholds relative to mean and standard deviation of scores: 4 if score > μ+0.75σ; 3 if μ+0.75σ ≥ score > μ; 2 if μ ≥ score > μ−0.75σ; 1 if μ−0.75σ ≥ score > 0; 0 if score=0."
+      },
+      {
+        "scope": "Audio preprocessing and features",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Audience laughter is muted using Green (2018) before extracting model-input audio features. MFCCs, RMS energy, and spectrogram tensors are concatenated into 33-dimensional features for each time sample. Maximum audio sequence length is 8000; shorter clips are zero-padded."
+      },
+      {
+        "scope": "Text embedding and multimodal classifier evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "One 5-point one-hot rating output per evaluated clip",
+        "token_budget": "BERT-derived models can process token sequences of length 512; the paper states these models are employed for the entire transcript of each approximately 2-minute clip. Final four layers are summed for clip embeddings.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Train-test split is reported as 70-30. No decoding/sampling is involved. Batch size, optimizer, epochs, learning rate, seeds, hardware, runtime, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Validation of automated laughter-based scoring mechanism",
+        "present": true,
+        "description": "Three human annotators rated clips on the same 0–4 humour scale based solely on audience laughter feedback. QWK between each annotator and the scoring mechanism was Human A 0.659, Human B 0.562, Human C 0.563, average 0.595.",
+        "directly_comparable": true,
+        "detail": "This is a direct validation of the automated scoring mechanism against human ratings of the same clips and target signal, although exact item count is ambiguous due the paper’s dataset-size inconsistency."
+      },
+      {
+        "scope": "Neural multimodal humour-rating model",
+        "present": true,
+        "description": "Human annotations are reported, but model outputs are evaluated against the automated scoring mechanism rather than directly against human annotators. Humans rated clips with audience laughter feedback, while the neural model uses laughter-muted audio plus text.",
+        "directly_comparable": false,
+        "detail": "The human ratings are useful context but are not a materially matched human baseline for the neural model’s task setting."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The Open Mic benchmark labels are created in this paper rather than taken from a public pre-existing labelled benchmark.",
+        "Audience laughter is muted before neural model training/testing, so the model is not intended to use the direct laughter signal as an input feature.",
+        "A 70-30 train-test split is reported."
+      ],
+      "basis": "The labelled benchmark appears newly introduced after the cited pretrained text models, but the underlying stand-up videos, online transcripts, and TED talks were public web materials and exact sources/dates are not reported. The paper does not report decontamination tests, exact pretrained checkpoints, or whether train/test splits prevent clips from the same show or comedian appearing in both sets. Therefore contamination/memorization risk for model-performance claims is conservatively assessed as moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Human annotators validate the laughter-derived scoring mechanism; no LLM judge is used or validated.",
+      "detail": "BERT/RoBERTa/XLM/DistilBERT are used as feature extractors in systems being evaluated, not as evaluators or judges. Results are determined by audience-laughter labels, human annotators, and conventional agreement metrics."
+    },
+    "reporting_gaps": [
+      "Dataset size is internally inconsistent: Section 3 says 927 stand-up clips plus 128 TED clips and Table 1 totals 1055 clips, but the same section also states 'Finally, we acquire 519 ~2 minute audio clips'.",
+      "Exact number of clips rated by each human annotator is not unambiguous because of the dataset-size inconsistency.",
+      "Human annotator recruitment method, expertise, native language, nationality/geography, compensation, and detailed annotation guidelines are not reported.",
+      "Live audience participant counts, demographics, recruitment, geography, and recording conditions are not reported.",
+      "Exact URLs/source identifiers for the 36 stand-up shows, TED clips, and transcript sources are not reported in the supplied text; the paper says data/code are released but no URL is present in the transcription.",
+      "Exact pretrained checkpoints/versions are not reported for BERT, RoBERTa, DistilBERT, XLM, or GloVe; GloVe corpus and dimensionality are not reported.",
+      "Inference/access dates, software versions, and execution environment for the pretrained models and preprocessing tools are not reported.",
+      "Neural-network training hyperparameters such as optimizer, learning rate, batch size, number of epochs, dropout, early stopping, random seeds, hardware, runtime, and cost are not reported.",
+      "The train/test split procedure is reported only as 70-30; the paper does not state exact split sizes, stratification, random seed, or whether clips from the same show/comedian can appear in both train and test sets.",
+      "No uncertainty intervals, multiple-run variance, or statistical significance tests are reported for model QWK results.",
+      "Validation accuracy/error rates for laughter detection and laughter muting are not reported."
+    ]
+  }
+}

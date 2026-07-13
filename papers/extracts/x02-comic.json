@@ -192,5 +192,364 @@
     "code_url": null,
     "data_url": null,
     "other": "Project page with videos: https://susunghong.github.io/COMIC"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Creators/channels whose public sketch-comedy videos were used as corpus/reference material: Foil Arms & Hog, Key & Peele, SNL, Studio C, and Viva La Dirt League.",
+        "recruitment": "Public YouTube channel corpus; the paper says videos not meeting length and format criteria were excluded, but does not specify the criteria.",
+        "geography": null,
+        "languages": [],
+        "observations": "4,940 YouTube data points collected; 30 data points from each of 5 channels and each of 3 engagement tiers, yielding 450 tiered data points.",
+        "detail": "Human-produced YouTube sketch content supplied the engagement-scored corpus, critic-alignment examples, validation/test items, and middle-tier reference videos."
+      },
+      {
+        "role": "live-audience",
+        "participant_count": null,
+        "population": "Organic YouTube viewers of the five sketch-comedy channels.",
+        "recruitment": "Not recruited by the study; engagement inferred from platform view counts.",
+        "geography": null,
+        "languages": [],
+        "observations": "View counts for the 4,940 collected YouTube data points were normalized by video age using per-channel logistic growth models and used as engagement signals.",
+        "detail": "The paper treats normalized projected carrying capacity from view-count trajectories as a proxy for audience engagement/humor quality."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Participants across the US, Europe, and Asia.",
+        "recruitment": null,
+        "geography": "US, Europe, and Asia",
+        "languages": [],
+        "observations": "22 responses per method and 110 responses total; five methods; each method represented by four videos; each participant viewed two videos per method and rated all five methods.",
+        "detail": "Blind randomized human evaluation of COMIC, VGoT, MovieAgent, Veo 3.1, and Sora 2 on 7-point Likert scales for funniness, re-watch/watch-more intent, comparison to human comedy, script quality, narrative quality, visual realism, and visual consistency."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Paired A/B preferences between COMIC and a critic-free baseline across funniness, script quality, narrative quality, visual realism, and visual consistency; neutral responses were excluded; the number of participants or comparisons is not reported.",
+        "detail": "Figure 10 reports non-neutral preference percentages: Script 57% vs 43%, Narrative 71% vs 29%, Realism 88% vs 12%, Consistency 100% for COMIC, and Funniness 62% vs 38%."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "Human raters in the blind randomized baseline comparison determined Table 3 mean Likert scores for the five video-generation methods."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Human raters in the paired A/B ablation determined preferences between full COMIC and the critic-free baseline; the paper does not state whether this ablation was blinded."
+      },
+      {
+        "type": "platform-vote",
+        "name": "YouTube view counts",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "View counts, normalized by a per-channel logistic growth model and projected carrying capacity, supplied engagement-tier labels used to select and validate LLM critics."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude 3.5 Haiku language-only critics",
+        "role": "primary",
+        "blind": null,
+        "detail": "Language-only LLM critics performed pairwise script comparisons for critic alignment, script tournaments, and script-quality metrics; selected critics included Mean Critic, Single Best, and Task-Wise Best strategies."
+      },
+      {
+        "type": "LLM",
+        "name": "Gemini 3 Flash Preview multimodal critics",
+        "role": "primary",
+        "blind": null,
+        "detail": "Multimodal/video critics evaluated rendered shots/videos, refined scene specifications, and performed pairwise video comparisons for automated evaluation."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude 3.5 Opus meta-critic / script inspection / scene direction",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Claude 3.5 Opus generated critic instructions, performed script inspection, and generated final scene directions; the supplement also says final merged-island evaluation used a specialized critic committee tailored to an academic audience."
+      },
+      {
+        "type": "LLM",
+        "name": "Image critic for best-of-batch selection",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The supplement states that an image critic performed best-of-batch selection to improve image quality and consistency, but does not identify the critic model or batch size."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Win Rate, Inter-Diversity, Intra-Diversity",
+        "role": "secondary",
+        "blind": null,
+        "detail": "These metrics aggregate pairwise evaluator probabilities from LLM critics for script/video quality and diversity analyses."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Candidate critic-prompt generation and selection",
+        "mode": "best-of-n",
+        "n": "critic pool size of 10 in practice",
+        "selector": "automatic-metric",
+        "detail": "A meta-critic generated diverse critic personas; critics were retained by validation accuracy against YouTube engagement-tier comparison tasks. Task-Wise Best selected the highest-accuracy critic per channel and comparison task."
+      },
+      {
+        "scope": "COMIC script generation and script selection for production",
+        "mode": "best-of-n",
+        "n": "base configuration uses K=3 islands and |S_k|=3 scripts per island; results are reported from the 4th generation unless otherwise noted; top four scripts selected for production",
+        "selector": "LLM-judge",
+        "detail": "Scripts evolved through round-robin pairwise LLM-critic tournaments; losing scripts were revised. After island iterations, scripts were inspected and ranked in a merged league. The supplement is not fully consistent about whether final selection used the single best critic from C_task or a specialized academic-audience critic committee."
+      },
+      {
+        "scope": "COMIC video rendering for selected scripts",
+        "mode": "best-of-n",
+        "n": "base configuration uses D=2 scene directions and |C_render|=1 rendering critic; small/base/large use D=1/2/4 and |C_render|=0/1/2 respectively",
+        "selector": "LLM-judge",
+        "detail": "For each script, multiple scene directions were rendered; each shot kept a refinement history and was selected by a single-elimination tournament, followed by a final single-elimination tournament among complete video realizations. The paper also reports image best-of-batch selection, but not its n."
+      },
+      {
+        "scope": "COMIC videos in the human baseline comparison",
+        "mode": "best-of-n",
+        "n": "four COMIC videos, generated from the top-performing scripts selected automatically by the pipeline",
+        "selector": "LLM-judge",
+        "detail": "The supplement states these four COMIC videos were selected automatically without manual curation."
+      },
+      {
+        "scope": "Baseline method videos in the human baseline comparison: VGoT, MovieAgent, Veo 3.1, and Sora 2",
+        "mode": "single-sample",
+        "n": "each baseline method was run four times independently to obtain four videos",
+        "selector": "none",
+        "detail": "The paper does not report best-of-N selection or manual curation for baseline outputs."
+      },
+      {
+        "scope": "Critic-free ablation videos",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The A/B study compares full COMIC with a critic-free baseline, but the paper does not report the number of generated ablation candidates or how ablation videos were selected."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "COMIC composite system",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "mixed",
+        "reporting": "partial",
+        "detail": "Uses API-budgeted language/multimodal calls plus local H200 image/video/voice generation; base configuration reported unless otherwise noted."
+      },
+      {
+        "name": "Claude",
+        "version_or_snapshot": "3.5 Sonnet",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for concept and script generation; no API snapshot, inference date, or decoding settings reported."
+      },
+      {
+        "name": "Claude",
+        "version_or_snapshot": "3.5 Haiku",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for language-only critics; no API snapshot, inference date, or decoding settings reported."
+      },
+      {
+        "name": "Gemini",
+        "version_or_snapshot": "3 Flash Preview",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for multimodal critics; no API snapshot, inference date, or decoding settings reported."
+      },
+      {
+        "name": "Claude",
+        "version_or_snapshot": "3.5 Opus",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for script inspection, scene direction generation, and meta-critic instruction generation; no API snapshot, inference date, or decoding settings reported."
+      },
+      {
+        "name": "FLUX.2 [dev] + TAG",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for character image synthesis and visual clarity enhancement; paper states image/video/voice generation was performed on an H200."
+      },
+      {
+        "name": "ElevenLabs",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for voice synthesis; exact model/version and access mode are not specified."
+      },
+      {
+        "name": "Chatterbox-TTS",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for voice cloning; paper states image/video/voice generation was performed on an H200, but no exact checkpoint is reported."
+      },
+      {
+        "name": "Wan",
+        "version_or_snapshot": "2.1 + TAG",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for video rendering; paper states image/video/voice generation was performed on an H200."
+      },
+      {
+        "name": "Veo",
+        "version_or_snapshot": "3.1",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Black-box frontier text-to-video baseline; no inference date, access path, prompts, or sampling settings reported."
+      },
+      {
+        "name": "Sora",
+        "version_or_snapshot": "2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Black-box frontier text-to-video baseline; no inference date, access path, prompts, or sampling settings reported."
+      },
+      {
+        "name": "VideoGen-of-Thought",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Agentic video-production baseline cited as VGoT; implementation/version and underlying model settings are not reported."
+      },
+      {
+        "name": "MovieAgent",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Agentic video-production baseline; implementation/version and underlying model settings are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "COMIC scale configurations",
+        "calls_per_item": "Writing-stage cost is stated as O(G · K · |S_k|^2 · |C_k|) LLM-critic evaluations across G generations; a globally pooled tournament would be O(G · K^2 · |S_k|^2 · |C_k|).",
+        "candidates_per_item": "Small: K=2, |S_k|=2, |C_k|=2, D=1, |C_render|=0. Base: K=3, |S_k|=3, |C_k|=3, D=2, |C_render|=1. Large: K=4, |S_k|=4, |C_k|=4, D=4, |C_render|=2.",
+        "token_budget": null,
+        "sampling_parameters": "Diffusion rendering uses an additional condition-agnostic guidance term/TAG; no temperature, seed, or decoding parameters are reported.",
+        "compute_or_cost": "Base configuration takes approximately one day on a single GPU / single H200 GPU with an API budget around $5.",
+        "detail": "Unless otherwise noted, experiments use the base configuration and report results from the 4th generation."
+      },
+      {
+        "scope": "COMIC rendering stage per selected script",
+        "calls_per_item": "The supplement states O(D · N · |C_render|) render calls per script, shot-level tournament selection O(D · N · |C_render|^2) comparisons, and final video-level tournament O(D · |C_render|) comparisons; it then states the dominant rendering-stage term as O(D · N · |C_render|^2) render calls per script.",
+        "candidates_per_item": "Each script receives D scene directions; each shot has a history {v_i^(0), ..., v_i^(|C_render|)}; a final tournament selects among D complete videos.",
+        "token_budget": null,
+        "sampling_parameters": "Render uses image, voice, and video generation with audio-visual-text conditions plus condition-agnostic guidance/TAG; exact diffusion sampling settings are not reported.",
+        "compute_or_cost": "Image, video, and voice generation are reported as performed on an H200.",
+        "detail": "Base rendering uses D=2 and |C_render|=1; large uses D=4 and |C_render|=2."
+      },
+      {
+        "scope": "Critic selection / alignment",
+        "calls_per_item": null,
+        "candidates_per_item": "Candidate critic pool size is 10 in practice; in-context sample counts tested were 0, 15, and 45; 30 data points per channel per tier produced 450 tiered data points split into S_in-context, S_val, and S_test.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports validation/test accuracies but not the number of LLM calls, prompts in full, token limits, or decoding settings for critic generation/evaluation."
+      },
+      {
+        "scope": "Human baseline-comparison video generation",
+        "calls_per_item": "Baseline methods were each run four times independently; COMIC generated videos from top-performing scripts selected automatically by its pipeline.",
+        "candidates_per_item": "Four videos per method in the human evaluation; each participant viewed two videos per method.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper does not report prompts, seeds, sample lengths for each method, or whether frontier-model calls used any hidden retries."
+      },
+      {
+        "scope": "Image best-of-batch selection",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Performed as part of image generation on H200 according to the supplement’s statement about image/video/voice generation.",
+        "detail": "The paper says an image critic performs best-of-batch selection, but the batch size, critic identity, and selection prompt are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human-evaluation comparison to average human sketch comedy",
+        "present": true,
+        "description": "Participants rated each generated video on a 7-point item asking how funny it was compared to the average human-made sketch comedy they had ever seen.",
+        "directly_comparable": false,
+        "detail": "No actual human-made videos were shown or rated alongside model outputs for this item; the baseline is participants’ memory/impression of human comedy."
+      },
+      {
+        "scope": "Automated comparison against middle-tier YouTube sketch videos",
+        "present": true,
+        "description": "Selected video critics compared generated videos against middle-tier test videos from the YouTube sketch corpus representing median sketch comedies.",
+        "directly_comparable": false,
+        "detail": "Human-produced and model-generated videos were compared by the same LLM-critic metric, but they were not generated under matched prompts/assets and were not directly judged by human raters in the same paired task."
+      },
+      {
+        "scope": "Matched human creator baseline from the same inputs",
+        "present": false,
+        "description": null,
+        "directly_comparable": false,
+        "detail": "The paper does not report human writers or filmmakers generating scripts/videos from the same character/background inputs under matched conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The 450 engagement-tier items were split into in-context, validation, and held-out test partitions for critic selection/evaluation.",
+        "Main video-quality claims are partly supported by a blind randomized human evaluation of newly generated videos.",
+        "The supplement states the four COMIC human-evaluation videos were selected automatically without manual curation."
+      ],
+      "basis": "The critic-alignment benchmark and automated video references are drawn from public YouTube sketch videos and public engagement signals, and the paper uses later proprietary/black-box LLMs and video models without reporting model snapshots, data cutoffs, collection dates, or any decontamination/memorization test. Public held-out splits reduce within-study overfitting but do not rule out pretraining exposure. Human evaluation of new generated outputs lowers the risk for some generation-quality claims, so the overall assessment is moderate rather than high."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Critic-alignment results in Tables 1–2, automated video ranking in Table 4, script/video selection within COMIC, generation/scale/island ablations, and automated win-rate/diversity claims depend on LLM critics or metrics derived from LLM pairwise judgments.",
+      "human_validation": "The baseline comparison includes blind human ratings with 22 responses per method, and the no-critics ablation includes a human A/B study with neutral responses excluded; the paper also notes the automated video ranking aligns with Table 3 human results.",
+      "detail": "LLM judges are not the only evidence source because Table 3 and the A/B ablation use human raters, but important methodological and performance claims are determined by LLM critic selection, LLM pairwise judging, and LLM-selected generation outputs."
+    },
+    "reporting_gaps": [
+      "Exact human participant count for the baseline evaluation is not reported; only responses per method and total responses are reported.",
+      "Recruitment method, compensation, demographic details, and participant language proficiency for human evaluations are not reported beyond geography for the baseline comparison.",
+      "A/B ablation participant count, number of paired comparisons, whether raters overlapped with the baseline study, geography, recruitment, and blinding are not reported.",
+      "Counts of neutral A/B responses excluded from Figure 10 are not reported.",
+      "Exact split sizes for S_in-context, S_val, and S_test are not reported, despite the 450 total tiered data points being reported.",
+      "YouTube data collection dates, publication-date ranges, and the exact length/format exclusion criteria are not reported.",
+      "No decontamination or memorization analysis is reported for public YouTube scripts/videos or engagement data used with LLM critics and generators.",
+      "Exact API snapshots, inference dates, and access paths are not reported for Claude, Gemini, Sora, Veo, VGoT, MovieAgent, or other model calls.",
+      "Prompts, token budgets, temperature/top-p/seed settings, retry policies, and decoding parameters are not reported for LLM agents or baselines.",
+      "Baseline-generation details for VGoT, MovieAgent, Veo 3.1, and Sora 2 are sparse: prompts, input assets, output durations, and any failed generations or retries are not specified.",
+      "The number of generated videos and pairwise comparisons used in the automated video evaluation of Table 4 is not reported.",
+      "The image critic used for best-of-batch selection is not identified, and its batch size and selection procedure are not reported.",
+      "The supplement gives inconsistent descriptions of final cross-island script selection: one section says the best validation critic from C_task is used, while another says a specialized academic-audience critic committee is used.",
+      "No confidence intervals, standard errors, significance tests, or inter-rater reliability statistics are reported for the human evaluation means or A/B percentages.",
+      "The paper reports approximate base compute/cost but not exact API call counts, per-component costs, or compute for small and large configurations."
+    ]
   }
 }

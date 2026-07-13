@@ -162,5 +162,195 @@
     "code_url": null,
     "data_url": "https://github.com/dnaihao/Chumor-dataset",
     "other": "Previously crawled Ruo Zhi Ba Best Annual Threads source cited by the paper: https://github.com/Leymore/ruozhiba"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Ruo Zhi Ba users/thread authors and forum moderators whose posts or selected threads supplied source jokes",
+        "recruitment": "Public/source-material collection from previously crawled “Best Annual Threads” between 2018 and 2021 and all threads in the “Moderator’s Recommendation” section; no participant recruitment reported.",
+        "geography": "Chinese Internet platform Ruo Zhi Ba; exact user geography not reported.",
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "The released dataset contains 1,951 retained jokes after cleaning, filtering, and annotation; the number of original users, posts, or threads before filtering is not reported.",
+        "detail": "Source material consists of RZB jokes. For Best Annual Threads, jokes are in follow-up posts selected by forum moderators; for Moderator’s Recommendation, jokes consist of thread title and content, with repeated content removed."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "One paper author, identified in Appendix A as Ruiqi He",
+        "recruitment": "Author-team annotation; no external recruitment.",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Annotated explanations for 1,951 jokes; corpus has a mean of 78 Chinese characters per explanation and 151,730 Chinese characters total. Also manually removed threads judged not funny, forum-management/rules related, excessively offensive, incomplete, or more philosophical than humorous.",
+        "detail": "The paper says one author annotated all explanations to ensure quality and consistency, citing concerns that crowd-sourcing cannot solicit high-quality explanations."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "Reported as 6 college students in the main text; Appendix A lists 7 authors as conducting preference annotations.",
+        "population": "Native Chinese-speaking college students who grew up in China; the Limitations section says all annotators hold at least a bachelor’s degree or are involved in bachelor’s programs.",
+        "recruitment": "Not reported.",
+        "geography": "Grew up in China; current location/recruitment geography not reported.",
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Three preference annotations were obtained for each joke in human-vs-LLM A/B comparisons. The paper says each annotator read a total length of around 300k Chinese characters. Reported agreement: 61.39% in main text; Appendix C reports 61.92% for GPT-4o, 60.86% for ERNIE Bot, and combined average 61.38%.",
+        "detail": "Annotators compared a human explanation and one LLM explanation and selected Explanation 1, Explanation 2, or both equally good. The paper also states all annotators reported that the jokes were very funny and aligned with Chinese Internet trends."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": "Ruiqi He",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Annotated the human explanations for all 1,951 jokes and performed manual filtering of unsuitable threads, according to Dataset Construction and Appendix A."
+      },
+      {
+        "type": "human-lay",
+        "name": "Native Chinese-speaking college-student preference annotators",
+        "role": "primary",
+        "blind": true,
+        "detail": "Primary evaluation judges for human-vs-GPT-4o and human-vs-ERNIE Bot explanation quality. The paper says explanations from the LLM and human were randomly assigned as Explanation 1 and Explanation 2; instructions did not identify the sources."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Majority vote, winning rate, and agreement-rate calculations",
+        "role": "primary",
+        "blind": null,
+        "detail": "For each example, the paper takes the majority vote among three preference annotations; if all annotators disagree, it assigns “Undecided.” Winning rate is used to compare LLM explanations versus human explanations, and percent agreement is reported for inter-annotator agreement."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Error-type distributions in Figure 3 are based on 200 sampled examples, but the paper does not report who labeled error types, how disagreements were handled, or the sampling procedure. The authors present the taxonomy and failure reasons."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Appendix F uses GPT-4o as a preference annotator to choose between its own explanation and the human-written explanation. This determines the Appendix F result that GPT-4o preferences differ from human preferences and favor its own explanations."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "GPT-4o humor-explanation generation for Chumor jokes",
+        "mode": "single-sample",
+        "n": "One final GPT-4o explanation per joke is evaluated; no best-of-N generation or selection is reported.",
+        "selector": "none",
+        "detail": "GPT-4o is prompted zero-shot to explain each joke in two sentences. The paper does not report generating multiple candidates or selecting among candidates."
+      },
+      {
+        "scope": "ERNIE Bot humor-explanation generation for Chumor jokes",
+        "mode": "single-sample",
+        "n": "One final ERNIE Bot explanation per joke is evaluated; no best-of-N generation or selection is reported.",
+        "selector": "none",
+        "detail": "ERNIE Bot is prompted zero-shot with the same two-sentence explanation prompt. The paper does not report generating multiple candidates or selecting among candidates."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Identified as GPT-4o from OpenAI and used for zero-shot explanation generation and Appendix F preference annotation. The paper links to OpenAI’s GPT-4o page and says GPT-4o experiments were supported by OpenAI Researcher Access credit. Figure 2 says the example is “as of June 5th, 2024,” but the paper does not state the full experiment inference date or exact snapshot/version."
+      },
+      {
+        "name": "ERNIE Bot",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Identified as ERNIE Bot from Baidu and used for zero-shot explanation generation. The paper links to a Baidu Research blog page but reports no exact version, snapshot, inference date, or interface."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-4o explanation generation",
+        "calls_per_item": null,
+        "candidates_per_item": "One final evaluated explanation per joke; number of calls, retries, or regenerations not reported.",
+        "token_budget": "Prompt requests a two-sentence explanation; no max-token or context-window budget reported.",
+        "sampling_parameters": "Zero-shot. Prompt: “请用两句话解释这个笑话的幽默之处:\\n[Joke]” / “Please explain the joke in two sentences:\\n[Joke]”. Temperature, top-p, seed, and decoding parameters are not reported.",
+        "compute_or_cost": "Supported by OpenAI Researcher Access credit; no cost amount or compute budget reported.",
+        "detail": "The output-length control is by instruction only, matching the paper’s statement that human explanations are in two sentences."
+      },
+      {
+        "scope": "ERNIE Bot explanation generation",
+        "calls_per_item": null,
+        "candidates_per_item": "One final evaluated explanation per joke; number of calls, retries, or regenerations not reported.",
+        "token_budget": "Prompt requests a two-sentence explanation; no max-token or context-window budget reported.",
+        "sampling_parameters": "Zero-shot with the same Chinese prompt as GPT-4o. Temperature, top-p, seed, and decoding parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "The paper reports ERNIE Bot sometimes refused to answer certain non-harmful contexts, but it does not report refusal handling, retries, or replacement procedures."
+      },
+      {
+        "scope": "GPT-4o preference annotation in Appendix F",
+        "calls_per_item": null,
+        "candidates_per_item": "Fixed pair of explanations per joke: GPT-4o’s own explanation and the human-written explanation; number of judge calls or repeated judgments not reported.",
+        "token_budget": null,
+        "sampling_parameters": "Prompt asks which of two explanations better explains the joke’s humor. Decoding parameters and output-normalization procedure are not reported.",
+        "compute_or_cost": null,
+        "detail": "Appendix F reports aggregate GPT-4o preferences: Human wins 20.9%, Tie 6.6%, GPT-4o wins 72.6%."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor-explanation quality: human-written explanations versus LLM-generated explanations",
+        "present": true,
+        "description": "Human explanations written by one author are compared against GPT-4o and ERNIE Bot explanations in randomized A/B preference evaluation by native Chinese-speaking annotators. LLMs are prompted to produce two-sentence explanations because the human explanations are two sentences.",
+        "directly_comparable": true,
+        "detail": "Both human and model explanations are presented as Explanation 1/Explanation 2 for the same jokes and judged by the same preference task; final labels are based on majority vote among three annotations per joke."
+      },
+      {
+        "scope": "Preference annotation: human annotators versus GPT-4o as annotator",
+        "present": true,
+        "description": "Appendix F compares GPT-4o’s preferences over human-vs-GPT-4o explanations with human preference results from Figure 1.",
+        "directly_comparable": false,
+        "detail": "The comparison is diagnostic rather than a matched human-performance baseline: GPT-4o judges a pair containing its own explanation, and the Appendix F prompt/options and randomization are not reported as identical to the human annotation protocol."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Human explanations for Chumor were newly manually annotated by one author, so the explanation labels as released in Chumor are not reported as pre-existing public labels."
+      ],
+      "basis": "Chumor itself is introduced in this 2024 paper, but the evaluated joke inputs come from public Ruo Zhi Ba material, including Best Annual Threads from 2018–2021 that had been previously crawled and Moderator’s Recommendation threads. These source jokes plausibly predate GPT-4o and may predate or overlap with ERNIE Bot training data. The paper reports no decontamination, memorization, or held-out/private-source check. Because the inputs are public legacy web/forum jokes but the explanatory labels are newly authored, the risk is assessed as moderate rather than low."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Appendix F claim that GPT-4o is not a reliable substitute preference annotator in this setting and that it favors its own explanations; this does not determine the main human-vs-LLM performance results.",
+      "human_validation": "Primary A/B evaluation uses native Chinese-speaking human annotators. Appendix F explicitly contrasts GPT-4o preferences with human preference distributions.",
+      "detail": "LLM judging is used for a diagnostic study of LLM-as-annotator behavior, not for the headline result that human explanations are preferred over GPT-4o and ERNIE Bot explanations."
+    },
+    "reporting_gaps": [
+      "Main text reports six college-student preference annotators, while Appendix A lists seven named authors as conducting preference annotations.",
+      "Recruitment method, compensation, exact current geography, and assignment of preference items to annotators are not reported.",
+      "The paper reports three preference annotations per joke but does not explicitly state total annotation counts per model comparison or whether the same annotators judged both GPT-4o and ERNIE Bot comparisons.",
+      "Exact GPT-4o snapshot/version and ERNIE Bot version are not reported.",
+      "Full experiment inference dates are not reported; only Figure 2 gives an example date of June 5th, 2024 for ChatGPT-4o.",
+      "Access/interface is not specified for either model; API versus web/chat interface is not stated.",
+      "Sampling and decoding parameters are not reported, including temperature, top-p, seed, max tokens, retry policy, and any post-processing.",
+      "Number of model calls per joke and handling of failed, refused, or malformed outputs are not reported, despite noting ERNIE Bot refusals in some contexts.",
+      "No compute budget or cost is reported, apart from noting OpenAI Researcher Access credit for GPT-4o experiments.",
+      "The 200-example error analysis lacks details on sampling procedure, who assigned error categories, whether labels were independent, and how multi-label or disagreement cases were handled.",
+      "No contamination or memorization analysis is reported for public Ruo Zhi Ba source jokes.",
+      "The Appendix F GPT-4o judge procedure does not report exact output choices/normalization, whether explanation order was randomized, or how the reported Tie category was elicited from a prompt that asks which explanation is better.",
+      "No independent validation or inter-annotator agreement is reported for the one-author human explanation annotations used as dataset references.",
+      "The paper states human explanations are significantly better but does not report statistical significance tests or confidence intervals."
+    ]
   }
 }

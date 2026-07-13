@@ -158,5 +158,319 @@
     "code_url": null,
     "data_url": "https://disi-unibo-nlp.github.io/Phunny",
     "other": "https://disi-unibo-nlp.github.io/publications/"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Paper authors/research team; exact contributors to pun creation are not enumerated.",
+        "recruitment": "Internal/manual dataset construction; recruitment not applicable or not reported.",
+        "geography": "Department of Computer Science and Engineering, University of Bologna, Italy, based on author affiliation; creators’ locations during construction not separately reported.",
+        "languages": [
+          "English"
+        ],
+        "observations": "350 final hand-crafted structured puns; 20 pre-existing/contaminated entries removed; gold manually crafted rationales are used for coherent comprehension judging.",
+        "detail": "The paper says the authors manually crafted PHUNNY through pun design, refinement, contamination checking, and critical review for respectful humor. It does not report the number of human creators, independent annotators, or inter-annotator agreement for dataset construction."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "60 volunteers total: 20 for comprehension, 20 for resolution, and 20 for generation.",
+        "population": "Native English speakers and individuals fluent in English at C1 level or higher; backgrounds included master’s and PhD students and employees from IT, finance, and economics sectors.",
+        "recruitment": "Volunteers; exact recruitment channel, incentives, and screening procedure not reported.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Each participant completed 30 randomly sampled task instances. Timing: 20 minutes for pun comprehension, 30 minutes for pun resolution, and 60 minutes for pun generation.",
+        "detail": "Participants received the same instructions as the models and served as the human baseline reported in Tables 1–3."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human evaluators for model-output assessment; identity and expertise not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Resolution outputs not accepted by automatic exact/derivative/substring criteria and not rejected by prefix filtering were human-evaluated; the paper says this was around 3% in the worst case per model. Manual correction/checks were also used for small ambiguous fractions in comprehension evaluation.",
+        "detail": "The paper does not report the number of human judges, whether they were authors, blindness, redundancy, or agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "Gemini-1.5-Flash",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as an LLM judge for coherent comprehension: it compares model explanations with manually crafted gold rationales and decides semantic equivalence. Also used in generation evaluation to judge whether an answer is derived from the prefix and whether answer and predicate are semantically related. Also used in the contamination pipeline to inspect retrieved web-page content for pun overlap."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Rule-based and lexical evaluation pipeline",
+        "role": "primary",
+        "blind": null,
+        "detail": "Comprehension uses response-form rules such as marking coherent responses starting with 'No' as incorrect and affirmative misleading responses as incorrect. Resolution uses exact match, WordNet lemmatization/synset derivational checks, linguistic suffix heuristics, substring match, prefix filtering, Valid Prefix Accuracy, Existing Word Accuracy, and Accuracy. Generation uses prefix checks and uniqueness-based creativity metrics C_S and C_A."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "The paper reports human oversight/manual correction for fewer than 1% of coherent comprehension cases due to ambiguity and limited manual checks for misleading-pun rejection consistency, but does not specify who performed these checks."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Human evaluation determined correctness for remaining resolution outputs after automatic acceptance/rejection filters. Evaluator count, identity, expertise, and blinding are not reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "all-MiniLM-L6-v2 embeddings",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to compute word embeddings for constructing semantically similar and dissimilar misleading subject swaps."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Pun comprehension model responses",
+        "mode": "single-sample",
+        "n": "One yes/no-plus-explanation response requested per prompt; no alternate candidates or selection reported.",
+        "selector": "none",
+        "detail": "Comprehension was evaluated zero-shot. The paper reports greedy decoding for Comprehension and Resolution."
+      },
+      {
+        "scope": "Pun resolution model responses",
+        "mode": "single-sample",
+        "n": "One final answer requested per prompt; no best-of-N or output selection reported.",
+        "selector": "none",
+        "detail": "Resolution used 5 few-shot demonstrations and greedy decoding. Direct prompting was applied only to open-source LLMs for comparisons; CoT was applied to all LLMs."
+      },
+      {
+        "scope": "Pun generation, Free setting",
+        "mode": "single-sample",
+        "n": "One new pun requested per prompt; 50 puns evaluated. Number of runs/calls is not fully reported.",
+        "selector": "none",
+        "detail": "Generation used 5 few-shot demonstrations and default temperature 1.0. Appendix D says examples were rotated across runs for some models such as Gemini to improve diversity, but no best-of-N selection procedure is described."
+      },
+      {
+        "scope": "Pun generation, Constrained setting",
+        "mode": "single-sample",
+        "n": "One Y/XZ answer requested for each fixed subject prompt; 104 unique subjects. No best-of-N or output selection reported.",
+        "selector": "none",
+        "detail": "Generation used 5 few-shot demonstrations and default temperature 1.0."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Closed-source OpenAI model; processed via OpenAI Batch API. No dated snapshot or exact API model identifier is reported."
+      },
+      {
+        "name": "GPT-4o-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Appears in result tables; OpenAI models were processed via OpenAI Batch API. The model is not clearly listed in Section 5.1’s prose model description, and no dated snapshot is reported."
+      },
+      {
+        "name": "o3-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Closed-source OpenAI reasoning model; processed via OpenAI Batch API. No dated snapshot or exact API model identifier is reported."
+      },
+      {
+        "name": "Gemini-2.0-Flash",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Closed-source Gemini model accessed through the Gemini API. No dated snapshot or exact API model identifier is reported."
+      },
+      {
+        "name": "Gemini-2.0-Flash-Thinking (FT)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Closed-source reasoning-focused Gemini model accessed through the Gemini API. Tables abbreviate it as Gemini-2.0-FT. No dated snapshot is reported."
+      },
+      {
+        "name": "LLaMA-3.1 (8B)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source model run with vLLM on local workstation. Exact checkpoint name, instruct/base variant, revision, and precision beyond configuration defaults are not reported."
+      },
+      {
+        "name": "LLaMA-3.3 (70B)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source 70B model run with vLLM; AWQ quantization was applied. Exact checkpoint/revision and instruct/base variant are not reported."
+      },
+      {
+        "name": "Phi-3.5 (3B)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source Phi model run locally with vLLM using configuration-file precision settings. Exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "Phi-4 (14B)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source Phi model run locally with vLLM using configuration-file precision settings. Section 5.1 describes Phi-4-14B; tables label Phi-4 (14B). Exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "Gemini-1.5-Flash",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as LLM judge for comprehension, generation evaluation, and contamination checking. No snapshot, inference date, or judge decoding settings are reported."
+      },
+      {
+        "name": "all-MiniLM-L6-v2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to compute embeddings for semantically similar/dissimilar subject swaps; paper says it is available on the Hugging Face hub but gives no revision or execution details."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Comprehension task inference",
+        "calls_per_item": null,
+        "candidates_per_item": "One yes/no-plus-explanation response is requested by the prompt; no retries, multiple candidates, or selection are reported.",
+        "token_budget": null,
+        "sampling_parameters": "Zero-shot setting; greedy decoding reported for Comprehension and Resolution.",
+        "compute_or_cost": null,
+        "detail": "Evaluated on 1,050 puns: 350 coherent and 700 misleading, split into 350 semantically similar swaps and 350 semantically dissimilar swaps."
+      },
+      {
+        "scope": "Resolution task inference",
+        "calls_per_item": null,
+        "candidates_per_item": "One final answer is requested by the prompt; no best-of-N or alternative-candidate selection is reported.",
+        "token_budget": null,
+        "sampling_parameters": "5 few-shot demonstrations; greedy decoding. Direct prompting only for open-source LLMs in comparisons; CoT prompting for all LLMs.",
+        "compute_or_cost": null,
+        "detail": "Evaluated on 350 coherent puns with punchlines as gold labels."
+      },
+      {
+        "scope": "Generation task inference, Free setting",
+        "calls_per_item": null,
+        "candidates_per_item": "One pun is requested per prompt; 50 puns evaluated. Exact number of runs is not reported.",
+        "token_budget": null,
+        "sampling_parameters": "5 few-shot demonstrations; default temperature 1.0. Appendix D reports rotating five demonstrations across runs for models such as Gemini, but not the number of rotations/runs.",
+        "compute_or_cost": null,
+        "detail": "No subject restriction; accuracy plus C_S and C_A creativity measures are reported."
+      },
+      {
+        "scope": "Generation task inference, Constrained setting",
+        "calls_per_item": null,
+        "candidates_per_item": "One Y/XZ pair is requested for each fixed-subject prompt; no best-of-N or selection is reported.",
+        "token_budget": null,
+        "sampling_parameters": "5 few-shot demonstrations; default temperature 1.0.",
+        "compute_or_cost": null,
+        "detail": "Evaluated on 104 unique subjects identified from the coherent-pun dataset; no predefined gold labels."
+      },
+      {
+        "scope": "Model serving and access",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Open models were run on a workstation with an NVIDIA A100 80GB for models with >=15B parameters and an NVIDIA RTX 3090 24GB for models with <=8B parameters; vLLM was used. AWQ quantization was applied for 70B-parameter models. OpenAI models used the OpenAI Batch API to reduce costs; Gemini models used the Gemini API. No monetary cost is reported.",
+        "detail": "Other open-source models used the precision settings specified in their configuration files."
+      },
+      {
+        "scope": "Gemini-1.5-Flash judging and contamination checks",
+        "calls_per_item": "Contamination: top-10 DuckDuckGo web search results were retrieved for each complete pun, and Gemini-1.5-Flash was used to verify whether the pun appeared in retrieved documents. Exact judge call batching/retries are not reported. Comprehension/generation judge call counts are not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The judge prompt for contamination is shown in Appendix C; prompts for comprehension/generation judging are shown in Appendix A."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Pun comprehension",
+        "present": true,
+        "description": "20 English native/C1+ volunteers completed 30 randomly sampled comprehension instances each under the same instructions as models; timed for 20 minutes. Human results reported: CPA 87.9, MPA- 87.3, MPA+ 94.4, MPA 90.9.",
+        "directly_comparable": true,
+        "detail": "Comparable at the task/instruction/metric level, but humans completed sampled timed subsets whereas models were evaluated on the full comprehension set; exact sampling balance across coherent/misleading categories is not reported."
+      },
+      {
+        "scope": "Pun resolution",
+        "present": true,
+        "description": "20 English native/C1+ volunteers completed 30 randomly sampled resolution instances each under the same instructions as models; timed for 30 minutes. Human results reported: ACC 85.7, VPA 95.1, EWA 100.0.",
+        "directly_comparable": true,
+        "detail": "Comparable at the task/instruction/metric level, but humans completed sampled timed subsets whereas models were evaluated on all 350 coherent puns."
+      },
+      {
+        "scope": "Pun generation",
+        "present": true,
+        "description": "20 English native/C1+ volunteers completed 30 randomly sampled generation instances each under the same instructions as models; timed for 60 minutes. Human results reported: Constrained ACC 88.7, Free ACC 92.8, C_S 82.3, C_A 95.2.",
+        "directly_comparable": true,
+        "detail": "Comparable at the task/instruction/metric level, but the paper does not specify exactly how each participant’s 30 instances were divided between Free and Constrained generation, and models were evaluated on specified model task sets of 50 free generations and 104 constrained subjects."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Dataset puns were manually crafted rather than taken from an existing public benchmark.",
+        "For each complete pun, the authors retrieved the top-10 DuckDuckGo web search results.",
+        "Gemini-1.5-Flash was used to inspect retrieved web-page content for sufficient evidence of the pun.",
+        "20 contaminated/pre-existing puns were removed; the full list is provided in Appendix C.",
+        "The paper frames PHUNNY as newly curated to minimize overlap with LLM pretraining corpora."
+      ],
+      "basis": "Risk is lower than for legacy public benchmarks because PHUNNY is newly hand-crafted and the authors performed a web-search/LLM-judge contamination screen. I assess residual risk as moderate rather than low because exact dataset creation/publication dates, model inference dates, API snapshots, and proprietary-model training cutoffs are not reported; the contamination screen is limited to top-10 DuckDuckGo results and an LLM judge; and the paper does not clearly state whether few-shot demonstration puns were excluded from evaluation items."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Coherent comprehension CPA depends on Gemini-1.5-Flash semantic-equivalence judgments; Free and Constrained generation ACC depend on Gemini-1.5-Flash derivation and semantic-relatedness judgments; contamination-removal/novelty claims also depend partly on Gemini-1.5-Flash. Resolution accuracy is less LLM-judge-dependent because it uses rule-based filters plus human fallback.",
+      "human_validation": "The paper reports fewer than 1% of coherent-comprehension cases requiring manual correction due to ambiguity, and under 1% incorrect misleading-pun rejections with limited manual checks. It does not report independent human validation of the generation LLM-judge decisions. Resolution fallback human evaluation was used for about 3% of cases in the worst case per model.",
+      "detail": "LLM judging is not the sole basis for every headline result, but it materially determines important reported metrics and the contamination filter."
+    },
+    "reporting_gaps": [
+      "Exact API model IDs, dated snapshots, and inference dates are not reported for OpenAI, Gemini, or Gemini-judge calls.",
+      "Exact open-model checkpoints, Hugging Face revisions, instruct/base variants, and tokenizer/config versions are not reported for LLaMA, Phi, or all-MiniLM-L6-v2.",
+      "GPT-4o-mini appears in result tables but is not clearly described in the prose model list in Section 5.1.",
+      "Token budgets, max output lengths, top-p/top-k, random seeds, stop criteria, retry policy, and judge-model decoding parameters are not reported.",
+      "OpenAI Batch API and Gemini API call dates, batching details, and monetary costs are not reported.",
+      "The paper reports 5 few-shot demonstrations for Resolution and Generation but does not clearly state whether demonstration puns were excluded from evaluation items.",
+      "Appendix D says few-shot examples were rotated across runs for some models, but exact demonstration sets per model/run and the number of runs are not reported.",
+      "Human baseline recruitment channel, compensation, participant geography, age/gender demographics, and screening details beyond English proficiency/background examples are not reported.",
+      "For human baseline generation, the paper does not specify how each participant’s 30 instances were split between Free and Constrained settings.",
+      "Human judges for manual correction, MPA checks, and resolution fallback are not counted or characterized; blinding, redundancy, and inter-annotator agreement are not reported.",
+      "Validation of Gemini-1.5-Flash as a judge is only partially quantified for comprehension; no separate human validation rate is reported for generation judging.",
+      "DuckDuckGo query strings, retrieval dates, web-page extraction procedure, and Gemini-judge settings for contamination checks are not reported.",
+      "The contamination analysis cannot inspect proprietary training corpora and does not report model training cutoffs.",
+      "The Direct vs CoT comparison is shown for open-source models, but full numeric direct-prompt results and exact prompt modality used for every main-table entry are not fully enumerated."
+    ]
   }
 }

@@ -1,0 +1,3 @@
+<!-- guide claims for x25-tic-talk (Part 5 (timing as multimodal data)) -->
+
+**Timing as multimodal data:** [**TIC-TALK: Pipeline and Database for the Multimodal Study of Comedic Timing**](https://aclanthology.org/2026.chum-1.2/) (Zribi, Cafiero, Lépinay & Vidal-Gorène, CHum 2026) `workshop` `dataset` aligns text, audio/laughter, shot type, and skeletal pose across 5,416 topic segments from 90 filmed specials. Its illustrative 24-topic analysis finds kinetic energy negatively associated with laughter (*r*=−.75) and close-up proportion positively associated (*r*=.28). These are ecological, topic-level correlations in edited Netflix specials, not causal laws of delivery, but the resource fills a major timing/embodiment gap.

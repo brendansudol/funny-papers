@@ -1,0 +1,488 @@
+{
+  "key": "x25-tic-talk",
+  "ref": "Part 5 (timing as multimodal data)",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x25-tic-talk/x25-tic-talk.md",
+  "source_md_sha256": "a6002b8160dc8702fcc037ee1fde8d6022eb36579e67904bf9c760c6adeee992",
+  "source_truncated": false,
+  "title": "Timing In stand-up Comedy: Text, Audio, Laughter, Kinesics (TIC-TALK): Pipeline and Database for the Multimodal Study of Comedic Timing",
+  "authors": [
+    "Yaelle Zribi",
+    "Florian Cafiero",
+    "Vincent Lépinay",
+    "Chahan Vidal-Gorène"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the 2nd Workshop on Computational Humor (CHum 2026), pages 29–38",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "system"
+  ],
+  "research_questions": [
+    "How can comedic timing in stand-up be represented computationally as short-lag coordination across text, gesture, and audience response?",
+    "Can a modular pipeline align subtitles, detected laughter, shot composition, and pose-derived motion at their native temporal resolutions?",
+    "Do thematic content, kinematic profile, and shot composition co-vary with audience laughter across topic segments?",
+    "Given the multimodal stream up to time t, can a model predict whether a new laughter event will begin in [t, t+2)?"
+  ],
+  "tasks": [
+    "multimodal comedic timing analysis",
+    "laughter detection",
+    "topic-level laughter dynamics analysis",
+    "short-horizon laughter onset prediction",
+    "shot classification",
+    "pose-derived gesture and movement analysis"
+  ],
+  "humor_domains": [
+    "stand-up comedy",
+    "professionally filmed comedy specials",
+    "audience laughter",
+    "comedic timing"
+  ],
+  "modalities": [
+    "text",
+    "audio",
+    "video"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "TIC-TALK",
+      "role": "introduced",
+      "size": "5,416 topic segments across 90 shows; average runtime per show is 63 min (total ≈94 h); 322,973 frames at 1 fps; 22% are full-body frames"
+    },
+    {
+      "name": "Netflix stand-up comedy specials",
+      "role": "source-material",
+      "size": "90 professionally filmed stand-up comedy specials (2015–2024)"
+    },
+    {
+      "name": "Manual shot-classification frame annotations",
+      "role": "trained-on",
+      "size": "594 manually annotated frames and 128 held-out samples"
+    },
+    {
+      "name": "TIC-TALK short-horizon laughter onset prediction anchors",
+      "role": "introduced",
+      "size": "285,916 anchors across 90 shows; positive rate 17.0%; test set: 45,894 anchors from 14 held-out shows"
+    }
+  ],
+  "models_evaluated": [
+    "Whisper-AT",
+    "BERTopic",
+    "all-MiniLM-L6-v2",
+    "YOLOv8-cls",
+    "YOLOv8s-pose",
+    "HistGradientBoostingClassifier"
+  ],
+  "methods_proposed": [
+    {
+      "name": "TIC-TALK multimodal processing pipeline",
+      "summary": "A pipeline that processes subtitles, audio, and video from stand-up specials into temporally aligned topic, laughter, shot, and pose streams. It uses BERTopic and sentence-BERT for text, Whisper-AT for laughter events, YOLOv8-cls for shot type, and YOLOv8s-pose for performer keypoints."
+    },
+    {
+      "name": "Hierarchical temporal alignment without resampling",
+      "summary": "Topic segments serve as 60 s anchors, and higher-frequency pose keyframes, shot labels, and laughter events are assigned by temporal containment. Each modality keeps its native resolution rather than being resampled."
+    },
+    {
+      "name": "Pose-derived kinematic signals",
+      "summary": "The paper defines arm spread A_t, kinetic energy E_t, and trunk lean θ_t from raw 17-joint pose coordinates. These continuous signals are smoothed with a 30 s sliding window and used as proxies for performance dynamics."
+    },
+    {
+      "name": "Short-horizon laughter onset prediction benchmark",
+      "summary": "Given multimodal context up to time t, the task predicts whether a new laughter event will begin in [t, t+2). The benchmark samples 285,916 anchors at 1 s steps and evaluates feature ablations for history, text, and vision with show-level train/validation/test splits."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "The introduction cites Kant’s definition of laughter as arising from “the sudden transformation of a strained expectation into nothing” to motivate attention to timing and expectation."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The paper cites Bergson’s “something mechanical encrusted on the living” and Augustine’s difficulty of defining time to motivate embodiment, rupture, and timing; it states that it did not test a pre-formulated theory of which techniques elicit the most laughter."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Shot classification was validated on 128 held-out annotated samples and reported average F1 = 0.91."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Topic model selection used number of topics K, largest-topic share s_max, normalized topic entropy H_norm, NPMI coherence C_NPMI, and the composite score S = H_norm + C_NPMI - 2 s_max."
+    },
+    {
+      "type": "live-audience",
+      "detail": "Audience response was operationalized through detected laughter in recorded stand-up specials; laughter rate r_l was defined as the share of block duration covered by detected laughter events."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The cross-modal use case computed topic-level means and Pearson correlations between laughter rate and kinematic or shot-composition features across 24 topics."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The laughter onset benchmark used AUROC, AUPRC, F1, precision, and recall; AUPRC of a random classifier equaled the positive rate, 0.170."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The fine-tuned YOLOv8-cls shot classifier achieved high validation performance on held-out annotated frames.",
+      "metric": "average F1",
+      "value": "0.91",
+      "dataset": "Manual shot-classification frame annotations",
+      "best_system": "YOLOv8-cls"
+    },
+    {
+      "finding": "Kinetic energy was the strongest non-tautological cross-modal signal and negatively predicted topic-level laughter rate.",
+      "metric": "Pearson r",
+      "value": "r = -0.75, N = 24",
+      "dataset": "TIC-TALK",
+      "best_system": null
+    },
+    {
+      "finding": "The highest-laughter topics were personal and bodily, while geopolitical or identity-framing topics produced lower laughter rates.",
+      "metric": "mean laughter rate",
+      "value": "T15 = 0.253; T22 = 0.248; T10 = 0.230; T17 = 0.222; T3 = 0.141; T1 = 0.085",
+      "dataset": "TIC-TALK",
+      "best_system": null
+    },
+    {
+      "finding": "Belly laughs were nearly absent at 60 s topic granularity.",
+      "metric": "belly laugh rate",
+      "value": "T22 = 0.0051; T17 = 0.0061; fewer than 2 events per 74,000+ inference windows",
+      "dataset": "TIC-TALK",
+      "best_system": "Whisper-AT"
+    },
+    {
+      "finding": "Close-up shot proportion had a weak positive relationship with topic-level laughter rate.",
+      "metric": "Pearson r",
+      "value": "r = +0.28, N = 24",
+      "dataset": "TIC-TALK",
+      "best_system": null
+    },
+    {
+      "finding": "The best laughter onset predictor was the full multimodal system, but it only marginally improved over laughter history alone.",
+      "metric": "AUROC / AUPRC / F1 / Prec / Rec",
+      "value": "0.647 / 0.277 / 0.342 / 0.248 / 0.553; history-only AUROC = 0.643; random AUPRC = 0.170; 1.6× lift",
+      "dataset": "TIC-TALK short-horizon laughter onset prediction anchors",
+      "best_system": "text + vision + history"
+    }
+  ],
+  "key_findings": [
+    "TIC-TALK provides derived, temporally aligned annotations for 90 professionally edited Netflix stand-up specials, including topic segments, detected laughter events, shot labels, pose keypoints, and sentence-BERT embeddings.",
+    "Across 24 topics, mean kinetic energy correlated negatively with laughter rate (r = -0.75, N = 24), supporting a correlational stillness-before-punchline interpretation.",
+    "Personal and bodily topics had the highest laughter rates, while geopolitical and identity-framing topics generated substantially less laughter in the corpus-level analysis.",
+    "Belly laughs were almost invisible at 60 s topic granularity, motivating finer event-level annotation.",
+    "For short-horizon laughter onset prediction, laughter history dominated: the full text + vision + history model improved AUROC by only 0.004 over history-only.",
+    "Text and vision showed small multimodal synergy, with text + vision AUROC = 0.577 compared with text-only 0.554 and vision-only 0.538."
+  ],
+  "limitations": [
+    "The corpus is limited to Netflix stand-up comedy specials and does not represent stand-up comedy in its totality.",
+    "Netflix platform selection is itself a marker of symbolic recognition and may reflect career, curation, and industrial production criteria not modeled in the paper.",
+    "Quantitative and computational analysis cannot fully account for comic intent, artistic singularity, comic intuition, or poetic inclination.",
+    "Topic modeling captures broad themes but does not operationalize the internal structure of jokes, such as setups, punchlines, or callbacks.",
+    "Professionally filmed stand-up specials are not neutral records of stage performance; montage and camera choices are part of the object under study and can confound visual signals.",
+    "The E_t–laughter anti-correlation is correlational and may be confounded by filming conventions, performer mobility, and the artefactual T6 topic.",
+    "The 60 s granularity of topical context limits short-horizon prediction, and the paper suggests sentence-level and frame-level features would likely yield stronger gains.",
+    "Single-recording specials and stochastic audience response limit the ceiling of laughter onset prediction."
+  ],
+  "safety_ethics_notes": "The released corpus contains only derived, time-aligned annotations; no audio, image, or video is distributed. The paper also notes Netflix/platform selection and filming conventions as embedded biases, and states that Claude AI was used to assist with condensing and proofreading the paper.",
+  "artifacts": {
+    "code_url": "https://github.com/yaelle-z/TIC-TALK",
+    "data_url": "https://huggingface.co/datasets/ENC-PSL/TIC-TALK",
+    "other": "Derived annotations are serialized as hierarchical JSON per show; visualizations for all 90 specials are distributed with the corpus."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "live-audience",
+        "participant_count": null,
+        "population": "Audiences audible in 90 professionally filmed Netflix stand-up comedy specials from 2015–2024.",
+        "recruitment": "Not recruited by the researchers; audience response was taken from archival/platform comedy-special recordings.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Audience response was operationalized through automatically detected laughter events; the paper reports mean laughter coverage of 17.8%, about 1.2 events per 10 s, and a 17.0% positive rate for 2 s laughter-onset anchors.",
+        "detail": "No audience participant counts, demographics, venue details, or per-show audience sizes are reported."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Stand-up performers/comedians appearing in the 90 Netflix stand-up comedy specials.",
+        "recruitment": "Not recruited by the researchers; performances were selected as Netflix stand-up specials.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "90 stand-up performances with average runtime 63 min, total approximately 94 h.",
+        "detail": "The paper describes a corpus of 90 professionally edited Netflix specials but does not report the number of distinct comedians/performers or their demographics."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual frame annotators for shot classification.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "594 manually annotated training frames and 128 held-out annotated validation samples for six shot-type labels.",
+        "detail": "The paper does not report who annotated the frames, annotator count, expertise, instructions, adjudication, or inter-annotator agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "live-audience",
+        "name": "Recorded stand-up audiences",
+        "role": "primary",
+        "blind": null,
+        "detail": "Audience laughter is the target response signal for descriptive laughter-rate analyses and the laughter-onset prediction benchmark, although the events are identified by an automatic audio tagger rather than manual audience coding."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Whisper-AT",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Pretrained AudioSet-based audio tagging model used at 0.8 s stride in a high-recall configuration to label laughter types, confidence scores, and event start/end times; these labels determine laughter rates and prediction targets."
+      },
+      {
+        "type": "human-lay",
+        "name": "Manual shot-frame annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided shot-type labels for 594 training frames and 128 held-out validation samples; expertise and blinding are not reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "YOLOv8-cls",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Fine-tuned shot classifier used to assign one of six shot labels at 1 Hz; validation against held-out human annotations yielded average F1 = 0.91."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "YOLOv8s-pose",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Pretrained pose estimator used on filtered full-body/frontal frames to extract 17 COCO body keypoints at 1 fps; derived arm spread, kinetic energy, and trunk lean are computed from these outputs."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BERTopic with all-MiniLM-L6-v2 embeddings, UMAP, and HDBSCAN",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to assign topic labels to 60 s text blocks and to provide 384-dimensional sentence-BERT embeddings stored in each topic segment."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "NPMI coherence and composite topic-selection score",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Training block size for topic modeling was selected from 120, 150, 180, 210, and 240 s using K, largest-topic share, normalized entropy, NPMI coherence, and S = H_norm + C_NPMI - 2 s_max with validity constraints."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Pearson correlations and topic-level weighted means",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for the cross-modal use case relating topic-level laughter rate to kinetic energy, arm spread, trunk lean, and shot proportions across 24 BERTopic topics."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "AUROC, AUPRC, F1, precision, recall",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to evaluate the short-horizon laughter-onset prediction systems; F1/precision/recall use a validation-tuned decision threshold."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "All experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper does not run a humor/text generation experiment and does not select among multiple generated outputs; it builds a multimodal dataset and evaluates automatic labeling, descriptive analyses, and a classifier benchmark."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Whisper-AT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Described as a pretrained AudioSet-based audio tagging model; no checkpoint, software version, inference date, or access mode is reported."
+      },
+      {
+        "name": "all-MiniLM-L6-v2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Sentence-transformer encoder used for 384-dimensional block embeddings; no package version, checkpoint hash, or inference date is reported."
+      },
+      {
+        "name": "BERTopic",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used with UMAP and HDBSCAN for topic modeling; algorithmic hyperparameters are reported, but software versions/snapshots are not."
+      },
+      {
+        "name": "YOLOv8-cls",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Fine-tuned for six-way shot classification on 594 annotated frames and validated on 128 held-out samples; exact YOLOv8 checkpoint/package version is not reported."
+      },
+      {
+        "name": "YOLOv8s-pose",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Pretrained pose model used for 17-joint keypoint extraction; exact checkpoint/package version and inference date are not reported."
+      },
+      {
+        "name": "HistGradientBoostingClassifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Classifier used for laughter-onset prediction with balanced sample weights; software/library version and random seed are not reported."
+      },
+      {
+        "name": "Claude AI",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Acknowledged as assisting with condensing and proofreading the paper; not used as an evaluator or to produce empirical results. Exact Claude model/version is not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Audio laughter detection",
+        "calls_per_item": "Inference at 0.8 s stride over audio.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Paper says a high-recall configuration was used and contiguous positive windows were merged into continuous events; thresholds and other decoding/configuration details are not reported.",
+        "compute_or_cost": null,
+        "detail": "Each event stores start/end time, laughter type label, and confidence score."
+      },
+      {
+        "scope": "Text embedding and topic modeling",
+        "calls_per_item": "Subtitle lines are concatenated into time blocks; candidate training block sizes are 120, 150, 180, 210, and 240 s; final topic assignment is to 60 s blocks.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "UMAP: cosine distance, n_neighbors=15, n_components=5, min_dist=0.1. HDBSCAN: min_cluster_size=15, min_samples=5. Topic model capped at 40 topics; top 10 words retained. Outlier reassignment uses embedding/c-TF-IDF reduction, nearest normalized centroid with similarity at least 0.30, and within-show temporal gap filling.",
+        "compute_or_cost": null,
+        "detail": "Embeddings are computed in batches and L2-normalized, but batch size, hardware, runtime, and cost are not reported."
+      },
+      {
+        "scope": "Shot classification",
+        "calls_per_item": "One shot label per video frame sampled at 1 Hz.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Fine-tuning used 100 epochs, batch size 32, learning rate 1e-3, and six shot classes: full shot, medium close-up, medium long shot, medium shot, other angles, and other.",
+        "compute_or_cost": null,
+        "detail": "Training used 594 manually annotated frames; validation used 128 held-out samples."
+      },
+      {
+        "scope": "Pose estimation and kinematic features",
+        "calls_per_item": "YOLOv8s-pose is applied at 1 fps to filtered full-body/frontal frames only.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "17 COCO keypoints are stored; joints with no detection confidence are recorded as (0, 0) and excluded by a validity filter; arm spread, kinetic energy, and trunk lean are smoothed with a 30 s sliding window.",
+        "compute_or_cost": null,
+        "detail": "The paper reports 322,973 visual frames at 1 fps, with 22% full-body frames yielding raw keypoint sequences for pose analysis."
+      },
+      {
+        "scope": "Cross-modal topic-level laughter analysis",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "For each of 5,416 aligned blocks, laughter rate, per-frame kinematic features, and shot-type proportions are computed; topic-level profiles are averaged weighted by block count; Pearson correlations are computed across 24 topics.",
+        "compute_or_cost": null,
+        "detail": "This is an analysis aggregation rather than generative inference."
+      },
+      {
+        "scope": "Short-horizon laughter-onset prediction benchmark",
+        "calls_per_item": "Anchor points sampled at 1 s steps, excluding moments inside an ongoing laughter event; 285,916 anchors total across 90 shows; test set has 45,894 anchors from 14 held-out shows.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Prediction target is whether a new laughter event begins in [t, t+2). GroupShuffleSplit by show: 62 train, 14 validation, 14 test. History and vision features aggregate the past 10 s; text uses the current topic block's 384-dimensional embedding reduced to 64 dimensions by PCA fitted on the training set only. HistGradientBoostingClassifier uses balanced sample weights; threshold tuned on validation to maximize F1.",
+        "compute_or_cost": null,
+        "detail": "Ablations evaluate history-only, text-only, vision-only, text+vision, and text+vision+history."
+      },
+      {
+        "scope": "Claude AI proofreading assistance",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports only that Claude AI assisted with condensing and proofreading; no prompt, token, date, version, or cost information is provided."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Short-horizon laughter-onset prediction",
+        "present": false,
+        "description": "The benchmark includes a random AUPRC baseline equal to the positive rate, but no human prediction baseline.",
+        "directly_comparable": null,
+        "detail": "No humans were asked to predict laughter onsets from matched multimodal context."
+      },
+      {
+        "scope": "Shot classification, topic labeling, laughter detection, and cross-modal analyses",
+        "present": false,
+        "description": "Human annotations are used only as shot-classification training/validation labels; they are not a human baseline system compared against model predictions under matched conditions.",
+        "directly_comparable": null,
+        "detail": "No human baseline is reported for detecting laughter, assigning topics, extracting pose, or estimating the cross-modal relationships."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The TIC-TALK derived dataset and laughter-onset benchmark are newly introduced rather than a legacy public benchmark evaluated by later models.",
+        "The laughter-onset benchmark uses show-level train/validation/test splitting, so no show appears in more than one split.",
+        "PCA for text features is fitted on the training set only.",
+        "Shot-classifier validation uses held-out annotated samples separate from the 594 annotated training frames."
+      ],
+      "basis": "The main evaluated classifier is trained and tested on newly derived anchors with show-level separation, and no proprietary LLM or generative model is evaluated on a public legacy humor benchmark. The source Netflix specials themselves were public/platform media from 2015–2024 and pretrained components may have unknown exposure to related audio/video/text, but the paper's headline supervised benchmark labels and splits are newly constructed. The paper discusses corpus and platform biases, but not data contamination or decontamination tests."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLM is used to judge humor, label outputs, select generations, or compute evaluation metrics. Claude AI is acknowledged only for condensing and proofreading the paper."
+    },
+    "reporting_gaps": [
+      "Audience participant counts, demographics, geography, and per-show audience sizes are not reported.",
+      "Number of distinct comedians/performers and their demographics are not reported.",
+      "Selection criteria for the 90 Netflix specials are only broadly described; detailed show list and sampling procedure are not given in the paper text.",
+      "Manual shot-annotation personnel, annotator count, expertise, instructions, blinding, adjudication, and inter-annotator agreement are not reported.",
+      "No human validation is reported for Whisper-AT laughter-event labels, laughter-type labels, pose keypoints, or BERTopic topic assignments.",
+      "Exact model checkpoints, package versions, random seeds, access mode, inference dates, and hardware are not reported for Whisper-AT, all-MiniLM-L6-v2, BERTopic/UMAP/HDBSCAN, YOLOv8-cls, YOLOv8s-pose, or HistGradientBoostingClassifier.",
+      "The Whisper-AT high-recall configuration is not specified in enough detail to reproduce thresholds or class-decision rules.",
+      "Compute time, hardware, and monetary cost are not reported.",
+      "The GroupShuffleSplit random seed or exact show IDs in each train/validation/test split are not reported.",
+      "Claude AI version, prompts, date of use, and access mode for proofreading/condensing are not reported."
+    ]
+  }
+}

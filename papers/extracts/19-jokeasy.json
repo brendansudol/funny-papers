@@ -138,5 +138,148 @@
     "code_url": null,
     "data_url": null,
     "other": "Prototype front-end developed as a Figma widget plugin; back-end built using Node.js; search implemented using the Tavily API. No public code or data URL is stated."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "13",
+        "population": "General users P1–P13, described as hobbyists and enthusiasts interested in stand-up/thematic joke writing.",
+        "recruitment": "Recruited via an online questionnaire distributed through social media platforms.",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Each participant interacted individually with both the baseline conversational system and Jokeasy in counter-balanced order; data collected included pre-test questionnaire responses, think-aloud comments, on-screen actions, video recordings, system logs, and a 15-minute semi-structured interview.",
+        "detail": "All participants were native Chinese speakers, and LLM outputs were configured in Chinese. General users received 40 RMB. Each session lasted approximately one hour; each system task had a suggested 15-minute limit, but no strict time constraint."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "5",
+        "population": "Expert users P14–P18/E1–E5. E1–E3 were comedians with over five stand-up performance experiences; E4 was a human-computer interaction specialist and stand-up enthusiast; E5 was an AI researcher and stand-up enthusiast.",
+        "recruitment": "Directly invited.",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Experts interacted with the systems and gave interview-based judgments about practical value, technical feasibility, design implications, search-enabled collaboration, and the visual canvas; reported findings include all five experts seeing value in pairing an LLM with live search and 4/5 experts viewing the non-linear canvas as fitting joke-writing practice.",
+        "detail": "All participants were native Chinese speakers, and LLM outputs were configured in Chinese. Expert users received 200 RMB. Expert interviews focused more on professional humour practice and broader applications than the general-user sessions."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "General users P1–P13",
+        "role": "primary",
+        "blind": false,
+        "detail": "General participants supplied subjective preferences, think-aloud reactions, and interview feedback after using visibly different systems. The study does not report blinding; the two interfaces were materially different and participants watched tutorials for each."
+      },
+      {
+        "type": "human-expert",
+        "name": "Expert users P14–P18/E1–E5",
+        "role": "primary",
+        "blind": false,
+        "detail": "Expert users supplied judgments about Jokeasy’s value for novices and experienced writers, search-enabled collaboration, technical limits, and canvas interaction. They were not reported as blinded."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors",
+        "role": "primary",
+        "blind": null,
+        "detail": "The authors analyzed recordings, logs, think-aloud comments, and post-session interviews using thematic analysis. The paper does not report coder count, codebook details, inter-rater reliability, or analyst blinding."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Jokeasy default initial joke-map generation after the user confirms a topic summary",
+        "mode": "best-of-n",
+        "n": "3 joke maps by default, derived from three high-level inspiration themes",
+        "selector": "human",
+        "detail": "For each confirmed topic, Jokeasy derives three inspiration themes, expands search keywords, queries the web, distills inspiration blocks, and produces a provisional joke title and prototype joke content for each map. The three maps are shown side by side for user inspection, selection, editing, or further refinement; no automatic ranking is reported."
+      },
+      {
+        "scope": "Jokeasy user-controlled refinement, added maps, and regenerated jokes",
+        "mode": "best-of-n",
+        "n": "Variable and user-controlled; in the P7 use case, the participant added one AI joke map, reviewed four maps, selected Joke Map 03, then used Regenerate Joke three times before choosing a preferred output. Counts across all participants are not reported.",
+        "selector": "human",
+        "detail": "Users could delete or edit inspiration blocks, use AI Add or Manual Add, add AI-generated or blank joke maps, and regenerate joke content. Selection was by the human user during the interactive co-writing process."
+      },
+      {
+        "scope": "Baseline conversational system in the user study",
+        "mode": "single-sample",
+        "n": "One response per user prompt/turn as described; users could request additional versions through follow-up prompts, but no fixed number of candidates across participants is reported.",
+        "selector": "human",
+        "detail": "The baseline used the same LLM model and had search capabilities, but lacked Jokeasy’s staged workflow and visual co-creation features. In the P7 baseline use case, the participant requested a second version, asked the system to merge ideas, prompted online search, and then asked to enhance expression."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "moonshot-v1-auto",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper states that Jokeasy uses moonshot-v1-auto, supporting up to 128k tokens, and that the baseline conversational system used the same LLM model. No provider endpoint, API access details, snapshot, or inference dates are reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Jokeasy LLM pipeline",
+        "calls_per_item": null,
+        "candidates_per_item": "Initial Generate Jokes creates three high-level inspiration themes and presents three joke maps; users may add or remove maps and inspiration blocks, so later candidate counts are variable and not reported.",
+        "token_budget": "The model is reported to support up to 128k tokens; per-call input/output token limits are not reported.",
+        "sampling_parameters": "Temperature parameter set to 0.3; LLM outputs in the study were configured to be in Chinese.",
+        "compute_or_cost": null,
+        "detail": "Front end was a Figma widget plugin; back end used Node.js. LLM functions were implemented using an LLM-chain method and structured output feature. Search used the Tavily API. Figure 3 names modules such as topicSumGen, inspirationThemeGen, jokeGen, queryGen, search4LLM, echoGen, inspirationPopupGen, and newInspirationGen, but exact call counts are not reported."
+      },
+      {
+        "scope": "Baseline conversational system",
+        "calls_per_item": null,
+        "candidates_per_item": "Not fixed or fully reported. The paper describes conversational turns and one illustrative P7 sequence, including ten relevant cases returned after a search request, but does not report candidate counts across participants.",
+        "token_budget": "Same LLM model as Jokeasy; per-call token limits are not reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The baseline had search capabilities and could integrate retrieved information into its outputs, but lacked Jokeasy’s multi-step search integration, staged workflow, and visual co-creation features. Its exact prompt, search settings, and sampling settings are not specified."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Thematic stand-up joke creation",
+        "present": false,
+        "description": "No unaided human-only writing condition or expert-authored joke baseline is reported. The study compares Jokeasy against a conversational AI baseline using the same LLM model and search capability.",
+        "directly_comparable": null,
+        "detail": "Human participants were users/evaluators in both AI-assisted conditions, not a separate human baseline whose outputs were evaluated under matched conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper does not use a fixed public benchmark or report model-performance scores on a test set. Its empirical claims are based on live HCI sessions, participant preferences, interviews, think-aloud data, logs, and author thematic analysis of interactions with two systems. Therefore benchmark memorization/contamination is not a meaningful threat to a benchmark result here, although the paper also does not report any decontamination analysis."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "The LLM generated summaries, inspiration blocks, joke maps, echo summaries, and conversational outputs, but it was not used to judge joke quality, label data, or score systems. Headline conclusions rest on participant/expert feedback and author thematic analysis."
+    },
+    "reporting_gaps": [
+      "No exact model provider access method, API endpoint, model snapshot, or inference dates are reported beyond the identifier moonshot-v1-auto.",
+      "No exact LLM call counts per topic, per joke map, per regeneration, or per participant are reported.",
+      "No per-call maximum input/output token budgets are reported; only the model’s 128k-token support is stated.",
+      "Baseline configuration is under-specified: prompt/system prompt, sampling parameters, search workflow, and retrieval integration details are not provided.",
+      "Tavily API settings are not reported, including retrieval dates, query limits, result-count defaults, ranking/depth settings, or source filters.",
+      "The paper mentions prompt templates and shows examples in figures, but does not provide complete machine-readable prompts for all LLM modules.",
+      "The list of creative tasks/topics given to participants and the full counter-balancing schedule are not reported.",
+      "The paper does not report participants’ final joke outputs or independent joke-quality ratings.",
+      "The thematic-analysis procedure is under-specified: coder count, codebook development, inter-coder reliability, adjudication process, and analyst blinding are not reported.",
+      "Participant demographics beyond user category, expertise descriptions, and native Chinese language are limited; participant geography is not reported.",
+      "No public code, logs, dataset, or artifact URL is reported.",
+      "No inference compute, latency, or monetary cost for LLM/search use is reported."
+    ]
   }
 }

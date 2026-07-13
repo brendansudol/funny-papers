@@ -1,0 +1,216 @@
+{
+  "key": "x36-ironic-melting-pot",
+  "ref": "Part 4 (human-evaluation review)",
+  "section": "Part 4 - Evaluation Methodology & Whether LLMs Are Actually Funny",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x36-ironic-melting-pot/x36-ironic-melting-pot.md",
+  "source_md_sha256": "a7aef7b3f38c6b9a4bf17d124511874543f63414eafead1fc6852333ea2d8886",
+  "source_truncated": false,
+  "title": "The Iron(ic) Melting Pot: Reviewing Human Evaluation in Humour, Irony and Sarcasm Generation",
+  "authors": [
+    "Tyler Loakman",
+    "Aaron Maladry",
+    "Chenghua Lin"
+  ],
+  "year": 2023,
+  "venue": "Findings of EMNLP 2023",
+  "paper_types": [
+    "survey",
+    "position",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can evaluator demographics and participant variables affect the interpretation and evaluation of humour, irony, and sarcasm generation?",
+    "How transparently do recent ACL Anthology papers on humour, irony, and sarcasm generation report human evaluation procedures and evaluator demographics?",
+    "What reporting practices should future work adopt for human evaluation of subjective NLG tasks such as humour, irony, and sarcasm generation?"
+  ],
+  "tasks": [
+    "human evaluation reporting",
+    "humour generation",
+    "pun generation",
+    "sarcasm generation",
+    "irony generation",
+    "humour detection",
+    "irony detection",
+    "sarcasm detection"
+  ],
+  "humor_domains": [
+    "humour",
+    "puns",
+    "jokes",
+    "irony",
+    "sarcasm",
+    "humorous headlines",
+    "punny captions",
+    "sarcastic responses"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "ACL Anthology humour/irony/sarcasm paper survey corpus",
+      "role": "analyzed",
+      "size": "259 papers initially; 135 papers after excluding shared-task submissions; 22 generation papers; final selection of 18 generation papers; 17 papers with human evaluation"
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Evaluation statement for subjective NLG human evaluation",
+      "summary": "The paper proposes that future work include an evaluation statement, akin to data statements, covering evaluation logistics, evaluator demographic information, evaluation process details, and an agreement study."
+    },
+    {
+      "name": "Stratified and perspectivist evaluator-panel reporting",
+      "summary": "The authors advocate treating demographic variation in evaluator panels as an informative feature rather than noise, and encourage stratified sampling techniques to obtain more varied panels."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper states that cognitive and linguistic theories of humour generally treat incongruity between expectations and reality, and its resolution, as essential for humour; it uses puns and jokes to illustrate this."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The paper grounds its discussion of irony in definitions of verbal irony as intending to convey the opposite of the literal meaning, and discusses sarcasm as a negative, aggressive subcategory of irony intended to ridicule someone or something."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "The authors critically surveyed ACL Anthology papers from selected venues and years, categorized them by topic/task, and counted whether human-evaluation reports included demographic variables, recruitment, compensation, IAA, and training materials."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "author",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "The paper's quantitative findings come from the authors' literature search, exclusions, categorization, and assessment of reporting transparency; no separate annotator pool, blinding, or inter-coder agreement for the survey coding is reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Paper itself",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper does not run a generation experiment or sample generated outputs; it reviews prior generation papers."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "No model inference",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Not applicable; the paper is a position/survey paper and does not run computational generation or evaluation models."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "No model-vs-human performance evaluation",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The paper reviews reporting practices in prior human evaluations but does not evaluate a model against human-generated outputs or human performance."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper does not evaluate models on a benchmark or use LLMs; it analyzes published papers and their human-evaluation reporting."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLM judge or automatic LLM-based evaluator is used."
+    },
+    "reporting_gaps": [
+      "The paper does not report whether survey coding was performed by one or multiple reviewers, nor any agreement or validation procedure for the coding.",
+      "The paper reports aggregate counts but does not provide a full per-paper coded table for all demographic, recruitment, compensation, IAA, and training-material variables.",
+      "The paper does not provide a repository, code, or data URL for the survey corpus or coding decisions.",
+      "The text states a final selection of 18 generation papers, while Appendix A.1 lists 17 covered generation papers and the main analysis uses 17 papers with human evaluation."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "The ACL Anthology search produced 259 papers, which was reduced to 135 after excluding shared-task submissions; among the 135, 22 focused on generation, 108 on detection, and 5 were categorized as other.",
+      "metric": "paper counts",
+      "value": "259; 135; 22; 108; 5",
+      "dataset": "ACL Anthology humour/irony/sarcasm paper survey corpus",
+      "best_system": null
+    },
+    {
+      "finding": "After excluding 4 generation papers that were surveys or dataset papers with human evaluation on non-computationally generated examples, the paper reports a final selection of 18 generation papers, all but 1 of which contained human evaluation, leaving 17 papers for the reporting-transparency analysis.",
+      "metric": "survey inclusion counts",
+      "value": "18 generation papers; 17 papers with human evaluation",
+      "dataset": "ACL Anthology humour/irony/sarcasm paper survey corpus",
+      "best_system": null
+    },
+    {
+      "finding": "Less than half of the assessed generation papers with human evaluation reported any evaluator demographic information.",
+      "metric": "demographics reporting",
+      "value": "7 of 17 (<42%)",
+      "dataset": "17 surveyed generation papers with human evaluation",
+      "best_system": null
+    },
+    {
+      "finding": "Language proficiency and location/nationality were each reported by 4 of 17 papers, education by 1 of 17, and age, gender, and social class by none.",
+      "metric": "demographic-variable reporting",
+      "value": "Language Proficiency: 4 (<24%); Location/Nationality: 4 (<24%); Education: 1 (<6%); Age: 0 (0%); Gender: 0 (0%); Social Class: 0 (0%)",
+      "dataset": "17 surveyed generation papers with human evaluation",
+      "best_system": null
+    },
+    {
+      "finding": "Reporting of evaluation logistics was also incomplete: recruitment was mentioned in 12 papers, compensation in 5, IAA in 9, and training materials in 4.",
+      "metric": "evaluation-procedure reporting",
+      "value": "Recruitment: 12 (<71%); Compensation: 5 (<30%); IAA: 9 (<53%); Training Materials: 4 (<24%)",
+      "dataset": "17 surveyed generation papers with human evaluation",
+      "best_system": null
+    },
+    {
+      "finding": "Among the 12 papers that explicitly mentioned recruitment, all used crowdsourcing platforms: 9 used Amazon Mechanical Turk, 2 used Prolific Academic, and 1 did not explicitly mention the platform; reported compensation ranged from approximately 9.23 USD to 20 USD per hour.",
+      "metric": "recruitment platform and compensation",
+      "value": "12 crowdsourcing; 9 AMT; 2 Prolific Academic; 1 unspecified; approximately 9.23 USD to 20 USD per hour",
+      "dataset": "17 surveyed generation papers with human evaluation",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "The paper argues that humour, irony, and sarcasm are especially sensitive to evaluator variables such as language proficiency, cultural knowledge, nationality, gender, age, and socio-cultural background.",
+    "Across the 17 surveyed generation papers with human evaluation, demographic reporting is sparse: only 7 report any demographic information and none report age, gender, or social class.",
+    "When recruitment is reported, the surveyed papers rely heavily on crowdsourcing platforms, especially Amazon Mechanical Turk.",
+    "The authors argue that inter-annotator agreement and evaluator training are important for subjective tasks, but only 9 of 17 papers report IAA and only 4 of 17 mention training materials.",
+    "The paper proposes an evaluation statement covering logistics, demographics, operational definitions, training materials, and agreement studies, and recommends more perspectivist and stratified approaches to evaluator sampling."
+  ],
+  "limitations": [
+    "The survey only covers papers from 2018–2023, which the authors say was chosen to capture recent behavior but yields a small number of papers.",
+    "The survey focuses only on humour, sarcasm, and irony, rather than NLG as a whole.",
+    "The paper focuses exclusively on human evaluators in generation tasks, while noting that similar issues apply to annotators during dataset creation for detection tasks.",
+    "The authors state that their claims are made in good faith and welcome perspectives from other backgrounds to support, challenge, or revise them."
+  ],
+  "safety_ethics_notes": "The ethics statement says the authors adhere to the ACL Code of Conduct and reviewed only publicly available information in published papers. They encourage participant metadata collection only with correct ethics procedures and only at the granularity needed, and they discuss risks of biased or exploitative crowdsourcing practices.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Appendix A.1 lists the covered generation papers; no code or data repository is reported."
+  }
+}

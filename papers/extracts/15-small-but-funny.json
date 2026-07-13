@@ -173,5 +173,212 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Some of the paper authors, described as “annotators.”",
+        "recruitment": "Internal author annotation; no recruitment procedure reported.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The paper says annotators performed blind pairwise scoring of 100 pairs of humorous outputs, ranking paraphrases for humor and consistency. The dataset section also says 100 test samples were used for human evaluation. Appendix A reports human WTR-H/WTR-C/WTR for BART, BART-BRIO, and BART-DPO against LLAMA2-70B, but does not state annotator count or exact pair counts per group.",
+        "detail": "Used to validate Llama2-70B critic agreement and to provide a small human evaluation of selected student models versus the teacher."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "Llama2-70B chat",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as teacher to generate humorous paraphrases; used as critic with Multiple Choice Prompting for pairwise Win Tie Rate; used to label positive/negative preference pairs for feedback training; used for main automatic WTR_llama2 evaluation against the teacher and for critic-bias/agreement analyses."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as an external critic for automatic WTR_GPT4 evaluation of student outputs against the Llama2-70B teacher in Table 2. Exact GPT-4 snapshot/version not reported."
+      },
+      {
+        "type": "human-expert",
+        "name": "author annotators",
+        "role": "validation",
+        "blind": true,
+        "detail": "Some authors performed blind pairwise scoring of 100 output pairs for humor and consistency; their judgments were compared with Llama2-70B critic judgments and reported in Appendix human evaluation."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "maximum pairwise n-gram-based edit distance",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "During critique-phase candidate construction, k=6 student candidates were generated and a diverse pair was selected using maximum pairwise n-gram-based edit distance before LLM critic scoring."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Teacher data generation for imitation training",
+        "mode": "single-sample",
+        "n": "N=3 humorous paraphrases per literal input, all used to create literal-humorous pairs rather than selected as a best output",
+        "selector": "none",
+        "detail": "Llama2-70B was prompted in zero-shot form to generate 3 creative and humorous paraphrases with the exact same meaning as the input; 12,000 training sentences yielded 36,000 literal-humorous pairs."
+      },
+      {
+        "scope": "Student candidate generation for critique-phase feedback",
+        "mode": "best-of-n",
+        "n": "k=6 candidates",
+        "selector": "automatic-metric",
+        "detail": "The finetuned student generated 6 candidates using either diverse beam search or nucleus sampling. A pair of diverse paraphrases was selected from this pool by maximum pairwise n-gram-based edit distance, then scored by the LLM critic. Selection was for diversity, not directly for humor quality."
+      },
+      {
+        "scope": "BRIO-DPO BRIO supervision from teacher responses",
+        "mode": "best-of-n",
+        "n": "two teacher responses ranked; total generated candidates not fully specified beyond teacher responses",
+        "selector": "LLM-judge",
+        "detail": "For BRIO-DPO, contrastive pairs for BRIO training came from the teacher instead of the student by letting the teacher rank two of its own responses; DPO preference pairs still came from student candidates."
+      },
+      {
+        "scope": "Student model outputs for automatic and human evaluation",
+        "mode": "single-sample",
+        "n": "one evaluated student output per input; beam search used with number of beams set to 5",
+        "selector": "rule",
+        "detail": "All BART student responses used for evaluation were obtained with beam search with num_beams=5. No best-of-N selection of evaluated outputs is reported."
+      },
+      {
+        "scope": "Pairwise WTR evaluation",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "WTR compares fixed pairs of outputs, typically a student output versus a teacher output. Reversing candidate order for positional-bias mitigation is repeated evaluation of the same fixed outputs, not generation selection."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Llama 2",
+        "version_or_snapshot": "70B chat version",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as teacher and as Llama2 critic. Paper cites Touvron et al. (2023) but does not report a checkpoint hash, service, access date, or inference date."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as external automatic critic for WTR_GPT4. No exact OpenAI model snapshot, access method, or inference date is reported."
+      },
+      {
+        "name": "BART-large",
+        "version_or_snapshot": "BART-large from Lewis et al. (2020); fine-tuned variants include BART-FT-WS, BART-FT, BART-SD, BART-BRIO, BART-DPO, and BART-BRIO-DPO",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Student SLM family. The paper reports fine-tuning objectives and epochs but not exact pretrained checkpoint identifier or random seeds."
+      },
+      {
+        "name": "BART-DPO-ITER2",
+        "version_or_snapshot": "BART-large variant with two feedback iterations",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Mentioned in qualitative analysis/Table 5 as a variant receiving feedback for two iterations instead of one; full experimental settings are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Teacher Llama2-70B generation of imitation data",
+        "calls_per_item": null,
+        "candidates_per_item": "3 humorous paraphrases per literal input",
+        "token_budget": null,
+        "sampling_parameters": "temperature = 0.8; nucleus sampling with top_p = 1",
+        "compute_or_cost": null,
+        "detail": "12,000 EmpatheticDialogues training sentences were sampled and used to generate 36,000 literal-humorous pairs. The prompt asked for a numbered list of 3 paraphrases. Total LLM calls, max tokens, hardware, and cost are not reported."
+      },
+      {
+        "scope": "Student BART generation for evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "one evaluated response per input; beam search used internally with 5 beams",
+        "token_budget": null,
+        "sampling_parameters": "beam search; number of beams = 5",
+        "compute_or_cost": null,
+        "detail": "The paper states all BART student responses are obtained using beam search with num_beams=5 during generation. Max length and other decoding parameters are not reported."
+      },
+      {
+        "scope": "Student candidate generation for feedback training",
+        "calls_per_item": null,
+        "candidates_per_item": "k = 6 candidates per input before pair selection",
+        "token_budget": null,
+        "sampling_parameters": "either diverse beam search or nucleus sampling; exact parameters not reported",
+        "compute_or_cost": null,
+        "detail": "A diverse candidate pair was selected using maximum pairwise n-gram-based edit distance. Candidate training pairs were filtered to near-equal length with length ratio 0.8 to 1.2 to mitigate length bias."
+      },
+      {
+        "scope": "LLM critic scoring for WTR and feedback labels",
+        "calls_per_item": "The paper states win rates are averaged by letting paraphrases take both position 1 and position 2; total call count is not reported.",
+        "candidates_per_item": "two paraphrases per pair",
+        "token_budget": null,
+        "sampling_parameters": "Multiple Choice Prompting; critic predicts choice token 1 or 2 with associated probabilities. Decoding/log-probability settings are not reported.",
+        "compute_or_cost": null,
+        "detail": "Used for training feedback and automatic evaluation. Cloze prompting was also tested in RQ1 but MCP WTR was selected for main evaluation."
+      },
+      {
+        "scope": "Training/feedback schedule relevant to inference demand",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "BART-FT-WS was fine-tuned for 10 epochs on teacher data. BART-BRIO and BART-DPO were fine-tuned for 10 epochs with feedback objectives; BART-BRIO-DPO used 10 BRIO epochs followed by 10 DPO epochs. Table 4 varies feedback frequency at 1/10, 2/10, and 10/10 epochs, but does not report total LLM call counts or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor generation quality",
+        "present": false,
+        "description": "No human-written humorous paraphrase baseline or human generator baseline is evaluated. Humans serve as judges/validators rather than as a directly comparable generation system.",
+        "directly_comparable": false,
+        "detail": "Model outputs are compared against the Llama2-70B teacher and judged by LLM critics and a small author-annotated human evaluation."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Evaluation uses validation/test splits sampled separately from the 12,000 EmpatheticDialogues training inputs used for student distillation.",
+        "Humorous references and student outputs are newly generated rather than legacy gold humor labels.",
+        "Out-of-distribution evaluation uses 500 inputs from Samsum.",
+        "Inputs that triggered Llama2 safety warnings, about 3-4% of inputs, were discarded; this is a safety filtering step, not a contamination control."
+      ],
+      "basis": "EmpatheticDialogues and Samsum are public 2019 datasets, preceding Llama2 and GPT-4. The paper does not report decontamination checks for Llama2, GPT-4, or BART pretraining data. Because the task uses public legacy source inputs with later LLMs as teacher/critics, but the evaluated humorous outputs are newly generated rather than fixed public labels, risk is assessed as moderate rather than high."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Headline claims that feedback-trained BART students narrow the gap with or perform on par with the Llama2-70B teacher, comparisons among BART-FT/BART-SD/BART-BRIO/BART-DPO/BART-BRIO-DPO, OOD performance, data-size effects, feedback-frequency effects, and critic-bias analyses all rely heavily on LLM WTR judgments. Llama2-70B also supplies training feedback labels.",
+      "human_validation": "Some author annotators performed blind pairwise scoring of 100 pairs; the paper reports LLM-human agreement up to 76% for humor with MCP WTR and Appendix A reports human WTR scores for three student groups against LLAMA2-70B. Annotator count and aggregation details are not reported.",
+      "detail": "Llama2-70B is both teacher and critic for many experiments, while GPT-4 provides an external LLM-critic comparison for Table 2. Human evaluation is limited and secondary relative to the automatic LLM-based results."
+    },
+    "reporting_gaps": [
+      "Exact number of human annotators is not reported; “some of the authors” is the only participant description.",
+      "Human annotator demographics, geography, recruitment/compensation, training, aggregation procedure, and inter-annotator agreement are not reported.",
+      "Appendix A does not specify exact number of human-evaluated pairs per group or whether all groups used the same 100 samples.",
+      "Exact GPT-4 model snapshot/version, API/access method, inference date, and decoding/log-probability settings are not reported.",
+      "Exact Llama2-70B checkpoint identifier, hosting/access method, inference date, and total inference-call count are not reported.",
+      "BART-large pretrained checkpoint identifier, random seeds, hardware, training compute, and cost are not reported.",
+      "Max input/output token limits and generation length limits are not reported for teacher, student, or critic calls.",
+      "For student candidate generation in feedback training, the paper says either diverse beam search or nucleus sampling but does not report which settings were used in each experiment or the nucleus/diverse-beam parameters.",
+      "Total LLM communication cost/call volume for feedback-frequency experiments is not reported despite the paper noting a cost trade-off.",
+      "No decontamination or training-data overlap analysis is reported for public EmpatheticDialogues/Samsum inputs with Llama2, GPT-4, or BART pretraining data.",
+      "The exact counts and handling of the 3-4% Llama2 safety-warning inputs discarded from distilled data are not fully specified."
+    ]
   }
 }

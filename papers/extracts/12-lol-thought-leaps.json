@@ -246,5 +246,471 @@
     "code_url": null,
     "data_url": "https://github.com/Leymore/ruozhiba/tree/main?tab=readme-ov-file",
     "other": "https://www.wjx.cn/"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Original SemEval 2021 Task 7 annotators/raters; paper says labels and ratings were collected from a balanced age group ranging from 18 to 70 years old.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Binary labels and ratings used by this paper to construct easy-case and hard-case humor judgment tasks.",
+        "detail": "The paper does not report the number of SemEval 2021 annotators or ratings in this study."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Original SemEval 2020 Task 7 labelers/raters for edited news headlines.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Binary labels and ratings used to construct easy-case and hard-case humor judgment tasks.",
+        "detail": "The paper reports use of the dataset’s labels/ratings but not annotator counts or demographics."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Oogiri game participants and voters from the Oogiri-GO source dataset.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Human-voting annotations/Likes are used to identify humorous responses and construct training/test judgment data; the paper randomly uses 95% of Oogiri-GO samples for training and 5% for testing.",
+        "detail": "The paper describes Oogiri game participants but does not report participant counts, vote counts, or sample counts."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Users of Chinese communities, including Ruozhiba and others.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Community human-voting/Likes labels are used to construct easy-case and hard-case Chinese humor tasks; the first 200 samples from the Ruozhiba validation subset are used for the generation user study.",
+        "detail": "The paper does not report numbers of community contributors, voters, Likes, or total Chinese Community Data items."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": null,
+        "population": "Users completing an online preference survey.",
+        "recruitment": "Online survey platform wjx.cn.",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "15 valid questionnaires with 3000 votes over 200 questions; users chose the most creative and humorous response among four LLM outputs whose options were randomly arranged.",
+        "detail": "The paper reports questionnaires and votes, but does not explicitly state a participant count, demographics, geography, or whether respondents were blind to model identity."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Experts enlisted by the authors.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Logical-coherence assessments on 200 examples from GPT-4o, GPT-4, and QWEN2-57B; wording does not clarify whether 200 is total or per model.",
+        "detail": "Used to evaluate GESIT/logical reasoning according to the main text. Blinding, annotation rubric details, and inter-annotator agreement are not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "SemEval 2021 and SemEval 2020 dataset annotators/raters",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Their binary labels and ratings are used to form positive/negative choices and easy/hard humor judgment tasks."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Community Likes / human-voting annotations",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Human-voting data from humor games and communities are transformed into pairwise data, ranking/selection labels, and Chinese benchmark labels."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to rewrite the most humorous answers into non-humorous versions; two GPT-4o agents are used in the teacher-student prompt loop; GPT-4o rewrites Ruozhiba queries into question-answer pairs and rewrites ground-truth answers into non-humorous versions; GPT-4o is also the causal-inference expert that generates rationales for GESIT preference pairs."
+      },
+      {
+        "type": "LLM",
+        "name": "LoL first-stage frozen model / π*",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "During GESIT, the frozen copy of the SFT model judges two sampled policy responses and assigns the more humorous one as positive and the other as negative."
+      },
+      {
+        "type": "LLM",
+        "name": "LoL-trained LLM / π′",
+        "role": "primary",
+        "blind": null,
+        "detail": "At inference time, Algorithm 3 uses the trained model’s judgment ability to select the most funny answer from multiple generated candidates."
+      },
+      {
+        "type": "LLM",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Automatic Instruction Expansion uses generator, imaginator, and selector/critic agents plus criteria to produce and filter evolved instruction-output data; the implementing LLM(s) and versions are not specified."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Top-1 accuracy / acc%",
+        "role": "primary",
+        "blind": null,
+        "detail": "Determines reported performance on 2T1, 2T1(hard), 3T1, and 4T1 humor judgment choice tasks against constructed labels."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Divergent Association Task score using Chinese Word Vectors",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to evaluate associative generalization/divergent thinking from generated associated words."
+      },
+      {
+        "type": "human-lay",
+        "name": "Online user-preference survey respondents",
+        "role": "primary",
+        "blind": null,
+        "detail": "Users choose the most creative and humorous response among four LLM outputs for 200 Ruozhiba-derived questions; options are randomly arranged, but model-identity blinding is not stated."
+      },
+      {
+        "type": "human-expert",
+        "name": "Three experts",
+        "role": "validation",
+        "blind": null,
+        "detail": "Main text says three experts assessed logical coherence of responses on 200 examples from GPT-4o, GPT-4, and QWEN2-57B."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4 / GPT-4o",
+        "role": "validation",
+        "blind": null,
+        "detail": "Figure 6 caption states that GPT-4 and GPT-4o logically evaluate model outputs after DIET and LoL, which conflicts with or is ambiguous relative to the main-text claim that three experts were enlisted."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "LoL final humor/witty-response inference, including the inference algorithm used for generation showcases and likely LoL generation outputs",
+        "mode": "best-of-n",
+        "n": "n prompts / n different answers; numeric n not reported",
+        "selector": "model-self-selection",
+        "detail": "Algorithm 3 selects n prompts from a prompt set, generates n candidate responses, and then uses the LoL-trained model itself as a judgment model to select the most funny answer."
+      },
+      {
+        "scope": "GESIT online preference-pair augmentation during DPO training",
+        "mode": "best-of-n",
+        "n": "2 sampled answers per selected question",
+        "selector": "model-self-selection",
+        "detail": "The trainable policy samples two answers; the frozen first-stage model π* judges which is more humorous to construct positive/negative preference data."
+      },
+      {
+        "scope": "Automatic Instruction Expansion training-data generation",
+        "mode": "not-reported",
+        "n": "maximum 3 evolution rounds, not a reported number of alternative candidates",
+        "selector": "unclear",
+        "detail": "Generator/imaginator/selector-critic agents and Criterion-1/Criterion-2 filter evolved instructions and imagined chats; the number of sampled alternatives, model identity, and sampling parameters are not reported."
+      },
+      {
+        "scope": "GPT-4o rewriting for answer-rewriting data and Ruozhiba benchmark construction",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper says GPT-4o rewrites most humorous answers into non-humorous versions and rewrites Ruozhiba queries/ground-truth answers; no multiple-candidate selection is described."
+      },
+      {
+        "scope": "DAT creativity validation",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "none",
+        "detail": "For each supplied word, the model is asked to generate associations/imagination and obtain 10 associated words; no best-of selection is described."
+      },
+      {
+        "scope": "Human preference study outputs from GPT-4o, QWEN1.5-32B, and CLoT",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper says four LLMs generate responses for 200 questions and the four responses are presented as options, but it does not state whether non-LoL baselines used single samples, multiple samples, or any selection procedure."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a baseline model, as a rewriting model, in teacher-student data construction, as a rationale generator/causal inference expert, and for Ruozhiba data transformation; no API snapshot, release date, or inference date is reported."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Mentioned in the logical-coherence/GESIT evaluation context; no snapshot or inference date is reported."
+      },
+      {
+        "name": "LLAMA3-8B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English and Chinese humor judgment benchmarks; instruct/chat variant and checkpoint are not specified."
+      },
+      {
+        "name": "LLAMA3-70B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English and Chinese humor judgment benchmarks; instruct/chat variant and checkpoint are not specified."
+      },
+      {
+        "name": "QWEN1.5-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark baseline; exact checkpoint is not specified."
+      },
+      {
+        "name": "QWEN1.5-14B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark baseline; exact checkpoint is not specified."
+      },
+      {
+        "name": "QWEN1.5-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark and generation-study baseline; exact checkpoint is not specified."
+      },
+      {
+        "name": "QWEN1.5-32B-Chat",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Implementation details state LoL is mainly validated based on QWEN1.5-32B-Chat with LoRA on 8 A100 GPUs; no checkpoint hash or model release snapshot is reported."
+      },
+      {
+        "name": "QWEN2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark baseline; exact checkpoint is not specified."
+      },
+      {
+        "name": "QWEN2-57B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark baseline and appears in the logical-coherence evaluation context; exact checkpoint is not specified."
+      },
+      {
+        "name": "QWEN2.5-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark baseline; exact checkpoint is not specified."
+      },
+      {
+        "name": "Baichuan2-13B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark baseline; exact checkpoint is not specified."
+      },
+      {
+        "name": "CLoT-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a benchmark and generation-study baseline; exact checkpoint is not specified."
+      },
+      {
+        "name": "QwQ-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English, Chinese, and Ruozhiba judgment tasks; table does not specify preview/snapshot."
+      },
+      {
+        "name": "QwQ+LoL-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reported in the Chinese benchmark table; training or checkpoint details are not provided."
+      },
+      {
+        "name": "LoL / OURS-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Authors’ trained model, based mainly on QWEN1.5-32B-Chat with LoRA; no released checkpoint, hash, or inference date is reported."
+      },
+      {
+        "name": "LoL/QWEN1.5-32B ablation variants",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Ablation configurations include OOGIRI-GO+Figure 2(C), OOGIRI-GO+Figure 2(C,D), OOGIRI-GO+AIE, ALL+Figure 2(C,D), ALL+AIE(DIET), +Figure 2(C), +Figure 2(C)(D), and +AIE(DIET); exact checkpoints are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Benchmark validation parameters",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "temperature=1; top k=50; top p=1.0; length penalty=1.0",
+        "compute_or_cost": null,
+        "detail": "Table 6 reports these as validation parameters, but the paper does not map them to every model/task or report max tokens."
+      },
+      {
+        "scope": "LoL final inference / Algorithm 3",
+        "calls_per_item": "n generation calls plus one self-judgment selection call, as described symbolically",
+        "candidates_per_item": "n candidate responses; numeric n not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The model randomly selects n prompts from a predefined prompt set, generates n answers, and selects A_best itself; prompt set and n are not specified."
+      },
+      {
+        "scope": "GESIT online DPO augmentation",
+        "calls_per_item": "when triggered: two policy generations, one frozen-model comparison, and two GPT-4o rationale generations per sampled question",
+        "candidates_per_item": "2 sampled answers",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Triggered every T steps for l questions from D0, but T and l are not numerically reported."
+      },
+      {
+        "scope": "Automatic Instruction Expansion",
+        "calls_per_item": "up to 3 evolutionary rounds with generator and imaginator calls; analyst/rule update may be invoked",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Algorithm 1 specifies while t<3 and criteria-based stopping; it does not report model identity, prompt-call counts under each branch, or sampling settings."
+      },
+      {
+        "scope": "DAT creativity validation",
+        "calls_per_item": null,
+        "candidates_per_item": "10 associated words generated for each target word, then scored with the target word as 11 words total",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Number of target words/domains and model-call counts are not reported in the text."
+      },
+      {
+        "scope": "Human preference study generation",
+        "calls_per_item": null,
+        "candidates_per_item": "4 presented responses per question, one from each of LoL, GPT-4o, QWEN1.5-32B, and CLoT",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "200 questions are used; the paper does not report generation prompts, max tokens, candidate counts for baselines, or whether LoL’s best-of-n inference was used."
+      },
+      {
+        "scope": "Training compute for LoL",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "LoRA training on 8 A100 GPUs",
+        "detail": "Stage 1 SFT: 6 epochs, AdamW, learning rate 3e-4, using 95% of the dataset mentioned above. Stage 2 GESIT/DPO: 3 epochs, AdamW, learning rate 2e-4, using 5% of the dataset; batches mix with-rationale and without-rationale data at 1:1."
+      },
+      {
+        "scope": "Ruozhiba benchmark/user-study data transformation",
+        "calls_per_item": "GPT-4o is asked to rewrite queries into question-answer pairs and then asked again to rewrite ground-truth answers into non-humorous versions",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Exact call counts, prompts beyond the description, and sampling parameters are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor judgment choice benchmarks",
+        "present": false,
+        "description": "Models are scored against labels/ratings/votes, but no human accuracy baseline on the constructed 2T1/2T1(hard)/3T1/4T1 tasks is reported.",
+        "directly_comparable": false,
+        "detail": "Human annotations provide ground truth, not a reported human-performance comparator."
+      },
+      {
+        "scope": "Generation user-preference study",
+        "present": false,
+        "description": "The preference options are LoL, GPT-4o, QWEN1.5-32B, and CLoT outputs; no human-written response option is included as a baseline.",
+        "directly_comparable": false,
+        "detail": "Humans judge model outputs, but human-generated humor is not evaluated under matched conditions."
+      },
+      {
+        "scope": "DAT creativity validation and logical-coherence validation",
+        "present": false,
+        "description": "DAT compares model-generated associated words; logical-coherence validation compares model responses before/after methods or across models. No human generative baseline is reported.",
+        "directly_comparable": false,
+        "detail": "Experts serve as evaluators, not as a human baseline system."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Oogiri-GO is split randomly into 95% training samples and a remaining 5% test set.",
+        "The user study uses the Ruozhiba validation subset, specifically the first 200 samples."
+      ],
+      "basis": "The study evaluates later LLMs on public legacy datasets including SemEval 2020, SemEval 2021, Oogiri-GO, and Ruozhiba-derived items. The paper explicitly states that the Ruozhiba dataset is one that most well-known LLMs have been trained on. LoL itself is trained on public/community humor data and evaluated on held-out/random or validation portions, but no decontamination test, private benchmark, or convincing pretraining-contamination control is reported. GPT-4o also rewrites some evaluation items, which changes format but does not establish decontamination."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Core method and some evaluations depend on LLM judgments or LLM-constructed labels: GPT-4o non-humorous rewrites, teacher-student feedback, AIE filtering, GESIT preference labels/rationales, Ruozhiba 2T1 construction, and LoL best-of-n self-selection for generation. Main SemEval/Oogiri accuracy scoring and the user-preference votes are not themselves primarily LLM-judged.",
+      "human_validation": "The paper reports a human preference survey with 15 valid questionnaires/3000 votes and a three-expert logical-coherence assessment, and benchmark labels originate from human labels/votes. It does not report human validation of GPT-4o rationale quality, GPT-4o non-humorous rewrites, AIE filtering decisions, or the frozen model’s preference labels.",
+      "detail": "LLMs are not merely diagnostic tools: they create training data, construct some positive/negative evaluation pairs, generate rationales for DPO data, and select final LoL generation outputs. Therefore LLM-judge dependence is substantial rather than none/secondary, even though headline benchmark accuracy is computed automatically against human-derived labels."
+    },
+    "reporting_gaps": [
+      "No API snapshots, exact checkpoint hashes, release snapshots, or inference dates are reported for GPT-4o, GPT-4, QwQ, LLaMA3, Qwen, Baichuan2, CLoT, or LoL variants.",
+      "The paper does not report total dataset sizes for most constructed training/test sets, item counts for the Chinese benchmarks, or exact counts for SemEval-derived easy/hard tasks.",
+      "User study reports 15 valid questionnaires and 3000 votes but not an explicit participant count, respondent demographics, geography, recruitment criteria, compensation, or model-identity blinding.",
+      "Human preference win-rate values in Figure 6(b) and Figure 6(c) are not numerically provided in the transcribed text.",
+      "Generation settings for baseline models in the human study are not reported, including prompts, temperature, max tokens, number of candidates, and any selection/cherry-picking procedure.",
+      "LoL inference uses n candidate responses and self-selection, but numeric n, prompt pool P, and token limits are not reported.",
+      "GESIT reports symbolic T and l for online augmentation but does not give numeric values for the frequency of augmentation or the number of questions sampled per augmentation step.",
+      "AIE does not report the concrete LLM(s), versions, sampling parameters, or full selection criteria implementation for generator/imaginator/selector agents.",
+      "The logical-coherence evaluation is ambiguous: the main text says three experts were enlisted, while the Figure 6 caption says GPT-4 and GPT-4o logically evaluate outputs.",
+      "No inter-annotator agreement, expert rubric, or blinding details are reported for the three-expert logical-coherence assessment.",
+      "No formal pretraining-contamination/decontamination analysis is reported despite public benchmarks and the paper’s statement that Ruozhiba is likely in many LLMs’ training data.",
+      "Training data overlap controls between the 95% SFT split, the 5% test/validation split, GESIT data, and public benchmark items are not fully specified.",
+      "Costs, wall-clock time, batch sizes, LoRA ranks, maximum sequence lengths, and decoding max-token limits are not reported."
+    ]
   }
 }

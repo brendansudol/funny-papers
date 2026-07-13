@@ -1,0 +1,3 @@
+<!-- guide claims for x27-genai-humor-bias (Part 6 (bias under humorization)) -->
+
+**Bias introduced by “make it funnier”:** [**Humor as a Window into Generative AI Bias**](https://doi.org/10.1038/s41598-024-83384-6) (Saumure, De Freitas & Puntoni, *Scientific Reports* 2025) `peer-reviewed` audits 600 generated images from 150 preregistered prompts. Humorization increased stereotyped representation for age, high body weight, and visual impairment while decreasing it for race and gender. The result broadens safety beyond toxicity scores: making content funnier can redistribute which identities become the visual butt of a joke.

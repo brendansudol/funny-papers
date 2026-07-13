@@ -141,5 +141,168 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that the full prompts and a full list of generated captions are available in the supplementary material."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "124 recruited; 26 excluded for non-completion; 98 with demographics reported after exclusions; per-condition completed counts for human-only vs human-AI are not reported",
+        "population": "Prolific participants with good English skills and prior use of an LLM interface at least once",
+        "recruitment": "Online platform Prolific; participant count determined after an initial power analysis",
+        "geography": "30 different countries",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each participant completed three meme-caption tasks using different image/topic combinations, spent at least 4 and at most 5 minutes on ideation per task, selected top three favorite ideas per task, created captioned meme images, and completed experience surveys including self-assessed creativity, NASA-TLX, interface and ideation questions. Across the two human-involved conditions, the study gathered 882 favorite ideas; 415 baseline and 441 collaborative ideas were usable after technical problems; after curation and excluding one meme template, 335 baseline images and 307 collaborative images remained.",
+        "detail": "Participants were assigned to a human-only baseline or a human-AI collaboration condition with access to GPT-4o through a chat interface. Reported demographics after exclusions: 63 male, 35 female; mean age 28.8 years, sd 8.7. Compensation was equivalent to 15 USD."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "N=100 recruited; 98 completed the task",
+        "population": "Second Prolific sample with the same English-language prerequisites; prior LLM knowledge was not required",
+        "recruitment": "Online platform Prolific",
+        "geography": "29 different countries",
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants rated a random sample of 50 meme images each on humor/funniness, creativity, and shareability. The rated pool contained 450 images: 150 human-only, 150 human-AI collaboration, and 150 AI-only images. Exact per-image rating counts are not reported.",
+        "detail": "Participants were reported as equally split between identifying as male and female, with average age 32.6 years, sd 11.1. Compensation was equivalent to 10 USD."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Prolific meme raters",
+        "role": "primary",
+        "blind": null,
+        "detail": "The second participant sample provided the human ratings that determined meme-quality results for humor/funniness, creativity, and shareability. The paper does not explicitly state whether generation condition was hidden from raters."
+      },
+      {
+        "type": "human-lay",
+        "name": "Meme-creation participants",
+        "role": "primary",
+        "blind": false,
+        "detail": "Participants in the human-only and human-AI conditions provided self-report outcomes such as NASA-TLX workload, perceived effort, perceived number of ideas, and ownership of generated captions. They necessarily knew whether they had access to the LLM assistant."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Server logs and automatic idea extraction",
+        "role": "primary",
+        "blind": null,
+        "detail": "The system recorded ideas, images, and LLM interactions; LLM responses in the collaboration interface were automatically processed to determine whether they contained ideas and to extract those ideas into the idea list. These logs supported productivity measures such as number of ideas."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors / study team",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The authors regenerated captioned images for consistent text placement and curated the generated images, excluding images where captions clearly did not match the task or where caption length obscured most of the image. The paper does not report multiple curators, blinding, or inter-rater agreement for this curation."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Human-only baseline meme creation",
+        "mode": "best-of-n",
+        "n": "Variable number of participant-generated ideas during a 4–5 minute ideation period per task; participants then selected their top three ideas per task",
+        "selector": "human",
+        "detail": "Participants generated captions without AI assistance, selected favorite ideas, and created final meme images. For evaluation, after technical filtering, regeneration, curation, and exclusion of one image template, the authors randomly sampled 10 images for each remaining image/topic combination, yielding 150 rated human-only images."
+      },
+      {
+        "scope": "Human-AI collaborative meme creation",
+        "mode": "best-of-n",
+        "n": "Variable number of human and LLM-assisted ideas during a 4–5 minute ideation period per task; the system prompt constrained the LLM to at most three ideas per response; participants selected their top three ideas per task",
+        "selector": "human",
+        "detail": "Participants could freely prompt GPT-4o through a chat interface during ideation, while the current image was always sent to the model before user prompts. Favorite selection and final image creation were performed by the participant without LLM support. For evaluation, after filtering, regeneration, curation, and exclusion of one image template, the authors randomly sampled 10 images for each remaining image/topic combination, yielding 150 rated collaborative images."
+      },
+      {
+        "scope": "AI-only meme-caption generation",
+        "mode": "best-of-n",
+        "n": "20 captions per image/topic combination; 15 image/topic combinations; Figure 5 reports 300 AI-driven meme images before sampling, with 150 sampled for rating",
+        "selector": "random",
+        "detail": "The model was sent the image and prompted to “generate 20 meme captions for this <image> about the topic of <topic>,” where the topic was work, food, or sports and the image description was no more than 10 words. Selection for evaluation was random rather than quality-based: 10 images per image/topic combination were sampled."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "The paper states that the study used the OpenAI API for GPT-4o in the human-AI chat interface and for the AI-only meme-caption condition, but it does not report an API snapshot/version or inference dates."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-4o chat assistant in the human-AI collaboration interface",
+        "calls_per_item": "Variable and user-initiated; exact calls per task, per participant, or per image are not reported",
+        "candidates_per_item": "At most three ideas per LLM response by system-prompt constraint; total LLM suggestions per task are not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Participants could enter any prompt. The system prompt set the assistant context, required a helpful and polite tone, and limited each response to at most three ideas. The current image was always sent to the LLM before any user prompt. The paper reports in limitations that less than half of participants interacted with the LLM multiple times and only six had more than eight interactions, but it does not provide full interaction-count distributions."
+      },
+      {
+        "scope": "GPT-4o AI-only caption generation",
+        "calls_per_item": "Not explicitly reported; the paper says the model was prompted for each image/topic combination",
+        "candidates_per_item": "20 captions per image/topic combination; 15 combinations; 300 AI-driven meme images before random sampling according to Figure 5",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Prompt described in the paper: “generate 20 meme captions for this <image> about the topic of <topic>.” The <topic> was one of work, food, or sports; the <image> field was a brief description of no more than 10 words. No temperature, top-p, seed, max-token setting, latency, or API cost is reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Productivity, workload, effort, and ownership in meme creation",
+        "present": true,
+        "description": "A human-only baseline group completed the same three meme-captioning tasks without AI assistance and was compared with the human-AI collaboration group on idea counts, NASA-TLX, perceived effort, and ownership.",
+        "directly_comparable": true,
+        "detail": "The human-only and human-AI groups used the same task structure, time window, templates/topics sampling procedure, favorite-selection step, image editor, and post-task survey, with LLM access as the key manipulated difference. Exact completed sample sizes per condition are not reported."
+      },
+      {
+        "scope": "Rated quality of generated memes versus GPT-4o AI-only memes",
+        "present": true,
+        "description": "Human-only memes were included as a baseline against human-AI collaboration and AI-only GPT-4o memes in a shared human-rating survey of humor/funniness, creativity, and shareability.",
+        "directly_comparable": false,
+        "detail": "The rating procedure used the same second rater pool, same metrics, same remaining five templates, same three topics, and 150 rated images per condition. However, generation and selection budgets were not materially matched: human and collaborative images came from timed participant ideation followed by participant top-three favorite selection and author curation, while AI-only images came from GPT-4o generating 20 captions per image/topic combination followed by random sampling; no matched time, prompt-count, or selection budget is reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Meme captions were generated during the study rather than scored against a fixed public answer key.",
+        "Quality labels were newly collected from a Prolific rater sample.",
+        "The evaluation used the same sampled templates/topics and the same rater survey across conditions."
+      ],
+      "basis": "This is not a conventional public benchmark with fixed labels, so answer-key contamination is not the main issue. However, the task uses popular internet meme templates and broad topics, and GPT-4o is a proprietary model likely trained on large internet data containing meme templates, meme conventions, and possibly similar captions. The paper provides no decontamination test, API snapshot, or analysis of memorized/common captions. New human ratings reduce direct benchmark-label leakage, but training overlap with public meme culture remains a plausible influence on AI-only performance claims."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Meme-quality conclusions were determined by human Prolific ratings; productivity and workload conclusions were determined by server logs and human self-reports.",
+      "detail": "GPT-4o was used to generate suggestions and AI-only captions, not to evaluate or score outputs. No LLM judge is reported."
+    },
+    "reporting_gaps": [
+      "Exact GPT-4o API snapshot/version is not reported.",
+      "Inference dates or access dates for GPT-4o are not reported.",
+      "Sampling parameters such as temperature, top-p, seed, and max tokens are not reported.",
+      "Exact number of GPT-4o calls per participant, task, image, or image/topic combination is not reported.",
+      "Token budgets, latency, compute usage, and OpenAI API cost are not reported.",
+      "Completed participant counts per human-only and human-AI condition are not reported; the abstract’s statement of three groups of 50 participants is not reconciled with the Methods report of 124 recruited and 26 excluded human participants plus an autonomous AI-only condition.",
+      "The rating scale format, range, and anchors for humor, creativity, and shareability are not specified in the supplied paper text.",
+      "Exact per-image rating counts and whether random image display was balanced across raters are not reported.",
+      "Whether meme raters were blind to generation condition is not explicitly reported.",
+      "The commercial survey platform used for subjective surveys and ratings is not named.",
+      "The automatic method for extracting ideas from LLM responses is not specified or validated.",
+      "Author curation procedures are underspecified: number of curators, blinding, adjudication, and inter-rater reliability are not reported.",
+      "The full system prompt and full list of generated captions are said to be in supplementary material but are not included in the supplied paper text.",
+      "Detailed demographic variables relevant to humor perception, such as ethnicity and language proficiency, were not systematically collected, according to the authors’ limitation section."
+    ]
   }
 }

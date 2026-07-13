@@ -5,5 +5,3 @@ Lemmens & De Marez — **ACM Computing Surveys 2026** (58(7):177) · `peer-revie
 - The broadest survey here: spans humor detection, generation, translation, and evaluation across text *and* multimodal data, situating LLM-era work against the larger computational-humor field (which dates to the 1990s). Best single reference for positioning the rest of this bibliography.
 
 ---
-
-## Adjacent: Sarcasm & Humor Styles

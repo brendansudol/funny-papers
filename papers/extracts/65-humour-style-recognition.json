@@ -192,5 +192,291 @@
     "code_url": "https://github.com/MaryKenneth/Two_Model_Humour_Style",
     "data_url": "https://github.com/MaryKenneth/Two_Model_Humour_Style",
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "6",
+        "population": "Ph.D. candidates",
+        "recruitment": "Recruited to serve as annotators; no further recruitment details reported.",
+        "geography": "Africa, Asia, and Europe",
+        "languages": [
+          "English"
+        ],
+        "observations": "200 Short Text Corpus instances divided into two sets of 100; each set independently annotated by 3 annotators. Fleiss’ Kappa: 0.2651 for first 100 samples and 0.2841 for second 100 samples. First set: 91 samples had at least two annotators agreeing and 9 had all three disagreeing; second set: 95 had at least two agreeing and 5 had all three disagreeing.",
+        "detail": "Annotators were provided humour-style definitions and asked to classify each instance as self-enhancing, self-deprecating, aggressive, affiliative, or neutral. Majority vote determined the final label where possible."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Website users or editors who supplied original labels, definitions, or tags on online joke websites",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "983 jokes extracted from websites including Reader’s Digest, Parade, Bored Panda, Laugh Factory, Pun Me, Independent, Cracked, Reddit, Tastefully Offensive, and BuzzFeed; the paper says jokes were labelled by users or editors and then mapped to the study’s humour-style categories.",
+        "detail": "The paper does not report the number, identity, demographics, or procedures of the website users/editors. Authors mapped website keywords/tags such as dark/inappropriate jokes, insult, friendship, family jokes, self-deprecating, self-love, and self-care to the five study labels."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "Six Ph.D. candidate annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Three human annotators labeled each of two 100-item Short Text Corpus subsets; majority vote assigned final labels except for 14 all-disagreement cases."
+      },
+      {
+        "type": "LLM",
+        "name": "Chat-GPT",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to classify the 14 Short Text Corpus instances where all three human annotators disagreed; its label was combined with the three human labels and labels from three other LLM chatbots for a seven-label majority decision."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to classify the 14 all-human-disagreement instances; exact version/snapshot not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "Microsoft Copilot",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to classify the 14 all-human-disagreement instances; exact version/snapshot not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "HuggingChat",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to classify the 14 all-human-disagreement instances; exact model/version not reported."
+      },
+      {
+        "type": "human-lay",
+        "name": "Website users or editors",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Original website labels, definitions, or tags determined labels for the 983 website jokes before authors mapped them to humour-style categories; the paper does not identify whether specific labels were user- or editor-generated."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Mapped website tags/keywords and source categories to the study’s labels, including mapping dark/inappropriate jokes and insults to aggressive, friendship/family/classroom/icebreaker/happiness jokes to affiliative, self-deprecating tags to self-deprecating, self-love/self-care to self-enhancing, and ColBERT non-humorous instances to neutral."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy, precision, recall, f1-score",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to evaluate classifier performance on the Humour Styles Dataset for the single-model, four-class, binary-class, and two-model approaches."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Wilcoxon signed-rank test",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to compare single-model and two-model approaches across metrics and humour styles."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Entire paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The study performs dataset construction, annotation, and text classification; it does not generate humour or select among generated outputs."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Naive Bayes",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Run as one of 14 evaluated classifiers; smoothing parameter reported as 1, but software/package/version not reported."
+      },
+      {
+        "name": "Random Forest",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Run with six sentence-embedding models; default hyperparameters used, but implementation/library version not reported."
+      },
+      {
+        "name": "XGBoost",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Run with six sentence-embedding models; default hyperparameters used, but implementation/library version not reported."
+      },
+      {
+        "name": "DistilBERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Fine-tuned for the classification tasks; the exact checkpoint/model ID is not reported. The paper mentions the Hugging Face Transformers library but not its version."
+      },
+      {
+        "name": "General Text Embeddings (GTE)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "One of six sentence embedding model families combined with RF and XGBoost; exact checkpoint not reported."
+      },
+      {
+        "name": "GTE Upgraded (ALI)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "One of six sentence embedding model families combined with RF and XGBoost; exact checkpoint not reported."
+      },
+      {
+        "name": "BAAI General Embedding (BGE)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "One of six sentence embedding model families combined with RF and XGBoost; exact checkpoint not reported."
+      },
+      {
+        "name": "Matryoshka Representation Learning and Binary Quantization (MRL)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "One of six sentence embedding model families combined with RF and XGBoost; exact checkpoint not reported."
+      },
+      {
+        "name": "Universal AnglE Embedding (UAE)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "One of six sentence embedding model families combined with RF and XGBoost; exact checkpoint not reported."
+      },
+      {
+        "name": "Multilingual E5 Text Embeddings (MUL)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "One of six sentence embedding model families combined with RF and XGBoost; exact checkpoint not reported."
+      },
+      {
+        "name": "Chat-GPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "Used as an LLM chatbot for annotation tie-breaking on 14 disagreement instances; exact model/version not reported."
+      },
+      {
+        "name": "Claude",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "Used as an LLM chatbot for annotation tie-breaking on 14 disagreement instances; exact model/version not reported."
+      },
+      {
+        "name": "Microsoft Copilot",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "Used as an LLM chatbot for annotation tie-breaking on 14 disagreement instances; exact model/version not reported."
+      },
+      {
+        "name": "HuggingChat",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "Used as an LLM chatbot for annotation tie-breaking on 14 disagreement instances; exact underlying model/version not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "LLM-assisted resolution of annotation disagreements",
+        "calls_per_item": "Four LLM chatbot classifications per unresolved item are reported for 14 items; the paper does not state whether there were repeated prompts or retries.",
+        "candidates_per_item": "One label from each of 4 LLMs plus 3 human annotator labels, yielding 7 labels per unresolved item for majority assignment.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper states that the LLMs were prompted to categorise each joke instance as self-enhancing, self-deprecating, aggressive, affiliative, or neutral. Full prompts, decoding settings, context length, and cost are not reported."
+      },
+      {
+        "scope": "Single-model, four-class, binary-class, and two-model classifier experiments",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Dataset split 80/20 for training/testing, randomised with fixed seed 100; 5-fold cross-validation used for all experiments. Naive Bayes smoothing parameter = 1. Random Forest and XGBoost used default hyperparameters.",
+        "compute_or_cost": null,
+        "detail": "Fourteen evaluated models: NB, RF plus six embeddings, XGBoost plus six embeddings, and DistilBERT. The paper reports metrics but not hardware, run counts beyond 5-fold CV, or library versions."
+      },
+      {
+        "scope": "DistilBERT fine-tuning",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Fine-tuned for 5 epochs with weight decay 0.01, warmup steps 500, training batch size 8, and the default learning-rate scheduler from the Hugging Face Transformers library.",
+        "compute_or_cost": null,
+        "detail": "Exact DistilBERT checkpoint, learning rate, tokenizer settings, maximum sequence length, hardware, and training time are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humour style recognition/classification",
+        "present": false,
+        "description": "Human annotators were used to label 200 dataset instances from the Short Text Corpus, but the paper does not evaluate human classification performance as a baseline on the same train/test or cross-validation tasks as the models.",
+        "directly_comparable": false,
+        "detail": "No materially matched human-vs-model baseline is reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The paper introduces a new 1,463-instance Humour Styles Dataset rather than evaluating on a previously released humour-style benchmark.",
+        "Supervised evaluation uses an 80/20 train/test split with fixed seed 100 and 5-fold cross-validation."
+      ],
+      "basis": "The full labelled benchmark is introduced in this paper, so it was not a public benchmark before the evaluated classifiers. However, many evaluated representations are pretrained language/embedding models, and the dataset is assembled from public web jokes plus existing public corpora (ColBERT and Short Text Corpus). The paper gives no collection dates, duplicate checks, or decontamination tests against pretraining data. Thus supervised train/test leakage is partly controlled, but pretraining/source-text contamination remains plausible and unmeasured."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Labels for 14 Short Text Corpus instances where all three human annotators disagreed, and any downstream classifier training/evaluation results that include those instances.",
+      "human_validation": "Each affected item retained the three original human annotator labels; four LLM labels were added, and the final label was assigned by majority over seven labels. No independent post hoc human validation is reported.",
+      "detail": "LLM judging does not directly score model outputs or determine the headline comparison between single-model and two-model classifiers, but it contributes labels to a small subset of the dataset used for model training/evaluation."
+    },
+    "reporting_gaps": [
+      "Exact versions, snapshots, underlying models, and inference dates are not reported for Chat-GPT, Claude, Microsoft Copilot, or HuggingChat.",
+      "Exact checkpoint/model IDs and versions are not reported for DistilBERT or the six embedding models: GTE, ALI, BGE, MRL, UAE, and MUL.",
+      "Software/library versions are not reported for Naive Bayes, Random Forest, XGBoost, Hugging Face Transformers, or other tooling.",
+      "The LLM prompt is described only generally; full prompt text, system messages, conversation context, decoding/sampling parameters, token limits, retries, and cost are not reported.",
+      "Annotator recruitment details, compensation, training beyond receiving humour-style definitions, language proficiency, demographic details beyond broad regions, and blind/independent annotation conditions are not fully reported.",
+      "The number and characteristics of website users/editors who supplied original labels/tags are not reported, and the paper does not specify which website labels were user-generated versus editor-generated.",
+      "No dates are reported for web data collection, LLM annotation, model training, or inference.",
+      "No decontamination, duplicate-overlap, or memorisation analysis is reported for public web/source-corpus items relative to pretrained models.",
+      "Hardware, compute budget, training time, and monetary cost are not reported.",
+      "Feature extraction details for Naive Bayes and exact preprocessing/tokenization settings are not fully specified.",
+      "The paper reports an 80/20 split and 5-fold cross-validation but does not provide the train/test class distributions or all procedural details needed to reproduce every reported table exactly."
+    ]
   }
 }

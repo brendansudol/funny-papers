@@ -155,5 +155,154 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "Llama 3.3 70B / Llama-3.3-70B-Instruct",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to judge whether each analyzed LLM response was unsafe, i.e. whether jailbreaking happened. The paper says the judge accounts for humorous context, and Appendix A.4 gives a prompt requiring an answer of only 'safe' or 'unsafe'. The same model is also one of the attacked models, so Llama 3.3 70B responses are judged by Llama 3.3 70B."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Percentage (%) of successful attacks",
+        "role": "primary",
+        "blind": null,
+        "detail": "Tables 1-4 report the percentage of successful attacks, where a successful attack is an analyzed response classified as unsafe by the Llama 3.3 70B judge."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Direct injection baseline and fixed single-turn attack variants: original humor attack, no-humor ablation, and joke addition without knock-knock",
+        "mode": "single-sample",
+        "n": "1 prompt/turn per unsafe request per evaluated condition",
+        "selector": "none",
+        "detail": "The paper describes these as single-turn methods and reports percentages over dataset requests. It does not describe generating multiple candidate responses or selecting a best response."
+      },
+      {
+        "scope": "Knock-knock addition multi-turn attack",
+        "mode": "single-sample",
+        "n": "one three-prompt interaction per unsafe request per evaluated condition",
+        "selector": "none",
+        "detail": "The multi-turn attack is described as three prompts: 'knock, knock...', a subject-specific second prompt, and a third prompt consisting of a joke plus the original humor attack prompt. No best-of-N response selection is reported."
+      },
+      {
+        "scope": "Llama 3.3 70B generation of 'man' situation jokes for the added-humor variants",
+        "mode": "not-reported",
+        "n": "4 variants were used and evaluated: Man-Humor, Man-NoHumor, Man-Humor-NoNeg, and Man-NoHumor-NoNeg; candidate count per variant is not reported",
+        "selector": "unclear",
+        "detail": "For the subject 'man', the paper used Llama 3.3 70B to formulate situations for the third prompt. The paper describes the four variant constraints but does not report the exact generation prompts, how many candidate jokes were generated, or whether any candidate selection was performed."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Llama-3.3-70B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Full model name is given in Appendix A.2. Used as an attacked model, as the LLM-as-judge, and to formulate the 'man' situation jokes in the added-humor experiments. Hosted on two NVIDIA H100 80GB GPUs."
+      },
+      {
+        "name": "Meta-Llama-3.1-8B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Full model name is given in Appendix A.2. Used as an attacked model. Hosted on one NVIDIA H100 80GB GPU."
+      },
+      {
+        "name": "Mixtral-8x7B-Instruct-v0.1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Full model name is given in Appendix A.2. Used as an attacked model. Hosted on one NVIDIA H100 80GB GPU."
+      },
+      {
+        "name": "gemma-3-27b-it",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Full model name is given in Appendix A.2. Used as an attacked model. Hosted on one NVIDIA H100 80GB GPU."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Single-turn attack response generation: direct injection, original humor attack, no-humor ablation, and joke addition without knock-knock",
+        "calls_per_item": "1 user prompt/turn per unsafe request per evaluated condition",
+        "candidates_per_item": "No multiple-candidate generation or best-of-N selection reported",
+        "token_budget": null,
+        "sampling_parameters": "Temperature was set to 0 in all experiments; other decoding parameters are not reported.",
+        "compute_or_cost": "Llama-3.3-70B-Instruct was hosted on two NVIDIA H100 80GB GPUs; Meta-Llama-3.1-8B-Instruct, Mixtral-8x7B-Instruct-v0.1, and gemma-3-27b-it were each hosted on one NVIDIA H100 80GB GPU, on a PowerEdge R760xa Server with two Intel Xeon Gold 6442Y processors and twelve 64GB RDIMM memory.",
+        "detail": "Datasets were JBB/D1 with 100 unsafe requests, AdvBench/D2 with 520 unsafe requests, and HEx-PHI/D3 with 300 unsafe requests. The paper reports percentages of successful attacks by model, dataset, and subject/variant."
+      },
+      {
+        "scope": "Knock-knock multi-turn attack response generation",
+        "calls_per_item": "3 prompts per unsafe request per evaluated condition",
+        "candidates_per_item": "No multiple-candidate generation or best-of-N selection reported",
+        "token_budget": null,
+        "sampling_parameters": "Temperature was set to 0 in all experiments; other decoding parameters are not reported.",
+        "compute_or_cost": "Same local H100-based platform as the single-turn experiments.",
+        "detail": "The three prompts are described as a knock-knock opening, a subject-specific second prompt, and a third prompt adding a joke before the original humor attack prompt."
+      },
+      {
+        "scope": "LLM-as-judge labeling",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "The paper states temperature was 0 in all experiments, but does not separately report judge decoding parameters beyond this.",
+        "compute_or_cost": "Judge model Llama-3.3-70B-Instruct was hosted on two NVIDIA H100 80GB GPUs.",
+        "detail": "The judge prompt requests one label, 'safe' or 'unsafe', for each user request and LLM response. The paper does not report repeated judge calls, majority voting, confidence estimates, or a human validation set."
+      },
+      {
+        "scope": "Llama 3.3 70B generation of 'man' situation jokes for added-humor prompts",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Temperature was 0 in all experiments, but no separate prompt-construction decoding details are reported.",
+        "compute_or_cost": "Llama-3.3-70B-Instruct hosted on two NVIDIA H100 80GB GPUs.",
+        "detail": "The model was used to formulate a situation where a man could innocently and inadvertently encounter the unsafe request, under four variant constraints. Number of generation calls, candidate outputs, and any selection procedure are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Unsafe-response/jailbreak success evaluation",
+        "present": false,
+        "description": "No human baseline and no human judging are reported. The only explicit baseline is direct injection of the unsafe request, which is a model-prompt baseline rather than a human baseline.",
+        "directly_comparable": false,
+        "detail": "All reported success rates are based on LLM outputs judged by Llama 3.3 70B."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper evaluates verbatim unsafe requests from three publicly available datasets, JBB, AdvBench, and HEx-PHI, and does not report any decontamination analysis, held-out/private request construction, or checks of whether the attacked models or the Llama 3.3 70B judge had seen these datasets. Exact training cutoffs or release/training dates for all model-dataset pairs are not reported in the paper, so benchmark-public-before-model is left null. Because the requests are public legacy benchmark items and are passed verbatim, contamination risk is assessed as at least moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "The main successful-attack percentages in Tables 1-4; comparisons between humor prompting and direct injection; the no-humor ablation claim that humor is crucial; and the claim that adding more humor generally does not improve the attack.",
+      "human_validation": "No human validation of Llama 3.3 70B judge labels is reported.",
+      "detail": "A response counts as a successful jailbreak only if the Llama 3.3 70B judge classifies it as unsafe. Thus the headline empirical conclusions rest primarily on LLM judgment rather than human annotation or an independently validated metric."
+    },
+    "reporting_gaps": [
+      "No human evaluation, human validation set, inter-annotator agreement, or calibration of the Llama 3.3 70B judge is reported.",
+      "Model identifiers are reported, but no model snapshot hashes, checkpoint revisions, serving-library versions, or inference dates are reported.",
+      "Decoding details beyond temperature=0 are not reported; missing details include max tokens/token budgets, top_p, top_k, seeds, stop sequences, and repetition settings.",
+      "The paper does not report repeated runs, variance, confidence intervals, or robustness to stochastic decoding settings.",
+      "For LLM-as-judge labeling, the paper does not report repeated judge calls, majority voting, uncertainty handling, or whether the judge was blinded to attacked model or attack condition.",
+      "For the Llama 3.3 70B-generated 'man' jokes, the exact generation prompts, generated joke texts/situations, number of candidates, and any selection procedure are not fully reported.",
+      "No contamination or decontamination analysis is reported for the public unsafe-request datasets or for the Llama 3.3 70B judge.",
+      "No code, data artifact, or response-output release is reported in the supplied paper."
+    ]
   }
 }

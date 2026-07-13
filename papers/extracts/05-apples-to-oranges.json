@@ -160,5 +160,398 @@
     "code_url": "https://github.com/tylerL404/Comparing-Apples-to-Oranges",
     "data_url": "https://github.com/tylerL404/Comparing-Apples-to-Oranges",
     "other": "The released dataset includes human-authored explanations, URLs to webpages containing knowledge needed for topical jokes, and IPA phonetic transcriptions of all jokes."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "not reported; paper says the ground-truth explanations were written by an author / by the authors",
+        "population": "paper author(s)",
+        "recruitment": "not applicable",
+        "geography": "UK author affiliations, but creator geography not separately reported",
+        "languages": [
+          "English"
+        ],
+        "observations": "600 human-authored reference explanations, one per joke; topical jokes also paired with URLs to relevant knowledge.",
+        "detail": "The paper states that it writes ground-truth explanations for all jokes and that, because they were written by an author, they were quality-controlled by external evaluators. It does not clearly state how many authors wrote the explanations or whether this overlapped with the primary evaluator."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "paper author; native speaker of English; holds degrees in Linguistics",
+        "recruitment": "author of the work",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Rated all 4,800 LLM-generated joke explanations on 0–5 accuracy and 0–5 completeness scales; the paper estimates this required about 40 hours.",
+        "detail": "This was the primary human evaluation used for the main results and logistic-regression analysis."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "third-party computer science students; native English speakers; not authors",
+        "recruitment": "recruited as third-party participants; paid a 60 GBP Amazon voucher for approximately 3 hours; ethics approval, participant information sheet, and consent forms reported",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Reliability re-annotation subset is reported inconsistently: main text and figures say 320 explanations, computed as 10 jokes × 4 joke types × 8 models; Appendix A.1 says 240 explanations. They rated accuracy and completeness and were used only to verify the primary evaluator’s reliability.",
+        "detail": "Reported agreement with the primary evaluator: Krippendorff’s alpha .574 accuracy and .553 completeness; Pearson correlations .765 accuracy and .795 completeness, both p < .001; 80.5% binary pass/fail agreement."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "native English-speaking computer science students",
+        "recruitment": "paid a 30 GBP Amazon voucher for approximately 1.5 hours; ethics approval, participant information sheet, and consent forms reported",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Each assessed 200 human-authored reference explanations, 50 per joke type, with each seeing different jokes.",
+        "detail": "They quality-controlled the reference explanations using the same 0–5 accuracy and completeness rubric. All explanations either received maximum scores of 5 on both criteria or received comments requiring improvements, which were implemented; minor post-editing was required for less than 1% of explanations."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "non-author linguist",
+        "recruitment": "third-party categorisation check; Appendix says these checks did not involve monetary compensation",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Checked categorisation of the 300 Reddit jokes into topical and non-topical subsets.",
+        "detail": "The paper states that both topical and non-topical Reddit subsets were checked by another linguist who was not an author."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1; may overlap with another author role, overlap not reported",
+        "population": "author trained as a phonetician",
+        "recruitment": "author of the work",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Manually verified an unspecified subset of Claude-generated IPA transcriptions.",
+        "detail": "The paper does not report the verification subset size or whether this author was the same person as the primary evaluator."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Reddit users who voted on r/Jokes posts in the source corpus",
+        "recruitment": "organic Reddit platform activity captured in the r/Jokes dataset",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Upvote-downvote score, not participant count, was used to rank Reddit jokes and select high-scoring topical and non-topical jokes.",
+        "detail": "No number of voters or votes is reported in this paper."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "One author, a native English speaker with Linguistics degrees, assigned the primary 0–5 accuracy and completeness ratings to all 4,800 model-generated explanations. Blinding to model identity is not reported."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Two third-party native-English-speaking computer science students re-annotated a subset for reliability checks. Blinding to model identity is not reported."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Three native-English-speaking computer science students quality-controlled the human-authored reference explanations using the same accuracy/completeness rubric."
+      },
+      {
+        "type": "human-expert",
+        "name": "non-author linguist",
+        "role": "validation",
+        "blind": null,
+        "detail": "Checked whether Reddit jokes were correctly categorised as topical or non-topical."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Authors manually verified filtered topical candidates, removed jokes not requiring external knowledge and meta-level Reddit humour, wrote or edited reference explanations, and an author manually verified a subset of IPA transcriptions."
+      },
+      {
+        "type": "platform-vote",
+        "name": "r/Jokes upvote-downvote score",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The r/Jokes score field, based on upvote-downvote ratio in Weller and Seppi (2020), was used to rank Reddit jokes for selection. No voter counts are reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "SpaCy NER",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to filter r/Jokes candidates for topical humour by retaining jokes with named entities of selected types including ORG, FAC, WORK_OF_ART, LAW, PROD, EVENT, and PERSON. SpaCy version/model is not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen2.5-72B-Instruct / Qwen 72B Instruct",
+        "role": "secondary",
+        "blind": true,
+        "detail": "Used as an LLM judge over the whole dataset with the human-authored reference explanation and the same 0–5 accuracy/completeness criteria. The provided prompt contains the joke, reference explanation, model explanation, and criterion, but not the source model name."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "SacreBLEU, ROUGE-1, ROUGE-2, ROUGE-L, METEOR, BERTScore",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Reference-based automatic metrics computed using human-authored explanations as references; used as supplementary automatic evaluation."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude Sonnet 3.5 (20241022)",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to generate General American IPA phonetic transcriptions of all jokes and to construct the transcription prompt. These IPA fields were not used in the main analyses."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main zero-shot joke-explanation generation for 600 jokes across 8 evaluated LLMs",
+        "mode": "single-sample",
+        "n": "1 explanation per joke per model, yielding 4,800 explanations",
+        "selector": "none",
+        "detail": "No best-of-N generation, reranking, or model self-selection is reported. All models used the same prompt asking for an approximately 100-word explanation."
+      },
+      {
+        "scope": "LLM-judge scoring with Qwen2.5-72B-Instruct",
+        "mode": "single-sample",
+        "n": "one numeric score per judge prompt; exact number of judge calls is not reported",
+        "selector": "none",
+        "detail": "The judge prompt asks for a single number from 0 to 5 for a specified criterion. The paper reports accuracy and completeness scores but does not state whether they were obtained in separate calls or batched."
+      },
+      {
+        "scope": "Claude-generated IPA transcriptions for dataset enhancement",
+        "mode": "single-sample",
+        "n": "not reported; intended one IPA transcription per text sample",
+        "selector": "none",
+        "detail": "No alternative transcriptions or selection procedure is reported; an unspecified subset was manually verified by an author trained as a phonetician."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": "gpt-4o-2024-05-13",
+        "inference_date": "August 2024, reported as the time these GPT/Gemini stable releases were available",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Prompted via the OpenAI API; settings left at defaults."
+      },
+      {
+        "name": "GPT-4o Mini",
+        "version_or_snapshot": "gpt-4o-mini-2024-07-18",
+        "inference_date": "August 2024, reported as the time these GPT/Gemini stable releases were available",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Prompted via the OpenAI API; settings left at defaults."
+      },
+      {
+        "name": "Gemini 1.5 Pro",
+        "version_or_snapshot": "gemini-1.5-pro-001",
+        "inference_date": "August 2024, reported as the time these GPT/Gemini stable releases were available",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used through the Google GenerativeAI API with all user-accessible safety limits disabled; settings left at defaults."
+      },
+      {
+        "name": "Gemini 1.5 Flash",
+        "version_or_snapshot": "gemini-1.5-flash-001",
+        "inference_date": "August 2024, reported as the time these GPT/Gemini stable releases were available",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used through the Google GenerativeAI API with all user-accessible safety limits disabled; settings left at defaults."
+      },
+      {
+        "name": "Llama 3.1 8B",
+        "version_or_snapshot": "Meta-Llama-3.1-8B-Instruct",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Run on a desktop PC with an RTX 4080 Super."
+      },
+      {
+        "name": "Llama 3.1 70B",
+        "version_or_snapshot": "Meta-Llama-3.1-70B-Instruct",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Run on an HPC node using two A100s."
+      },
+      {
+        "name": "DeepSeek R1 8B",
+        "version_or_snapshot": "DeepSeek-R1-Distill-Llama-8B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Run on an HPC node using two A100s; main text describes it as a distilled 8B variant based on Llama 3.1."
+      },
+      {
+        "name": "DeepSeek R1 70B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "The paper evaluates an R1 70B model and states that the 70B distilled variant is based on Llama 3.3, but Appendix A.1 lists the model identifier for DeepSeek R1 70B as 'DeepSeek-R1-Distill-Llama-8B', the same as the 8B model. The exact 70B identifier is therefore not unambiguous."
+      },
+      {
+        "name": "Qwen2.5-72B-Instruct / Qwen 72B Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Used as the final LLM judge. Weights were obtained from Hugging Face repositories. Judge-candidate selection date is reported as 04/02/2025; Qwen was ranked 6th in Hugging Face Judge Arena at that time. Run on an HPC node using two A100s; temperature fixed to 0.1 for judging."
+      },
+      {
+        "name": "Prometheus 2 8x7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Candidate LLM judge described as a Mistral Mixture-of-Experts derivative and selected from Hugging Face Judge Arena candidates; not used as the final judge. Exact repository snapshot, inference date, and compute are not reported."
+      },
+      {
+        "name": "Gemma 2 9B Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Candidate LLM judge selected from Hugging Face Judge Arena candidates; not used as the final judge. Exact repository snapshot, inference date, and compute are not reported."
+      },
+      {
+        "name": "Claude Sonnet 3.5",
+        "version_or_snapshot": "20241022",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used for IPA transcription generation and to construct the transcription prompt. Access route, inference date, and decoding parameters are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "OpenAI GPT-4o and GPT-4o Mini joke-explanation generation",
+        "calls_per_item": "1 call per joke per model is implied by 600 jokes × 8 models = 4,800 explanations; no retries reported",
+        "candidates_per_item": "1",
+        "token_budget": "Prompt requested approximately 100 words; no maximum input/output token limit reported",
+        "sampling_parameters": "All settings, e.g. temperature, left at default",
+        "compute_or_cost": "OpenAI API; cost not reported",
+        "detail": "Prompt: 'Explain the following joke (presented in square brackets) in approximately 100 words.\\n\\n[JOKE]\\n\\n'."
+      },
+      {
+        "scope": "Google Gemini 1.5 Pro and Gemini 1.5 Flash joke-explanation generation",
+        "calls_per_item": "1 call per joke per model is implied; no retries reported",
+        "candidates_per_item": "1",
+        "token_budget": "Prompt requested approximately 100 words; no maximum input/output token limit reported",
+        "sampling_parameters": "All settings, e.g. temperature, left at default; all user-accessible safety limits disabled",
+        "compute_or_cost": "Google GenerativeAI API; cost not reported",
+        "detail": "Appendix reports that the Google API still blocked 5 explanations across 3 jokes, with one instance blocked only by Flash."
+      },
+      {
+        "scope": "Local/HPC open-model joke-explanation generation for Llama 3.1 and DeepSeek R1 models",
+        "calls_per_item": "1 call per joke per model is implied; no retries reported",
+        "candidates_per_item": "1",
+        "token_budget": "Prompt requested approximately 100 words; no maximum input/output token limit reported",
+        "sampling_parameters": "All settings, e.g. temperature, left at default",
+        "compute_or_cost": "Llama 8B run on a desktop RTX 4080 Super; Llama 70B, both R1 models run on an HPC node using two A100s; monetary cost not reported",
+        "detail": "Same prompt as API models; no seed, batching, precision, or serving framework details reported."
+      },
+      {
+        "scope": "Qwen LLM-as-judge scoring",
+        "calls_per_item": "not explicitly reported; the prompt returns one 0–5 score for one specified criterion",
+        "candidates_per_item": "1 score per judge prompt",
+        "token_budget": "not reported",
+        "sampling_parameters": "temperature fixed to 0.1; all other hyperparameters model default",
+        "compute_or_cost": "HPC node using two A100s; cost not reported",
+        "detail": "The judge prompt includes joke, human reference explanation, model-generated explanation, scoring criterion, and scoring rubric, and asks for only a single number between 0 and 5."
+      },
+      {
+        "scope": "Candidate LLM-judge comparison using Prometheus 2 8x7B, Qwen 72B Instruct, Gemma 2 9B Instruct, and possible jury ensemble",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "temperature fixed to 0.1 for all judge models; other hyperparameters defaults",
+        "compute_or_cost": "not reported",
+        "detail": "The paper says Qwen alone best aligned with human evaluation versus a jury ensemble or any individual candidate, but does not give the full candidate-evaluation protocol."
+      },
+      {
+        "scope": "Claude Sonnet 3.5 IPA transcription generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Used to transcribe all jokes into General American IPA and to create its own transcription prompt; no call counts, batching, cost, or decoding settings reported."
+      },
+      {
+        "scope": "Reference-based automatic metrics",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "SacreBLEU, ROUGE-1/2/L, METEOR, and BERTScore were computed against human-authored reference explanations; metric package versions and detailed settings are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Joke-explanation performance comparison with LLMs",
+        "present": false,
+        "description": "No matched human baseline was reported in which humans generated explanations under the same prompt and had those explanations scored like the model outputs. Human-authored explanations served as reference answers and were quality-controlled, not as a directly comparable baseline system.",
+        "directly_comparable": false,
+        "detail": "Third-party humans re-annotated model outputs for reliability and scored reference explanations for quality control; they did not perform the same generation task as the models."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Reference explanations were newly human-authored for this dataset rather than taken from public explanation sites.",
+        "The paper argues that readily available explanations for the jokes are less likely than the jokes themselves and says a manually verified subset found such explanations to be rare.",
+        "Topical Reddit jokes were manually verified for dependence on external knowledge, and URLs to relevant topical knowledge were supplied in the dataset but not used in the main model prompting."
+      ],
+      "basis": "All evaluated joke texts come from public secondary sources: SemEval-2017 Task 7 puns and r/Jokes posts from 2008–2019. The paper explicitly states that the selected models were trained on data about events up to at least 2023 and acknowledges that it is likely that the majority of jokes have been seen before by LLMs. There is no decontamination test or private/held-out joke creation. The main mitigating factor is that the reference explanations were newly authored and the authors believe public explanations are rare, so label contamination is lower than input-item contamination."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Qwen LLM-judge agreement results, supplemental LLM-as-judge figures, and dataset IPA-transcription features depend on LLM outputs. The headline conclusions about joke-type difficulty and model-size effects primarily come from human ratings of model explanations.",
+      "human_validation": "Primary human evaluation covered all 4,800 explanations, and two third-party human annotators re-rated a subset for reliability; Qwen was compared against these human ratings.",
+      "detail": "The LLM judge corroborates and diagnoses the human evaluation rather than replacing it. Claude-generated IPA transcriptions are explicitly stated not to be used in the main analyses."
+    },
+    "reporting_gaps": [
+      "Blinding is not reported for the primary author evaluator, the two third-party reliability annotators, or the three reference-explanation quality-control evaluators.",
+      "The reliability subset size is internally inconsistent: the main text and Figures 6–7 report 320 explanations, while Appendix A.1 reports 240 explanations.",
+      "The exact DeepSeek R1 70B model identifier is not unambiguous; Appendix A.1 lists the 70B model as 'DeepSeek-R1-Distill-Llama-8B', conflicting with the stated 70B variant in the main text.",
+      "No exact inference dates are reported for most models; GPT/Gemini are only tied to stable releases available in August 2024, and the LLM-judge selection date is reported separately as 04/02/2025.",
+      "No maximum token limits, context windows used, seeds, batching details, retry policy, serving framework, precision/quantization, or full decoding parameters are reported; the paper states only that model settings were defaults, except judge temperature 0.1.",
+      "API costs and local/HPC runtime costs are not reported.",
+      "The treatment of Gemini safety blocks, textual refusals, and rare degenerate outputs in scoring is described qualitatively but not operationally specified in the main methods.",
+      "Recruitment channels and demographics for student evaluators are not reported beyond native-English status, computer-science student status, compensation, and consent/ethics procedures.",
+      "The paper does not clearly state how many authors wrote the 600 reference explanations or whether the reference author(s) overlapped with the primary evaluator.",
+      "The subset size and sampling method for manual verification of readily available public explanations is not reported.",
+      "The case-study joke is described as randomly selected, but no randomization method or seed is reported.",
+      "The full protocol for selecting Qwen over Prometheus, Gemma, and a jury ensemble is not reported, including the exact alignment criterion and dataset used for candidate-judge comparison.",
+      "Exact Hugging Face repository snapshots or commit hashes for local/open judge models are not reported.",
+      "Claude Sonnet access route, inference date, call count, decoding parameters, and IPA verification subset size are not reported.",
+      "SpaCy version/model for NER filtering is not reported.",
+      "Automatic metric implementation details are incomplete; package versions, BERTScore backbone/model, tokenization/settings, and confidence intervals are not reported."
+    ]
   }
 }

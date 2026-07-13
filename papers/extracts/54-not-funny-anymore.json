@@ -166,5 +166,254 @@
     "code_url": "https://github.com/Ftsos/HumorLiteralnessPaper",
     "data_url": "https://github.com/Ftsos/HumorLiteralnessPaper",
     "other": "The paper states that the dataset will be publicly released in Hugging Face upon acceptance."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "4",
+        "population": "bilingual native speakers serving as Mandarin annotators; all annotators were volunteering friends of the authors",
+        "recruitment": "volunteering friends of the authors",
+        "geography": null,
+        "languages": [
+          "English",
+          "Mandarin Chinese"
+        ],
+        "observations": "Each annotator rated all 162 English-to-Mandarin joke-translation pairs on a five-point Likert scale for semantic preservation of humor; Krippendorff’s alpha reported as 0.776.",
+        "detail": "The paper does not report age, gender, location, compensation, training, or whether annotators were blinded to the translation source."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Hindi annotators; all annotators were volunteering friends of the authors",
+        "recruitment": "volunteering friends of the authors",
+        "geography": null,
+        "languages": [
+          "English",
+          "Hindi"
+        ],
+        "observations": "The Hindi process used 76 joke-translation pairs and 3 annotators; the paper says the same process was repeated and reports Krippendorff’s alpha as “0.776 (change number).”",
+        "detail": "The Hindi agreement value appears to include an unresolved placeholder. The paper does not separately describe Hindi annotator demographics, location, training, compensation, or blinding."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "contributors/authors represented in the Kaggle short-jokes dataset, not described in the paper",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The authors sampled 162 jokes from Kaggle for Mandarin translation and 76 jokes for Hindi translation; these are item counts, not contributor counts.",
+        "detail": "No information is given about the people who originally wrote or contributed the Kaggle jokes."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "bilingual human annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Human annotators supplied the reference 1–5 humor-preservation ratings against which LLM-generated ratings were compared. The paper describes them as bilingual native speakers/friends, not professional evaluators."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude, GPT-4o/OpenAI, Gemini, Qwen-3, DeepSeek-3, Llama-4, and Mistral",
+        "role": "primary",
+        "blind": null,
+        "detail": "Seven LLMs rated each source-translation joke pair under vanilla, chain-of-thought, and self-consistency prompting. Prompts asked for a single integer 1–5 score prioritizing humor preservation over surface lexical similarity."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "agreement/correlation/classification metrics",
+        "role": "primary",
+        "blind": null,
+        "detail": "Strict agreement, ±1 accuracy, MAE, Spearman correlation, Pearson correlation, and binary classification metrics were computed from LLM ratings versus human ratings."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "token-level semantic alignment / literalness score",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper computes a literalness/wordiness diagnostic using xlm-r-100langs-bert-base-nli-stsb-mean-tokens embeddings, Procrustes alignment, cosine similarity, Hungarian matching, and mean token-level cosine similarity."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Machine-translation dataset construction: English jokes translated to Mandarin and Hindi",
+        "mode": "single-sample",
+        "n": "One final translation per sampled joke is reported: 162 Mandarin pairs and 76 Hindi pairs; no candidate pool size is reported.",
+        "selector": "none",
+        "detail": "Translations were generated using GPT-4o-mini/ChatGPT-generated translation. The paper does not describe best-of-N generation, manual selection, or filtering among multiple candidate translations."
+      },
+      {
+        "scope": "LLM judge ratings under vanilla and chain-of-thought prompts",
+        "mode": "single-sample",
+        "n": "One final integer rating per model-prompt-joke pair",
+        "selector": "none",
+        "detail": "The paper says each model was queried with each prompting strategy and instructed to output a single integer score. Repeated samples or majority voting are not reported."
+      },
+      {
+        "scope": "LLM judge ratings under self-consistency prompt",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "model-self-selection",
+        "detail": "The prompt asks the model to “internally compare multiple possible ratings and choose the most consistent score,” but the paper does not report external multiple samples, number of internal ratings, or a best-of-N procedure."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to translate sampled English jokes into Mandarin; limitations also describe the translations as ChatGPT-generated and “done by gpt4o-mini.” No snapshot, API date, prompt, or decoding settings are reported."
+      },
+      {
+        "name": "Claude Sonnet",
+        "version_or_snapshot": "claude-sonnet-4-5-20250929",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Listed in the Model details section as one of the judge models."
+      },
+      {
+        "name": "OpenAI judge model",
+        "version_or_snapshot": "gpt-4o",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Experimental setup/model details list gpt-4o, while the Limitations section says “GPT-4.1 as a rater,” creating an unresolved inconsistency."
+      },
+      {
+        "name": "Gemini",
+        "version_or_snapshot": "gemini-2.5-flash-lite",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Listed in the Model details section; no API snapshot or inference date is given."
+      },
+      {
+        "name": "Qwen3",
+        "version_or_snapshot": "Qwen3-235B-A22B-Instruct-2507-tput",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Listed in the Model details section as a judge model."
+      },
+      {
+        "name": "Llama 4",
+        "version_or_snapshot": "Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Listed in the Model details section as a judge model."
+      },
+      {
+        "name": "Mistral",
+        "version_or_snapshot": "Mistral-7B-Instruct-v0.3",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Listed in the Model details section as a judge model."
+      },
+      {
+        "name": "DeepSeek",
+        "version_or_snapshot": "DeepSeek-V3.1",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Listed in the Model details section as a judge model."
+      },
+      {
+        "name": "xlm-r-100langs-bert-base-nli-stsb-mean-tokens",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to encode tokens for the semantic alignment/literalness metric; no model source, runtime, or version hash is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-4o-mini translation generation for dataset construction",
+        "calls_per_item": null,
+        "candidates_per_item": "One final translation per source joke is present in the dataset; the number of generated candidates is not reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper does not report translation prompt, batching, temperature, top-p, max tokens, retries, cost, or inference date."
+      },
+      {
+        "scope": "LLM-as-judge rating of joke-translation pairs",
+        "calls_per_item": "Each of 7 models is queried with 3 prompting strategies for each joke-translation pair, i.e. 21 model-prompt judgments per pair as described.",
+        "candidates_per_item": "One final integer rating per model/prompt is reported; no external multi-sample self-consistency count is reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Prompts are provided, but decoding parameters, max tokens, API/provider routes, inference dates, retries, and total cost are not reported."
+      },
+      {
+        "scope": "Token-level semantic alignment / literalness scoring",
+        "calls_per_item": "Each source joke and translation are tokenized/encoded with the multilingual embedding model; exact batching or call counts are not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports the algorithmic steps but not runtime, hardware, embedding-model version hash, or implementation details for estimating the Procrustes alignment matrix."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Reference-free humor-preservation evaluation",
+        "present": true,
+        "description": "Human annotators rated the same source-translation joke pairs on a 1–5 Likert scale, and LLM ratings were compared against the human annotation vector.",
+        "directly_comparable": true,
+        "detail": "The paper states that LLMs were tasked with the same evaluation and restricted to the original joke and translation as input. However, the exact aggregation of multiple human ratings into h_i is not consistently specified."
+      },
+      {
+        "scope": "Translation-generation baseline",
+        "present": false,
+        "description": "No human-translated joke outputs are used as a matched baseline for the GPT-4o-mini synthetic translations.",
+        "directly_comparable": null,
+        "detail": "The paper’s translation pairs are synthetic/ChatGPT-generated; it evaluates judges, not competing human versus machine translators."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The translation pairs and human ratings appear newly created for this work rather than taken from an existing labeled benchmark.",
+        "The paper says the dataset will be publicly released upon acceptance, implying the full labeled benchmark was not already public at paper time."
+      ],
+      "basis": "The English source jokes were sampled from the public Kaggle short-jokes dataset, so evaluated LLMs may have encountered the joke texts or close variants in pretraining; no memorization or decontamination test is reported. Risk is reduced because the specific GPT-4o-mini translations and human humor-preservation labels appear newly created, but the paper does not report dataset creation dates relative to model training or inference. The paper discusses synthetic-translation/self-preference bias, but not contamination."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Headline claims that LLM judges struggle, that strict agreement is near or below the 20% random baseline, and that LLM evaluator errors are driven by literalness all depend on ratings produced by the evaluated LLM judges.",
+      "human_validation": "Human ratings from 4 Mandarin annotators and 3 Hindi annotators are used as the comparison target; Mandarin Krippendorff’s alpha is reported as 0.776, while Hindi alpha is reported with an unresolved “change number” placeholder.",
+      "detail": "LLM judging is the object of study rather than an unvalidated replacement for all evaluation. Still, the main empirical results are determined by LLM-generated ratings compared with human annotations and by an automatic literalness metric."
+    },
+    "reporting_gaps": [
+      "Hindi coverage is inconsistent: the abstract and Dataset section report 76 English-to-Hindi pairs, but the Limitations section says the dataset is limited to English-to-Chinese only and refers to 162 pairs.",
+      "Results tables do not clearly state whether metrics are computed on Mandarin only, Hindi only, both languages combined, or some subset.",
+      "The Hindi Krippendorff’s alpha is printed as “0.776 (change number),” suggesting an unresolved placeholder.",
+      "The aggregation of multiple human ratings into the human annotation vector h_i is unclear; the paper variously refers to a human annotation vector, human rater mode, average human-assigned scores, and example average human ratings.",
+      "Human annotator demographics, geography, training, compensation, and blinding are not reported beyond bilingual/native-speaker status and being volunteering friends of the authors.",
+      "The sampling procedure for selecting jokes from the Kaggle short-jokes dataset is not described.",
+      "GPT-4o-mini translation-generation prompt, sampling parameters, candidate counts, filtering/selection, inference date, and access route are not reported.",
+      "LLM judge access route, inference date, decoding parameters, max-token limits, retries, and costs are not reported.",
+      "OpenAI judge provenance is inconsistent: model details list gpt-4o, while the Limitations section mentions GPT-4.1 as a rater.",
+      "The operational details of self-consistency are underspecified; no number of samples, votes, or repeated calls is reported.",
+      "The binary classification threshold or mapping from 1–5 ratings to binary labels is not defined.",
+      "Details of the Procrustes alignment estimation for the literalness metric are underspecified, including what data are used to fit W and whether the method is applied identically to Hindi.",
+      "No contamination or memorization check is reported for the public Kaggle source jokes.",
+      "No confidence intervals, significance tests, or uncertainty estimates are reported for the main accuracy/correlation metrics."
+    ]
   }
 }

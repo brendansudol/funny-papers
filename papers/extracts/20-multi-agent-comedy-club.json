@@ -2,11 +2,11 @@
   "key": "20-multi-agent-comedy-club",
   "ref": "#20",
   "section": "Part 2 - Generating Jokes",
-  "extracted_at": "2026-07-03",
+  "extracted_at": "2026-07-13",
   "extraction_model": "gpt-5.5",
   "extraction_reasoning_effort": "high",
   "source_md": "papers/md/20-multi-agent-comedy-club/20-multi-agent-comedy-club.md",
-  "source_md_sha256": "43f6619fe624a415a445b0254a769ee45ef8d95df41a6185d3119e9aee7a3abf",
+  "source_md_sha256": "6cae415aba1c3a89fa093653d9723bd822253ec0f3461f7d506544d2f1a8d685",
   "source_truncated": false,
   "title": "Multi-Agent Comedy Club: Investigating Community Discussion Effects on LLM Humor Generation",
   "authors": [
@@ -17,7 +17,7 @@
     "Zhicong Lu"
   ],
   "year": 2026,
-  "venue": "arXiv:2602.14770v2 [cs.CL]",
+  "venue": "Findings of ACL 2026",
   "paper_types": [
     "dataset",
     "method",
@@ -26,20 +26,19 @@
   ],
   "research_questions": [
     "Can broadcast community discussion be operationalized as a usable conditioning signal that improves an LLM’s subsequent creative writing?",
-    "Does enabling public reception, logging it as discussion traces, and retrieving it as social memory improve long-form stand-up comedy generation over a no-discussion baseline when within-round revision is removed?",
-    "What quality-versus-social-risk tradeoffs arise when community discussion conditions later humor generation?"
+    "Does logging public reception as threaded discussion and retrieving it as bounded social memory improve subsequent long-form stand-up comedy monologues compared with a no-discussion baseline?",
+    "What craft, social-response, and safety/style tradeoffs arise when community discussion conditions LLM humor generation?"
   ],
   "tasks": [
     "stand-up comedy monologue generation",
     "long-form humor generation",
     "humor evaluation",
-    "reception-grounded creative writing"
+    "humor style assessment"
   ],
   "humor_domains": [
     "stand-up comedy",
     "long-form comedy monologues",
-    "social satire",
-    "online community reception of comedy"
+    "online community discussion and reception"
   ],
   "modalities": [
     "text"
@@ -49,9 +48,9 @@
   ],
   "datasets_used": [
     {
-      "name": "Multi-Agent Comedy Club paired resource",
+      "name": "Multi-Agent Comedy Club paired monologue resource",
       "role": "introduced",
-      "size": "50 rounds; 250 monologues per condition; 250 paired instances; 5,384 interaction events in the discussion run"
+      "size": "50 rounds; 250 discussion-enabled monologues and 250 baseline monologues; 5,384 interaction events in the discussion trace"
     },
     {
       "name": "Fixed topic list",
@@ -60,115 +59,267 @@
     }
   ],
   "models_evaluated": [
-    "GPT-4o-mini"
+    "GPT-4o-mini",
+    "GPT-5.1"
   ],
   "methods_proposed": [
     {
-      "name": "Multi-Agent Comedy Club sandbox",
-      "summary": "A controlled 35-agent stand-up comedy community with one host, five performers, three critics, and twenty-six audience agents. The experimental switch enables or skips broadcast post-performance discussion while holding topics, personas, model, decoding, and no-within-round-revision constant."
+      "name": "Multi-Agent Comedy Club",
+      "summary": "A controlled multi-agent stand-up comedy sandbox with a host, five performers, three critics, twenty-six audience agents, and a binary discussion switch. The design holds topics, personas, model, and decoding configuration constant while varying whether broadcast community discussion is produced and reused."
     },
     {
-      "name": "Broadcast discussion with bounded social memory",
-      "summary": "In the discussion condition, critic reviews, audience posts, and free-dialogue turns are reconstructed into threads, curated into high-signal reception items, embedded in a vector store, and retrieved under a fixed memory budget to condition later performer generations."
+      "name": "Bounded social memory for reception-grounded generation",
+      "summary": "Discussion events are curated into a vector-store memory and retrieved into later performer contexts using a score combining embedding similarity, importance, and recency. Performers generate once per round without within-round revision, so effects can only come from cross-round reception memory."
     },
     {
       "name": "Diagnostic human evaluation protocol for long-form humor",
-      "summary": "The protocol combines forced A/B preference with 15 Likert items covering immediate amusement, craft and clarity, humor styles, value-judgment pressure, memorability, share willingness, and social/task attraction."
+      "summary": "The protocol combines forced A/B preference with Q1–Q15 Likert ratings covering amusement, craft/clarity, humor styles, moral pressure, memorability, share willingness, and social/task attraction."
     },
     {
       "name": "HarmShift and Benefit–Safety analysis",
-      "summary": "The paper defines HarmShift as the net movement toward aggressive and self-defeating humor relative to affiliative and self-enhancing humor, and defines Benefit and Safety composites to examine quality-risk tradeoffs across paired instances."
+      "summary": "HarmShift separates net shifts toward aggressive/self-defeating humor from benign/affiliative humor, while the Benefit–Safety composite maps paired instances into quality-gain versus risk tradeoff regions."
     }
   ],
   "humor_theories": [
     {
       "theory": "SSTH (script opposition)",
       "usage": "grounding/motivation",
-      "detail": "The related-work section cites classical semantic theories in which humor arises from conflicting scripts and cognitive reinterpretation, but this theory is not used directly in the generation method or annotation scheme."
+      "detail": "The related-work section cites classical semantic theories, attributed to Raskin, in which humor involves conflicting scripts and cognitive shift or reinterpretation."
     },
     {
       "theory": "humor styles (Martin HSQ)",
       "usage": "operationalized",
-      "detail": "Q7–Q10 adapt the Humor Styles Questionnaire dimensions: Affiliative, Self-enhancing, Aggressive, and Self-defeating."
+      "detail": "Q7–Q10 adapt the Humor Styles Questionnaire dimensions: affiliative, self-enhancing, aggressive, and self-defeating humor."
     },
     {
       "theory": "other",
       "usage": "operationalized",
-      "detail": "The rubric operationalizes reader-response formalisms for perceived intent and justified landing, defamiliarization for novel expression, and social/task attraction measures for downstream reception."
+      "detail": "The evaluation rubric operationalizes reader-response formalisms for perceived intent and justified landing, defamiliarization as a literary technique, and social/task attraction for downstream reception."
     }
   ],
   "evaluation_methods": [
     {
       "type": "human-eval",
-      "detail": "Five raters evaluated each matched pair with a forced A/B preference question and 1–5 Likert ratings for Q1–Q15 on both texts; presentation was anonymized, randomized, and shuffled across non-consecutive rounds."
+      "detail": "Five dedicated raters evaluated 250 matched pairs with randomized anonymized A/B presentation, forced preference Q0, and Q1–Q15 1–5 Likert ratings for both texts."
     },
     {
       "type": "expert-annotation",
-      "detail": "The abstract describes the evaluation as 250 paired monologues judged by five expert annotators using A/B preference and a 15-item rubric."
+      "detail": "The abstract describes five expert annotators; the protocol says raters were trained on the 15-item rubric and included people with prior performance experience or frequent stand-up/talk-show viewing."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports Wilson 95% CI for Q0, clustered-bootstrap percentile 95% CIs with B=20,000 for Q1–Q15, Fleiss’ kappa, Gwet’s AC1, ICC(3,5), ANOVA p-values, and Spearman correlations."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-5.1 with temperature 0 was used for an LLM-assisted round-level audit of all post-performance broadcast discussion messages for off-topic drift and low-information feedback, after a manual 100-message sanity check."
     }
   ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "five",
+        "population": "Dedicated raters; some had prior performance experience such as stand-up, improv, or public speaking, and the remaining raters were frequent viewers of stand-up comedy and talk-show content.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "250 matched pairs; each paired comparison evaluated by five raters; 1249 individual Q0 votes; Q1–Q15 Likert ratings for both text A and text B; valid N=249 for Q0 reliability and N=241 for ICC(3,5) over all 15 Likert items.",
+        "detail": "Raters completed the full annotation workload, were trained on the 15-item rubric, saw anonymized randomized A/B texts, and items were shuffled in a fully mixed order with non-consecutive rounds."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "Five dedicated/expert raters determined the main A/B preference and rubric outcomes; condition identity was anonymized and A/B order randomized independently per item."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "The authors manually screened a random sample of 100 discussion messages for off-topic drift and low-information feedback, observing 1 off-topic instance and 3 low-information instances."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5.1",
+        "role": "secondary",
+        "blind": false,
+        "detail": "For each round, GPT-5.1 received the round topic and full chronological discussion transcript with message IDs and speaker roles, and labeled messages as off-topic drift or low-information feedback when applicable."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Discussion-enabled performer monologues",
+        "mode": "single-sample",
+        "n": "1 monologue per performer per round; 5 performances per round across 50 rounds",
+        "selector": "none",
+        "detail": "Each performer generated exactly one monologue in fixed order, with no within-round revision and no best-of-N selection."
+      },
+      {
+        "scope": "Baseline performer monologues",
+        "mode": "single-sample",
+        "n": "1 monologue per performer per round; 5 performances per round across 50 rounds",
+        "selector": "none",
+        "detail": "The no-discussion baseline used the same performer roster, same 50 topics, and fixed decoding configuration; it skipped all non-performer stages."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "All 35 sandbox agents were instantiated using GPT-4o-mini; the paper mentions Microsoft API credits and underlying LLM/API access but does not report an API snapshot or inference date."
+      },
+      {
+        "name": "GPT-5.1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used only for the LLM-assisted audit of discussion-message failures; the paper reports temperature 0 but not snapshot, access route, or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Sandbox generation in discussion and baseline conditions",
+        "calls_per_item": "Each performer generates exactly one monologue per round; five performances per round; 50 rounds per condition.",
+        "candidates_per_item": "1 monologue per performer/topic",
+        "token_budget": "Retrieved memory block B_mem=1600 tokens; last L=10 utterances in relevant thread or global context; retrieve k=30 memory items; fixed total budget and role-specific output length caps are mentioned but values are not stated.",
+        "sampling_parameters": "Fixed decoding configuration across conditions; exact parameters not stated.",
+        "compute_or_cost": "Microsoft API credits supported the experiments; cost not stated.",
+        "detail": "The sandbox has N=35 agents: five performers, three critics, twenty-six audience members, and one host. Context builder structure and token budgets are identical across conditions, but the discussion condition has non-empty social memory."
+      },
+      {
+        "scope": "Discussion free-dialogue loop",
+        "calls_per_item": "At each dialogue step, every agent except the host outputs JSON including willingness and optional replyTo; selected agents post messages. Exact total model-call count is not stated.",
+        "candidates_per_item": "Top K_t,s agents selected, with K_max=5 among agents with w(a,t,s) >= 0.7.",
+        "token_budget": "Same bounded context mechanism, including B_mem=1600 tokens for retrieved memory and L=10 recent utterances.",
+        "sampling_parameters": "Fixed decoding configuration; exact parameters not stated.",
+        "compute_or_cost": null,
+        "detail": "Free dialogue stops at 150 free-dialogue events or 15 consecutive silent steps; the discussion trace contains 5,384 interaction events including topic releases, performances, critic reviews, and free dialogue."
+      },
+      {
+        "scope": "LLM-assisted discussion-failure audit",
+        "calls_per_item": "1 audit per round across 50 rounds",
+        "candidates_per_item": null,
+        "token_budget": "Full chronological discussion transcript per round; no token limit stated.",
+        "sampling_parameters": "temperature 0",
+        "compute_or_cost": null,
+        "detail": "GPT-5.1 labeled messages as off-topic drift or low-information feedback using message IDs, speaker roles, round topic, and transcript."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human-written stand-up comedy baseline",
+        "present": false,
+        "description": "The study compares two LLM-generated conditions and uses humans only as evaluators; it does not include human-written monologues as a baseline.",
+        "directly_comparable": false,
+        "detail": "No human and model outputs were evaluated under matched generation conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "New paired outputs are generated inside the sandbox rather than drawn from a legacy public humor benchmark.",
+        "Both conditions use the same 50 pre-generated topics, performer roster, model, and fixed decoding configuration.",
+        "A/B human evaluation uses anonymized randomized condition presentation."
+      ],
+      "basis": "The primary comparison is between newly generated discussion-enabled and no-discussion outputs from the same model and topics, so benchmark memorization is not central. The paper does not report decontamination checks or details of topic-list generation."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "The LLM judge affects the prevalence estimates for off-topic drift and low-information feedback over all discussion messages, not the primary preference, craft, or social-response results.",
+      "human_validation": "A random 100-message sample was manually screened first; the paper reports that GPT-5.1 labels fully agreed with the manual annotations on this sample.",
+      "detail": "The headline quality claims rely on five human raters. GPT-5.1 is used only for a supplementary audit that found 55/5,384 off-topic drift messages and 98/5,384 low-information messages."
+    },
+    "reporting_gaps": [
+      "GPT-4o-mini API snapshot/version and inference date are not reported.",
+      "GPT-5.1 snapshot/access route and inference date are not reported.",
+      "The fixed decoding configuration is mentioned, but exact sampling parameters are not stated.",
+      "Role-specific output length caps are mentioned, but cap values are not stated.",
+      "The total fixed context budget is not stated beyond B_mem=1600 for retrieved memory.",
+      "The embedding model, vector database implementation, and numeric values for lambda and gamma in the retrieval scoring formula are not reported.",
+      "The method for pre-generating the fixed 50-topic list is not described.",
+      "Exact total model-call count, compute, and cost are not reported.",
+      "Rater recruitment procedure, geography, age, culture, and detailed demographics are not reported.",
+      "No direct data URL is provided for the paired monologue resource or human annotations."
+    ]
+  },
   "headline_results": [
     {
-      "finding": "Discussion-enabled outputs won the instance-level majority preference in 189 of 250 paired instances and received most individual votes.",
-      "metric": "Q0 majority-win rate / individual vote share",
+      "finding": "Discussion-enabled outputs won the human majority preference substantially more often than the no-discussion baseline.",
+      "metric": "Q0 majority-win rate and individual vote share",
       "value": "75.6% (189/250; Wilson 95% CI [69.9, 80.5]); 70.1% individual votes (876/1249)",
-      "dataset": "Multi-Agent Comedy Club paired resource",
+      "dataset": "Multi-Agent Comedy Club paired monologue resource",
       "best_system": "Discussion-enabled Multi-Agent Comedy Club"
     },
     {
-      "finding": "Discussion improved the primary Craft/Clarity profile over the no-discussion baseline.",
-      "metric": "mean Δ on Craft/Clarity (Q1–Q6)",
-      "value": "Δ=0.440",
-      "dataset": "Multi-Agent Comedy Club paired resource",
+      "finding": "Discussion improved the two primary aggregate profiles.",
+      "metric": "Mean Δ = Discussion − Baseline",
+      "value": "Craft/Clarity (Q1–Q6) Δ=0.440; Social Response (Q12–Q15) Δ=0.422",
+      "dataset": "Multi-Agent Comedy Club paired monologue resource",
       "best_system": "Discussion-enabled Multi-Agent Comedy Club"
     },
     {
-      "finding": "Discussion improved the primary Social Response profile over the no-discussion baseline.",
-      "metric": "mean Δ on Social Response (Q12–Q15)",
-      "value": "Δ=0.422",
-      "dataset": "Multi-Agent Comedy Club paired resource",
+      "finding": "The largest core amusement gain was on Immediate Amusement.",
+      "metric": "Q1 Immediate Amusement, 1–5 Likert",
+      "value": "Discuss. 2.85; Base 2.33; Δ=0.52; 95% CI [0.44, 0.59]",
+      "dataset": "Multi-Agent Comedy Club paired monologue resource",
       "best_system": "Discussion-enabled Multi-Agent Comedy Club"
     },
     {
-      "finding": "The largest craft/outcome improvements included Immediate Amusement and Justified Landing.",
-      "metric": "Q1 Immediate Amusement; Q4 Justified Landing",
-      "value": "Q1: 2.85 vs 2.33, Δ=0.52, 95% CI [0.44, 0.59]; Q4: 3.12 vs 2.63, Δ=0.49, 95% CI [0.42, 0.56]",
-      "dataset": "Multi-Agent Comedy Club paired resource",
-      "best_system": "Discussion-enabled Multi-Agent Comedy Club"
+      "finding": "Discussion also increased risk-associated style and moral-pressure scores.",
+      "metric": "Q9, Q10, Q11 1–5 Likert deltas",
+      "value": "Q9 Aggressive Δ=0.42 [0.36, 0.49]; Q10 Self-defeating Δ=0.25 [0.20, 0.30]; Q11 Value Judgment Pressure Δ=0.16 [0.12, 0.19]",
+      "dataset": "Multi-Agent Comedy Club paired monologue resource",
+      "best_system": "Discussion-enabled outputs had higher risk-associated scores"
     },
     {
-      "finding": "Discussion also increased risk-associated humor-style and moral-pressure dimensions, especially aggressive humor.",
-      "metric": "Q9 Aggressive; Q10 Self-defeating; Q11 Value Judgment Pressure",
-      "value": "Q9: 2.69 vs 2.26, Δ=0.42, 95% CI [0.36, 0.49]; Q10: 2.18 vs 1.93, Δ=0.25, 95% CI [0.20, 0.30]; Q11: 1.76 vs 1.61, Δ=0.16, 95% CI [0.12, 0.19]",
-      "dataset": "Multi-Agent Comedy Club paired resource",
-      "best_system": "Discussion-enabled Multi-Agent Comedy Club"
+      "finding": "Benefit and Safety showed heterogeneous tradeoffs rather than a single monotonic relationship.",
+      "metric": "Benefit–Safety composite",
+      "value": "Win-win: 57/250 (22.8%); Pareto: 6/250 (2.4%); Spearman ρ = -0.046, p = 0.472",
+      "dataset": "Multi-Agent Comedy Club paired monologue resource",
+      "best_system": null
     },
     {
-      "finding": "Rubric difference scores were substantially more reliable than forced preference judgments.",
+      "finding": "Rubric difference scores were much more reliable than forced preference.",
       "metric": "Inter-rater reliability",
-      "value": "Q0 Fleiss’ κ=0.237 [0.171, 0.299]; Q0 Gwet’s AC1=0.253 [0.188, 0.321]; Δ mean (Q1–Q15) ICC(3,5)=0.710 [0.640, 0.765]",
-      "dataset": "Multi-Agent Comedy Club paired resource",
+      "value": "Q0 Fleiss’ κ=0.237 [0.171, 0.299]; Q0 Gwet’s AC1=0.253 [0.188, 0.321]; Δ mean Q1–Q15 ICC(3,5)=0.710 [0.640, 0.765]",
+      "dataset": "Human evaluation annotations",
       "best_system": null
     }
   ],
   "key_findings": [
-    "Broadcast community discussion, stored and retrieved as social memory, improved GPT-4o-mini stand-up monologues over an otherwise matched no-discussion baseline.",
-    "The gains were strongest on craft, clarity, amusement, memorability, share willingness, and task attraction, not merely on overall forced preference.",
-    "The system’s quality improvements came with tradeoffs: aggressive humor, self-defeating humor, and value-judgment pressure all increased in the discussion condition.",
-    "Round-level and persona-level analyses showed the same qualitative pattern, and one-way ANOVA found no reliable performer-persona effects on Craft, Social response, moral pressure, or HarmShift.",
-    "Only 57/250 instances (22.8%) fell in the above-average Benefit and above-average Safety win-win quadrant, and Benefit and Safety were weakly correlated overall (Spearman ρ = -0.046, p = 0.472)."
+    "A persistent public reception stream, stored as retrievable social memory, improved long-form stand-up monologue generation over a matched no-discussion baseline.",
+    "The discussion condition won 75.6% of instance-level majority preferences and improved both Craft/Clarity (Δ=0.440) and Social Response (Δ=0.422).",
+    "The gains were not driven by a single performer persona; the paper reports no reliable persona effects on Craft, Social response, moral/value-judgment pressure, or HarmShift.",
+    "Quality gains came with safety/style tradeoffs: aggressive humor, self-defeating humor, and value-judgment pressure all increased, and the paper reports craft gains coupled with aggressive humor at ρ = 0.289.",
+    "The multi-dimensional Likert rubric produced more consistent relative judgments than forced-choice preference, with ICC(3,5)=0.710 for Δ mean Q1–Q15 versus Fleiss’ κ=0.237 for Q0.",
+    "Failure modes in the discussion stream appeared infrequent in the paper’s audit: GPT-5.1 labeled 55/5,384 messages as off-topic drift and 98/5,384 as low-information feedback."
   ],
   "limitations": [
-    "All agents in the simulation are driven by GPT-4o-mini, limiting conclusions about other model families and scales.",
-    "The evaluation uses 50 rounds and a fixed topic list; longer horizons and more diverse topic distributions could reveal different feedback dynamics.",
-    "The selected topics may inadvertently favor certain comedic styles or performer personas, potentially biasing comparative results.",
-    "Humor evaluation is subjective and culturally situated, and the annotator pool may not reflect preferences across cultures and age groups.",
-    "Evaluating decontextualized monologues outside the simulated community may not fully capture the social dynamics the sandbox is intended to study."
+    "All agents in the simulation are driven by GPT-4o-mini, limiting conclusions about other model families or scales.",
+    "The evaluation uses 50 rounds and 250 monologues per condition with a fixed topic list, so longer horizons and more diverse topic distributions may reveal different dynamics.",
+    "The fixed topics may inadvertently favor certain comedic styles or performer personas.",
+    "Human humor evaluation is subjective and culturally situated, and the annotator pool may not reflect preferences across cultures and age groups.",
+    "The monologues were evaluated outside their simulated community setting, which may not fully capture the social dynamics the sandbox aims to study.",
+    "The paper does not include human-written stand-up baselines.",
+    "Several reproducibility details are missing, including model snapshots, exact decoding parameters, embedding model, and full inference cost/model-call counts."
   ],
-  "safety_ethics_notes": "The paper notes that stand-up comedy can involve sensitive topics, taboos, and controversial viewpoints; the simulation may generate offensive or inappropriate content. The authors used persona-based guidelines but no additional content filtering, warn that feedback loops could amplify some comedic styles while marginalizing others, informed raters about possible offensive content, allowed voluntary participation and skipping/stopping, collected no personally identifying rater information, and state that released artifacts are for research rather than end-user deployment.",
+  "safety_ethics_notes": "The paper notes that stand-up comedy can involve sensitive topics, social taboos, and controversial viewpoints, and that generated content may be offensive or inappropriate. Persona-based guidelines were used, but no additional content filtering was applied to preserve ecological validity. The authors warn that simulated feedback loops may amplify some comedic styles while marginalizing others, recommend moderation strategies for deployment contexts, release code/configuration under the MIT License for research rather than end-user deployment, and state that raters were warned about possible offensive/sensitive content, participation was voluntary, and no personally identifying rater information was collected or released.",
   "artifacts": {
-    "code_url": null,
+    "code_url": "https://github.com/s-hong46/multi_agent_comedy_club",
     "data_url": null,
-    "other": "The paper states that the sandbox configuration and code will be released under the MIT License, and generated artifacts including paired monologues, reconstructed discussion threads, and event logs will be released under CC BY-NC 4.0; no URLs are provided."
+    "other": "The paper says the sandbox configuration and code were released under the MIT License for research purposes."
   }
 }

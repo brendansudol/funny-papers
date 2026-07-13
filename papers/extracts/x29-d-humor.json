@@ -1,0 +1,452 @@
+{
+  "key": "x29-d-humor",
+  "ref": "Part 6 (dark-humor resource)",
+  "section": "Part 6 - Safety, Harm & Boundaries",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x29-d-humor/x29-d-humor.md",
+  "source_md_sha256": "f56b5bb7cd1bcda474589ec5d35635991f7910381f213fb7acc1421eeb67df55",
+  "source_truncated": false,
+  "title": "D-HUMOR: Dark Humor Understanding via Multimodal Open-ended Reasoning - A Benchmark Dataset and Method",
+  "authors": [
+    "Sai Kartheek Reddy Kasu",
+    "Mohammad Zia Ur Rehman",
+    "Shahid Shafi Dar",
+    "Rishi Bharat Junghare",
+    "Dhanvin Sanjay Namboodiri",
+    "Nagendra Kumar"
+  ],
+  "year": 2025,
+  "venue": "IEEE International Conference on Data Mining (ICDM), 2025",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can dark humor in multimodal memes be detected and categorized when the humor relies on implicit, sensitive, culturally contextual image-text cues?",
+    "Can structured VLM-generated explanations, refined through a Role-Reversal Self-Loop, improve dark humor detection, target identification, and intensity prediction?",
+    "Does fusing OCR text, image features, and reasoning features through a Tri-stream Cross-Reasoning Network outperform text-only, image-only, and zero-shot VLM baselines?"
+  ],
+  "tasks": [
+    "dark humor detection",
+    "target identification",
+    "intensity prediction",
+    "structured humor explanation"
+  ],
+  "humor_domains": [
+    "dark humor",
+    "memes",
+    "sarcasm",
+    "cynicism",
+    "satire",
+    "irony",
+    "offensive humor",
+    "social media humor"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [],
+  "datasets_used": [
+    {
+      "name": "D-HUMOR",
+      "role": "introduced",
+      "size": "4,379 Reddit memes"
+    },
+    {
+      "name": "D-HUMOR",
+      "role": "trained-on",
+      "size": "3,503 memes"
+    },
+    {
+      "name": "D-HUMOR",
+      "role": "evaluated-on",
+      "size": "876 memes"
+    },
+    {
+      "name": "Reddit memes",
+      "role": "source-material",
+      "size": "4,379 multimodal memes"
+    }
+  ],
+  "models_evaluated": [
+    "BERT",
+    "DistilBERT",
+    "Llama-3.2-3b-it",
+    "CLIP",
+    "ViT",
+    "BLIP",
+    "Qwen-2.5-7b-it",
+    "LLaVA-1.6-mistral-7b",
+    "TCRNet"
+  ],
+  "methods_proposed": [
+    {
+      "name": "D-HUMOR dataset",
+      "summary": "A multimodal benchmark of Reddit memes annotated for binary dark humor presence, target category, and three-level intensity. The target categories are gender, mental health, violence, race, disability, and other."
+    },
+    {
+      "name": "Role-Reversal Self-Loop",
+      "summary": "A prompting procedure in which Qwen-2.5-7B first generates a six-part structured explanation and then assumes the perspective of the meme author to critique and refine its own explanation for up to 5 epochs."
+    },
+    {
+      "name": "Tri-stream Cross-Reasoning Network (TCRNet)",
+      "summary": "A multimodal fusion architecture that encodes OCR text, self-refined reasoning, and images, then applies pairwise scaled dot-product attention across text-image, text-reasoning, and image-reasoning streams before classification."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The paper cites Ruch et al. to characterize dark humor as incorporating sarcasm, cynicism, satire, and irony."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The method is motivated by claims that dark humor in memes relies on abstract incongruity between text and visuals and on semantic incongruity or visual-verbal contradictions."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "Three undergraduate annotators were trained using a 100-meme expert-annotated gold-standard seed set and a codebook; annotations were supervised and reviewed by a faculty member and a PhD researcher."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Models were evaluated on dark humor detection, target identification, and intensity prediction using Accuracy, Macro-F1, Weighted-F1, and Pearson correlation for intensity."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "TCRNet achieved the best dark humor detection performance among all evaluated methods.",
+      "metric": "Accuracy / Macro-F1 / Weighted-F1",
+      "value": "75.00% / 73.55 / 74.13",
+      "dataset": "D-HUMOR",
+      "best_system": "TCRNet"
+    },
+    {
+      "finding": "For target identification, the best scores were obtained by Distil-BERT using OCR Text + Structured Explanation with Role-Reversal Prompting.",
+      "metric": "Accuracy / Macro-F1 / Weighted-F1",
+      "value": "66.41 / 62.53 / 66.07",
+      "dataset": "D-HUMOR",
+      "best_system": "Distil-BERT + OCR Text + Structured Explanation"
+    },
+    {
+      "finding": "TCRNet achieved the best intensity prediction results.",
+      "metric": "Accuracy / Macro-F1 / Weighted-F1 / P-Corr.",
+      "value": "62.72 / 49.71 / 60.74 / 38.63",
+      "dataset": "D-HUMOR",
+      "best_system": "TCRNet"
+    },
+    {
+      "finding": "Adding structured explanations to Distil-BERT improved target Macro-F1 over OCR text only.",
+      "metric": "Macro-F1",
+      "value": "55.98 to 62.53",
+      "dataset": "D-HUMOR",
+      "best_system": "Distil-BERT + OCR Text + Structured Explanation"
+    },
+    {
+      "finding": "Removing the explanation modality from TCRNet substantially reduced target identification performance.",
+      "metric": "Macro-F1",
+      "value": "60.54 to 35.11",
+      "dataset": "D-HUMOR",
+      "best_system": "TCRNet ablation without reasoning"
+    },
+    {
+      "finding": "Removing the explanation modality from TCRNet reduced dark humor classification performance.",
+      "metric": "Weighted-F1",
+      "value": "74.13 to 67.31",
+      "dataset": "D-HUMOR",
+      "best_system": "TCRNet ablation without reasoning"
+    }
+  ],
+  "key_findings": [
+    "The D-HUMOR dataset contains 4,379 Reddit memes with OCR text and image content, split into 3,503 training memes and 876 test memes.",
+    "Dark humor labels are relatively balanced: the training set has 1,577 dark humor and 1,926 non-dark humor memes, while the test set has 397 dark humor and 479 non-dark humor memes.",
+    "Target and intensity annotations show that Gender/Sex-Related Topics are the most frequent dark-humor target, with 683 training instances and 161 test instances.",
+    "Text-only models performed better than image-only models for detecting dark humor, but they struggled more on target identification and intensity prediction.",
+    "Zero-shot VLMs showed limited effectiveness without task-specific fine-tuning, even when provided with structured explanations as prompts.",
+    "Structured explanations were most useful for the more implicit reasoning-heavy tasks, and ablation showed especially large drops when the reasoning stream was removed."
+  ],
+  "limitations": [
+    "The paper states that D-HUMOR is skewed toward the Gender/Sex-Related Topics label, likely reflecting the greater availability of such content online.",
+    "The paper notes that there can never be an objective way to distinguish clean humor from dark humor.",
+    "The dataset contains sensitive and potentially offensive content and is restricted to academic and research purposes under a data usage agreement.",
+    "The authors identify future work to expand the dataset with additional target classes and investigate semi-supervised and self-supervised techniques for emerging dark humor trends."
+  ],
+  "safety_ethics_notes": "The paper includes a caution that it contains offensive content. The authors state that the dataset is intended exclusively for academic and research purposes, that public redistribution or unauthorized dissemination is prohibited, and that access requires a data usage agreement. They report excluding personally identifiable information, deleted content, and private content from Reddit collection, and they encouraged annotator breaks and capped annotation volume to reduce fatigue from sensitive content.",
+  "artifacts": {
+    "code_url": "https://github.com/Sai-Kartheek-Reddy/D-Humor-Dark-Humor-Understanding-via-Multimodal-Open-ended-Reasoning",
+    "data_url": "https://github.com/Sai-Kartheek-Reddy/D-Humor-Dark-Humor-Understanding-via-Multimodal-Open-ended-Reasoning",
+    "other": "Dataset access is subject to signing a data usage agreement."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "undergraduate computer science students",
+        "recruitment": "Voluntarily participated with informed consent; granted access to A100 GPU resources as appreciation.",
+        "geography": null,
+        "languages": [],
+        "observations": "Annotated memes across dark-humor presence, target, and intensity after training on a 100-meme expert-annotated seed set; weekly batches of 200 memes, encouraged 10–15 minute breaks after each set of 10 memes, soft cap of 50 memes per day. Reported agreement includes Fleiss' Kappa 70.29 for dark humor, 72.13 for target, and 58.57 for intensity.",
+        "detail": "The paper does not state whether all three annotators labeled every meme, whether they were blind to one another's labels, or the precise final adjudication rule."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "a faculty member and a PhD researcher with expertise in computational humor and harmful content analysis",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Annotated a balanced 100-meme gold-standard seed set; oversaw annotator training, regular check-ins, conflict resolution, and final review to create an adjudicated gold-standard dataset.",
+        "detail": "The paper identifies these supervising researchers by role, not by name, and does not report blinding."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Reddit users whose public meme posts were collected",
+        "recruitment": "Posts containing both an image and accompanying text were retrieved through the Reddit API; deleted, private, and personally identifiable information were excluded according to the paper.",
+        "geography": null,
+        "languages": [],
+        "observations": "Source material for 4,379 multimodal memes after manual duplicate screening.",
+        "detail": "The number of distinct Reddit users, subreddits, collection dates, and user demographics are not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "three undergraduate computer science annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Produced the main annotations for dark-humor yes/no labels, target category, and intensity level after codebook-based training."
+      },
+      {
+        "type": "human-expert",
+        "name": "faculty member and PhD researcher expert team",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Annotated the 100-meme gold-standard seed set, supervised annotation, discussed discrepancies, and reviewed final labels for the adjudicated dataset."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper reports a manual review of an unspecified subset of generated explanations to support the qualitative claim that Role-Reversal improvements concentrated in Narrative Structure, Dark Attributes, and Implied Joke."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Cohen's Kappa, Fleiss' Kappa, Accuracy, Macro-F1, Weighted-F1, Pearson correlation",
+        "role": "primary",
+        "blind": null,
+        "detail": "Agreement metrics quantified annotation consistency; Accuracy, Macro-F1, Weighted-F1, and Pearson correlation determined reported model performance."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Structured explanation generation and Role-Reversal Self-Loop used as reasoning features",
+        "mode": "single-sample",
+        "n": "One initial structured explanation followed by iterative refinement for a maximum of 5 epochs; explanations reportedly stabilize after approximately 3 epochs on average.",
+        "selector": "none",
+        "detail": "No best-of-N candidate generation or external selection is described; the final refined explanation from the self-loop is used."
+      },
+      {
+        "scope": "Prompt-based zero-shot VLM classification, with and without Role-Reversal prompting",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports zero-shot Qwen and LLaVA results but does not report the number of sampled outputs, retries, decoding settings, or any candidate-selection procedure."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "BERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Used as an OCR-text baseline and as a text encoder; specific checkpoint such as base/large/cased/uncased is not reported."
+      },
+      {
+        "name": "S-BERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Used to encode self-refined reasoning; exact Sentence-BERT checkpoint is not reported."
+      },
+      {
+        "name": "Distil-BERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Used as an OCR-text and OCR-plus-structured-explanation baseline; exact checkpoint is not reported."
+      },
+      {
+        "name": "Llama-3.2-3b-it",
+        "version_or_snapshot": "3.2-3b-it",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used as a text-only and OCR-plus-structured-explanation baseline; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "CLIP",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Image-only baseline; exact CLIP variant/checkpoint is not reported."
+      },
+      {
+        "name": "ViT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Image-only baseline and visual feature extractor; exact ViT variant/checkpoint is not reported."
+      },
+      {
+        "name": "BLIP",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Image-only baseline; exact BLIP variant/checkpoint is not reported."
+      },
+      {
+        "name": "Qwen-2.5-7b-it / Qwen2.5-7B-Instruct",
+        "version_or_snapshot": "Qwen2.5-7B-Instruct page cited as accessed 2-June-2025",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for structured explanation generation/refinement and as a prompt-based zero-shot baseline. The paper also describes Qwen-2.5-7B as a Vision-Language Model, but the cited model page is Qwen2.5-7B-Instruct; exact snapshot and inference date are not reported."
+      },
+      {
+        "name": "LLaVA-1.6-mistral-7b",
+        "version_or_snapshot": "1.6-mistral-7b",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used as a prompt-based zero-shot VLM baseline, with and without Role-Reversal prompting; exact checkpoint/snapshot and inference date are not reported."
+      },
+      {
+        "name": "TCRNet",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Proposed Tri-stream Cross-Reasoning Network fusing OCR text, image features, and structured explanations; architecture and hyperparameters are described, but no code commit/version is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Qwen structured explanation generation and Role-Reversal Self-Loop",
+        "calls_per_item": "At least one initial generation plus a refinement loop for a maximum of 5 epochs; average convergence reported at approximately 3 epochs.",
+        "candidates_per_item": "One evolving explanation; no alternative candidates reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Experiments were conducted on Intel(R) Xeon(R) Silver 4316 CPU @ 2.30GHz with 4× NVIDIA A16 GPUs, 16 GB VRAM each, CUDA 12.8, driver 570.133.07, PyTorch GPU acceleration; computations used a single GPU unless otherwise specified.",
+        "detail": "No decoding parameters, output-token limits, or cost are reported."
+      },
+      {
+        "scope": "Encoder-only text models and textual feature extraction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Feature equations report BERT(T) and S-BERT(R) embeddings of shape 197×768.",
+        "sampling_parameters": "Training hyperparameters: 5 epochs, batch size 16, learning rate 0.00002.",
+        "compute_or_cost": "Same local server setup reported for all experiments; no monetary cost reported.",
+        "detail": "Optimizer, random seeds, validation procedure, and inference-time batch/call counts are not reported."
+      },
+      {
+        "scope": "LLMs with QLoRA",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Training hyperparameters: 3 epochs; LoRA rank r=8; LoRA alpha 32; LoRA dropout 0.1; target modules q_proj and v_proj.",
+        "compute_or_cost": "Same local server setup reported for all experiments; no monetary cost reported.",
+        "detail": "The paper does not specify which exact LLM runs used QLoRA beyond listing this model type in the hyperparameter table, nor does it report decoding settings."
+      },
+      {
+        "scope": "Image models",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Training hyperparameters: 5 epochs, batch size 16, learning rate 0.00002.",
+        "compute_or_cost": "Same local server setup reported for all experiments; no monetary cost reported.",
+        "detail": "Image preprocessing details and exact backbone variants are not reported."
+      },
+      {
+        "scope": "TCRNet",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Text, reasoning, and image feature matrices are reported as 197×768; pooled cross-reasoned vectors are concatenated into a 2,304-dimensional representation.",
+        "sampling_parameters": "Training hyperparameters: 5 epochs, batch size 16, learning rate 0.00002, dropout 0.3, 8 attention heads.",
+        "compute_or_cost": "Same local server setup reported for all experiments; no monetary cost reported.",
+        "detail": "No inference-time call count, wall-clock time, random seeds, or statistical uncertainty are reported."
+      },
+      {
+        "scope": "Prompt-based zero-shot VLM evaluations",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Same local server setup reported for all experiments; no monetary cost reported.",
+        "detail": "Prompt templates for the zero-shot classification conditions, parsing rules, retries, and decoding parameters are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Dark humor detection, target identification, and intensity prediction",
+        "present": false,
+        "description": null,
+        "directly_comparable": false,
+        "detail": "Human annotations serve as ground-truth labels and agreement evidence, but no human baseline performance is reported under conditions comparable to model evaluation."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The D-HUMOR benchmark labels are introduced by this paper rather than reused from a legacy public benchmark.",
+        "The authors manually screened duplicates before annotation.",
+        "The evaluation uses a held-out test split of 876 memes separate from the 3,503 training memes."
+      ],
+      "basis": "The benchmark annotations appear newly created, lowering the chance that models saw the exact labeled benchmark. However, all source memes came from public Reddit posts, collection dates and subreddits are not reported, and no decontamination or near-duplicate checks against pretraining data are described. Public Reddit image/text content could plausibly have appeared in the pretraining data of CLIP, BLIP, ViT, LLaVA, Qwen, Llama, or text encoders, so contamination risk remains moderate despite the new labels."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Ground-truth labels were produced by human annotators and supervising researchers; automatic metrics, not LLM judges, determine headline performance. The paper mentions manual review of a subset of explanations but gives no quantitative validation details.",
+      "detail": "LLMs/VLMs are used as evaluated systems and as generators of structured reasoning features, not as evaluators or scoring judges for the reported benchmark results."
+    },
+    "reporting_gaps": [
+      "The paper gives inconsistent total dataset size: most sections and tables state 4,379 memes, while the conclusion states 4,397 Reddit memes.",
+      "Reddit collection dates, subreddits, query terms, filtering criteria, and source-post time range are not reported.",
+      "Languages of memes/OCR text are not reported.",
+      "The OCR system/tool, OCR quality controls, and text preprocessing details are not reported.",
+      "The train/test split procedure, random seed, stratification method, and validation split are not reported.",
+      "It is not specified whether all three undergraduate annotators labeled every meme, nor the exact adjudication/voting rule used to produce final labels.",
+      "Annotator blinding is not reported.",
+      "Exact checkpoints/snapshots are missing for BERT, S-BERT, Distil-BERT, Llama, CLIP, ViT, BLIP, Qwen, and LLaVA; model inference dates are not reported.",
+      "The Qwen model identity is ambiguous: the text describes a Qwen-2.5-7B Vision-Language Model, while the citation is to Qwen2.5-7B-Instruct.",
+      "Initial structured-explanation prompt and zero-shot classification prompts are not fully reported; only the Role-Reversal prompt template is shown.",
+      "Generation decoding parameters such as temperature, top-p/top-k, max tokens, stop criteria, and retry rules are not reported.",
+      "The number and selection criteria for the manually reviewed subset of generated explanations are not reported.",
+      "No decontamination test or pretraining-overlap analysis is reported for public Reddit source content.",
+      "No human baseline performance under matched evaluation conditions is reported.",
+      "No confidence intervals, significance tests, or variance over random seeds are reported.",
+      "No monetary cost, wall-clock training time, or inference latency is reported."
+    ]
+  }
+}

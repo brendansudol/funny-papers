@@ -1,0 +1,387 @@
+{
+  "key": "x23-eigentaste-jester",
+  "ref": "Part 4 (audience-modeling anchor)",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x23-eigentaste-jester/x23-eigentaste-jester.md",
+  "source_md_sha256": "d88ecc120220fffd736c89683edc08836af7f0f6ac71f1bd53e9006bba7d17b0",
+  "source_truncated": false,
+  "title": "Eigentaste: A Constant Time Collaborative Filtering Algorithm",
+  "authors": [
+    "Ken Goldberg",
+    "Theresa Roeder",
+    "Dhruv Gupta",
+    "Chris Perkins"
+  ],
+  "year": 2000,
+  "venue": "UCB Electronics Research Laboratory Technical Report M00/41",
+  "paper_types": [
+    "method",
+    "dataset",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can an automated collaborative filtering system recommend funny jokes when the criteria for humor are difficult to formalize?",
+    "Can Eigentaste provide accurate recommendations in online time independent of the number of users in the database?",
+    "How do Eigentaste, POP, and nearest-neighbor collaborative filtering algorithms compare on the Jester joke-rating data in accuracy and efficiency?"
+  ],
+  "tasks": [
+    "joke recommendation",
+    "joke rating prediction"
+  ],
+  "humor_domains": [
+    "jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [],
+  "datasets_used": [
+    {
+      "name": "Jester joke ratings",
+      "role": "introduced",
+      "size": "approximately 2,500,000 ratings from 57,000 users; 10 jokes in the gauge set and 90 non-gauge jokes; average number of ratings per user is 46"
+    },
+    {
+      "name": "Jester joke ratings",
+      "role": "trained-on",
+      "size": "18,000 random users from the sample, randomly divided into training and test sets"
+    },
+    {
+      "name": "Jester joke ratings",
+      "role": "evaluated-on",
+      "size": "18,000 random users from the sample, randomly divided into training and test sets"
+    },
+    {
+      "name": "initial Jester jokes from friends and newsgroups",
+      "role": "source-material",
+      "size": "initial set of 40 jokes"
+    }
+  ],
+  "models_evaluated": [
+    "POP",
+    "1-NN",
+    "q-NN",
+    "80-NN",
+    "Eigentaste"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Eigentaste",
+      "summary": "A collaborative filtering algorithm that asks every user to rate a common gauge set of universal queries, applies PCA to the resulting dense ratings submatrix, clusters users offline in a low-dimensional eigenspace, and serves recommendations by online projection plus lookup."
+    },
+    {
+      "name": "recursive rectangular clustering",
+      "summary": "A clustering method for the two-dimensional eigenplane that recursively bisects rectangular cells, with smaller cells near the origin, and stores per-cluster mean ratings for non-gauge items as recommendation lookup tables."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "cited-in-passing",
+      "detail": "The paper mentions psychological studies of humor and Ziv's categorization of humor taste by social, emotional, and intellectual characteristics, but states that the approach avoids such semantic categories and treats each user and joke as a black box."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Normalized Mean Absolute Error (NMAE), defined as MAE divided by the raw rating range; Jester ratings use the range [-10,+10]."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Computational complexity and measured running time for offline training and online recommendation, including per-user online times."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "POP, which predicts every joke from its global average, yielded NMAE of 0.203.",
+      "metric": "NMAE",
+      "value": "0.203",
+      "dataset": "Jester joke ratings",
+      "best_system": "POP"
+    },
+    {
+      "finding": "Using only one nearest neighbor was less accurate than POP, with normalized MAE reported as 0.238 in the results text.",
+      "metric": "NMAE",
+      "value": "0.238",
+      "dataset": "Jester joke ratings",
+      "best_system": "1-NN"
+    },
+    {
+      "finding": "The lowest nearest-neighbor error was NMAE 0.187 for approximately 80 nearest neighbors.",
+      "metric": "NMAE",
+      "value": "0.187",
+      "dataset": "Jester joke ratings",
+      "best_system": "80-NN"
+    },
+    {
+      "finding": "Eigentaste matched the best nearest-neighbor accuracy on the Jester data.",
+      "metric": "NMAE",
+      "value": "0.187",
+      "dataset": "Jester joke ratings",
+      "best_system": "Eigentaste"
+    },
+    {
+      "finding": "For Jester, Eigentaste's online projection and lookup took 3.22 msec per user, while the paper reports 438 msec to find the nearest neighbor and generate predictions for one test user.",
+      "metric": "online time per user",
+      "value": "3.22 msec per user; 438 msec",
+      "dataset": "Jester joke ratings",
+      "best_system": "Eigentaste"
+    },
+    {
+      "finding": "For 8853 training set users, Eigentaste's offline work took 29.59 seconds total.",
+      "metric": "offline time",
+      "value": "29.59 seconds",
+      "dataset": "Jester joke ratings",
+      "best_system": "Eigentaste"
+    }
+  ],
+  "key_findings": [
+    "Eigentaste achieved the same NMAE as the best reported nearest-neighbor setting, 0.187, while requiring online time independent of the number of users in the database.",
+    "POP was a strong but non-personalized baseline, with NMAE 0.203 despite ignoring differences between users.",
+    "1-NN was worse than POP on this data, with normalized MAE reported as 0.238, showing that too few neighbors made recommendations susceptible to noise.",
+    "The first two eigenvectors of the Jester gauge-set ratings accounted for nearly 50% of all variance and were used to project users onto an eigenplane.",
+    "The paper argues that universal queries address sparseness by making the gauge-set ratings matrix dense, which enables PCA and rapid profiling."
+  ],
+  "limitations": [
+    "The paper notes that universal queries can be argued to be less effective than user-selected queries, and their effectiveness depends on the domain.",
+    "The choice of which items to include in the gauge set is left as a subject for future work.",
+    "The paper reports that more research is needed on continuous rating scales and their user-interface effects.",
+    "The discussion states that random-baseline analyses suggest room for improved accuracy for all current collaborative filtering algorithms.",
+    "The humor implementation treats users and jokes as black boxes and avoids semantic categories such as social, emotional, or intellectual humor characteristics."
+  ],
+  "safety_ethics_notes": "The authors state that the initial 40 jokes were chosen from friends and newsgroups while doing their best to avoid highly offensive jokes; the Jester Dataset is described as including anonymous ratings.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Jester is online at http://eigentaste.berkeley.edu; the Jester Dataset is described as available upon request by emailing the first author."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Friends and newsgroup contributors whose jokes were used as source material",
+        "recruitment": "Authors selected an initial set of jokes from friends and newsgroups, stating they did their best to avoid highly offensive jokes.",
+        "geography": null,
+        "languages": [],
+        "observations": "Initial set of 40 jokes; this is source-material count, not a participant count.",
+        "detail": "No counts or demographics are reported for the people who originated the jokes."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": "80",
+        "population": "Friends and students",
+        "recruitment": "Authors asked them to rate all 40 initial jokes by visiting the website.",
+        "geography": null,
+        "languages": [],
+        "observations": "Each was asked to rate all 40 jokes; these ratings were used to select 20 jokes for the first gauge set based on correlations and variances.",
+        "detail": "This was the bootstrapping stage before Jester 1.0."
+      },
+      {
+        "role": "live-audience",
+        "participant_count": "around 150 registered users by the end of November 1998; number of people behind later page requests not reported",
+        "population": "Internet users visiting Jester 1.0",
+        "recruitment": "The site was registered with search engines; a Wired News story and syndication to sites such as Yahoo, Excite, and Netscape News produced a traffic spike.",
+        "geography": null,
+        "languages": [],
+        "observations": "41,350 page requests after the Wired News feature; page requests are not a participant count.",
+        "detail": "This live deployment motivated Eigentaste after Jester 1.0, a single-nearest-neighbor system, was overwhelmed and crashed."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": "approximately 57,000 users",
+        "population": "Internet users of the Jester online joke recommender",
+        "recruitment": "Users interacted with the online Jester system; no demographic recruitment details are reported.",
+        "geography": null,
+        "languages": [],
+        "observations": "Approximately 2,500,000 ratings; average 46 ratings per user; Jester 2.0 had 10 gauge-set jokes and 90 non-gauge jokes.",
+        "detail": "Ratings were real-valued on a continuous HTML image-map bar over [-10,+10], with about 200 distinguishable levels. The paper describes the dataset as anonymous and available upon request."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "18,000 random users from the Jester sample",
+        "population": "Subset of anonymous Jester users",
+        "recruitment": "Randomly sampled by the authors from the larger Jester ratings sample, then randomly divided into disjoint training and test sets.",
+        "geography": null,
+        "languages": [],
+        "observations": "Their ratings were used for offline training and testing of POP, nearest-neighbor, and Eigentaste algorithms; timing discussion states 8,853 training-set users, but exact test-set size is not reported.",
+        "detail": "The training set was used to compute predictions or model quantities; the test set was used to evaluate accuracy and efficiency."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Jester users",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Users rated jokes on the continuous rating bar. These human ratings served as observed labels/ground truth for training and test-set prediction error."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Normalized Mean Absolute Error (NMAE)",
+        "role": "primary",
+        "blind": null,
+        "detail": "NMAE is MAE divided by the raw rating range; the Jester range is [-10,+10]. It determined the reported accuracy comparisons."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Computational complexity and running time",
+        "role": "primary",
+        "blind": null,
+        "detail": "The paper reports asymptotic online/offline complexity and measured times, including nearest-neighbor scanning/prediction time and Eigentaste offline and online times."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": false,
+        "detail": "Authors selected the initial joke set and selected gauge-set jokes using correlations and variances from the bootstrapping ratings. This affected the system design but was not a separate human evaluation of algorithm outputs."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "All experiments in the paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates collaborative-filtering prediction and recommendation over a fixed joke corpus. It does not generate new jokes or sample multiple generated outputs."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "POP global-mean recommender",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Predicts every joke from its global average computed on the training set. No software version, hardware, or run date is reported."
+      },
+      {
+        "name": "1-NN single-nearest-neighbor recommender",
+        "version_or_snapshot": "Jester 1.0 used a naive single-nearest-neighbor recommender; no separate software version for the offline evaluation is reported",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "For a test user, the prediction was the actual rating of the nearest neighbor in the training set. Text reports NMAE 0.238; discussion table reports 0.237."
+      },
+      {
+        "name": "q-NN / 80-NN nearest-neighbor recommender",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "The paper varied q; q-NN predictions were the unweighted average of q nearest neighbors' ratings. Lowest reported NMAE was 0.187 at approximately 80 neighbors. No software version or run date is reported."
+      },
+      {
+        "name": "Weighted nearest-neighbor variant",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "The paper states that a weighted nearest-neighbor algorithm was implemented using a function of Euclidean distance, w(i,p)=d(i,q+1)-d(i,p), but does not report separate accuracy results for this variant."
+      },
+      {
+        "name": "Eigentaste",
+        "version_or_snapshot": "Implemented in Jester 2.0, released March 1, 1999",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Uses universal-query gauge ratings, PCA, projection to the first two principal components for the Jester evaluation, offline clustering, and online cluster lookup. No code version, hardware, or exact evaluation run date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "User profiling and item set in deployed Jester systems",
+        "calls_per_item": null,
+        "candidates_per_item": "Jester 1.0: m=70 jokes, with new users rating 20 gauge jokes plus 5 randomly selected non-gauge jokes before recommendations. Jester 2.0: m=100 jokes, with 10 gauge jokes and 90 non-gauge jokes.",
+        "token_budget": null,
+        "sampling_parameters": "Jester 1.0 used 5 randomly selected non-gauge jokes to seed future recommendations; randomization details are not reported.",
+        "compute_or_cost": null,
+        "detail": "Jester used an HTML client and CGI scripts written in C. Users rated each presented joke before the next joke was shown."
+      },
+      {
+        "scope": "Main offline accuracy evaluation split",
+        "calls_per_item": null,
+        "candidates_per_item": "90 non-gauge jokes in Jester 2.0; exact number of evaluated user-joke predictions is not reported.",
+        "token_budget": null,
+        "sampling_parameters": "18,000 random users from the Jester sample were randomly divided into disjoint training and test sets. No random seed, exact split sizes for NMAE, or repeated-split protocol is reported.",
+        "compute_or_cost": null,
+        "detail": "Training-set data were used to compute predictions for each algorithm; test-set ratings were used to evaluate accuracy and efficiency."
+      },
+      {
+        "scope": "POP algorithm",
+        "calls_per_item": "One global-mean prediction per evaluated user-joke rating; exact number of evaluated predictions not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Uses training-set global average for each joke; no sampling parameters.",
+        "compute_or_cost": "Offline complexity O(nm); online complexity O(1). No measured online time per user is reported in the table.",
+        "detail": "Reported NMAE is 0.203."
+      },
+      {
+        "scope": "Nearest-neighbor algorithms",
+        "calls_per_item": "For each test user, the implementation traversed all training-set users to find nearest neighbors.",
+        "candidates_per_item": "q nearest neighbors selected from the training set; figures show q ranges including 1 to 150 and 1 to 1700, with the best result near q=80. Timing section reports 8,853 training-set users scanned.",
+        "token_budget": null,
+        "sampling_parameters": "1-NN used the actual rating of the nearest training-set neighbor. q-NN used the unweighted average of q nearest neighbors' ratings. A weighted Euclidean-distance variant is defined but not separately reported.",
+        "compute_or_cost": "Section 6 reports 31.64 seconds to scan all 8,853 training-set users, and 438 msec to find the nearest neighbor and generate predictions for one test user. The discussion table reports 350 msec online time per user for 1-NN and 80-NN. Complexity is described as O(n) in text and O(nk) in the table.",
+        "detail": "Reported NMAE values include 0.238 in text for 1-NN, 0.224 for q=2, and 0.187 for approximately 80-NN."
+      },
+      {
+        "scope": "Eigentaste algorithm on Jester",
+        "calls_per_item": "For a new user, collect 10 gauge-set ratings, project the 10-dimensional vector, assign a cluster, and perform a lookup.",
+        "candidates_per_item": "Recommendations are from the 90 non-gauge jokes, sorted by cluster mean rating; exact number displayed per recommendation episode is not reported.",
+        "token_budget": null,
+        "sampling_parameters": "Uses k=10 gauge items and v=2 principal components for the reported Jester evaluation. Recursive rectangular clustering is described; Figure 2 illustrates 4 levels / 40 clusters, but the paper does not unambiguously state all clustering hyperparameters for the reported NMAE.",
+        "compute_or_cost": "Offline complexity O(k^2 n). For 8,853 training-set users: 27.85 seconds to scan users, 444 msec to generate eigenvectors/eigenvalues, 298 msec to generate clusters and predictions for each cluster, 29.59 seconds total. Online complexity O(k); projection and recommendation lookup took 3.22 msec per user.",
+        "detail": "Reported NMAE is 0.187, matching the best nearest-neighbor result while reducing online time."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Rating prediction / joke recommendation accuracy",
+        "present": false,
+        "description": "No human recommender or human rating-prediction baseline is evaluated. Human users provide the ratings used as labels, not a competing baseline.",
+        "directly_comparable": false,
+        "detail": "The paper compares algorithms against POP, nearest-neighbor methods, Eigentaste, and analytic/random prediction baselines, but not against human predictors under matched conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The paper states that the 18,000-user experimental sample was randomly divided into two disjoint sets: training and test.",
+        "Training-set data were used to compute predictions or model parameters, while test-set data were used to evaluate accuracy and efficiency.",
+        "The main dataset was collected by the authors through Jester rather than being a legacy public benchmark for pretrained models."
+      ],
+      "basis": "This is a classical collaborative-filtering train/test evaluation, not an evaluation of pretrained LLMs or generative models. Public-benchmark memorization is therefore not the central risk. The stated disjoint user split lowers leakage risk, but the paper does not give random seeds, exact test-set size, repeated-split checks, or explicit leakage/decontamination analysis."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLM judges or LLM-based metrics are used. Headline conclusions rely on human joke ratings, NMAE, and computational timing/complexity."
+    },
+    "reporting_gaps": [
+      "Demographics, geography, and language(s) of Jester users, friends/students, and joke contributors are not reported.",
+      "Exact test-set size for the NMAE experiments is not reported; the timing section gives 8,853 training-set users, but the paper does not explicitly give the corresponding test count.",
+      "Random seed, number of random splits, and whether results were averaged across splits are not reported.",
+      "The exact number of evaluated user-joke predictions/test ratings used in each NMAE calculation is not reported.",
+      "No confidence intervals, standard errors, or statistical significance tests are reported for NMAE differences.",
+      "Nearest-neighbor implementation details are incomplete: the paper reviews Pearson correlation, states Jester 1.0 used Euclidean space, defines a Euclidean weighted variant, and reports unweighted q-NN results, but the exact distance setup for all reported nearest-neighbor curves is not fully specified.",
+      "The weighted nearest-neighbor variant is described as implemented, but separate results are not reported.",
+      "Eigentaste clustering hyperparameters for the reported NMAE are not fully specified; Figure 2 illustrates 4 recursion levels / 40 clusters, but the paper does not clearly state this is the exact setting for all reported results.",
+      "Hardware/software environment for timing measurements is not reported, limiting interpretation of millisecond/second timings.",
+      "There are internal inconsistencies: 1-NN NMAE is 0.238 in the text but 0.237 in the discussion table; nearest-neighbor online time is 438 msec in Section 6 but 350 msec in the discussion table.",
+      "No code release URL is reported; the Jester dataset is described as available upon request by email.",
+      "Criteria for avoiding highly offensive jokes are not formalized, and the paper does not report annotator review for offensiveness."
+    ]
+  }
+}

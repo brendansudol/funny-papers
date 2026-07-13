@@ -194,5 +194,299 @@
     "code_url": null,
     "data_url": "https://zenodo.org/record/3969509#.XyWh6fhKh24",
     "other": "Competition page: https://competitions.codalab.org/competitions/20970; FunLines dataset: https://cs.rochester.edu/u/nhossain/funlines.html; FunLines game website: https://funlines.co"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Qualified Amazon Mechanical Turk workers screened to find expert headline editors for the Humicroedit dataset.",
+        "recruitment": "Amazon Mechanical Turk qualification phase; exact screening criteria not given in this paper.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "About 5,000 original headlines, each with three modified versions, yielding 15,095 edited headlines. Editors applied a single-word micro-edit replacing a verb, noun, or entity.",
+        "detail": "The paper states that original headlines came from Reddit r/worldnews and r/politics posts of professional-news headlines, published 01/2017-05/2018, from 25 major English news sources."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "A separate set of qualified Amazon Mechanical Turk human judges of humor for the Humicroedit dataset.",
+        "recruitment": "Amazon Mechanical Turk qualification phase; exact screening criteria not given in this paper.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Five judges were asked to rate the funniness of each edited headline on a 0-3 scale; the funniness label is the mean of the five ratings.",
+        "detail": "The rating scale is 0 = Not funny, 1 = Slightly funny, 2 = Moderately funny, 3 = Funny. The paper reports ratings/labels, not the number of distinct judges."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "FunLines headline contributors or players; described as a competition hosted to collect humorous headlines at very low cost.",
+        "recruitment": "FunLines competition/game; details not described in this paper.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "8,248 annotated FunLines headlines were provided as additional training data; FunLines also included sports, entertainment, and technology news categories, with headlines published 05/2019-01/2020.",
+        "detail": "The paper says the Humicroedit and FunLines collection approaches are mostly similar, but does not report contributor counts here."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "FunLines humor judges, explicitly described as a different set of judges from the main task dataset.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "8,248 FunLines headlines were annotated; the paper warns that FunLines and task-dataset rating scales may not be calibrated.",
+        "detail": "The paper does not report the number of FunLines judges, ratings per item, or exact annotation protocol in this overview."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "More than 300 participants signed up; 86 teams participated in the development phase; 48 teams participated in Subtask 1 and 31 teams in Subtask 2 during the evaluation phase.",
+        "population": "SemEval-2020 Task 7 participating teams/systems.",
+        "recruitment": "Open shared-task participation via the SemEval/CodaLab task.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Official results ranked 48 Subtask 1 submissions by RMSE and 31 Subtask 2 submissions by accuracy, with reward also reported for Subtask 2.",
+        "detail": "The evaluation-phase counts are team counts, not counts of individual human participants."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Qualified Amazon Mechanical Turk humor judges",
+        "role": "primary",
+        "blind": null,
+        "detail": "Their 0-3 ratings determine the ground-truth mean funniness score for each edited headline. Subtask 2 labels are derived by comparing the two edited headlines' mean funniness ratings, ignoring equal-ground-truth-funniness cases."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "RMSE",
+        "role": "primary",
+        "blind": null,
+        "detail": "Subtask 1 systems are ranked by root mean squared error between system estimates and the mean of the five human funniness ratings."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Classification accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Subtask 2 systems are ranked by accuracy in predicting which edited version of the same original headline is funnier."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Reward",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper also reports a Subtask 2 reward metric that gives larger rewards or penalties when the absolute funniness-rating gap between the two edited headlines is larger."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "GloVe cosine-distance incongruity measure",
+        "role": "secondary",
+        "blind": null,
+        "detail": "For analysis, the paper computes distances between the original word and replacement words using GloVe vectors and correlates the distance difference with the ground-truth pair label."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The authors perform qualitative analysis of systematic errors and edge cases, attributing failures to world knowledge, cultural references, sarcasm, negative sentiment, common sense, and tension relief."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "AI/model text generation",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The shared task evaluates humor rating and pairwise ranking systems; participating systems output scores or labels, not generated headlines. The edited headlines in the dataset were human-created by MTurk/FunLines contributors."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "BASELINE benchmark",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Defined as assigning the training-set mean rating for Subtask 1 or the training-set majority label for Subtask 2."
+      },
+      {
+        "name": "CBOW benchmark using GloVe",
+        "version_or_snapshot": "Pretrained GloVe word vectors with 300-dimensional embeddings and a 2.2M-word dictionary",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Table 3 reports variants using CONTEXT, ORIG, FREEZE, FT, and/or FUNLINES; no exact GloVe release or training code version is stated."
+      },
+      {
+        "name": "BERT benchmark",
+        "version_or_snapshot": "BERT base model embeddings",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports benchmark variants using BERT embeddings, with feature-extraction or fine-tuning settings; no checkpoint identifier or software version is stated."
+      },
+      {
+        "name": "RoBERTa benchmark",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper reports RoBERTa benchmark variants but does not state base/large size, checkpoint, or software version."
+      },
+      {
+        "name": "Official submitted systems",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper evaluates 48 Subtask 1 and 31 Subtask 2 submitted systems and lists team rankings; it summarizes only selected systems and does not give complete model provenance for every submission."
+      },
+      {
+        "name": "Hitachi system",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Winning system; described as an ensemble using BERT, GPT-2, RoBERTa, XLNet, Transformer-XL, and XLM. The text also states a total of 700 PLMs as '7 PLMs × 20 hyperparameters × 5 folds,' creating an unresolved mismatch with the six named PLM families."
+      },
+      {
+        "name": "Amobee system",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Second-place system; described as training 30 instances of BERT, RoBERTa, and XLNet and combining them into a 90-model ensemble."
+      },
+      {
+        "name": "YNU-HPCC system",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Third-place system; used edited headlines only, encoded with FastText, Word2Vec, ELMo, and BERT variants, then trained BiGRU models and an XGBoost regressor ensemble."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Official Subtask 1 evaluation",
+        "calls_per_item": "One real-valued funniness estimate per edited headline submission item.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports 3,025 Subtask 1 test items and 48 participating teams; no per-model inference calls, runtime, hardware, or cost are reported."
+      },
+      {
+        "scope": "Official Subtask 2 evaluation",
+        "calls_per_item": "One predicted pair label per headline-pair submission item; the paper notes that most systems instead scored each of the two edited headlines with a Subtask 1 model and selected the higher score.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports 2,961 Subtask 2 test items and 31 participating teams. It also notes possible predictions included 'headline 1 is funnier,' 'headline 2 is funnier,' and 'both headlines have equal funniness,' but no inference-budget details are given."
+      },
+      {
+        "scope": "Table 3 benchmark setup",
+        "calls_per_item": "For Subtask 2, benchmark results were obtained by using the model trained for Subtask 1 to assign funniness ratings to both edited versions and choosing the higher-scoring version.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Benchmarks include BASELINE, CBOW/GloVe, BERT, and RoBERTa variants with CONTEXT, ORIG, FREEZE, FT, and/or FUNLINES. Hyperparameters, random seeds, hardware, runtime, and cost are not reported."
+      },
+      {
+        "scope": "Hitachi system",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Fine-tuned 50 instances per PLM, each with a unique hyperparameter setting; after 5-fold cross-validation selected 20 best-performing settings per PLM; combined predictions with Ridge regression.",
+        "compute_or_cost": null,
+        "detail": "The paper states a total of 700 PLMs, written as '7 PLMs × 20 hyperparameters × 5 folds,' and says Hitachi used FunLines data. Exact hyperparameters, token limits, hardware, runtime, and cost are not reported."
+      },
+      {
+        "scope": "Amobee system",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Trained 30 instances of BERT, RoBERTa, and XLNet, combined into an ensemble of 90 models.",
+        "compute_or_cost": null,
+        "detail": "No exact checkpoints, hyperparameter ranges, hardware, runtime, or cost are reported in this overview."
+      },
+      {
+        "scope": "YNU-HPCC system",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Used 11 encodings: four FastText, two Word2Vec, four BERT, and one ELMo; trained a bidirectional GRU for each encoding; concatenated GRU predictions and fed them to an XGBoost regressor.",
+        "compute_or_cost": null,
+        "detail": "No exact embedding/model versions, GRU/XGBoost hyperparameters, hardware, runtime, or cost are reported in this overview."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Subtask 1 funniness regression",
+        "present": false,
+        "description": "The mean of five human ratings is used as ground truth, but the paper does not report a separate human predictor, human-vs-human RMSE baseline, or held-out human baseline under matched conditions.",
+        "directly_comparable": false,
+        "detail": "Reported baselines are automatic/statistical or model benchmarks, not human baselines."
+      },
+      {
+        "scope": "Subtask 2 pairwise funnier-headline classification",
+        "present": false,
+        "description": "The pairwise ground truth is derived from human mean funniness ratings, but the paper does not report independent human pairwise decisions under the same conditions as systems.",
+        "directly_comparable": false,
+        "detail": "The paper discusses judge disagreement for examples and says larger human funniness gaps make system ranking easier, but this is not a direct human baseline."
+      },
+      {
+        "scope": "BASELINE benchmark",
+        "present": false,
+        "description": "BASELINE assigns the training-set mean rating or majority label; it is not a human baseline.",
+        "directly_comparable": false,
+        "detail": "It is included in official results tables as an automatic benchmark."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The task uses train/dev/test splits and places all edited versions of the same original headline in exactly one split, reducing near-duplicate original-headline leakage across partitions.",
+        "Official evaluation uses separate test sets: 3,025 items for Subtask 1 and 2,961 items for Subtask 2.",
+        "The labels are human funniness ratings of task-specific micro-edits rather than ordinary news headline labels."
+      ],
+      "basis": "Conservative assessment: the paper explicitly mitigates split leakage by grouping all edits of an original headline into one partition, but the dataset is the Humicroedit dataset described in prior 2019 work and the source news/Reddit headlines were public; the supplied text does not state whether the full labeled Humicroedit data or eventual test labels were inaccessible to participants before evaluation. It also does not test whether pretrained language-model corpora contained source headlines or edited examples. Because this is a supervised shared task with task-specific human labels and split controls, the risk is not assessed as high, but the prior-dataset/public-source uncertainty keeps it above low."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Ground truth comes from human crowd ratings; official system results are computed with deterministic metrics against those labels.",
+      "detail": "No LLM is used as an evaluator or metric. GPT-2 and other pretrained language models appear as participant/benchmark predictors, not as judges."
+    },
+    "reporting_gaps": [
+      "The paper does not report the number of distinct MTurk editors or judges; it reports five judges per edited headline, which is an observation/ratings design fact, not a participant count.",
+      "MTurk worker geography, demographics, native-language status, compensation, and detailed qualification criteria are not reported in this overview.",
+      "FunLines contributor counts, judge counts, ratings per item, and full annotation protocol are not reported; the paper only notes that FunLines used a different set of judges and may be uncalibrated with the main task dataset.",
+      "The paper does not state whether the full Humicroedit labels were public before the SemEval evaluation or whether participants were prevented from using previously released labeled data.",
+      "No decontamination or memorization checks are reported for pretrained language models with respect to public source news headlines, Reddit posts, or the edited headline dataset.",
+      "Exact versions/checkpoints/snapshots for BERT, RoBERTa, GPT-2, XLNet, Transformer-XL, XLM, ELMo, Word2Vec, FastText, and GloVe are not reported; inference dates are not reported.",
+      "Model access mode, software versions, random seeds, detailed hyperparameters, hardware, runtime, and cost are not reported for the benchmarks or most participating systems.",
+      "The Hitachi description lists six named PLM families but states a calculation using seven PLMs; the overview does not resolve this discrepancy.",
+      "No token budgets or sampling parameters are reported; the systems are primarily discriminative/scoring systems rather than text-generation systems.",
+      "No independent human baseline, human-vs-human RMSE/accuracy, or aggregate inter-annotator agreement statistic is reported in this paper, beyond example-level standard deviations and qualitative comments about judge disagreement."
+    ]
   }
 }

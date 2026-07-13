@@ -1,0 +1,464 @@
+{
+  "key": "x38-multipun",
+  "ref": "Part 3 (MultiPun)",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x38-multipun/x38-multipun.md",
+  "source_md_sha256": "c6870929b691ac6ecc21e24b12c2e8bc74e9fac80698acac9fed5b311075ab48",
+  "source_truncated": false,
+  "title": "“I See What You Did There”: Can Large Vision-Language Models Understand Multimodal Puns?",
+  "authors": [
+    "Naen Xu",
+    "Jiayi Sheng",
+    "Changjiang Li",
+    "Chunyi Zhou",
+    "Yuyuan Li",
+    "Tianyu Du",
+    "Jun Wang",
+    "Zhihui Fu",
+    "Jinbao Li",
+    "Shouling Ji"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 9786–9805",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "RQ1 – How effectively can VLMs recognize multimodal puns against non-puns?",
+    "RQ2 – To what extent can VLMs explain puns?",
+    "RQ3 – How can we enhance VLMs’ understanding of puns?"
+  ],
+  "tasks": [
+    "multimodal pun detection",
+    "multimodal pun localization",
+    "multimodal pun explanation",
+    "multimodal pun recognition",
+    "multimodal pun sample generation"
+  ],
+  "humor_domains": [
+    "multimodal puns",
+    "homophonic puns",
+    "homographic puns",
+    "visual puns"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "MultiPun",
+      "role": "introduced",
+      "size": "445 puns and 890 non-puns; 1,335 total samples"
+    },
+    {
+      "name": "MultiPun",
+      "role": "evaluated-on",
+      "size": "445 positive pun instances and 890 negative samples"
+    },
+    {
+      "name": "MultiPun",
+      "role": "trained-on",
+      "size": "666 training samples for Pun-Tuning; 669 held-out test samples"
+    },
+    {
+      "name": "CMU Pronouncing Dictionary",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "WordNet",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-5.1",
+    "GPT-4o",
+    "Gemini-3-Pro",
+    "Claude Sonnet 4.5",
+    "Qwen3-VL-8B-Instruct",
+    "Qwen3-VL-30B-A3B-Instruct",
+    "LLaVA-v1.6-Vicuna-13B",
+    "Llama-4-Scout-17B",
+    "GLM-4.1V-9B-Thinking",
+    "Qwen3-VL-8B-Thinking",
+    "Qwen3-VL-30B-A3B-Thinking"
+  ],
+  "methods_proposed": [
+    {
+      "name": "MULTIPUN construction pipeline",
+      "summary": "A pipeline that generates homophonic and homographic multimodal pun tuples from CMU Pronouncing Dictionary and WordNet, uses GPT-4o to generate captions, image descriptions, and interpretations, and uses GPT-image-1 to create images. It adds adversarial non-pun distractors through Explicative Substitution and Random Substitution, followed by diversity filtering and human verification."
+    },
+    {
+      "name": "Biased-prompt evaluation suite",
+      "summary": "A three-task evaluation suite for detection, localization, and explanation that asks each question in both biased-to-pun and biased-to-non-pun forms. The design is intended to separate actual pun understanding from affirmative or prompt-induced bias."
+    },
+    {
+      "name": "Pun-CoT",
+      "summary": "A prompt-level method that enforces three-stage verification: visual grounding, lexical anchoring, and cross-modal verification. It is designed to prevent pun keyword hallucination, phonetic hallucination, semantic hallucination, and visual object hallucination."
+    },
+    {
+      "name": "Pun-Tuning",
+      "summary": "A model-level fine-tuning approach using MULTIPUN positive and negative samples, high-quality responses, and both biased-to-pun and biased-to-non-pun prompts. It targets over-interpretation, imprecise explanations, and prompt sensitivity."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes a linguistic taxonomy of puns into homophonic puns and homographic puns, with a multimodal pun tuple P=<w_p,w_a,S_p,S_a> representing the caption word, alternative word, literal visual sense, and figurative/contextual sense."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Pun recognition is evaluated with TPR, TNR, F1-score, changes in TPR/TNR under prompt bias shifts, and Cohen’s Kappa."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Pun component verification uses mention ratio for ground-truth pun word w_p and alternative word w_a in localization and explanation outputs."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "An advanced LLM judge performs pairwise comparisons between VLM-generated explanations and ground-truth explanations, labeling each as Win, Tie, or Loss."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Three graduate-student annotators verify generated positive and negative samples for image quality, visual-textual coherence, ambiguity presence, and naturalness; samples are retained if at least 2 of 3 annotators accept them."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "graduate students from the authors’ institution with prior experience in NLP research; aged 20-28; two male and one female doctoral students in computer science",
+        "recruitment": "Recruited from the authors’ institution; compensated at $25 USD/hour for approximately 8 hours per participant; provided informed consent",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "All generated samples, positive and negative, were independently evaluated; samples were retained if at least 2 out of 3 annotators agreed on acceptance; Fleiss’ Kappa was 0.78",
+        "detail": "Annotators checked image quality, visual-textual coherence, ambiguity presence, and naturalness. Annotations were anonymized and used only for academic research."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Three graduate-student annotators verified dataset samples and determined acceptance by at least 2-of-3 agreement."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": false,
+        "detail": "The authors manually verified image-description alignment and refined prompts to regenerate images when mismatches occurred."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "TPR, TNR, F1, ΔTPR, ΔTNR, Cohen’s Kappa, mention ratio",
+        "role": "primary",
+        "blind": null,
+        "detail": "Automatic metrics determine the main pun recognition and component verification results."
+      },
+      {
+        "type": "LLM",
+        "name": "advanced LLM judge",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper does not name the judge model; it compares model-generated explanations with MULTIPUN ground-truth explanations and outputs Win/Tie/Loss labels."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "MULTIPUN positive sample generation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "GPT-4o generates caption, image description, and interpretation for each tuple, and GPT-image-1 creates the visual scene. The paper reports manual verification and prompt refinement/regeneration for mismatches, but not the number of candidates or samples per tuple."
+      },
+      {
+        "scope": "MULTIPUN adversarial negative generation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "Explicative Substitution and Random Substitution negatives are generated with prompt templates and then human-verified; the paper does not report candidate counts or sampling parameters."
+      },
+      {
+        "scope": "VLM outputs for detection, localization, and explanation",
+        "mode": "single-sample",
+        "n": "All experiments are run three times, and the reported results are averages.",
+        "selector": "none",
+        "detail": "The repeated runs are averaged; no best-of-N generation or selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-5.1",
+        "version_or_snapshot": "gpt-5.1",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Closed-source VLM accessed via official API."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": "gpt-4o-2024-08-06",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Evaluated as a closed-source VLM; GPT-4o is also used in positive sample generation, but the generation version is not separately specified."
+      },
+      {
+        "name": "Gemini-3-Pro",
+        "version_or_snapshot": "gemini-3-pro-preview",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Closed-source VLM accessed via official API."
+      },
+      {
+        "name": "Claude Sonnet 4.5",
+        "version_or_snapshot": "claude-sonnet-4-5-20250929",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Closed-source VLM accessed via official API."
+      },
+      {
+        "name": "Llama-4-Scout-17B",
+        "version_or_snapshot": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Open-source checkpoint hosted on a vLLM server."
+      },
+      {
+        "name": "Qwen3-VL-8B-Instruct",
+        "version_or_snapshot": "Qwen/Qwen3-VL-8B-Instruct",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Open-source checkpoint hosted on a vLLM server."
+      },
+      {
+        "name": "Qwen3-VL-30B-A3B-Instruct",
+        "version_or_snapshot": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Open-source checkpoint hosted on a vLLM server."
+      },
+      {
+        "name": "Qwen3-VL-8B-Thinking",
+        "version_or_snapshot": "Qwen/Qwen3-VL-8B-Thinking",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Open-source checkpoint hosted on a vLLM server."
+      },
+      {
+        "name": "Qwen3-VL-30B-A3B-Thinking",
+        "version_or_snapshot": "Qwen/Qwen3-VL-30B-A3B-Thinking",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Open-source checkpoint hosted on a vLLM server."
+      },
+      {
+        "name": "LLaVA-v1.6-Vicuna-13B",
+        "version_or_snapshot": "liuhaotian/llava-v1.6-vicuna-13b",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Open-source checkpoint hosted on a vLLM server."
+      },
+      {
+        "name": "GLM-4.1V-9B-Thinking",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "The model is evaluated and described as an open-source reasoning-based VLM, but the checkpoint is not listed in Table 8."
+      },
+      {
+        "name": "GPT-image-1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to generate visual scenes from image descriptions for MULTIPUN."
+      },
+      {
+        "name": "text-embedding-3-large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used for embedding-based diversity filtering of generated samples."
+      },
+      {
+        "name": "advanced LLM judge",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used for pairwise explanation comparison, but the paper does not name the model or version."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main VLM evaluation across detection, localization, and explanation",
+        "calls_per_item": "two prompt variants per task (biased-to-pun and biased-to-non-pun); all experiments are run three times",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Open-source models are evaluated on two NVIDIA A100 80GB GPUs; closed-source models are accessed via official APIs.",
+        "detail": "The paper reports repeated runs and hardware/access mode but not temperature, top-p, max tokens, cost, or exact inference dates."
+      },
+      {
+        "scope": "MULTIPUN sample generation",
+        "calls_per_item": "GPT-4o is prompted to generate three distinct components for each tuple; the image description is subsequently fed into GPT-image-1",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports manual prompt refinement and image regeneration for mismatches but not the number of regeneration attempts or sampling settings."
+      },
+      {
+        "scope": "Pairwise explanation comparison",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "An advanced LLM judge compares generated explanations to ground-truth explanations; the exact judge model, prompt budget, and call counts are not reported."
+      },
+      {
+        "scope": "Pun-Tuning training/evaluation",
+        "calls_per_item": "Training uses both biased-to-pun and biased-to-non-pun prompt variants; evaluation is performed on the held-out test set (669 samples).",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "batch size 4 per A100 GPU, learning rate 2e-5, AdamW optimizer, linear warmup (100 steps) followed by cosine decay, weight decay 0.01, gradient clipping (max norm 1.0), FP16 mixed precision for 3 epochs",
+        "detail": "These are fine-tuning hyperparameters rather than inference sampling parameters; inference sampling settings remain unreported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Pun recognition and explanation",
+        "present": false,
+        "description": "The paper uses human verification for dataset quality but does not report human performance as a baseline on the detection, localization, or explanation tasks.",
+        "directly_comparable": false,
+        "detail": "Ground-truth explanations are compared against model explanations, but no human-generated explanation baseline under matched conditions is reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "MULTIPUN is newly constructed in the paper rather than a legacy public benchmark.",
+        "The Pun-Tuning experiments use a split that the paper says ensures no test samples leak into training.",
+        "Generated samples are human-verified.",
+        "Adversarial non-pun negatives are included."
+      ],
+      "basis": "The benchmark is newly introduced, which lowers legacy benchmark contamination risk. However, GPT-4o is used to generate MULTIPUN content and is also evaluated, no decontamination test is reported for proprietary models, and inference dates are not provided."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Claims about pairwise explanation quality, such as ground-truth explanations generally outperforming VLM-generated explanations and Pun-Tuning increasing win rates, depend on an unnamed advanced LLM judge.",
+      "human_validation": "No human validation of the LLM judge’s Win/Tie/Loss decisions is reported.",
+      "detail": "The main recognition and F1 claims are computed with automatic metrics against dataset labels, but explanation-quality comparisons use an LLM judge."
+    },
+    "reporting_gaps": [
+      "The advanced LLM judge used for pairwise explanation comparison is not named and has no reported version or snapshot.",
+      "No inference dates are reported for API-based models.",
+      "Sampling parameters such as temperature, top-p, max tokens, and decoding settings are not reported for evaluated VLMs, dataset generation, or the LLM judge.",
+      "The checkpoint/configuration for GLM-4.1V-9B-Thinking is not listed in the open-source model configuration table.",
+      "The paper states that fine-tuning experiments are limited to three open-source models, but Table 4 reports Pun-Tuning results for four models including Llama-4 Scout-17B.",
+      "Exact candidate counts and regeneration counts for dataset generation are not reported.",
+      "The pairwise comparison figures are discussed qualitatively, but exact Win/Tie/Loss values are not tabulated in the provided text.",
+      "Blindness of human verification annotations is not reported."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "MULTIPUN contains 445 positive pun instances and 890 adversarial negative samples, for 1,335 total samples.",
+      "metric": "dataset size",
+      "value": "445 positive pun instances; 890 negative samples; 1,335 total samples",
+      "dataset": "MultiPun",
+      "best_system": null
+    },
+    {
+      "finding": "GPT-5.1 achieves the highest reported explanation-task F1 among the evaluated models, with 0.804 on homophonic puns and 0.757 on homographic puns.",
+      "metric": "F1",
+      "value": "0.804 (homophonic); 0.757 (homographic)",
+      "dataset": "MultiPun",
+      "best_system": "GPT-5.1"
+    },
+    {
+      "finding": "Qwen3-VL-30B-A3B-Instruct identifies almost every homophonic detection input as a pun, producing near-perfect TPR but extremely low TNR.",
+      "metric": "TPR/TNR",
+      "value": "TPR 0.990; TNR 0.018",
+      "dataset": "MultiPun",
+      "best_system": "Qwen3-VL-30B-A3B-Instruct"
+    },
+    {
+      "finding": "LLaVA-v1.6-Vicuna-13B shows extreme prompt-induced bias in homophonic detection when the prompt shifts from biased-to-pun to biased-to-non-pun.",
+      "metric": "ΔTPR/ΔTNR",
+      "value": "ΔTPR -0.923; ΔTNR +0.933",
+      "dataset": "MultiPun",
+      "best_system": "LLaVA-v1.6-Vicuna-13B"
+    },
+    {
+      "finding": "Pun-CoT improves Qwen3-VL-8B-Thinking on homophonic explanation by raising F1 and non-pun rejection.",
+      "metric": "F1/TNR",
+      "value": "F1 0.595 → 0.807; TNR 0.387 → 0.776",
+      "dataset": "MultiPun",
+      "best_system": "Qwen3-VL-8B-Thinking + Pun-CoT"
+    },
+    {
+      "finding": "Pun-Tuning substantially improves LLaVA-v1.6-Vicuna-13B explanation-task F1 on both pun types.",
+      "metric": "F1",
+      "value": "0.057 → 0.640 (homophonic); 0.051 → 0.617 (homographic)",
+      "dataset": "MultiPun",
+      "best_system": "LLaVA-v1.6-Vicuna-13B + Pun-Tuning"
+    }
+  ],
+  "key_findings": [
+    "Most evaluated VLMs achieve high TPR but low TNR, indicating that they often misclassify adversarial non-puns as puns.",
+    "Open-source models are more sensitive to prompt wording, while closed-source models such as GPT-4o and Gemini-3-Pro show more consistent behavior across biased prompt variants.",
+    "Requiring explanations improves rejection of non-puns but can reduce TPR because models sometimes discard valid puns when they fail to justify the mechanism.",
+    "Models usually identify the caption pun word w_p, but retrieving the alternative word w_a is the bottleneck for homophonic puns.",
+    "Reasoning-based variants have mixed effects: they help larger models in some settings but can worsen hallucination in smaller models.",
+    "Both Pun-CoT and Pun-Tuning improve F1 and non-pun rejection, and the paper reports an average F1-score improvement of 16.5%."
+  ],
+  "limitations": [
+    "The benchmark focuses exclusively on English puns.",
+    "The evaluation covers 11 representative VLMs, but newer models may behave differently.",
+    "The paper states that fine-tuning experiments are limited to three open-source models due to computational constraints.",
+    "The adversarial negative strategies may not cover all possible failure modes.",
+    "Pairwise explanation-quality conclusions rely on an unnamed advanced LLM judge without reported human validation.",
+    "The dataset is synthetic and generated partly with GPT-4o, which is also one of the evaluated models."
+  ],
+  "safety_ethics_notes": "The paper states that MULTIPUN data is generated using publicly available text-to-image models and LLMs under their intended purposes and licenses, contains no personally identifiable information or real individuals, and acknowledges dual-use risks in which improved linguistic manipulation could be used for social engineering or propaganda.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "A footnote states that the code is available, but the URL is not present in the provided transcription."
+  }
+}

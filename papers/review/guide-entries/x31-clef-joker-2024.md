@@ -1,0 +1,3 @@
+<!-- guide claims for x31-clef-joker-2024 (Part 7 (shared-task ecosystem)) -->
+
+**Shared-task ecosystem:** [**CLEF JOKER**](https://ceur-ws.org/Vol-3740/paper-167.pdf) (Ermakova, Bosser, Miller & Jatowt, 2022–24) `workshop` `shared task` `dataset` spans humor-aware retrieval, genre/technique classification, and pun translation. The 2024 Task 3 overview reports 1,405 English training puns with 5,838 professional French translations and recalls the 2023 manually evaluated ceiling: only 6% of English→French and 18% of English→Spanish outputs preserved both pun form and sense. The track is the major evaluation resource omitted by an LLM-only reading of pun translation, and it also shows how automatic metrics can overstate success.

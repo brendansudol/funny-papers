@@ -1,0 +1,440 @@
+{
+  "key": "x35-turing-jest",
+  "ref": "Part 1 (Turing Jest)",
+  "section": "Part 1 - Explaining & Understanding Jokes",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x35-turing-jest/x35-turing-jest.md",
+  "source_md_sha256": "9143b337e7a73f96dbca3104a90a2f1bbafee1006adff1faed188229d6448fe1",
+  "source_truncated": false,
+  "title": "Turing Jest: Distributional Semantics and One-Line Jokes",
+  "authors": [
+    "Sean Trott",
+    "Drew E. Walker",
+    "Samuel M. Taylor",
+    "Seana Coulson"
+  ],
+  "year": 2025,
+  "venue": "Cognitive Science",
+  "paper_types": [
+    "evaluation-study",
+    "dataset"
+  ],
+  "research_questions": [
+    "Whether and to what extent exposure to purely linguistic input can account for the human ability to recognize one-line jokes and identify their entailments.",
+    "Whether LLMs trained only on language data can detect, appreciate, and comprehend one-line jokes.",
+    "Whether LLM performance on one-line joke detection, appreciation, and comprehension reaches human parity.",
+    "Whether humans and LLMs use final-word surprisal as a cue when judging whether a sentence is a joke or how funny it is."
+  ],
+  "tasks": [
+    "humor detection",
+    "humor appreciation / funniness rating",
+    "humor comprehension / entailment recognition",
+    "joke classification"
+  ],
+  "humor_domains": [
+    "one-liners",
+    "one-line jokes",
+    "verbal humor",
+    "quips"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Turing Jest stimuli and responses",
+      "role": "introduced",
+      "size": "400 distinct sentences, which included 80 Expected sentences, 160 Joke sentences, and 160 Straight sentences; new human and LLM responses for detection, appreciation, and comprehension tasks"
+    },
+    {
+      "name": "Coulson and Lovett (2004) one-line joke materials",
+      "role": "source-material",
+      "size": "400 distinct sentences, which included 80 Expected sentences, 160 Joke sentences, and 160 Straight sentences"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-3 text-davinci-002",
+    "Mixtral 8x7B",
+    "Mixtral 8x22B",
+    "Llama-3-8B",
+    "Llama-3-70B",
+    "GPT-3 ada",
+    "GPT-3 babbage",
+    "GPT-3 curie",
+    "GPT-3 davinci",
+    "GPT-4"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Three-task human–LLM evaluation of one-line jokes",
+      "summary": "The paper evaluates humor detection, humor appreciation, and humor comprehension using the same one-line joke materials for humans and LLMs. Detection and comprehension are scored via yes/no judgments or log-odds over yes/no tokens, while appreciation is scored using 1–5 funniness ratings."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper frames joke comprehension as involving revision of an initial interpretation in light of new information and discusses incongruity resolution as a core process in humor."
+    },
+    {
+      "theory": "frame-shifting / conceptual blending",
+      "usage": "grounding/motivation",
+      "detail": "The one-line jokes are described as requiring a sentence-final word that prompts revision of assumptions, and the discussion links this to frame-shifting accounts of joke comprehension."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "cited-in-passing",
+      "detail": "The paper cites the Script-based Semantic Theory of Humor as an earlier rule-based framework formalizing humor as juxtaposition of contrasting scripts."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "cited-in-passing",
+      "detail": "The paper cites Attardo's General Theory of Verbal Humor in its discussion of prior computational models using script oppositions and logical mechanisms."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "The introduction notes theories arguing that humor serves a function related to feeling superiority to others."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "The introduction notes tension-relief accounts of humor."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "operationalized",
+      "detail": "Final-word surprisal from language models is used as a predictor in analyses of joke detection and funniness ratings."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The distributional semantic hypothesis is operationalized by testing LLMs trained on linguistic input and using model-derived surprisal to assess whether language statistics support humor capacities."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Study 1 collected human yes/no joke classifications and 1–5 funniness ratings; Study 2 collected human yes/no entailment judgments for comprehension probes."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "LLM detection and comprehension were scored using log odds comparing p(\"Yes\") to p(\"No\"); LLM appreciation used the 1–5 answer assigned the highest probability."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "167 completed; 14 failed the attention checks and were excluded from analysis",
+        "population": "Native English speakers from the University of California, San Diego's student population; 37 male, 123 female, 5 nonbinary, 2 preferred not to say; average age 22",
+        "recruitment": "SONA recruitment tool; participants volunteered and received course credit",
+        "geography": "University of California, San Diego",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each participant saw 120 sentences: 40 Jokes, 40 Straights, 40 Expected; the aim was to collect 40 human judgments per unique Joke; six attention checks were included.",
+        "detail": "Study 1 humor detection and appreciation sample. All participants provided informed consent; the study received UCSD IRB approval."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "160 completed and passed four attention checks; no participants were excluded",
+        "population": "Native English speakers; 93 female, 63 male, and 4 nonbinary; average age 41",
+        "recruitment": "Online platform Prolific; participants were paid $2",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Each participant saw 60 sentences and answered 60 comprehension probes; the aim was to collect 20 human judgments per unique sentence in the stimulus set; four catch trials were included.",
+        "detail": "Study 2 humor comprehension sample. All participants provided informed consent; the study received UCSD IRB approval."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "UCSD SONA participants",
+        "role": "primary",
+        "blind": null,
+        "detail": "Produced the human yes/no joke classification responses and 1–5 funniness ratings in Study 1."
+      },
+      {
+        "type": "human-lay",
+        "name": "Prolific participants",
+        "role": "primary",
+        "blind": null,
+        "detail": "Produced the human yes/no entailment judgments used as the human comprehension benchmark in Study 2."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "LLM token probabilities / log odds",
+        "role": "primary",
+        "blind": null,
+        "detail": "For LLMs, detection and comprehension were determined from log odds comparing p(\"Yes\") to p(\"No\"); appreciation was determined by selecting the highest-probability rating token from 1 to 5."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Experimental conditions and correct answers were based on the Expected, Joke, and Straight materials and comprehension probes adapted from Coulson and Lovett (2004)."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "All experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates classification, rating, and comprehension behavior; it does not ask models to generate jokes or select among generated jokes."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-3 text-davinci-002",
+        "version_or_snapshot": "text-davinci-002",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used via the OpenAI Python API for the main humor detection, appreciation, and comprehension tasks; selected as the best-performing GPT-3 model trained without RLHF."
+      },
+      {
+        "name": "Mixtral 8x7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Run using the HuggingFace inference endpoints API for open-source LLM analyses."
+      },
+      {
+        "name": "Mixtral 8x22B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Listed in the methods as one of the Mixtral models tested using HuggingFace inference endpoints, but detailed result numbers are not reported in the main text."
+      },
+      {
+        "name": "Llama-3-8B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Run using the HuggingFace inference endpoints API."
+      },
+      {
+        "name": "Llama-3-70B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Run using the HuggingFace inference endpoints API."
+      },
+      {
+        "name": "GPT-3 ada",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in a preliminary analysis to record final-word surprisal for the 400 sentences."
+      },
+      {
+        "name": "GPT-3 babbage",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in a preliminary analysis to record final-word surprisal for the 400 sentences."
+      },
+      {
+        "name": "GPT-3 curie",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in a preliminary analysis to record final-word surprisal for the 400 sentences."
+      },
+      {
+        "name": "GPT-3 davinci",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in a preliminary analysis to record final-word surprisal for the 400 sentences."
+      },
+      {
+        "name": "instruction-tuned versions of GPT-3 ada, babbage, curie, and davinci",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper states that instruction-tuned versions of each GPT-3 model were used in the preliminary final-word surprisal analysis, but does not provide exact model identifiers."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Mentioned only in the conclusion as part of Supplementary Analysis 4: the paper says there remains a gap between humans and LLMs “even GPT-4 trained with RLHF.”"
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Preliminary final-word surprisal analysis",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The 400 sentences were presented to a range of GPT-3 models and the surprisal of the final word was recorded; exact call counts, token budgets, sampling parameters, compute, and cost are not reported."
+      },
+      {
+        "scope": "Study 1 humor detection",
+        "calls_per_item": "Each item was presented to the model twice (on separate runs) for text-davinci-002",
+        "candidates_per_item": "2 response options: \"Yes\" and \"No\"",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Each of the 400 sentences was presented as a separate trial to avoid contamination between items; log odds compared p(\"Yes\") to p(\"No\"). The same prompts were used for open-source models, but detailed call counts for them are not separately reported."
+      },
+      {
+        "scope": "Study 1 humor appreciation",
+        "calls_per_item": null,
+        "candidates_per_item": "5 response options: 1, 2, 3, 4, 5",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "For each sentence, the conditional probability assigned to each of the five possible funniness ratings was calculated and the highest-probability token was selected as the model rating."
+      },
+      {
+        "scope": "Study 2 humor comprehension",
+        "calls_per_item": null,
+        "candidates_per_item": "2 response options: \"Yes\" and \"No\"",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Each of the 400 sentence–probe items was presented as a separate trial. text-davinci-002 was tested with both zero-shot and few-shot prompting; open-source models were tested with the same prompt procedure. Token budgets, sampling parameters, compute, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Study 1 humor detection",
+        "present": true,
+        "description": "Native English-speaking UCSD participants classified the same sentence materials as jokes or nonjokes.",
+        "directly_comparable": true,
+        "detail": "The LLM prompt was intended to be as similar as possible to the one given to human participants, though GPT-3 performed detection and appreciation separately while humans completed both on each trial."
+      },
+      {
+        "scope": "Study 1 humor appreciation",
+        "present": true,
+        "description": "Native English-speaking UCSD participants rated the same sentence materials on a five-point funniness scale.",
+        "directly_comparable": true,
+        "detail": "Humans used the same 1–5 scale labels; GPT-3 ratings were derived by selecting the highest-probability response token."
+      },
+      {
+        "scope": "Study 2 humor comprehension",
+        "present": true,
+        "description": "Native English-speaking Prolific participants judged whether comprehension probes were entailed by the sentence materials.",
+        "directly_comparable": true,
+        "detail": "The paper directly compares human accuracy to LLM accuracy on the same materials; humans completed three example trials with feedback, and the main comparison used GPT-3 zero-shot results."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "The paper explicitly discusses possible data leakage because the joke materials were previously published.",
+        "Each item was presented as a separate trial to avoid contamination between items.",
+        "The authors argue that even if GPT-3 had seen the exact jokes, it was very unlikely to have been trained on the comprehension probes or their answers.",
+        "The study focuses on detection, rating, and entailment judgments rather than joke generation."
+      ],
+      "basis": "The stimuli were adapted from previously published Coulson and Lovett (2004) materials and include jokes originally collected from websites, so later LLM training data could plausibly include some test jokes. The paper provides an argument that comprehension-probe answers are less likely to be contaminated, but it does not report a decontamination test."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "LLMs are evaluated as experimental subjects, not used to judge outputs or determine benchmark labels."
+    },
+    "reporting_gaps": [
+      "Exact HuggingFace model identifiers, snapshots, and inference dates are not reported for the Mixtral and Llama models.",
+      "Inference dates are not reported for text-davinci-002 or the open-source models.",
+      "Token budgets, sampling parameters, compute, and cost are not reported.",
+      "The preliminary GPT-3 surprisal analysis names ada, babbage, curie, davinci, and instruction-tuned versions, but does not provide exact model IDs for all of them.",
+      "Mixtral 8–22B is listed in the methods, but detailed result numbers for this model are not reported in the main text.",
+      "GPT-4 is mentioned only via Supplementary Analysis 4; the main text does not provide its exact version, access method, or quantitative results.",
+      "The study discusses possible data leakage but does not report a decontamination test."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "In Study 1, humans were more accurate overall on joke detection than all reported LLMs.",
+      "metric": "accuracy",
+      "value": "Human 81.4%; GPT-3 67.5%; Llama-3-70B 70%; Llama-3-8B 67.8%; Mixtral 8×7B 62%",
+      "dataset": "Turing Jest stimuli and responses",
+      "best_system": "Human"
+    },
+    {
+      "finding": "For joke versus straight control sentence classification, Mixtral-8×7B achieved an F1 close to the human F1, while GPT-3 had low recall.",
+      "metric": "precision / recall / F1",
+      "value": "GPT-3 0.9 / 0.23 / 0.36; Mixtral8-7B 0.67 / 0.98 / 0.8; Llama3-70B 0.61 / 0.98 / 0.76; Llama3-8B 0.71 / 0.51 / 0.59; Human 0.78 / 0.84 / 0.81",
+      "dataset": "Turing Jest stimuli and responses",
+      "best_system": "Human"
+    },
+    {
+      "finding": "GPT-3 funniness ratings were positively related to human funniness ratings, while open-source LLM funniness ratings were uncorrelated with human ratings.",
+      "metric": "Pearson correlation",
+      "value": "r = .47",
+      "dataset": "Turing Jest stimuli and responses",
+      "best_system": "GPT-3 text-davinci-002"
+    },
+    {
+      "finding": "GPT-3 funniness judgments fell within one standard deviation of the human average inter-annotator agreement under leave-one-annotator-out comparisons.",
+      "metric": "Pearson's r and Spearman's rho",
+      "value": "Human inter-annotator agreement: Pearson's mean r = .58, SD = 0.17; Spearman's mean rho = 0.56, SD = 0.17; GPT-3 vs human average: Pearson's r = .52; Spearman's rho = 0.6",
+      "dataset": "Turing Jest stimuli and responses",
+      "best_system": "GPT-3 text-davinci-002"
+    },
+    {
+      "finding": "In Study 2, humans outperformed GPT-3 overall on comprehension, and the gap was concentrated on jokes.",
+      "metric": "accuracy",
+      "value": "Overall: Human 89.5%, GPT-3 84.2%; jokes: Human 84.7%, GPT-3 69.4%; nonjokes: Human 91.9%, GPT-3 94.2%",
+      "dataset": "Turing Jest stimuli and responses",
+      "best_system": "Human"
+    },
+    {
+      "finding": "On comprehension, Llama-3-70B outperformed GPT-3 in the joke condition but still did not reach human accuracy for jokes.",
+      "metric": "accuracy",
+      "value": "Llama-3-70B: expected 95%, straight 96.2%, joke 75%; Mixtral-8×7B: expected 84.8%, straight 71.1%, joke 67.3%; Llama-3-8B: expected 47.5%, straight 53.1%, joke 55.6%",
+      "dataset": "Turing Jest stimuli and responses",
+      "best_system": "Llama-3-70B"
+    }
+  ],
+  "key_findings": [
+    "All LLMs tested showed above-chance joke detection, but humans were more accurate overall.",
+    "Both humans and LLMs were more likely to misclassify nonjokes with high-surprisal final words as jokes.",
+    "GPT-3, but not the reported open-source LLMs, assigned higher funniness ratings to jokes than nonjokes and produced ratings correlated with human funniness judgments.",
+    "Humans and all tested LLMs showed worse comprehension for jokes than nonjokes, but the gap was larger for LLMs.",
+    "The paper concludes that distributional language statistics can support some humor detection, appreciation, and comprehension, but do not fully account for human-level one-line joke understanding."
+  ],
+  "limitations": [
+    "The jokes considered were a single type: one-liners.",
+    "The study considered only a subset of available LLMs: GPT-3 text-davinci-002, Llama-3-70B, Llama-3-8B, and Mixtral 8×7B, with Mixtral 8–22B listed in methods but not detailed in results.",
+    "The behavior of LLMs may depend on the exact prompt used, although the paper reports that the comprehension study found no meaningful difference between zero-shot and few-shot prompting and that a follow-up study found robustness in open models for joke classification.",
+    "Because previously published joke materials were used, data leakage is possible.",
+    "Most available LLMs are trained on data produced by an unrepresentative sample of primarily English speakers, and the human samples also have representativeness limitations.",
+    "The tasks assess cognitive dimensions of humor rather than emotional or physiological aspects such as laughter or arousal."
+  ],
+  "safety_ethics_notes": "Human studies received approval from the University of California at San Diego's Institutional Review Board; participants provided informed consent. Study 1 participants received course credit, and Study 2 participants were paid $2. The paper notes representativeness concerns for both LLM training data and human psychology samples.",
+  "artifacts": {
+    "code_url": "https://github.com/seantrott/humor_llms",
+    "data_url": "https://github.com/seantrott/humor_llms",
+    "other": "Preregistrations: https://osf.io/yzupx?mode=&revisionId=&view_only= and https://osf.io/wudn2?mode=&revisionId=&view_only="
+  }
+}

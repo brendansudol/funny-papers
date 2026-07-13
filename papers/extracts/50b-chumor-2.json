@@ -189,5 +189,310 @@
     "code_url": "https://github.com/dnaihao/Chumor-dataset",
     "data_url": "https://huggingface.co/datasets/dnaihao/Chumor",
     "other": "Project page: https://dnaihao.github.io/Chumor-dataset/; leaderboard: https://huggingface.co/spaces/dnaihao/Chumor"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Ruo Zhi Ba (RZB) forum users/posters whose public web content supplied the jokes",
+        "recruitment": "Existing RZB content: previously crawled “Best Annual Threads” from 2018–2021 and all threads in the “Moderator’s Recommendation” section",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Public source threads/posts; after cleaning, the paper reports 3,339 joke-explanation instances in Chumor and a case-study corpus covering 1,951 jokes.",
+        "detail": "The paper does not report the number or demographics of original RZB posters."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "5",
+        "population": "Native Chinese-speaking authors",
+        "recruitment": "Authors of the paper",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Manual labels for the generated explanation instances in Chumor, using majority vote; reported labels are 1,454 good and 1,887 bad explanations for 3,339 instances.",
+        "detail": "They annotated whether each GPT-4o or ERNIE4-turbo explanation “fully explain[s] the joke” or “partially explain[s] or not explain[s] the joke.” The reported good/bad counts do not sum to the reported total."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "3",
+        "population": "Chinese native speakers unfamiliar with the work",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Annotated a randomly chosen subset of 200 examples for the human-performance comparison; paper reports average accuracy 78.3% and MCC 0.60.",
+        "detail": "No further demographics, compensation, individual scores, or agreement statistics are reported."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": "1",
+        "population": "One author",
+        "recruitment": "Author of the paper",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Wrote/annotated human explanations for 1,951 jokes; mean length 78 Chinese characters per joke; total length 151,730 Chinese characters.",
+        "detail": "These human explanations are used in the A/B case study comparing human-written explanations against GPT-4o and ERNIE4-turbo explanations."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "6",
+        "population": "Native Chinese-speaking college students who grew up in China",
+        "recruitment": null,
+        "geography": "Grew up in China",
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "A/B preference annotations comparing human explanations with one LLM explanation for each joke; each joke received three preference annotations; combined average agreement 61.4%.",
+        "detail": "The paper says each annotator read around 300k Chinese characters. Appendix A conflicts with the main text by listing named authors as preference annotators."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "An individual not involved in writing the original explanations",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Error-type analysis on a sample of 200 examples for GPT-4o and ERNIE4-turbo explanations; examples could have multiple error types.",
+        "detail": "The paper does not report this annotator’s credentials, blinding, or reliability checks."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Five native Chinese-speaking authors provided the reference good/bad labels for Chumor explanation instances by majority vote."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy, false positive rate, false negative rate, Matthews Correlation Coefficient",
+        "role": "primary",
+        "blind": null,
+        "detail": "Model predictions were compared against Chumor reference labels; no-response or incorrect responses were marked incorrect."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Three Chinese native speakers unfamiliar with the work annotated 200 randomly selected examples to estimate human performance on the same explanation-classification task."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "Six native Chinese-speaking college students judged A/B preferences between human and LLM explanations. Appendix C says the human and LLM explanations were randomly assigned as Explanation 1 and Explanation 2."
+      },
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "An individual not involved in writing the original explanations conducted the error-type analysis for GPT-4o and ERNIE4-turbo explanations on 200 sampled examples."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Authors manually cleaned the RZB data, removed non-joke/offensive/incomplete/philosophical threads, removed duplicates, and categorized jokes into six types; detailed protocols and reliability are not reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Chumor dataset explanation generation for benchmark instances",
+        "mode": "single-sample",
+        "n": "Not explicitly reported; the paper describes generated explanations from GPT-4o and ERNIE4-turbo and no best-of-N selection.",
+        "selector": "none",
+        "detail": "Generated explanations were not selected by an automatic or human selector before labeling; instead, the generated explanation instances were manually labeled good/bad."
+      },
+      {
+        "scope": "LLM classification responses under direct prompting and chain-of-thought prompting",
+        "mode": "single-sample",
+        "n": "One response per model per item per prompting setting is implied; repeated sampling is not reported.",
+        "selector": "none",
+        "detail": "The paper says each prompt was input to the model and responses were collected; majority voting or best-of-N over multiple model outputs was not used."
+      },
+      {
+        "scope": "Case-study joke explanation generation for A/B preference comparison",
+        "mode": "single-sample",
+        "n": "One two-sentence explanation per LLM per joke is described for GPT-4o and ERNIE4-turbo.",
+        "selector": "none",
+        "detail": "The LLMs were prompted: “Please explain the joke in two sentences: [Joke].” No multiple candidates or selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Yi_34B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source model family from 01.AI; paper says the instruction-tuned version was used, but exact checkpoint/revision, deployment method, and inference date are not reported. Reference model card accessed 2024-12-10."
+      },
+      {
+        "name": "Nemotron_70B",
+        "version_or_snapshot": "Llama-3.1-Nemotron-70B-Instruct-HF",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source NVIDIA model; exact Hugging Face revision/snapshot, deployment method, and inference date are not reported. Reference model card accessed 2024-12-10."
+      },
+      {
+        "name": "Athene_70B",
+        "version_or_snapshot": "Athene-70B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source Nexusflow model; exact checkpoint/revision, deployment method, and inference date are not reported. Reference model card accessed 2024-12-10."
+      },
+      {
+        "name": "Qwen2.5_72B",
+        "version_or_snapshot": "Qwen2.5-72B-Instruct",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source Alibaba/Qwen model; exact checkpoint revision, deployment method, and inference date are not reported. Reference model card accessed 2024-12-10."
+      },
+      {
+        "name": "Mistral_123B",
+        "version_or_snapshot": "Mistral-Large-Instruct-2407",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Paper labels the evaluated model as Mistral_123B and cites the Mistral-Large-Instruct-2407 model card. Exact revision/snapshot, deployment method, and inference date are not reported; model card accessed 2024-12-10."
+      },
+      {
+        "name": "Gemini1.5-pro",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Closed-source Google model; API/service details, exact snapshot, and inference date are not reported. Documentation accessed 2024-12-10."
+      },
+      {
+        "name": "GLM-4_plus",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Closed-source BigModel/Tsinghua model; exact snapshot, access route, and inference date are not reported. Documentation accessed 2024-12-10."
+      },
+      {
+        "name": "GPT-4_turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Closed-source OpenAI model; exact API snapshot/version and inference date are not reported. OpenAI Researcher Access credit supported GPT experiments."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used both to generate explanations and as an evaluated classifier/explanation generator. Exact API snapshot/version and inference date are not reported. OpenAI Researcher Access credit supported GPT experiments."
+      },
+      {
+        "name": "ERNIE_4-turbo",
+        "version_or_snapshot": "ERNIE-4.0-turbo",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used both to generate explanations and as an evaluated classifier/explanation generator. Exact service snapshot and inference date are not reported; documentation accessed 2024-12-10."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Chumor classification evaluation across ten LLMs under DP and CoT",
+        "calls_per_item": "One call per model per prompt setting per instance is implied; repeated calls are not reported.",
+        "candidates_per_item": "1 response per call; no best-of-N or majority vote over repeated model outputs reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Limited budget and API access are mentioned; GPT experiments were supported by OpenAI Researcher Access credit, but no cost, hardware, or compute totals are reported.",
+        "detail": "Evaluation used 3,339 Chumor instances. A response was correct if it matched the reference label; incorrect or missing responses were marked incorrect. Missing/no-response cases occurred 21 times, exclusively with GLM-4plus."
+      },
+      {
+        "scope": "Generation of Chumor candidate explanations by GPT-4o and ERNIE4-turbo",
+        "calls_per_item": null,
+        "candidates_per_item": "Not reported; the paper does not report multiple candidates or selection.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The prompt, sampling parameters, token limits, number of failed generations, and exact call accounting for the benchmark-explanation generation step are not reported."
+      },
+      {
+        "scope": "Case-study generation of two-sentence explanations by GPT-4o and ERNIE4-turbo",
+        "calls_per_item": "One prompt per LLM per joke is implied, but exact call accounting is not reported.",
+        "candidates_per_item": "1 explanation per LLM per joke is described.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Prompt is reported in Chinese and English: “Please explain the joke in two sentences: [Joke].” The case study covers 1,951 jokes."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor explanation classification on Chumor",
+        "present": true,
+        "description": "Three Chinese native speakers unfamiliar with the work labeled a random 200-example subset; paper reports human average accuracy 78.3% and MCC 0.60 versus best LLM accuracy 60.3% and MCC 0.29.",
+        "directly_comparable": false,
+        "detail": "Humans and LLMs performed the same label-judgment task against the same reference-label scheme, but the human baseline was only on a 200-example subset while headline LLM scores are reported for the full 3,339-instance benchmark; same-subset LLM scores are not reported."
+      },
+      {
+        "scope": "Joke explanation quality/generation case study",
+        "present": true,
+        "description": "One author wrote human explanations for 1,951 jokes; six native Chinese-speaking college students compared those explanations against GPT-4o and ERNIE4-turbo explanations in randomized A/B preference judgments.",
+        "directly_comparable": true,
+        "detail": "Human and LLM explanations were evaluated for the same jokes by the same preference procedure. LLMs were prompted to produce two-sentence explanations consistent with the human-explanation format, though the human authoring process is less fully specified."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The labeled Chumor benchmark was newly constructed for the paper rather than reused as an existing public benchmark.",
+        "Reference labels were manually assigned by native Chinese-speaking authors.",
+        "The authors manually cleaned the public RZB source data, including removing duplicates and non-joke/offensive/incomplete/philosophical threads."
+      ],
+      "basis": "The released Chumor benchmark and labels appear newly created, but the underlying RZB jokes come from public web/forum content, including 2018–2021 Best Annual Threads and Moderator’s Recommendation threads, which likely predate several evaluated models and may have been present in web-scale pretraining data. The paper does not report any decontamination test, training-data search, or model-specific contamination control. Additional uncertainty comes from evaluating GPT-4o and ERNIE4-turbo on explanation instances generated by those same models."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Primary benchmark labels were assigned by five native Chinese-speaking authors; a separate human baseline used three Chinese native speakers; A/B explanation-quality claims used six native Chinese-speaking college-student preference annotators.",
+      "detail": "LLMs generated candidate explanations and were evaluated systems, but no LLM was used as the evaluator, metric, or judge for the paper’s headline conclusions."
+    },
+    "reporting_gaps": [
+      "Exact API snapshots, model revisions, inference dates, and access/deployment routes are not reported for the evaluated models.",
+      "Sampling parameters such as temperature, top-p, max tokens, stop conditions, seeds, and retry policies are not reported for classification or explanation generation.",
+      "The prompt used to generate the original Chumor benchmark explanations from GPT-4o and ERNIE4-turbo is not reported; only the case-study two-sentence explanation prompt is shown.",
+      "The paper reports 3,339 instances but 1,454 good plus 1,887 bad labels, which sum to 3,341.",
+      "The paper does not fully explain how 1,951 jokes produced 3,339 explanation instances, or whether missing/filtered generations account for the difference from two explanations per joke.",
+      "Inter-annotator agreement, vote distributions, adjudication details, and source blinding are not reported for the five-author Chumor good/bad labeling.",
+      "Recruitment, compensation, demographics beyond native-speaker status, individual scores, and agreement are not reported for the three-person human baseline.",
+      "Preference-study reporting is inconsistent: the main text says six native Chinese-speaking college students performed A/B annotation, while Appendix A lists seven named authors as conducting the preference annotations.",
+      "For the preference study, recruitment and compensation are not reported; source blinding is only inferable from the Explanation 1/Explanation 2 randomization instructions.",
+      "The joke-type categorization process and reliability are not reported.",
+      "The 200-example error-analysis sampling method, annotator credentials, blinding, and reliability checks are not reported.",
+      "No contamination or decontamination analysis is reported despite public RZB source material predating the evaluated models.",
+      "The introduction text states LLM winning rates of 6.2% for GPT-4o and 5.3% for ERNIE4-turbo, while Figure 4 labels those values as Undecided and shows LLM wins of 2.2% and 2.9%."
+    ]
   }
 }

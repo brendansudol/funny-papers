@@ -251,5 +251,354 @@
     "code_url": null,
     "data_url": null,
     "other": "HTB-authored prompts are described as released under CC BY 4.0, but no repository or download URL is stated in the paper."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "other",
+        "participant_count": "12 candidates",
+        "population": "Master’s-level students in Computer Science or Artificial Intelligence",
+        "recruitment": "Initial qualification pool; candidates completed a qualification task with humor identification and pairwise joke ranking on a shared example set.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Qualification-task results were used to select the three retained annotators; detailed qualification results are not reported.",
+        "detail": "Appendix K states that the three main annotators were selected from this pool based on inter-annotator agreement and response consistency. The 12 includes the retained annotators, not an additional main-evaluation sample."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3 retained evaluators",
+        "population": "Master’s-level students in Computer Science or Artificial Intelligence",
+        "recruitment": "Volunteers recruited by invitation; selected from the qualification pool; no compensation was provided.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "60 curated pairwise comparisons across 12 categories over 50 held-out headlines. Main text reports 170 blind pairwise judgments; Appendix K reports 180 votes (3 evaluators × 60 pairs each).",
+        "detail": "Evaluators signed in via Google, saw a headline and two anonymous jokes, and voted for the funnier one. Model identities were hidden and A/B order was randomized. Reported metrics: human unanimous agreement 31.7%, Krippendorff’s α = 0.425 for three evaluators and α = 0.412 for two, LLM–human majority agreement 58.3%, micro-average agreement 52.4%."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "Llama-3.3-70B-Instruct",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to judge and rank the full CSF candidate pool for training-data construction; used as an automated pairwise judge for HTB and SemEval leaderboards; also assigns structured winner/loser tags in the HTB analysis. The paper reports randomized A/B presentation but does not explicitly state model-identity blinding for the LLM judge."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen 2.5-72B",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as a second automated pairwise judge for both HTB and SemEval to test cross-judge robustness. Reported Kendall τ vs. the Llama judge: 0.8667 on HTB and 0.8286 on SemEval."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": true,
+        "detail": "Three retained human evaluators judged the curated 60-pair validation set. They were blind to model identity; candidate order was randomized."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Bradley-Terry / Elo ratings via MM algorithm",
+        "role": "primary",
+        "blind": null,
+        "detail": "Pairwise judge outcomes were aggregated into contest matrices and fit with a Bradley-Terry model; Elo-scale BT ratings with 95% bootstrap confidence intervals from 100 bootstrap samples determined leaderboard rankings."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Kendall rank correlation",
+        "role": "validation",
+        "blind": null,
+        "detail": "Used to compare model rankings produced by the Llama and Qwen LLM judges. Exact BT ties were broken deterministically by model-name order before rank correlation was computed."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "CSF training-data synthesis and curation from the 1,200 SemEval experimental prompts",
+        "mode": "best-of-n",
+        "n": "24 candidates per prompt (4 per persona × 6 personas); paper reports ~28,800 raw candidates and Appendix tables report 28,789 actual candidates",
+        "selector": "LLM-judge",
+        "detail": "A teacher ensemble of Kimi-K2 and Qwen 2.5-32B-Instruct generated the candidate pool. Llama-3.3-70B-Instruct judged pairwise tournaments and Elo/BT rankings drove selection: SFT used the top 10 per prompt, DPO randomly paired top-5 candidates as chosen with bottom-5 candidates as rejected, and O-GRPO retained all 24 candidates with group-relative weights."
+      },
+      {
+        "scope": "Final model-output generation for HTB and SemEval automated leaderboards",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports pairwise comparisons among 15 models over fixed benchmark prompts, but does not state decoding parameters, whether each model produced exactly one sampled output per prompt, or whether any best-of-N generation/selection was used before judging."
+      },
+      {
+        "scope": "CSD / Think-variant inference",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "Think variants generate reasoning followed by the joke; the reasoning is stripped before evaluation. The paper does not report the number of samples, decoding parameters, or any selection among multiple generations."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Kimi-K2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used in the CSF teacher ensemble and evaluated as a frontier baseline. No endpoint, snapshot, revision, or inference date is reported."
+      },
+      {
+        "name": "Qwen 2.5-32B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used in the CSF teacher ensemble; the human-evaluation table also refers to a 32B teacher comparison. No revision or inference date is reported."
+      },
+      {
+        "name": "Llama-3.3-70B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Actually run as the main LLM judge for data curation and leaderboard evaluation. No model revision, serving route, or inference date is reported."
+      },
+      {
+        "name": "Qwen 2.5-72B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Actually run as the second LLM judge. The paper does not specify whether this is an instruct/chat checkpoint, nor any revision or inference date."
+      },
+      {
+        "name": "Qwen 2.5-7B-Instruct / Base Qwen-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Reported as the base architecture for all HumorGen fine-tuning and evaluated as Base Qwen-7B. Fine-tuning used NVIDIA H100-80GB GPUs, but no checkpoint revision is reported."
+      },
+      {
+        "name": "HumorGen-SFT-7B",
+        "version_or_snapshot": "LoRA fine-tuned from Qwen 2.5-7B-Instruct on D_SFT (top-10 CSF candidates per prompt; N=12,000)",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Own trained model variant; training hyperparameters are reported, but no checkpoint hash/repository or inference date is given."
+      },
+      {
+        "name": "HumorGen-DPO-7B",
+        "version_or_snapshot": "DPO-aligned HumorGen variant using D_DPO (N=6,000 preference pairs)",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Own trained model variant initialized from the SFT pipeline; no checkpoint hash/repository or inference date is given."
+      },
+      {
+        "name": "HumorGen-GRPO-7B",
+        "version_or_snapshot": "O-GRPO / GRPO variant using all ranked CSF candidates with group-relative advantages",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Leaderboards call this GRPO although the method is described as offline O-GRPO. No checkpoint hash/repository or inference date is given."
+      },
+      {
+        "name": "HumorGen-SFT-Think-7B",
+        "version_or_snapshot": "CSD Think variant trained with persona reasoning traces plus jokes under SFT settings",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Reasoning traces are generated at inference and stripped before evaluation. No checkpoint hash/repository or inference date is given."
+      },
+      {
+        "name": "HumorGen-DPO-Think-7B",
+        "version_or_snapshot": "CSD Think variant trained with reasoning traces in DPO chosen/rejected responses",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "No checkpoint hash/repository or inference date is given."
+      },
+      {
+        "name": "HumorGen-GRPO-Think-7B",
+        "version_or_snapshot": "CSD Think variant trained with O-GRPO/GRPO settings",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "No checkpoint hash/repository or inference date is given."
+      },
+      {
+        "name": "HumorGen-Com-7B",
+        "version_or_snapshot": "HumorGen-SFT-7B further fine-tuned on 998 Shaun Eli stand-up jokes",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Section 5.2 calls this HumorGen-Com-7B; Table 13 appears to typo it as HumorGen-Con-7B. No checkpoint hash/repository or inference date is given."
+      },
+      {
+        "name": "GPT-5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a frontier system on the automated leaderboards. No API model string, snapshot, or inference date is reported."
+      },
+      {
+        "name": "Gemini-2.5-Pro",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a frontier/proprietary baseline. No API model string, snapshot, or inference date is reported."
+      },
+      {
+        "name": "Qwen3-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an open-weight general baseline. No checkpoint revision or inference date is reported."
+      },
+      {
+        "name": "GPT-OSS-120B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a large baseline. No checkpoint revision/snapshot or inference date is reported."
+      },
+      {
+        "name": "phi2-Humor",
+        "version_or_snapshot": "insaabbas/phi2-4-epoch-humor-model; no revision reported",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a humor-specialized baseline; cited as a SemEval 2026 humor-generation checkpoint."
+      },
+      {
+        "name": "JokeGPT",
+        "version_or_snapshot": "TzJ2006 JokeGPT-Model; PPO-tuned LoRA adapter on Qwen3-8B; no revision reported",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a humor-specialized baseline."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Appears in the human-evaluation category design as an SFT-7B vs GPT-4o comparison, but is not part of the 15-model automated leaderboards. No API model string, snapshot, or inference date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "CSF candidate generation for training data",
+        "calls_per_item": null,
+        "candidates_per_item": "24 candidates per source prompt (4 per persona × 6 personas) across 1,200 prompts; raw pool reported as ~28,800 and Appendix as 28,789",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Generated from a teacher ensemble of Kimi-K2 and Qwen 2.5-32B-Instruct. The paper does not report per-teacher allocation, number of API/model calls, decoding parameters, or max generation tokens."
+      },
+      {
+        "scope": "CSF candidate ranking / training-label construction",
+        "calls_per_item": "Complete pairwise tournament per prompt over the 24 candidates; implementation-level call count not reported",
+        "candidates_per_item": "24 candidates per prompt",
+        "token_budget": null,
+        "sampling_parameters": "Judge selects funnier joke or tie; presentation order randomized. Judge decoding parameters are not reported.",
+        "compute_or_cost": "Candidate ranking for the full pool consumed ~132 H100 node-hours.",
+        "detail": "Llama-3.3-70B-Instruct pairwise judgments produced Elo/BT rankings used for SFT, DPO, and O-GRPO data."
+      },
+      {
+        "scope": "HTB automated evaluation",
+        "calls_per_item": "42,000 pairwise comparisons per judge over 400 prompts and 15 models",
+        "candidates_per_item": "15 model outputs per prompt are compared pairwise; number of generated samples per model/prompt is not reported",
+        "token_budget": null,
+        "sampling_parameters": "A/B presentation order randomized for judging; model-output decoding parameters not reported.",
+        "compute_or_cost": null,
+        "detail": "Both Llama-3.3-70B and Qwen 2.5-72B judged HTB. BT ratings used 100 bootstrap samples for confidence intervals."
+      },
+      {
+        "scope": "SemEval automated evaluation",
+        "calls_per_item": "5,250 pairwise comparisons per judge over the first 50 official test headlines and 15 models",
+        "candidates_per_item": "15 model outputs per prompt are compared pairwise; number of generated samples per model/prompt is not reported",
+        "token_budget": null,
+        "sampling_parameters": "A/B presentation order randomized for judging; model-output decoding parameters not reported.",
+        "compute_or_cost": null,
+        "detail": "Both Llama-3.3-70B and Qwen 2.5-72B judged SemEval. BT ratings used 100 bootstrap samples for confidence intervals."
+      },
+      {
+        "scope": "HumorGen fine-tuning/training budget",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Max sequence length 1024 for SFT/SFT-Think, DPO/DPO-Think, and GRPO/GRPO-Think; DPO prompt max 512.",
+        "sampling_parameters": null,
+        "compute_or_cost": "Trained on NVIDIA H100-80GB GPUs using LoRA r=16. Reported runtimes: SFT 7.2m, SFT-Think 7.8m, DPO 18.5m, DPO-Think 21.2m, GRPO 23.7m, GRPO-Think 6.0h, HumorGen-Con/Com 2.3m.",
+        "detail": "SFT configured for 3 epochs; DPO and O-GRPO configured for 5 epochs with early stopping patience=2. Table 12 reports learning rates, batch size 16, optimizers, bf16 precision, and alignment-specific settings β=0.1 for DPO and G=24, T=1.0 for GRPO."
+      },
+      {
+        "scope": "Comedian adaptation training budget",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Runtime reported as 2.3m in Table 13; trained on 998 Shaun Eli jokes.",
+        "detail": "Learning rate 5e-5 with cosine schedule, batch size 16, 2 epochs, warmup ratio 0.05, AdamW 8-bit, base checkpoint HumorGen-SFT-7B."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "HTB and SemEval model leaderboards",
+        "present": false,
+        "description": "No prompt-matched human-written joke baseline is evaluated against model outputs on the same prompts. Humans only serve as evaluators in the validation study.",
+        "directly_comparable": false,
+        "detail": "The main comparisons are among LLM-generated outputs judged by LLMs, with a small human validation subset."
+      },
+      {
+        "scope": "Comedian adaptation ablation",
+        "present": false,
+        "description": "The paper uses 998 human-written Shaun Eli stand-up jokes as fine-tuning data for HumorGen-Com-7B, but the human jokes themselves are not evaluated as a prompt-matched output baseline.",
+        "directly_comparable": false,
+        "detail": "The reported regression is for the model after fine-tuning on the stand-up corpus, not a direct comparison between human and model jokes under matched generation/evaluation conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "HTB domains A–G are described as HTB-authored prompts and HTB is evaluation-only in this paper.",
+        "The paper states that no model is fine-tuned on HTB data.",
+        "SemEval evaluation uses the first 50 prompts from the official 300-prompt test set, while training uses a separate 1,200-prompt SemEval experimental set as described."
+      ],
+      "basis": "Risk is mixed. HTB-authored prompts and the no-fine-tuning-on-HTB statement reduce direct training leakage for the authors’ models, but Domain H uses publicly available BBC headlines, SemEval test prompts are official benchmark items, and the paper reports no decontamination test or pretraining-exposure analysis for GPT-5, Kimi-K2, Gemini-2.5-Pro, GPT-4o, open-weight baselines, or the LLM judges. Model snapshots and inference dates are also not reported, so public-data exposure cannot be ruled out."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Leaderboard rankings on HTB and SemEval; claims that 7B HumorGen variants outperform larger baselines; SFT vs DPO vs O-GRPO conclusions; CSD/Think explainer-trap conclusions; persona-performance analysis; judge-assigned mechanism/flaw tag analysis; and the training-data selection used to create SFT/DPO/O-GRPO corpora.",
+      "human_validation": "Small validation study with 3 evaluators over 60 curated pairs; main text reports 170 judgments while Appendix K reports 180 votes. Human majority agreement with the LLM judge is 58.3%, micro-average 52.4%, with human unanimous agreement 31.7%.",
+      "detail": "The headline empirical results rest mainly on LLM pairwise judgments and BT aggregation. Human evaluation is post-hoc and small, so it corroborates judge behavior only partially rather than independently determining the main conclusions."
+    },
+    "reporting_gaps": [
+      "No API model strings, checkpoint revisions, snapshots, or inference dates are reported for proprietary/frontier systems, LLM judges, or most open-weight baselines.",
+      "Access route is not specified for most external models and judges (API vs local vs hosted service).",
+      "Model-output generation settings for benchmark evaluation are not reported: temperature, top-p/top-k, max output tokens, stop sequences, random seeds, and whether outputs were sampled once or selected from multiple candidates.",
+      "The paper does not explicitly disclose any best-of-N or no-best-of-N policy for final benchmark outputs.",
+      "Teacher-ensemble allocation for the 24 CSF candidates is not specified: how many candidates came from Kimi-K2 vs Qwen 2.5-32B-Instruct is unclear.",
+      "Candidate-pool size is inconsistent/underexplained: the method describes 1,200 × 24 = 28,800 candidates, while Appendix tables report 28,789 actual candidates.",
+      "Human-evaluation counts conflict: main text reports 170 blind pairwise judgments, whereas Appendix K reports 180 votes from 3 evaluators × 60 pairs; no explanation is provided for the discrepancy.",
+      "Human evaluator demographics are sparse: no age, gender, nationality/cultural background, native language, or English proficiency is reported.",
+      "Human-evaluation pair curation is only summarized by category; the exact sampling/selection procedure for the 60 curated pairs is not fully specified.",
+      "No decontamination or memorization analysis is reported for SemEval, BBC headline prompts, HTB prompts, evaluated models, or LLM judges.",
+      "No code, checkpoint, or data repository URL is provided in the paper, despite stating HTB-authored prompts are released under CC BY 4.0.",
+      "LLM judge prompt details, tie handling in the contest matrix, and judge decoding/token budgets are not fully reported.",
+      "API costs or monetary cost estimates are not reported; only H100 node-hours for candidate ranking and training runtimes are given."
+    ]
   }
 }

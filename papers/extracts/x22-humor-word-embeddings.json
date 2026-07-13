@@ -1,0 +1,391 @@
+{
+  "key": "x22-humor-word-embeddings",
+  "ref": "Part 4 (audience-modeling anchor)",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x22-humor-word-embeddings/x22-humor-word-embeddings.md",
+  "source_md_sha256": "c2ec706f7e5748fbb745bc19586481b421e32ae190c08ef2a16134099f7d32cb",
+  "source_truncated": false,
+  "title": "Humor in Word Embeddings: Cockamamie Gobbledegook for Nincompoops",
+  "authors": [
+    "Limor Gultchin",
+    "Genevieve Patterson",
+    "Nancy Baym",
+    "Nathaniel Swinger",
+    "Adam Tauman Kalai"
+  ],
+  "year": 2019,
+  "venue": "Proceedings of the 36th International Conference on Machine Learning, Long Beach, California, PMLR 97, 2019",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Do simple linear directions in word embeddings correlate with aggregate human ratings of single-word humor?",
+    "Can word embeddings capture theory-motivated features of word humor such as humorous sound, juxtaposition, sexual connotation, scatological connotation, insults, and colloquiality?",
+    "Can an individual person's sense of humor be represented as a vector that predicts preferences for new, unrated words?",
+    "Do clusters of individual sense-of-humor embeddings reveal group and demographic differences in humor preferences?"
+  ],
+  "tasks": [
+    "single-word humor rating prediction",
+    "single-word humor feature prediction",
+    "individual humor preference prediction",
+    "sense-of-humor clustering and demographic preference analysis"
+  ],
+  "humor_domains": [
+    "single-word humor",
+    "funny-sounding words",
+    "juxtaposed or incongruous words",
+    "sexual connotation",
+    "scatological connotation",
+    "insults",
+    "colloquial words",
+    "multi-word tokens and phrases"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Engelthaler-Hill Dataset",
+      "role": "evaluated-on",
+      "size": "4,997 single words, each rated by approximately 35 raters on a scale of 1-5"
+    },
+    {
+      "name": "Cockamamie Gobbledegook single-word humor data",
+      "role": "introduced",
+      "size": "120,000 words and phrases; 8,120 filtered words; 216 words rated by 1,678 U.S.-based raters; 1,500 words annotated for six humor features by at least 8 different raters per feature/word pair"
+    }
+  ],
+  "models_evaluated": [
+    "GNEWS (word2vec)",
+    "WebSubword (fastText)",
+    "WebFast (fastText)",
+    "WebGlove (gloVe)"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Humor vector",
+      "summary": "The paper fits a least-squares linear regression from 300-dimensional word embeddings to mean humor ratings, treating the resulting linear direction as a humor vector whose inner product with other word vectors predicts humor."
+    },
+    {
+      "name": "Sense-of-humor embeddings",
+      "summary": "An individual's sense of humor is represented by the normalized average of embeddings for words they rated positively. These vectors are used for clustering raters and for predicting which new words different people will find funny."
+    },
+    {
+      "name": "Know-your-audience test",
+      "summary": "The paper introduces a pairwise cold-start test: given two people’s training words and two held-out funniest words, the method predicts which person chose which held-out word using only embedding geometry."
+    },
+    {
+      "name": "Theory-based humor feature annotation",
+      "summary": "The authors collect binary crowd annotations for six features motivated by humor theories: humorous sound, juxtaposition, colloquiality, insults, sexual connotation, and scatological connotation."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "Motivates the humorous sound feature and the juxtaposition/unexpected incongruity feature, including words with unusual sound combinations or surprising combinations of unrelated terms."
+    },
+    {
+      "theory": "relief",
+      "usage": "operationalized",
+      "detail": "Motivates sexual connotation and scatological connotation features as humor related to taboo subjects and pressure relief."
+    },
+    {
+      "theory": "superiority",
+      "usage": "operationalized",
+      "detail": "Motivates the insulting-words feature, where words that put others down may be humorous to some people."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "crowd-votes",
+      "detail": "Amazon Mechanical Turk workers performed forced-choice sextuple comparisons over 120k, 8k, and 216 word sets; selected words were treated as positive labels and unselected words as negative labels."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The paper uses the Engelthaler & Hills mean humor ratings and collects new human annotations for six humor features on 1,500 words, with binary yes/no judgments averaged over at least 8 raters per feature/word pair."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports Pearson correlation coefficients for humor-rating and feature prediction, using 10-fold cross-validation repeated 100 times with 95% confidence intervals where stated, and reports success rates on know-your-audience tests."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The best cross-validated aggregate humor-rating prediction on the Engelthaler-Hill Dataset was achieved by WebFast and WebGlove.",
+      "metric": "Pearson correlation with 10-fold cross-validation",
+      "value": "0.730 ± 0.002",
+      "dataset": "Engelthaler-Hill Dataset",
+      "best_system": "WebFast (fastText); WebGlove (gloVe)"
+    },
+    {
+      "finding": "The strongest non-cross-validated aggregate humor-rating correlation was achieved by WebGlove.",
+      "metric": "Pearson correlation",
+      "value": "0.768",
+      "dataset": "Engelthaler-Hill Dataset",
+      "best_system": "WebGlove (gloVe)"
+    },
+    {
+      "finding": "GNEWS also captured aggregate word humor, though below the web-crawl embeddings.",
+      "metric": "Pearson correlation with 10-fold cross-validation",
+      "value": "0.675 ± 0.003",
+      "dataset": "Engelthaler-Hill Dataset",
+      "best_system": "GNEWS (word2vec)"
+    },
+    {
+      "finding": "In the normal know-your-audience test, sense-of-humor embeddings predicted which held-out funniest word belonged to which person above chance.",
+      "metric": "Success rate",
+      "value": "68.2%",
+      "dataset": "Cockamamie Gobbledegook single-word humor data",
+      "best_system": "Sense-of-humor embeddings"
+    },
+    {
+      "finding": "The easy and hard know-your-audience variants achieved different success rates using disjoint or only five training words.",
+      "metric": "Success rate",
+      "value": "Easy: 78.1%; Hard: 65.0%",
+      "dataset": "Cockamamie Gobbledegook single-word humor data",
+      "best_system": "Sense-of-humor embeddings"
+    },
+    {
+      "finding": "Clustering sense-of-humor vectors produced demographic differences without using demographics in clustering.",
+      "metric": "Cluster demographics and significance",
+      "value": "Cluster 1: 70.3% female; Cluster 5: 35.2% female; Cluster 3 mean age 42.3; Cluster 5 mean age 34.7; p-value < 10^{-6}",
+      "dataset": "Cockamamie Gobbledegook single-word humor data",
+      "best_system": "K-means++ over sense-of-humor embeddings"
+    }
+  ],
+  "key_findings": [
+    "Linear directions in word embeddings predicted aggregate single-word humor ratings, with cross-validated correlations up to 0.730 ± 0.002 on the Engelthaler-Hill Dataset.",
+    "The authors introduced a public crowdsourced dataset starting from 120,000 words and phrases, filtering to 8,120 and then 216 highly humorous words, and adding six theory-based feature annotations for 1,500 words.",
+    "Averaging the vectors of words a person rated funny produced an individual sense-of-humor embedding that generalized to held-out words in the know-your-audience tests.",
+    "Sense-of-humor vector clusters differed by demographic composition and humor-feature preferences, including a female-skewed cluster preferring funny-sounding words and a male-skewed younger cluster scoring higher on sexual connotation and juxtaposition.",
+    "Word embeddings captured the six annotated humor features to varying degrees: GNEWS predicted colloquial words and insults with correlations greater than 0.5, while WebSubword predicted all features better than GNEWS except colloquiality and reached correlations equal or greater than 0.4 for five of six features."
+  ],
+  "limitations": [
+    "The paper states that the Engelthaler-Hill 5k-word evaluation set is somewhat limited, is aggregate-only, and does not contain many of the funniest words found in the authors' broader data collection.",
+    "The main crowdsourcing studies use English-speaking labelers, with 98% identifying English as their native language and U.S.-based workers except for results in Table 4 of the appendix.",
+    "Eligible strings in the authors' study were restricted to lower-case words or phrases made of the twenty-six lower-case Latin letters with at most one underscore representing a space; strings with digits or other non-alphabetic characters were omitted.",
+    "The 216-word rating process introduced noise because each user's initial random permutation of words affected which words could advance to later comparison rounds.",
+    "The authors state that word embeddings are only one lens on single-word humor and that phonotactic, morphological, and orthographic characteristics could complement the embedding approach."
+  ],
+  "safety_ethics_notes": "The paper begins with a warning that it contains words people rated humorous, including many offensive words. The analyzed humor features explicitly include sexual connotation, scatological connotation, and insults.",
+  "artifacts": {
+    "code_url": "https://github.com/limorigu/Cockamamie-Gobbledegook",
+    "data_url": "https://github.com/limorigu/Cockamamie-Gobbledegook",
+    "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Engelthaler-Hill dataset: mean humor ratings for 4,997 English single words; each word rated by approximately 35 raters on a 1-5 scale. The supplied paper also says EH provides aggregate means by binary gender (M/F) and age groups over 32/under 32.",
+        "detail": "Prior public dataset used as the primary aggregate humor-rating benchmark. The paper does not report the total number of EH participants or their recruitment/geography; it uses only aggregate EH ratings, not individual-level data."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": "1,678 U.S.-based raters for the 216-word study; participant counts for the 120k and 8k stages are not reported",
+        "population": "English-speaking Amazon Mechanical Turk labelers; all identified themselves as fluent in English and 98% identified English as their native language.",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": "U.S.-based for the main crowdsourcing studies, except for results in Table 4 of the appendix.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Humor rating studies used forced-choice sextuples. In the 120k study, each string was shown to at least three different participants in three different sextuples. In the 8k study, each word was shown to at least 15 different participants in random sextuples. In the 216 study, each participant made 36 initial sextuple choices, then 6 further sextuple choices, then one final sextuple choice; the authors mapped these choices to ratings 0-3. Workers were shown daily-limited batches of up to 50 sextuple comparisons and no worker labeled more than 16 batches.",
+        "detail": "These ratings created the authors' humor dataset and supplied individual-level data for sense-of-humor vectors, clustering, and know-your-audience tests."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Same worker pool as the authors' crowdsourcing studies: English-speaking Mechanical Turk workers, all self-identified as fluent in English and 98% as native English speakers.",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": "U.S.-based for the main crowdsourcing studies, except for results in Table 4 of the appendix.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Feature annotation study: 1,500 words were annotated for six binary humor features: humorous sound, juxtaposition, colloquial, insulting, sexual connotation, and scatological connotation. Results were averaged over at least 8 different raters per feature/word pair. Each task presented one feature definition and 30 words to a rater.",
+        "detail": "A small number of workers were eliminated due to poor performance on gold-standard words; the exact number eliminated is not reported in the supplied text."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Engelthaler-Hill raters",
+        "role": "primary",
+        "blind": null,
+        "detail": "Their 1-5 word-humor ratings, used only in aggregate form in this paper, provide the ground-truth labels for the EH aggregate humor-rating prediction experiments."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk humor raters",
+        "role": "primary",
+        "blind": null,
+        "detail": "Their forced-choice sextuple selections determine positive/negative humor labels, the 216-word high-humor set, individual 0-3 ratings, sense-of-humor vectors, clustering inputs, and know-your-audience test data."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk feature annotators",
+        "role": "primary",
+        "blind": null,
+        "detail": "Their binary yes/no annotations determine the labels for the six theory-motivated humor-feature prediction analyses."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Pearson correlation with least-squares regression and cross-validation",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to evaluate predicted aggregate EH humor ratings and predictability of the six feature labels; 10-fold cross-validation was repeated 100 times where reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Know-your-audience success rate",
+        "role": "primary",
+        "blind": null,
+        "detail": "The paper computes the fraction of eligible person pairs for which the embedding-based assignment of two held-out funniest words to two raters is correct."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "K-means++ clustering and random-shuffle significance tests",
+        "role": "secondary",
+        "blind": null,
+        "detail": "K-means++ over sense-of-humor embeddings determines clusters; repeated random shuffling/partitioning of users into same-size groups is used to assess age and gender differences."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Entire paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates static word embeddings and regression/clustering methods; it does not generate humor text or sample multiple candidate model outputs."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GNEWS (word2vec)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Publicly available pre-trained 300-dimensional word embedding trained with word2vec on about 100 billion tokens from Google News, cited to Mikolov et al. (2013a). Exact file/version/download date not reported."
+      },
+      {
+        "name": "WebSubword (fastText)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Publicly available pre-trained 300-dimensional fastText embedding trained on a web crawl of 600 billion tokens using subword information; described as able to evaluate virtually any word or phrase. Exact file/version/download date not reported."
+      },
+      {
+        "name": "WebFast (fastText)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Publicly available pre-trained 300-dimensional fastText embedding trained on a web crawl of 600 billion tokens without the subword capability described for WebSubword. Exact file/version/download date not reported."
+      },
+      {
+        "name": "WebGlove (gloVe)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Publicly available pre-trained 300-dimensional GloVe embedding trained on a web crawl of 840 billion tokens, cited to Pennington et al. (2014). Exact file/version/download date not reported."
+      },
+      {
+        "name": "Additional fastText and GloVe embeddings",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper notes that a number of additional fastText and GloVe embeddings trained on different and generally smaller corpora were found to have smaller humor-rating correlations, but it does not identify the exact embeddings or report detailed results."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Aggregate humor-rating and humor-feature prediction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Not applicable; static 300-dimensional word embeddings, not generative token models.",
+        "sampling_parameters": "Least-squares linear regression; 10-fold cross-validation repeated 100 times for reported cross-validated correlations/confidence intervals.",
+        "compute_or_cost": null,
+        "detail": "The paper reports embedding dimensionality and cross-validation repetitions but not hardware, runtime, random seeds, exact splits, or cost."
+      },
+      {
+        "scope": "Sense-of-humor clustering",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Not applicable; clustering of averaged static word vectors.",
+        "sampling_parameters": "K-means++ in scikit-learn with default parameters; K=5 chosen using the elbow method. Significance for demographic cluster differences was estimated by random shuffling/partitioning users into same-size groups 10^7 times.",
+        "compute_or_cost": null,
+        "detail": "Clustering used the normalized average GNEWS vector of the 36 words each rater rated positively. The paper does not report scikit-learn version or random seeds."
+      },
+      {
+        "scope": "Know-your-audience test",
+        "calls_per_item": "Brute force over all eligible pairs: 1,004 pairs for the easy test and 818,790 pairs for the normal and hard tests.",
+        "candidates_per_item": "Two possible assignments of two held-out funniest words to two participants per pair.",
+        "token_budget": "Not applicable; static word-vector matching, not generative decoding.",
+        "sampling_parameters": "Normal and easy tests used 35 other positively rated training words per participant; the hard test used only the five words each participant rated 2. Eligible normal/hard pairs required each participant to have rated the other's funniest word as 0.",
+        "compute_or_cost": null,
+        "detail": "The paper reports pair counts and training/test word structure, but the embedding used for the Table 3 know-your-audience results is not explicitly named in Section 7."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Aggregate humor-rating prediction, feature prediction, clustering, and know-your-audience tests",
+        "present": false,
+        "description": "Human ratings and annotations serve as labels/ground truth. The paper does not report a separate human prediction baseline for the model tasks.",
+        "directly_comparable": null,
+        "detail": "No human participants are asked to predict EH mean ratings, six feature labels, cluster assignments, or held-out know-your-audience word-person assignments under conditions matched to the embedding methods."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Several evaluated embeddings, including GNEWS and WebGlove, are cited to sources predating the 2017 Engelthaler-Hill humor norms.",
+        "The authors' 120k/8k/216 humor ratings and 1,500-word feature annotations were newly collected for this study after selecting words from pretrained embeddings.",
+        "Supervised label use is separated by 10-fold cross-validation repeated 100 times for aggregate humor-rating and feature-prediction analyses.",
+        "The know-your-audience test uses held-out funniest words and does not use ratings of the test words or other participants for the prediction."
+      ],
+      "basis": "The paper does not discuss training-data contamination or decontamination. Risk is lowered because the systems are static unsupervised word embeddings rather than instruction-tuned LLMs, some embeddings predate EH, and much of the evidence uses newly collected labels. Risk remains moderate for the EH benchmark because it is a public 2017 dataset and some evaluated web-crawl embeddings are cited to 2018 work with unspecified crawl dates/files, so the paper does not rule out exposure of web-trained embeddings to EH-derived content or humor-word lists."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs are used as judges, metrics, labelers, or generators in the supplied paper."
+    },
+    "reporting_gaps": [
+      "Total participant count, recruitment details, geography, and demographics for the Engelthaler-Hill raters are not reported in this paper.",
+      "Participant counts for the authors' 120k and 8k humor-rating stages are not reported, and overlap of workers across the 120k, 8k, 216, and feature-annotation studies is not specified.",
+      "The feature-annotation study does not report total annotator count or the exact number of workers eliminated for poor performance on gold-standard words.",
+      "The supplied text gives limited MTurk procedural details: task dates, compensation, qualification filters beyond English fluency/U.S.-based status, full demographic missingness/exclusions, and consent/IRB details are not reported.",
+      "Exact pretrained embedding files, versions/snapshots, vocabulary versions, download dates, and inference dates are not reported.",
+      "The additional fastText and GloVe embeddings mentioned as having lower correlations are not identified, and their results are not tabulated.",
+      "The embedding used for the Table 3 know-your-audience test is not explicitly named in Section 7.",
+      "Random seeds, exact cross-validation splits, k-means initialization details beyond K-means++ defaults, scikit-learn version, and shuffle-test implementation details are not reported.",
+      "Hardware, runtime, and monetary cost are not reported.",
+      "No decontamination analysis is reported for public EH labels or humor-word resources against the web-crawl embeddings."
+    ]
+  }
+}

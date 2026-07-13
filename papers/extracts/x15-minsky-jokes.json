@@ -95,5 +95,68 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "none",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "No empirical evaluation, annotation, labeling, voting, or judging procedure is reported. The paper is a theoretical essay about humor, cognition, censors, frames, analogy, and commonsense reasoning."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "whole paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "No AI or computational text-generation experiment is reported."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "whole paper",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Not applicable: the paper reports no model inference, implementation run, API use, compute setup, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "whole paper",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "No human-vs-model baseline or matched human performance comparison is reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper predates modern LLM benchmarking and reports no empirical benchmark, dataset evaluation, or model run. Therefore training/test contamination is not applicable."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLM judge or LLM-based metric is used. The paper’s claims are theoretical and argumentative rather than based on LLM evaluation."
+    },
+    "reporting_gaps": [
+      "The paper reports no empirical study design, participant recruitment, participant counts, or participant demographics.",
+      "The paper reports no dataset, annotation protocol, judging rubric, quantitative metric, or statistical analysis.",
+      "The paper reports no computational model implementation or model inference settings. These omissions are consistent with the paper’s status as a theoretical essay rather than an empirical AI evaluation."
+    ]
   }
 }

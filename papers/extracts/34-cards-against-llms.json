@@ -169,5 +169,322 @@
     "code_url": "https://github.com/aida-ugent/cards_against_llms",
     "data_url": "Data is available upon request to CAH Lab at mail@cardsagainsthumanity.com",
     "other": "CAH Lab platform: https://lab.cardsagainsthumanity.com"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": "at least 824 identified players in the sampled rounds; total unique player count not reported because about 50% of sampled rounds have missing player IDs",
+        "population": "Players on the online Cards Against Humanity Labs platform whose gameplay logs supplied the human reference choices; the limitations describe the population as self-selected and predominantly Western.",
+        "recruitment": "Voluntary gameplay for entertainment; participants were not recruited as annotators or crowdworkers for this study.",
+        "geography": "Predominantly Western; country and U.S. state are optional demographic attributes, but detailed distributions are not reported.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Raw logs collected November 2023-April 2025 contained 148,497 past games/rounds. After filtering, 107,562 unique rounds remained. The study sampled 4,947 unique rounds, each with one human-picked white card. LLM evaluation duplicated these into 9,894 round-replicate records; 282 records with at least one invalid model response were excluded, leaving 9,612 valid model-evaluation records.",
+        "detail": "Each gameplay record includes a black card prompt, ten candidate white cards, completion time, the winning card, and player identity when available. Filtering excluded rounds completed in fewer than 10 seconds, rounds exceeding 120 seconds, and skipped rounds."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": "not reported for the full optional survey; demographic accuracy analysis used 824 players with non-missing IDs linked to the sampled rounds",
+        "population": "CAH Lab players linked to sampled rounds and optional demographic responses; players could contribute multiple rounds.",
+        "recruitment": "Optional demographic survey on the CAH Lab platform.",
+        "geography": "Country and U.S. state were among the self-reported demographic fields; subgroup distributions are not reported in the paper text.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Among the 4,947 sampled rounds, 2,437 could be mapped to a valid player identifier. Demographic analysis aggregated model accuracy at player level across rounds and two model replicates for gender, sexual orientation, race, political ideology, country, and U.S. state; 95% confidence intervals were bootstrapped at the player level.",
+        "detail": "The paper states that statistical power was insufficient to detect fine-grained demographic differences and reports no evidence of substantial heterogeneity across the studied sociodemographic lines."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Paper authors",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Authors manually verified coherence of Mixtral-generated topic labels on an unspecified subset of cards and harmonized GPT-5/Copilot-produced topic taxonomies.",
+        "detail": "No systematic human annotation protocol, subset size, rater count, or inter-annotator agreement is reported for the topic labels."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "CAH Lab gameplay players",
+        "role": "primary",
+        "blind": true,
+        "detail": "The human-selected white card in each sampled round is the reference label for human-LLM exact-match accuracy. Each reference label comes from a single player in naturalistic gameplay, not from multiple annotators."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5.2, Gemini 3 Flash, Claude Opus 4.5, Grok 4, and DeepSeek-V3.2",
+        "role": "primary",
+        "blind": true,
+        "detail": "Each evaluated model acted as a humor judge by selecting the single funniest white card from the black card prompt and numbered slate. Prompts did not include the human choice or other models' choices. These outputs determine human-LLM alignment, self-consistency, inter-model agreement, position-bias, and model-choice analyses."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Exact-match accuracy, agreement, and bootstrap confidence intervals",
+        "role": "primary",
+        "blind": null,
+        "detail": "Human-LLM alignment is computed as exact match to the human-picked card, averaged over two replicates. The paper also computes cross-replicate self-consistency, pairwise inter-model agreement, and bootstrapped 95% confidence intervals."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Chi-square position-bias tests and conditional-logit surrogate analyses",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Position-bias claims use chi-square goodness-of-fit tests against a uniform pick distribution. The joint position/topic analysis fits per-model conditional logit models on 80% of rounds and reports round-level accuracy on the remaining 20%; topic covariates come from LLM-generated labels."
+      },
+      {
+        "type": "LLM",
+        "name": "Mixtral 8x7B",
+        "role": "data-labeling",
+        "blind": true,
+        "detail": "Used in an LLM-as-judge scheme to annotate all 2,074 unique white cards in the final dataset with topics. The prompt showed the input card and a fixed list of 15 topic slugs; final annotations had 1 to 3 topics per card."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5 via Microsoft Copilot",
+        "role": "data-labeling",
+        "blind": true,
+        "detail": "A version of GPT-5 accessed through Microsoft Copilot was prompted twice, each time with a different sample of 100 white cards, to propose topic taxonomies that the authors then harmonized into the final 15-topic list."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Authors harmonized the two GPT-5/Copilot taxonomies and manually checked coherence of a subset of Mixtral topic annotations; no systematic human inter-annotator validation is reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Card-popularity and XGBoost boosted-tree baselines",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Two non-LLM baselines contextualize LLM accuracy: a card-popularity baseline using training-set white-card win rates and an XGBoost classifier trained on human choices from 84,110 CAH rounds."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Evaluated LLM CAH humor-selection task",
+        "mode": "single-sample",
+        "n": "One parsed output per model per round-replicate; each of 4,947 unique rounds was run in two shuffled-order replicates. Both replicates were used/averaged rather than selecting the better one.",
+        "selector": "none",
+        "detail": "This is not best-of-N generation. The model's single response to each prompt was parsed as the selected card; null, failed, or unparseable responses were treated as abstentions."
+      },
+      {
+        "scope": "Mixtral topic annotation for white cards",
+        "mode": "single-sample",
+        "n": "One topic-labeling output per white card is reported for 2,074 unique white cards; repeated sampling or best-of-N selection is not reported.",
+        "selector": "none",
+        "detail": "The output schema required a JSON object with 1-4 topic slugs from a fixed 15-topic list; the paper reports that all cards were successfully annotated with 1 to 3 topics."
+      },
+      {
+        "scope": "GPT-5/Copilot topic-taxonomy creation",
+        "mode": "single-sample",
+        "n": "Two separate prompt runs on two different 100-card samples",
+        "selector": "human",
+        "detail": "The paper reports two generated taxonomies that were harmonized by the authors; it does not report best-of-N selection."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "OpenAI GPT",
+        "version_or_snapshot": "gpt-5.2",
+        "inference_date": "All evaluated-model outputs were collected between 17 January and 10 March 2026; per-model dates not reported.",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Referred to as GPT in result sections."
+      },
+      {
+        "name": "Google Gemini",
+        "version_or_snapshot": "gemini-3-flash-preview",
+        "inference_date": "All evaluated-model outputs were collected between 17 January and 10 March 2026; per-model dates not reported.",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Referred to as Gemini 3 Flash or Gemini in the paper."
+      },
+      {
+        "name": "Anthropic Claude",
+        "version_or_snapshot": "claude-opus-4-5",
+        "inference_date": "All evaluated-model outputs were collected between 17 January and 10 March 2026; per-model dates not reported.",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Referred to as Claude Opus 4.5 or Claude in the paper."
+      },
+      {
+        "name": "xAI Grok",
+        "version_or_snapshot": "grok-4",
+        "inference_date": "All evaluated-model outputs were collected between 17 January and 10 March 2026; per-model dates not reported.",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Referred to as Grok in result sections."
+      },
+      {
+        "name": "DeepSeek",
+        "version_or_snapshot": "DeepSeek-V3.2",
+        "inference_date": "All evaluated-model outputs were collected between 17 January and 10 March 2026; per-model dates not reported.",
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Referred to as DeepSeek in result sections."
+      },
+      {
+        "name": "Mixtral",
+        "version_or_snapshot": "8x7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for white-card topic annotation. Provider, checkpoint/snapshot, access route, and inference date are not reported."
+      },
+      {
+        "name": "GPT-5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "A version of GPT-5 accessed through Microsoft Copilot was used to propose topic taxonomies; exact Copilot model version/snapshot and date are not reported."
+      },
+      {
+        "name": "Sentence-BERT all-MiniLM-L6-v2",
+        "version_or_snapshot": "all-MiniLM-L6-v2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used to obtain 384-dimensional embeddings of black-card and white-card texts for the XGBoost human-choice baseline; software/checkpoint date not reported."
+      },
+      {
+        "name": "XGBoost classifier baseline",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Trained on 84,110 CAH rounds to predict human choices at the card-option level; hyperparameter search space is reported, but package version and compute environment are not."
+      },
+      {
+        "name": "Per-model conditional logit surrogate models",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Fitted to predict each LLM's choices from card position and topic flags using an 80/20 train/test split; implementation and software versions are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "CAH humor selection for GPT-5.2, gemini-3-flash-preview, claude-opus-4-5, grok-4, and DeepSeek-V3.2",
+        "calls_per_item": "API call count/batching not reported. The experimental design produced 9,894 round-replicate prompts per evaluated model (4,947 rounds × 2 replicates), or 49,470 model-records across five models.",
+        "candidates_per_item": "10 candidate white cards in all rounds; the model was instructed to choose one card. For two-blank black cards, a target slot was designated and the model filled only that slot.",
+        "token_budget": "Maximum output length of 128 tokens.",
+        "sampling_parameters": "Fixed temperature 0.8 for all evaluated models; identical prompt template; no examples or chain-of-thought instructions; white-card order shuffled differently across the two replicates.",
+        "compute_or_cost": "Models were queried through their respective APIs. The paper states that API costs constrained experimental scale, but exact cost is not reported.",
+        "detail": "Models were instructed to answer only with '<number>. <exact card text>'. Gemini produced null or failed picks in 280 records, Grok in 2 records, and GPT/Claude/DeepSeek in 0; records with any model abstention or unparseable response were excluded from downstream all-model analyses."
+      },
+      {
+        "scope": "Mixtral 8x7B white-card topic annotation",
+        "calls_per_item": "Not reported; the paper reports that all 2,074 unique white cards were annotated using the prompt template.",
+        "candidates_per_item": "15 possible topic labels; output schema requested 1-4 topics, and final annotations had 1 to 3 topics per card.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Access method, batching, retries, temperature, token limits, and annotation date are not reported."
+      },
+      {
+        "scope": "GPT-5/Copilot topic-taxonomy generation",
+        "calls_per_item": "Two prompt runs are reported, each with a different sample of 100 white cards.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The generated taxonomies were harmonized by the authors into 15 topics; exact Copilot version, date, decoding settings, and cost are not reported."
+      },
+      {
+        "scope": "Card-popularity baseline predicting human choices",
+        "calls_per_item": null,
+        "candidates_per_item": "At evaluation, predicts among the 10 white-card options using their win rates in the training set.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Training set contained 84,110 CAH rounds after removing all LLM-annotated rounds and data from any known players who participated in those rounds."
+      },
+      {
+        "scope": "XGBoost boosted-tree baseline predicting human choices",
+        "calls_per_item": null,
+        "candidates_per_item": "At test time, the card with highest predicted pick probability among the round's options is compared with the actual human choice.",
+        "token_budget": null,
+        "sampling_parameters": "RandomizedSearchCV with 50 iterations and 3-fold stratified cross-validation optimizing ROC-AUC; searched n_estimators, max_depth, learning_rate, min_child_weight, scale_pos_weight, subsample, and colsample_bytree values listed in Table 4.",
+        "compute_or_cost": null,
+        "detail": "Training set contained 84,110 rounds. Features were 384-dimensional white-card embedding, 384-dimensional black-card embedding, and 15 topic annotations, for 783 total features; final model was refit on the full training set."
+      },
+      {
+        "scope": "Conditional-logit surrogate models for LLM behavior",
+        "calls_per_item": null,
+        "candidates_per_item": "10 candidate white cards per round.",
+        "token_budget": null,
+        "sampling_parameters": "For each evaluated LLM, a conditional logit model was fitted on 80% of rounds and tested on the remaining 20%; covariates were one-hot slate position and white-card topic flags.",
+        "compute_or_cost": null,
+        "detail": "The surrogate models ignore the black-card prompt and predict the LLM's selected white card from position and topic features only."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human reference in CAH gameplay benchmark",
+        "present": true,
+        "description": "For each sampled round, the reference is the actual white card selected by one CAH Lab player as funniest in naturalistic gameplay.",
+        "directly_comparable": true,
+        "detail": "LLMs were given the same black card and ten candidate white cards and asked to choose one. Caveats: human gameplay was naturalistic rather than an API prompt, only one human choice is available per round, and the LLMs were run in two shuffled-order replicates."
+      },
+      {
+        "scope": "Human inter-rater or human-ceiling baseline",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The paper explicitly states that the CAH Lab dataset does not allow measurement of inter-annotator agreement; no multiple-human judgments for the same round are available."
+      },
+      {
+        "scope": "Demographic subgroup human comparison",
+        "present": true,
+        "description": "Optional demographic data were used to compute model exact-match accuracy at player level across demographic subgroups.",
+        "directly_comparable": true,
+        "detail": "This remains an exact-match comparison to the same human gameplay choices, restricted to players with non-missing identifiers and available demographic information; subgroup counts are not reported in the text."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The evaluated rounds were randomly sampled from CAH Lab gameplay logs rather than from a pre-existing public benchmark split described in the paper.",
+        "Human gameplay logs were collected before the model outputs were collected.",
+        "For the non-LLM baselines, the training set removed LLM-annotated rounds and data from known players who participated in those rounds; this addresses baseline leakage, not LLM pretraining contamination."
+      ],
+      "basis": "The paper does not discuss contamination, model training cutoffs, or decontamination tests. The exact sampled CAH Lab gameplay labels are not presented as a standard public benchmark and may be less exposed, but the underlying Cards Against Humanity card texts and game materials are public and could plausibly be in later models' training data. Because evaluated frontier models were queried after the logs were collected and no decontamination control is reported, risk is assessed as moderate rather than low."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Topic-bias heatmap claims, claims that models over-select bodily/sexual topics and under-select politics/identity topics relative to humans, and the topic-feature component of the conditional-logit surrogate results. The primary exact-match human-LLM alignment, self-consistency, inter-model agreement, and position-bias chi-square results do not rely on LLM-generated topic labels.",
+      "human_validation": "Authors manually verified coherence of topic labels on an unspecified subset and found them generally consistent and meaningful; no systematic human inter-annotator agreement or validation protocol is reported.",
+      "detail": "Mixtral 8x7B labeled white-card topics, and GPT-5/Copilot helped create the topic taxonomy. No LLM judge scored the humor quality of model outputs against humans."
+    },
+    "reporting_gaps": [
+      "Total unique number of CAH Lab players contributing the sampled human reference choices is not reported; about 50% of sampled rounds have missing player IDs.",
+      "Detailed demographic subgroup counts and distributions are not reported in the text.",
+      "No inter-rater agreement, human-human ceiling, or multiple human judgments per evaluated round are available.",
+      "Exact per-model API endpoints, snapshots, and per-model inference dates are not reported; only a shared output-collection date range is given.",
+      "API call count, batching, retry policy, and total cost are not reported, despite API cost being cited as a constraint.",
+      "Decoding parameters beyond temperature 0.8 and max output length 128 are not reported, such as top_p, seeds, stop sequences, or provider-specific defaults.",
+      "Random seeds for round sampling and white-card shuffling are not reported.",
+      "Model training data cutoffs and contamination/decontamination checks are not discussed.",
+      "Mixtral 8x7B access route, provider, exact checkpoint/snapshot, inference date, temperature, and token limits are not reported.",
+      "GPT-5/Copilot exact version, date, and sampling settings for topic-taxonomy generation are not reported.",
+      "Manual topic-label validation subset size, number of human validators, procedure, and agreement statistics are not reported.",
+      "Software/package versions and compute environment for XGBoost, conditional logit models, and embedding generation are not reported.",
+      "The procedure for designating target_slot in two-blank CAH prompts is not fully described."
+    ]
   }
 }

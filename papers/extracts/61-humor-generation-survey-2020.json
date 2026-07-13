@@ -295,5 +295,118 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "survey authors Miriam Amin and Manuel Burghardt",
+        "recruitment": "not applicable; paper authors",
+        "geography": null,
+        "languages": [],
+        "observations": "12 system-level humorousness (H) and complexity (C) rankings in Table 1 on a 1–3 ordinal scale.",
+        "detail": "The authors propose humorousness and complexity criteria and rank surveyed systems themselves. They state that the humorousness assessment could only consider jokes published by the original system authors, usually 3–5 examples, and that such examples may have been manually filtered."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "human participants in prior humor-generation user studies summarized by the survey",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Human ratings of generated jokes, typically on Likert scales from 0 = not a joke to 5 = really funny; Yang and Sheng (2017) and Valitutti et al. (2016) are reported as using four-step Likert scales.",
+        "detail": "The survey says most previous systems evaluated humorousness through user studies with actual humans, but it does not report participant counts, demographics, recruitment, item counts, or detailed protocols for those prior studies."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "test persons in Yu et al. (2018) Soft Turing Test, as reported by the survey",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Humanness ratings of jokes on a three-score Likert scale: 2 = definitely human, 0 = definitely machine.",
+        "detail": "This is described as a prior evaluation in which test persons rated whether generated jokes appeared human-generated. The survey does not provide the number or characteristics of test persons."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": "Miriam Amin and Manuel Burghardt",
+        "role": "primary",
+        "blind": null,
+        "detail": "The survey authors determine the paper’s own comparative Table 1 rankings for humorousness and complexity. No blinding, independent annotation, or inter-annotator agreement is reported."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper summarizes prior user-study evaluations in which humans rated generated jokes on Likert scales or rated humanness in a Soft Turing Test. These judges support the survey’s discussion of evaluation practices, not a newly run experiment."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "This survey paper’s own study design",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The authors did not run humor generators or sample new outputs. Their comparison relied on examples published in the original system papers; they note these were usually 3–5 examples and may have been manually filtered, with Petrović and Matthews (2013) specifically described as hand-picking best jokes."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "This survey paper",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No model inference or generation was performed by the survey authors, so no calls, candidates, token limits, sampling parameters, compute, or cost apply."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Survey authors’ Table 1 comparison",
+        "present": false,
+        "description": "No human joke-generation baseline is evaluated under matched conditions; the comparison ranks only computational systems using author-defined humorousness and complexity criteria.",
+        "directly_comparable": false,
+        "detail": "The paper discusses the broader goal of imitating human humor but does not collect or evaluate matched human outputs for its own comparison."
+      },
+      {
+        "scope": "Yu et al. (2018) Soft Turing Test as summarized by the survey",
+        "present": true,
+        "description": "The survey reports that test persons rated the humanness of generated jokes on a three-score scale, following the idea that a computer-generated joke is successful if people cannot tell it apart from a human-generated joke.",
+        "directly_comparable": null,
+        "detail": "The survey does not provide enough protocol detail to determine whether human and model items were evaluated under materially matched conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The survey does not train or run models and does not evaluate later models on a public benchmark. It qualitatively reviews prior humor-generation systems and ranks them from published examples. Possible cherry-picking or publication-selection bias is discussed by the authors but is separate from benchmark/model contamination risk."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs are used as judges or metrics. The paper predates modern LLM-as-judge evaluation and its own headline comparison is determined by the authors."
+    },
+    "reporting_gaps": [
+      "For the survey authors’ H/C ranking, no formal annotation protocol, blinding procedure, independent annotator setup, adjudication process, or inter-annotator agreement is reported.",
+      "The exact examples used for each system-level humorousness judgment are not enumerated; the authors state only that they could consider published jokes, usually 3–5 examples.",
+      "The survey authors did not run the surveyed systems or evaluate random samples of their outputs, so generated sample sizes, seeds, inference settings, and implementation details are absent by design.",
+      "The paper reports that most prior evaluations used human Likert ratings but does not provide participant counts, demographics, recruitment methods, geography, item counts, or full protocols for those studies.",
+      "Prior evaluation sample selection is reported as often unclear; the paper specifically notes that Petrović and Matthews hand-picked best jokes for human assessment and that published examples may have been manually filtered.",
+      "No directly comparable human baseline is included for the survey’s own system ranking.",
+      "Model versions, code versions, run dates, and computational budgets for the surveyed systems are not reported as executed artifacts because the survey did not rerun them.",
+      "The prose describing complexity ranks appears internally inconsistent with the statement that rank 1 is highest and with Table 1: one sentence says rank 3 is assigned to systems without restrictive templates and rank 1 to one-template systems, while Table 1 assigns neural systems C=1 and later describes them as having the highest complexity."
+    ]
   }
 }

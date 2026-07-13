@@ -261,5 +261,406 @@
     "code_url": null,
     "data_url": null,
     "other": "No HOMER code or released dataset URL is stated. Footnotes provide source URLs for ShortJokes, CrowdTruth, and Dad Jokes."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "20 raters in the main text and Table 13 header; Appendix B.8 later contains a conflicting statement that “12 human raters” scored each method",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Main text reports 5-point funniness ratings for seven methods and “a total of 5600 rating scores.” Appendix B.8 procedure also states 20 cartoon images × 20 raters × 7 methods = 2,800 data points, creating an unresolved inconsistency.",
+        "detail": "Raters first judged whether each caption was relevant to the cartoon; irrelevant captions automatically received 1.0. Relevant captions were rated from 1 not funny to 5 very funny. Inter-rater agreement is reported as Cohen’s kappa κ = 0.49."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Human authors/raters represented in public New Yorker Caption Contest-derived benchmarks",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Humor in AI: 365 cartoons, average 6,044 captions, three ranking groups (#Top10, #200-209, #1000-1009). Electronic Sheep: 679 cartoons, average 6 captions, split into High-Humor and Low-Humor groups from ranked pairs.",
+        "detail": "The paper uses human-written captions and existing ranking information as ground-truth comparison material, but does not report participant counts or demographics for the original caption writers or rankers."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "ImgFlip/MemeCap meme caption contributors",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Public ImgFlip meme data are used for generalization; the paper reports pass@k against ground-truth meme captions but does not report dataset size in the main text.",
+        "detail": "The paper describes the dataset as containing realistic, comic, cartoon, and synthetic images."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Creators/contributors of public text-only humor corpora",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The humor retrieval database contains 335,570 jokes after filtering, cleaning, deduplication, and near-duplicate removal.",
+        "detail": "Sources listed include Pun of a Day, Short Jokes, Reddit Jokes, rJoke, SemEval 2021 Task 7, TED Laughter, HumorNorm, CleanComedy, ShortJokes, CrowdTruth, and Dad Jokes."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "GPT-5",
+        "role": "primary",
+        "blind": null,
+        "detail": "Adopted as the primary humor evaluation model after evaluator-reliability testing; used with temperature 0. It determines headline pass@k comparisons by judging whether generated captions are funnier than human-written captions. It is also used as an expert evaluator for visual understanding, humor understanding, and stylistic expression rankings in Appendix B.6."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4.1",
+        "role": "validation",
+        "blind": null,
+        "detail": "Used in evaluator-reliability testing and additional pass@k/statistical-significance experiments; reported as the second-strongest evaluator. Temperature 0 is stated for humor evaluators generally."
+      },
+      {
+        "type": "LLM",
+        "name": "LLaMa 3-8B; Humor-tuned LLaMa 3-8B; Qwen-Turbo",
+        "role": "validation",
+        "blind": null,
+        "detail": "Used in Section 3.1 to compare evaluator ranking accuracy on human-written caption pairs randomly selected across 200 contests. The open-source LLaMa evaluators use token logits/rewards; Humor-tuned LLaMa3 is trained with SFT followed by DPO and assigns reward scores at inference."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Human raters scored generated captions on a 1–5 funniness scale in the human evaluation. Recruitment, expertise, blinding, and ordering/randomization are not reported."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Existing benchmark rankings/preferences",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Existing human-written caption rankings define the Humor in AI ranking groups and Electronic Sheep High-Humor/Low-Humor groups used as comparison material. The paper does not report the original annotator counts or procedures."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Unbiased pass@k",
+        "role": "primary",
+        "blind": null,
+        "detail": "Headline metric computed for K={1,3,5}; n_i=5 generated captions per image; each pass@K calculation is the average of five trials. The metric depends on GPT-5/GPT-4.1 judgments for whether generated captions beat human captions."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Distinct n-gram diversity",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to evaluate lexical diversity of generated captions, including 1-gram, 2-gram, and 3-gram coverage in Appendix B.9."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "RoBERTa-large natural language inference model",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used for NLI Diversity: the percentage of caption pairs classified as non-entailing."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Detoxify",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to evaluate harmful content across toxicity, severe toxicity, obscene, identity attack, insult, threat, and sexual explicit dimensions."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Two-sided Wilcoxon signed-rank test; Pearson correlation",
+        "role": "validation",
+        "blind": null,
+        "detail": "Wilcoxon tests are used for significance on Pass@k scores; Pearson correlation is used to compare LLM evaluator scores with human ratings."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "HOMER per-caption generation",
+        "mode": "single-sample",
+        "n": "One selected conflict script/target/path per generated caption; the paper also states n_i=5 generated captions per image for pass@k",
+        "selector": "random",
+        "detail": "The caption generator randomly selects key conflicting scripts and a relevant humor target, enumerates paths in the selected imagination tree, then samples one imagination path before generating a caption."
+      },
+      {
+        "scope": "Main pass@k evaluation on New Yorker and meme datasets",
+        "mode": "single-sample",
+        "n": "n_i=5 candidate captions per image; pass@k reported for k={1,3,5}; each pass@K calculation averaged over five trials",
+        "selector": "random",
+        "detail": "The headline metric estimates the probability that at least one of k randomly selected captions from the n_i=5 generated candidates beats the human caption. This is not reported as best-of-N selection of a single output for the headline pass@k tables."
+      },
+      {
+        "scope": "Human evaluation caption set",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Human raters scored seven captions corresponding to seven methods, but the paper does not state how the particular caption shown for each method/image was selected from possible generated candidates."
+      },
+      {
+        "scope": "Appendix B.12 fair comparison under same LLM calls",
+        "mode": "best-of-n",
+        "n": "HumorousAI: 3 repeats; LoL: 2 repeats; Phunny: 3 repeats; CLoT: 1 repeat; HOMER: 1 output with 7 calls",
+        "selector": "unclear",
+        "detail": "The paper states that each baseline generates multiple independent humorous captions and selects the best one for each output, with attempts set to match or exceed HOMER’s seven LLM calls. It does not report how the 'best' caption is selected."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as one of four base LLMs for caption generation. No API snapshot, provider version, or inference date is reported."
+      },
+      {
+        "name": "Claude-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as one of four base LLMs for caption generation. No API snapshot, provider version, or inference date is reported."
+      },
+      {
+        "name": "Qwen-VL",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as one of four base LLMs for caption generation. The paper reports the 7B size but no exact checkpoint, access mode, or inference date."
+      },
+      {
+        "name": "LLaVA-1.5",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as one of four base LLMs for caption generation. The paper reports LLaVA-1.5 (7B) but no exact checkpoint or inference date."
+      },
+      {
+        "name": "GPT-5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as the primary LLM humor evaluator and in dimension rankings. No snapshot or inference date is reported."
+      },
+      {
+        "name": "GPT-4.1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as a secondary/validation evaluator. No snapshot or inference date is reported."
+      },
+      {
+        "name": "Qwen-Turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used in evaluator-reliability testing. No snapshot or inference date is reported."
+      },
+      {
+        "name": "LLaMa 3",
+        "version_or_snapshot": "8B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an open-source evaluator with token logits/rewards. The paper does not specify the exact checkpoint or whether it is an instruct/chat variant."
+      },
+      {
+        "name": "Humor-tuned LLaMa 3",
+        "version_or_snapshot": "8B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Fine-tuned by the authors using SFT followed by DPO on ranked caption pairs split 8:1:1. Exact base checkpoint, training counts, and inference date are not reported."
+      },
+      {
+        "name": "HumorousAI",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Evaluated as a state-of-the-art humor-generation competitor; implementation/version details are not reported."
+      },
+      {
+        "name": "LoL",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Evaluated as a humor-generation competitor; implementation/version details are not reported."
+      },
+      {
+        "name": "Phunny",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Evaluated as a pun-generation competitor; implementation/version details are not reported."
+      },
+      {
+        "name": "CLoT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Evaluated as a multimodal humor-generation competitor; implementation/version details are not reported."
+      },
+      {
+        "name": "Detoxify",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for harmful-content detection; no package/model version is reported."
+      },
+      {
+        "name": "RoBERTa-large natural language inference model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for NLI Diversity; no exact checkpoint or model source is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "HOMER full model caption generation",
+        "calls_per_item": "7 LLM calls per output: extractor 2, imaginator 3, generator 2",
+        "candidates_per_item": "n_i=5 generated captions per image for pass@k",
+        "token_budget": null,
+        "sampling_parameters": "Caption generation temperature=1; all other parameters left at defaults. Retrieval top-k jokes k=5; humor-relevant entity threshold δ=5; LLM association chain length adaptively determined with empirical average ≈4.",
+        "compute_or_cost": "All experiments conducted on 2 NVIDIA RTX 4090 GPUs with 16 GB; monetary/API cost not reported.",
+        "detail": "Humor retrieval itself is stated not to require API calls. The paper does not explicitly sum total calls per image when five candidate captions are generated."
+      },
+      {
+        "scope": "HOMER naive model in Appendix B.12",
+        "calls_per_item": "Table 16: extractor 2, imaginator 0, generator 2 API calls",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Uses pre-processed imagination results; humor retrieval does not need API calls.",
+        "compute_or_cost": null,
+        "detail": "Included for efficiency comparison; not the main full HOMER setting."
+      },
+      {
+        "scope": "Main baseline generation in Table 3",
+        "calls_per_item": null,
+        "candidates_per_item": "The pass@k metric uses n_i=5 generated captions per image, but per-baseline call budgets are not reported in the main table.",
+        "token_budget": null,
+        "sampling_parameters": "All base LLMs use temperature=1 for caption generation; all other parameters default.",
+        "compute_or_cost": "2 NVIDIA RTX 4090 GPUs are reported for all experiments; per-method compute/cost not reported.",
+        "detail": "Baselines include CoT, few-shot, self-consistency, HumorousAI, LoL, Phunny, and CLoT across four base LLMs."
+      },
+      {
+        "scope": "Appendix B.12 fair-comparison call budget",
+        "calls_per_item": "HumorousAI 9 (=3 calls × 3 repeats); LoL 8 (=4 calls × 2 repeats); Phunny 9 (=3 calls × 3 repeats); CLoT 7 (=7 calls × 1 repeat); HOMER 7",
+        "candidates_per_item": "Multiple independent captions for baselines, with best one selected; exact candidate counts beyond repeats are not fully specified.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Used for pass@1 comparison in Table 17. The selector for the best baseline output is not reported."
+      },
+      {
+        "scope": "LLM-based evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "GPT-5 and other humor evaluators use temperature=0. GPT-5 dimension rankings are repeated over five trials.",
+        "compute_or_cost": null,
+        "detail": "Evaluator call counts, prompts for pass@k judging, and token limits are not reported."
+      },
+      {
+        "scope": "Humor-tuned LLaMa3 evaluator training/inference",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Two-stage SFT followed by DPO; inference assigns a reward score to each caption.",
+        "compute_or_cost": "Overall experiments use 2 NVIDIA RTX 4090 GPUs; fine-tuning compute details not otherwise reported.",
+        "detail": "Ranked caption pairs are split 8:1:1 into training, validation, and test sets, but dataset counts and training hyperparameters are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Main New Yorker pass@k benchmarks",
+        "present": true,
+        "description": "Generated captions are compared against human-written captions from Humor in AI ranking groups and Electronic Sheep High-Humor/Low-Humor groups.",
+        "directly_comparable": false,
+        "detail": "The same LLM evaluator judges generated-vs-human caption wins, but the paper does not show that human captions were produced under matched conditions, prompts, time limits, or available context."
+      },
+      {
+        "scope": "Human evaluation of generated systems",
+        "present": false,
+        "description": "The human-rating table compares seven generated-caption methods and does not include a human-written-caption row.",
+        "directly_comparable": null,
+        "detail": "Human raters evaluate machine-generated captions only."
+      },
+      {
+        "scope": "Meme generalization evaluation",
+        "present": true,
+        "description": "Generated meme captions are evaluated against ground-truth meme captions from a public ImgFlip/MemeCap-style dataset.",
+        "directly_comparable": false,
+        "detail": "The paper does not report the human caption-generation conditions or dataset size, so matched comparability cannot be established."
+      },
+      {
+        "scope": "Evaluator reliability testing",
+        "present": true,
+        "description": "LLM evaluators are tested on human-written caption pairs randomly selected across 200 contests with known rankings.",
+        "directly_comparable": null,
+        "detail": "This is a validation set for evaluator accuracy, not a generation baseline under matched human-vs-model production conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "The humor retrieval database excludes cartoons/image captions and is restricted to text-only humor corpora.",
+        "The paper reports removal of duplicate jokes and jokes sharing more than 80% of English words.",
+        "The paper reports exact-match and normalized-overlap comparisons between the joke database and test captions, with zero overlap.",
+        "The test set is described as reserved for multimodal caption generation, separate from text-only humor retrieval sources."
+      ],
+      "basis": "The evaluated benchmarks are public New Yorker Caption Contest-derived datasets and public meme data, and later closed/proprietary LLMs such as GPT-4o, Claude-4, GPT-4.1, and GPT-5 are used for generation and/or evaluation. The paper discusses leakage only between the authors’ joke retrieval database and the test captions; it does not report decontamination or memorization checks for the base LLMs or LLM judges against the public benchmark captions/rankings. Under the audit rule for public legacy benchmarks evaluated with later proprietary models, this remains at least moderate risk."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Headline pass@k superiority of HOMER over baselines on New Yorker and meme datasets; evaluator-reliability claims; GPT-5-ranked visual understanding, humor understanding, and stylistic expression analyses; additional GPT-4.1 validation claims.",
+      "human_validation": "The paper reports a human evaluation with 20 raters and 5600 rating scores, plus Pearson correlations between GPT-5 and human ratings of 0.8608 on Humor in AI and 0.8533 on Electronic Sheep. However, the human-evaluation appendix contains inconsistencies about number of raters and rating totals.",
+      "detail": "The central performance tables use GPT-5 as the primary humor evaluator. Human ratings corroborate the direction of the result but are secondary and smaller/less clearly specified than the LLM-judged pass@k evaluation."
+    },
+    "reporting_gaps": [
+      "No exact API snapshots, model versions, inference dates, or provider release identifiers are reported for GPT-4o, Claude-4, GPT-5, GPT-4.1, or Qwen-Turbo.",
+      "Exact checkpoints/access modes are not reported for Qwen-VL, LLaVA-1.5, LLaMa 3, Humor-tuned LLaMa3, RoBERTa-large NLI, or Detoxify.",
+      "Human-rater recruitment, demographics, geography, expertise, compensation, screening, and exclusion criteria are not reported.",
+      "Human-evaluation blinding, caption ordering, randomization, and whether raters saw method names are not reported.",
+      "Human-evaluation accounting is internally inconsistent: main text reports 20 raters and 5600 rating scores; Appendix B.8 procedure reports 2,800 data points from 20 images × 20 raters × 7 methods; Appendix B.8 text later says 12 human raters and gives different means from Table 13.",
+      "The paper does not clearly state how the specific captions used in human evaluation were selected from generated candidates.",
+      "The selector for the 'best' baseline output in the Appendix B.12 repeated-generation comparison is not reported.",
+      "Per-method generation budgets for CoT, few-shot, self-consistency, HumorousAI, LoL, Phunny, and CLoT in the main Table 3 are not fully reported beyond the shared pass@k setup.",
+      "Token budgets, max output lengths, top-p, frequency penalties, and other decoding parameters are not reported; only temperature and defaults are stated.",
+      "Prompts/rubrics for GPT-5/GPT-4.1 pass@k judging are not fully specified, and evaluator call counts are not reported.",
+      "The actual embedding method f_emb used for joke retrieval is not specified; the method section says it can be statistical or LM-based.",
+      "Meme dataset size, sampling procedure, and caption-selection details are not reported.",
+      "Fine-tuning hyperparameters, exact training-set sizes, and checkpoint details for Humor-tuned LLaMa3 are not reported.",
+      "The paper’s leakage analysis checks overlap between the joke database and test captions but does not test whether generation/evaluation LLMs had seen the public benchmark captions or rankings during pretraining.",
+      "Human-written caption baselines are not shown to have been produced under matched instructions, time constraints, or context relative to model outputs.",
+      "Details of Wilcoxon test units and any multiple-comparison correction are not reported."
+    ]
   }
 }

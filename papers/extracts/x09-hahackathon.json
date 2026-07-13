@@ -186,5 +186,233 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that the texts and annotations will continue to be available on the Codalab website, and cites the Kaggle Short Jokes source at https://www.kaggle.com/abhinavmoudgil95/short-jokes."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "Reported as 1,569 annotators rated one batch, with an additional 492 doing a second batch; the paper also reports 2,062 retained annotation sessions, so the exact unique annotator count is ambiguous.",
+        "population": "Prolific annotators aged 18–70, screened for self-reported native English-speaker status, US citizenship, and membership in one of four age groups: 18–25, 26–40, 41–55, and 56–70.",
+        "recruitment": "Recruited from Prolific using self-reported native-English, US-citizenship, and age-group criteria.",
+        "geography": "United States citizenship; annotators were selected from the same region as the Twitter text sources.",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each of 10,000 texts was annotated by 5 members of each of the four age groups, for 20 annotations per text. Batches comprised 100 texts. Of 2,364 annotation sessions, 301 were discarded and replaced; 2,062 retained annotation sessions made up the dataset.",
+        "detail": "Annotators answered whether each text was intended to be humorous, generally offensive, and personally offensive. If they answered yes, they rated humor or offense from 1–5; humor also offered an 'I don’t get it' option. Quality control discarded submissions when an annotator failed to label at least 60% of the approximately 20% Kaggle texts in a batch as humorous."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Creators of source texts from Twitter accounts and from the Kaggle Short Jokes dataset, which the paper says drew from /r/jokes and /r/cleanjokes.",
+        "recruitment": "Texts were selected by the organizers: Twitter accounts were chosen for US relevance and humorous or non-humorous account types, then crawled with the Twitter API; Kaggle jokes were selected partly to meet humor, traditional-joke, and offense quotas.",
+        "geography": "Twitter sources were selected to be US-based or US-relevant; geography of Kaggle joke creators is not reported.",
+        "languages": [
+          "English"
+        ],
+        "observations": "The dataset contains 8,000 tweets and 2,000 Kaggle short jokes. The Twitter crawl initially yielded 76,542 texts before filtering to 8,000 tweets.",
+        "detail": "These source creators were not study annotators. Counts reported for this population are texts/accounts, not people."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "SemEval-2021 Task 7 shared-task system-submission teams.",
+        "recruitment": "Participants in the HaHackathon shared task submitted systems for one or more subtasks.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "63 teams submitted systems overall: 58 for Task 1a, 50 for Task 1b, 36 for Task 1c, and 48 for Task 2.",
+        "detail": "The paper reports leaderboard results and selected system descriptions; team counts are not individual participant counts."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Prolific annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Crowd annotators supplied the humor-intention, generally-offensive, personally-offensive, and 1–5 rating judgments from which the dataset labels and regression targets were derived. The paper does not report annotator blinding."
+      },
+      {
+        "type": "author",
+        "name": "Task organizers",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Organizers transformed annotations into task labels and targets: humorous if a majority of 20 votes labeled the text humorous, with ties assigned humorous; average humor score for humorous texts used numerical votes, counted 'I don’t get it' as 0, and excluded 'no' ratings; controversy was variance above the training-set median humor-rating variance, median s² = 1.79; offense rating averaged all ratings, including 'no' as 0; only generally-offensive ratings were used for the task."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Shared-task scoring metrics",
+        "role": "primary",
+        "blind": null,
+        "detail": "Task 1a and Task 1c were evaluated using F-score and accuracy; Task 1b and Task 2 were evaluated using RMSE. The paper reports leaderboard rankings based on these metrics."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Agreement and analysis statistics",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper reports Krippendorff’s alpha for class labels, humor ratings, and offense ratings; Pearson correlations between task labels/ratings; and MAE-based error analysis for difficult humor/offense rating cases."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "HaHackathon shared-task systems",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates humor/offense detection and rating prediction systems, not generation of humorous text. Ensembling, cross-validation, majority voting, averaging, and repeated model predictions are used for fixed prediction outputs, not best-of-N generation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Naive Bayes classifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Organizer linear benchmark for classification tasks, implemented with sklearn and bag-of-words features. Exact Naive Bayes variant, library version, and execution environment are not reported."
+      },
+      {
+        "name": "Support vector regressor",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Organizer linear benchmark for regression tasks, implemented with sklearn using TF-IDF features. Exact SVR configuration, library version, and execution environment are not reported."
+      },
+      {
+        "name": "BERT-base classification/regression baseline",
+        "version_or_snapshot": "BERT-base; exact checkpoint not reported",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Organizer baseline run for one epoch for all subtasks, with batch size 16 and learning rate 5e-5. No checkpoint snapshot or implementation details are given."
+      },
+      {
+        "name": "PALI and stce participant ensembles",
+        "version_or_snapshot": "RoBERTa large and ERNIE 2.0",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper states that PALI and stce used ensembles of RoBERTa large and ERNIE 2.0, but both declined to submit detailed system papers."
+      },
+      {
+        "name": "DeepBlueAI stacked transformer models",
+        "version_or_snapshot": "RoBERTa and ALBERT; exact variants not reported in this overview",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "DeepBlueAI used stacked transformer models, majority vote for classification, average prediction for regression, task-adaptive fine-tuning, pseudo-labeling, adversarial training, and Multi-Sample Dropout."
+      },
+      {
+        "name": "abcbpc ERNIE-based multi-task model",
+        "version_or_snapshot": "ERNIE 2.0",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "abcbpc used ERNIE 2.0 in a multi-task setup with task-specific gradients/loss, cross-validation, and averaging or majority decision across best-performing models."
+      },
+      {
+        "name": "Humor@IITK PLM ensembles",
+        "version_or_snapshot": "BERT, RoBERTa, ERNIE 2.0, DeBERTa, and XLNet; exact variants not reported in this overview",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Humor@IITK used single-task and multi-task PLM ensembles, including concatenated embeddings and vote-based or weighted-aggregate outputs."
+      },
+      {
+        "name": "SarcasmDet BERT/RoBERTa systems",
+        "version_or_snapshot": "BERT or RoBERTa; exact variants not reported in this overview",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "SarcasmDet used BERT or RoBERTa models with different hyperparameters and hard-voting or averaging ensembles for Tasks 1a, 1b, and 2; for Task 1c it used a rule based on predicted humor rating ≥ 3."
+      },
+      {
+        "name": "HumorHunter DeBERTa system",
+        "version_or_snapshot": "DeBERTa; exact variant not reported",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "HumorHunter used DeBERTa with an embedding table accounting for relative token position."
+      },
+      {
+        "name": "Other participant systems summarized in the overview",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper also reports or summarizes participant use of BERTweet, RoBERTa, BERT-base, BERT+CNN, RNNs, ALBERT/BERT+CNN, LightGBM, XGBoost, Bayesian Ridge, TF-IDF feature models, lexical/Hurtlex features, and task-adaptive or domain-adaptive variants, but without systematic exact provenance."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Organizer linear benchmarks",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper specifies model classes and features—Naive Bayes with bag-of-words for classification, SVR with TF-IDF for regression—but does not report inference calls, token limits, runtime, hardware, seeds, or cost."
+      },
+      {
+        "scope": "Organizer BERT-base baseline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Run for one epoch, batch size 16, learning rate 5e-5; no sampling parameters reported because this is prediction/classification/regression rather than text generation.",
+        "compute_or_cost": null,
+        "detail": "No maximum sequence length, hardware, runtime, random seeds, checkpoint date, or cost are reported."
+      },
+      {
+        "scope": "Participant submissions",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The overview describes ensembling, averaging, majority voting, cross-validation, task-adaptive pretraining, pseudo-labeling, adversarial training, and other techniques for some teams, but does not systematically report number of model calls per test item, ensemble sizes, token limits, hardware, runtime, seeds, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "All four shared-task subtasks",
+        "present": false,
+        "description": "No separate human prediction baseline is evaluated. Human crowd annotations serve as the gold labels/targets, and inter-annotator agreement is reported, but humans are not asked to perform the benchmark under matched train/test prediction conditions.",
+        "directly_comparable": false,
+        "detail": "The paper compares systems to organizer baselines and to other submitted systems, not to a directly comparable human baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "New human annotations were collected for the 10,000-text benchmark.",
+        "The data were split 80:10:10 into training, development, and test sets.",
+        "Participants did not have access to ground-truth test humor scores/labels for the threshold analysis, and the test labels functioned as held-out shared-task targets.",
+        "Humor-signaling hashtags such as #joke were removed from tweets, and remaining hashtags were split with Ekphrasis."
+      ],
+      "basis": "The benchmark labels were newly crowdsourced and test labels were held out for the shared task, which lowers label-leakage risk. However, the underlying texts came from public Twitter accounts and the public Kaggle Short Jokes dataset, and the paper does not report any decontamination or overlap check against pretraining corpora of the PLMs used by participants. Some participant methods also used unlabeled test texts for pseudo-labeling. Because source-text memorization or source-distribution leakage cannot be ruled out, but the gold labels themselves were newly collected/held out, the conservative risk assessment is moderate rather than low or high."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Primary labels and ratings came from Prolific human annotators; leaderboard results were computed with automatic metrics.",
+      "detail": "No LLM is used as an evaluator, metric, or judge in this paper. Pre-trained language models are evaluated as prediction systems, not as judges."
+    },
+    "reporting_gaps": [
+      "Exact unique annotator count is not fully clear: the paper reports 2,062 retained annotation sessions and says 1,569 annotators rated one batch with an additional 492 doing a second batch, which does not unambiguously state the unique count.",
+      "Annotator blinding is not reported.",
+      "Exact model checkpoints, pretrained-model snapshots, library versions, inference dates, and API/local access details are not reported for the organizer BERT baseline or participant PLMs.",
+      "Hardware, runtime, random seeds, token-length limits, and compute/cost are not reported for baselines or participant systems.",
+      "Participant system details are incomplete for some high-ranking teams; the paper explicitly states that PALI, stce, and mmmm/mmmmm did not provide detailed approach information.",
+      "No decontamination or pretraining-overlap test is reported for the public Twitter and Kaggle source texts."
+    ]
   }
 }

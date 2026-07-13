@@ -184,5 +184,273 @@
     "code_url": "https://github.com/acetocarmine11/OpenMic",
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Creators represented in pre-existing Chinese comedic source materials, including CFUN short-form setups/punchlines, traditional crosstalk scripts, and an LLM-processed Talkshow dataset.",
+        "recruitment": "Pre-existing corpora; no newly recruited human participants or creators are described.",
+        "geography": null,
+        "languages": [
+          "Chinese"
+        ],
+        "observations": "Source corpus items/scripts are used for retrieval and fine-tuning; corpus sizes and creator counts are not reported.",
+        "detail": "The paper uses existing comedic materials but reports no human evaluation participants, annotators, or live-audience study."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "Grok-4-1-fast-reasoning",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as a senior executive producer persona for LLM-as-a-judge scoring of generated talk-show scripts across Persona Fidelity, Humor Mechanics, Interactive Reactivity, Contextual Coherence, and Narrative Arc; this determines Table 1/Figure 6 temperature-evaluation results."
+      },
+      {
+        "type": "LLM",
+        "name": "QualityController; underlying model not reported",
+        "role": "primary",
+        "blind": null,
+        "detail": "Acts as critic/gatekeeper in OpenMic, evaluating coherence, comedic payoff, timing realism, audience fit, retrieval quality, and writer quality; outputs PASS or REVISION and supplies the Q_r^R/Q_r^W labels underlying the reported Case 3 convergence claim."
+      },
+      {
+        "type": "LLM",
+        "name": "LLM Candidate Scorer; underlying model not reported",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Scores retrieved candidates for comedic potential and relevance, selecting high-potency jokes/materials for RAG; this affects generation inputs rather than an external evaluation benchmark."
+      },
+      {
+        "type": "LLM",
+        "name": "LLM Punchline Selector; underlying model not reported",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Refines/distills selected RAG candidates into writing materials passed to JokeWriter."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Weighted score S_total",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper defines S_total = 0.30P + 0.25H + 0.20R + 0.15C + 0.10N over LLM-judge dimension scores, although Table 1 reports the five dimensions rather than total scores."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Section 5.2 reports qualitative review suggesting higher temperatures lead JokeWriter to ignore RAG-provided setups; no separate review protocol or reviewer count is reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Temperature sweep for JokeWriter configurations JW+Tem0.1, JW+Tem0.3, JW+Tem0.5, JW+Tem0.7, and JW+Tem0.9",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports LLM-judge scores but does not state the number of prompts, generated scripts, repeated runs, or whether outputs were single samples, averages, or selected from multiple candidates. No best-of-N generation procedure is stated."
+      },
+      {
+        "scope": "OpenMic multi-round refinement workflow and end-to-end demo",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "LLM-judge",
+        "detail": "The workflow iteratively revises one evolving script based on QualityController feedback until PASS or a maximum round budget; the demo states the system was run for 3 iterations. This is iterative refinement, not best-of-N selection among independent sampled outputs. R_max is not reported."
+      },
+      {
+        "scope": "Qualitative single-agent and comparison examples in Figures 7-10",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper shows qualitative examples from GPT, DeepSeek, a QLoRA-finetuned model, and two temperature settings, but does not describe how examples were sampled or selected."
+      },
+      {
+        "scope": "Downstream video synthesis from a performance-ready script",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper describes rendering structured DSL-marked scripts into narrated comedy video via external digital-human APIs; no number of rendered candidates or selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-5.2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Mentioned as a strong general model in the preliminary qualitative comparison; Figure 7 shows a GPT-style generated response, but no API snapshot, access date, or decoding settings are reported."
+      },
+      {
+        "name": "DeepSeek",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in a preliminary qualitative comparison and Figure 8; exact DeepSeek model/version is not reported."
+      },
+      {
+        "name": "Qwen",
+        "version_or_snapshot": "Qwen-2.5-3B-Instruct",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Reported as the base model for comedy-specialized QLoRA fine-tuning in Table 2; fine-tuning was conducted on a single GPU and the final model was deployed via a vLLM entrypoint with LoRA support."
+      },
+      {
+        "name": "Qwen3-4B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Figure 9 is captioned 'QLora finetuned Qwen3-4B-Instruct', which conflicts with Table 2's Qwen-2.5-3B-Instruct base model; no separate implementation details are provided."
+      },
+      {
+        "name": "Grok-4-1-fast-reasoning",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the LLM-as-a-judge model; no snapshot, inference date, access date, or judge decoding settings are reported."
+      },
+      {
+        "name": "Unspecified LLM(s) powering OpenMic core AutoGen agents",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "AudienceAnalyzer, ComedyDirector, JokeWriter, PerformanceCoach, and QualityController are implemented as ConversableAgents, but their underlying model(s), versions, access mode, and inference dates are not specified."
+      },
+      {
+        "name": "Unspecified LLM(s) for RAG candidate scoring and punchline refinement",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "The triadic RAG workflow uses an LLM Candidate Scorer and LLM Punchline Selector, but does not name the model(s)."
+      },
+      {
+        "name": "Unspecified LLM for crosstalk-to-talkshow corpus processing",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Traditional crosstalk scripts were pushed through an LLM-driven refinement/anonymization/stylistic-conversion stage; the model is not identified."
+      },
+      {
+        "name": "Unspecified embedding model/function E",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "The RAG retriever uses embeddings and cosine similarity, but the embedding model, index, and retrieval implementation are not reported."
+      },
+      {
+        "name": "Kling AI or other high-fidelity digital-human platform",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "The video-synthesis section says the system invokes RESTful APIs from high-fidelity digital-human platforms, e.g. Kling AI; the exact platform/model/version actually used is not unambiguously specified."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Temperature-sweep generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Temperature values reported: 0.1, 0.3, 0.5, 0.7, 0.9. Other sampling parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "No number of prompts, generations per temperature, repetitions, random seeds, or averaging protocol is reported."
+      },
+      {
+        "scope": "LLM-as-a-judge scoring",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Scoring uses a Pydantic-enforced schema with five dimensions and a weighted total formula; the number of judge calls, judge prompt, temperature, token limits, and retry policy are not reported."
+      },
+      {
+        "scope": "RAG retrieval, scoring, and punchline refinement",
+        "calls_per_item": "Semantic retrieval plus LLM Candidate Scorer plus LLM Punchline Selector per query are described, but exact call counts are not reported.",
+        "candidates_per_item": "top-k1 raw candidates are retrieved and a top-k2/thresholded subset is selected; k1, k2, and tau are not reported.",
+        "token_budget": "The paper says thousands of tokens of raw material are processed in the Secret Blackboard, but gives no exact token limits or context-window budgets.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "RAG uses cosine similarity over an integrated comedic corpus, followed by LLM scoring and refinement; corpus size and retrieval settings are not reported."
+      },
+      {
+        "scope": "OpenMic multi-agent refinement loop",
+        "calls_per_item": "Five core agents are scheduled across workflow rounds, with optional re-retrieval or rewriting; exact LLM-call counts per round are not reported.",
+        "candidates_per_item": "One evolving draft is revised; the demo reports 3 iterations. Maximum iteration budget R_max is referenced but not specified.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Termination occurs when both retrieval and writer dimensions pass or when the maximum round budget is reached."
+      },
+      {
+        "scope": "QLoRA fine-tuned JokeWriter deployment",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Fine-tuning was conducted on a single GPU; final model deployed via vLLM with LoRA support. Inference compute and cost are not reported.",
+        "detail": "Reported training configuration includes 4-bit NF4 quantization, LoRA rank 16, alpha 32, dropout 0.05, learning rate 2e-4, paged AdamW 32-bit, per-device batch size 2, gradient accumulation 4, 1 epoch, and BF16 or FP16 precision."
+      },
+      {
+        "scope": "Video synthesis",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper describes RESTful API calls to digital-human platforms and middleware parsing DSL markers, but does not report API call counts, rendering settings, cost, latency, or number of generated videos."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Script-generation and temperature-evaluation results",
+        "present": false,
+        "description": "No human-written baseline scripts, human performers, live-audience ratings, or human evaluator scores are reported. Comparisons are qualitative model examples and LLM-judge scores.",
+        "directly_comparable": null,
+        "detail": "Because no human baseline is present, there are no materially matched human-vs-model conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "unclear",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper does not evaluate on a standard public benchmark; it mainly judges generated outputs from system prompts. However, the retrieval and fine-tuning sources include public or pre-existing comedic corpora, the evaluation prompts and corpus/test separation are not specified, and there is no held-out split, decontamination test, or discussion of overlap between retrieved/training materials and evaluated outputs. Benchmark contamination is therefore not directly assessable, but leakage/originality risk is unclear."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Temperature-sweep scores and the conclusion that low temperature with RAG gives superior results; claims about higher-temperature effects on reactivity/narrative arc; QualityController-based iterative convergence claims such as Case 3 dropping from about 30% in round 1 to under 5% by round 3.",
+      "human_validation": "None reported.",
+      "detail": "The main quantitative evidence comes from Grok-4-1-fast-reasoning as LLM-as-a-judge, and the refinement-loop evidence depends on LLM agent judgments. No human-audience or expert validation is provided."
+    },
+    "reporting_gaps": [
+      "No human evaluation, live-audience evaluation, or human baseline is reported.",
+      "No number of prompts, generated scripts, runs, repetitions, seeds, or averaging procedure is reported for Table 1 despite fractional scores and mention of high variance.",
+      "The exact prompts and sampled outputs underlying the temperature-sweep scores are not fully reported.",
+      "No judge prompt, judge decoding parameters, judge-call count, calibration, inter-rater reliability, or human validation is reported for the Grok LLM-as-a-judge setup.",
+      "No API snapshots, inference/access dates, or exact versions are reported for GPT-5.2, DeepSeek, Grok-4-1-fast-reasoning, the OpenMic agents, the embedding model, or video-generation services.",
+      "The underlying LLM(s) for AudienceAnalyzer, ComedyDirector, JokeWriter during inference, PerformanceCoach, QualityController, LLM Candidate Scorer, and LLM Punchline Selector are not specified.",
+      "RAG corpus sizes, item counts, source splits, k1, k2, threshold tau, embedding model, index configuration, and retrieval hyperparameters are not reported.",
+      "The LLM used to process/anonymize/convert traditional crosstalk scripts into talk-show style is not reported.",
+      "Fine-tuning dataset size, train/validation/test split, held-out evaluation design, and contamination controls are not reported.",
+      "There is a model-reporting inconsistency: Table 2 lists Qwen-2.5-3B-Instruct as the base model, while Figure 9 is captioned as QLoRA-finetuned Qwen3-4B-Instruct.",
+      "Maximum refinement-round budget R_max is referenced but not specified; the empirical sample size behind the reported Case 3 percentages is not reported.",
+      "Token budgets, context-window sizes, latency, cost, and inference compute are not reported for the multi-agent system or LLM judge.",
+      "Video-synthesis evaluation metrics, exact rendering platform/model/version, number of rendered videos, and selection protocol are not reported."
+    ]
   }
 }

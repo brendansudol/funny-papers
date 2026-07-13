@@ -224,5 +224,575 @@
     "code_url": "https://zhongshsh.github.io/CLoT/",
     "data_url": "https://zhongshsh.github.io/CLoT/",
     "other": "The abstract states that the dataset, code, and models will be released online at the project URL."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Internet Oogiri-game content creators/players whose questions and creative responses appeared on Bokete, Twitter, and Weibo.",
+        "recruitment": "Not recruited; data were crawled from public online platforms.",
+        "geography": null,
+        "languages": [
+          "English",
+          "Chinese",
+          "Japanese"
+        ],
+        "observations": "Over 200,000 unfiltered raw samples were collected; final Oogiri-GO contains more than 130,000 samples / 134,148 tabulated samples across I2T, T2T, and IT2T.",
+        "detail": "The paper reports no number of unique users, contributors, or players. It describes Bokete question IDs, user IDs, creative responses, and ratings being crawled, but sample counts are data items, not participant counts."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Online platform users whose likes/ratings attached to Oogiri responses were used as human preference annotations.",
+        "recruitment": "Naturally occurring platform ratings/likes collected with the crawled data.",
+        "geography": null,
+        "languages": [
+          "English",
+          "Chinese",
+          "Japanese"
+        ],
+        "observations": "77.95% of Oogiri-GO samples have human preference annotations, namely numbers of likes/ratings.",
+        "detail": "The paper gives no number of raters/voters and no information about whether ratings are independent or how many ratings each user supplied."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual dataset screeners for inappropriate content.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "Chinese",
+          "Japanese"
+        ],
+        "observations": "After Qwen-VL machine screening reduced the data to about 160,000 samples, two rounds of manual screening reduced it to more than 130,000 samples.",
+        "detail": "The appendix states that each round involved different individuals and that translation software was used, but it does not report screener counts, qualifications, geography, agreement, or adjudication procedures."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": null,
+        "population": "Users completing an online preference questionnaire on WJX.",
+        "recruitment": "Online survey platform; recruitment source, eligibility, compensation, and demographics not reported.",
+        "geography": null,
+        "languages": [
+          "English",
+          "Japanese",
+          "Chinese"
+        ],
+        "observations": "154 valid questionnaires with 2,772 votes; users selected a preferred questionnaire language and then chose the most creative and humorous response among six randomly permuted model outputs for 18 Oogiri questions.",
+        "detail": "The paper reports valid questionnaires rather than a separately verified unique-person count, so participant_count is left null."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual curators/verifiers for the Cloud Guessing Game and other curation steps.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "For CGG, the authors manually screened generated cloud images until obtaining 30 unambiguous and challenging white-cloud images for each category, and manually verified validity and clarity of constructed choice questions.",
+        "detail": "The paper does not report the number or identity of the people performing this manual screening/verification."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Oogiri-GO human ground-truth responses",
+        "role": "primary",
+        "blind": null,
+        "detail": "Choice-question correctness is based on ground-truth Oogiri responses from the dataset; 2T1, 3T1, 4T1, and 5T2 questions ask models to select the human Oogiri response(s) among distractors."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Online likes/ratings",
+        "role": "primary",
+        "blind": null,
+        "detail": "Ranking questions use human preference annotations, namely the number of likes/ratings on responses, to define the preferred order for five candidates; NDCG and top-1 accuracy are computed against these preferences."
+      },
+      {
+        "type": "human-lay",
+        "name": "User preference survey respondents",
+        "role": "primary",
+        "blind": null,
+        "detail": "For the human evaluation, survey users chose the most creative and humorous response among six randomly permuted model outputs. The paper does not explicitly state model-identity blinding, although questionnaire examples show unlabeled options."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy, NDCG, top-1 accuracy, and ASD",
+        "role": "primary",
+        "blind": null,
+        "detail": "Choice questions and CGG use classification accuracy; ranking questions use NDCG and top-1 accuracy; DAT uses average semantic distance, measured with GloVe, after converting DAT to choice questions."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen-VL",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Qwen-VL was used with safety-checking prompts for initial machine screening of raw Oogiri data for bias, violence, explicit content, offensive language, NSFW-related labels, and similar content."
+      },
+      {
+        "type": "human-lay",
+        "name": "Manual screeners",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Two rounds of manual screening by different individuals further removed inappropriate Oogiri samples after machine screening."
+      },
+      {
+        "type": "LLM",
+        "name": "CLoT-trained LLM itself",
+        "role": "primary",
+        "blind": null,
+        "detail": "During explorative self-refinement and CLoT inference, the model ranks its generated candidates and then selects the best response from the ranked top-2 candidates; this LLM self-judgment determines generated self-refinement data and CLoT final outputs."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen-14B",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Qwen-14B was used to rewrite ground-truth responses as distractor options for Oogiri choice questions. It does not define the correct label, but it affects evaluation item construction."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BLIP2",
+        "role": "secondary",
+        "blind": null,
+        "detail": "BLIP2-generated image captions were used as distractor options in Oogiri choice questions, affecting item construction and difficulty."
+      },
+      {
+        "type": "author",
+        "name": "Authors/manual curators for CGG",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper states that generated cloud images and CGG choice questions were manually screened/verified for unambiguity, difficulty, validity, and clarity."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Explorative self-refinement training-data generation",
+        "mode": "best-of-n",
+        "n": "5",
+        "selector": "model-self-selection",
+        "detail": "For each user input, the tuned LLM generates n humor candidates under empty or randomly sampled noun conditions; n is set to 5. The LLM ranks candidates, mixes the top-2 with the ground-truth response, selects the top-1, and discards the sample if the ground truth is selected."
+      },
+      {
+        "scope": "CLoT inference for humor generation",
+        "mode": "best-of-n",
+        "n": "Algorithm uses response number n; appendix reports n=5 for explorative remote association, but the paper does not separately confirm n for every inference/user-study use.",
+        "selector": "model-self-selection",
+        "detail": "At inference, CLoT constructs weakly associated conditions, generates n responses, ranks them, and selects the best from the ranked top-2 using the same LLM’s learned ranking and selection abilities."
+      },
+      {
+        "scope": "User preference study generation for six displayed model responses",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Six LLMs generated one displayed response each for each of 18 questions, and the six responses were randomly permuted for voting. The paper does not report whether non-CLoT model outputs were single samples or selected from multiple generations, nor the decoding settings."
+      },
+      {
+        "scope": "Oogiri choice/ranking, CGG, and DAT quantitative evaluations",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "These evaluations require models to output a selected option or ranking over fixed options, not to generate multiple humor candidates for selection. Repeated evaluation or majority voting is not reported."
+      },
+      {
+        "scope": "CoT, CoT-SC, and PLoT reasoning-framework comparison",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper compares Qwen-VL with CoT, CoT-SC, PLoT, and CLoT on multilingual I2T metrics, but does not state CoT-SC sample count, decoding settings, or selection/aggregation details."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT4v",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Evaluated in multimodal multilingual Oogiri tasks and user-study comparisons; no API snapshot, model card version, access route, or inference date is reported."
+      },
+      {
+        "name": "GPT-3.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Evaluated on English T2T; no exact model snapshot or inference date is reported."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Evaluated on English T2T; no exact model snapshot or inference date is reported."
+      },
+      {
+        "name": "LLaVA-1.5",
+        "version_or_snapshot": "13B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in multimodal multilingual Oogiri tasks and user-study comparisons; checkpoint/source not specified beyond name and size."
+      },
+      {
+        "name": "MiniGPT-v2",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in multimodal multilingual Oogiri tasks and user-study comparisons."
+      },
+      {
+        "name": "mPLUG-Owl_Multilingual",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in multimodal multilingual Oogiri tasks."
+      },
+      {
+        "name": "VisualGLM-6B",
+        "version_or_snapshot": "6B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in multimodal multilingual Oogiri tasks."
+      },
+      {
+        "name": "Qwen-VL",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used as baseline, as the base model for Qwen-VL+AIT/CLoT, for Qwen-VL+CoT/CoT-SC/PLoT comparisons, for CGG/DAT transfer evaluation, and for Oogiri data machine screening. The authors state they used the official Qwen-VL code for implementation/training, but no checkpoint hash or inference date is reported."
+      },
+      {
+        "name": "Qwen-VL+AIT",
+        "version_or_snapshot": "based on Qwen-VL 7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Author-trained associable-instruction-tuned model using LoRA; evaluated in Oogiri tasks and user study."
+      },
+      {
+        "name": "Qwen-VL+CLoT",
+        "version_or_snapshot": "based on Qwen-VL 7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Author-trained CLoT model using LoRA and explorative self-refinement; evaluated in Oogiri, user study, CoT-framework comparison, CGG, and DAT."
+      },
+      {
+        "name": "Qwen-VL+CoT",
+        "version_or_snapshot": "based on Qwen-VL 7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Prompting framework evaluated in Figure 8 and user study; exact prompt details beyond CoT reference are not reported."
+      },
+      {
+        "name": "Qwen-VL+CoT-SC",
+        "version_or_snapshot": "based on Qwen-VL 7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Self-consistency prompting framework evaluated in Figure 8; sample count and aggregation details are not reported."
+      },
+      {
+        "name": "Qwen-VL+PLoT",
+        "version_or_snapshot": "based on Qwen-VL 7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Prompt-based LoT baseline using the prompt “let’s think outside the box,” evaluated in Figure 8."
+      },
+      {
+        "name": "InstructionBLIP / InstructBLIP",
+        "version_or_snapshot": "13B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English multimodal non-multilingual Oogiri tasks; paper table spells it “InstructionBLIP.”"
+      },
+      {
+        "name": "mPLUG-Owl_LLAMA2",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English multimodal non-multilingual Oogiri tasks."
+      },
+      {
+        "name": "Otter",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English multimodal non-multilingual Oogiri tasks."
+      },
+      {
+        "name": "CogVLM-17B",
+        "version_or_snapshot": "CogVLM-17B; table size column lists 7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used as baseline and as the base model for CogVLM-17B+AIT/CLoT. The authors state they used official CogVLM code for implementation/training; no checkpoint hash or inference date is reported."
+      },
+      {
+        "name": "CogVLM-17B+AIT",
+        "version_or_snapshot": "based on CogVLM-17B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Author-trained associable-instruction-tuned model evaluated on English multimodal non-multilingual Oogiri tasks."
+      },
+      {
+        "name": "CogVLM-17B+CLoT",
+        "version_or_snapshot": "based on CogVLM-17B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Author-trained CLoT model evaluated on English multimodal and English T2T Oogiri tasks."
+      },
+      {
+        "name": "LLAMA2",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "LLAMA2",
+        "version_or_snapshot": "13B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "LLAMA2",
+        "version_or_snapshot": "70B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "Baichuan2",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "Baichuan2",
+        "version_or_snapshot": "13B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "Qwen",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "Qwen",
+        "version_or_snapshot": "14B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T and also used to rewrite ground-truth responses for Oogiri choice-question distractors; no checkpoint version is reported."
+      },
+      {
+        "name": "ChatGLM3",
+        "version_or_snapshot": "6B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "Vicuna-v1.5",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "Vicuna-v1.5",
+        "version_or_snapshot": "13B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on English T2T."
+      },
+      {
+        "name": "BLIP2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to generate image captions as distractors for Oogiri choice questions; no exact checkpoint is reported."
+      },
+      {
+        "name": "PaddleOCR",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to recognize text in images from platforms where questions and responses were combined in one image; no exact version is reported."
+      },
+      {
+        "name": "Control diffusion model / ControlNet-style diffusion model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to generate white-cloud images for CGG from manually created masks; citations include latent diffusion and ControlNet papers, but no exact model checkpoint is specified."
+      },
+      {
+        "name": "GloVe",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to compute semantic distances for DAT average semantic distance; no GloVe corpus/version/dimensionality is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "CLoT explorative self-refinement candidate generation and selection",
+        "calls_per_item": "The procedure implies 5 candidate generations plus a ranking step and a selection step; exact call count/batching is not reported.",
+        "candidates_per_item": "5 generated candidates; top-2 candidates are mixed with the ground-truth response for final selection during self-refinement.",
+        "token_budget": null,
+        "sampling_parameters": "Weakly associated conditions are empty with probability rho=0.5 or uniformly sampled from noun set S; n=5 candidates. Decoding temperature/top-p/max tokens are not reported.",
+        "compute_or_cost": null,
+        "detail": "If the selected top-1 response is the ground-truth response, the generated sample is discarded. The generated data are combined with vanilla instruction-tuning samples to form more than 550,000 samples."
+      },
+      {
+        "scope": "CLoT inference for humor generation",
+        "calls_per_item": "Not exactly reported; algorithm includes candidate generation, candidate ranking, and top-2 selection.",
+        "candidates_per_item": "n responses per input; n is an algorithm input. The appendix reports n=5 for explorative remote association, but does not explicitly tie this value to every inference result.",
+        "token_budget": null,
+        "sampling_parameters": "Weakly associated conditions are constructed; exact decoding parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "The model ranks n responses and selects the best from the ranked top-2 using its learned selection ability."
+      },
+      {
+        "scope": "Associable instruction tuning and CLoT training",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "For associable generation, the condition option is empty with probability rho_c=0.50; otherwise a noun from the task-specific response is used.",
+        "compute_or_cost": "All trained models use 8 Nvidia A100 40G GPUs. Qwen-VL+CLoT: AdamW beta1=0.9, beta2=0.95, eps=1e-8, learning rate 1e-5, weight decay 1e-1, batch size 64, LoRA rank 64, normalization parameter 16, dropout 0.05. CogVLM-17B+CLoT: learning rate 1e-5, weight decay 5e-2, batch size 128, LoRA rank 10, normalization parameter 1, dropout 0.00.",
+        "detail": "The paper reports training hyperparameters and GPU type for CLoT variants, but not wall-clock time, energy, or monetary cost."
+      },
+      {
+        "scope": "Oogiri choice and ranking evaluations",
+        "calls_per_item": null,
+        "candidates_per_item": "Choice questions use 2T1, 3T1, 4T1, and 5T2 option sets; ranking questions always rank five candidates.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper does not report exact prompting/decoding parameters, number of repeated runs, or per-model call counts for these evaluations."
+      },
+      {
+        "scope": "User preference study response generation",
+        "calls_per_item": null,
+        "candidates_per_item": "Six displayed model responses per question, one from each selected model; 18 questions total.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The study produced 108 displayed model outputs if one output per model per question is counted, but the paper does not report generation prompts, decoding settings, candidate counts for non-CLoT models, or whether outputs were regenerated/filtered."
+      },
+      {
+        "scope": "CoT, CoT-SC, and PLoT comparison",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "PLoT uses the prompt “let’s think outside the box.” CoT-SC sampling count and aggregation details are not reported.",
+        "compute_or_cost": null,
+        "detail": "The comparison is on Qwen-VL for multilingual I2T choice/ranking metrics."
+      },
+      {
+        "scope": "CGG and DAT transfer evaluations",
+        "calls_per_item": null,
+        "candidates_per_item": "CGG uses 4T1 questions and constructs three choice questions for each white-cloud image. DAT is described in the main text as choosing one word from nine options, while appendix examples show four options.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "CGG contains 30 cloud images per category; the paper inconsistently says “four categories—cat, human, and giraffe.” DAT uses GloVe-based ASD; decoding/call details are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Oogiri choice and ranking benchmark results",
+        "present": false,
+        "description": "Human Oogiri responses and platform likes are used as labels/preferences, but the paper does not report humans answering the same choice or ranking questions under matched conditions.",
+        "directly_comparable": false,
+        "detail": "Thus model accuracies/NDCG are not compared to a human performance baseline."
+      },
+      {
+        "scope": "Oogiri humor generation user preference study",
+        "present": false,
+        "description": "The six options in the user study are model outputs; no human-generated response baseline is included among the options.",
+        "directly_comparable": false,
+        "detail": "Humans serve as judges/voters, not as a generation baseline."
+      },
+      {
+        "scope": "CGG and DAT transfer evaluations",
+        "present": false,
+        "description": "No human performance baseline is reported for the paper’s CGG or converted DAT choice-question evaluations.",
+        "directly_comparable": false,
+        "detail": "The paper cites DAT as a human creativity test but evaluates only model performance in its converted format."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Oogiri-GO is introduced by the paper rather than reused as an existing public benchmark.",
+        "The authors use a 95% train / 5% test split for Oogiri-GO.",
+        "CGG images were newly generated with a diffusion model and manually screened.",
+        "Manual and machine safety filtering were used for dataset quality, though not for contamination control."
+      ],
+      "basis": "The main Oogiri-GO benchmark is built from public web content on Bokete, Twitter, and Weibo, so evaluated pretrained models may have encountered source material during pretraining. The paper reports a random 95/5 split by samples and does not state grouping by question/image/prompt ID, deduplication across train/test, or decontamination checks; because multiple responses can exist under the same Oogiri question, sample-level splitting can leak prompts or related responses. GPT and other proprietary model snapshots/inference dates are not reported. DAT is a pre-existing public creativity benchmark. CGG is more protected because it is newly generated, but it is only a transfer task, not the main evidence base."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Dataset filtering, Oogiri item construction, CLoT self-refinement data selection, and CLoT inference outputs depend on LLM judgments or LLM-generated distractors. The headline quantitative benchmark scores are mainly determined by human-derived labels/preferences plus automatic metrics, and the user-study preference result is judged by humans.",
+      "human_validation": "Two rounds of manual screening follow Qwen-VL safety screening; ranking labels use platform likes; humor-generation preferences are collected from 154 valid questionnaires with 2,772 votes.",
+      "detail": "No headline evaluation metric is solely an LLM-as-judge score, but CLoT’s method internally uses the model as a ranker/selector, and Qwen-VL/Qwen-14B/BLIP2 affect dataset filtering or option construction."
+    },
+    "reporting_gaps": [
+      "Exact model snapshots/checkpoints, API versions, access routes, and inference dates are not reported for GPT4v, GPT-3.5, GPT-4, and most open-source baselines.",
+      "Decoding parameters such as temperature, top-p, max tokens, stop criteria, and random seeds are not reported for model evaluations or humor generation.",
+      "The number of samples and aggregation procedure for CoT-SC are not reported.",
+      "CLoT inference uses an algorithmic response number n, but the paper does not explicitly state the value of n for every inference/user-study setting; n=5 is reported for explorative remote association/self-refinement.",
+      "The user study reports 154 valid questionnaires but not unique participant verification, recruitment channel beyond the survey platform, demographics, geography, compensation, exclusion criteria, or language distribution.",
+      "Manual screening and manual CGG verification lack counts of annotators/curators, qualifications, blinding, inter-annotator agreement, and adjudication procedures.",
+      "The Oogiri-GO random split is described at sample level; the paper does not report grouping by prompt/image/question ID, deduplication across train/test, or contamination checks against pretrained model data.",
+      "The number of exact evaluation items per task/language after the 5% split is not reported in the main experimental tables.",
+      "The method for accessing GPT4v/GPT-4/GPT-3.5 and handling multimodal inputs is not specified.",
+      "User-study output generation details are missing, including prompts, whether outputs were single samples or best-of-N for non-CLoT models, and whether any outputs were filtered before presentation.",
+      "CGG category reporting is inconsistent: the appendix says “four categories—cat, human, and giraffe,” listing only three categories.",
+      "DAT conversion details are incomplete/inconsistent: the main text says nine options, while appendix examples show four options; number of DAT questions and exact GloVe version are not reported.",
+      "NudeNet is mentioned through its label set, but no exact keyword list/version or whether the NudeNet model itself was run is specified.",
+      "Wall-clock training time, inference latency, energy use, and monetary cost are not reported."
+    ]
   }
 }

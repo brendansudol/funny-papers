@@ -149,5 +149,263 @@
     "code_url": null,
     "data_url": null,
     "other": "Prompts are included in Appendix A."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "SemEval 2017 Task 7 contains 810 homographic puns, 647 heterographic puns, and 1077 non-puns; each pun has human annotations of the pun-word and the spelling or definition in both interpretations, plus a human-provided sentence-form explanation.",
+        "detail": "The paper uses pre-existing SemEval human annotations and explanations; it does not report annotator identities, counts, demographics, recruitment, or annotation protocol details beyond the dataset description."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Context-Situated Puns contains 821 homographic puns and 1739 heterographic puns with human annotations of the pun-word and spelling/definition information; it does not contain human explanations.",
+        "detail": "The paper uses pre-existing Context-Situated Puns annotations as ground-truth context for judging. It does not report annotator counts, demographics, recruitment, or geography."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "ExplainTheJoke.com contributors or authors, not otherwise described",
+        "recruitment": "Dataset was scraped from the ExplainTheJoke.com website.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "ExplainTheJoke contains 350 jokes; each entry has paragraph-form human explanations with high variability in style, length, quality, and accuracy.",
+        "detail": "The paper uses pre-existing website explanations; it does not report contributor counts, demographics, recruitment beyond website scraping, or quality-control procedures."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as the pairwise judge for explanation quality. For SemEval, it compared each Gemini-1.5-Flash generated explanation against the dataset human explanation, with dataset annotations provided. For Context-Situated Puns and ExplainTheJoke, it directly compared baseline text-only and multimodal outputs. Pairwise comparisons were run twice with the explanation order swapped, and win rates were averaged to mitigate positional bias."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT, version not specified",
+        "role": "secondary",
+        "blind": null,
+        "detail": "For ExplainTheJoke, the paper says it first asked GPT to summarize the provided human explanations; that summary was then used as relevant context for the judge-LLM. The exact GPT model/version and prompt are not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "Gazelle v0.2",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used in Appendix A.2 for a diagnostic transcription-logit analysis of phonetic ambiguity because public LLM APIs did not provide logits. The paper inspected logits for the audio word “Where” and for the pun “Patience is a heavy weight.”"
+      },
+      {
+        "type": "human-lay",
+        "name": "SemEval 2017 Task 7 human annotators/explanation writers",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided the pre-existing pun-word/spelling-or-definition annotations and sentence-form explanations used as ground-truth context and as the human comparison explanations in SemEval."
+      },
+      {
+        "type": "human-lay",
+        "name": "Context-Situated Puns human annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided pre-existing pun-word and spelling/definition annotations used as ground-truth context for GPT-4o judging; no human explanations were available."
+      },
+      {
+        "type": "human-lay",
+        "name": "ExplainTheJoke.com explanation authors",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided pre-existing paragraph-form explanations that were summarized by an unspecified GPT model and used as judge context; they were not directly compared as a human baseline in the reported pairwise results."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main humor-explanation generation with Gemini-1.5-Flash on SemEval, Context-Situated Puns, and ExplainTheJoke under text-only baseline and combined text-plus-audio prompting",
+        "mode": "single-sample",
+        "n": "One reported generated explanation per item per prompting condition",
+        "selector": "none",
+        "detail": "The paper reports fixed generated explanations being judged; it does not report generating multiple candidate explanations or selecting best-of-N outputs. The order-swapped GPT-4o judging is repeated evaluation of fixed outputs, not generation selection."
+      },
+      {
+        "scope": "Separate multimodal aggregation strategy shown in Figure 1-Left",
+        "mode": "single-sample",
+        "n": "One text-only explanation, one audio-only explanation, then one aggregation output per item in the described strategy",
+        "selector": "none",
+        "detail": "This strategy was tested to combine separate modality-specific explanations into one final output, but the paper states it performed worse than the combined audio-text prompt and does not report detailed metrics or selection among multiple candidates."
+      },
+      {
+        "scope": "Ablation and voice-type experiments on SemEval",
+        "mode": "single-sample",
+        "n": "One reported output per item per ablation or TTS voice condition; the Onyx + Alloy condition passed two audio files along with text in one prompt",
+        "selector": "none",
+        "detail": "The ablations compare audio-only prompting, removing aggregation wording, the main system, and TTS voices. No best-of-N generation or candidate-selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Gemini-1.5-Flash",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to generate humor/pun explanations. The paper states Gemini-1.5-Flash was chosen because, at the time, only the Gemini family offered API-based audio input and Flash balanced performance and affordability. No API snapshot, release variant, inference date, or decoding settings are reported."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as the LLM judge. The paper cites OpenAI 2024 and says GPT-4o was chosen as the strongest available model at the time and to avoid using the same model family for generation and evaluation. No snapshot or inference date is reported."
+      },
+      {
+        "name": "OpenAI tts-1-hd",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to convert text jokes into audio. Alloy was used throughout the main experiments; Nova, Onyx, Alloy, and Onyx + Alloy are compared in the voice analysis. No model snapshot, inference date, or TTS parameter settings beyond voice choice are reported."
+      },
+      {
+        "name": "Gazelle v0.2",
+        "version_or_snapshot": "v0.2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source model available on Hugging Face, used for transcription-logit analysis in Appendix A.2. The paper does not report the Hugging Face revision, runtime environment, or inference date."
+      },
+      {
+        "name": "GPT, version not specified",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to summarize ExplainTheJoke human explanations before GPT-4o judging. The exact GPT model, provider interface, snapshot, prompt, and inference date are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "TTS audio generation for multimodal prompts",
+        "calls_per_item": "One text-to-speech conversion per joke in the main Alloy condition; the Onyx + Alloy voice analysis used two audio files in the prompt",
+        "candidates_per_item": "One audio file per joke in the main condition",
+        "token_budget": null,
+        "sampling_parameters": "Voice choice is reported: Alloy for main experiments; Nova, Onyx, Alloy, and Onyx + Alloy in the voice analysis. No other TTS parameters are reported.",
+        "compute_or_cost": null,
+        "detail": "The paper states that no additional ground-truth emphasis or timing information was provided to the LLM."
+      },
+      {
+        "scope": "Gemini-1.5-Flash explanation generation, main baseline and with-audio conditions",
+        "calls_per_item": "One generated explanation per item per reported prompting condition",
+        "candidates_per_item": "One reported explanation per item per condition; no multiple candidates are reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "The paper says Gemini-1.5-Flash offered the best balance between performance and affordability; no actual cost is reported.",
+        "detail": "Prompt components included task definitions, instructions, chain-of-thought-style few-shot examples, and either text alone or text plus TTS audio. Exact max tokens, temperature, top-p, seed, retries, and safety settings are not reported."
+      },
+      {
+        "scope": "Separate multimodal aggregation strategy",
+        "calls_per_item": "Three LLM calls per item in the described setup: text-only explanation, audio-only explanation, and aggregation prompt",
+        "candidates_per_item": "One final aggregated output; no best-of or selection among candidates is reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper says this strategy was extensively tested and was worse than the combined audio-text strategy, but does not report the number of tests, datasets/items used, or detailed scores."
+      },
+      {
+        "scope": "GPT-4o pairwise judging",
+        "calls_per_item": "Two judge calls per pairwise comparison, with explanation order swapped",
+        "candidates_per_item": "Two explanations per comparison",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "For SemEval, each model explanation was paired with the human explanation; for Context-Situated Puns and ExplainTheJoke, baseline and with-audio model outputs were compared directly. Dataset annotations or summarized human-explanation context were provided where applicable."
+      },
+      {
+        "scope": "ExplainTheJoke GPT summarization step",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports that GPT summarized the provided human explanations before judging, but does not identify the model, prompt, number of calls, or decoding settings."
+      },
+      {
+        "scope": "Gazelle v0.2 phonetic-ambiguity logit analysis",
+        "calls_per_item": "Two reported transcription-logit probes: the word “Where” and the pun “Patience is a heavy weight”",
+        "candidates_per_item": "Top-token logits/probabilities inspected; no sampled candidate set is described",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Used only for diagnostic analysis of whether audio preserved homophone alternatives such as where/wear/ware and weight/wait."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "SemEval 2017 Task 7 explanation evaluation",
+        "present": true,
+        "description": "Pre-existing human-provided sentence-form explanations were paired with Gemini-1.5-Flash generated explanations and judged by GPT-4o; dataset annotations were provided to the judge.",
+        "directly_comparable": false,
+        "detail": "The same pun items were compared under the same GPT-4o pairwise judging procedure, but the human explanations were pre-existing dataset artifacts and the paper does not report that humans produced them under the same prompt, format constraints, or conditions as the model."
+      },
+      {
+        "scope": "Context-Situated Puns evaluation",
+        "present": false,
+        "description": "The dataset has human annotations but no human explanations; evaluation compares text-only and multimodal Gemini outputs directly.",
+        "directly_comparable": false,
+        "detail": "Human annotations supply ground-truth context for the judge but do not constitute a human explanation baseline."
+      },
+      {
+        "scope": "ExplainTheJoke evaluation",
+        "present": false,
+        "description": "The dataset includes paragraph-form human explanations, but the reported evaluation compares text-only and multimodal Gemini outputs directly after using a GPT-generated summary of the human explanations as judge context.",
+        "directly_comparable": false,
+        "detail": "The human explanations are not evaluated as a competing baseline and are described as variable in style, length, quality, and accuracy."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [],
+      "basis": "SemEval 2017 and Context-Situated Puns 2022 are public benchmarks predating Gemini-1.5-Flash and GPT-4o, and ExplainTheJoke is a scraped public web dataset. The paper reports no decontamination test, no held-out/private item construction, and no model-training-data audit. It also says the few-shot examples were selected from each dataset tested, but does not report whether these examples were excluded from evaluated items or whether a strict split was used. The generated audio is new TTS output, but it is derived from public source text and is not a convincing contamination control."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "The headline claims that multimodal prompting improves explanation quality across SemEval, Context-Situated Puns, ExplainTheJoke, ablations, and TTS voice comparisons rest on GPT-4o pairwise judgments. The phonetic-ambiguity mechanism claim is supported by Gazelle v0.2 logit analysis.",
+      "human_validation": "No new human evaluation is reported. The study uses pre-existing human annotations/explanations as references or judge context for some datasets, but not human raters validating the reported model comparisons.",
+      "detail": "All reported win/tie metrics are produced by LLM judging, with order swapping to mitigate positional bias. The paper itself lists automated LLM-based judging as an evaluation limitation and suggests future human assessment."
+    },
+    "reporting_gaps": [
+      "No participant or annotator counts, demographics, recruitment details, or geography are reported for the human annotations/explanations in the reused datasets.",
+      "No API snapshot/version, inference date, or exact provider configuration is reported for Gemini-1.5-Flash, GPT-4o, or OpenAI tts-1-hd.",
+      "The GPT model used to summarize ExplainTheJoke human explanations is not identified, and its summarization prompt and decoding settings are not reported.",
+      "No temperature, top-p, max-token limit, seed, retry policy, parsing-failure handling, or safety/filter settings are reported for generation or judging.",
+      "No exact API call totals, runtime, hardware, or monetary cost are reported, despite affordability motivating the Gemini-1.5-Flash choice.",
+      "The paper does not report a train/dev/test split, exact evaluated item IDs, or whether few-shot examples selected from each dataset were excluded from evaluation items.",
+      "No contamination or memorization analysis is reported for public benchmark/web data evaluated with later proprietary models.",
+      "No human validation, inter-rater comparison, or calibration study is reported for GPT-4o judgments on this task.",
+      "No confidence intervals, statistical significance tests, or effect-size uncertainty estimates are reported for the win-rate differences, even though the prose describes improvements as significant.",
+      "The scope and quantitative results of the discarded separate aggregation strategy are not reported beyond the statement that it was worse in every test performed.",
+      "TTS prosody, speed, cadence, volume, and other speech-generation parameters are not reported; only voice choice is described.",
+      "The Hugging Face revision, runtime environment, and full inference setup for Gazelle v0.2 are not reported."
+    ]
   }
 }

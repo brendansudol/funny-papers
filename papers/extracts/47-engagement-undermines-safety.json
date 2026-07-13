@@ -204,5 +204,357 @@
     "code_url": null,
     "data_url": null,
     "other": "The authors state they currently withhold their prompt corpora from release to prevent adversarial misuse and will publish all analysis code under an open-source license, but no URL is provided."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Reddit r/Jokes posters and voters represented in the Weller and Seppi (2020) r/Jokes corpus",
+        "recruitment": "Public Reddit activity compiled in an existing corpus; no participant recruitment described by this paper",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The corpus is described as over ~540K jokes in §2.2.1 and over 550,000 jokes in Appendix B/Related Work, with setup/punchline structure and user upvote counts; 10,000 joke bodies were sampled as prompts; upvotes were used as proxy humor labels for regressor training.",
+        "detail": "These are not new study participants. The paper does not report counts of distinct Reddit users or voters."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human evaluators from Horvitz et al. (2024) for the satire-generation subset",
+        "recruitment": "Not reported in this paper; labels are reused from Horvitz et al. open-sourced human evaluation results",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Human funniness labels for the human-evaluated satire subset are used to partition LLM satirical generations into Funny vs. Not-Funny groups; this paper does not report item counts, annotation counts, or annotator counts.",
+        "detail": "The paper uses these labels only in the external satire-generation analysis, not in the main r/Jokes generation study."
+      }
+    ],
+    "judges": [
+      {
+        "type": "platform-vote",
+        "name": "r/Jokes community upvotes",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Upvote counts from the Reddit r/Jokes corpus are transformed as log(upvotes + 1) and used as proxy humor scores to train the humor regressor."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "regressor-finetuned-stella_400M_v5 humor scorer",
+        "role": "primary",
+        "blind": null,
+        "detail": "A retrained humor regressor, selected by lowest validation RMSE, assigns scalar humor scores to generated jokes and is also used to choose the highest-scoring completion out of five in §4.2."
+      },
+      {
+        "type": "LLM",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "An unspecified large model is used as a 3-point ordinal classifier for humor, stereotypicality, and toxicity in the main pipeline. Outputs are constrained to one token with temperature 0 and logit bias 100.0 on the three label tokens."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "ALBERT-v2 stereotype classifier from Wu et al. (2024b), fine-tuned on Multi-Grain Stereotype",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to filter r/Jokes data for stereotypical jokes and neutral setups, and used as a classifier-based stereotype detector for generated jokes."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "HateBERT-ToxiGen classifier from Hartvigsen et al. (2022)",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as the classifier-based toxicity detector for generated jokes."
+      },
+      {
+        "type": "LLM",
+        "name": "Llama-3.3-70B evaluator",
+        "role": "validation",
+        "blind": null,
+        "detail": "Table 2 states that stereotypicality and toxicity rates for the external satire-generation task are evaluated using a Llama-3.3-70B evaluator."
+      },
+      {
+        "type": "human-lay",
+        "name": "Horvitz et al. (2024) human funniness labels",
+        "role": "validation",
+        "blind": null,
+        "detail": "Human funniness judgments from the external Horvitz et al. satire-generation subset are reused to compare harmfulness rates between generations deemed funny vs. not funny by humans."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Information-theoretic incongruity metrics",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Average token-level Shannon entropy and average negative log-likelihood over generated punchline tokens are computed from model token probabilities to measure uncertainty and surprisal."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main r/Jokes base/persona generation for harmfulness rates and LLM-label contingency analyses",
+        "mode": "single-sample",
+        "n": "5 completions per setup/prompt/model were generated and retained; no best-of selection is reported for Table 1 or §4.3",
+        "selector": "none",
+        "detail": "The study uses 10,000 neutral joke bodies, a base prompt, and persona-conditioned prompts based on 50 comedians across six models, producing approximately 15 million generations. The paper’s wording implies multiple retained samples rather than selection for these analyses."
+      },
+      {
+        "scope": "Continuous humor-score vs. stereotype/toxicity analysis (§4.2)",
+        "mode": "best-of-n",
+        "n": "5",
+        "selector": "automatic-metric",
+        "detail": "The authors state that they pick the completion out of five with the highest humor score for each joke premise, following the single-objective funniness formulation."
+      },
+      {
+        "scope": "Counterfactual non-offensive prompting (§4.6)",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "none",
+        "detail": "The prompt “Complete the joke without being offensive” is applied to the same setups and models used in vanilla humor generation, but the paper does not report the exact number of completions or any best-of selection for this condition; Table 4 reports only OLMo-2-13B and Mistral-8B."
+      },
+      {
+        "scope": "External Horvitz et al. satire-generation data",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper analyzes open-sourced LLM-generated satirical variants from Horvitz et al. (2024) for ChatGPT-3.5, GPT-4, and Mistral-Instruct; generation and selection procedures are not described in this paper."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "OLMo-2-1124-7B-Instruct",
+        "version_or_snapshot": "1124 embedded in model name",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Main joke-generation model; exact access method and inference date are not reported."
+      },
+      {
+        "name": "OLMo-2-1124-13B-Instruct",
+        "version_or_snapshot": "1124 embedded in model name",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Main joke-generation model; exact access method and inference date are not reported."
+      },
+      {
+        "name": "OLMo-2-0325-32B-Instruct",
+        "version_or_snapshot": "0325 embedded in model name",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Main joke-generation model; exact access method and inference date are not reported."
+      },
+      {
+        "name": "Meta-Llama-3.1-8B-Instruct",
+        "version_or_snapshot": "3.1",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Main joke-generation model; exact access method and inference date are not reported."
+      },
+      {
+        "name": "Ministral-8B-Instruct-2410",
+        "version_or_snapshot": "2410 embedded in model name",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Main joke-generation model; exact access method and inference date are not reported."
+      },
+      {
+        "name": "Mistral-Small-24B-Instruct-2501",
+        "version_or_snapshot": "2501 embedded in model name",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Main joke-generation model; the paper links the Hugging Face model page but does not report exact access method or inference date."
+      },
+      {
+        "name": "Unspecified large model for ordinal classification",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used for 3-point LLM-based humor, stereotype, and toxicity classification in the main pipeline; model identity is not reported."
+      },
+      {
+        "name": "Llama-3.3-70B evaluator",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an evaluator for unsafe rates in the external satire-generation task according to Table 2; no provider, instruct/chat variant, snapshot, or inference date is reported."
+      },
+      {
+        "name": "ALBERT-v2 stereotype classifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Classifier from Wu et al. (2024b), fine-tuned on the Multi-Grain Stereotype dataset; exact checkpoint/version and inference date are not reported."
+      },
+      {
+        "name": "HateBERT-ToxiGen classifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Toxicity classifier from Hartvigsen et al. (2022); exact checkpoint/version and inference date are not reported."
+      },
+      {
+        "name": "regressor-finetuned-stella_400M_v5",
+        "version_or_snapshot": "v5 embedded in model name",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Final downstream humor scorer trained by the authors using an STELLA-400M backbone and regression head; selected by lowest validation RMSE. Exact checkpoint release/access details are not provided."
+      },
+      {
+        "name": "ChatGPT-3.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "External satirical generations from Horvitz et al. (2024) are analyzed; this paper does not report the exact model snapshot or whether the authors reran the model."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "External satirical generations from Horvitz et al. (2024) are analyzed; this paper does not report the exact model snapshot or whether the authors reran the model."
+      },
+      {
+        "name": "Mistral-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "External satirical generations from Horvitz et al. (2024) are analyzed; exact model variant and generation date are not reported in this paper."
+      },
+      {
+        "name": "Sora",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used only to create an illustrative image in Figure 1; not part of the empirical evaluation."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main r/Jokes punchline generation",
+        "calls_per_item": "Five completions per setup/prompt/model are reported; exact API call accounting is not reported. The persona condition uses 50 comedian personas, and the paper reports approximately 15 million total generations.",
+        "candidates_per_item": "5 completions per setup/prompt/model",
+        "token_budget": "Maximum output length 256 tokens; base prompt also instructs the model to output the completion in less than 50 words. Dataset filtering excludes jokes with overall token length >512 and body length >256 for ALBERT limits.",
+        "sampling_parameters": "temperature 0.6; no top-p, top-k, seed, repetition penalty, or stop-sequence settings reported",
+        "compute_or_cost": null,
+        "detail": "Generation uses a base prompt and system-role persona prompt over 10,000 neutral setups and six models."
+      },
+      {
+        "scope": "LLM-based ordinal classification for humor, stereotypes, and toxicity",
+        "calls_per_item": "One classification per generated joke per dimension is implied for three dimensions, but exact call totals are not reported.",
+        "candidates_per_item": "One label from three allowed labels per dimension",
+        "token_budget": "Output tokens constrained to 1",
+        "sampling_parameters": "temperature 0; logit bias of 100.0 added to the three label tokens",
+        "compute_or_cost": null,
+        "detail": "The LLM judge prompt asks the model to rate each joke on a 3-point scale for the relevant dimension."
+      },
+      {
+        "scope": "Task-specific classifiers and humor regressor at evaluation time",
+        "calls_per_item": "Each generated joke is fed to the humor regressor, stereotype classifier, and toxicity classifier as applicable; exact batching/call counts are not reported.",
+        "candidates_per_item": null,
+        "token_budget": "Generation max output length is 256 tokens; source jokes are filtered to stay under ALBERT context limits, but per-evaluator truncation behavior is not reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "These are deterministic/scoring models rather than sampled generators; classifier thresholds for percentage rates are not specified."
+      },
+      {
+        "scope": "Humor scorer training/development",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Training uses RMSE loss with AdamW optimizer and learning rate 2e-5; r/Jokes examples are split 80% train and 20% validation; the target is log(upvotes + 1).",
+        "compute_or_cost": null,
+        "detail": "The paper reports architecture comparisons and selects the checkpoint with lowest validation RMSE, but does not report batch size, number of epochs in text, hardware, runtime, or cost."
+      },
+      {
+        "scope": "Counterfactual non-offensive prompting",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper says the non-offensive prompt is applied to the same setups and models used in vanilla humor generation, but the exact generation budget and settings are not restated; Table 4 reports only two models."
+      },
+      {
+        "scope": "External Horvitz et al. satire-generation analysis",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Generation budgets for ChatGPT-3.5, GPT-4, and Mistral-Instruct are not reported because the paper reuses open-sourced data/generations. Llama-3.3-70B evaluator settings for Table 2 are also not reported."
+      },
+      {
+        "scope": "Incongruity metric computation",
+        "calls_per_item": "Computed for each generated punchline, but exact pass counts/batching are not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Average token-level entropy and negative log-likelihood are computed from model token distributions over punchline positions."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Main r/Jokes joke completion study",
+        "present": false,
+        "description": "No human-written punchlines are generated or evaluated under the same prompt conditions as the LLM outputs. Original r/Jokes punchlines and upvotes are used as source/training data, not as a matched human baseline.",
+        "directly_comparable": false,
+        "detail": "The main comparisons are among model outputs, prompt conditions, and automated/LLM labels."
+      },
+      {
+        "scope": "External satire-generation analysis",
+        "present": false,
+        "description": "Human funniness labels are used for LLM-generated satire, and original Unfun serious headlines are compared to LLM satirical headlines for harmfulness, but no human-generated satirical outputs are evaluated as a matched baseline in this paper.",
+        "directly_comparable": false,
+        "detail": "Humans serve as funniness annotators, not as a content-generation baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Original r/Jokes punchlines are removed before prompting the LLMs.",
+        "Joke bodies are filtered with the ALBERT-v2 stereotype classifier to remove setups flagged as stereotypical."
+      ],
+      "basis": "The main prompts are sampled from the public r/Jokes/Weller and Seppi corpus, which predates the evaluated 2024/2025 open models and may be present in model pretraining data. The setups are drawn from stereotypical jokes with punchlines removed, so memorization of original setup-punchline pairs could affect generated punchlines and the claim that harmful content is invented by the model. The humor regressor is also trained on the same public r/Jokes corpus, with no reported disjointness between scorer training data and prompt-source items. The paper does not report decontamination, memorization checks, or train/test overlap controls; its filtering controls address prompt harmfulness, not model-data contamination."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Important claims about ordinal humor/stereotype/toxicity associations, contingency matrices, and external satire unsafe rates depend on LLM judges, including an unspecified main ordinal classifier and a Llama-3.3-70B evaluator for Table 2. Some persona-effect and harmfulness claims are corroborated by non-LLM classifiers and the humor regressor.",
+      "human_validation": "Human validation is limited to reused Horvitz et al. funniness labels for external satire generations; the paper reports no human validation of main r/Jokes labels or stereotype/toxicity judgments.",
+      "detail": "The study does not rest solely on LLM judging because it also uses task-specific classifiers/regressors, but LLM judgments determine several central bins, rates, and validation analyses."
+    },
+    "reporting_gaps": [
+      "No participant counts, demographics, geography, or recruitment details are reported for Reddit upvoters/posters or for Horvitz et al. human evaluators reused in the paper.",
+      "The main LLM-based ordinal classifier is not identified by model name, provider, snapshot, access method, or inference date.",
+      "Generator model access methods and inference dates are not reported, even when exact open-model names are listed.",
+      "No hardware, runtime, total compute, monetary cost, batching, or random seed information is reported for generation, evaluation, or scorer training.",
+      "Decoding settings beyond temperature 0.6 and max output length 256 are not reported for main generation; top-p/top-k/stop criteria/repetition penalties are absent.",
+      "The exact accounting of generations is ambiguous: the text says each 10,000-body prompt yields 5 completions for neutral and persona prompts across six models and reports ~15M generations, implying 50 persona prompts, but the per-persona call structure is not fully spelled out.",
+      "Classifier decision thresholds or calibration procedures for converting ALBERT-v2 and HateBERT-ToxiGen scores into percentage rates are not reported.",
+      "The paper does not report whether the 10,000 prompt-source jokes are excluded from the r/Jokes data used to train or validate the humor regressor.",
+      "The counterfactual non-offensive experiment says it is run across models but Table 4 reports only OLMo-2-13B and Mistral-8B; exact sample size, completion count, and evaluator settings for this test are not reported.",
+      "For the Horvitz et al. satire task, this paper does not report item counts, model snapshots, generation prompts, generation budgets, or human annotation protocol details.",
+      "There is an internal reporting ambiguity for external satire harmfulness evaluation: §2.2.2 says stereotypicality and toxicity are assessed with the same detectors used in the main pipeline, while Table 2 states that the unsafe metric is evaluated using a Llama-3.3-70B evaluator.",
+      "No decontamination or memorization test is reported for public r/Jokes prompts or the external public satire data."
+    ]
   }
 }

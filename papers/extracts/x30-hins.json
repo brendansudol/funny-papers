@@ -1,0 +1,461 @@
+{
+  "key": "x30-hins",
+  "ref": "Part 7 (long-context Hindi)",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x30-hins/x30-hins.md",
+  "source_md_sha256": "00e6002e411820fe2a9911aebc230a11beb2c60bc10496fc099e6c3e5fce3d92",
+  "source_truncated": false,
+  "title": "Does Reasoning Kill the Joke? Long-Context Humor Understanding in Hindi",
+  "authors": [
+    "Kaveri Anuranjana",
+    "Navya Shrivastava",
+    "Atharv Johar",
+    "Rishabh Sabharwal",
+    "Gautam Ranka",
+    "Aryan Lunawat",
+    "Punit Rathore",
+    "Radhika Mamidi"
+  ],
+  "year": 2026,
+  "venue": "C3NLP 2026",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can current LLMs generate correct explanations for laughter in long-context Hindi/Hinglish conversational video clips when given transcripts and scene descriptions?",
+    "How large is the understandability or linguistic-equity gap between English humor reasoning on SMILE and Hindi humor reasoning on HinS?",
+    "How do model scale and Indic-language specialization affect Hindi humor reasoning?",
+    "How does input context length affect humor explanation quality?",
+    "Can combining lexical diversity with standard quality metrics help identify hallucinated or rambling humor explanations?"
+  ],
+  "tasks": [
+    "humor explanation generation",
+    "long-context humor understanding",
+    "Hindi conversational humor reasoning"
+  ],
+  "humor_domains": [
+    "conversational humor",
+    "sitcom humor",
+    "stand-up comedy",
+    "verbal humor",
+    "Hindi/Hinglish video dialogues"
+  ],
+  "modalities": [
+    "text",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "Hindi",
+    "Hindi-English code-mixed (Hinglish)",
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "HinS Hindi long-context humor benchmark",
+      "role": "introduced",
+      "size": "1,046 instances; 44 videos; 9,531 video segments"
+    },
+    {
+      "name": "SMILE",
+      "role": "evaluated-on",
+      "size": "150 random samples"
+    }
+  ],
+  "models_evaluated": [
+    "Qwen-2.5-7B",
+    "Qwen-3-7B",
+    "Sarvam-M-24B",
+    "Gemma-3-27B",
+    "Llama-3.1-70B",
+    "Gemini-2.0-Flash",
+    "DeepSeek-R1-0528",
+    "Llama-3.1-8B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "HinS textual-stream benchmark construction",
+      "summary": "The paper curates Hindi humorous video clips from sitcoms and stand-up comedy and converts them into time-aligned dialogue transcripts, dense scene descriptions, and audio features. LLMs are prompted to generate natural-language explanations for why the audience laughed."
+    },
+    {
+      "name": "Quality-diversity diagnostic with TTR",
+      "summary": "The analysis pairs Type-Token Ratio with BLEU and BERTScore to identify “noneffective diversity,” where high lexical diversity reflects rambling or hallucinated explanations rather than grounded humor reasoning."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Generated explanations are compared to ground-truth explanations using BLEU, ROUGE-1/2/L, METEOR, and BERTScore; Type-Token Ratio is used as a lexical diversity measure."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Native Hindi-speaking university students verified 200 randomly selected automated ground-truth samples; 86.65% were found correct with inter-annotator agreement of 0.68."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Manual verification of 80 Sarvam-M-24B humor explanations found 26.25% accuracy."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Gemini-2.0-Flash achieved the strongest automatic scores in the main HinS benchmark.",
+      "metric": "BLEU / METEOR / ROUGE-1/2/L / BERTScore",
+      "value": "0.0566 / 0.2869 / 0.31 / 0.10 / 0.24 / 0.8075",
+      "dataset": "HinS Hindi long-context humor benchmark",
+      "best_system": "Gemini-2.0-Flash"
+    },
+    {
+      "finding": "Sarvam-M-24B, the Indic-specialized open-weight model, closely approached Llama-3.1-70B despite the paper describing Llama as nearly three times its size.",
+      "metric": "BLEU / METEOR / BERTScore",
+      "value": "Sarvam-M-24B: 0.0471 / 0.2274 / 0.7890; Llama-3.1-70B: 0.0523 / 0.2334 / 0.7910",
+      "dataset": "HinS Hindi long-context humor benchmark",
+      "best_system": "Llama-3.1-70B"
+    },
+    {
+      "finding": "DeepSeek-R1-0528 showed the largest reported English-to-Hindi understandability gap.",
+      "metric": "BLEU; BERTScore",
+      "value": "38.3% decline in BLEU (0.1138 → 0.0702); BERTScore 0.8239 → 0.7958",
+      "dataset": "SMILE vs. HinS, 150 random samples",
+      "best_system": null
+    },
+    {
+      "finding": "Manual human evaluation showed that the best-suited Indic-specialized model still failed on most conversational humor explanations.",
+      "metric": "human accuracy",
+      "value": "26.25% on 80 humor explanations",
+      "dataset": "HinS Hindi long-context humor benchmark",
+      "best_system": "Sarvam-M-24B"
+    },
+    {
+      "finding": "Ground-truth explanation verification found most sampled automated labels correct but not perfect.",
+      "metric": "correctness; inter-annotator agreement",
+      "value": "86.65%; 0.68",
+      "dataset": "HinS Hindi long-context humor benchmark",
+      "best_system": null
+    },
+    {
+      "finding": "Gemma-3-27B exhibited the paper’s clearest quality-diversity gap, with the highest TTR but the lowest BLEU score in Table 2.",
+      "metric": "TTR; BLEU",
+      "value": "0.1377; 0.0380",
+      "dataset": "HinS Hindi long-context humor benchmark",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "The paper introduces HinS, a Hindi long-context conversational humor benchmark with 1,046 instances from 44 videos and 9,531 video segments.",
+    "Hindi humor reasoning is consistently harder than English humor reasoning on the sampled SMILE comparison, with all compared models showing lower scores on HinS.",
+    "Scaling generally improves automatic performance, but the gains remain small and do not solve pragmatic humor reasoning.",
+    "Indic-language specialization helps: Sarvam-M-24B competes closely with the much larger Llama-3.1-70B on several metrics.",
+    "Performance follows a downward concave pattern over context length, peaking at 250–750 words and degrading beyond 750 words while also being weak for contexts under 250 words.",
+    "Automatic semantic metrics overstate competence: Sarvam-M-24B reached only 26.25% accuracy in manual evaluation despite nontrivial BERTScore values."
+  ],
+  "limitations": [
+    "The study relies on textual streams such as transcripts and scene descriptions rather than raw multimodal video inputs.",
+    "The textual approach discards or weakens non-verbal humor cues such as prosodic shifts, comedic timing, facial expressions, and speaker actions.",
+    "Cultural relevance evaluation is inherently subjective, and the paper notes that separating cultural reasoning from language-based reasoning is difficult.",
+    "Aggregate scores obscure differences across distinct comedic mechanisms such as sarcasm, allusion, and fallacious reasoning.",
+    "The work focuses on verbal humor and leaves situational humor using raw video for future work."
+  ],
+  "safety_ethics_notes": "The paper reports that 676 instances, approximately 64.5%, are Creative Commons licensed, while the remaining 370 clips, approximately 35.4%, are under standard copyright restrictions; it emphasizes that the CC-licensed subset remains a viable reproducible benchmark. It also notes the subjectivity of cultural evaluation.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://osf.io/hsdx8/overview?view_only=dc86594301e844ebb78221ca5887f81c",
+    "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "native Hindi-speaking university students",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Hindi",
+          "Hindi-English code-mixed (Hinglish)"
+        ],
+        "observations": "200 randomly selected automated/generated ground-truth samples were verified; 86.65% were found correct; inter-annotator agreement was 0.68.",
+        "detail": "Used to validate a subset of HinS ground-truth explanations. The paper does not report the number of students, recruitment method, location, annotation rubric, or whether annotators were blind."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Hindi",
+          "Hindi-English code-mixed (Hinglish)"
+        ],
+        "observations": "80 Sarvam-M-24B humor explanations were manually verified; reported accuracy was 26.25%.",
+        "detail": "Section 9 describes this as human/manual evaluation of model explanations, but evaluator identity, count, expertise, recruitment, rubric, and blinding are not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "automatic-metric",
+        "name": "BLEU, ROUGE-1/2/L, METEOR, BERTScore",
+        "role": "primary",
+        "blind": null,
+        "detail": "These metrics compare generated humor explanations with ground-truth explanations and determine the main quantitative benchmark results in Table 2 and the SMILE-vs-HinS comparison figures."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Type-Token Ratio (TTR)",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used as a lexical-diversity diagnostic paired with quality metrics to identify possible rambling or hallucinated explanations; not used as the primary quality score."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "unnamed automated ground-truth generation process",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper states that the ground-truth explanations were generated/automated and then human-verified on a 200-sample subset. The exact source, model, prompt, or procedure for generating these labels is not reported."
+      },
+      {
+        "type": "human-lay",
+        "name": "native Hindi-speaking university students",
+        "role": "validation",
+        "blind": null,
+        "detail": "Verified 200 randomly selected automated ground-truth samples; 86.65% correctness and IAA 0.68 are reported."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Manual verifiers judged 80 Sarvam-M-24B explanations, producing the reported 26.25% human-evaluation accuracy. The paper does not identify who performed this verification."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Qualitative error analysis in Table 3 characterizes Llama-3.1-70B and Llama-3.1-8B outputs as hallucinations, nuance simplifications, instruction failures, metadata repetition, and refusals."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main HinS humor-explanation generation benchmark over 1,046 instances for Qwen-2.5-7B, Qwen-3-7B, Sarvam-M-24B, Gemma-3-27B, Llama-3.1-70B, and Gemini-2.0-Flash",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports generated explanations evaluated against ground truth, but does not state whether one candidate or multiple candidates were generated per item, nor any best-of-N or selection procedure."
+      },
+      {
+        "scope": "SMILE-vs-HinS comparison on 150 random samples for Gemini-2.0-Flash, DeepSeek-R1-0528, and Gemma-3-27B",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports metric comparisons on 150 random samples but does not report candidate count, decoding settings, or output-selection method."
+      },
+      {
+        "scope": "Context-length and qualitative error analyses, including Llama-3.1-8B and Llama-3.1-70B examples",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper presents performance trends and illustrative generations, but does not report how many candidates were generated or how examples were selected."
+      },
+      {
+        "scope": "Dataset construction: dense scene-description generation from video clips",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Dense textual scene descriptions were generated with an unnamed frontier captioning model; candidate count, prompt, sampling, and selection/validation procedure are not reported."
+      },
+      {
+        "scope": "Dataset construction: automated/generated ground-truth humor explanations",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper says ground-truth explanations were generated/automated and later human-verified on a subset, but does not report the generation source, number of candidates, or selection process."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Qwen-2.5-7B",
+        "version_or_snapshot": "2.5-7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-weight baseline. The paper does not specify exact checkpoint, instruct/base variant, hosting/local environment, or inference date."
+      },
+      {
+        "name": "Qwen-3-7B",
+        "version_or_snapshot": "3-7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-weight baseline. The paper describes Qwen-3-7B and its thinking/non-thinking modes, but does not specify exact checkpoint, mode used, hosting/local environment, or inference date."
+      },
+      {
+        "name": "Sarvam-M-24B",
+        "version_or_snapshot": "M-24B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Indic-focused open-weight model used in the main benchmark and in the 80-output manual evaluation. Exact checkpoint, serving environment, and inference date are not reported."
+      },
+      {
+        "name": "Gemma-3-27B",
+        "version_or_snapshot": "3-27B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-weight model used in the main benchmark and SMILE-vs-HinS comparison. Exact checkpoint/variant, serving environment, and inference date are not reported."
+      },
+      {
+        "name": "Llama-3.1-70B",
+        "version_or_snapshot": "3.1-70B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-weight model used in the main benchmark and qualitative error analysis. Exact checkpoint/variant, serving environment, and inference date are not reported."
+      },
+      {
+        "name": "Llama-3.1-8B",
+        "version_or_snapshot": "3.1-8B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Discussed in context-length/error analysis and Table 3 examples; not included in Table 2. Exact checkpoint/variant, serving environment, and inference date are not reported."
+      },
+      {
+        "name": "Gemini-2.0-Flash",
+        "version_or_snapshot": "2.0-Flash",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Proprietary commercial/API model used in the main benchmark and SMILE-vs-HinS comparison. The paper does not report API snapshot, model ID beyond this name, or inference date."
+      },
+      {
+        "name": "DeepSeek-R1-0528",
+        "version_or_snapshot": "R1-0528",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used in the SMILE-vs-HinS comparison. The text also contains a likely inconsistent reference to “Deepseek-R1-52B”; no access route or inference date is reported."
+      },
+      {
+        "name": "unnamed frontier captioning model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used to generate dense scene descriptions from video clips. The paper does not identify the model or version."
+      },
+      {
+        "name": "unnamed automated ground-truth generation system",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "The paper refers to generated/automated ground-truth explanations but does not identify the system, model, prompt, or date used to create them."
+      },
+      {
+        "name": "BERTScore scorer model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "BERTScore is used as an automatic semantic metric, but the encoder/checkpoint and metric implementation settings are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main HinS explanation generation benchmark",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Evaluated 1,046 HinS instances. Table 2 says models were provided with transcripts and scene descriptions; the prompt shown in Figure 1 is “Given the transcript and scene, explain why the audience laughed.” Inputs average approximately 550 words with a long tail beyond 1,500 words and inputs exceeding 2,000 words, but no token limit, decoding parameters, retry policy, hardware, or cost is reported."
+      },
+      {
+        "scope": "SMILE-vs-HinS English/Hindi comparison",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports a comparison on 150 random samples between SMILE and HinS for Gemini-2.0-Flash, DeepSeek-R1-0528, and Gemma-3-27B. It does not report sample seed, whether samples were length/domain matched, candidate count, prompt details, or decoding parameters."
+      },
+      {
+        "scope": "Sarvam-M-24B manual-evaluation subset",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "80 Sarvam-M-24B humor explanations were manually verified, but the paper does not report how those 80 outputs were sampled, whether they came from a single generation per item, or any decoding/inference settings."
+      },
+      {
+        "scope": "Scene-description generation during dataset construction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "A frontier captioning model generated dense, time-aligned scene descriptions. No model identity, prompt, number of captions/candidates, token/image/video budget, compute, or cost is reported."
+      },
+      {
+        "scope": "Automated/generated ground-truth explanation creation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Ground-truth explanations are described as generated/automated and then human-verified on a subset, but the generating system, candidate count, selection policy, prompts, and inference parameters are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "HinS Hindi humor explanation generation",
+        "present": false,
+        "description": "No independent human-generated explanation baseline or human task-performance baseline under the same input/prompt conditions is reported. Humans only validate a subset of generated ground truth and manually judge a subset of Sarvam-M-24B outputs.",
+        "directly_comparable": false,
+        "detail": "The paper states that native Hindi speakers can rationalize humor, but does not present matched human outputs scored by the same metrics or under materially comparable conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper does not report any contamination analysis, training-data audit, or decontamination test. HinS is newly introduced, which reduces the chance that exact benchmark labels were public before the evaluated models, but its clips are sourced from public Indian media, including Creative Commons and copyrighted sitcom/stand-up material that could have appeared in model training data. The English SMILE comparison uses a public 2024 benchmark with later 2025-era models such as Gemini-2.0-Flash, Gemma-3-27B, and DeepSeek-R1-0528; model training cutoffs and API snapshots are not reported. Overall risk is therefore assessed as moderate rather than low."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "A 200-sample subset of automated/generated ground truth was checked by native Hindi-speaking university students, and 80 Sarvam-M-24B outputs were manually verified.",
+      "detail": "No LLM-as-judge or LLM evaluator is explicitly reported for scoring outputs. Headline rankings rely on automatic metrics against generated ground-truth explanations plus limited human validation. The source of the generated/automated ground truth is not identified, so model-label provenance is a reporting gap, but the paper does not report an LLM judge."
+    },
+    "reporting_gaps": [
+      "Number of human annotators/verifiers is not reported for either the 200-sample ground-truth validation or the 80-output Sarvam-M-24B manual evaluation.",
+      "Recruitment, geography, expertise, compensation, blinding, and detailed annotation rubrics for human verification are not reported.",
+      "The procedure and source for generating the automated/generated ground-truth explanations are not reported, including model/system identity, prompt, candidate count, and selection method.",
+      "The exact frontier captioning model used to create scene descriptions is not named; prompts, version, sampling settings, and validation procedure are absent.",
+      "Exact checkpoints/instruct variants are not reported for most open-weight models; API snapshots and inference dates are not reported for proprietary/API models.",
+      "Access route and serving environment for open-weight models are not reported; hardware, compute, latency, and cost are not reported.",
+      "Decoding and sampling parameters are absent, including temperature, top-p/top-k, max output tokens, stop criteria, retry/failure handling, and whether Qwen-3 thinking mode was used.",
+      "Number of generated candidates per item and any best-of-N or post-generation selection procedure are not reported.",
+      "Prompt template is only partially shown in Figure 1; full prompts for HinS, SMILE, and all models are not provided.",
+      "Metric implementation details are missing, including BLEU/ROUGE/METEOR tokenization and BERTScore encoder/checkpoint/language settings.",
+      "Use of audio features in model inputs is ambiguous: the pipeline extracts audio features and Section 6 mentions combined textual/audio/visual features, while the formal objective and Table 2 describe transcript plus scene description inputs.",
+      "The 150-random-sample SMILE-vs-HinS comparison lacks sampling seed, exact sampling frame, whether 150 means per dataset, and controls for domain/context-length differences.",
+      "The 80 Sarvam-M-24B manual-evaluation subset lacks sampling method and operational definition of “accuracy.”",
+      "The paper reports IAA 0.68 for the 200-sample ground-truth check but not the number of annotators, agreement statistic type, label scheme, or adjudication process.",
+      "No contamination or memorization analysis is reported for public source videos, generated ground truth, SMILE, or proprietary model training data.",
+      "Llama-3.1-8B is discussed in qualitative/context-length analysis but its full evaluation scope, metrics, and inference setup are not reported in the main benchmark table."
+    ]
+  }
+}
