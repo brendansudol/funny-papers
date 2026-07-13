@@ -2,19 +2,22 @@
 
 Recipes for querying the library programmatically. Everything here was run and verified against the repo (July 2026). Needs `jq` (any version) and/or `python3`; run from the repo root.
 
-The three queryable layers:
+The four queryable layers:
 
 | File(s) | What it knows |
 | --- | --- |
 | `papers/papers.json` | catalog: title/authors/venue/tags, PDF provenance, status, page counts |
-| `papers/extracts/*.json` | per-paper structured extracts: tasks, datasets (with roles), models, theories (with usage), headline results, findings, limitations |
+| `papers/extracts/*.json` | per-paper structured extracts: tasks, datasets, models, theories, results, limitations, and evidence profiles |
+| `papers/synthesis_claims.json` | curated field-level claims with supporting papers, counterevidence, confidence, and rationale |
 | `data/datasets.json` | dataset catalog: contents, source, license, size, vendored status, paper cross-refs |
 
 Plus the full text itself in `papers/md/<key>/<key>.md` — plain grep works great.
 
 ## Extract schema quick reference
 
-Each `papers/extracts/<key>.json` has: `key`, `ref` (guide number like `#3`), `title`, `authors`, `year`, `venue`, `paper_types`, `research_questions`, `tasks`, `humor_domains`, `modalities`, `languages`, `datasets_used` (`{name, role, size}` — role is `introduced` / `evaluated-on` / `trained-on` / `analyzed` / `source-material`), `models_evaluated` (strings), `methods_proposed`, `humor_theories` (`{theory, usage, detail}` — usage is `operationalized` / `motivation`), `evaluation_methods`, `headline_results` (`{finding, metric, value, dataset, best_system}`), `key_findings`, `limitations`, `safety_ethics_notes`, `artifacts` (`{code_url, data_url, other}`).
+Each `papers/extracts/<key>.json` has: `key`, `ref` (guide number like `#3`), `title`, `authors`, `year`, `venue`, `paper_types`, `research_questions`, `tasks`, `humor_domains`, `modalities`, `languages`, `datasets_used` (`{name, role, size}` — role is `introduced` / `evaluated-on` / `trained-on` / `analyzed` / `source-material`), `models_evaluated` (strings), `methods_proposed`, `humor_theories` (`{theory, usage, detail}`), `evaluation_methods`, `evidence_profile`, `headline_results` (`{finding, metric, value, dataset, best_system}`), `key_findings`, `limitations`, `safety_ethics_notes`, and `artifacts`.
+
+`evidence_profile` records distinct human samples, judge types, single-sample versus best-of-N generation, exact model/version/date reporting, inference budgets, human baselines, contamination risk, LLM-judge dependence, and reporting gaps. [papers/EVIDENCE.md](../papers/EVIDENCE.md) is the generated human-readable view.
 
 ## Papers by dataset / theory / model / task
 
@@ -46,6 +49,8 @@ jq -r '.models_evaluated[]?' papers/extracts/*.json | sort | uniq -c | sort -rn 
 
 Caveat: model strings are as-written in each paper (`GPT-4o` vs `gpt-4o` vs `GPT-4o-mini` are separate rows). `scripts/build_analysis.py` has a `normalize_model()` that folds variants — copy it for anything serious.
 
+The generated `papers/ANALYSIS.md` already applies that model normalization and a conservative task ontology that folds broad synonyms such as `joke generation` into `humor generation` while retaining narrower tasks such as `pun generation`.
+
 **Headline results involving a model:**
 
 ```bash
@@ -56,6 +61,38 @@ jq -r '.headline_results[]? | select(.best_system // "" | test("GPT-4o")) | .fin
 
 ```bash
 jq -r 'select([.tasks[]?] | any(test("pun"; "i"))) | .ref + "  " + (.tasks | join("; "))' papers/extracts/*.json
+```
+
+## Evidence-strength queries
+
+**Papers whose important conclusions substantially or primarily depend on an LLM judge:**
+
+```bash
+jq -r 'select(.evidence_profile.llm_judge_dependence.level == "primary" or .evidence_profile.llm_judge_dependence.level == "substantial") | .ref + "  " + .title' papers/extracts/*.json
+```
+
+**Generation studies using best-of-N selection:**
+
+```bash
+jq -r 'select([.evidence_profile.generation_selection[]?.mode] | any(. == "best-of-n" or . == "both")) | .ref + "  " + .title' papers/extracts/*.json
+```
+
+**Model runs lacking an exact version/snapshot:**
+
+```bash
+jq -r '. as $paper | .evidence_profile.model_provenance[]? | select(.reporting != "exact") | [$paper.ref, .name, .reporting] | @tsv' papers/extracts/*.json
+```
+
+**Human samples and populations as reported:**
+
+```bash
+jq -r '. as $paper | .evidence_profile.human_samples[]? | [$paper.ref, .role, (.participant_count // "n not reported"), (.population // "population not reported")] | @tsv' papers/extracts/*.json
+```
+
+**Contamination-risk census:**
+
+```bash
+jq -r '.evidence_profile.contamination_risk.level' papers/extracts/*.json | sort | uniq -c | sort -rn
 ```
 
 ## Catalog queries

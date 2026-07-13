@@ -1,0 +1,356 @@
+{
+  "key": "x32-hsq-fingerprinting",
+  "ref": "Adjacent (construct-validity caution)",
+  "section": "Adjacent - Sarcasm & Humor Styles",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x32-hsq-fingerprinting/x32-hsq-fingerprinting.md",
+  "source_md_sha256": "aeec2159908ccb97c77888951a9f99dbcada3fc1219f9d7ab9fa7a0505753277",
+  "source_truncated": false,
+  "title": "Fingerprinting LLMs through Survey Item Factor Correlation: A Case Study on Humor Style Questionnaire",
+  "authors": [
+    "Simon Münker"
+  ],
+  "year": null,
+  "venue": null,
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "RQ1 Do LLMs from the same family/company show similar factor covariance patterns?",
+    "RQ2 How do these LLM patterns compare to human response patterns?"
+  ],
+  "tasks": [
+    "humor style questionnaire response simulation",
+    "humor-related psychological construct representation",
+    "humor style factor-structure recovery"
+  ],
+  "humor_domains": [
+    "humor styles",
+    "Humor Style Questionnaire",
+    "psychological assessment of humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Humor Style Questionnaire (HSQ)",
+      "role": "source-material",
+      "size": "32-item Humor Style Questionnaire; 8 items for each of four dimensions; 5-point Likert scale"
+    },
+    {
+      "name": "LLM HSQ response sets with 5-item context window",
+      "role": "introduced",
+      "size": "n = 1000 samples per model, each containing i = 32 response items"
+    },
+    {
+      "name": "LLM HSQ response sets without context window",
+      "role": "introduced",
+      "size": "same experimental setup but providing models with no historical context of previous interactions"
+    },
+    {
+      "name": "Human Full",
+      "role": "analyzed",
+      "size": "1071 human HSQ responses from Martin et al. (2003)"
+    },
+    {
+      "name": "Human Items",
+      "role": "introduced",
+      "size": "1,000 synthetic response sets"
+    },
+    {
+      "name": "Random",
+      "role": "introduced",
+      "size": "1000 synthetic response sets"
+    },
+    {
+      "name": "Human inter-sample validation subsets",
+      "role": "analyzed",
+      "size": "10 distinct samples n = 100 from the original survey"
+    }
+  ],
+  "models_evaluated": [
+    "Llama 3.1 8B",
+    "Llama 3.3 70B",
+    "Mistral 7B",
+    "Mistral 123B",
+    "Qwen 2.5 7B",
+    "Qwen 2.5 72B"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Survey item factor-correlation fingerprinting",
+      "summary": "The paper represents each model or baseline as a Pearson correlation matrix over all 32 HSQ items across a synthetic or human population. It vectorizes the upper triangle of each correlation matrix and compares fingerprints with cosine similarity to assess whether LLMs organize humor-style constructs similarly to one another or to humans."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "The study uses the Humor Style Questionnaire’s four dimensions—Affiliative, Self-enhancing, Aggressive, and Self-defeating humor—as the psychological construct structure to test whether LLM responses recover human-like humor-style organization."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Pearson correlation matrices over 32 HSQ items are vectorized into 496 upper-triangular elements and compared using cosine similarity normalized in [-1, +1]."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Exploratory graph analysis estimates partial-correlation networks using graphical LASSO with EBIC model selection and Walktrap community detection to compare recovered communities with the HSQ four-factor structure."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Cronbach’s alpha is computed for each humor style dimension, using the paper’s adopted applied-research threshold of α ≥ 0.8."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Human response fingerprints were highly consistent across subsamples, unlike LLM fingerprints.",
+      "metric": "cosine similarity of vectorized item-correlation fingerprints",
+      "value": "0.776 to 0.891 (averaging 0.823)",
+      "dataset": "Human inter-sample validation subsets",
+      "best_system": null
+    },
+    {
+      "finding": "LLM-human similarity was very low; the highest Human Full similarity in the main context-window setting was achieved by Qwen 2.5 7B.",
+      "metric": "cosine similarity",
+      "value": "averaging only 0.026; highest 0.164",
+      "dataset": "Human Full / HSQ",
+      "best_system": "Qwen 2.5 7B"
+    },
+    {
+      "finding": "With a 5-item context window, some cross-family similarities exceeded within-family similarities.",
+      "metric": "cosine similarity",
+      "value": "Mistral 7B/123B 0.044; Qwen 2.5 7B/72B 0.034; Qwen 2.5 7B/Llama 3.3 70B 0.085; Qwen 2.5 72B/Llama 3.1 8B 0.082; Qwen 2.5 7B/Mistral 123B 0.070",
+      "dataset": "LLM HSQ response sets with 5-item context window",
+      "best_system": null
+    },
+    {
+      "finding": "Removing conversational context reduced human alignment, especially for Qwen 2.5 7B against Human Full.",
+      "metric": "cosine similarity",
+      "value": "0.164 with context to 0.004 without context; highest no-context Human Full similarity 0.011",
+      "dataset": "LLM HSQ response sets without context window",
+      "best_system": "Llama 3.1 8B"
+    },
+    {
+      "finding": "Exploratory graph analysis recovered the expected human four-factor HSQ structure but not the LLM structures.",
+      "metric": "EGA community count",
+      "value": "2-8 communities for LLM responses vs 4 factors for human baseline",
+      "dataset": "HSQ",
+      "best_system": null
+    },
+    {
+      "finding": "Human responses met or nearly met applied reliability standards across humor styles, while all LLM conditions had substantially lower Cronbach’s alpha values.",
+      "metric": "Cronbach’s alpha",
+      "value": "Human Full: 0.841, 0.820, 0.790, 0.815; best context-window LLM values included Mistral 7B 0.460-0.617 and Qwen 2.5 7B 0.492, 0.535, 0.551, 0.298",
+      "dataset": "HSQ",
+      "best_system": "Human Full"
+    }
+  ],
+  "key_findings": [
+    "Current tested LLMs exhibited little similarity to human HSQ response-correlation patterns, with human-to-human subsample similarity far exceeding human-to-LLM similarity.",
+    "The human baseline recovered the expected four-factor HSQ structure, whereas LLM exploratory graph analyses produced between 2 and 8 communities that did not clearly align with the theoretical dimensions.",
+    "Models from the same family showed some similarity, but cross-family similarities sometimes exceeded within-family similarities, suggesting that factors beyond architectural lineage shape these response fingerprints.",
+    "Larger models were not consistently more human-like: larger-model similarities averaged 0.029 across families, but Cronbach’s alpha results showed smaller Qwen 2.5 7B with context outperforming Qwen 2.5 72B on several dimensions.",
+    "A 5-item context window improved some LLM reliability and human alignment relative to no context, but the resulting structures still fell far short of human-level coherence."
+  ],
+  "limitations": [
+    "The models may have been exposed to the HSQ during training, so responses might reflect training-data patterns rather than intrinsic model properties.",
+    "Different API implementations, prompting strategies, and generation parameter configurations might introduce systematic biases in model responses.",
+    "The analysis is based on a single psychological instrument, the HSQ, so results may not generalize to other psychological constructs or assessment tools.",
+    "The sliding-window history is only one implementation of contextual continuity; other context-management strategies might yield different response patterns.",
+    "The experiment is restricted to open-weight and comparatively small models, leaving out models from OpenAI or Anthropic."
+  ],
+  "safety_ethics_notes": "The paper warns that substantial divergence between LLM and human factor-correlation patterns creates risks if LLMs are used as replacements for human participants or in psychological assessments. It notes dual-use potential for fingerprinting methods, urges extra safeguards for sensitive domains such as psychopathology, trauma, or suicidality, and cautions against interpreting plausible questionnaire responses as human-like internal psychological states.",
+  "artifacts": {
+    "code_url": "https://github.com/simon-muenker/LLM-Questionnaires",
+    "data_url": "https://github.com/simon-muenker/LLM-Questionnaires",
+    "other": "The repository is stated to contain the complete code, raw data, and aggregated data."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": "1071",
+        "population": "Archival human respondents to the Humor Style Questionnaire from Martin et al. (2003).",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "32-item HSQ responses on a 5-point Likert scale; also used to draw 10 random/distinct samples of n = 100 for human inter-sample fingerprint-similarity validation.",
+        "detail": "The paper incorporates these 1071 human HSQ responses as the 'Human Full' baseline/gold standard. It does not describe the original respondents’ demographics, recruitment, location, or survey-administration details."
+      }
+    ],
+    "judges": [
+      {
+        "type": "automatic-metric",
+        "name": "Pearson item-correlation matrices plus cosine similarity",
+        "role": "primary",
+        "blind": null,
+        "detail": "For each LLM and baseline condition, the paper computes Pearson correlations among all 32 HSQ items across response sets, vectorizes the 496 upper-triangular off-diagonal correlations, and compares fingerprints using cosine similarity normalized to [-1,+1]. This metric supports the main inter-model and human-vs-LLM similarity claims."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Exploratory Graph Analysis (graphical LASSO with EBIC; Walktrap community detection)",
+        "role": "secondary",
+        "blind": null,
+        "detail": "EGA is used to estimate partial-correlation networks and detect item communities for comparison with the HSQ four-factor structure. In the main 5-item-context condition, the EGA figure excludes Llama 3.1 8B and Llama 3.3 70B because both included items with no standard deviation. In the no-context ablation, it excludes Llama 70B and Qwen 72B for the same reason."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Cronbach’s alpha",
+        "role": "validation",
+        "blind": null,
+        "detail": "Cronbach’s alpha is computed for each of the four HSQ humor-style dimensions across baseline, no-context LLM, and 5-item-context LLM conditions; the paper adopts α ≥ 0.8 as the applied-research reliability threshold."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main LLM HSQ response simulation with five-question sliding window of previous questions and responses",
+        "mode": "single-sample",
+        "n": "1000 independent response sets per model; 32 separately prompted HSQ items per response set; no best-of-N reported",
+        "selector": "none",
+        "detail": "Each model is prompted for one class response in {1,2,3,4,5} per item, with structured output forcing a value between 1 and 5. The paper reports no multiple candidates, reranking, or selection among generated alternatives."
+      },
+      {
+        "scope": "Ablation LLM HSQ response simulation without conversational history",
+        "mode": "single-sample",
+        "n": "same experimental setup as main condition, but no historical context; no best-of-N reported",
+        "selector": "none",
+        "detail": "The ablation removes the five-question context window and otherwise evaluates model response fingerprints using the same HSQ setup. No candidate selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Llama",
+        "version_or_snapshot": "3.1 8B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run locally using Ollama. The paper gives the family/version/size label but not an exact Ollama tag, checkpoint hash, quantization, or inference date."
+      },
+      {
+        "name": "Llama",
+        "version_or_snapshot": "3.3 70B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run locally using Ollama. Result tables label the large Llama model as Llama 3.3 70B, while the methods text also says 'Llama 3.1 8B/70B'; no exact Ollama tag, checkpoint hash, quantization, or inference date is reported."
+      },
+      {
+        "name": "Mistral",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run locally using Ollama. The paper gives family/size but not an exact checkpoint, model tag, quantization, or inference date."
+      },
+      {
+        "name": "Mistral",
+        "version_or_snapshot": "123B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run locally using Ollama. The paper gives family/size but not an exact checkpoint, model tag, quantization, or inference date."
+      },
+      {
+        "name": "Qwen",
+        "version_or_snapshot": "2.5 7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run locally using Ollama. The paper gives family/version/size but not an exact model tag, checkpoint hash, quantization, or inference date."
+      },
+      {
+        "name": "Qwen",
+        "version_or_snapshot": "2.5 72B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run locally using Ollama. The paper gives family/version/size but not an exact model tag, checkpoint hash, quantization, or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main 5-item-context LLM response generation",
+        "calls_per_item": "One prompting instance per HSQ item per synthetic response set; 1000 response sets per model and 32 items per response set are reported.",
+        "candidates_per_item": "One forced response value in {1,2,3,4,5}; no multiple candidates reported.",
+        "token_budget": null,
+        "sampling_parameters": "Default hyperparameter configuration, including temperature and repetition penalties, to reflect typical naïve application; exact values not reported.",
+        "compute_or_cost": "Models run locally with Ollama; model selection was intended to be accessible with approximately 80GB VRAM. Actual hardware, runtime, and cost are not reported.",
+        "detail": "Prompt template: 'For each of the statements below, please indicate how true each statement is for you...' with response options 1-5 and instruction to respond only with the predicted class. All 32 items are presented individually; a five-question sliding window of previous questions and responses is included as conversational history."
+      },
+      {
+        "scope": "No-context ablation LLM response generation",
+        "calls_per_item": "Same experimental setup as the main condition, with 1000 response sets per model and 32 individually prompted HSQ items per response set.",
+        "candidates_per_item": "One forced response value in {1,2,3,4,5}; no multiple candidates reported.",
+        "token_budget": null,
+        "sampling_parameters": "Default hyperparameter configuration; exact values not reported.",
+        "compute_or_cost": "Models run locally with Ollama; actual hardware, runtime, and cost are not reported.",
+        "detail": "The ablation provides HSQ items without any context of previous interactions in order to isolate the impact of conversational history."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human Full baseline for fingerprint similarity, EGA, and Cronbach’s alpha",
+        "present": true,
+        "description": "1071 archival human HSQ responses from Martin et al. (2003), described as the primary reference point and gold standard for human-like psychological construct organization.",
+        "directly_comparable": true,
+        "detail": "Human and LLM conditions are evaluated on the same 32-item HSQ response scale using the same correlation-fingerprint, EGA, and reliability analyses. However, the human data are archival and the paper does not report the original administration conditions or participant demographics."
+      },
+      {
+        "scope": "Human inter-sample validation",
+        "present": true,
+        "description": "10 distinct/random samples of n = 100 drawn from the original human survey dataset are compared to estimate human-to-human fingerprint consistency.",
+        "directly_comparable": true,
+        "detail": "Uses the same fingerprint/cosine-similarity metric as the LLM comparisons; the paper reports similarities ranging from 0.776 to 0.891, averaging 0.823. The paper does not clarify whether the n=100 subsets are disjoint or overlapping."
+      },
+      {
+        "scope": "Human Items synthetic control",
+        "present": true,
+        "description": "1000 synthetic response sets preserving item-level human response distributional properties, described as mean and standard deviation, while randomizing inter-item correlations.",
+        "directly_comparable": false,
+        "detail": "This is derived from human response distributions but is not an actual human participant baseline; it is used to test whether LLMs reproduce surface-level response tendencies rather than deeper factor structure."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "The prompt deliberately avoids explaining the HSQ’s purpose or dimensional structure, reducing immediate prompt priming but not pretraining contamination.",
+        "The paper makes code, prompts, and analysis scripts publicly available for reproducibility, but this is not a decontamination control."
+      ],
+      "basis": "The HSQ and its factor structure date to Martin et al. (2003), well before the tested model families, and the paper itself states that models may have been exposed to the HSQ during training. No held-out/private/newly created questionnaire items or convincing decontamination test are reported. Because the task is response simulation and factor-correlation comparison rather than recall of an answer key, and because contamination would more likely alter or inflate human-like structure than fully determine all findings, the risk is assessed as moderate rather than low."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLM is used to judge, label, score, or select outputs. LLMs are the systems under test; results are determined by automatic statistical and psychometric analyses."
+    },
+    "reporting_gaps": [
+      "Original human dataset demographics, recruitment, geography, language confirmation, and administration conditions are not reported beyond citing 1071 human HSQ responses from Martin et al. (2003).",
+      "Exact model checkpoints/Ollama tags, checkpoint hashes, quantization settings, and inference dates are not reported.",
+      "The methods text and result tables are inconsistent for the large Llama label: methods mention 'Llama 3.1 8B/70B', while tables and results use 'Llama 3.3 70B'.",
+      "Exact decoding/default hyperparameter values, including temperature and repetition penalties, are not reported.",
+      "Token limits, context-length settings, random seeds, retry policy, invalid-output handling, and parsing/failure rates for structured output are not reported.",
+      "Actual hardware used, runtime, and monetary/energy cost are not reported; only approximate accessibility with 80GB VRAM is mentioned.",
+      "The paper reports 1000 independent response sets per model but does not detail how independence was enforced across sessions or random seeds.",
+      "The construction of the 'Human Items' synthetic baseline is only summarized as preserving item-level mean and standard deviation while randomizing correlations; implementation details are not fully specified in the paper text.",
+      "For the 10 human n=100 validation samples, the paper does not state the random seed or whether samples are disjoint or overlapping.",
+      "EGA results are incomplete for some model conditions because models with zero-standard-deviation items could not be processed by EGAnet."
+    ]
+  }
+}

@@ -4,7 +4,7 @@
 
 Fact-check of every entry in [humor-and-llms-field-guide.md](../humor-and-llms-field-guide.md) against the full-text transcriptions in `papers/md/`. Run 2026-07-03 by 16 Claude Opus 4.8 agents (5 papers each); every reported discrepancy is backed by a verbatim quote from the transcription. Machine-readable results: [review/discrepancies.json](review/discrepancies.json).
 
-**Scope:** 80 papers, ~540 factual claims (authors, venues, dataset sizes, quantitative results, findings characterizations). Editorial opinions, reading advice, and cross-paper lineage claims were excluded. The 6 guide entries without a paper (theory books T1–T5, unpublished MWAHAHA overview) could not be checked.
+**Scope at the time of the audit (2026-07-03):** the original 80 transcribed papers and ~540 factual claims (authors, venues, dataset sizes, quantitative results, findings characterizations). Editorial opinions, reading advice, and cross-paper lineage claims were excluded. The six entries then lacking a paper included theory books T1–T5 and the not-yet-published MWAHAHA overview; MWAHAHA and 18 additional works were added to the library on 2026-07-11 and are outside this historical audit.
 
 ## Verdict
 

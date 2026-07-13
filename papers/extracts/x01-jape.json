@@ -157,5 +157,133 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Volunteers unfamiliar with JAPE-1",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "They were asked to make lexical entries for a set of words; the number of volunteers, words, and lexical entries is not reported.",
+        "detail": "These volunteer-written entries were used to build the lexicon for the evaluation so that the authors did not hand-craft humour-oriented lexical data."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "A “common knowledge judge”",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Sifted the volunteer-written lexical entries for errors and excessively obscure suggestions before entry into JAPE-1’s lexicon; the number checked, changed, or rejected is not reported.",
+        "detail": "The paper describes this as the second stage of the informal evaluation procedure, after data acquisition and before joke judging."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "14",
+        "population": "A different group of volunteers",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "188 JAPE-1 jokes in near-surface form were distributed in batches; judges scored jokes from 0 to 5 and gave qualitative comments such as possible improvements and whether they had heard a joke before. The paper does not fully specify the per-joke assignment design, though it refers to an “other judge” for jokes that received a maximum score from one judge.",
+        "detail": "These volunteers provided the primary joke-quality evidence reported in the paper."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Common knowledge judge",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Checked volunteer-supplied lexical entries for errors and excessively obscure suggestions before those entries were used in the JAPE-1 lexicon. Expertise, instructions beyond this check, and blinding are not reported."
+      },
+      {
+        "type": "human-lay",
+        "name": "14 volunteer joke judges",
+        "role": "primary",
+        "blind": null,
+        "detail": "Scored generated jokes on a 0–5 scale where 0 meant “Not a joke. Doesn’t make any sense.” and 5 meant “Really good”; also provided qualitative information. Demographics, recruitment, blinding, batch sizes, and exact per-joke rating counts are not reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "JAPE-1 generation for the informal volunteer evaluation",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "rule",
+        "detail": "JAPE-1 produced a set of 188 jokes in near-surface form from volunteer-provided lexical data. The program used schemata, templates, and a post-production checker that rejected outputs where lexemes in the question and punchline were accidentally identical or where the lexemes used for the nonsense noun phrase and its meaning formed a genuine common noun phrase. The paper presents the 188 as the jokes produced from those lexical data and does not report best-of-N sampling, ranking, or human cherry-picking."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "JAPE-1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Implemented symbolic joke generator described as the current version of JAPE-1; exact implementation version, run date, execution environment, and code access are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "JAPE-1 informal evaluation generation run",
+        "calls_per_item": null,
+        "candidates_per_item": "188 jokes total; no item-level prompts or per-item candidate counts are reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports that JAPE-1 had six schemata, a set of templates, a homonym base, and post-production checks. It does not report the number of source words, number of lexical entries, pre-filter candidate count, rejection count, runtime, compute, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "JAPE-1 joke-quality judging",
+        "present": false,
+        "description": "No control group of human-produced jokes was judged under the same conditions. The authors explicitly state that they do not know how human-produced jokes of this genre would fare if judged in the same way, and describe a mixed human/JAPE evaluation only as an ideal hindsight design.",
+        "directly_comparable": false,
+        "detail": "The Crack-a-Joke Book was studied as source material and some existing jokes are discussed, but no matched human baseline was included in the reported evaluation."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Volunteer lexical-entry writers were used instead of author hand-crafted entries to reduce humour-oriented bias in the lexicon.",
+        "A common knowledge judge checked volunteer entries for errors and excessive obscurity.",
+        "Joke judges were asked whether they had heard any of the jokes before."
+      ],
+      "basis": "There is no fixed public benchmark or learned model training set in the modern contamination sense; JAPE-1 is a symbolic generator and the evaluated set was generated from volunteer-supplied lexical data, then rated by humans. However, the authors developed the model after studying existing riddles and report that some high-end outputs already existed as jokes, so novelty overlap is possible and was not fully controlled or quantified."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Primary scores came from volunteer human joke judges; no LLM judge was used.",
+      "detail": "The paper predates LLM-based evaluation and reports no automatic or LLM evaluator for joke quality."
+    },
+    "reporting_gaps": [
+      "Number, demographics, recruitment method, and geography of the lexical-entry volunteers are not reported.",
+      "The number of source words, number of volunteer-written lexical entries, and number of entries accepted, edited, or rejected by the common knowledge judge are not reported.",
+      "The common knowledge judge’s identity, expertise, detailed criteria, and blinding are not reported.",
+      "Joke-judge demographics, recruitment method, geography, and prior familiarity with the task are not reported.",
+      "Batch sizes, randomization, blinding, instructions beyond the rating scale and qualitative prompts, and the exact number of ratings per joke are not fully specified.",
+      "The evaluation is explicitly described as informal and not statistically rigorous; no statistical significance testing is provided.",
+      "No matched human-produced joke control group was included, which the paper explicitly notes.",
+      "The exact implementation version, run date, code availability, execution environment, runtime, compute, and cost are not reported.",
+      "Generation budget details are missing: pre-filter candidate count, rejection count from post-production checking, schema/template usage counts, and any ordering or sampling procedure are not reported.",
+      "The size of the shortened homonym base and the detailed criteria used to shorten it are not reported.",
+      "The number of outputs that judges identified as pre-existing jokes is not quantified beyond listed examples."
+    ]
   }
 }

@@ -1,0 +1,3 @@
+<!-- guide claims for x32-hsq-fingerprinting (Adjacent (construct-validity caution)) -->
+
+**Construct-validity caution:** [**Fingerprinting LLMs through Survey Item Factor Correlation: A Case Study on Humor Style Questionnaire**](https://aclanthology.org/2025.emnlp-main.13/) (Münker, EMNLP 2025) `peer-reviewed` evaluates six LLMs on the HSQ. Their item-correlation structures show little similarity to human respondents, and none recovers the questionnaire's four factors. A model can follow an "affiliative" or "aggressive" persona prompt without instantiating the corresponding human psychological construct; style labels are controls, not validated synthetic personalities.

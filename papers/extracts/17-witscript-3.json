@@ -140,5 +140,162 @@
     "code_url": null,
     "data_url": "www.kaggle.com/datasets/arnavsharmaas/chatbot-dataset-topical-chat",
     "other": "The paper states that the proprietary Witscript 3 software is available for license."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "15",
+        "population": "Amazon Mechanical Turk workers",
+        "recruitment": "Hired via AMT; eligibility requirements were location in the United States and HIT Approval Rate >= 95%.",
+        "geography": "United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each of 39 input-response pairs was evaluated by 15 AMT workers, yielding 585 ratings. Ratings used a 1–4 scale: 1 = not a joke, 2 = almost a joke, 3 = a joke, 4 = a very good joke.",
+        "detail": "The 39 pairs consisted of 13 responses from each source: Human, GPT-LOL, and Witscript 3. Pairs were put in a random order and presented in that same order to all evaluators, who were not told how the pairs had been obtained."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "AMT workers whose conversations are included in Amazon's Topical-Chat dataset",
+        "recruitment": "The paper describes Topical-Chat as comments exchanged by pairs of AMT workers asked to have coherent and engaging conversations based on topical reading material; it does not report the original dataset contributor count.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The study selected 13 input sentences from Topical-Chat and used the recorded response from the AMT worker as the Human response for each selected sentence.",
+        "detail": "For the Human baseline, the author took the entire response up until the AMT worker changed the subject, then corrected capitalization, spelling, and punctuation. The number of unique Topical-Chat workers represented in the 13 Human responses is not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "AMT evaluators",
+        "role": "primary",
+        "blind": true,
+        "detail": "Primary evaluators of response humorousness/joke status. They rated all 39 input-response pairs on the 1–4 joke-quality scale and were not told how the pairs had been obtained."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-3 text-davinci-002",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Within Witscript 3, the GPT-3 API was called with a prompt to determine which of three joke candidates seemed funniest; that candidate was output as Witscript 3's response. This was generation selection, not the final human evaluation."
+      },
+      {
+        "type": "author",
+        "name": "Joe Toplyn",
+        "role": "secondary",
+        "blind": false,
+        "detail": "The author selected and standardized the 13 Topical-Chat sentences using stated criteria, including the author's judgment about whether a sentence could be responded to with a joke relatively easily. The author also standardized Human responses by correcting capitalization, spelling, and punctuation."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "GPT-LOL responses for the 13 selected Topical-Chat input sentences",
+        "mode": "single-sample",
+        "n": "1 response used: the first response output by the system for each input",
+        "selector": "none",
+        "detail": "GPT-LOL is text-davinci-002 prompted with: “You want to be funny. Respond to this: [The sentence].” Temperature was 0.7 and Top P was 1.0. No best-of-N selection is reported."
+      },
+      {
+        "scope": "Witscript 3 responses for the 13 selected Topical-Chat input sentences",
+        "mode": "best-of-n",
+        "n": "3 joke candidates",
+        "selector": "LLM-judge",
+        "detail": "For each input, Witscript 3 created three punch-line/joke candidates via a wordplay mechanism, a common-sense-knowledge mechanism, and a third proprietary mechanism. It then called the GPT-3 API with a prompt to determine which of the three joke candidates seemed funniest and output that candidate."
+      },
+      {
+        "scope": "Human responses from Topical-Chat",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "These were pre-existing human conversational responses from the Topical-Chat dataset, not generated in the experiment. The author selected the response span up until the worker changed the subject."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "OpenAI GPT-3",
+        "version_or_snapshot": "text-davinci-002",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used without fine-tuning by Witscript 3 and by the GPT-LOL baseline. The paper reports the model identifier text-davinci-002 and states it has 175B parameters, but does not report an API inference date or other snapshot metadata."
+      },
+      {
+        "name": "Witscript 3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "mixed",
+        "reporting": "partial",
+        "detail": "Hybrid neural-symbolic system using symbolic humor algorithms, GPT-3 API prompt chaining, non-GPT NLP tools for the wordplay candidate, and a third proprietary GPT-3-powered joke production mechanism. No software version/build is reported."
+      },
+      {
+        "name": "GPT-LOL",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Baseline joke generator created by the author using GPT-3 text-davinci-002 with the reported prompt and sampling settings. No separate system version or inference date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-LOL baseline generation",
+        "calls_per_item": "not explicitly reported",
+        "candidates_per_item": "1 response used per input: the first response output by the system",
+        "token_budget": null,
+        "sampling_parameters": "Temperature = 0.7; Top P = 1.0; prompt: “You want to be funny. Respond to this: [The sentence].”",
+        "compute_or_cost": null,
+        "detail": "The paper does not report max tokens, stop sequences, number of completions requested, random seed, latency, or cost."
+      },
+      {
+        "scope": "Witscript 3 generation",
+        "calls_per_item": "A separate GPT-3 API call was made for each step, but the exact total number of calls per input is not fully reported.",
+        "candidates_per_item": "3 final joke candidates before selection; 1 selected output per input",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Reported GPT-3 uses include selecting topic handles, generating associations, creating the common-sense-knowledge candidate, powering a third proprietary mechanism, generating an angle/joke candidate for each punch line, and selecting the funniest of the three candidates. The wordplay candidate is created without GPT-3 using unspecified NLP tools."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Response humorousness comparison against Human Topical-Chat responses",
+        "present": true,
+        "description": "The Human baseline consisted of the AMT worker response recorded in Topical-Chat for each selected input sentence, edited only for capitalization, spelling, and punctuation and truncated when the worker changed the subject.",
+        "directly_comparable": false,
+        "detail": "Human and AI responses were evaluated together by the same AMT evaluators under source-blind conditions, but the production conditions were not materially matched: the Topical-Chat workers were asked to have coherent and engaging conversations and, as the paper notes, were not making any special attempt to be funny."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [],
+      "basis": "The evaluation prompts and Human baseline responses came from the public Topical-Chat dataset, cited as a 2019 dataset and available from Kaggle. The evaluated LLM was GPT-3 text-davinci-002, and the paper provides no decontamination test, training-overlap check, or held-out/private item creation. The task is open-ended joke generation rather than reproducing benchmark labels, which limits but does not remove risk because the selected public sentences or conversations could have appeared in model training data."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Witscript 3's actual emitted responses, and therefore their subsequent human ratings, depend on GPT-3 selecting the funniest among three internally generated candidates. The headline comparison of Human, GPT-LOL, and Witscript 3 is nevertheless determined by AMT ratings, not by LLM evaluation.",
+      "human_validation": "15 AMT evaluators rated all 39 input-response pairs, yielding 585 human ratings; evaluators were not told how the pairs had been obtained.",
+      "detail": "GPT-3 functions as an internal candidate selector for Witscript 3. It is not used to score the final outputs in Table 1 or Table 2."
+    },
+    "reporting_gaps": [
+      "No OpenAI API inference date, deployment snapshot beyond the text-davinci-002 model identifier, or random seed is reported.",
+      "Witscript 3's prompt templates, token limits, max_tokens, stop sequences, and sampling parameters are not reported.",
+      "The exact number of GPT-3 API calls per Witscript 3 input is not fully specified, especially for association generation, angle generation, and the proprietary third mechanism.",
+      "The third Witscript 3 joke production mechanism is described only as proprietary, and the non-GPT NLP tools used for the wordplay candidate are not named or versioned.",
+      "No compute cost, API cost, runtime, or latency is reported for GPT-LOL or Witscript 3.",
+      "Evaluator demographics beyond AMT platform, U.S. location, and HIT Approval Rate >= 95% are not reported; language proficiency is not separately reported.",
+      "The number of unique Topical-Chat workers represented in the 13 Human baseline responses is not reported.",
+      "No inter-rater reliability, confidence intervals, statistical significance tests, or effect-size analyses are reported for the human ratings.",
+      "The paper does not discuss possible training-data contamination or overlap between Topical-Chat and GPT-3/text-davinci-002 training data.",
+      "No evaluator training, attention checks, or quality-control exclusions are reported beyond the AMT eligibility filters."
+    ]
   }
 }

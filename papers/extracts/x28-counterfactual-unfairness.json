@@ -1,0 +1,506 @@
+{
+  "key": "x28-counterfactual-unfairness",
+  "ref": "Part 6 (relational fairness)",
+  "section": "Part 6 - Safety, Harm & Boundaries",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x28-counterfactual-unfairness/x28-counterfactual-unfairness.md",
+  "source_md_sha256": "3e0e9abcacfbe30aed18095714fa59bb5f387a7a31311153df2726ea42e5705e",
+  "source_truncated": false,
+  "title": "Investigating Counterfactual Unfairness in LLMs towards Identities through Humor",
+  "authors": [
+    "Shubin Kim",
+    "Yejin Son",
+    "Junyeong Park",
+    "Keummin Ka",
+    "Seungbeen Lee",
+    "Jaeyoung Lee",
+    "Hyeju Jang",
+    "Alice Oh",
+    "Youngjae Yu"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "RQ1: Do LLMs refuse to generate humor differently depending on the speaker–target identities?",
+    "RQ2: Do LLMs attribute different speaker intentions depending on speaker–listener pairs, even when the humor content is identical?",
+    "RQ3: Do LLMs predict relational and societal impacts of humor asymmetrically across speaker–listener configurations?"
+  ],
+  "tasks": [
+    "humor generation refusal",
+    "speaker intention inference",
+    "humor style classification",
+    "intent valence classification",
+    "relational and societal impact prediction",
+    "listener reaction generation and evaluation"
+  ],
+  "humor_domains": [
+    "identity-agnostic humor",
+    "identity-specific disparagement humor",
+    "jokes",
+    "identity-based humor",
+    "affiliative humor",
+    "aggressive humor",
+    "self-deprecating humor",
+    "self-enhancing humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Counterfactual humor fairness data",
+      "role": "introduced",
+      "size": "Task 1: 12,320 unique prompts per model and 61,600 requests and responses across five models; Tasks 2/3: 400 identity-agnostic jokes and 737 identity-specific disparagement jokes; Task 3 statistical dataset: 118,400 samples across five models"
+    },
+    {
+      "name": "Humor Recognition dataset",
+      "role": "source-material",
+      "size": "1,183 jokes"
+    },
+    {
+      "name": "HaHackathon (SemEval-2021 Task 7)",
+      "role": "source-material",
+      "size": "10,000 jokes from Reddit and Kaggle; each joke annotated by 20 raters for humor quality and offensiveness"
+    }
+  ],
+  "models_evaluated": [
+    "Claude 3.5 Haiku",
+    "GPT-4o",
+    "DeepSeek-Reasoner",
+    "Gemini 2.5 Flash-Lite",
+    "Grok 4",
+    "Grok-4-Fast Non-Reasoning",
+    "GPT-4.1",
+    "Llama-3-70B-Instruct"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Counterfactual humor fairness framework",
+      "summary": "The paper probes identity-conditioned unfairness by swapping speaker, target, and listener identities while holding request templates or joke content constant across three humor tasks: generation refusal, intention inference, and relational/societal impact prediction."
+    },
+    {
+      "name": "Asymmetric Refusal Rate (ARR)",
+      "summary": "ARR measures the absolute difference between refusal rates for reversed speaker–target configurations, |RR(A→B) − RR(B→A)|, to detect directional safety asymmetries."
+    },
+    {
+      "name": "Speaker Effect (SE)",
+      "summary": "SE compares speaker-target conditioned refusal rates against target-only baselines, SE(A→B)=RR(A→B)−RR(B), to isolate whether a named speaker identity increases or decreases refusal."
+    },
+    {
+      "name": "Difference-based Bias (B_diff)",
+      "summary": "B_diff averages valence-score differences between reversed speaker–listener configurations, mapping malicious to +1, uncertain to 0, and benign to −1 for speaker intention inference."
+    },
+    {
+      "name": "Identity-specific disparagement humor curation pipeline",
+      "summary": "The paper combines GPT-4.1 pre-filtering with trained human verification to extract jokes with a single identity-based target and unanchored speaker–listener roles from HaHackathon."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "humor styles (Martin HSQ)",
+      "usage": "operationalized",
+      "detail": "Identity-agnostic jokes are balanced across affiliative, aggressive, self-deprecating, and self-enhancing styles, and Task 2 asks models to classify speaker intention using the same framework."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "cited-in-passing",
+      "detail": "McGraw and Warren (2010) is cited in the introduction to motivate humor’s dependence on social cues and acceptability boundaries."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "GPT-4o evaluates Task 1 refusal/fulfillment and Task 3 responses; Task 1 and Task 3 judge temperature is fixed at 0."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Llama-3-70B-Instruct is used as an independent cross-evaluator for the full Task 1 dataset and a 4,000-evaluation Task 3 subset."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Human experts validate Task 1 refusal labels, Task 3 score directions, and dataset filtering decisions."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper reports ARR, SE, B_diff, independent-samples t-tests, p-values, and Cohen’s d."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Two annotators filter identity-agnostic jokes; seven trained annotators verify identity-specific disparagement jokes, with each candidate reviewed by three annotators."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "20 raters per joke",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "10,000 HaHackathon jokes annotated for humor quality and offensiveness in the source corpus.",
+        "detail": "These are source-corpus annotations described by the paper, not newly recruited participants for this study."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Filtered 1,183 jokes from the Humor Recognition dataset to remove identity-related content, yielding 100 jokes per style and 400 total.",
+        "detail": "Used for the identity-agnostic humor subset."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "7",
+        "population": "trained human annotators",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Reviewed 1,224 candidate identity-specific samples; each sample was independently evaluated by three annotators; 737 jokes with unanimous agreement were retained.",
+        "detail": "Annotators manually verified filtering criteria, corrected mislabeled categories, and excluded intersectional and borderline cases."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "expert annotator",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Annotated 1,540 Task 1 samples for refusal/request fulfillment.",
+        "detail": "The subset was randomly sampled and balanced across models, identity configurations, and benign/malign request types."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "expert annotators",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Task 3 human validation is described as a subset of 800 samples; the same section also states 80 samples per model and 400 samples across five evaluated models, with two annotators assigned to each humor item.",
+        "detail": "Annotators scored model responses on humor acceptance, social sensitivity, and character consistency using the same 1–5 scale as the LLM judges."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "primary",
+        "blind": null,
+        "detail": "Automated judge for Task 1 refusal classification and Task 3 humor acceptance, social sensitivity, and character consistency scores."
+      },
+      {
+        "type": "LLM",
+        "name": "Llama-3-70B-Instruct",
+        "role": "validation",
+        "blind": null,
+        "detail": "Independent cross-evaluator for Task 1 and Task 3 validation."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4.1",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used for automated pre-filtering and initial labeling of the identity-specific disparagement humor dataset."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude 3.5 Haiku, GPT-4o, DeepSeek-Reasoner, Gemini 2.5 Flash-Lite, Grok-4-Fast Non-Reasoning",
+        "role": "primary",
+        "blind": null,
+        "detail": "In Task 2, the evaluated LLMs themselves output forced-choice humor style and intent-valence labels; these outputs constitute the measured labels."
+      },
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "One expert annotator validates Task 1 refusal classifications; three expert annotators validate Task 3 ratings."
+      },
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Two annotators filter the identity-agnostic subset and seven trained annotators verify identity-specific disparagement-humor samples."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "ARR, SE, B_diff, t-tests, Cohen’s d",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Metrics aggregate model outputs and judge labels into reported asymmetry and significance results."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Task 1 humor generation",
+        "mode": "single-sample",
+        "n": "one response per instantiated request",
+        "selector": "none",
+        "detail": "The paper reports 61,600 requests and responses across five models; no best-of-N selection is described."
+      },
+      {
+        "scope": "Task 3 listener-response generation",
+        "mode": "single-sample",
+        "n": "one generated response per joke/identity/relationship variation",
+        "selector": "none",
+        "detail": "Responses are later scored by GPT-4o; no candidate selection stage is described."
+      },
+      {
+        "scope": "Task 2 forced-choice intention inference",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The task is classification with three trials and option shuffling, not open-ended generation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Claude 3.5 Haiku",
+        "version_or_snapshot": "claude-3-5-haiku-20241022",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated in all three main tasks and in the Task 2 intersectional appendix."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": "gpt-4o-2024-08-06",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated as a target model; GPT-4o is also used as an automated judge, but the judge snapshot is not separately specified."
+      },
+      {
+        "name": "DeepSeek-Reasoner",
+        "version_or_snapshot": "deepseek-reasoner",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated in the main tasks."
+      },
+      {
+        "name": "Gemini 2.5 Flash-Lite",
+        "version_or_snapshot": "gemini-2.5-flash-lite",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated in the main tasks."
+      },
+      {
+        "name": "Grok 4",
+        "version_or_snapshot": "grok-4-0709",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used in Task 1."
+      },
+      {
+        "name": "Grok-4-Fast Non-Reasoning",
+        "version_or_snapshot": "grok-4-fast-non-reasoning",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used in Tasks 2 and 3; tables also refer to Grok-4-Fast."
+      },
+      {
+        "name": "GPT-4.1",
+        "version_or_snapshot": "gpt-4.1-2025-04-14",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used for automated pre-filtering and initial labeling of the identity-specific humor dataset."
+      },
+      {
+        "name": "Llama-3-70B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an independent open-source evaluator for Task 1 and Task 3 validation."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Task 1 target-model generation",
+        "calls_per_item": "one response per request",
+        "candidates_per_item": "1",
+        "token_budget": null,
+        "sampling_parameters": "temperature 0.7; system prompt: “You are a helpful assistant.”; no output-structure constraints",
+        "compute_or_cost": null,
+        "detail": "80 templates instantiated into 9,680 speaker-target conditioned requests and 2,640 target-only requests, for 12,320 unique prompts per model and 61,600 requests/responses across five models."
+      },
+      {
+        "scope": "Task 1 refusal judging",
+        "calls_per_item": "one GPT-4o evaluation per response; Llama-3-70B-Instruct re-evaluates the full 61,600 evaluations",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "GPT-4o judge temperature 0",
+        "compute_or_cost": null,
+        "detail": "Judge outputs structured JSON fields for contains_humor, humor_content, request_fulfilled, refusal_type, and deviation_type."
+      },
+      {
+        "scope": "Identity-specific dataset pre-filtering",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "GPT-4.1 prompts use temperatures 0.2–0.3",
+        "compute_or_cost": null,
+        "detail": "GPT-4.1 screens and labels HaHackathon jokes before human verification."
+      },
+      {
+        "scope": "Task 2 intention inference",
+        "calls_per_item": "three trials for each speaker–listener–joke combination",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Option order shuffled; “uncertain” varied with synonyms such as “unsure” and “undecided”; main-task temperature not reported",
+        "compute_or_cost": null,
+        "detail": "Models output exactly two words: humor style and intent valence."
+      },
+      {
+        "scope": "Task 2 intersectional appendix",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "temperature 0.3 for GPT-4o and Claude 3.5 Haiku",
+        "compute_or_cost": null,
+        "detail": "Uses 100 identity-agnostic humor items, 25 per humor style, across 24 speaker-listener pairs."
+      },
+      {
+        "scope": "Task 3 response generation",
+        "calls_per_item": "one generated response per variation",
+        "candidates_per_item": "1",
+        "token_budget": null,
+        "sampling_parameters": "target-model generation temperature not reported",
+        "compute_or_cost": null,
+        "detail": "The statistical validation dataset comprises 118,400 samples across five models, 23,680 per model."
+      },
+      {
+        "scope": "Task 3 LLM-as-judge scoring",
+        "calls_per_item": "one GPT-4o judge evaluation per generated response; Llama-3-70B-Instruct re-evaluates a 4,000-evaluation subset",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "GPT-4o judge temperature fixed at 0",
+        "compute_or_cost": null,
+        "detail": "Judge returns 1–5 scores and reasoning for humor acceptance, social sensitivity, and character consistency."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "All tasks",
+        "present": false,
+        "description": "Human annotations are used for validation of LLM judges and dataset labels, but the paper does not report a human baseline system performing the same generation, refusal, or inference tasks under matched conditions.",
+        "directly_comparable": false,
+        "detail": "Task 3 humans score the same model responses, which validates evaluation direction but is not a baseline for model behavior."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "New request templates are constructed for Task 1.",
+        "Existing humor corpora are filtered and adapted for the counterfactual design.",
+        "Identity swaps hold joke/request content constant across conditions.",
+        "Human verification is used for the curated identity-specific subset."
+      ],
+      "basis": "The study uses newly constructed prompts and curated counterfactual conditions, but it also draws jokes from public pre-existing datasets such as HaHackathon and the Humor Recognition dataset; no decontamination test or model training-data audit is reported."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Task 1 refusal-rate and ARR claims and Task 3 humor-acceptance/social-sensitivity claims depend primarily on GPT-4o judgments; GPT-4.1 pre-filtering also affects the identity-specific dataset construction.",
+      "human_validation": "Task 1 human-vs-GPT-4o agreement is 96.88% (1,492/1,540), Cohen’s κ = 0.931; Task 3 human validation shows the same directional pattern for humor acceptance, social sensitivity, and character consistency, though character consistency agreement is weak.",
+      "detail": "The main conclusions are corroborated by Llama-3-70B-Instruct and human validation, but important headline metrics are still produced by LLM judges."
+    },
+    "reporting_gaps": [
+      "Inference dates are not reported for any model.",
+      "Access mode is not specified for the proprietary APIs or for Llama-3-70B-Instruct deployment.",
+      "The GPT-4o snapshot used specifically as judge is not separately specified from the evaluated GPT-4o model snapshot.",
+      "Main Task 2 temperature and other sampling parameters are not reported.",
+      "Task 3 target-model generation temperature and token limits are not reported.",
+      "Token budgets, compute, and monetary cost are not reported.",
+      "Human annotator recruitment, demographics, geography, and compensation are not reported.",
+      "The paper does not report a decontamination analysis for source jokes from public datasets.",
+      "Task 3 statistical validation notes that observations are not strictly independent because joke items appear across multiple speaker–listener conditions.",
+      "Character Consistency in Task 3 has weak human–LLM agreement, κ = 0.13–0.19."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "In Task 1, the largest reported Asymmetric Refusal Rate is for the poor/wealthy pair, with Claude refusing one direction 67.5 percentage points more often than the reverse.",
+      "metric": "ARR",
+      "value": "67.5%",
+      "dataset": "Counterfactual humor fairness data",
+      "best_system": "Claude 3.5 Haiku"
+    },
+    {
+      "finding": "Averaging across Claude, GPT, DeepSeek, and Gemini, American→Chinese requests show 71% refusal versus 41% in the reverse direction.",
+      "metric": "refusal rate",
+      "value": "71% vs. 41%",
+      "dataset": "Counterfactual humor fairness data",
+      "best_system": null
+    },
+    {
+      "finding": "For Task 2 identity-agnostic humor, able-bodied speakers addressing physically disabled listeners are labeled malicious at 46.2% versus 21.4% in the reverse direction.",
+      "metric": "malicious intent rate / B_diff",
+      "value": "B_diff = 0.501, p < 0.001; 46.2% vs. 21.4%",
+      "dataset": "Counterfactual humor fairness data",
+      "best_system": null
+    },
+    {
+      "finding": "In the unrelated-target Task 2 setting, White speakers talking to Black listeners about Chinese people are judged malicious 73.1% of the time versus 44.3% for the reverse configuration.",
+      "metric": "malicious intent rate / B_diff",
+      "value": "B_diff = 0.595, p < 0.001; 73.1% vs. 44.3%",
+      "dataset": "Counterfactual humor fairness data",
+      "best_system": null
+    },
+    {
+      "finding": "Across Task 2 models, unrelated-target identity jokes amplify average absolute B_diff by 1.71× to 3.96× relative to identity-agnostic humor.",
+      "metric": "Overall Amplification",
+      "value": "1.71×–3.96×",
+      "dataset": "Counterfactual humor fairness data",
+      "best_system": null
+    },
+    {
+      "finding": "In Task 3, overall humor acceptance is lower for Privileged→Marginalized than Marginalized→Privileged interactions, while social sensitivity is higher.",
+      "metric": "mean score, t-test, Cohen’s d",
+      "value": "H: 3.07 (1.50) vs. 3.65 (1.47), t = -66.89, p < .001, d = -0.39; S: 3.57 (0.98) vs. 3.06 (1.09), t = 84.42, p < .001, d = 0.49",
+      "dataset": "Counterfactual humor fairness data",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Across models, humor requests from conventionally privileged speakers targeting marginalized groups are refused more often than the reverse, consistent with a learned punching-down versus punching-up hierarchy.",
+    "Models attribute more malicious and aggressive intent to identical jokes when the speaker has a privileged identity, even when the joke content itself is identity-agnostic.",
+    "Bias is amplified in Task 2 when jokes target an unrelated identity group, showing that speaker–listener identity cues can override the actual target of the joke.",
+    "Task 3 responses are judged as less accepting and more socially sensitive when privileged speakers address marginalized listeners, and professional hierarchies intensify these effects relative to friendships.",
+    "Intersectional complex profiles split models into conservative and lenient clusters: Claude, DeepSeek, and Grok treat complexity as a risk multiplier, while GPT-4o and Gemini treat it as added nuance.",
+    "The authors argue that models rely on demographic cues as proxies for harm rather than performing holistic context-sensitive social reasoning."
+  ],
+  "limitations": [
+    "The study focuses on a small set of state-of-the-art proprietary models, excluding open-source systems and smaller checkpoints from the main evaluation.",
+    "The counterfactual design uses controlled identity swaps and curated templates, which abstract away nuance and spontaneity from natural conversations.",
+    "The datasets are limited to identity-agnostic jokes and disparagement humor derived from existing corpora, not the full diversity of humor.",
+    "The authors state that expanding to more varied humor sources and multilingual settings remains future work.",
+    "Task 3 statistical tests use samples that are not strictly independent because individual jokes appear across multiple speaker–listener conditions.",
+    "Task 3 Character Consistency scores should be interpreted cautiously because human–LLM agreement is weak for that dimension."
+  ],
+  "safety_ethics_notes": "The paper includes an offensive-content warning. It studies disparagement humor and identity-targeted jokes, including potentially offensive examples. The Ethics Statement says AI assistants were used for language support, GPT-4.1 was used for dataset pre-filtering, GPT-4o for automated judging in Tasks 1 and 3, and automated outputs were validated through human annotation and independent cross-evaluation.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The first page shows a GitHub icon followed by “Code and Dataset,” but the transcription does not provide a URL."
+  }
+}

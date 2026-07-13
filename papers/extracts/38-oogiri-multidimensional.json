@@ -152,5 +152,266 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that it releases the annotated corpus and benchmark design, but no URL is provided in the transcribed text."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Native Japanese speakers recruited without regard to age or educational background",
+        "recruitment": "Lancers crowdsourcing platform",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "Each response was rated by four different native Japanese speakers on six 0–4 dimensions. The final evaluation set consisted of 200 topics and eight response types per topic.",
+        "detail": "Used for manual annotation of Novelty, Clarity, Relevance, Intelligence, Empathy, and Overall Funniness. The paper does not report the total number of unique annotators."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Human competitors and voters/judges on Bokete, as represented in the Oogiri-GO dataset",
+        "recruitment": "Pre-existing online Oogiri competition platform data",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "After filtering, Oogiri-GO contributed 1,329 topics: 313 text-based and 1,016 image-based. Filtering retained topics whose top-voted response had at least 100 votes and that had at least 10 submitted responses.",
+        "detail": "Each Oogiri-GO sample contains a topic, a human-submitted response, and the number of votes the response received. Source vote counts were used to select topics and define High/Mid/Low human response tiers; vote counts are not participant counts."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Human participants and voters on Oogiri-Chaya",
+        "recruitment": "Pre-existing online Oogiri competition platform data collected by the authors between 21 November 2021 and 17 July 2024",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "After filtering to topics with 100 or more responses, Oogiri-Chaya contributed 551 topics: 425 text-based and 126 image-based.",
+        "detail": "Each entry contains a topic, a participant response, and the number of votes that response received. The platform hides other participants’ responses during submission and hides vote counts during evaluation; vote counts are not participant counts."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Lancers native Japanese annotators",
+        "role": "primary",
+        "blind": null,
+        "detail": "Rated each topic–response pair on six dimensions using 0–4 integer scores. The paper reports that eight data subsets ensured each annotator evaluated only one response type per topic, but does not report whether annotators were blind to response source or category."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Bokete/Oogiri-GO votes",
+        "role": "data-labeling",
+        "blind": false,
+        "detail": "Vote counts determined source response popularity and were used for topic filtering and High/Mid/Low response selection. The paper states Bokete users can view other users’ responses and current vote counts, creating possible first-mover and conformity bias."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Oogiri-Chaya votes",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Vote counts were used as source popularity data. The paper states responses are hidden during submission and vote counts are hidden during evaluation, reducing social-influence bias relative to Bokete."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4.1",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as an LLM annotator for the Oogiri evaluation task, applying the same six-dimensional 0–4 rubric to topic–response pairs."
+      },
+      {
+        "type": "LLM",
+        "name": "Gemini 2.5 Pro",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as an LLM annotator for the Oogiri evaluation task, applying the same six-dimensional 0–4 rubric to topic–response pairs."
+      },
+      {
+        "type": "LLM",
+        "name": "Claude Sonnet 4",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as an LLM annotator for the Oogiri evaluation task, applying the same six-dimensional 0–4 rubric to topic–response pairs."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Correlation, ranking accuracy, and significance analyses",
+        "role": "primary",
+        "blind": null,
+        "detail": "Spearman correlations between human and LLM scores are the main RQ2 metric; appendices also report Pearson correlations and t-test significance against zero correlation. The paper also reports accuracy for correctly predicting the High/Mid/Low Overall Funniness order."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to detect topics and responses in Oogiri-Chaya that potentially contained discriminatory, violent, sexual, or otherwise socially inappropriate content before manual review."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors/manual reviewers",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Manually reviewed all GPT-4o-flagged Oogiri-Chaya items and removed those deemed inappropriate."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4.1",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to transcribe image-based topics consisting solely of text and reclassify them as text-based."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Humorous Oogiri response generation by GPT-4.1, Gemini 2.5 Pro, and Claude Sonnet 4 for the 200-topic evaluation set",
+        "mode": "single-sample",
+        "n": "1 response per model per topic",
+        "selector": "none",
+        "detail": "The Japanese generation prompt asks the model to generate one funny answer. The final evaluation set includes one humorous response from each model for each topic. No best-of-N generation or post-generation selection is reported."
+      },
+      {
+        "scope": "GPT-4.1 serious, non-humorous control responses",
+        "mode": "not-reported",
+        "n": "The final evaluation set contains one GPT-4.1 serious response per topic",
+        "selector": "unclear",
+        "detail": "The paper lists “GPT-4.1 (serious)” as one of the eight response types, but does not provide the prompt, sampling setup, candidate count, or selection procedure for these serious responses."
+      },
+      {
+        "scope": "Selection of pre-existing human and unrelated source responses",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "rule",
+        "detail": "High/Mid/Low were selected as the most/average/fewest-voted responses on the source website. Unrelated responses were top-voted responses from different, irrelevant topics. These are selections from existing human website responses, not model generations."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4.1",
+        "version_or_snapshot": "gpt-4.1-2025-04-14",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used for Oogiri humorous generation and as an LLM evaluator. GPT-4.1 is also named for serious controls and for transcription/reclassification of text-only image topics, but the paper does not separately specify settings for those uses."
+      },
+      {
+        "name": "Gemini 2.5 Pro",
+        "version_or_snapshot": "gemini-2.5-pro-preview-05-06",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used for Oogiri humorous generation and as an LLM evaluator."
+      },
+      {
+        "name": "Claude Sonnet 4",
+        "version_or_snapshot": "claude-sonnet-4-20250514-v1:0",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used for Oogiri humorous generation and as an LLM evaluator."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for safety-related detection of potentially inappropriate Oogiri-Chaya topics and responses; no snapshot or inference details are reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Humorous Oogiri generation by GPT-4.1, Gemini 2.5 Pro, and Claude Sonnet 4",
+        "calls_per_item": null,
+        "candidates_per_item": "1 final humorous response per model per topic",
+        "token_budget": null,
+        "sampling_parameters": "Default parameter settings",
+        "compute_or_cost": null,
+        "detail": "For each selected Oogiri topic, the authors embedded the topic in a Japanese prompt asking for one funny answer. Exact default parameter values, token limits, retries, failures, and costs are not reported."
+      },
+      {
+        "scope": "GPT-4.1 serious control generation",
+        "calls_per_item": null,
+        "candidates_per_item": "1 final serious response per topic in the evaluation set",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper includes a GPT-4.1 serious/non-humorous response type but does not report the prompt, parameter settings, number of calls, or whether any selection occurred."
+      },
+      {
+        "scope": "LLM evaluation by GPT-4.1, Gemini 2.5 Pro, and Claude Sonnet 4",
+        "calls_per_item": null,
+        "candidates_per_item": "1 reported six-dimensional score vector per model per topic–response pair",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "LLMs used the same evaluation framework and prompt template as humans, outputting integer scores from 0 to 4 for six dimensions. Repeated evaluations, decoding parameters, and cost are not reported."
+      },
+      {
+        "scope": "GPT-4o safety screening of Oogiri-Chaya",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "GPT-4o was used to flag potentially inappropriate topics and responses. The number of screened items, calls, prompts, thresholding details, and parameters are not reported."
+      },
+      {
+        "scope": "GPT-4.1 transcription/reclassification of text-only image topics",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper states that image-based topics consisting solely of text were transcribed using GPT-4.1 and reclassified as text-based, but does not report the number of such items or inference settings."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "RQ1 Oogiri generation quality",
+        "present": true,
+        "description": "Human High, Mid, and Low responses from source websites were included alongside LLM-generated responses and rated by human annotators using the same six-dimensional 0–4 rubric.",
+        "directly_comparable": true,
+        "detail": "The final evaluation set contains High/Mid/Low human response types for the same selected topics as the LLM responses. Human tiers were selected by source website vote rules, while final scores came from Lancers annotations."
+      },
+      {
+        "scope": "RQ2 Oogiri evaluation ability",
+        "present": true,
+        "description": "Human Lancers annotations served as the reference against which GPT-4.1, Gemini 2.5 Pro, and Claude Sonnet 4 evaluation scores were compared.",
+        "directly_comparable": true,
+        "detail": "Humans and LLMs evaluated the same topic–response pairs on the same six dimensions with the same evaluation framework; the paper reports Spearman and Pearson correlations between the resulting scores."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The evaluated model snapshots are from 2025, while the underlying Oogiri-GO/Bokete and Oogiri-Chaya source content was public or online and collected before then, including Oogiri-Chaya data from 2021–2024 and Oogiri-GO from prior work. The final 200-topic evaluation set appears newly assembled by the authors, but it is drawn from public web/platform data and the paper reports no decontamination test, memorization check, private held-out source, or other contamination control. Therefore risk is assessed as moderate rather than low."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "RQ2 claims about whether LLMs can judge Oogiri humor, their low agreement with humans, positivity and self-preference biases, and their prioritization of Novelty over Empathy depend directly on LLM-generated evaluation scores. Dataset safety filtering also partly depends on GPT-4o flags. RQ1 generation rankings mainly rest on human annotations rather than LLM judges.",
+      "human_validation": "Each response was rated by four native Japanese human annotators, and LLM evaluation scores were compared against those human scores using correlation analyses.",
+      "detail": "LLMs are not merely ancillary metrics in the evaluation task; their scores are the object of analysis. However, the headline generation-performance result is grounded in human evaluation, so LLM-judge dependence is substantial rather than primary overall."
+    },
+    "reporting_gaps": [
+      "Total number of unique Lancers annotators is not reported; the paper reports four different native Japanese speakers per response but not the annotator pool size.",
+      "Human annotator geography, compensation, screening, training, quality-control procedures, exclusions, and inter-annotator agreement are not reported.",
+      "Whether human annotators were blind to response source, model identity, human tier, or control category is not reported; the paper only states that each annotator saw one response type per topic.",
+      "The final 200-topic selection procedure is only described as based on popularity of top-voted answers; the exact sampling rule and counts from Oogiri-GO versus Oogiri-Chaya are not reported.",
+      "The prompt and generation procedure for GPT-4.1 serious/non-humorous control responses are not reported.",
+      "Access method, inference dates, random seeds, exact default decoding parameters, token limits, retry/failure handling, cost, and compute are not reported for LLM generation or evaluation.",
+      "The number of LLM evaluation calls per item and whether evaluations were repeated or averaged are not reported.",
+      "No contamination or memorization analysis is reported for public Oogiri topics/responses used with later proprietary models.",
+      "GPT-4o snapshot/version, prompt, settings, number of flagged items, and quantitative safety-filtering outcomes are not reported.",
+      "The exact GPT-4.1 snapshot/settings and number of items for text-only image transcription/reclassification are not reported.",
+      "The supplied paper text states that the corpus is released, but no release URL is provided in the markdown."
+    ]
   }
 }

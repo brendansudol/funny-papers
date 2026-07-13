@@ -181,5 +181,276 @@
     "code_url": "https://github.com/qiuchili/llm_sarcasm_detection",
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Producers/speakers of texts in pre-existing sarcasm benchmarks: IAC-V1/IAC-V2 online debates and discussions, SemEval 2018 Task 3 tweets, and MUStARD TV-show conversations.",
+        "recruitment": "No new human recruitment by this paper; the authors selected existing benchmark datasets.",
+        "geography": null,
+        "languages": [
+          "English explicitly for SemEval 2018 Task 3; language for the other sarcasm benchmarks is not explicitly reported in this paper"
+        ],
+        "observations": "Reported dataset item splits: IAC-V1 #Train 1,595, #Dev 80, #Test 320; IAC-V2 #Train 5,216, #Dev 262, #Test 1,042; SemEval 2018 #Train 3,634, #Dev 200, #Test 784; MUStARD #Train 552, #Test 138, and 690 samples total of 3,000 utterances. These are item/utterance counts, not participant counts.",
+        "detail": "The paper reports no contributor/speaker counts, demographics, or recruitment details for these datasets. For MUStARD, the paper uses only textual information despite the dataset being multimodal."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual annotators of the SemEval 2018 Task 3 irony/sarcasm tweet corpus.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The paper states that SemEval 2018 Task 3 was collected using irony-related hashtags and subsequently manually annotated; no annotation count is reported beyond dataset item splits.",
+        "detail": "Annotator count, expertise, agreement, and blinding are not reported in this paper."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Producers/speakers in pre-existing humor-detection benchmarks CMMA and UR-FUNNY-V2.",
+        "recruitment": "No new human recruitment by this paper; the humor extension uses existing benchmarks.",
+        "geography": null,
+        "languages": [
+          "Chinese for CMMA, from the referenced dataset title; language for UR-FUNNY-V2 is not explicitly reported in this paper"
+        ],
+        "observations": "Table 4 reports accuracy and Macro-F1 on CMMA and UR-FUNNY-V2 but does not report item counts or participant counts for these two datasets.",
+        "detail": "The paper does not describe contributor counts, demographics, annotator counts, or annotation protocols for the humor datasets."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Pre-existing benchmark gold labels",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Gold labels from IAC-V1, IAC-V2, SemEval 2018 Task 3, MUStARD, CMMA, and UR-FUNNY-V2 determine correctness. The paper explicitly describes SemEval as manually annotated; label-generation protocols for the other benchmarks are not described in this paper."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy, Macro-F1, Avg. of F1, unpaired t-test",
+        "role": "primary",
+        "blind": null,
+        "detail": "The reported results are computed by accuracy and Macro-F1 against benchmark labels; tables also average F1 across datasets. Table 2 marks significance improvements over the best baseline via an unpaired t-test with p < 0.05."
+      },
+      {
+        "type": "LLM",
+        "name": "Backbone LLM used as GoC cue evaluator/voter",
+        "role": "secondary",
+        "blind": null,
+        "detail": "In Graph of Cues, an LLM acts as the cue evaluator, voting on the most valuable next cue and assessing whether cumulative cues provide sufficient confidence. This affects the method’s internal path selection, not the external benchmark metric."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "IO, CoT, and Chain of Contradiction prompting for sarcasm detection",
+        "mode": "single-sample",
+        "n": "one final label per input; CoC uses three sequential steps/generations",
+        "selector": "none",
+        "detail": "No best-of-N output selection is reported. CoC asks for surface sentiment, true intention, then a final consistency/label decision."
+      },
+      {
+        "scope": "Graph of Cues",
+        "mode": "single-sample",
+        "n": "up to 10 cue-selection iterations are described; exact number of votes/generations per iteration is not reported",
+        "selector": "LLM-judge",
+        "detail": "The LLM cue evaluator greedily selects cues until confidence is at least 0.95 or the cue limit is reached, then produces a final judgment. This is not reported as best-of-N final-output selection."
+      },
+      {
+        "scope": "Bagging of Cues",
+        "mode": "single-sample",
+        "n": "T cue subsets and q cues per subset are defined but their numerical values are not reported",
+        "selector": "rule",
+        "detail": "BoC generates T independent predictions from randomly sampled cue subsets and aggregates them by majority vote. This is an ensemble/voting procedure, not best-of-N selection of the best candidate."
+      },
+      {
+        "scope": "Tensor of Cues",
+        "mode": "single-sample",
+        "n": "one yes/no label decoded from the first generated-token logit",
+        "selector": "none",
+        "detail": "ToC extracts linguistic, contextual, and emotional cues, fuses hidden-layer cue embeddings through a tensor product, prepends the fused cue sequence to the prompt, and decodes a single-token label."
+      },
+      {
+        "scope": "Tree-of-Thought baseline",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper includes ToT as a baseline and says LangChain is used, but it does not report ToT branching factor, depth, evaluator, stopping rule, or candidate-selection procedure."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Implemented via the official OpenAI Python API library. No API model snapshot, version string, or inference date is reported. ToC is not implemented for GPT-4o."
+      },
+      {
+        "name": "Claude 3.5 Sonnet",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Implemented via the official Anthropic Python API library. No dated Claude 3.5 Sonnet snapshot/version or inference date is reported. ToC is not implemented for Claude 3.5 Sonnet."
+      },
+      {
+        "name": "LLaMA3-8B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Implemented with Hugging Face Transformers; Table 2 labels it Llama 3-8B. No Hugging Face model ID revision, checkpoint hash, quantization, or inference date is reported."
+      },
+      {
+        "name": "Qwen 2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Implemented with Hugging Face Transformers. No exact checkpoint/revision, instruction-tuning status, quantization, or inference date is reported."
+      },
+      {
+        "name": "Qwen 2-1.5B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run in the model-scale study for CoC, GoC, BoC, and ToC. Exact checkpoint/revision and inference date are not reported."
+      },
+      {
+        "name": "Qwen 2-72B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run in the model-scale study for CoC, GoC, and BoC. Exact checkpoint/revision, quantization, and inference date are not reported."
+      },
+      {
+        "name": "LLaMA 3-70B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Run in the model-scale study for CoC, GoC, and BoC. Exact checkpoint/revision, instruction-tuning status, quantization, and inference date are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Chain of Contradiction",
+        "calls_per_item": "3 sequential LLM steps are specified per input: surface sentiment, true intention, and consistency/final label.",
+        "candidates_per_item": "one final label",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "The paper says all models are run on four A100 GPUs, while GPT-4o and Claude 3.5 Sonnet are accessed via official APIs; cost is not reported.",
+        "detail": "Used in zero-shot Table 2 and few-shot Table 6. Exact decoding settings, prompt formatting beyond examples, context limits, retries, and output parsing are not reported."
+      },
+      {
+        "scope": "Graph of Cues",
+        "calls_per_item": "Iterative cue-selection loop until confidence >= 0.95 or j <= 10, plus final judgment; exact number of LLM calls/votes per item is not reported.",
+        "candidates_per_item": "up to 10 selected cues; no best-of-N final-output candidates reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Four A100 GPUs are reported generally; API calls for GPT-4o/Claude are used, but cost is not reported.",
+        "detail": "The cue evaluator is an LLM. The implementation uses LangChain, but voting count, stopping implementation, confidence calibration, and generation parameters are not reported."
+      },
+      {
+        "scope": "Bagging of Cues",
+        "calls_per_item": "T independent LLM predictions per input are defined, but T is not numerically reported.",
+        "candidates_per_item": "T predictions aggregated by majority vote; q cues per subset is defined but not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Four A100 GPUs are reported generally; API costs are not reported.",
+        "detail": "Cue subsets are randomly sampled without replacement. Random seeds and the values of T and q are not provided."
+      },
+      {
+        "scope": "Tensor of Cues",
+        "calls_per_item": "The paper says the LLM extracts linguistic, contextual, and emotional cues respectively and then performs sarcasm detection with tensor-fused cue embeddings; the exact number of generation/forward passes per item is not fully specified.",
+        "candidates_per_item": "one yes/no label from the first generated-token logit",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Training and local inference are reported on four A100 GPUs; cost and runtime are not reported.",
+        "detail": "ToC freezes the LLM and trains fully connected projection layers using cross-entropy loss. Learning rate, epochs, batch size, optimizer, checkpoint selection, and tensor dimensions beyond the formula are not reported."
+      },
+      {
+        "scope": "Zero-shot main experiments",
+        "calls_per_item": "method-dependent; see CoC/GoC/BoC/ToC rows. IO, CoT, and ToT call budgets are not specified.",
+        "candidates_per_item": "not reported for ToT; otherwise one final label or BoC majority vote as above",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Mean performance over 5 runs is reported; four A100 GPUs are reported generally.",
+        "detail": "Table 2 states that LLM strategies are zero-shot. This is in tension with ToC requiring supervised training of added layers; the paper does not fully reconcile this."
+      },
+      {
+        "scope": "Few-shot prompting experiments",
+        "calls_per_item": "same method-dependent budgets as CoC, GoC, and BoC",
+        "candidates_per_item": "not reported beyond method definitions",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Mean performance over 5 runs is reported; compute cost not reported.",
+        "detail": "The paper evaluates k={0,1,5,10} shots by randomly sampling k examples from the training set. Sampling seeds and exact demonstrations are not reported."
+      },
+      {
+        "scope": "Humor-detection extension",
+        "calls_per_item": "method-dependent for CoC, GoC, and BoC; exact budgets not separately reported",
+        "candidates_per_item": "not reported beyond the method definitions",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "GPT-4o is the backbone for SarcasmCue in this extension; API cost is not reported.",
+        "detail": "Table 4 evaluates CMMA and UR-FUNNY-V2 against MFN and SVM+BERT baselines, but it does not report whether those supervised baselines were rerun or copied from prior work."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Sarcasm detection on IAC-V1, IAC-V2, SemEval 2018, and MUStARD",
+        "present": false,
+        "description": "No human performance baseline is reported; human-provided benchmark labels are used only as gold labels for evaluation.",
+        "directly_comparable": null,
+        "detail": "All headline comparisons are between LLM prompting methods and model baselines using automatic metrics."
+      },
+      {
+        "scope": "Humor detection on CMMA and UR-FUNNY-V2",
+        "present": false,
+        "description": "No human performance baseline is reported.",
+        "directly_comparable": null,
+        "detail": "The extension compares SarcasmCue with MFN and SVM+BERT model baselines."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "No decontamination mitigation is reported"
+      ],
+      "basis": "The main sarcasm benchmarks are public legacy datasets from 2013, 2016, 2018, and 2019, and UR-FUNNY is also pre-existing; they are evaluated with later proprietary and open LLMs without reported data-contamination checks, private held-out items, or model snapshot details. CMMA timing relative to all model pretraining is less clear from this paper, but the headline sarcasm results rely on public benchmarks with no decontamination discussion."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "GoC performance and any conclusions involving GoC depend partly on an LLM cue evaluator/voting mechanism; ToT baseline selection details are unclear. Headline task performance, however, is scored by automatic metrics against benchmark gold labels rather than by an external LLM judge.",
+      "human_validation": "Only pre-existing benchmark labels are used; no new human validation is reported.",
+      "detail": "LLMs are primarily systems under test. The only explicit LLM-as-evaluator role is internal to GoC cue selection/confidence assessment, not the final evaluation metric."
+    },
+    "reporting_gaps": [
+      "No API snapshots, exact model version strings, Hugging Face checkpoint revisions, quantization settings, or inference dates are reported for any LLM.",
+      "Temperature, top-p/top-k, max tokens, stop sequences, context-window handling, retry policy, and output-parsing rules are not reported.",
+      "BoC defines T cue subsets and q cues per subset but does not report the numerical values used.",
+      "GoC does not report the number of LLM votes/candidates per cue-selection step, confidence-calibration details, or exact stopping implementation beyond the 0.95 threshold and cue limit.",
+      "ToT baseline configuration is not reported, including branching factor, depth, evaluator/selector, number of candidates, and stopping rule.",
+      "ToC training details are incomplete: optimizer, learning rate, epochs, batch size, validation/checkpoint selection, tensor projection dimensions, and train/dev usage are not reported.",
+      "The paper reports mean performance over 5 runs but generally omits random seeds and per-run results; standard deviations appear in figures but not in the main tables.",
+      "The exact full prompts are only partially shown through examples and algorithms; complete prompt templates for all datasets/methods are not included in the paper text.",
+      "Benchmark annotator counts, annotator demographics, annotation agreement, and blinding are not reported in this paper; only SemEval is explicitly described as manually annotated.",
+      "No data-contamination or benchmark memorization analysis is reported.",
+      "For the humor extension, the paper does not report CMMA/UR-FUNNY-V2 item counts and does not clarify whether MFN and SVM+BERT baselines were rerun or taken from prior work.",
+      "Compute reporting is ambiguous for proprietary API models: the paper says GPT-4o and Claude use official APIs but also says all models are run on four A100 GPUs; API cost and local runtime are not reported."
+    ]
   }
 }

@@ -1,0 +1,504 @@
+{
+  "key": "x33-yesbut-juxtaposition",
+  "ref": "Part 3 (Hu YesBut lineage)",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x33-yesbut-juxtaposition/x33-yesbut-juxtaposition.md",
+  "source_md_sha256": "e9f51f5e8d4a56bfeb0d129708addc81a01f61cda49a09b8b6d11eb69b3de5f6",
+  "source_truncated": false,
+  "title": "Cracking the Code of Juxtaposition: Can AI Models Understand the Humorous Contradictions",
+  "authors": [
+    "Zhe Hu",
+    "Tuo Liang",
+    "Jing Li",
+    "Yiren Lu",
+    "Yunlai Zhou",
+    "Yiran Qiao",
+    "Jing Ma",
+    "Yu Yin"
+  ],
+  "year": 2024,
+  "venue": "38th Conference on Neural Information Processing Systems (NeurIPS 2024).",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can large vision-language models and large language models understand humor in two-panel comics where juxtaposition creates contradictory narratives?",
+    "How do models perform across increasingly difficult comic-understanding tasks, from literal description writing to contradiction generation, underlying philosophy selection, and title matching?",
+    "How does surface-level literal understanding of a comic influence deeper reasoning about its philosophy and title?",
+    "What kinds of errors do current vision-language models make when interpreting humorous contradictions in comics?"
+  ],
+  "tasks": [
+    "literal description writing",
+    "contradiction generation",
+    "underlying philosophy selection",
+    "title matching",
+    "comic humor understanding"
+  ],
+  "humor_domains": [
+    "captionless two-panel comics",
+    "visual humor",
+    "comic juxtaposition",
+    "contradictory everyday scenarios",
+    "nonlinear comic narratives"
+  ],
+  "modalities": [
+    "image",
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "YesBut-Juxtaposition (Hu et al.)",
+      "role": "introduced",
+      "size": "348 comics"
+    },
+    {
+      "name": "Anton Gudim’s \"YES, BUT\" series",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Public social media comics from Twitter and Pinterest",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4",
+    "Claude 3 Opus",
+    "LLaVA-1.6-34B",
+    "LLaVA-1.6-13B",
+    "LLaVA-1.5-13B",
+    "InstructBLIP-13B",
+    "CogVLM",
+    "Qwen-VL-Chat",
+    "mPLUG-Owl2",
+    "LLaVA-1.6-7B",
+    "InstructBLIP-7B",
+    "ChatGPT",
+    "Llama-3-8B-Instruct",
+    "Mistral-7B-Instruct"
+  ],
+  "methods_proposed": [
+    {
+      "name": "YESBUT benchmark",
+      "summary": "A benchmark of 348 two-panel comics with contradictory narratives, annotated with literal descriptions, contradiction explanations, underlying philosophies, and titles."
+    },
+    {
+      "name": "Four-task comic understanding suite",
+      "summary": "The paper evaluates models on literal description writing, contradiction generation, underlying philosophy selection, and title matching to span surface narrative comprehension through deeper nonlinear reasoning."
+    },
+    {
+      "name": "Progressive human-AI collaborative annotation pipeline",
+      "summary": "GPT-4 drafts descriptions, contradiction explanations, philosophies, titles, and hard negatives, after which human annotators modify, verify, cross-check, and filter the data."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The benchmark operationalizes humor through juxtaposition: two contrasting comic panels create contradictory narratives that require nonlinear reasoning, social reasoning, and interpretation of the underlying satirical message."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "For multiple-choice philosophy and title tasks, the paper reports accuracy (%). For literal description and contradiction generation, it reports ROUGE-2 recall and BERTScore recall."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "For literal description and contradiction generation, gpt-3.5-turbo-0125 assigns 1-to-5 GPT evaluation scores using prompts in Appendix B."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Three human judges rated 30 random samples for literal description and contradiction generation on a 1-to-5 scale; literal descriptions used Correctness, Completeness, and Faithfulness, while contradictions used Correctness and Faithfulness."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Eight human judges annotated and cross-verified benchmark components; one author reviewed each sample for validity and appropriateness."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "8",
+        "population": "Proficient English speakers based in English-speaking countries with at least a Bachelor’s degree; the paper also states annotators came from different genders and diverse cultural backgrounds.",
+        "recruitment": null,
+        "geography": "English-speaking countries",
+        "languages": [
+          "English"
+        ],
+        "observations": "348 comics annotated with literal descriptions, contradiction explanations, underlying philosophies, titles, and multiple-choice distractors; annotations underwent cross verification with an inspector and possible third annotator.",
+        "detail": "Human judges participated in the data annotation process and were compensated with an average hourly wage of $11."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "3",
+        "population": "human judges",
+        "recruitment": "hired",
+        "geography": null,
+        "languages": [],
+        "observations": "30 random samples on each task for human evaluation; model outputs were anonymized and shuffled; ratings used a 1-to-5 scale.",
+        "detail": "For literal description, judges rated Correctness, Completeness, and Faithfulness; for contradiction, they rated Correctness and Faithfulness."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "social media commenters",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Social media comments for each comic were cross-referenced to validate alignment with widely accepted interpretations.",
+        "detail": "The paper gives no commenter counts or comment counts."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "GPT-4 / gpt4-turbo",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used in the progressive human-AI annotation pipeline to draft narrative descriptions, contradiction explanations, underlying philosophies, titles, and hard negative distractors."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Eight human judges modified and annotated GPT-4 drafts, excluded offensive, hateful, or sexual material, and participated in cross verification."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "After cross verification, one author reviewed each sample to verify validity and appropriateness."
+      },
+      {
+        "type": "platform-vote",
+        "name": "social media comments",
+        "role": "validation",
+        "blind": null,
+        "detail": "Annotations were validated by cross-referencing social media comments for each comic; no counts are reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "accuracy, ROUGE-2 recall, BERTScore recall",
+        "role": "primary",
+        "blind": null,
+        "detail": "Accuracy determines MCQ performance; ROUGE-2 recall and BERTScore recall are automatic generation metrics in Table 2."
+      },
+      {
+        "type": "LLM",
+        "name": "gpt-3.5-turbo-0125",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used for GPT-based 1-to-5 evaluation of literal description and contradiction generation outputs."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": true,
+        "detail": "Three human judges rated anonymized and shuffled model outputs for 30 random samples in the human evaluation."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "literal description writing experiments",
+        "mode": "single-sample",
+        "n": "three distinct prompts for each task; average scores from three runs with each prompt",
+        "selector": "none",
+        "detail": "The paper reports averaged results across prompts/runs and does not describe best-of-N output selection."
+      },
+      {
+        "scope": "contradiction generation experiments",
+        "mode": "single-sample",
+        "n": "three distinct prompts for each task; average scores from three runs with each prompt",
+        "selector": "none",
+        "detail": "Repeated prompting/runs are used for averaging, not for selecting the best candidate."
+      },
+      {
+        "scope": "dataset annotation assistance",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "GPT-4 generated draft components and five negative philosophy/title distractors; human annotators verified and modified outputs for final benchmark components."
+      },
+      {
+        "scope": "underlying philosophy selection and title matching",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "These are multiple-choice selection tasks, not free-form generation tasks."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": "gpt-4-vision-preview",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used as a commercial VLM in experiments; temperature set to 1.0."
+      },
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": "gpt-3.5-turbo-0125",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used as an LLM in experiments and for GPT-based evaluation; temperature set to 1.0."
+      },
+      {
+        "name": "GPT-4 Turbo",
+        "version_or_snapshot": "gpt4-turbo",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used for data annotation according to the paper’s footnote."
+      },
+      {
+        "name": "Claude 3 Opus",
+        "version_or_snapshot": "updated on 29th Feb, 2024",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Commercial Claude-3 model used in VLM experiments; temperature set to 1.0."
+      },
+      {
+        "name": "LLaVA-1.6-34B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "LLaVA-1.6-13B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-sourced model run with Hugging Face Transformers; its generated literal descriptions are also used as inputs for LLM experiments."
+      },
+      {
+        "name": "LLaVA-1.6-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "LLaVA-1.5-13B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "InstructBLIP-13B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "InstructBLIP-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "CogVLM",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "Qwen-VL-Chat",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "mPLUG-Owl2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Open-sourced model run with Hugging Face Transformers."
+      },
+      {
+        "name": "Llama-3-8B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "LLM experiment using generated literal descriptions as image substitutes."
+      },
+      {
+        "name": "Mistral-7B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "LLM experiment using generated literal descriptions as image substitutes."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "commercial model inference",
+        "calls_per_item": "three distinct prompts for each task; average scores from three runs with each prompt",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "temperature as 1.0 for GPT-4, Claude-3 and ChatGPT",
+        "compute_or_cost": null,
+        "detail": "All commercial models are accessed through their official API."
+      },
+      {
+        "scope": "open-source model inference",
+        "calls_per_item": "three distinct prompts for each task; average scores from three runs with each prompt",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "default parameter setting or greedy decoding during inference",
+        "compute_or_cost": "NVIDIA 4090 and A6000 GPUs",
+        "detail": "Open-sourced models are implemented using Hugging Face Transformers."
+      },
+      {
+        "scope": "multiple-choice philosophy and title evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "4 options",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Models are instructed to directly output the option; hard rules parse the answer, and if none of the options can be parsed, a random option is assigned."
+      },
+      {
+        "scope": "dataset annotation assistance",
+        "calls_per_item": null,
+        "candidates_per_item": "five contextualized, plausible, but ultimately incorrect criticisms and moral lessons; five seemingly reasonable, eye-catching but incorrect titles",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "human judges compensated with an average hourly wage of $11",
+        "detail": "GPT-4 is prompted progressively for description/contradiction, philosophy/title, and negative distractors; humans verify and modify outputs."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "YESBUT task performance",
+        "present": false,
+        "description": "Human-written annotations are used as gold references and human judges evaluate model outputs on a subset, but the paper does not report standalone human task accuracy or matched human generation scores as a baseline system.",
+        "directly_comparable": false,
+        "detail": "The abstract says models lag behind human performance, but the reported experiments do not provide a directly comparable quantitative human baseline for all tasks."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The benchmark annotations are newly collected.",
+        "The annotation process includes deduplication, filtering, cross verification, and author review."
+      ],
+      "basis": "YESBUT is introduced in the paper, but its source images are scraped from publicly available social media comics, primarily Anton Gudim’s public YES, BUT series. The paper does not report decontamination checks for evaluated proprietary or open models, so prior exposure to source images cannot be ruled out."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Text-generation quality claims for literal description and contradiction generation partly use GPT-based 1-to-5 scores; GPT-4 also contributes draft annotations and distractors before human verification.",
+      "human_validation": "Three human judges evaluated 30 random samples and the paper reports similar trends to the automatic and GPT-based evaluations.",
+      "detail": "The deepest reasoning tasks use accuracy against human-verified MCQ labels rather than LLM-as-judge, and generation conclusions are supported by ROUGE-2, BERTScore, GPT evaluation, and a human subset evaluation."
+    },
+    "reporting_gaps": [
+      "Exact inference dates for model runs are not reported.",
+      "Exact open-source checkpoints and per-model decoding settings are not fully specified beyond model family/size and default or greedy decoding.",
+      "Token budgets, maximum output lengths, API costs, runtime, and GPU memory are not reported.",
+      "The paper does not report error bars or statistical significance for experimental results.",
+      "No directly comparable quantitative human baseline is reported for all YESBUT tasks.",
+      "The paper does not discuss contamination or decontamination despite using public social media comics as source images.",
+      "Recruitment details, geography, and compensation for the three human evaluation judges are not reported."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "GPT-4 achieved the best literal description scores among evaluated VLMs.",
+      "metric": "BERTScore recall / ROUGE-2 recall / GPT evaluation score",
+      "value": "88.32 / 87.46 / 3.76",
+      "dataset": "YesBut-Juxtaposition (Hu et al.)",
+      "best_system": "GPT-4"
+    },
+    {
+      "finding": "For contradiction generation, GPT-4 obtained the best ROUGE-2 recall and GPT evaluation score, while ChatGPT obtained the best BERTScore recall.",
+      "metric": "BERTScore recall / ROUGE-2 recall / GPT evaluation score",
+      "value": "GPT-4: 87.64 / 83.21 / 4.03; ChatGPT BERTScore recall: 87.78",
+      "dataset": "YesBut-Juxtaposition (Hu et al.)",
+      "best_system": "GPT-4; ChatGPT for BERTScore recall"
+    },
+    {
+      "finding": "Claude-3 achieved the highest underlying philosophy selection accuracy.",
+      "metric": "Accuracy (%)",
+      "value": "84.10",
+      "dataset": "YesBut-Juxtaposition (Hu et al.)",
+      "best_system": "Claude-3"
+    },
+    {
+      "finding": "LLaVA-1.6-34B achieved the highest title matching accuracy.",
+      "metric": "Accuracy (%)",
+      "value": "63.31",
+      "dataset": "YesBut-Juxtaposition (Hu et al.)",
+      "best_system": "LLaVA-1.6-34B"
+    },
+    {
+      "finding": "In human evaluation, GPT-4 received the highest reported scores for both literal description and contradiction generation.",
+      "metric": "1-to-5 human ratings",
+      "value": "Literal Description Correctness 3.75, Completeness 3.86, Faithfulness 3.53; Contradiction Correctness 3.1, Faithfulness 3.22",
+      "dataset": "30 random samples from YesBut-Juxtaposition (Hu et al.)",
+      "best_system": "GPT-4"
+    },
+    {
+      "finding": "Providing oracle human-written literal descriptions substantially improved deep reasoning accuracy for LLMs.",
+      "metric": "Accuracy (%)",
+      "value": "Llama3-8B philosophy 72.1 to 89.3; title 49.7 to 73.5",
+      "dataset": "YesBut-Juxtaposition (Hu et al.)",
+      "best_system": "Llama3-8B-Instruct with oracle description"
+    }
+  ],
+  "key_findings": [
+    "Commercial VLMs generally outperform open-source VLMs on literal description and contradiction generation, with GPT-4 leading most generation metrics.",
+    "Deep reasoning remains difficult: the best philosophy accuracy is 84.10%, while the best title accuracy is only 63.31%.",
+    "Title matching is consistently harder than underlying philosophy selection because titles are shorter and more abstract.",
+    "Better literal descriptions improve downstream philosophy and title selection, especially when oracle human descriptions are provided.",
+    "Generated descriptions do not necessarily help VLMs in a decomposed pipeline; Table 3 shows title performance drops for all listed VLMs when their predicted descriptions are added.",
+    "Error analysis identifies visual misinterpretation, failures in reasoning over panel relationships, hallucination, and incorrect associations as recurring model problems."
+  ],
+  "limitations": [
+    "Comic interpretation is subjective, especially for underlying ideas, and potential ambiguity remains despite quality controls.",
+    "The dataset is relatively small, with 348 images.",
+    "The benchmark focuses predominantly on visual humor via juxtaposition and may not cover all aspects of visual understanding needed for general AI applications.",
+    "The paper leaves expansion to different types of narratives and more creative tasks, such as generating counterparts to YES images, for future work.",
+    "Generated descriptions may contain errors or be long, which can hurt decomposed VLM reasoning performance."
+  ],
+  "safety_ethics_notes": "The paper states that samples come from publicly available social media content, original links are used, permission was obtained from author artists such as Anton Gudim and Liz Climo, offensive or harmful content was filtered, and annotators were compensated at an average hourly wage of $11. It also warns that large vision-language models pretrained on web corpora may produce biased outputs.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://vulab-ai.github.io/YESBUT_Homepage/",
+    "other": "The paper states that annotations, code, and model results are released; the homepage URL is given on the first page."
+  }
+}

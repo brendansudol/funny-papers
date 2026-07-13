@@ -204,5 +204,352 @@
     "code_url": "https://github.com/kreimanlab/HumorDB",
     "data_url": "https://github.com/kreimanlab/HumorDB",
     "other": "The supplementary material states that reference links for internet-collected images are provided in the repository."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "Conflicting counts: Sec. 3.2 reports 650 online participants; Appendix 7.4 reports 850 participants total (200 Binary, 215 Range, 435 Comparison) and says some were discarded for reliability/outliers. Final retained N is not reconciled or reported.",
+        "population": "Crowdsourced online psychophysics participants. Reported demographics: age 20-29 47.0%, 30-39 30.3%, 40-49 13.8%, 50-59 5.2%, 0-19 2.1%, 60-69 1.6%; education undergraduate 56.3%, postgraduate 29.5%, high school 14.2%; gender male 52.6%, female 46.6%, non-binary 0.8%.",
+        "recruitment": "Amazon Mechanical Turk and Prolific.",
+        "geography": "Nationality: United States 54.0%, South Africa 9.0%, Other 41 countries 37.0%.",
+        "languages": [],
+        "observations": "Main text: each participant rated 100 images in one of Binary, Range, or Comparison tasks. Appendix instructions say 100-120 images per survey. Final images received 6-8 Binary or Range ratings or 4-6 comparisons. Repeated images were 10% of trials; Fig. 5 reports 1,800 repeated Range rating pairs. Comparison participants also gave brief justifications/words.",
+        "detail": "Human data supplied the benchmark labels/ratings: Binary funny/not-funny, Range 1-10 funniness, and pairwise Comparison majority choices. Quality controls included 500 ms minimum viewing time, repeated images, outlier removal, textual justifications for Comparison, and prevention of repeated participation in the same task. Original images were rated funnier than modified counterparts for 86.4% of pairs."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Separate in-lab, non-crowdsourced participants; demographics and participant source not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Ratings for 400 images with at least 5 ratings per image.",
+        "detail": "Used to validate crowdsourced annotations. Reported correlations with online data were rho = 0.78 for the Binary task and rho = 0.72 for the Range task. Participant count was not reported."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Human evaluators of VLM explanations; population not described.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Rated VLM explanations on a 1-5 scale for how well they identified why an image is funny and for factual accuracy of the scene. Number of evaluators and number of explanation ratings were not reported.",
+        "detail": "These ratings support explanation-quality results such as Gemini Why Funny 4.1 ± 0.6 and Accuracy 4.24 ± 0.47, GPT-4o Why Funny 3.9 ± 0.7 and Accuracy 4.12 ± 0.63, and LLaVA Why Funny 3.5 ± 0.9 and Accuracy 3.57 ± 0.95."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Study team/manual curators and image editors; exact personnel count not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Constructed HumorDB from web-scraped images, AI-generated images, manual curation, Photoshop edits, and stable-diffusion-based inpainting. Final dataset has 3,542 images and 1,271 original/modified pairs.",
+        "detail": "Human curation removed explicit/offensive images and cases where humor relied on embedded text, capped each Google Search API result to 15 images, and created minimally contrastive modified counterparts by removing, obscuring, or replacing humor-inducing elements."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk and Prolific participants",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided Binary labels, Range ratings, Comparison votes, and textual justifications/keywords used to create human-derived labels, mean ratings, majority votes, and word sets. Blinding to image condition/model identity was not specified."
+      },
+      {
+        "type": "human-lay",
+        "name": "In-lab validation participants",
+        "role": "validation",
+        "blind": null,
+        "detail": "Provided ratings for 400 images to validate online annotations; participant count, recruitment, and blinding were not reported."
+      },
+      {
+        "type": "human-lay",
+        "name": "VLM explanation raters",
+        "role": "primary",
+        "blind": null,
+        "detail": "Rated model explanations on 1-5 scales for humor-source identification and factual accuracy; rater count, assignment, item count, and whether raters were blind to model identity were not reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy/RMSE/majority-vote scoring",
+        "role": "primary",
+        "blind": null,
+        "detail": "Binary accuracy was computed against a human-derived label thresholded at mean Binary rating >= 0.5; Range used RMSE against mean human rating; Comparison accuracy matched majority human vote; external control-set performance was percentage classified as not funny."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "All Words Score and Common Words Score",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Automated VLM explanation scoring used spaCy stemming and NLTK synonym matching against human annotation words, including all annotator words or words appearing in at least 30% of human responses."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Attention rollout, difference-map masks, and logit attribution metrics",
+        "role": "primary",
+        "blind": null,
+        "detail": "Attention maps were evaluated with Recall, Strict Box Containment, and Outside Box Ratio using pixel-level differences between original and modified pairs as a proxy for humorous regions. Layer-wise logit attribution computed binary classification accuracy from transformer-layer hidden states."
+      },
+      {
+        "type": "author",
+        "name": "Study authors/manual curators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Determined image inclusion/exclusion, image categories, and original/modified pair construction before human validation; the paper does not report independent blinded curation."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "AI-generated HumorDB images produced during dataset construction with DALL-E/MidJourney-like systems",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "The paper says novel images were generated using AI-based models like DALL-E and MidJourney and then curated, but does not report prompts, number of generated candidates, number retained, sampling settings, or whether selection was best-of-N."
+      },
+      {
+        "scope": "Vision-language model answers for Binary, Range, Comparison, and example explanations",
+        "mode": "single-sample",
+        "n": "One answer per prompt is implied; Binary used two prompt variants whose results were averaged, not selected.",
+        "selector": "none",
+        "detail": "No best-of-N generation, reranking, or self-selection is reported. For Binary VLM prompting, the paper used both 'Is the image funny?' and 'Is the image not funny?' and averaged results because performance was comparable. For Comparison, the prompt requested 'first' or 'second' plus a succinct explanation. For some figure examples, a suffix asked the model to start with yes/no and explain."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "DINOv2 large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision-only model; fine-tuned/evaluated locally. Exact checkpoint, implementation source, and pretraining source for this model were not specified beyond DINOv2 large."
+      },
+      {
+        "name": "ViT huge",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision-only model in pretrained and non-pretrained settings; exact checkpoint/source not specified."
+      },
+      {
+        "name": "ViT large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Appears in category and attention-map results, although the prose model list emphasizes ViT huge. Exact checkpoint/source not specified."
+      },
+      {
+        "name": "Swin2/SwinV2 large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Name appears as Swin2 large and SwinV2 large. Evaluated as a vision-only model; exact checkpoint/source not specified."
+      },
+      {
+        "name": "ConvNeXt large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision-only model; exact checkpoint/source not specified."
+      },
+      {
+        "name": "ViTG-14",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as a vision model; exact checkpoint/source not specified. The paper states pretrained vision models used weights from either ImageNet or LAION-2B, but does not map sources to every model."
+      },
+      {
+        "name": "ResNet152",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Listed in the Models section and Range table. A Comparison-task figure axis transcription mentions ResNet50, creating an unresolved ResNet naming inconsistency."
+      },
+      {
+        "name": "LLaVA zero-shot",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated with VQA-style prompts. Exact LLaVA release/checkpoint not specified. Training-data mixture is described only generally by citing LLaVA papers."
+      },
+      {
+        "name": "LLaVA fine-tuned",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "LoRA fine-tuned for HumorDB tasks. Exact base checkpoint and LoRA settings beyond grid-search/training details were not specified."
+      },
+      {
+        "name": "LLaVA words fine-tuned",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned with prompts prefixed by common human words appearing in at least 30% of responses for an image. Exact base checkpoint not specified."
+      },
+      {
+        "name": "BLIP fine-tuned",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned for HumorDB tasks. Exact BLIP checkpoint not specified."
+      },
+      {
+        "name": "BLIP words fine-tuned",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned with common human-word prompt prefixes. Exact BLIP checkpoint not specified."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": "gpt-4o-2024-05-13",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Evaluated zero-shot and run one time. Access method, inference date, decoding settings, and cost were not reported."
+      },
+      {
+        "name": "Gemini",
+        "version_or_snapshot": "1.5-002 Flash",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Reported as Gemini 1.5-002 Flash/Gemini-Flash. Evaluated zero-shot and run one time. Access method, inference date, decoding settings, and cost were not reported."
+      },
+      {
+        "name": "DALL-E",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for AI-generated dataset images; paper text says DALL-E and reference list cites DALL-E 2, but the exact model/version and generation date are not specified."
+      },
+      {
+        "name": "MidJourney",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for AI-generated dataset images; exact model/version and generation date are not specified."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Local fine-tuned/open-model experiments",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Training grid search over learning rates {0.01, 0.001, 0.0001, 0.00001}, batch sizes {4, 8, 16}, and weight decay {0.1, 0.01, 0.001}; Adam with weight decay; 10 epochs; cross-entropy for Binary/Comparison and mean-square loss for Range; validation-best checkpoint used for final test evaluation; LLaVA used LoRA fine-tuning; balanced sampling by rating bins for Range and Comparison.",
+        "compute_or_cost": "Most experiments used 4 Nvidia GeForce RTX 2080 Ti GPUs on an internal cluster; LLaVA training and some Comparison-task models used an Nvidia A100 GPU. Monetary cost not reported.",
+        "detail": "Each experiment was conducted 5 times for all models except GPT-4o and Gemini-Flash. Per-item inference-call counts, inference-time batch sizes, and decoding parameters for local VLMs were not reported."
+      },
+      {
+        "scope": "GPT-4o and Gemini-Flash zero-shot prompting",
+        "calls_per_item": "Binary used two prompt variants and averaged performance; Range used the 1-10 funniness prompt; Comparison used one two-image prompt requesting 'first' or 'second' plus a succinct explanation.",
+        "candidates_per_item": "One run is reported for GPT-4o and Gemini-Flash; no multiple candidates, best-of-N, or reranking reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Access route, inference dates, temperature/top-p/max-token settings, retries, refusal handling, and API cost were not reported."
+      },
+      {
+        "scope": "AI image generation for HumorDB",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports use of DALL-E/MidJourney-like systems for novel images but does not report generation prompts, number of candidates, image-generation settings, cost, or selection rate. AI-generated images constitute 10% of the final dataset."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Binary visual humor classification",
+        "present": true,
+        "description": "Human performance is shown alongside model bars in Binary-task figures. Humans performed the same funny/not-funny task on HumorDB images, and model accuracy was scored against human-derived labels thresholded at mean Binary rating >= 0.5.",
+        "directly_comparable": true,
+        "detail": "The task and images are materially matched, but the exact computation of the human accuracy bar relative to aggregate labels is not fully described, and the same human data also define the benchmark labels."
+      },
+      {
+        "scope": "Range funniness rating prediction",
+        "present": true,
+        "description": "Table 3 includes a Humans RMSE row, and models are evaluated by RMSE against mean human 1-10 ratings.",
+        "directly_comparable": true,
+        "detail": "Humans and models both produced 1-10 ratings for the same task, but the paper does not fully specify how human RMSE was computed from individual ratings versus mean ratings."
+      },
+      {
+        "scope": "Pairwise humor Comparison task",
+        "present": true,
+        "description": "Human performance is shown in Fig. 9, and model Comparison accuracy is scored against the majority human vote for image pairs.",
+        "directly_comparable": true,
+        "detail": "Humans and models both chose which of two images was funnier. The exact procedure for computing the human baseline from individual votes versus majority labels is not fully specified."
+      },
+      {
+        "scope": "VLM explanation quality",
+        "present": false,
+        "description": "Human evaluators rated model explanations, and human annotation words were used for automated explanation alignment, but the paper does not report a human-written-explanation baseline evaluated under the same criteria.",
+        "directly_comparable": false,
+        "detail": "Humans act as judges/annotation sources rather than as a directly comparable explanation-generation system."
+      },
+      {
+        "scope": "Attention/localization of humorous regions",
+        "present": false,
+        "description": "No human segmentation/localization baseline is reported; the humorous region is approximated by pixel-level differences between original and modified image pairs.",
+        "directly_comparable": false,
+        "detail": "Attention-map metrics are not compared with human attention maps or human-drawn humor-region masks."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "HumorDB is introduced as a new benchmark rather than a legacy public benchmark.",
+        "Train/validation/test splits are held out for supervised fine-tuning/evaluation.",
+        "Minimally contrastive original/modified pairs include newly edited counterparts that are less likely to appear verbatim in model pretraining data.",
+        "Subtle enhancements were applied to both original and modified images in a pair to reduce editing-artifact cues.",
+        "An external control set of 650 non-humorous, non-edited MSCOCO/Places365 images was used to test whether models simply learned editing artifacts."
+      ],
+      "basis": "The curated HumorDB benchmark and labels appear newly introduced, but many original humorous images were web-scraped from the public internet, and proprietary/open models may have been pretrained on similar or identical public images. The paper explicitly notes that GPT-4o’s roughly 10% improvement when evaluated only on original images suggests it probably saw original internet images or similar images in training. Modified paired images and held-out splits mitigate but do not constitute a decontamination test; exact image-collection dates, model training cutoffs, and overlap checks are not reported."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Human labels/ratings/majority votes and human explanation ratings are used; no LLM is reported as an evaluator or judge.",
+      "detail": "LLMs are evaluated systems, not judges. Automated explanation scoring uses stemming and synonym matching, not an LLM judge."
+    },
+    "reporting_gaps": [
+      "Online participant count is inconsistent: 650 in the main methods versus 850 in the supplement, with no reconciled final retained count after exclusions.",
+      "Per-task retained participant counts after quality-control exclusions are not reported.",
+      "Crowdsourcing exposure count is inconsistent: main text says each participant rated 100 images; appendix instructions say 100-120 images.",
+      "Recruitment, demographics, and participant count for the in-lab validation study are not reported.",
+      "Participant count, recruitment, item count, assignment procedure, and blinding/model-identity masking for the human VLM-explanation evaluation are not reported.",
+      "Languages of participants and whether tasks were restricted to English speakers are not reported, despite English task prompts and textual justifications.",
+      "Exact open-model checkpoints, implementation versions, and pretraining-source mapping for each vision model are not specified.",
+      "The paper gives exact GPT-4o and Gemini model names but not access method, inference dates, decoding parameters, token limits, retries, or cost.",
+      "DALL-E/MidJourney dataset-generation prompts, versions, candidate counts, selection criteria, and generation dates are not reported.",
+      "No best-of-N generation is reported, but candidate counts and decoding settings are also not reported for VLM outputs.",
+      "Human baseline computation is under-specified for Binary, Range RMSE, and Comparison, especially because aggregate human judgments also define the target labels.",
+      "Dataset split counts in Table 1 are internally inconsistent: validation and testAll total columns do not match the funny plus not-funny counts, and train/valid/testAll totals do not sum cleanly to the stated total of 3,542.",
+      "Some model names are inconsistent across prose, tables, and figure axis transcriptions, including Swin2/SwinV2, ResNet152 versus figure-axis ResNet50, and figure-only labels not described in the Models section.",
+      "The external control set is described only as 250 MSCOCO and 400 Places365 non-humorous, non-edited images; detailed selection criteria and image IDs are not included in the supplied text.",
+      "Blinding is not reported for crowd raters, in-lab raters, manual curators, or explanation evaluators.",
+      "The paper cites likely exposure of GPT-4o to original internet images but reports no formal decontamination or image-overlap test."
+    ]
   }
 }

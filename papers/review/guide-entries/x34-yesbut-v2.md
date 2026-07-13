@@ -1,0 +1,3 @@
+<!-- guide claims for x34-yesbut-v2 (Part 3 (Hu YesBut V2)) -->
+
+**YesBut V2 (Hu et al.):** [**When 'YES' Meets 'BUT': Can Large Models Comprehend Contradictory Humor Through Comparative Reasoning?**](https://arxiv.org/abs/2503.23137) (Liang, Hu, Li et al., arXiv v2 2026) `preprint` `dataset` `benchmark` expands **YesBut-Juxtaposition** to **1,262 multilingual and multicultural comics** with four tiers from surface content to deep comparative reasoning. Fifty-eight percent contain embedded text, 86% require social knowledge, and the data span 15 thematic domains. Strong VLMs still lag people, especially on perception, key-element identification, comparison, and hallucination; task decomposition and social-knowledge augmentation help locally but do not close the gap.

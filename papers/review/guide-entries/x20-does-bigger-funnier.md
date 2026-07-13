@@ -1,0 +1,3 @@
+<!-- guide claims for x20-does-bigger-funnier (Part 4 (judge-validity stress test)) -->
+
+**Judge-validity stress test:** [**Does Bigger Mean Funnier? Evaluating Humor Generation Across the Qwen3 Model Family**](https://aclanthology.org/2026.chum-1.7/) (Agrawal & Mamidi, CHum 2026) `workshop` — an automated judge ranked five Qwen3 variants perfectly monotonically by size, yet 12 blind human annotators found no significant aggregate difference among the three largest variants. A significant but small scaling effect appeared only on a post-hoc high-agreement subset (*p*=.039; Kendall's *W*=.025). Position and length biases helped drive the automated result. **Agreement among LLM judges is therefore not evidence of validity against human preference.**

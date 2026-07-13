@@ -4,9 +4,3 @@
 Pituxcoosuvarn & Murakami — **Digital (MDPI) 2025**, 5(4):49 · `peer-reviewed`
 - **Method:** Compares a neural machine translation (NMT) system against GPT-based translation (three prompts: GPT, GPT-P, GPT-Ex) for English→Thai joke translation; human annotation of joke preservation; McNemar test for distribution differences.
 - **Findings:** GPT-based translation significantly beats NMT on humor retention; the explanation-enhanced prompt (GPT-Ex) preserves the most jokes (62.94% vs. 50.12% for NMT). Prompt engineering that surfaces humor mechanisms and cultural nuance improves retention — the generation-side counterpart to #54's evaluation-side warning.
-
----
-
-## Part 8 — Datasets, Shared Tasks & Data-Construction Methods
-
-(Several datasets also live in earlier parts: ExPUNations #7, Phunny #8, HumorDB #25, YesBut #26, Humor in AI #22, Oogiri-Master #39, StandUp4AI #44, Chumor #50.)

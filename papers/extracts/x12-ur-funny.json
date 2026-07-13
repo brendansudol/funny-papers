@@ -143,5 +143,241 @@
     "code_url": null,
     "data_url": "https://github.com/ROC-HCI/UR-FUNNY",
     "other": "The paper states that UR-FUNNY is publicly available for research, alongside extracted features, and that the dataset and accompanying experiments are publicly available."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "1,741 distinct speakers",
+        "population": "TED talk presenters; paper characterizes TED speakers as coming from various backgrounds, ethnic groups, and cultures",
+        "recruitment": "1,866 English TED videos and transcripts were collected from the TED portal; further video-selection criteria are not reported",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "1,866 videos across 417 topics; 90.23 hours; source material for 16,514 video segments, including 8,257 humor and 8,257 non-humor instances",
+        "detail": "Speakers are the source of the multimodal speech/presentation content, not annotators for the study."
+      },
+      {
+        "role": "live-audience",
+        "participant_count": null,
+        "population": "TED talk audiences whose laughter is represented by transcript audience-behavior markers",
+        "recruitment": "Not recruited by the study; audience behavior markers were taken from TED transcripts",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Laughter markers were used to filter 8,257 humorous punchlines; the sentence immediately before a laughter marker was treated as the punchline",
+        "detail": "The paper does not report the number of audience members, audience demographics, or how laughter was captured beyond the TED transcript markers."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "People responsible for TED manual transcripts/audience-behavior markers",
+        "recruitment": "Not reported; transcripts and audience markers were provided by TED",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Annotated laughter markers in transcripts served as the operational indicator of audience laughter/humor",
+        "detail": "The paper states that TED videos include manual transcripts and reliably annotated audience markers, but it does not describe the marker annotators or annotation protocol."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "2 annotators",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Human performance was calculated by averaging the two annotators over a shuffled set of 100 humor and 100 non-humor cases; annotator agreement was 84%",
+        "detail": "Footnote states the annotators were given the same input as the machine-learning models, described as similar context and punchline. No demographics, expertise, instructions, or blinding information is reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "live-audience",
+        "name": "TED audiences",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Immediate audience laughter, as represented by TED transcript laughter markers, is treated as the indicator that a punchline is humorous."
+      },
+      {
+        "type": "human-lay",
+        "name": "TED transcript/audience-marker annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The transcript laughter markers determine which sentences are eligible as positive humor punchlines; the paper does not describe the annotators or protocol for these markers."
+      },
+      {
+        "type": "author",
+        "name": "UR-FUNNY paper authors",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Authors applied the dataset-construction rule: the sentence immediately before a laughter marker is the positive punchline; context is prior sentences until the previous laughter marker or beginning of video; 8,257 negative samples were chosen at random intervals where the last sentence was not immediately followed by a laughter marker."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Binary accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Model results for C-MFN variants and Random Forest are reported as binary accuracy on the standard train/validation/test folds."
+      },
+      {
+        "type": "human-lay",
+        "name": "Two human annotators",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Human baseline/gap claim uses average annotator performance on 100 humor and 100 non-humor cases; reported human performance is 82.5% with 84% annotator agreement."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Whole paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper introduces a dataset and evaluates binary humor-detection classifiers; it does not conduct text or joke generation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Contextual Memory Fusion Network (C-MFN)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Proposed contextual extension of Memory Fusion Network; evaluated under modality settings T, A+V, T+A, T+V, and T+A+V. Architecture is described, but no exact code version, checkpoint, random seed, or run date is reported."
+      },
+      {
+        "name": "C-MFN (P)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Punchline-only variant, described as equivalent to MFN without contextual initialization. No exact implementation version or checkpoint is reported."
+      },
+      {
+        "name": "C-MFN (C)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Context-only variant conditioning prediction on Unimodal and Multimodal Context Network outputs. No exact implementation version or checkpoint is reported."
+      },
+      {
+        "name": "Random Forest classifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Non-neural baseline using summary features of punchline and context; paper says highest accuracy followed hyperparameter tuning and same folds as C-MFN, but tuning details and implementation/version are not reported."
+      },
+      {
+        "name": "GloVe word embeddings",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as pretrained word vectors for text features; exact embedding dimensionality, corpus/version, and preprocessing are not reported."
+      },
+      {
+        "name": "P2FA forced alignment model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to align text and audio at phoneme level and extract timing annotations at word level; no software version is reported."
+      },
+      {
+        "name": "COVAREP",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to extract 81 acoustic features at 30 frames/second; no software version is reported."
+      },
+      {
+        "name": "OpenFace facial behavioral analysis tool",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to extract facial Action Units and rigid/non-rigid facial shape parameters at 30 frames/second; no software version is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "C-MFN, C-MFN (P), and C-MFN (C) classification experiments",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Models were trained using categorical cross-entropy and evaluated on standard speaker-independent train/validation/test folds. The paper does not report epochs, batch size, optimizer, learning rate, hidden sizes, dropout, early stopping, number of runs, hardware, runtime, or cost."
+      },
+      {
+        "scope": "Random Forest baseline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Paper states that the highest Random Forest accuracy was obtained after hyperparameter tuning using the same folds as C-MFN, but the hyperparameter search, number of trials, random seed, and compute are not reported."
+      },
+      {
+        "scope": "Feature extraction and alignment",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "COVAREP and OpenFace features were extracted at 30 frames/second, and P2FA was used for forced alignment. The paper does not report runtime, hardware, software versions, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "UR-FUNNY binary humor detection",
+        "present": true,
+        "description": "Human performance is reported as 82.5%, calculated by averaging two annotators over a shuffled set of 100 humor and 100 non-humor cases; annotators agreed 84% of the time and were given the same input as the machine-learning models, described as similar context and punchline.",
+        "directly_comparable": false,
+        "detail": "The human baseline uses the same general task/input type, but it is only a 200-case shuffled subset and the paper does not state that it is the same full test set used for model accuracies or provide the full evaluation protocol. Therefore it is not strictly directly comparable to headline model test-fold accuracy."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "UR-FUNNY is introduced in this paper rather than evaluating on a pre-existing public benchmark for the reported baseline models.",
+        "The paper defines standard train/validation/test folds that share no speakers across folds, reducing speaker-identity leakage.",
+        "Models are trained and evaluated as supervised classifiers on the dataset folds, not prompted as pretrained generative models."
+      ],
+      "basis": "Conservative assessment: the evaluated models are conventional supervised baselines introduced/run with the newly constructed dataset, and the benchmark was not a legacy public benchmark for these models. The source TED videos and pretrained GloVe embeddings are public and the paper gives no explicit decontamination analysis, but there is no later proprietary LLM or public benchmark reuse scenario; speaker-independent folds are the main stated leakage control."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "No LLM judging is used. The paper includes a small human baseline from two annotators, but model conclusions are based on dataset labels and binary accuracy.",
+      "detail": "There are no LLM evaluators, LLM metrics, or LLM-generated judgments in the study."
+    },
+    "reporting_gaps": [
+      "TED audience participant counts, demographics, geography, and laughter-capture details are not reported.",
+      "The people and protocol behind TED transcript/audience-behavior laughter markers are not described.",
+      "Negative-sample randomization details, random seed, and any exclusion or deduplication rules beyond 'random intervals' and 'not immediately followed by a laughter marker' are not reported.",
+      "Human-baseline annotator demographics, recruitment, expertise, instructions, compensation, and blinding are not reported.",
+      "The human-baseline subset selection is underspecified: the paper does not state whether the 100 humor and 100 non-humor cases came from the test fold, nor whether model scores were recomputed on the same 200 items.",
+      "The exact presentation of modalities to human annotators is not fully specified; the paper says they received the same input as models, with similar context and punchline, but does not detail the interface or modality condition.",
+      "C-MFN implementation details such as optimizer, learning rate, batch size, epochs, hidden dimensions, dropout, early stopping, random seeds, and number of runs are not reported.",
+      "No confidence intervals, variance across runs, or statistical tests are reported for model comparisons, despite qualitative claims about relative performance.",
+      "Random Forest summary features, implementation/library, number of trees, tuned hyperparameters, tuning search space, and validation procedure are not reported.",
+      "Exact versions/snapshots for GloVe, P2FA, COVAREP, and OpenFace are not reported; GloVe corpus and embedding dimensionality are also not stated.",
+      "Training/inference hardware, runtime, memory use, and cost are not reported.",
+      "The paper does not provide an explicit data-contamination or pretrained-resource overlap analysis for public TED source material or pretrained embeddings."
+    ]
   }
 }

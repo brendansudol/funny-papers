@@ -263,5 +263,309 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that the dataset is available via Drive, but the transcription provides no Drive URL. It also states that annotations, labeling schema, splits, and metadata will be made publicly available for academic research; D-HUMOR-derived media files are not redistributed."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "7",
+        "population": "Volunteer annotators from diverse backgrounds: 4 men and 3 women; 2 doctoral candidates/holders, 3 master’s students/holders, and 2 undergraduate students/holders. Five were citizens residing in the Middle East and North Africa; two were U.S. or Canadian citizens with Arab ancestry.",
+        "recruitment": "Volunteers; provided informed consent; warned that the dataset may contain sensitive, offensive, or harmful humor; told they could withdraw at any time without penalty.",
+        "geography": "Middle East and North Africa; United States/Canada for two annotators with Arab ancestry.",
+        "languages": [
+          "Arabic",
+          "Arabic dialects including primarily Egyptian plus Levantine, Gulf, Maghrebi, and others",
+          "English"
+        ],
+        "observations": "Each annotator independently labeled the entire dataset: 3,000 text jokes, 6,005 image memes, and 1,202 videos. They first labeled Safe vs. Harmful; harmful items were further labeled Explicit vs. Implicit. Final gold labels were assigned by majority vote. Reported agreement: Text Harm/Safe 92.1%, κ=0.87, α=0.88; Text Explicit/Implicit 86.4%, κ=0.81, α=0.82; Images Harm/Safe 89.4%, κ=0.84, α=0.85; Images Explicit/Implicit 83.9%, κ=0.78, α=0.79; Videos Harm/Safe 87.6%, κ=0.81, α=0.82; Videos Explicit/Implicit 81.2%, κ=0.74, α=0.75.",
+        "detail": "Annotators had access to the full modality-specific context: written text for text jokes, image plus embedded text for memes, and visual frames plus original audio for videos. They were instructed to consider visual context, spoken dialog, captions, and cultural references. They did not use discussion-based adjudication; independence was preserved, though they could consult public resources for unfamiliar terminology or dialectal/cultural references."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Unrecruited creators/users/rightsholders of public online and dataset content used as source material, including Reddit, X/Twitter archives, online forums, Wikimedia Commons, Vimeo, MemeDroid, D-HUMOR, dadjokes, reddit-dadjokes, Arabic Humor, English plaintext jokes, and Short Jokes.",
+        "recruitment": "Not recruited as study participants; content was manually curated from publicly accessible sources and existing datasets. The paper states that collection was manual rather than large-scale automated scraping.",
+        "geography": null,
+        "languages": [
+          "English",
+          "Arabic",
+          "Universal / language-independent visual content"
+        ],
+        "observations": "Source material ultimately yielded 3,000 texts, 6,005 images, and 1,202 videos. These are item counts, not creator or participant counts.",
+        "detail": "The paper states that it excluded PII, direct profile links, doxxing, content appearing to reveal private individuals, and other sensitive personal data; upstream content remains governed by original licenses or terms."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Seven volunteer annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Primary gold-label source for Safe vs. Harmful and, for harmful items, Explicit vs. Implicit labels. Final labels were obtained by majority voting over seven independent annotations per item."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy, Macro-F1, and recall/true-positive rate for Implicit and Explicit harmful subsets",
+        "role": "primary",
+        "blind": null,
+        "detail": "Model predictions were compared with the human majority-vote gold labels. Overall Accuracy and Macro-F1 were reported for binary Harmful vs. Safe classification; Imp/Exp columns report recall on the corresponding harmful subsets."
+      },
+      {
+        "type": "author",
+        "name": "Authors’ rule for empty or blocked closed-source API outputs",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Empty or blocked outputs from closed-source APIs were not excluded; they were conservatively mapped to the Harmful class. Table 9 reports such cases, all below 1% for affected closed-source model/modality combinations."
+      },
+      {
+        "type": "author",
+        "name": "Manual failure-case and qualitative analysis",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The authors manually inspected predicted labels and model explanations for representative failure cases and qualitative claims about failure modes and safeguards. This did not replace the automatic metric computation for headline scores."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Model classification responses for text, image, and video harmful-humor evaluation",
+        "mode": "single-sample",
+        "n": "One returned response per input; no repeated candidate generation or best-of-N selection is reported.",
+        "selector": "none",
+        "detail": "Prompts asked models to return JSON labels/explanations. The paper reports direct evaluation of the returned class label against gold labels; no candidate pool, reranking, or human/LLM selection among multiple outputs is described."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-5.2",
+        "version_or_snapshot": "GPT-5.2-2025-12-11",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Commercial model used via official API; evaluated for text and images. GPT-5.2 reasoning effort was explicitly set to high."
+      },
+      {
+        "name": "GPT-5 Pro",
+        "version_or_snapshot": "GPT-5-pro-2025-08-07",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Commercial model used via official API for video evaluation. The paper states GPT-5-Pro reasoning effort defaults to high and was used as provided; video analysis is described as vision-only for GPT-5-Pro."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as a strong multimodal commercial baseline via official API. The paper does not report an API snapshot/version; it states GPT-4o has no controllable reasoning-effort parameter and was used under the default configuration. Table 5 labels the video row as ChatGPT-4o."
+      },
+      {
+        "name": "Gemini 2.5 Pro",
+        "version_or_snapshot": "Gemini-2.5-pro-2025-06-17",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Commercial model used via official API; dynamic thinking is enabled by default with high reasoning behavior, and the default configuration was used."
+      },
+      {
+        "name": "Gemini 3 Pro",
+        "version_or_snapshot": "Gemini-3-2025-11-18",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Commercial model used via official API; dynamic thinking is enabled by default with high reasoning behavior, and the default configuration was used."
+      },
+      {
+        "name": "DeepSeek-Reasoner",
+        "version_or_snapshot": "DeepSeek-R1 series, January 20, 2025",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated for text. The paper groups it under open-source models and cites the DeepSeek-R1 series, but does not provide an exact checkpoint, deployment, or access mode."
+      },
+      {
+        "name": "Qwen2.5-14B",
+        "version_or_snapshot": "Qwen2.5 family, September 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for text. Exact checkpoint/revision is not reported; the paper states open-source models used identical inference settings and were selected as models that can fit on a single A6000 GPU."
+      },
+      {
+        "name": "Llama-3.1-8B",
+        "version_or_snapshot": "July 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for text; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "AceGPT-v2-32B-Chat",
+        "version_or_snapshot": "June 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Arabic-specialized text model; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "ALLAM-7B-Instruct",
+        "version_or_snapshot": "November 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Arabic-specialized text model; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "Jais-13B-Chat",
+        "version_or_snapshot": "August 2023",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Arabic-centric text model; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "Aya-Vision-8B",
+        "version_or_snapshot": "May 14, 2025",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for images; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "InternVL2-8B",
+        "version_or_snapshot": "July 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Tables and Appendix E list InternVL2-8B for image evaluation. The methodology text separately names InternVL3-14B, creating an internal model-identity inconsistency."
+      },
+      {
+        "name": "Llama-3.2-11B-Vision-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for images according to the methodology; the result table abbreviates the row as Llama3-Vision. Exact checkpoint/revision and date are not reported."
+      },
+      {
+        "name": "LLaVA-NeXT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for images; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "MiniCPM-Llama3-V-2.5",
+        "version_or_snapshot": "May 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for images; the result table abbreviates the row as MiniCPM-Llama3. Exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "Qwen2.5-VL-32B",
+        "version_or_snapshot": "January 2025",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for images; the result table abbreviates the row as Qwen2.5-VL. Exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "Qwen2-VL-7B",
+        "version_or_snapshot": "August 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated for images; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "Qwen2.5-Omni",
+        "version_or_snapshot": "March 26, 2025",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source video model; exact checkpoint/revision is not reported."
+      },
+      {
+        "name": "VideoChat",
+        "version_or_snapshot": "June 2024",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source video model; exact checkpoint/revision is not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Open-source pretrained and fine-tuned models across text, image, and video",
+        "calls_per_item": null,
+        "candidates_per_item": "1, implied by greedy decoding; no alternate candidates are reported.",
+        "token_budget": "Maximum token limit of 512",
+        "sampling_parameters": "temperature = 0.0; greedy decoding",
+        "compute_or_cost": "The paper says evaluated open-source LLMs/LMMs can fit on a single A6000 GPU; exact hardware configuration, runtime, memory use, and cost are not reported.",
+        "detail": "The paper states that identical inference settings were used for all pretrained and fine-tuned open-source models, including both reasoning and non-reasoning models."
+      },
+      {
+        "scope": "Commercial API models",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Official API defaults except where reasoning configuration is described: GPT-5-Pro reasoning effort defaults to high; Gemini-2.5-Pro and Gemini-3 use default dynamic thinking/high reasoning behavior; GPT-5.2 reasoning effort was explicitly set to high; GPT-4o used its default configuration with no controllable reasoning-effort parameter.",
+        "compute_or_cost": null,
+        "detail": "The paper does not report temperature, top-p, seed, max output tokens, retries, or exact number of API calls per item for commercial models."
+      },
+      {
+        "scope": "Video input processing",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Frames sampled at 10 FPS while preserving the original audio track. When an API supported audio-conditioned video understanding, audio was provided jointly with visual frames; otherwise the model operated in a vision-only configuration.",
+        "compute_or_cost": null,
+        "detail": "The paper explicitly notes GPT-5-Pro led overall even in a vision-only configuration. It does not fully enumerate audio-conditioning support for every video model."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Harmful-vs-safe classification across text, image, and video benchmark items",
+        "present": false,
+        "description": "No human classifier baseline is reported. Humans supplied gold labels and inter-annotator agreement statistics, but their performance was not evaluated as a model-comparable baseline under matched prediction conditions.",
+        "directly_comparable": false,
+        "detail": "Annotator agreement can contextualize label reliability but is not a directly comparable human-vs-model baseline because annotators created the reference labels rather than being evaluated against an independent gold standard."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The benchmark’s Safe/Harmful and Explicit/Implicit labels, taxonomy, and majority-vote annotations were newly curated by the authors.",
+        "The paper reports manual curation, duplicate removal, and removal of spam/non-joke or low-quality content, though these are quality controls rather than decontamination tests."
+      ],
+      "basis": "The benchmark is introduced in this paper, but much raw content comes from public web/social sources and existing datasets, including Reddit/X, online forums, Pungas, Short Jokes, dadjokes, reddit-dadjokes, Arabic Humor, D-HUMOR, Wikimedia, Vimeo, and MemeDroid. Many of these sources predate the evaluated 2025 model snapshots and could have appeared in model training data. The paper gives no decontamination or memorization test and does not report a collection/release/inference chronology sufficient to rule out exposure. Newly curated labels reduce the chance that models saw the exact benchmark annotations, but public-source item memorization remains a material risk."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Gold labels were produced by seven human annotators with majority voting, and headline model results were computed with automatic metrics against those labels.",
+      "detail": "The evaluated LLMs/VLMs/video LLMs produced predictions, but no LLM was used as an evaluator, metric, adjudicator, or judge of model outputs."
+    },
+    "reporting_gaps": [
+      "Exact inference/run dates and API access dates are not reported.",
+      "GPT-4o API snapshot/version is not specified; many open-source checkpoints lack exact revision IDs or hashes; DeepSeek-Reasoner’s exact checkpoint/deployment and access mode are unclear.",
+      "There is an internal image-model identity inconsistency: the methodology text names InternVL3-14B, while the results table and Appendix E list InternVL2-8B. Several tables also use abbreviated model names such as Llama3-Vision, MiniCPM-Llama3, and Qwen2.5-VL.",
+      "Candidate counts, retry policy, number of API calls per item, and any repeated-run or stochasticity checks are not reported; no best-of-N selection is described.",
+      "Commercial-model decoding parameters such as temperature, top-p, seeds, output-token limits, and stop conditions are not reported beyond reasoning-effort/thinking defaults.",
+      "Compute, runtime, cost, software environment, quantization, and exact local hardware configuration are not reported beyond the statement that open-source models can fit on a single A6000 GPU.",
+      "Per-model video audio handling is not fully enumerated; the paper states audio was supplied when supported and otherwise models were vision-only, but only GPT-5-Pro’s vision-only configuration is explicitly discussed.",
+      "Data collection dates and the benchmark release date relative to model training or API snapshots are not reported, and no contamination/decontamination analysis is provided despite extensive use of public and preexisting source material.",
+      "No directly comparable human baseline is reported.",
+      "Annotator blinding to source provenance or prior dataset labels is not stated, and annotator compensation is not reported.",
+      "The Drive URL for dataset access is not included in the provided paper text, and redistribution details vary for restricted upstream media such as D-HUMOR-derived items.",
+      "Handling of malformed but non-empty model JSON/output parsing errors is not fully described; the paper only specifies that empty or blocked closed-source outputs were mapped to Harmful."
+    ]
   }
 }

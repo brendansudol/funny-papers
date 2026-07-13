@@ -185,5 +185,286 @@
     "code_url": null,
     "data_url": "https://github.com/altsoph/humor-mechanics",
     "other": "The paper also cites ReJ download scripts at https://github.com/Humor-Research/hri_tools and includes prompts in Appendices A and B."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human assessors; further demographics not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "100 random one-liners from the 16000 OneLiners dataset were ranked by pairwise comparison; the paper reports ten assessors per pair and that the top 30 jokes were used as the seed dataset.",
+        "detail": "This annotation created the high-quality seed joke set used for GPT-4 humor-policy inference. The paper does not report the number of unique assessors, number of pairwise comparisons, recruitment source, or demographics."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Native English speakers on ScaleAI.",
+        "recruitment": "ScaleAI annotation platform.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "At least five annotators assessed each aspect of each joke/text. Table 2 reports 100 zero-shot texts, 120 no-assoc, 120 assoc-v1, 120 assoc-v2, 120 full-pipeline, and 156 reddit texts; the paper notes that a count of 120 means 120 texts annotated 5 times each and that scores were aggregated from 500+ individual labels.",
+        "detail": "Primary human evaluation labels were Understandable, Offensive/Inappropriate, Is a joke, Heard before/Known, Funniness on a 1–5 scale, and a short explanation, with skip logic after not-understood, offensive, or not-a-joke responses. Unique annotator count, overlap across labels, demographics beyond native-English status, and cultural background were not reported."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Reddit users whose jokes/posts are represented in the ReJ dataset.",
+        "recruitment": "Historical Reddit joke dataset collected by Weller and Seppi (2019), downloaded via scripts cited from Baranov, Kniazhevsky, and Braslavski (2023).",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The authors selected positive ReJ examples from the train split and, after cleaning and moderation filtering, labeled a subsample of 156 jokes using the same ScaleAI workflow.",
+        "detail": "These are the human-created baseline texts. The number of original authors/contributors and their demographics are not reported in this paper."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Reddit users whose upvotes underlie the ReJ positive/negative split.",
+        "recruitment": "Platform voting in the source Reddit dataset.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "ReJ positive and negative examples are described as Reddit jokes split into more and less funny examples based on users’ upvotes; this paper selected the funnier part with label == 1.",
+        "detail": "Upvoter counts and voting distributions are not reported in this paper; the paper notes that Reddit-user humorousness scores and assessor scores can differ."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2 listed authors",
+        "population": "Paper authors.",
+        "recruitment": "Authors’ own pilot labeling.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The discussion states that the authors did a first pilot labeling of generated jokes and obtained highly contradictory results.",
+        "detail": "This pilot is mentioned as evidence of humor subjectivity and jargon effects; no sample size, annotation protocol, or use in headline quantitative results is reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Human assessors ranked 100 random one-liners by pairwise comparison, ten assessors per pair, to select the top 30 seed jokes for policy inference."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "GPT-4 decomposed each of the top 30 seed jokes into humorous building blocks and then distilled the decompositions into a humor-generation policy prompt. It was not used as the primary evaluator of generated-joke quality."
+      },
+      {
+        "type": "human-crowd",
+        "name": "ScaleAI native-English assessors",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary quality labels for generated and ReJ texts: understandability, offensiveness/inappropriateness, whether it is a joke, whether it was previously heard, funniness, and explanation."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "OpenAI Moderation API",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used before annotation to filter generated jokes and to validate/filter ReJ texts with a harassment threshold of 0.02."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Reddit upvotes in ReJ source dataset",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The source ReJ dataset split jokes into more and less funny examples based on Reddit users’ upvotes; this paper used the positive label == 1 subset for its human-created benchmark sample."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Mann-Whitney U rank test",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to test differences in distributions of funniness, joke, understandable, and known scores, including tests with averaged annotator scores and, for funniness, all individual scores."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors",
+        "role": "validation",
+        "blind": null,
+        "detail": "Authors report an initial pilot labeling of generated jokes with contradictory results; this did not determine the main reported evaluation scores."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "zero-shot GPT-4 ablation",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "none",
+        "detail": "The experiment is described as asking GPT-4 to generate a joke on a given topic; 100 texts were annotated. No best-of-N generation or candidate-selection procedure is reported. Generated jokes were filtered with the OpenAI Moderation API before annotation."
+      },
+      {
+        "scope": "no-assoc ablation",
+        "mode": "not-reported",
+        "n": "Appendix final joke prompt requests a numbered list of 7-10 jokes, but the experiment prose describes generating 'a joke' and reports 120 annotated texts.",
+        "selector": "unclear",
+        "detail": "This ablation asks GPT-4 to generate a joke on a topic given the humor-generation policy, without associations. The paper does not report whether all items from any generated list were used, whether one was selected, or how final annotated texts were chosen beyond moderation filtering."
+      },
+      {
+        "scope": "assoc-v1 ablation",
+        "mode": "not-reported",
+        "n": "20 associations are generated; Appendix final joke prompt requests 7-10 jokes, but selection/all-use is not specified.",
+        "selector": "unclear",
+        "detail": "This ablation uses associations from step 2 of Algorithm 1 plus the policy. The paper reports 120 annotated texts and no best-of-N selector."
+      },
+      {
+        "scope": "assoc-v2 ablation",
+        "mode": "not-reported",
+        "n": "20 associations are generated and expanded; Appendix final joke prompt requests 7-10 jokes, but selection/all-use is not specified.",
+        "selector": "unclear",
+        "detail": "This ablation uses associations from step 3 of Algorithm 1 plus the policy. The paper reports 120 annotated texts and no best-of-N selector."
+      },
+      {
+        "scope": "full Algorithm 1 pipeline",
+        "mode": "not-reported",
+        "n": "20 associations are generated, expanded, refined to a final list no longer than 6 items, and Appendix final prompt requests 7-10 jokes.",
+        "selector": "unclear",
+        "detail": "The full pipeline randomly selects a topic from the top 10,000 most frequent English words after exclusions, then uses GPT-4 for association generation, expansion, refinement, and joke generation. The paper reports 120 annotated full-pipeline texts but does not state whether all generated jokes were retained or whether any candidate selection occurred beyond moderation filtering."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for seed-joke decomposition, policy distillation, association generation/expansion/refinement, zero-shot joke generation, ablations, and full-pipeline joke generation. No exact GPT-4 snapshot, API model name, or run dates are reported."
+      },
+      {
+        "name": "OpenAI Moderation API",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to filter generated jokes and ReJ texts with a harassment threshold of 0.02. The moderation model/version is not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Humor-policy inference from seed jokes",
+        "calls_per_item": "30 GPT-4 decomposition calls for the 30 top-ranked seed jokes plus 1 GPT-4 distillation call over concatenated decompositions.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper states each joke was decomposed independently using GPT-4 and then all decompositions were concatenated for GPT-4 policy distillation. Token limits, temperature/top-p, retries, and cost are not reported."
+      },
+      {
+        "scope": "zero-shot GPT-4 joke generation",
+        "calls_per_item": "1 GPT-4 call per given topic/text as described in the ablation setup.",
+        "candidates_per_item": "Described as generating 'a joke'; exact prompt and number of returned candidates are not reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "100 zero-shot texts were annotated. No sampling parameters, token budget, or exact prompt are provided."
+      },
+      {
+        "scope": "no-assoc ablation generation",
+        "calls_per_item": "1 GPT-4 final-generation call per topic/text, using the humor-generation policy; policy-inference calls are separate.",
+        "candidates_per_item": "Not clearly reported; Appendix final joke prompt requests 7-10 jokes, while the experiment prose describes generating a joke.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "120 no-assoc texts were annotated. No sampling parameters, token budget, or selection details are reported."
+      },
+      {
+        "scope": "assoc-v1 ablation generation",
+        "calls_per_item": "2 GPT-4 calls per topic implied by Algorithm 1 and the ablation definition: generate 20 associations, then final joke generation using those associations and the policy.",
+        "candidates_per_item": "20 associations; final joke candidate count not clearly reported, with Appendix final prompt requesting 7-10 jokes.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "120 assoc-v1 texts were annotated. The paper does not report sampling settings, token limits, retries, or how generated candidate lists map to annotated texts."
+      },
+      {
+        "scope": "assoc-v2 ablation generation",
+        "calls_per_item": "3 GPT-4 calls per topic implied: generate 20 associations, expand associations, then final joke generation using expanded associations and the policy.",
+        "candidates_per_item": "20 associations expanded into 10-15-word items; final joke candidate count not clearly reported, with Appendix final prompt requesting 7-10 jokes.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "120 assoc-v2 texts were annotated. Sampling settings, token limits, retries, and candidate-selection details are not reported."
+      },
+      {
+        "scope": "full Algorithm 1 generation",
+        "calls_per_item": "4 GPT-4 calls per topic: generate 20 associations, expand associations, combine/refine associations, and generate jokes from topic, refined associations, and policy.",
+        "candidates_per_item": "20 associations; expanded associations; refined list no longer than 6 items; Appendix final prompt requests 7-10 jokes.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "120 full-pipeline texts were annotated. Topic selection is random from the top 10,000 most frequent English words after excluding profanity, stopwords, and words under 4 letters. The paper does not report sampling parameters, token limits, retries, cost, or final candidate-selection/all-use procedure."
+      },
+      {
+        "scope": "OpenAI Moderation API filtering",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Harassment threshold = 0.02.",
+        "compute_or_cost": null,
+        "detail": "Applied to generated jokes before annotation and to ReJ texts during cleaning. The paper does not report the moderation model version, number of filtered texts, raw pre-filter counts, or API call counts."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Cleaned positive ReJ Reddit jokes",
+        "present": true,
+        "description": "A subsample of 156 human-created ReJ jokes from the train split with label == 1 was cleaned, filtered with OpenAI Moderation API at harassment threshold 0.02, and labeled through the same ScaleAI workflow as generated jokes.",
+        "directly_comparable": false,
+        "detail": "The annotation protocol was matched, but the baseline was an existing Reddit/upvote-selected corpus rather than jokes newly written under the same topics or generation constraints; the paper itself notes artifacts and potential unfairness in comparing Reddit-derived jokes with computer-generated humor."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Generated jokes were evaluated for whether annotators had heard them before, producing a Known score.",
+        "The proposed pipeline used randomly selected topics from the top 10,000 most frequent English words, after exclusions, rather than only reusing benchmark prompts.",
+        "Generated and ReJ texts were filtered/validated with the OpenAI Moderation API before annotation."
+      ],
+      "basis": "The study uses public legacy joke sources: 16000 OneLiners from 2005 for seed policy construction and ReJ/Reddit jokes from 2019 for the human-created comparison. GPT-4’s exact snapshot and training data are not reported, so these public joke corpora and Reddit content could have been in training data. The paper discusses memorized jokes and novelty, and it adds human Known labels, but it does not perform a decontamination test, web/source matching, or training-data audit. Because the main outputs are newly generated and judged by humans, the risk is not necessarily high, but public pre-existing humor data and proprietary-model uncertainty make it at least moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Headline quality and novelty claims are based on ScaleAI human labels and Mann-Whitney U tests, not on LLM judgments of funniness or novelty.",
+      "detail": "GPT-4 is central to the generation method and to seed-policy decomposition/distillation, but the paper does not use an LLM as the primary evaluator of generated jokes. OpenAI Moderation API affects filtering/inclusion, not the funniness or novelty conclusions."
+    },
+    "reporting_gaps": [
+      "Exact GPT-4 API model name/snapshot/version and inference dates are not reported.",
+      "Access route for GPT-4 runs is not reported.",
+      "Sampling parameters such as temperature, top_p, random seeds, retries, and stop criteria are not reported.",
+      "Token budgets/context limits and compute or monetary cost are not reported.",
+      "Exact prompts for the zero-shot baseline and some ablation variants are not fully reported.",
+      "The Appendix final generation prompt asks for a numbered list of 7-10 jokes, but the paper does not report whether all generated jokes were evaluated or how individual annotated texts were selected from generated lists.",
+      "Raw generated counts before OpenAI Moderation API filtering and counts removed by filtering are not reported.",
+      "Number of unique ScaleAI annotators, annotator overlap across labels/items, recruitment details, compensation, geography, and demographics beyond native-English status are not reported.",
+      "The paper explicitly states that annotators’ cultural background information was unavailable.",
+      "Blinding of annotators to text source/method and randomization/order of annotation items are not reported.",
+      "Seed-pairwise-ranking details are incomplete: unique assessor count, recruitment source, number of pairwise comparisons, and rank-aggregation method are not specified.",
+      "OpenAI Moderation API model/version and exact filtering outputs are not reported.",
+      "ReJ subsampling procedure, random seed, and detailed source distribution are not reported.",
+      "Inter-annotator agreement is described qualitatively as low via average variance of funniness scores, but the numeric agreement/variance value is not reported.",
+      "No decontamination or source-overlap search against GPT-4 training data, public joke corpora, 16000 OneLiners, or Reddit is reported."
+    ]
   }
 }

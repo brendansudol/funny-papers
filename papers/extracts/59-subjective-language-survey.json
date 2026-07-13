@@ -655,5 +655,69 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "none",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "No new human, LLM, crowd, expert, or automatic judging study is reported. The paper is a survey synthesizing prior literature rather than evaluating newly generated outputs or model predictions."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "whole paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The survey does not conduct a humor or language generation experiment and therefore has no single-sample or best-of-N output selection procedure."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "whole paper",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No original model inference is reported. The paper names and reviews many LLM families and prior methods, but it does not run models itself or report prompts, sampling parameters, API calls, token budgets, compute, or cost for a new experiment."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "whole paper",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The survey discusses human annotations and human/model comparisons in prior work, but it does not collect a new human baseline or evaluate humans and models under matched conditions in an original study."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "This is a non-empirical survey with no original benchmark evaluation of LLMs. Because no model is run on public or private test items by the authors, benchmark contamination risk is not applicable to the paper's own results. The paper does discuss datasets and benchmarks broadly, but not as a contamination control for an original evaluation."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "The survey's conclusions are narrative syntheses of cited literature. No LLM is used by the authors as an evaluator, annotator, metric, or judge for the paper's own claims."
+    },
+    "reporting_gaps": [
+      "The paper states that it synthesizes results from over 200 recent papers, but it does not report a systematic review protocol with search databases, search queries, search dates, screening counts, inclusion/exclusion criteria, or PRISMA-style flow information.",
+      "No coding scheme, double-coding procedure, adjudication process, or inter-rater reliability is reported for the survey's literature categorization or qualitative claims.",
+      "The paper does not provide an original unified quantitative benchmark across the eight subjective-language tasks with shared datasets, prompts, model versions, metrics, or evaluation settings.",
+      "Because no original experiments are run, model snapshots, inference dates, prompts, sampling parameters, token budgets, API versions, compute, and cost are not reported."
+    ]
   }
 }

@@ -204,5 +204,444 @@
     "code_url": "https://github.com/yguooo/cartoon-caption-generation",
     "data_url": "https://huggingface.co/datasets/yguooo/newyorker_caption_ranking",
     "other": "Dataset released under Creative Commons Attribution Non Commercial 4.0; codebase released under Apache 2.0."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Users/readers rating captions in The New Yorker online crowdsourced caption-rating system",
+        "recruitment": "Users were presented with captions through The New Yorker weekly caption contest rating interface; exact recruitment and unique-rater counts are not reported.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "284,183,913 ratings across 365 contests; average 778,586 ratings/contest; ratings were funny=3, somewhat funny=2, unfunny=1. The top 5% of captions received an average of 821 ratings, and the bottom 50% around 85 ratings.",
+        "detail": "These ratings are item-level observations, not participant counts. The rating process used a UCB/KL-UCB-style bandit algorithm to show higher-performing captions more often."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "The New Yorker weekly cartoon caption contest readers/contestants submitting captions",
+        "recruitment": "Open weekly contest submissions through The New Yorker website; exact contributor counts are not reported.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Over 2.2 million submitted captions; 365 contests/cartoons from contests 530 to 895; Table 1 reports average 6,044 captions/contest with STD 1,794.",
+        "detail": "Caption counts are submissions/items, not numbers of people. The paper states each week thousands submit captions, on average more than 6,000."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "The New Yorker editorial staff",
+        "recruitment": "Editorial role at The New Yorker; exact number of editors is not reported.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Editors filtered submissions before crowdsourced rating to remove captions that were not humorous or included personal information and/or offensive content; editors chose the top three funniest captions and made final decisions based on crowdsourced ratings.",
+        "detail": "The editorial staff contributes filtering and contest-decision judgments, but the paper does not report editor counts or a formal annotation protocol beyond this description."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "Six workers reported for the Claude-3-Opus vs Human Top 10 evaluation; participant count is not reported for all Table 2 Prolific reliability experiments.",
+        "population": "Prolific crowd workers",
+        "recruitment": "Prolific; participants provided informed consent under Institutional IRB.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Human-worker results include Table 2 reliability accuracies for pairwise/group caption comparisons and Table 4 Claude-3-Opus-over-Human-Top-10 preference rate of 35.4%. Participants were paid $12/hour; the authors report spending about $600 on human data collection.",
+        "detail": "The paper reports task instructions for several worker conditions: pairwise with GPT4o-vision descriptions, pairwise with cartoon image, group overall with descriptions, group overall with image, group best-pick with descriptions, group best-pick with image, and Human Top 10 vs Claude generated captions."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "1",
+        "population": "Humor expert; former cartoon editor of The New Yorker",
+        "recruitment": "A former New Yorker editor/humor expert; the paper does not describe recruitment beyond this role.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "In Table 2, the expert achieved 94.28±2.79% ranking accuracy for Group Overall with cartoon images. In Table 4, the expert preferred Claude-3-Opus generated caption groups over Human Top 10 only 1.6% of the time.",
+        "detail": "The expert is used as a high-skill human comparator for evaluator reliability and for judging Claude-3-Opus versus top-ranked human captions."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "New Yorker caption-contest crowd raters",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Crowd ratings on a 1–3 scale determine caption average ratings/rankings, preference-pair construction for finetuning, and the ground-truth ranking levels used in reliability tests and benchmark human baselines."
+      },
+      {
+        "type": "human-expert",
+        "name": "The New Yorker editorial staff",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Editors filtered submitted captions for non-humorous, personal-information, and offensive content, chose the top three funniest captions, and made final contest decisions based on crowdsourced ratings."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Prolific workers",
+        "role": "primary",
+        "blind": null,
+        "detail": "Workers judged pairwise/group caption comparisons in Table 2 and judged Claude-3-Opus versus Human Top 10 groups in Table 4. The prompts showed cartoons or descriptions and A/B caption choices; the paper does not explicitly report source blinding/randomization details."
+      },
+      {
+        "type": "human-expert",
+        "name": "Former New Yorker cartoon editor",
+        "role": "primary",
+        "blind": null,
+        "detail": "The expert judged Group Overall reliability comparisons and Claude-3-Opus versus Human Top 10 caption groups, producing the 94.28±2.79% accuracy and 1.6% Claude preference results."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT4-Turbo",
+        "role": "primary",
+        "blind": null,
+        "detail": "Selected as the main Group Comparison (Overall) evaluator with Hessel et al. human-written descriptions. It also appears in Table 2 pairwise/group reliability conditions. Evaluations used 5-shot in-context prompting; for group comparisons without chain of thought, GPT4 decisions were recalibrated using a validation-set threshold on A/B log-probability differences."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT4o-vision",
+        "role": "primary",
+        "blind": null,
+        "detail": "Selected as the main Group Comparison (Best Pick) evaluator with raw cartoon images. It also appears in Table 2 reliability conditions and as a source of generated cartoon descriptions in some conditions."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT4-Turbo-vision",
+        "role": "validation",
+        "blind": null,
+        "detail": "Used in Table 2 evaluator-reliability experiments and additional vision-integration comparisons, including conditions with cartoon plus text description and blank image plus text description."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT4o",
+        "role": "validation",
+        "blind": null,
+        "detail": "Used as a text-only evaluator in Table 2 pairwise reliability experiments and to generate cartoon descriptions in Appendix B.1. As an evaluator, it determines reported reliability results."
+      },
+      {
+        "type": "LLM",
+        "name": "Trained reward model initialized from weqweasdas/RM-Mistral-7B",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The reward model selects captions for Mistral Best-of-N sampling, supplies the reward for RLHF/PPO, and is chosen using reward evaluation on a holdout set. Because it scores and selects generated captions, it functions as an LLM judge/selector even though it is not the final benchmark evaluator."
+      },
+      {
+        "type": "LLM",
+        "name": "Reward-model benchmark candidates",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Table 8 reports Reward Ranking Accuracy for Mistral-7B Instruct, Llama-3-8B Instruct, Llama-2-7B Chat, weqweasdas/RM-Mistral-7B, Eurus-RM-7B, FsfairX-LLAMA3-RM-v0.1, and Qwen1.5-7B-Chat against human-derived preference pairs."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Average EAD and SBERT cosine similarity",
+        "role": "primary",
+        "blind": null,
+        "detail": "These metrics determine the diversity-evaluation results in Table 6. Average EAD measures token-level diversity; SBERT cosine similarity measures semantic-level diversity. The exact SBERT model variant is not reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Standard model caption generation for Table 3, excluding Mistral-7B BoN",
+        "mode": "single-sample",
+        "n": "Ten captions per held-out cartoon/group",
+        "selector": "none",
+        "detail": "For each held-out cartoon, models generated a group of ten captions that was evaluated directly against four groups of human submissions. This includes LLaVA, LLaVA SFT, Mistral-7B 0-shot/SFT/RLHF/DPO, GPT-3.5 Turbo, GPT-4o, GPT-4o Vision, and Claude-3-Opus. No best-of-N selection is reported for these rows."
+      },
+      {
+        "scope": "Mistral-7B Best-of-N sampling in Table 3",
+        "mode": "best-of-n",
+        "n": "50 generated candidates per cartoon; top 10 captions selected",
+        "selector": "LLM-judge",
+        "detail": "Appendix C.3 states that for BoN the authors picked the top 10 captions based on the trained reward model out of 50 generated candidates. The reward model was trained from/initialized with weqweasdas/RM-Mistral-7B."
+      },
+      {
+        "scope": "GPT-4o cartoon-description generation used for description-based prompts/evaluations",
+        "mode": "single-sample",
+        "n": "One set of descriptions per cartoon is requested: canny description, uncanny description, location, and entities",
+        "selector": "none",
+        "detail": "Appendix B.1 describes a 5-shot GPT-4o prompt for generating cartoon descriptions. The five examples were randomly selected from the testing set and reused for every cartoon. No selection among multiple generated descriptions is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "mistralai/Mistral-7B-Instruct-v0.1",
+        "version_or_snapshot": "v0.1",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Used as the open-source language-only base model for 0-shot generation and as the base for finetuned Mistral variants."
+      },
+      {
+        "name": "Mistral-7B Instruct finetuned variants",
+        "version_or_snapshot": "LoRA finetuned from mistralai/Mistral-7B-Instruct-v0.1; SFT, RLHF/PPO, DPO, and BoN variants reported",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "The paper reports methods and base model but not released checkpoint identifiers or exact selected hyperparameters for each final checkpoint."
+      },
+      {
+        "name": "llava-hf/llava-v1.6-mistral-7b-hf",
+        "version_or_snapshot": "v1.6 Mistral-7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Used as the open-source multimodal LLaVA model."
+      },
+      {
+        "name": "LLaVA SFT",
+        "version_or_snapshot": "LoRA finetuned from llava-hf/llava-v1.6-mistral-7b-hf",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Finetuned multimodal variant; exact checkpoint identifier is not reported."
+      },
+      {
+        "name": "weqweasdas/RM-Mistral-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Pretrained reward model from Hugging Face URL https://huggingface.co/weqweasdas/RM-Mistral-7B; used as the initial reward model to finetune from and benchmarked in Table 8."
+      },
+      {
+        "name": "Trained caption reward model",
+        "version_or_snapshot": "Initialized from weqweasdas/RM-Mistral-7B; best model picked by reward evaluation on holdout set",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for Best-of-N selection and RLHF/PPO reward; exact checkpoint/version is not reported."
+      },
+      {
+        "name": "Llama-3-8B Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Benchmarked as a reward-ranking model in Table 8; exact Hugging Face identifier/snapshot is not reported."
+      },
+      {
+        "name": "Llama-2-7B Chat",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Benchmarked as a reward-ranking model in Table 8; exact Hugging Face identifier/snapshot is not reported."
+      },
+      {
+        "name": "Eurus-RM-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Benchmarked as a reward-ranking model in Table 8; exact snapshot is not reported."
+      },
+      {
+        "name": "FsfairX-LLAMA3-RM-v0.1",
+        "version_or_snapshot": "v0.1",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Benchmarked as a reward-ranking model in Table 8; exact snapshot is not reported."
+      },
+      {
+        "name": "Qwen1.5-7B-Chat",
+        "version_or_snapshot": "1.5",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Benchmarked as a reward-ranking model in Table 8; exact snapshot is not reported."
+      },
+      {
+        "name": "GPT-3.5 Turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to generate captions with text descriptions only. The paper does not report an OpenAI model snapshot or inference date."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used for caption generation without vision, cartoon-description generation, and some evaluator-reliability conditions. No exact snapshot/date is reported."
+      },
+      {
+        "name": "GPT-4o Vision / GPT4o-vision",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used for caption generation with raw images, main Best Pick evaluation, Table 2 reliability conditions, and description-generation conditions. No exact snapshot/date is reported."
+      },
+      {
+        "name": "GPT4-Turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as the selected Overall group evaluator and in Table 2 reliability conditions. No exact snapshot/date is reported."
+      },
+      {
+        "name": "GPT4-Turbo-vision",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used in reliability and vision-integration experiments. No exact snapshot/date is reported."
+      },
+      {
+        "name": "GPT4 Vision / GPT4-vision",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Reported as a description/image condition in Table 2. Exact model snapshot/date is not reported."
+      },
+      {
+        "name": "Claude-3-Opus",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to generate captions; Appendix B.3 states Claude was always provided both image description and image. No exact Anthropic snapshot/date is reported."
+      },
+      {
+        "name": "Sentence-BERT (SBERT)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for embedding cosine similarity in diversity evaluation. The exact SBERT model variant and runtime details are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main held-out caption-generation benchmark, Table 3",
+        "calls_per_item": null,
+        "candidates_per_item": "Ten generated captions per held-out cartoon; 91 held-out cartoons; each model group compared against four human caption groups (#1-10, #200-209, #1000-1009, median).",
+        "token_budget": null,
+        "sampling_parameters": "For pretrained and finetuned open-source models, Appendix C.3 reports temperature 0.7, top-p 0.95, repetition penalty 1.15. API generation sampling parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "Appendix B.3 says GPT-3.5-turbo used image descriptions only; GPT-4o had text-only and image versions; Claude was provided both image description and image. The paper does not state exact API call counts or token limits."
+      },
+      {
+        "scope": "Mistral-7B Best-of-N caption generation",
+        "calls_per_item": null,
+        "candidates_per_item": "50 generated candidates per cartoon; top 10 selected by the trained reward model.",
+        "token_budget": null,
+        "sampling_parameters": "Same reported generation configuration for pretrained/finetuned models: temperature 0.7, top-p 0.95, repetition penalty 1.15.",
+        "compute_or_cost": null,
+        "detail": "BoN does not change model weights; it selects captions using the trained reward model. Exact number of calls and token limits are not reported."
+      },
+      {
+        "scope": "GPT-based group-comparison evaluation",
+        "calls_per_item": "One LLM query per group comparison is described for group comparisons, with all ten captions from each group provided in a single query.",
+        "candidates_per_item": "Two groups of ten captions per query; Table 3 evaluates four human comparison groups per held-out cartoon for each generated model.",
+        "token_budget": null,
+        "sampling_parameters": "Evaluation prompts use 5-shot in-context prompting. Sampling/decoding parameters for GPT evaluators are not reported.",
+        "compute_or_cost": "Appendix C.3: evaluating a single number of each scenario cost roughly $5 on the OpenAI platform.",
+        "detail": "Overall uses GPT4-Turbo with Hessel et al. descriptions; Best Pick uses GPT4o-vision with raw cartoon images. GPT4 group comparisons without chain of thought were recalibrated using a validation-set threshold on A/B log-probability differences."
+      },
+      {
+        "scope": "Evaluator-reliability experiments, Table 2",
+        "calls_per_item": null,
+        "candidates_per_item": "Ranking accuracy of captions ranked #1-10 versus #1000-1009 averaged over 200 pairs. Pairwise randomly selected one caption from each group; group comparisons supplied all ten captions from each group.",
+        "token_budget": null,
+        "sampling_parameters": "LLM evaluator prompts used 5-shot in-context prompting; worker tasks used the instructions in Appendix C.1. LLM sampling parameters are not reported.",
+        "compute_or_cost": "Human participants were paid $12/hour; about $600 was spent on human data collection.",
+        "detail": "Reliability conditions include human workers, human expert, GPT4-Turbo, GPT4-Turbo-vision, GPT4o, and GPT4o-vision with either cartoon images or generated/human-written descriptions."
+      },
+      {
+        "scope": "GPT-4o cartoon-description generation",
+        "calls_per_item": "Not explicitly stated; the prompt requests one set of descriptions for each cartoon.",
+        "candidates_per_item": "One canny description, one uncanny description, one location, and one entity list per cartoon are requested.",
+        "token_budget": null,
+        "sampling_parameters": "5-shot prompting; five examples were randomly selected from the testing set and reused for every cartoon. Decoding parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "Descriptions are used for language-only generation/evaluation conditions and compared with human-written Hessel et al. descriptions in Table 7."
+      },
+      {
+        "scope": "Finetuning and reward-model training setup",
+        "calls_per_item": null,
+        "candidates_per_item": "SFT trains on 1,000 caption pairs per contest; reward modeling, DPO, and RLHF train on 1,000 caption pairs per contest with ratings at least three combined standard deviations apart.",
+        "token_budget": null,
+        "sampling_parameters": "TRL default optimizer up to 1 epoch; hyperparameters searched near defaults; best model selected under GPT-based group comparison metrics, with reward model selected by holdout reward evaluation. Batch size 64 for SFT and reward model, 128 for other settings. Early stopping occurs before a single epoch for best iterations.",
+        "compute_or_cost": "SFT, DPO, and PPO usually take 2–4 days to train to convergence on an A100 machine.",
+        "detail": "Training uses LoRA updates. PPO performed best starting from pretrained Mistral Instruct 7B; DPO performed best from an SFT checkpoint, according to the paper."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Caption-generation benchmark against human contestant submissions",
+        "present": true,
+        "description": "For each held-out cartoon, model-generated groups of ten captions are compared against four groups of past human submissions: ranks #1-10, #200-209, #1000-1009, and the median-ranked ten captions.",
+        "directly_comparable": false,
+        "detail": "The evaluation query compares same-sized caption groups, but the human groups are selected from a large public contest with thousands of submissions and crowd ratings, whereas models generate ten captions under a prompt. Thus production and selection budgets are not materially matched."
+      },
+      {
+        "scope": "Evaluator-reliability comparison of humans versus GPT evaluators",
+        "present": true,
+        "description": "Human workers and a human expert judged the same top-10 versus #1000-1009 caption-comparison tasks reported for GPT evaluators in Table 2.",
+        "directly_comparable": true,
+        "detail": "Ranking accuracy is reported for human workers, human expert, and GPT4-family evaluators on the same comparison objective, though exact participant counts for all worker conditions are not fully reported."
+      },
+      {
+        "scope": "Human evaluation of Claude-3-Opus versus Human Top 10",
+        "present": true,
+        "description": "Six Prolific workers and one expert judged Claude-3-Opus generated caption groups against Human Top 10 caption groups; workers preferred Claude 35.4% of the time and the expert 1.6% of the time.",
+        "directly_comparable": false,
+        "detail": "The judged groups are same-sized, but Human Top 10 captions are contest-selected from many human submissions and ratings; this is not a matched single-human generation budget."
+      },
+      {
+        "scope": "Diversity comparison with human caption groups",
+        "present": true,
+        "description": "Table 6 reports Average EAD and SBERT diversity metrics for Human Top 10, #200-209, #1000-1009, and Median groups alongside model-generated groups.",
+        "directly_comparable": true,
+        "detail": "The automatic diversity metrics are computed on caption groups of the same size, but the paper’s broader human-generation process remains contest-selected rather than budget-matched to model sampling."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "For the authors’ finetuning experiments, 91 contests were held out for evaluation and the remaining available contests formed the training split.",
+        "The finetuning split uses the Hessel et al. testing and validation splits as the held-out test split within contests 530–890.",
+        "No decontamination test, model pretraining cutoff analysis, or API-provider data-exclusion evidence is reported."
+      ],
+      "basis": "The held-out benchmark relies on New Yorker caption-contest cartoons/captions and Hessel et al. splits that were public before several evaluated 2024 proprietary models such as GPT-4o and Claude-3-Opus, and exact pretraining/snapshot dates are not reported. Although the authors hold out contests from their own finetuning data, this does not address possible pretraining or API-model exposure to public contest captions, cartoons, or prior benchmark data. Because the task could benefit from memorized public captions or contest information and no decontamination analysis is provided, risk is assessed as high."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Table 3 model win rates, the selected HumorousAI Overall and Best Pick benchmark metrics, most open-source finetuning comparisons, MLLM-versus-LLM comparisons, BoN/RLHF/DPO performance conclusions, and GPT-based hyperparameter/model selection depend on LLM judges or LLM reward models.",
+      "human_validation": "The paper includes Prolific worker evaluations, a former New Yorker editor expert evaluation, and Table 2 reliability comparisons. The expert substantially outperforms GPT evaluators in Group Overall reliability, and Table 4 human judgments show much lower preference for Claude-3-Opus over Human Top 10 than GPT Overall evaluation suggests.",
+      "detail": "LLM judges do not determine the dataset size/statistics or the automatic diversity metrics, but they are central to the benchmark evaluation of generated humor. The authors explicitly select GPT4-Turbo with Hessel descriptions for Overall and GPT4o-vision with raw images for Best Pick, and they recalibrate GPT4 A/B decisions to reduce option-position bias."
+    },
+    "reporting_gaps": [
+      "Unique numbers of New Yorker crowd raters and caption submitters are not reported; the paper reports ratings and captions, not participant counts.",
+      "Exact participant counts for all Prolific worker reliability conditions in Table 2 are not reported; only the Claude-versus-Human-Top-10 evaluation is described as using six workers.",
+      "Participant demographics, geography, and detailed recruitment criteria for New Yorker raters/submitters and Prolific workers are not reported.",
+      "Exact OpenAI/Anthropic API snapshots, model versions, and inference dates are not reported for GPT-3.5 Turbo, GPT-4o, GPT4-Turbo, GPT4-Turbo-vision, GPT4o-vision, GPT4 Vision, or Claude-3-Opus.",
+      "API generation and evaluation decoding parameters, token limits, and exact call counts are not reported.",
+      "The exact SBERT model variant used for diversity evaluation is not reported.",
+      "The paper does not report a decontamination analysis or pretraining-cutoff comparison for public New Yorker/Hessel benchmark material.",
+      "The exact held-out contest IDs within the 91-contest evaluation split are not listed in the supplied text.",
+      "For open-source generation, the paper states that ten captions are generated per cartoon, but the exact call structure for all models is not fully specified, and Table 10 prompt examples request one caption for some open-source settings.",
+      "The hyperparameter-search neighborhood and final selected hyperparameters/checkpoint identifiers for SFT, DPO, PPO/RLHF, and the reward model are not fully reported.",
+      "Human evaluation sample sizes/trial counts underlying Table 4 preference percentages are not explicitly stated beyond the six workers and one expert description."
+    ]
   }
 }

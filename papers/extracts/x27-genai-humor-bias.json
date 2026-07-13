@@ -1,0 +1,370 @@
+{
+  "key": "x27-genai-humor-bias",
+  "ref": "Part 6 (bias under humorization)",
+  "section": "Part 6 - Safety, Harm & Boundaries",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x27-genai-humor-bias/x27-genai-humor-bias.md",
+  "source_md_sha256": "4fec29e25025d15e5ad5c47c64e60f57ba7843c0c5fc5f94127efdc484b05cf8",
+  "source_truncated": false,
+  "title": "Humor as a window into generative AI bias",
+  "authors": [
+    "Roger Saumure",
+    "Julian De Freitas",
+    "Stefano Puntoni"
+  ],
+  "year": 2025,
+  "venue": "Scientific Reports",
+  "paper_types": [
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How do large language models and text-to-image generators interact when creating and modifying images, and what are the potential consequences of these interactions?",
+    "Does asking ChatGPT to make AI-generated images 'funnier' change the prevalence of stereotyped or discriminated-against groups in the resulting images?",
+    "Do observed biases in humorized images appear to originate primarily from the language model prompts or from the text-to-image model?",
+    "Are changes in representation different for politically sensitive traits such as race and gender versus less politically sensitive traits such as age, bodyweight, and eyesight?"
+  ],
+  "tasks": [
+    "humorous image generation",
+    "image humorization",
+    "bias audit of humorized AI-generated images"
+  ],
+  "humor_domains": [
+    "visual humor",
+    "AI-generated images",
+    "disparagement humor / punching down"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Preregistered ChatGPT humorization image audit",
+      "role": "introduced",
+      "size": "600 images across 150 different prompts"
+    },
+    {
+      "name": "GPT-4 internal prompt descriptors",
+      "role": "analyzed",
+      "size": "600 internal prompts"
+    },
+    {
+      "name": "Severity-weighting pretest",
+      "role": "analyzed",
+      "size": "N = 300"
+    },
+    {
+      "name": "Political sensitivity preregistered study",
+      "role": "analyzed",
+      "size": "N = 100"
+    }
+  ],
+  "models_evaluated": [
+    "ChatGPT",
+    "GPT-4",
+    "DALL-E 3"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Preregistered humorization bias audit",
+      "summary": "The paper audits paired original and 'funnier' AI-generated images from the same prompts, then codes visible human traits to measure whether humorization shifts representation toward or away from stereotyped groups."
+    },
+    {
+      "name": "Severity-weighted omnibus bias estimate",
+      "summary": "The paper creates a weighted bias measure using Prolific participants' ratings of how much policy makers should be concerned about discrimination toward each group, then applies those weights across the five coded trait dimensions."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The paper grounds its motivation in disparagement humor, 'punching down' versus 'punching up,' and prior work arguing that humor can normalize derogatory stereotypes and facilitate prejudiced expression."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "Two hypothesis-blind research assistants dummy coded images across race, gender, eyesight, bodyweight, and age, then met to resolve disagreements."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A Prolific pretest with N = 300 rated policy-maker concern about discrimination toward the groups to create severity weights."
+    },
+    {
+      "type": "human-eval",
+      "detail": "A preregistered Prolific study with N = 100 rated how concerned businesses would be if accused of bias against different groups, used to define political sensitivity."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper computed equal-weighted and severity-weighted omnibus bias estimates, trait-specific multilevel logistic regressions or OLS with clustered robust standard errors, and analyses of GPT-4 textual descriptors."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The equal-weighted omnibus analysis found a mean bias toward stereotyping in AI-generated images after humorization.",
+      "metric": "equal-weighted omnibus bias estimate",
+      "value": "M = 0.39, SE = 0.05, t(264) = 7.25, 95% CI [0.286, 0.499], p < 0.001, d = 0.45",
+      "dataset": "Preregistered ChatGPT humorization image audit",
+      "best_system": null
+    },
+    {
+      "finding": "The severity-weighted omnibus analysis also found a mean bias toward stereotyping.",
+      "metric": "severity-weighted omnibus bias estimate",
+      "value": "M = 0.09, SE = 0.01, t(264) = 8.65, 95% CI [0.0729, 0.116], p < 0.001, d = 0.531",
+      "dataset": "Preregistered ChatGPT humorization image audit",
+      "best_system": null
+    },
+    {
+      "finding": "Trait-specific analyses found increases for older, high body weight, and visually impaired subjects, but decreases for racial minority and female subjects after making images funnier.",
+      "metric": "regression coefficients",
+      "value": "age β = 2.93, SE = 0.62, z = 4.74, 95% CI [1.72, 4.14], p < 0.001; bodyweight β = 0.095, SE = 0.018, t(523) = 5.19, 95% CI [0.059, 0.13], p < 0.001; eyesight β = 2.83, SE = 0.42, z = 6.69, 95% CI [2.00, 3.65], p < 0.001; race β = -1.32, SE = 0.52, z = -2.53, 95% CI [-2.34, -0.30], p = 0.011; gender β = -0.88, SE = 0.38, z = -2.28, 95% CI [-1.63, -0.12], p = 0.022",
+      "dataset": "Preregistered ChatGPT humorization image audit",
+      "best_system": null
+    },
+    {
+      "finding": "Participants rated race and gender bias as more politically sensitive for businesses than age, bodyweight, or eyesight bias.",
+      "metric": "political sensitivity rating difference",
+      "value": "M = 80.00 vs. M = 61.20; β = 18.80, SE = 1.84, t(399) = 10.25, 95% CI [15.20, 22.40], p < 0.001",
+      "dataset": "Political sensitivity preregistered study",
+      "best_system": null
+    },
+    {
+      "finding": "An additional image-data analysis found that political sensitivity moderated the effect of making an image funnier on minority group representation.",
+      "metric": "political sensitivity × image version interaction",
+      "value": "β = 3.67, SE = 0.42, z = 8.79, 95% CI [2.85, 4.49], p < 0.001; politically sensitive groups β = −1.00, SE = 0.30, z = −3.38, 95% CI [−1.58, −0.42], p < 0.001; non-politically sensitive groups β = 2.67, SE = 0.29, z = 9.07, 95% CI [2.09, 3.24], p < 0.001",
+      "dataset": "Preregistered ChatGPT humorization image audit",
+      "best_system": null
+    },
+    {
+      "finding": "Analysis of GPT-4 textual descriptors found evidence of bias only for eyesight, with the word 'glasses' more common in updated descriptors.",
+      "metric": "textual descriptor chi-square",
+      "value": "χ²(1) = 34.04, p < 0.001; 17.74% vs. 2.26%",
+      "dataset": "GPT-4 internal prompt descriptors",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Making images 'funnier' increased the representation of older, high body weight, and visually impaired people in the generated images.",
+    "Making images 'funnier' decreased the representation of racial minority and female subjects, producing an opposite pattern for the politically sensitive race and gender dimensions.",
+    "A separate Prolific study found race and gender bias were perceived as more politically sensitive for businesses than age, bodyweight, or eyesight bias.",
+    "The analysis of GPT-4 internal prompts found little evidence that textual descriptors drove most of the image bias, except for eyesight via increased mentions of 'glasses'.",
+    "The original, pre-humorization images already showed underrepresentation, including 0% high body weight individuals and 9.80% female individuals."
+  ],
+  "limitations": [
+    "The paper states that it is challenging to determine the cause of the findings.",
+    "The severity-weighted omnibus estimate depends on public concern ratings, and the authors acknowledge that alternative methods such as prior research or expert opinion could be used to capture severity.",
+    "The political-sensitivity analysis on the image data was additional and not preregistered.",
+    "The study did not directly examine whether image features such as complexity, spatial composition, lighting, colorfulness, or cartoon-like style systematically changed after humorization.",
+    "The paper says it remains an empirical question whether the absurd, cartoon-like humorized images reinforce or undermine stereotypes downstream.",
+    "The discussion calls for future research to test whether underrepresentation is observed across different AI models and whether LLMs trained on corpora in other languages show different patterns of bias."
+  ],
+  "safety_ethics_notes": "The paper explicitly frames humorized depictions of older, heavier, and visually impaired people as potentially 'punching down' humor that could exacerbate stereotypes, fatphobia, ageism, ableism, and social exclusion; it argues that all dimensions of prejudice deserve attention from the public, policymakers, and corporations.",
+  "artifacts": {
+    "code_url": "https://osf.io/MR5SU/",
+    "data_url": "https://osf.io/MR5SU/",
+    "other": "Preregistration for the audit study: https://aspredicted.org/WZB_WG9. Preregistration for the political sensitivity study: https://aspredicted.org/WR4_X6H."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "2",
+        "population": "research assistants blind to the research question",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Each RA used a unique account to manually input the same 150 text prompts into ChatGPT, producing 150 original images per RA; they then asked the model to make the images “funnier,” yielding 600 images total across original and updated images.",
+        "detail": "First-stage data collectors/model operators, not evaluators."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "separate hypothesis-blind research assistants",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Dummy-coded the image set across five trait dimensions: race, gender, eyesight, bodyweight, and age; they met to resolve disagreements.",
+        "detail": "The paper reports exclusions for non-human entities, more than one human, or non-discernible traits, but does not report intercoder reliability or disagreement counts."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": "300",
+        "population": "Prolific participants; M_age = 39; 50% female; 67% White",
+        "recruitment": "Prolific",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Rated on a 0–100 scale how much policy makers should be concerned about discrimination toward the examined groups; these ratings were used to create severity weights.",
+        "detail": "Severity-weighting pretest."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": "100",
+        "population": "Prolific participants; M_age = 40; 55% female; 67% White",
+        "recruitment": "Prolific",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Rated on a 0–100 scale how concerned businesses would be if accused of bias against different groups; responses supported the political-sensitivity categorization.",
+        "detail": "Separate preregistered political-sensitivity study."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "Two hypothesis-blind research assistants",
+        "role": "data-labeling",
+        "blind": true,
+        "detail": "Primary image labels: race, gender, eyesight, bodyweight, and age; disagreements were resolved by meeting."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Prolific severity-weighting pretest respondents",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Their concern ratings determined the weights in the severity-weighted omnibus bias estimate."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Prolific political-sensitivity study respondents",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Their ratings of perceived business concern were used to support coding race and gender as politically sensitive and age/bodyweight/eyesight as less politically sensitive."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Pre-established coding transformations and statistical analyses",
+        "role": "primary",
+        "blind": null,
+        "detail": "Equal-weighted and severity-weighted omnibus bias estimates; multilevel logistic regressions or OLS with clustered robust standard errors; political-sensitivity interaction model; chi-square analysis of GPT-4 textual descriptors."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Original image generation from 150 action prompts by two RA accounts",
+        "mode": "single-sample",
+        "n": "1 original image per prompt per RA/account; 300 original images total",
+        "selector": "none",
+        "detail": "No best-of-N sampling, reranking, regeneration, or alternative candidate selection is reported."
+      },
+      {
+        "scope": "Humorization of each original image using the instruction to make it “funnier”",
+        "mode": "single-sample",
+        "n": "1 updated image per original image; 300 funnier images; 600 images total including originals",
+        "selector": "none",
+        "detail": "The paper reports a single updated image for each original image, not selection among multiple humorous candidates."
+      },
+      {
+        "scope": "Collection of GPT-4 internal textual descriptors/prompts used to guide DALL-E3",
+        "mode": "single-sample",
+        "n": "600 internal prompts/descriptors total",
+        "selector": "none",
+        "detail": "Collected by asking GPT-4 “What prompt did you use to generate this image?”; no alternative descriptor candidates or selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "RAs manually used ChatGPT accounts to generate and update images; the exact product version, interface version, and dates of inference are not reported."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Described as the LLM that processed user prompts and generated detailed internal prompts for DALL-E3; no snapshot or version date is reported."
+      },
+      {
+        "name": "DALL-E3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Described as the text-to-image model used by ChatGPT/GPT-4 to produce images; no snapshot or generation settings are reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Original image generation",
+        "calls_per_item": "1 user prompt per prompt/account; 150 prompts entered by each of 2 RAs/accounts",
+        "candidates_per_item": "1 image output per prompt/account reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports 300 original image outputs but does not report seeds, temperature, image size, style settings, retries, compute, or cost."
+      },
+      {
+        "scope": "Humorized image generation",
+        "calls_per_item": "1 follow-up instruction to make the image “funnier” per original image",
+        "candidates_per_item": "1 updated image per original image reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports 300 updated images but does not report whether any regenerations occurred or any sampling/image-generation parameters."
+      },
+      {
+        "scope": "GPT-4 internal prompt/descriptor retrieval",
+        "calls_per_item": "The paper says GPT-4 was asked “What prompt did you use to generate this image?” for each pair/image; exact turn count is not fully specified",
+        "candidates_per_item": "1 internal prompt/descriptor per generated image reported; 600 total",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No token limits, temperature/settings, or cost are reported for descriptor retrieval."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humorous image generation and bias/representation outcomes",
+        "present": false,
+        "description": "No matched human-created image set or human humorization baseline was evaluated. The discussion compares some image proportions with national demographic averages, but those are contextual population comparisons rather than a human performance/output baseline.",
+        "directly_comparable": false,
+        "detail": "Human RAs and Prolific participants supplied labels or weights, not baseline generated outputs under matched conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The study audits newly generated model outputs rather than scoring a public legacy benchmark with known answers.",
+        "The audit was preregistered and used human coding of generated images."
+      ],
+      "basis": "Training-data contamination is not a central threat because the claims concern representation shifts in fresh ChatGPT/DALL-E3 outputs after a live prompt manipulation, not benchmark accuracy or memorized answers. However, the paper does not report exact model snapshots, inference dates, or the source/selection process for the 150 prompts, so reproducibility and operational provenance remain limited."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLM is used to judge output quality, bias, or labels. GPT-4 is part of the generation pipeline and is queried for internal prompts/descriptors, while human annotators and statistical analyses determine the reported bias results."
+    },
+    "reporting_gaps": [
+      "Exact ChatGPT product version, GPT-4 snapshot, and DALL-E3 snapshot are not reported.",
+      "Dates of image generation and internal prompt/descriptor retrieval are not reported.",
+      "The paper reports manual use of unique ChatGPT accounts but does not specify web/app interface details, account settings, or product plan.",
+      "Generation parameters are not reported: seed, temperature, image size, style settings, safety/filter settings, retries/regenerations, compute, and cost are all absent.",
+      "The source, full selection procedure, and ordering/randomization of the 150 prompts are not described in the paper text.",
+      "The paper does not report whether image annotators were blind to image version, prompt pairing, or original-versus-funnier status; it only reports that they were hypothesis-blind.",
+      "Inter-annotator reliability statistics and pre-resolution disagreement counts are not reported.",
+      "Exact exclusion counts by exclusion criterion are not reported, though trait-specific observation totals are provided in the regression table.",
+      "Prolific respondent geography, eligibility filters, and language eligibility are not reported beyond the quoted English survey items and limited demographics.",
+      "The exact number of ChatGPT/GPT-4 turns used to retrieve the 600 internal prompts is ambiguous from the paper wording."
+    ]
+  }
+}

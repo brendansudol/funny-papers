@@ -198,5 +198,308 @@
     "code_url": "https://github.com/zacharyhorvitz/Getting-Serious-With-LLMs",
     "data_url": "https://github.com/zacharyhorvitz/Getting-Serious-With-LLMs",
     "other": "Source datasets mentioned: https://github.com/epfl-dlab/unfun and https://github.com/Ankh2295/humor-detection-corpus"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Original Unfun game players / internet users who edited The Onion headlines and rated other players’ edits",
+        "recruitment": "Original Unfun game from West and Horvitz (2019); recruitment details and number of players are not reported in this paper",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "February 2, 2023 Unfun database backup yielded 11,831 valid unfunned headline pairs; a rated subset was used to curate 867 high-quality pairs; after filtering/splitting, training/dev/test contained 3,882/186/375 unfuns, each with corresponding satire headlines.",
+        "detail": "Players are a human source both for the human unfun baseline and for ratings used to select high-quality evaluation/prompt/dev/test data. The paper reports item/pair counts, not participant counts."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "10",
+        "population": "University students; all American and native English speakers",
+        "recruitment": "Recruited by the authors; compensation and assignment details are not reported",
+        "geography": "United States / American, as reported",
+        "languages": [
+          "English"
+        ],
+        "observations": "Unfun human evaluation: n=100 samples per approach, three annotations per example, majority-vote labels for real/satire/neither, funniness, grammaticality, and coherence.",
+        "detail": "Used for Table 2. Annotators rated English headline samples from unfun and humor-generation sources."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Bilingual Hindi-English speakers",
+        "recruitment": "The authors state they worked with three bilingual speakers; further recruitment/compensation details are not reported",
+        "geography": null,
+        "languages": [
+          "Hindi",
+          "English",
+          "English-Hindi code-mixed"
+        ],
+        "observations": "English-Hindi human evaluation: Table 3 reports n=125 per approach, with three unique annotations per example and majority votes for humorous/non-humorous and coherence; the GPT-4-filtered subset is described as 56/125; human-vetted unfuns used in automatic evaluation numbered n=97.",
+        "detail": "Used for evaluating original non-humorous tweets, original humorous tweets, GPT-4 unfuns, and GPT-4-filtered unfuns."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Prior annotators for the English-Hindi Humor dataset by Khandelwal et al. (2018), not described in this paper",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "Hindi",
+          "English-Hindi code-mixed"
+        ],
+        "observations": "Available dataset used by this paper has n=2,951 tweets with humorous/non-humorous labels; split 60%/20%/20%, with original-dataset holdout n=591.",
+        "detail": "The paper relies on the prior dataset labels for training and original-dataset holdout evaluation, but does not describe the original annotation population."
+      }
+    ],
+    "judges": [
+      {
+        "type": "platform-vote",
+        "name": "Original Unfun player ratings",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to select high-quality Unfun pairs: at least one annotation, satirical headline funniness rating ≥ 0.8, and unfunned headline funniness rating ≤ 0.2."
+      },
+      {
+        "type": "human-lay",
+        "name": "10 American native-English-speaking university student annotators",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary judges for English Unfun human evaluation in Table 2; labels assigned by majority vote from three annotations per sample."
+      },
+      {
+        "type": "human-lay",
+        "name": "3 bilingual Hindi-English speakers",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary judges for English-Hindi human evaluation in Table 3 and for identifying coherent, non-humorous GPT-4 unfuns used as the n=97 human-vetted unfun holdout."
+      },
+      {
+        "type": "human-lay",
+        "name": "Khandelwal et al. (2018) English-Hindi Humor dataset labels",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Existing humorous/non-humorous labels are used for training/dev/test splits and original-dataset holdout evaluation; this paper does not describe the original labeling procedure."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used as a yes/no humorousness classifier to filter English-Hindi GPT-4 unfunned tweets; outputs classified as still humorous were removed."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Downstream humor-classifier accuracy using fine-tuned MISTRAL, RoBERTa, and HING-ROBERTA",
+        "role": "primary",
+        "blind": null,
+        "detail": "Automatic evaluations judge synthetic data quality by training classifiers on human or synthetic data and evaluating accuracy on held-out labeled data: MISTRAL/RoBERTa for Unfun and HING-ROBERTA for English-Hindi."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Edit distance and type-token ratio",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to characterize generated data diversity and degree of editing in Tables 1 and 3."
+      },
+      {
+        "type": "author",
+        "name": "Authors",
+        "role": "secondary",
+        "blind": null,
+        "detail": "For English-Hindi prompt construction, the authors generated 50 zero-shot examples and selected nine high-quality results as in-context prompt examples; exact selection criteria are not reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "English Unfun generation: editing satirical headlines into realistic/non-humorous headlines with GPT-4, GPT-3.5-TURBO, MISTRAL-7B, and MISTRAL-7B-INSTRUCT",
+        "mode": "single-sample",
+        "n": "3,882 training inputs per synthetic approach; no alternate-candidate count reported",
+        "selector": "none",
+        "detail": "Prompts used 8 randomly sampled in-context pairs from the high-quality prompt subset. The paper reports one generated dataset per model/source and does not report best-of-N selection."
+      },
+      {
+        "scope": "English humor generation: editing unfunned/realistic headlines into humorous headlines with GPT-4, GPT-3.5-TURBO, MISTRAL-7B, and MISTRAL-7B-INSTRUCT",
+        "mode": "single-sample",
+        "n": "Generated from the corresponding Unfun training examples; no alternate-candidate count reported",
+        "selector": "none",
+        "detail": "Humor generation provides the unfunned example as input, with in-context pairs from high-quality prompt examples. No best-of-N or post-generation selection is reported."
+      },
+      {
+        "scope": "ROBERTA-SWAP unfun baseline",
+        "mode": "single-sample",
+        "n": "One edited headline per input; k=3 swaps",
+        "selector": "rule",
+        "detail": "The method iteratively masks each token, selects the position with the largest predicted/original token probability ratio, and replaces it with the highest-probability RoBERTa prediction. This is rule-based token selection, not best-of-N generated-output selection."
+      },
+      {
+        "scope": "English-Hindi GPT-4 unfun generation and filtering",
+        "mode": "single-sample",
+        "n": "One generated unfunned tweet per input is implied; Table 3 evaluates n=125 per approach and describes the GPT-4-filtered subset as 56/125",
+        "selector": "LLM-judge",
+        "detail": "GPT-4 first generates unfunned versions of humorous tweets; a second GPT-4 prompt classifies generated tweets as humorous/non-humorous and filters out outputs classified as humorous. This is post-hoc filtering of fixed outputs, not best-of-N generation."
+      },
+      {
+        "scope": "English-Hindi in-context prompt-example construction",
+        "mode": "best-of-n",
+        "n": "50 zero-shot generated examples; 9 high-quality results selected",
+        "selector": "human",
+        "detail": "Because no existing English-Hindi unfun pairs were available, the authors generated 50 examples on the training set and selected nine high-quality results to use in the prompt. This selection was for prompt exemplars, not the final evaluated output per item."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for English headline unfun and humor generation, English-Hindi unfun generation, and English-Hindi GPT-4 filtering. Exact model snapshot/API version and inference dates are not reported."
+      },
+      {
+        "name": "GPT-3.5-TURBO",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for English headline unfun and humor generation. Exact snapshot/version and inference dates are not reported."
+      },
+      {
+        "name": "MISTRAL-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as an English headline generation model. The generation checkpoint/version and serving/access route are not specified."
+      },
+      {
+        "name": "MISTRAL-7B-INSTRUCT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as an English headline generation model. The exact instruct checkpoint/version and serving/access route are not specified."
+      },
+      {
+        "name": "MISTRAL-7B classifier",
+        "version_or_snapshot": "mistralai/Mistral-7B-v0.1",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Fine-tuned for Unfun humor classification with 4-bit quantized LoRA and a classification head; trained/evaluated on a single NVIDIA A100 GPU."
+      },
+      {
+        "name": "RoBERTa / ROBERTA-BASE",
+        "version_or_snapshot": "FacebookAI/roberta-base",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Used for the ROBERTA-SWAP masked-token baseline and as a fine-tuned Unfun humor classifier."
+      },
+      {
+        "name": "HING-ROBERTA",
+        "version_or_snapshot": "l3cube-pune/hing-roberta",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "XLM-RoBERTa model previously fine-tuned on English-Hindi Twitter data; fine-tuned for English-Hindi humor classification."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "LLM generation for English Unfun and humor tasks",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "For all LLMs: top-p = 0.85 and τ = 1.0. Unfun generation uses 8 randomly sampled in-context pairs.",
+        "compute_or_cost": null,
+        "detail": "The paper reports generating synthetic data from 3,882 Unfun training examples per approach, but does not report exact calls per item, maximum tokens, cost, latency, or whether retries occurred. No best-of-N selection is reported."
+      },
+      {
+        "scope": "ROBERTA-SWAP baseline",
+        "calls_per_item": null,
+        "candidates_per_item": "One edited output per input; k = 3 token swaps",
+        "token_budget": null,
+        "sampling_parameters": "No sampling; for each swap, select the masked position by the largest predicted/original probability ratio and replace with the highest-probability RoBERTa token.",
+        "compute_or_cost": null,
+        "detail": "The paper describes the algorithmic masking/replacement procedure but not runtime or hardware specifically for this baseline."
+      },
+      {
+        "scope": "English-Hindi GPT-4 unfun generation and GPT-4 filtering",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "For all LLMs: top-p = 0.85 and τ = 1.0. Prompt construction used 50 zero-shot generations and selected 9 examples; filtering used a GPT-4 yes/no humorousness prompt.",
+        "compute_or_cost": null,
+        "detail": "The paper does not report exact call counts, token limits, cost, or inference dates. Filtering is a second GPT-4 classification step over generated tweets."
+      },
+      {
+        "scope": "Classifier fine-tuning and automatic evaluations",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Results computed over 5 seeds: [1234, 2345, 3456, 4567, 5678]. AdamW with constant learning rate. Selected configurations: MISTRAL QLoRA lr 6.25e-06 batch 32; RoBERTa lr 1.25e-05 batch 32; HING-ROBERTA lr 1.5625e-06 batch 8.",
+        "compute_or_cost": "All model trains use a single NVIDIA A100 GPU; estimated total compute budget is 200 hours.",
+        "detail": "Hyperparameter tuning considered learning rates {5e-5, 2.5e-5, 1.25e-5, 6.25e-6, 3.125e-6, 1.5625e-6}; English-Hindi also varied batch size {256,128,64,32,16,8}. Epoch counts and maximum sequence lengths are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "English Unfun editing away humor",
+        "present": true,
+        "description": "Human Unfun players’ edited headlines are compared with LLM and ROBERTA-SWAP unfuns in automatic evaluation and with n=100 samples in human evaluation.",
+        "directly_comparable": true,
+        "detail": "The same downstream metrics and human-evaluation scheme are applied to human-player and model-generated unfuns. Caveat: original Unfun players were incentivized to make minimal edits, which the paper notes may affect edit distances and human-evaluation metrics."
+      },
+      {
+        "scope": "English humor/satire generation",
+        "present": true,
+        "description": "The Onion headlines serve as the human-written satire baseline for model-generated humorous headlines.",
+        "directly_comparable": false,
+        "detail": "The Onion headlines are evaluated with the same human annotation metrics, but they were not produced under the same experimental prompt/editing conditions as the LLM-generated satire."
+      },
+      {
+        "scope": "English-Hindi unfun generation",
+        "present": false,
+        "description": "No human-edited English-Hindi unfun baseline is reported; original humorous and non-humorous tweets are evaluated alongside GPT-4 unfuns.",
+        "directly_comparable": false,
+        "detail": "Original non-humorous tweets provide a reference point for human ratings, but they are not edited counterparts to the humorous tweets and are not a matched human unfun baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Appendix A.6 checks whether synthetic Unfun or satire outputs appear in the original Unfun corpus for n=200 test examples; reported overlaps are small: GPT-3.5 3/200 unfun and 0/200 satire; GPT-4 7/200 unfun and 0/200 satire; MISTRAL 2/200 unfun and 1/200 satire; MISTRAL INSTRUCT 2/200 unfun and 0/200 satire; ROBERTA-SWAP 0/200 unfun.",
+        "The Unfun high-quality subset is split into prompt/dev/test shards, and the training set excludes overlap with those shards; shards are additionally filtered to one unfunned headline per satirical headline.",
+        "The authors state that English-Hindi pairs do not already exist on the internet.",
+        "Human evaluations of generated outputs provide validation not solely based on benchmark labels."
+      ],
+      "basis": "The paper uses public legacy corpora: Unfun/West and Horvitz (2019) and English-Hindi Humor/Khandelwal et al. (2018), with later LLMs whose exact snapshots and training data are not disclosed. The authors explicitly discuss contamination and perform a small exact-overlap-style check, but this is not a convincing decontamination test for proprietary GPT models or pretrained open models. Newly generated English-Hindi pairs and human validation reduce but do not eliminate risk. Conservative overall assessment: moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Claims involving the English-Hindi '+ GPT-4 Filter' condition and training data with GPT-4-filtered synthetic unfuns depend on GPT-4 acting as a humorousness filter. The main English Unfun headline results do not depend on LLM judging.",
+      "human_validation": "Three bilingual Hindi-English speakers evaluated the GPT-4 unfuns and GPT-4-filtered condition; Table 3 reports filtered outputs as 3.6% humorous and 89.3% coherent, and automatic evaluation also uses n=97 human-vetted coherent/non-humorous unfuns.",
+      "detail": "GPT-4 judging is used for data filtering/preprocessing, not as the primary evaluator of headline results. Important English-Hindi filtered-data claims are corroborated by human annotations and downstream classifier tests."
+    },
+    "reporting_gaps": [
+      "Exact GPT-4 and GPT-3.5-TURBO snapshots/API versions, access route, and inference dates are not reported.",
+      "Exact generation checkpoints/versions and serving setup for MISTRAL-7B and MISTRAL-7B-INSTRUCT are not reported.",
+      "Exact LLM call counts, retry policy, maximum output/input token limits, and monetary cost are not reported.",
+      "Number of generated candidates per input is not explicitly reported for LLM generation; the paper reports generated datasets but not whether any retries or discarded malformed outputs occurred outside the stated GPT-4 English-Hindi filter.",
+      "Human-evaluation blinding/randomization to source condition is not reported.",
+      "Compensation and detailed recruitment procedures for the 10 English annotators and 3 bilingual annotators are not reported.",
+      "Participant counts and demographics for original Unfun players/raters are not reported in this paper.",
+      "Original annotation procedure and annotator population for the Khandelwal et al. (2018) English-Hindi labels are not described in this paper.",
+      "Criteria and decision process for selecting the nine high-quality English-Hindi prompt examples from 50 zero-shot generations are not fully specified.",
+      "Classifier training omits some implementation details such as epoch counts, maximum sequence lengths/truncation settings, and full hyperparameter-selection results."
+    ]
   }
 }

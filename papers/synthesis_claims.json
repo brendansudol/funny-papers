@@ -1,0 +1,185 @@
+{
+  "generated_from": "humor-and-llms-field-guide.md synthesis",
+  "updated": "2026-07-13",
+  "claims": [
+    {
+      "id": "S1",
+      "claim": "Humor performance is task- and protocol-dependent, not a fixed capability ladder.",
+      "support": [
+        {"paper_key": "02-chatgpt-fun-not-funny", "note": "Generic prompting produced repetitive jokes and plausible explanations for non-jokes."},
+        {"paper_key": "31-how-funny-is-chatgpt", "note": "Blind ratings favored ChatGPT over lay writers on constrained tasks, while the Onion comparison was inconclusive."},
+        {"paper_key": "38-oogiri-multidimensional", "note": "Generation and evaluation separate across dimensions and human tiers."},
+        {"paper_key": "39-oogiri-master", "note": "Models approach human ratings under a different Oogiri understanding protocol."},
+        {"paper_key": "x35-turing-jest", "note": "Matched detection, appreciation, and comprehension tasks show different failure patterns within one controlled stimulus family."}
+      ],
+      "counterevidence": [
+        {"paper_key": "40-one-joke-to-rule-them-all", "note": "Cross-dataset transfer exists, so competence is not wholly task-isolated."}
+      ],
+      "confidence": "high",
+      "rationale": "The apparent contradictions recur across independently designed human and benchmark studies and largely resolve when task, prompts, audience, and metric are specified."
+    },
+    {
+      "id": "S2",
+      "claim": "Humor competence fragments across forms, languages, and settings.",
+      "support": [
+        {"paper_key": "08-phunny", "note": "Novel pun instances expose weak schema generalization."},
+        {"paper_key": "40-one-joke-to-rule-them-all", "note": "Transfer among humor datasets is partial and asymmetric."},
+        {"paper_key": "05-apples-to-oranges", "note": "Performance differs sharply among traditional puns, explanations, and topical jokes."},
+        {"paper_key": "x30-hins", "note": "Long Hindi context produces different context-length and metric failures."},
+        {"paper_key": "x40-corpus-pragmatics", "note": "Humor-presence agreement is substantially stronger than agreement on communicative function in Italian political discourse."}
+      ],
+      "counterevidence": [
+        {"paper_key": "03-humorbench", "note": "General reasoning strength is associated with explanation performance across caption sources."}
+      ],
+      "confidence": "high",
+      "rationale": "Multiple controlled and transfer studies reject a single scalar humor capability, although shared reasoning and language skills create some cross-task signal."
+    },
+    {
+      "id": "S3",
+      "claim": "Explanation is a stronger diagnostic than detection, but fluent explanation is not proof of understanding.",
+      "support": [
+        {"paper_key": "02-chatgpt-fun-not-funny", "note": "The model rationalized deliberately unfunny inputs."},
+        {"paper_key": "04-pun-unintended", "note": "Perturbations reveal form-matching and post-hoc explanations."},
+        {"paper_key": "x30-hins", "note": "Reference metrics can reward pragmatically wrong explanations."},
+        {"paper_key": "x35-turing-jest", "note": "Surprising non-jokes trigger false humor judgments despite matched experimental controls."},
+        {"paper_key": "x38-multipun", "note": "Adversarial cross-modal near-misses reveal affirmative pun-pattern matching."},
+        {"paper_key": "x40-corpus-pragmatics", "note": "Strong detection agreement does not transfer to fine-grained pragmatic-function annotation."}
+      ],
+      "counterevidence": [
+        {"paper_key": "01-androids-electric-sheep", "note": "Human-authored explanations still beat model explanations under preference evaluation."},
+        {"paper_key": "03-humorbench", "note": "Element-based rubrics make explanation performance measurable and discriminative."}
+      ],
+      "confidence": "high",
+      "rationale": "Adversarial and perturbation evidence directly demonstrates false rationalization, while structured explanation benchmarks show the task remains useful when paired with verifiable elements and humans."
+    },
+    {
+      "id": "S4",
+      "claim": "Reasoning effects are mixed and depend on the humor construct and context.",
+      "support": [
+        {"paper_key": "03-humorbench", "note": "STEM-benchmark association coexists with mixed test-time thinking gains."},
+        {"paper_key": "05-apples-to-oranges", "note": "Reasoning strength transfers weakly to knowledge-heavy and topical humor."},
+        {"paper_key": "x30-hins", "note": "Moderate context helps, while longer context degrades explanation."},
+        {"paper_key": "64-sarcasm-step-by-step", "note": "Sequential and non-sequential prompting do not establish one universal reasoning process."}
+      ],
+      "counterevidence": [
+        {"paper_key": "12-lol-thought-leaps", "note": "Structured thought-leap training reports broad gains in its generation and judgment setup."}
+      ],
+      "confidence": "moderate",
+      "rationale": "The direction is consistent enough to reject a universal more-reasoning-is-better claim, but studies operationalize reasoning, context, and humor differently."
+    },
+    {
+      "id": "S5",
+      "claim": "Structured generation is promising, but has not established superiority over strong budget-matched baselines.",
+      "support": [
+        {"paper_key": "11-clot-leap-of-thought", "note": "Structured creative search improves over the paper's baselines."},
+        {"paper_key": "15-small-but-funny", "note": "Generator-critic feedback improves compact models."},
+        {"paper_key": "29-homer", "note": "Script-grounded multi-role generation reports strong gains."},
+        {"paper_key": "20-multi-agent-comedy-club", "note": "Community discussion improves expert-rated monologues."}
+      ],
+      "counterevidence": [
+        {"paper_key": "57-mwahaha", "note": "A simple Gemini 2.5 Flash baseline tied for first across all shared-task subtasks."},
+        {"paper_key": "14-ai-humor-generation-skills", "note": "The strong result uses a large candidate pool and expert selection, complicating comparison with a single-sample baseline."}
+      ],
+      "confidence": "moderate",
+      "rationale": "Many methods beat weak or unmatched baselines, but model, inference budget, candidate count, and evaluator are rarely controlled together."
+    },
+    {
+      "id": "S6",
+      "claim": "Training-method conclusions remain local to the dataset, base model, reward, and sampling setup.",
+      "support": [
+        {"paper_key": "13-humorgen-persona-distillation", "note": "SFT beats the tested DPO and O-GRPO variants in one pipeline."},
+        {"paper_key": "22-caption-preferences", "note": "SFT, RLHF, and DPO do not close the New Yorker caption gap despite massive preference data."}
+      ],
+      "counterevidence": [
+        {"paper_key": "10-joke-master-pun-curriculum", "note": "Curriculum preference learning improves bilingual pun generation."},
+        {"paper_key": "15-small-but-funny", "note": "Feedback distillation materially improves small-model generation."}
+      ],
+      "confidence": "moderate",
+      "rationale": "The literature contains both strong gains and important null results, with too few matched replications to rank optimization methods generally."
+    },
+    {
+      "id": "S7",
+      "claim": "LLM-judge reliability does not establish validity against human humor preferences.",
+      "support": [
+        {"paper_key": "34-cards-against-llms", "note": "Models agree with one another more than with human choices and exhibit artifacts."},
+        {"paper_key": "54-not-funny-anymore", "note": "Judges reward literal translation rather than preserved humor."},
+        {"paper_key": "x20-does-bigger-funnier", "note": "A monotonic automated ranking disappears in the aggregate human evaluation."},
+        {"paper_key": "38-oogiri-multidimensional", "note": "LLM funniness ratings correlate weakly with humans and overvalue unrelated novelty."},
+        {"paper_key": "x36-ironic-melting-pot", "note": "Human-evaluation validity is weakened by severe underreporting of evaluator demographics and recruitment."}
+      ],
+      "counterevidence": [
+        {"paper_key": "33-gpt4-evaluate-jokes", "note": "GPT-4 rankings correlate with human rankings under selected persona and prompting conditions."},
+        {"paper_key": "35-humorrank", "note": "Pairwise tournament rankings are stable across two LLM judges and directionally checked against humans."},
+        {"paper_key": "57-mwahaha", "note": "Stable system-level aggregation is possible even when individual humor judgments are noisy."}
+      ],
+      "confidence": "high",
+      "rationale": "Direct human comparisons repeatedly find systematic judge bias; pairwise aggregation can improve reliability but does not remove the need for target-population validation."
+    },
+    {
+      "id": "S8",
+      "claim": "Originality and funniness are distinct outcomes and both are measured noisily.",
+      "support": [
+        {"paper_key": "x21-joke-space-originality", "note": "Automated originality measures correlate only moderately with professional judgments."},
+        {"paper_key": "38-oogiri-multidimensional", "note": "Models and humans weight novelty and empathy differently from overall funniness."}
+      ],
+      "counterevidence": [
+        {"paper_key": "02-chatgpt-fun-not-funny", "note": "Extreme repetition can make corpus novelty a useful failure signal even without a full originality construct."}
+      ],
+      "confidence": "moderate",
+      "rationale": "The conceptual distinction is strong, but automated originality evidence is currently narrow and expert agreement is itself limited."
+    },
+    {
+      "id": "S9",
+      "claim": "Humor evaluation must model participants, relationships, and situation rather than only content and a generic audience.",
+      "support": [
+        {"paper_key": "36-who-laughs-with-whom", "note": "User clusters exhibit distinct interpretable preferences."},
+        {"paper_key": "x22-humor-word-embeddings", "note": "Large-scale ratings recover individual and demographic preference structure."},
+        {"paper_key": "x26-not-human-funnier", "note": "Machine performer identity can become part of the comedic material."},
+        {"paper_key": "x28-counterfactual-unfairness", "note": "Speaker-listener identity swaps change safety and intent judgments for fixed content."},
+        {"paper_key": "x37-improv-comedy-setting", "note": "Matched live delivery, audience, prompt, and performer make AI-human comparisons differ from offline text-only evaluations."},
+        {"paper_key": "x39-how-humorous-ai", "note": "The same model varies across sentence, image, coping, and interpersonal-conflict settings."}
+      ],
+      "counterevidence": [
+        {"paper_key": "x23-eigentaste-jester", "note": "Preference recommendation can work from ratings alone without explicit social semantics."}
+      ],
+      "confidence": "moderate",
+      "rationale": "Several independent preference, identity, and fairness studies support the relational framing, but no single benchmark yet manipulates all proposed axes together."
+    },
+    {
+      "id": "S10",
+      "claim": "Additional modalities help when they carry the missing cue, while creating new integration failures.",
+      "support": [
+        {"paper_key": "x19-unpie", "note": "Images directly disambiguate paired textual pun meanings."},
+        {"paper_key": "09-text-not-all-you-need", "note": "Audio improves pun explanation under the paper's judge protocol."},
+        {"paper_key": "x07-vhub", "note": "Matched video conditions expose visual-motion failures and benefits from sound."},
+        {"paper_key": "27-bottlehumor", "note": "Selecting the right visual and world knowledge improves explanations."},
+        {"paper_key": "x38-multipun", "note": "Cross-modal pun distractors expose failures that positive-only image-text examples cannot measure."}
+      ],
+      "counterevidence": [
+        {"paper_key": "25-humordb", "note": "Models often attend away from the humor-critical image region."},
+        {"paper_key": "26-yesbut", "note": "Nandy et al.'s satire detection, understanding, and completion tasks remain difficult despite visual access."},
+        {"paper_key": "x33-yesbut-juxtaposition", "note": "Hu et al.'s separate 348-comic benchmark exposes visual and cross-panel relational failures."},
+        {"paper_key": "x34-yesbut-v2", "note": "The larger multilingual Hu follow-up retains substantial perception, comparison, and hallucination gaps."}
+      ],
+      "confidence": "moderate",
+      "rationale": "Controlled studies support cue-specific benefits, but modalities, datasets, and evaluation methods differ enough to rule out a universal visual-versus-text ranking."
+    },
+    {
+      "id": "S11",
+      "claim": "Humor safety is relational and cannot be represented by a single edginess threshold.",
+      "support": [
+        {"paper_key": "41-robot-walks-into-bar", "note": "Filtering can flatten professional and minority comedic voice."},
+        {"paper_key": "47-engagement-undermines-safety", "note": "Humor optimization can amplify stereotypical and toxic content."},
+        {"paper_key": "49-humor-bypass-guardrails", "note": "Humorous framing can bypass model safeguards."},
+        {"paper_key": "x27-genai-humor-bias", "note": "Humorization changes which identities receive stereotyped visual treatment."},
+        {"paper_key": "x28-counterfactual-unfairness", "note": "Fixed jokes receive different safety judgments after participant-identity swaps."}
+      ],
+      "counterevidence": [
+        {"paper_key": "t6-benign-violation", "note": "Benign-violation and distance variables explain part of the boundary, but do not encode all relational factors."},
+        {"paper_key": "48-harm-or-humor", "note": "A categorical safe/implicit/explicit benchmark remains operationally useful for detection."}
+      ],
+      "confidence": "moderate",
+      "rationale": "The direction is supported across generation, filtering, jailbreak, and identity-swap studies, while target-population and cross-cultural human validation remain limited."
+    }
+  ]
+}

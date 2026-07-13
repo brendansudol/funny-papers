@@ -1,0 +1,653 @@
+{
+  "key": "x19-unpie",
+  "ref": "Part 3 (controlled cross-modal anchor)",
+  "section": "Part 3 - Multimodal & Visual Humor",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x19-unpie/x19-unpie.md",
+  "source_md_sha256": "2d5fb8c7c6a1f7525aef2685fc63c9dc3d0d517e0713d67d6942cc39a6905161",
+  "source_truncated": false,
+  "title": "Can visual language models resolve textual ambiguity with visual cues? Let visual puns tell you!",
+  "authors": [
+    "Jiwan Chung",
+    "Seungwon Lim",
+    "Jaehyun Jeon",
+    "Seungbeen Lee",
+    "Youngjae Yu"
+  ],
+  "year": 2024,
+  "venue": "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can visual-language models resolve textual ambiguities in puns by using visual context?",
+    "Does adding pun explanation or disambiguator images improve model performance over text-only inputs for pun grounding, disambiguation, and reconstruction?",
+    "How do monolithic Visual-Language Models compare with Socratic Models that convert images into captions for pun understanding?",
+    "Does fine-tuning a visual-language model on a standard multimodal machine translation dataset improve performance on visually grounded pun tasks?",
+    "Are AI-generated pun explanation images sufficiently usable compared with natural image-pun pairs from the web?"
+  ],
+  "tasks": [
+    "pun grounding",
+    "pun disambiguation",
+    "pun reconstruction",
+    "multimodal pun translation"
+  ],
+  "humor_domains": [
+    "puns",
+    "homographic puns",
+    "heterographic puns",
+    "visual puns"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English",
+    "German",
+    "French",
+    "Korean"
+  ],
+  "datasets_used": [
+    {
+      "name": "UNPIE (Understanding Pun with Image Explanations)",
+      "role": "introduced",
+      "size": "1,000 puns; 500 homographic and 500 heterographic pun sentences, each accompanied by one pun explanation image, two pun disambiguator images, and translations to three languages"
+    },
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "source-material",
+      "size": "2,878 English pun sentences; selected 500 homographic and 500 heterographic puns"
+    },
+    {
+      "name": "LAION 2B web image-text dataset",
+      "role": "source-material",
+      "size": "ten images per meaning retrieved; top one manually selected when suitable"
+    },
+    {
+      "name": "Multi30k",
+      "role": "trained-on",
+      "size": "training split; Table 1 also reports a 1,000-sample test-2017-flickr subset"
+    },
+    {
+      "name": "CoMMuTE",
+      "role": "analyzed",
+      "size": "155"
+    },
+    {
+      "name": "r/puns subreddit",
+      "role": "source-material",
+      "size": "two sets of 50 randomly selected images for human evaluation studies"
+    },
+    {
+      "name": "Rice et al. (2019) homonym meaning frequency data",
+      "role": "analyzed",
+      "size": "890 homonyms"
+    }
+  ],
+  "models_evaluated": [
+    "Vicuna",
+    "GPT-4",
+    "Qwen-VL-Chat 7B",
+    "LLaVA 1.5 13B",
+    "BLIP-2 OPT 2.7B",
+    "LLaVA-MMT"
+  ],
+  "methods_proposed": [
+    {
+      "name": "UNPIE (Understanding Pun with Image Explanations)",
+      "summary": "A multimodal multilingual benchmark of 1,000 English puns paired with visual explanations, visual disambiguators, and German, French, and Korean translations. It is designed to test whether models actively integrate visual information to resolve lexical ambiguity."
+    },
+    {
+      "name": "Pun grounding, pun disambiguation, and pun reconstruction tasks",
+      "summary": "The paper defines three tasks: identifying the pun phrase in English, translating an English pun according to the meaning indicated by a disambiguator image, and reconstructing the original English pun from an ambiguity-free translation plus an explanation image."
+    },
+    {
+      "name": "Machine-assisted pun translation and visual annotation pipeline",
+      "summary": "The authors use DALL-E 3 with human prompting and filtering to create pun explanation images, retrieve disambiguator images from LAION 2B, and use machine-assisted human translation to produce meaning-specific German, French, and Korean targets."
+    }
+  ],
+  "humor_theories": [],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "Pun grounding is evaluated with exact surface-text match accuracy between the generated pun phrase and the ground-truth pun phrase."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Pun disambiguation is evaluated by using BERTScore to compare the generated translation with two meaning-specific target translations; binary classification accuracy is reported."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "Pun reconstruction uses GPT-4/GPTEval to decide whether the generated English sentence and the original sentence contain the same pun."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Pun reconstruction additionally reports Bleu-4 and METEOR, though the paper states these metrics did not show a clear trend for pun correctness."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Generated pun explanation images are compared with natural r/puns image-pun pairs in a pun-image matching task and an A/B naturalness study."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Human annotations on 100 samples are used to validate BERTScore for pun disambiguation and GPT-4 evaluation for pun reconstruction."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Three NLP researchers generated and curated DALL-E 3 pun explanation images, and native bilingual annotators produced meaning-specific target-language translations."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "UNPIE contains 1,000 English puns split evenly between homographic and heterographic cases, each with one explanation image, two disambiguator images, and translations into three languages.",
+      "metric": "dataset size",
+      "value": "1,000 puns; 500 homographic and 500 heterographic",
+      "dataset": "UNPIE (Understanding Pun with Image Explanations)",
+      "best_system": null
+    },
+    {
+      "finding": "In pun grounding, Qwen-VL gained the most from images, improving from text-only 43.8/57.8 to V+L 63.6/70.8 on homographic/heterographic puns.",
+      "metric": "exact match accuracy",
+      "value": "Homo 63.6 (↑ 19.8); Hetero 70.8 (↑ 13.0)",
+      "dataset": "UNPIE (Understanding Pun with Image Explanations)",
+      "best_system": "Qwen-VL"
+    },
+    {
+      "finding": "In pun disambiguation, the GPT-4 Socratic Model achieved the best All accuracy for all three target languages.",
+      "metric": "binary classification accuracy",
+      "value": "En→De All 71.4; En→Fr All 72.9; En→Ko All 65.8",
+      "dataset": "UNPIE (Understanding Pun with Image Explanations)",
+      "best_system": "GPT-4 Socratic Model"
+    },
+    {
+      "finding": "In pun reconstruction, GPT-4 with images achieved the best All Correct (%) for all three source languages.",
+      "metric": "Correct (%) by GPT-4/GPTEval",
+      "value": "De→En All 57.9 (↑13.7); Fr→En All 55.9 (↑3.6); Ko→En All 61.3 (↑9.0)",
+      "dataset": "UNPIE (Understanding Pun with Image Explanations)",
+      "best_system": "GPT-4"
+    },
+    {
+      "finding": "Human image studies found generated pun images were usable relative to natural r/puns images, with higher pun matching accuracy but distinguishable naturalness.",
+      "metric": "human-evaluation accuracy",
+      "value": "natural images 86% vs generated images 92%; naturalness accuracies 66%, 72%, and 74%",
+      "dataset": "UNPIE (Understanding Pun with Image Explanations); r/puns subreddit",
+      "best_system": null
+    },
+    {
+      "finding": "BERTScore was selected for disambiguation because it correlated best with human judgments in the metric validation.",
+      "metric": "Acc (%) / Phi correlation coefficient",
+      "value": "LLaVA: Acc 93, φ 81; GPT4: Acc 89, φ 72",
+      "dataset": "100 valid samples",
+      "best_system": "BERTScore"
+    }
+  ],
+  "key_findings": [
+    "Visual context consistently improved pun grounding for all Socratic Model and Visual-Language Model variants, with the largest gains for Qwen-VL and only small gains for already strong GPT-4 systems.",
+    "For pun disambiguation, GPT-4 with BLIP-2 image captions achieved the best All accuracies, indicating that language-side pun comprehension was especially important in this task.",
+    "Pun reconstruction showed strong visual benefits: GPT-4 with images improved All Correct (%) by ↑13.7 for De→En, ↑3.6 for Fr→En, and ↑9.0 for Ko→En.",
+    "Heterographic puns were harder than homographic puns, and the benefit of visual context was more evident in more complex settings such as Korean inputs.",
+    "Fine-tuning LLaVA on Multi30k harmed performance compared with zero-shot LLaVA in nearly all pun disambiguation settings and in pun reconstruction.",
+    "Bleu-4 and METEOR did not track pun reconstruction correctness clearly, because they were more aligned with surface-form changes than with whether the same pun was recovered."
+  ],
+  "limitations": [
+    "UNPIE is built on an English-only pun corpus, so it primarily models lexical ambiguities specific to English polysemy or surface-form similarity.",
+    "The dataset size is insufficient for creating a training split suitable for fine-tuning, partly because puns are scarce and difficult for humans to create.",
+    "Generated images show slight distributional differences from natural image-pun pairs, although the paper considers the disparity acceptable.",
+    "The reconstruction task relies on GPT-4-based machine evaluation, which the paper validates against humans but still reports imperfect agreement.",
+    "Existing English puns may contain cultural biases or stereotypes; annotators removed explicit hatred, but subtle biases may remain."
+  ],
+  "safety_ethics_notes": "The paper states that UNPIE may inadvertently perpetuate cultural biases and stereotypes present in existing English puns. Human annotators were instructed to eliminate puns expressing explicit hatred, but subtle biases may remain. The authors also state that annotators either volunteered willingly or were compensated fairly, with translation annotators paid 12–15$ per hour and data collection approved by the university department.",
+  "artifacts": {
+    "code_url": "https://github.com/JiwanChung/VisualPun_UNPIE",
+    "data_url": "https://huggingface.co/datasets/jiwan-chung/VisualPun_UNPIE",
+    "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "3",
+        "population": "NLP researchers",
+        "recruitment": "Recruited to prompt DALL-E 3 and curate outputs; appendix says they participated voluntarily.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Created and curated 1,000 pun explanation images; about 24% of samples needed multi-step modification.",
+        "detail": "The paper says three NLP researchers actively prompted DALL-E 3 to create images satisfying pun criteria and maintaining natural appearance, then filtered/curated outputs."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual image selectors; paper describes the selectors only as “we”.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "For each pun meaning, ten LAION-retrieved images were reviewed and the top suitable image was manually selected; samples were discarded when no suitable image existed.",
+        "detail": "Selectors avoided images with printed pun words/meanings and watermarks. The paper does not report selector count, qualifications, or whether these were authors."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3; one per target language",
+        "population": "Native speakers of German, French, and Korean who were proficient in English.",
+        "recruitment": "Engaged for machine-assisted translation; paid $12–15 per hour; data collection approved by the university department.",
+        "geography": null,
+        "languages": [
+          "English",
+          "German",
+          "French",
+          "Korean"
+        ],
+        "observations": "Finalized meaning-specific translations for UNPIE using three machine-generated suggestions per translation item as starting points.",
+        "detail": "For each target language, annotators selected and modified candidates generated by GPT-4 and DeepL so the translation reflected the specified pun meaning without preserving ambiguity."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Human evaluators for the pun-image matching study; demographics not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Evaluated a set of 50 randomly selected images; matching accuracy was 86% for natural r/puns images and 92% for generated UNPIE images.",
+        "detail": "Evaluators identified the correct text pun associated with each image from a set of potential matches. The number of evaluators is not reported."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "3 independent evaluators",
+        "population": "Human evaluators for the A/B naturalness study; demographics not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Evaluated another set of 50 random images after excluding natural images with multiple panels, written text, or well-known characters; naturalness-test accuracies were 66%, 72%, and 74%.",
+        "detail": "The study compared perceived naturalness of generated images against natural r/puns image-pun pairs."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human annotators for validating disambiguation metrics; qualifications and demographics not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "German",
+          "French",
+          "Korean"
+        ],
+        "observations": "Provided ternary Match/No Match/Invalid judgments; automatic metrics were compared with human decisions on 100 valid samples; 32 invalid LLaVA outputs and no GPT4 outputs were filtered out.",
+        "detail": "Used to validate BERTScore and compare BLEU, METEOR, Rouge-L, BERTScore, and GPTEval for the pun disambiguation task."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human assessors for validating GPT-4-based reconstruction evaluation; qualifications and demographics not reported.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "German",
+          "French",
+          "Korean"
+        ],
+        "observations": "Manually annotated 100 sample outputs from a multimodal approach (GPT-4 with image captions) and a text-only approach (GPT-4).",
+        "detail": "Their judgments were compared with GPT-4 evaluation decisions in Appendix D; Table 9 reports accuracy and Pearson correlation by source language and approach."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Annotators/contributors in Rice et al. (2019), not described in this paper.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "External human-annotated frequency data covering 890 homonyms was used to validate GPT-4 meaning-frequency ordering.",
+        "detail": "The paper uses this external dataset only for cross-checking GPT-4’s zero-shot rankings of common vs uncommon homonym meanings."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "SemEval-2017 Task 7 / UNPIE ground-truth pun phrase labels",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Pun grounding exact-match evaluation uses a ground-truth pun phrase for each selected SemEval pun sentence; the current paper does not describe the original SemEval annotators."
+      },
+      {
+        "type": "human-expert",
+        "name": "Three NLP researchers",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Generated, revised, filtered, and curated DALL-E 3 pun explanation images for UNPIE."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper says “we manually select” the top LAION-retrieved disambiguator image for each pun meaning and discard unsuitable samples."
+      },
+      {
+        "type": "human-expert",
+        "name": "Native bilingual translation annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Produced final meaning-specific German, French, and Korean translations used as reference targets in disambiguation and reconstruction tasks."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Exact surface-text match",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary metric for pun grounding: model-estimated pun phrase must exactly match the ground-truth pun phrase."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BERTScore",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary metric for pun disambiguation: model translation is compared with two meaning-specific reference translations, and the output is correct if BERTScore is higher for the target aligned with the image."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Human judgments on 100 valid samples were used to validate BERTScore for disambiguation; the paper does not report annotator count or blinding."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4 / GPTEval",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary correctness judge for pun reconstruction: GPT-4 decides whether the generated English sentence and the original English sentence contain the same pun."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BLEU-4 and METEOR",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Reported for pun reconstruction as secondary surface-form metrics; the paper states they did not show a clear trend for pun correctness."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "Human annotations on 100 reconstruction sample outputs were used to validate GPT-4 evaluation decisions; Table 9 reports GPT-4-vs-human accuracies of 80%–89% and Pearson correlations of 0.54–0.66 depending on language and condition."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used zero-shot to rank pun-word meanings by frequency and categorize data into common vs uncommon meanings for the dataset analysis in Table 2."
+      },
+      {
+        "type": "human-expert",
+        "name": "Rice et al. (2019) human-annotated meaning frequencies",
+        "role": "validation",
+        "blind": null,
+        "detail": "External human-annotated frequency data was used to assess GPT-4-based meaning-frequency ordering; Table 2 reports GPT4Eval accuracy 78.1% and Cohen’s kappa 0.39."
+      },
+      {
+        "type": "human-lay",
+        "name": "Human evaluators in image studies",
+        "role": "primary",
+        "blind": null,
+        "detail": "Human evaluators determined results of the generated-vs-natural image matching and A/B naturalness studies."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4 / GPTEval",
+        "role": "validation",
+        "blind": null,
+        "detail": "Considered as a candidate metric for disambiguation validation in Appendix C, where it performed worse than BERTScore against human judgments."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "DALL-E 3 pun explanation image generation",
+        "mode": "both",
+        "n": "Not fixed; an initial image could be accepted, while about 24% of samples required multi-step modification/revision.",
+        "selector": "human",
+        "detail": "Three NLP researchers iteratively prompted DALL-E 3 and curated outputs until 1,000 explanation images satisfying the pun criteria were obtained."
+      },
+      {
+        "scope": "Pun disambiguator image retrieval from LAION 2B",
+        "mode": "best-of-n",
+        "n": "10 retrieved images per pun meaning",
+        "selector": "human",
+        "detail": "Using a CLIP-based image search API, the authors retrieved ten images for each meaning and manually selected the top suitable image; this is retrieval/selection rather than text generation."
+      },
+      {
+        "scope": "Machine-assisted target translation creation",
+        "mode": "best-of-n",
+        "n": "3 machine-generated candidates per translation item: two GPT-4 prompted variants and one DeepL translation",
+        "selector": "human",
+        "detail": "Native bilingual annotators selected the best candidate and modified it to produce final meaning-specific translations."
+      },
+      {
+        "scope": "Benchmark model generation for pun grounding, disambiguation, and reconstruction",
+        "mode": "single-sample",
+        "n": "1 generated output per evaluated input condition",
+        "selector": "none",
+        "detail": "Appendix A states deterministic greedy sampling was used for all experiments, with no randomness or external hyperparameter in text generation."
+      },
+      {
+        "scope": "Socratic Models image-to-caption step",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "none",
+        "detail": "BLIP-2 OPT 2.7B was used to encode images into textual captions before the language-model step; the paper does not report multiple caption candidates or selection."
+      },
+      {
+        "scope": "GPT-4 meaning-frequency ranking",
+        "mode": "single-sample",
+        "n": "1 zero-shot ranking per item as described",
+        "selector": "none",
+        "detail": "GPT-4 was used to rank meanings by frequency; rankings were later compared with Rice et al. human-annotated frequencies."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": "gpt-4-0613",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Appendix A says all GPT-4 usage used the `gpt-4-0613` endpoint and that GPT-4 outputs were inferred through the OpenAI API. GPT-4 was used as a text LM, in Socratic Models, for GPTEval, for metric validation, for meaning-frequency ranking, and for machine-translation suggestions. Tables also report GPT-4 V+L rows, but the paper does not specify a separate vision-capable snapshot."
+      },
+      {
+        "name": "Vicuna",
+        "version_or_snapshot": "`lmsys/vicuna-7b-v1.5` in Appendix A; main text describes Vicuna-13B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "The paper contains a size/version inconsistency: Section 4.1 names Vicuna-13B, while Appendix A gives `lmsys/vicuna-7b-v1.5`. Open-source models were run using official implementations and HuggingFace weights."
+      },
+      {
+        "name": "LLaVA 1.5 13B",
+        "version_or_snapshot": "`liuhaotian/llava-v1.5-13b`",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Used as a visual-language model and also in text-only settings by omitting images."
+      },
+      {
+        "name": "Qwen-VL-Chat 7B",
+        "version_or_snapshot": "`Qwen/Qwen-VL-Chat`",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Referred to as Qwen-VL in result tables because of space constraints."
+      },
+      {
+        "name": "BLIP-2 OPT 2.7B",
+        "version_or_snapshot": "OPT 2.7B; exact HuggingFace identifier not reported",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used as the visual description generator for Socratic Models, converting images to textual captions."
+      },
+      {
+        "name": "LLaVA-MMT",
+        "version_or_snapshot": "LoRA fine-tuned variant of LLaVA on the Multi30k training split",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned for multimodal machine translation; trained for ten epochs with early stopping on a single A100 40GB GPU."
+      },
+      {
+        "name": "DALL-E 3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used to generate pun explanation images. Appendix B says annotators accessed DALL-E 3 through the GPT-4/ChatGPT web interface and Bing Image Generator."
+      },
+      {
+        "name": "DeepL",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used as one of three machine-generated translation suggestions for human translation annotation."
+      },
+      {
+        "name": "CLIP-based image search API / clip-retrieval",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to retrieve candidate disambiguator images from LAION 2B; the exact CLIP model or index snapshot is not reported."
+      },
+      {
+        "name": "BERTScore",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the primary text-similarity metric for pun disambiguation after validation against human judgments; the implementation/backbone/configuration is not specified."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main benchmark text generation for evaluated models",
+        "calls_per_item": "One generated output per evaluated input condition; total number of API/model calls is not reported.",
+        "candidates_per_item": "1",
+        "token_budget": "Except for GPT-4, all models were allowed to generate up to 200 tokens with early stopping; GPT-4 token budget is not reported.",
+        "sampling_parameters": "Deterministic greedy sampling for all experiments; no randomness or external hyperparameter in text generation.",
+        "compute_or_cost": "Open-source models were run on a single NVIDIA A100 40GB GPU; with batch processing, a query took about ~0.8 seconds. GPT-4 was run through the OpenAI API; API cost not reported.",
+        "detail": "Applies to pun grounding, disambiguation, and reconstruction model outputs unless otherwise specified."
+      },
+      {
+        "scope": "Socratic Models pipeline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Language-model generation follows the main benchmark token budget; caption token limits are not reported.",
+        "sampling_parameters": "No separate caption decoding parameters reported.",
+        "compute_or_cost": "BLIP-2 and open-source language models appear to be covered by the single-A100 setup; exact per-stage compute not reported.",
+        "detail": "The pipeline first captions the image with BLIP-2 OPT 2.7B and then passes text to Vicuna or GPT-4, but exact per-item call accounting is not provided."
+      },
+      {
+        "scope": "GPTEval for pun reconstruction",
+        "calls_per_item": "Not explicitly reported; GPT-4 is used to produce a binary decision for generated reconstruction outputs.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "OpenAI API cost not reported.",
+        "detail": "The GPT-4 evaluator prompt, decoding settings, and total number of evaluator calls are not reported."
+      },
+      {
+        "scope": "DALL-E 3 pun explanation image generation",
+        "calls_per_item": null,
+        "candidates_per_item": "Not fixed; about 24% of samples required multi-step modification.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Hosted DALL-E 3 via ChatGPT/GPT-4 and Bing Image Generator; cost not reported.",
+        "detail": "The paper reports 1,000 final images but not the total number of generated candidates, prompts, revisions, or discarded images."
+      },
+      {
+        "scope": "Machine-assisted human translation annotation",
+        "calls_per_item": "3 machine-translation suggestions per translation item: GPT-4 prompted in two ways and DeepL once.",
+        "candidates_per_item": "3",
+        "token_budget": null,
+        "sampling_parameters": "GPT-4 and DeepL translation-generation settings not reported.",
+        "compute_or_cost": "Human annotators were paid $12–15 per hour; total hours and model/API costs not reported.",
+        "detail": "Human annotators selected and modified candidates to produce final target translations."
+      },
+      {
+        "scope": "LAION disambiguator image retrieval",
+        "calls_per_item": null,
+        "candidates_per_item": "10 retrieved images per pun meaning",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "A CLIP-based image search API was used; exact search parameters, index date, and retrieval cost are not reported."
+      },
+      {
+        "scope": "LLaVA-MMT fine-tuning",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "LoRA fine-tuning; ten epochs on the Multi30k training split with early stopping.",
+        "compute_or_cost": "Single NVIDIA A100 40GB GPU; about ~20 hours on average.",
+        "detail": "This is training compute for the LLaVA-MMT variant rather than inference budget."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Pun grounding, pun disambiguation, and pun reconstruction model tasks",
+        "present": false,
+        "description": "No human performance baseline is reported under matched task conditions. Humans create references and validate metrics, but they are not evaluated as task-performing systems alongside models.",
+        "directly_comparable": false,
+        "detail": "Random chance is reported for disambiguation, but no human baseline is provided."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "UNPIE adds newly generated explanation images, retrieved disambiguator images, and newly collected meaning-specific translations to the source puns.",
+        "Manual filtering/selection was applied to images and translations."
+      ],
+      "basis": "The benchmark is newly introduced, but its 1,000 English pun sentences are selected from the public SemEval-2017 Task 7 collection, which predates GPT-4, LLaVA, Qwen-VL, and other evaluated models. This creates plausible exposure/memorization risk for text puns and pun phrases, especially in grounding and reconstruction. The paper does not report a decontamination test or contamination analysis. Newly created visual and translation annotations reduce but do not eliminate risk because the underlying pun items are public legacy data."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Pun reconstruction Correct (%) results and visual-context improvements rely on GPT-4/GPTEval as the primary correctness judge; the common-vs-uncommon meaning analysis also relies on GPT-4 zero-shot meaning-frequency rankings. GPTEval is additionally tested as a candidate metric for disambiguation but is not the selected primary disambiguation metric.",
+      "human_validation": "Appendix D compares GPT-4 reconstruction judgments with human annotations on 100 sample outputs from multimodal and text-only GPT-4 approaches; reported accuracies range from 80% to 89% and Pearson correlations from 0.54 to 0.66. Appendix C compares disambiguation metrics with human judgments on 100 valid samples and selects BERTScore over GPTEval.",
+      "detail": "Grounding uses exact match and disambiguation uses BERTScore, so not all headline results are LLM-judged. However, the central reconstruction task and claims about complex multimodal pun recovery depend materially on GPT-4 evaluation."
+    },
+    "reporting_gaps": [
+      "No inference dates are reported for GPT-4, DALL-E 3, DeepL, CLIP retrieval, or open-source model runs.",
+      "The paper reports GPT-4 V+L rows in result tables but Appendix A says all GPT-4 usage used `gpt-4-0613`; no separate vision-capable GPT-4 snapshot or image-input mechanism is specified.",
+      "Vicuna provenance is inconsistent: Section 4.1 says Vicuna-13B, while Appendix A specifies `lmsys/vicuna-7b-v1.5`.",
+      "GPT-4 API decoding parameters, maximum tokens, and evaluator settings are not reported beyond the general statement of deterministic greedy sampling.",
+      "The GPT-4/GPTEval prompt and full decision procedure for pun reconstruction evaluation are not provided.",
+      "BERTScore implementation details, backbone/model version, language handling, and thresholds/tie-breaking are not reported.",
+      "Participant counts are not reported for the first image matching study, BERTScore validation annotators, or GPTEval validation annotators.",
+      "Human evaluator/annotator demographics, geography, recruitment source, qualification checks, and blinding are largely not reported for human evaluation and metric-validation studies.",
+      "The total number of DALL-E 3 generations, prompts, rejected images, and cost are not reported; only the final 1,000 images and ~24% multi-step modification rate are reported.",
+      "LAION/CLIP retrieval settings, index snapshot/date, exact CLIP model, number of discarded retrieval samples, and selector identity/count are not reported.",
+      "Total numbers of model calls and API costs for benchmark inference and evaluation are not reported.",
+      "No directly comparable human baseline is reported for the three main model tasks.",
+      "No contamination or decontamination analysis is reported despite using public SemEval-2017 puns as source items."
+    ]
+  }
+}

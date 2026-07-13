@@ -190,5 +190,306 @@
     "code_url": null,
     "data_url": "https://github.com/amazon-research/expunations",
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "10",
+        "population": "professional team of dedicated full-time annotators within the coauthors’ organization; not coauthors; full-time employees with benefits",
+        "recruitment": "hired by the coauthors’ organization for data annotation; received a kick-off meeting, 3 pilot calibration rounds, and then worked through 7 annotation rounds with quality feedback and redoing batches as necessary",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "5 annotations per sample for 1,999 SemEval-derived text samples; annotation fields covered understandability, offensiveness/inappropriateness, joke intent, 1–5 funniness, natural-language explanations, and joke keywords; dataset includes 6,650 explanations",
+        "detail": "Each minibatch was annotated by consistent subteams of 5 annotators. Annotators could skip downstream fields if they did not understand the text or did not judge it to be a joke. Personal worker information was discarded; pay per task was above local minimum wage, approximately $15/hour."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Amazon Mechanical Turk workers",
+        "recruitment": "Turkers had to pass a qualifier by correctly labeling >= 80% of 20 manually annotated samples",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "3 annotators per generated pun; workers labeled whether each generated pun was successful; Fleiss’ kappa reported as κ = 0.49",
+        "detail": "Success was defined as whether the text supports both senses of the pun word. The paper does not report the number of unique Turkers, their demographics, geography, or whether they were blinded to model/condition."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "paper team / unspecified manual reviewers",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "20 samples were manually annotated for the AMT qualifier; completed professional-annotator batches were manually examined for quality and sometimes redone",
+        "detail": "The paper says the authors/manual reviewers provided quality feedback and manually annotated qualifier examples, but does not identify the individuals or count them."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "professional full-time annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided the ExPUN annotations. AF1–AF3 dataset labels were summarized by majority vote; AF4 used nonblank funniness scores; AF5 and AF6 supplied explanations and keyword phrases."
+      },
+      {
+        "type": "author",
+        "name": "paper team / manual reviewers",
+        "role": "validation",
+        "blind": null,
+        "detail": "Manually inspected completed annotation batches, gave feedback on quality issues, had batches redone as necessary, and manually annotated the 20-sample AMT qualifier set."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk workers",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary human judge for generated-pun success rates in the keyword-conditioned pun generation evaluation; 3 annotators per generated pun."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "classification accuracy / simulatability score",
+        "role": "primary",
+        "blind": null,
+        "detail": "Pun explanation utility was evaluated through acc(IE → O) − acc(I → O), using trained classifiers and reporting three-seed average accuracy curves."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "word incorporation rate",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Automatic metric for keyword-conditioned pun generation, measuring incorporation of pun words, keywords, and both."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Cohen’s kappa, Spearman’s rho, BLEU-4, METEOR, Fleiss’ kappa",
+        "role": "validation",
+        "blind": null,
+        "detail": "Used to quantify annotation agreement for ExPUN fields and AMT human-evaluation agreement."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "keyword aggregation algorithm with reliability score and fuzzy matching",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Aggregated five annotators’ keyword lists into a single keyword set per sample using an anchor annotator selected by reliability score and fuzzy matching with threshold 60."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "T5 pun explanation generation",
+        "mode": "best-of-n",
+        "n": "beam size 2",
+        "selector": "model-self-selection",
+        "detail": "Appendix E states that T5 inference used beam search with beam size 2 and stopped at EOS or maximum target length; one generated explanation was then used for the downstream explanation-augmented classifier."
+      },
+      {
+        "scope": "T5FT and T5PT+FT keyword-conditioned pun generation",
+        "mode": "best-of-n",
+        "n": "beam size 2",
+        "selector": "model-self-selection",
+        "detail": "The T5-based pun generators used beam search with beam size 2 at inference; the paper does not report temperature, top-p, or any human/manual post-selection."
+      },
+      {
+        "scope": "AmbiPun keyword-conditioned pun generation baseline",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports the AmbiPun prompt format and that no further finetuning was used, but does not report decoding parameters, number of candidates, or any selection procedure."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "BERT-base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Finetuned via HuggingFace for pun classification with and without explanations. No exact checkpoint revision, software version, training date, or inference date is reported."
+      },
+      {
+        "name": "RoBERTa-base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Finetuned via HuggingFace for pun classification with and without explanations. No exact checkpoint revision, software version, training date, or inference date is reported."
+      },
+      {
+        "name": "DeBERTa-base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Finetuned via HuggingFace for pun classification with and without explanations. No exact checkpoint revision, software version, training date, or inference date is reported."
+      },
+      {
+        "name": "T5-base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used through SimpleT5 for explanation generation and for T5FT/T5PT+FT keyword-conditioned pun generation. No exact checkpoint revision, SimpleT5 version, training date, or inference date is reported."
+      },
+      {
+        "name": "ELV / ELV-sa",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "The authors used released ELV code and inherited most default hyperparameters for ELV-sa, changing training batch size per GPU to 4. Exact code commit/checkpoint and inference date are not reported."
+      },
+      {
+        "name": "AmbiPun",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the state-of-the-art homographic pun generation baseline with no further finetuning. The paper gives the prompt format but not the checkpoint, code version, decoding setup, or inference date."
+      },
+      {
+        "name": "roberta-large-mnli",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Mentioned in Appendix D implementation details with reduced training epochs and batch size; the paper does not clearly tie this model to main reported results."
+      },
+      {
+        "name": "bart-large-mnli",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Mentioned in Appendix D implementation details with reduced training epochs and batch size; the paper does not clearly tie this model to main reported results."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "BERT/RoBERTa/DeBERTa pun-classification experiments",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Hyperparameter search tried learning rates {1e-4, 3e-4, 1e-5, 3e-5} × training epochs {3, 10, 20}. Final hyperparameters for bert-base, roberta-base, and deberta-base: learning rate 1e-5, 20 epochs, batch size 32. Best dev-accuracy checkpoint chosen for inference; results reported as three-seed averages.",
+        "compute_or_cost": "HuggingFace used; classifier hardware and cost not reported.",
+        "detail": "Pun explanation/classification split was 1,699 train / 100 dev / 200 test, with dev and test balanced between jokes and non-jokes."
+      },
+      {
+        "scope": "roberta-large-mnli and bart-large-mnli implementation note",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Training epochs reduced to 3 and training batch size to 8.",
+        "compute_or_cost": null,
+        "detail": "The appendix reports these settings but does not clearly describe the models’ role in the main experiments or provide results."
+      },
+      {
+        "scope": "ELV pun-classification baseline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Used released ELV code with most default ELV-sa hyperparameters; training batch size per GPU changed to 4.",
+        "compute_or_cost": null,
+        "detail": "No token limits, number of inference calls, GPU count, or cost are reported."
+      },
+      {
+        "scope": "T5 pun explanation generation",
+        "calls_per_item": "one generated explanation used per item; number of model calls not explicitly reported",
+        "candidates_per_item": "beam size 2",
+        "token_budget": "maximum source length 512; maximum target length 256",
+        "sampling_parameters": "T5-base from SimpleT5; AdamW learning rate 0.0001; batch size 8; 30 finetuning epochs; beam search decoding with beam size 2; decoding stopped at EOS or maximum target length.",
+        "compute_or_cost": "Trained on a Tesla V100 for finetuning; cost not reported.",
+        "detail": "For samples with no annotated explanation, the pun sentence itself was used as the output explanation during data preparation."
+      },
+      {
+        "scope": "T5FT and T5PT+FT keyword-conditioned pun generation",
+        "calls_per_item": "one generated pun used per test input; number of model calls not explicitly reported",
+        "candidates_per_item": "beam size 2",
+        "token_budget": "maximum source length 512; maximum target length 256",
+        "sampling_parameters": "T5-base from SimpleT5; AdamW learning rate 0.0001; batch size 8; 30 finetuning epochs; beam search decoding with beam size 2. T5PT+FT additionally pretrained for 3 epochs on BookCorpus-derived non-pun examples before ExPUN finetuning.",
+        "compute_or_cost": "Finetuning used a Tesla V100; cost not reported.",
+        "detail": "Generation data was limited to 1,482 samples with ExPUN keywords and SemEval pun-word sense annotations; 100 were reserved as test data and the rest used for training. For BookCorpus pretraining, the authors extracted 200 sentences containing the pun word for a given pun word and used RAKE keywords."
+      },
+      {
+        "scope": "AmbiPun keyword-conditioned pun generation baseline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports no finetuning and the prompt format “generate sentence: K, p_w, a_w,” but not decoding settings, candidate count, hardware, or cost."
+      },
+      {
+        "scope": "RAKE keyword extraction conditions",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "RAKE was run on pun text for automatically extracted keyword training/evaluation conditions and on BookCorpus sentences for T5PT+FT pretraining examples.",
+        "compute_or_cost": null,
+        "detail": "No RAKE implementation version, parameter settings, runtime, or cost are reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Pun explanation utility for pun classification",
+        "present": true,
+        "description": "Gold human-written ExPUN explanations were used as an upper-bound explanation condition at training and testing time, and compared against no-explanation and T5-generated-explanation conditions in the same classifier-based simulatability framework.",
+        "directly_comparable": true,
+        "detail": "This is a human-explanation baseline/upper bound, not a human pun-classification performance baseline. The paper selected the longest human-written explanation per sample and substituted the pun text when no explanation existed."
+      },
+      {
+        "scope": "Pun classification accuracy",
+        "present": false,
+        "description": "Human majority vote supplied labels, but the paper does not report human classifier accuracy on the same train/dev/test task.",
+        "directly_comparable": false,
+        "detail": "Annotator agreement is reported, but not a directly matched human-vs-model classification baseline."
+      },
+      {
+        "scope": "Keyword-conditioned pun generation",
+        "present": false,
+        "description": "The paper does not evaluate human-written puns generated from the same keyword, pun-word, and alternate-word inputs under the same AMT success protocol.",
+        "directly_comparable": false,
+        "detail": "Original SemEval puns are source/reference material and training targets, but not a directly evaluated human generation baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "ExPUN annotations were newly collected for this paper rather than copied from the original SemEval task.",
+        "The authors used train/dev/test splits for pun explanation/classification and held out 100 test examples for keyword-conditioned pun generation.",
+        "Models were finetuned on designated training splits rather than intentionally trained on the held-out test split."
+      ],
+      "basis": "The source texts were sampled from the public SemEval 2017 Task 7 dataset, while the evaluated pretrained models/checkpoints such as BERT, RoBERTa, T5, DeBERTa, and AmbiPun postdate or could postdate the public release of those puns. The paper does not discuss contamination or run a decontamination test. The newly collected ExPUN annotations reduce but do not eliminate risk, because the underlying pun texts were public legacy benchmark material."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Generated-pun success was judged by AMT workers; dataset labels and explanations/keywords came from professional annotators. No LLM evaluator is reported.",
+      "detail": "BERT/RoBERTa/DeBERTa/T5/ELV/AmbiPun are systems under test or trained task models, not LLM judges. Automatic metrics include classification accuracy, simulatability, word incorporation, and agreement scores, but no LLM-as-judge."
+    },
+    "reporting_gaps": [
+      "No demographic, native-language, or geographic information is reported for the 10 professional annotators or for AMT workers.",
+      "The number of unique AMT workers is not reported; only 3 annotators per generated pun is specified.",
+      "The AMT evaluation does not report whether workers were blinded to model identity/condition, how items were randomized, or exactly how the 3 labels per item were aggregated into success rates.",
+      "The paper does not explicitly state the total number of generated items or total AMT judgments per model/condition, although the generation test set size is given as 100.",
+      "Exact model checkpoint revisions, code commits, library versions, training dates, and inference dates are not reported for HuggingFace, SimpleT5, ELV, or AmbiPun models.",
+      "AmbiPun decoding parameters, number of generated candidates, token limits, hardware, and inference cost are not reported.",
+      "T5 decoding reports beam size and length limits, but not seed values, length penalties, temperature/top-p settings, or whether any postprocessing/filtering was applied.",
+      "Classifier inference token limits, hardware, GPU count, and cost are not reported; T5 hardware is only reported as a Tesla V100 for finetuning.",
+      "The paper reports three-seed averages for classification figures but does not provide the seed values.",
+      "The paper does not discuss benchmark contamination or decontamination despite using public SemEval 2017 source texts with later pretrained models.",
+      "The roles of roberta-large-mnli and bart-large-mnli mentioned in Appendix D are not clearly connected to the main reported experimental results."
+    ]
   }
 }

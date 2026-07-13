@@ -162,5 +162,257 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "32 respondents",
+        "population": "Target-audience raters recruited as people who identify as Gen Z and like Instagram caption humor; mostly local-university students were expected to fit the demographic.",
+        "recruitment": "Online survey distributed through email announcements to clubs and classes at a local university; advertised for people who identify as \"Gen-Z\" and who \"like Instagram caption humor\"; survey took about 30 minutes and users were paid $10.",
+        "geography": "Local university; country/region not reported for participants.",
+        "languages": [
+          "English"
+        ],
+        "observations": "6015 caption ratings in the target Instagram study; raters saw 20 images with 15 captions each, with image order and caption order randomized. This is an observation count, not a participant count.",
+        "detail": "Demographics reported: 5 male, 9 female, 18 declined gender; 14 aged 18-25, 1 aged 25+, 17 declined age group. Ratings used a 1-5 funniness scale where 1 was \"not funny\", 3 \"somewhat funny\", and 5 \"very funny\". Users were not told the caption condition and were not told AI was involved."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "21 respondents",
+        "population": "Target-audience raters recruited the same way as the previous study for the camera-roll/Flickr image survey.",
+        "recruitment": "Paper states raters were recruited the same as for the previous study; exact overlap with the first survey was not reported.",
+        "geography": "Local university recruitment implied by the previous-study method; country/region not reported for participants.",
+        "languages": [
+          "English"
+        ],
+        "observations": "4765 ratings for the Flickr camera-roll-style image study; 30 randomly selected Flickr Image Dataset images, with 5 HumorSkills captions and 5 GPT-4o captions per image. This is an observation count, not a participant count.",
+        "detail": "Demographics reported: 10 female, 4 male, 7 declined gender; 12 aged 18-25, 2 aged 25+, 7 declined age group. Image and caption order were randomized. The paper does not explicitly restate whether these raters were told or not told that AI was involved."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "17 respondents",
+        "population": "Target-audience raters recruited the same way as the previous study for the museum-art image survey.",
+        "recruitment": "Paper states raters were recruited the same as for the previous study; exact overlap with the first or Flickr survey was not reported.",
+        "geography": "Local university recruitment implied by the previous-study method; country/region not reported for participants.",
+        "languages": [
+          "English"
+        ],
+        "observations": "4044 ratings for the museum-art image study; 30 museum art images, 15 from MoMA and 15 from The Met, with 5 HumorSkills captions and 5 GPT-4o captions per image. This is an observation count, not a participant count.",
+        "detail": "Demographics reported: 7 female, 3 male, 7 declined gender; 8 aged 18-25, 2 aged 25+, 7 declined age group. Image and caption order were randomized. The paper does not explicitly restate whether these raters were told or not told that AI was involved."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Instagram users who wrote comments/captions on 8 popular Instagram humor captioning accounts used for the target evaluation images.",
+        "recruitment": "Organic Instagram comments; authors selected existing posts/images and comments from popular Instagram humor captioning accounts.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "For the target study, the top 5 most upvoted Instagram captions/comments for each image were used as the human-written comparison condition; with 20 images, this implies 100 human-caption items, not 100 people.",
+        "detail": "Number of unique commenters, candidate comments per post, upvote totals, post dates, and account identities were not reported."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Instagram users who wrote humorous comments on three popular Instagram meme pages with over 400,000 followers, used for fine-tuning data.",
+        "recruitment": "Authors extracted existing top comments from popular Instagram meme pages.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "80 humorous comments were extracted for fine-tuning; the paper says the top five comments of each image post were collected. This is an item count, not a participant count.",
+        "detail": "The paper does not report the number of source posts, unique commenters, source account names, post dates, or whether these fine-tuning sources overlapped with evaluation sources."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Instagram users whose platform upvotes determined which comments were top-ranked.",
+        "recruitment": "Organic platform voting on Instagram posts.",
+        "geography": null,
+        "languages": [],
+        "observations": "Platform upvotes selected the top-five human comments for the target-study human baseline and selected top comments for the 80-comment fine-tuning dataset; exact vote counts were not reported.",
+        "detail": "These platform users were not recruited study participants; their number and demographics are unknown."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Target Instagram humor-rating survey respondents",
+        "role": "primary",
+        "blind": true,
+        "detail": "Rated captions on a 1-5 funniness scale. Caption source conditions were hidden, and users were not told AI was involved. These ratings determine the main Instagram-study quantitative results."
+      },
+      {
+        "type": "human-lay",
+        "name": "Flickr camera-roll humor-rating survey respondents",
+        "role": "primary",
+        "blind": null,
+        "detail": "Rated HumorSkills and GPT-4o captions for 30 Flickr images. The paper reports randomized image and caption order, but does not explicitly restate condition/AI blinding for this survey."
+      },
+      {
+        "type": "human-lay",
+        "name": "Museum-art humor-rating survey respondents",
+        "role": "primary",
+        "blind": null,
+        "detail": "Rated HumorSkills and GPT-4o captions for 30 museum-art images. The paper reports randomized image and caption order, but does not explicitly restate condition/AI blinding for this survey."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Instagram upvotes",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Determined which existing human-written Instagram comments were the top-five comparison captions in the target Instagram study."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Instagram upvotes for fine-tuning examples",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Top-five comments from popular Instagram meme-page posts were extracted to form the 80-comment humorous-caption fine-tuning dataset."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o-based Gen Z humor ranking/filtering agent",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Within HumorSkills, this agent ranks 30 generated captions by humor, relatability, and alignment with the image/narrative, filters weaker captions, and returns the top five evaluated HumorSkills captions."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors",
+        "role": "secondary",
+        "blind": false,
+        "detail": "Authors provide the qualitative analysis of examples in Section 5, attributing performance to Gen Z slang/fine-tuning, narrative extrapolation, and visual detail extraction. No independent qualitative coders are reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "MixedLM/GLMM regression over human ratings",
+        "role": "validation",
+        "blind": null,
+        "detail": "Statistical models over human ratings produced condition coefficients and p-values. The paper text describes a GLMM for ordinal ratings, while the regression tables are labeled MixedLM with REML."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "HumorSkills outputs for the Instagram, Flickr, and museum-art evaluations",
+        "mode": "best-of-n",
+        "n": "30 generated captions per image: 15 captions generated without external narratives and 15 generated with external narratives; the ranker returns the top 5.",
+        "selector": "LLM-judge",
+        "detail": "A GPT-4o-based Gen Z humor ranking agent selects the evaluated HumorSkills captions based on humor, relatability, and alignment with the image and narrative."
+      },
+      {
+        "scope": "GPT-4o baseline outputs for the Instagram, Flickr, and museum-art evaluations",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper reports 5 GPT-4o captions per image and describes the baseline as GPT-4o with prompt engineering/a simple humor prompt. No over-generation, filtering, or best-of-N selection is reported; the exact call structure is not reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the state-of-the-art VLM baseline with prompt engineering and within HumorSkills for visual detail extraction, visual humor ideation, and narrative/conflict extrapolation. No snapshot, API version, access method, or inference date is reported."
+      },
+      {
+        "name": "Fine-tuned GPT-3.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as the HumorSkills caption generator. The paper says it was fine-tuned on 80 humorous Instagram comments and used in two prompts per image: one with generated narratives and one without. The exact GPT-3.5 variant/model ID is not reported."
+      },
+      {
+        "name": "GPT-4o-based Gen Z humor ranking agent",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as an LLM judge inside HumorSkills to rank and filter generated captions. The paper describes it as GPT-4o-based and fine-tuned/trained to evaluate Gen Z humor, but gives no model ID, training data details, snapshot, or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "HumorSkills per input image",
+        "calls_per_item": "At least six described prompt/model invocations per image: GPT-4o visual detail extraction; GPT-4o visual humor ideation; GPT-4o narrative/conflict extrapolation; fine-tuned GPT-3.5 caption generation without narratives; fine-tuned GPT-3.5 caption generation with narratives; GPT-4o-based caption ranking/filtering.",
+        "candidates_per_item": "10 generated narratives/conflicts; 15 captions without narratives plus 15 captions with narratives, for 30 generated captions; top 5 returned.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper summarizes some prompt instructions but does not provide full prompts, temperature/top-p/seed settings, max-token limits, latency, compute, or monetary cost."
+      },
+      {
+        "scope": "GPT-4o baseline per image",
+        "calls_per_item": null,
+        "candidates_per_item": "5 captions per image were used in each survey.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Exact baseline prompt, number of API/model calls, whether the five captions were produced in one response or multiple responses, and decoding parameters are not reported. No extra selection or filtering is reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Target Instagram humor-rating study",
+        "present": true,
+        "description": "The human-written comparison condition consisted of the top 5 most upvoted Instagram captions/comments for each of the same 20 images.",
+        "directly_comparable": false,
+        "detail": "The human and AI captions were rated together by the same blinded survey respondents, but the human captions were preselected by platform upvotes from an unknown number of comments, commenters, and voters in a real Instagram context. The production and selection conditions are therefore not materially matched to the model generation conditions."
+      },
+      {
+        "scope": "Flickr camera-roll image study",
+        "present": false,
+        "description": "No human-written caption baseline was used; the paper states that top-ranked human captions were not compared because these images were not taken from Instagram.",
+        "directly_comparable": null,
+        "detail": "Only HumorSkills and GPT-4o captions were evaluated."
+      },
+      {
+        "scope": "Museum-art image study",
+        "present": false,
+        "description": "No human-written caption baseline was used; the paper states that top-ranked human captions were not compared because these images were not taken from Instagram.",
+        "directly_comparable": null,
+        "detail": "Only HumorSkills and GPT-4o captions were evaluated."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Funniness ratings for the evaluated caption sets were newly collected from human survey respondents."
+      ],
+      "basis": "Evaluation inputs and comparison captions came from public sources: Instagram posts/comments, the public Flickr Image Dataset, and public MoMA/Met art images. The Flickr dataset predates GPT-4o, and many museum/Instagram items may also have been publicly available before model training, but the paper does not report post dates, model training cutoffs, model snapshots, or decontamination tests. The newly collected human ratings reduce reliance on public benchmark labels, but they do not rule out model exposure to images, memes, or captions. No held-out/private/newly created image set or memorization check is reported."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Claims about HumorSkills performance depend on evaluating the top 5 captions selected by a GPT-4o-based Gen Z ranking agent from 30 generated candidates per image. The final funniness scores themselves are human survey ratings, not LLM ratings.",
+      "human_validation": "Human raters evaluated the final selected captions in all three studies, but the paper does not report a human validation of the ranking agent’s rankings or an ablation without the LLM ranker.",
+      "detail": "The LLM judge is part of the generation/selection pipeline rather than the primary outcome evaluator. Its filtering role materially affects which HumorSkills outputs enter the human evaluation."
+    },
+    "reporting_gaps": [
+      "No GPT-4o snapshot/version, GPT-3.5 base variant, fine-tuned model IDs, access method, or inference dates are reported.",
+      "No decoding parameters are reported for any generation or ranking step: temperature, top-p, seed, max tokens, context limits, or stop criteria are absent.",
+      "Full prompts are not provided; the paper summarizes prompt intent for system components and describes the baseline as a simple prompt, but does not provide exact prompt text for all steps.",
+      "The GPT-4o baseline generation procedure is underspecified: the paper reports 5 captions per image but not the number of calls, whether captions were generated in one response, or any retry/filtering rules.",
+      "Fine-tuning details are incomplete: hyperparameters, train/validation split, exact source posts/accounts, comment dates, and data-cleaning criteria are not reported.",
+      "The training/evaluation separation between the 80-comment Instagram fine-tuning set and the target Instagram evaluation sources is not documented; overlap of accounts, posts, images, or commenters is not reported.",
+      "The GPT-4o-based Gen Z ranking agent is described as fine-tuned/trained, but its training data, validation procedure, prompt, and model ID are not reported.",
+      "Exact evaluation items are not identified: the 20 Instagram images, 30 Flickr image IDs, 15 MoMA items, and 15 Met items are not listed.",
+      "Instagram upvote counts, candidate comment-pool sizes, number of unique human commenters, and number/demographics of platform voters are not reported.",
+      "Participant overlap across the three surveys is not reported.",
+      "Completion, exclusion, and missing-rating handling are not reported; the observed rating counts are lower than the full factorial totals implied by the respondent/image/caption counts.",
+      "Blinding to AI involvement and caption condition is explicitly reported for the main Instagram survey but not explicitly restated for the Flickr and museum-art surveys.",
+      "The analysis is reported inconsistently: text describes a GLMM for ordinal ratings, while tables are labeled MixedLM with REML; non-target text p-values also differ from table P>|z| values reported as 0.000.",
+      "No contamination/decontamination analysis is reported for public Instagram, Flickr, MoMA, or Met content.",
+      "No ablation studies are reported to isolate the contribution of visual detail extraction, narrative extrapolation, fine-tuning, or the LLM ranking agent."
+    ]
   }
 }

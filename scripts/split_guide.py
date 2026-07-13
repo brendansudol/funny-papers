@@ -23,17 +23,42 @@ OUT_DIR = ROOT / "papers" / "review" / "guide-entries"
 ANCHORS = {
     "x15-minsky-jokes": "Marvin Minsky, \"Jokes and the Logic",
     "x01-jape": "**Pre-LLM foundations (historical grounding).**",
-    "x02-comic": "**Also in this cluster (2026):**",
-    "x03-openmic": "**Also in this cluster (2026):**",
-    "x04-pixelhumor": "**Also in this section:**",
-    "x05-memereacon": "**Also in this section:**",
+    "x02-comic": "**Performance-oriented multi-agent systems:**",
+    "x03-openmic": "**Performance-oriented multi-agent systems:**",
+    "x04-pixelhumor": "**Related comics datasets:**",
+    "x05-memereacon": "**Related comics datasets:**",
     "x06-exfuntube": "**Video humor:**",
     "x07-vhub": "**Video humor:**",
     "x09-hahackathon": "**HaHackathon",
     "x10-humicroedit": "**Humicroedit & FunLines",
     "x11-rjokes-last-laugh": "**rJokes**",
     "x12-ur-funny": "**UR-FUNNY**",
-    "x13-redefining-humor-data": "**Also:** [Re-defining Humor Data Objects",
+    "x13-redefining-humor-data": "**Humor data as social interaction:**",
+    "x16-pun-generation-surprise": "**Pun Generation with Surprise**",
+    "x17-context-satirical-news": "**Context-Driven Satirical News Generation**",
+    "x18-yodalib": "**YodaLib**",
+    "x19-unpie": "**Visual-pun disambiguation:**",
+    "x20-does-bigger-funnier": "**Judge-validity stress test:**",
+    "x21-joke-space-originality": "**Originality beyond funniness:**",
+    "x22-humor-word-embeddings": "**Earlier audience-modeling anchors:**",
+    "x23-eigentaste-jester": "[**Eigentaste / Jester**]",
+    "x24-open-mic-humor-quotient": "**Audience laughter as a signal:**",
+    "x25-tic-talk": "**Timing as multimodal data:**",
+    "x26-not-human-funnier": "**Performer identity as material:**",
+    "x27-genai-humor-bias": "**Bias introduced by",
+    "x28-counterfactual-unfairness": "**Relational fairness under identity swaps:**",
+    "x29-d-humor": "**Dark-humor resource:**",
+    "x30-hins": "**Long context in Hindi:**",
+    "x31-clef-joker-2024": "**Shared-task ecosystem:**",
+    "x32-hsq-fingerprinting": "**Construct-validity caution:**",
+    "x33-yesbut-juxtaposition": "**YesBut-Juxtaposition (Hu et al.):**",
+    "x34-yesbut-v2": "**YesBut V2 (Hu et al.):**",
+    "x35-turing-jest": "**Turing Jest:**",
+    "x36-ironic-melting-pot": "**Human-evaluation reporting audit:**",
+    "x37-improv-comedy-setting": "**Live AI–human improv comparison:**",
+    "x38-multipun": "**Adversarial multimodal-pun tests:**",
+    "x39-how-humorous-ai": "**Humor in social interaction:**",
+    "x40-corpus-pragmatics": "**Pragmatic-function annotation:**",
 }
 # Keys covered by another entry's numbered block.
 ALIASES = {
@@ -51,8 +76,20 @@ def numbered_blocks(text: str) -> dict[str, str]:
         start = match.start()
         end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
         block = text[start:end]
-        # Trim trailing sub-headers (e.g. '### Pun / wordplay generation')
-        block = re.split(r"\n### [^\d]", block)[0].strip()
+        # Stop at a new section/subsection or a separately cataloged compact
+        # entry that happens to sit between numbered entries.
+        block = re.split(r"\n## ", block, maxsplit=1)[0]
+        block = re.split(r"\n### (?!T?\d+\. )", block, maxsplit=1)[0]
+        compact_starts = []
+        for anchor in set(ANCHORS.values()):
+            anchor_pos = block.find(anchor)
+            if anchor_pos <= 0:
+                continue
+            paragraph_start = block.rfind("\n\n", 0, anchor_pos)
+            compact_starts.append(paragraph_start if paragraph_start >= 0 else anchor_pos)
+        if compact_starts:
+            block = block[: min(compact_starts)]
+        block = block.strip()
         ref = match.group(1)
         blocks["#" + ref if not ref.startswith("T") else ref] = block
     return blocks

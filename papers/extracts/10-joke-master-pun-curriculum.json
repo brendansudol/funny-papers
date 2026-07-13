@@ -201,5 +201,331 @@
     "code_url": "https://github.com/cubenlp/PGCL",
     "data_url": "https://github.com/cubenlp/PGCL",
     "other": "The paper says code, data, and resources are publicly available for research purposes at this repository."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "postgraduates from language-related fields; also described as three postgraduate students",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Chinese",
+          "English"
+        ],
+        "observations": "ChinesePun annotation produced a final dataset of 1,049 homophonic and 1,057 homographic puns; 150 instances received multiple annotations for IAA (Fleiss’ κ = 0.68). Human evaluation used 50 randomly sampled pun word pairs from the test dataset and reported humor A/B-test choices and pun/non-pun classifications; average IAA was 0.47 for humor capability and 0.58 for pun success.",
+        "detail": "The same three people performed dataset annotation and later evaluated the experiments. Before annotation they underwent a training session on pun words, pun sentences, and locating pun words. Each sentence was annotated by all three; disagreements were discussed and final labels were determined by majority vote. Workers were paid 60 yuan per hour. Blinding/randomization and demographics beyond field/status are not reported."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "unidentified authors/collectors of pre-existing jokes and puns used as source or reference material",
+        "recruitment": "pre-existing datasets, GitHub, and humor websites",
+        "geography": null,
+        "languages": [
+          "Chinese",
+          "English"
+        ],
+        "observations": "ChinesePun construction began from 28,269 Chinese jokes gathered from GitHub and humor websites; SemEval 2017 Task 7 is reported as containing 1,298 homographic and 1,098 homophonic English puns.",
+        "detail": "The paper does not report creator counts or demographics. The Table 4 “Human” rows appear to use human-authored dataset reference puns rather than newly recruited human generators."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "three postgraduates from language-related fields",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Final ChinesePun annotation labels were manually revised by the three annotators; disagreements were discussed by the group and resolved by majority vote. Fleiss’ κ on 150 multiply annotated instances was 0.68."
+      },
+      {
+        "type": "human-expert",
+        "name": "three postgraduates from language-related fields",
+        "role": "primary",
+        "blind": null,
+        "detail": "For human evaluation, the same evaluators judged paired model-vs-ChatGPT outputs for humor, allowing ties, and classified each sentence as “pun” or “non-pun” for Pun Succ. Average IAA was 0.47 for humor capability and 0.58 for pun success."
+      },
+      {
+        "type": "LLM",
+        "name": "ChatGPT",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used with few-shot prompting for shallow pre-annotation of ChinesePun candidate sentences before manual revision. The paper later states the ChatGPT model used in experiments is gpt-3.5-turbo, but does not separately specify the pre-annotation snapshot/date."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "RoBERTa-Large pun-type classifier",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "A RoBERTa-Large model trained on CCL2018 Task4 was used during ChinesePun data preparation to select candidate homographic and homophonic puns from unclassified jokes."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "structure discriminator / Structure Succ.",
+        "role": "primary",
+        "blind": null,
+        "detail": "Rule-based structural criteria judged whether outputs satisfied pun structure: homographic puns require the pun word in the sentence; English homophonic puns require the pun word without the alternative word; Chinese homophonic puns require both pun word and alternative word. This discriminator was used to construct preference data and Structure Succ. was the primary automatic evaluation metric."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "RoBERTa-large humor discriminator",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "For English, RoBERTa-large was fine-tuned on the ColBERT joke/non-joke dataset; for Chinese, RoBERTa-large was fine-tuned on a Chinese humor recognition dataset from Chen et al. (2023). Output probabilities were used to select humor-negative samples and, with the structure discriminator, rumination/negative samples for preference triplets."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Dist-1, Dist-2, Avg-Length",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Automatic diversity and length metrics were reported at corpus and sentence level in Tables 4 and 5."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "paired t-test",
+        "role": "validation",
+        "blind": null,
+        "detail": "Table 4 states that paired t-tests show the difference between the proposed model and baselines is statistically significant (p < 0.05), but exact test details and p-values are not reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Evaluation-time pun generation for Table 4 and Table 5 systems",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports generated outputs and aggregate metrics for each system, but does not state whether each test prompt used a single sampled output or multiple candidates with selection. Human evaluation used 50 randomly sampled test pun word pairs."
+      },
+      {
+        "scope": "ChatGPT baseline few-shot generation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "ChatGPT used few-shot prompts containing three examples for each dataset/type prompt template. The paper does not report candidate counts, reranking, retries, or selection rules."
+      },
+      {
+        "scope": "Structure preference negative-sample construction",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "rule",
+        "detail": "SFT LLMs randomly generated puns from the same prompts; outputs that did not comply with the structural rules were accepted as negative samples. Appendix B says 10,000 structure preference pairs were randomly selected, but raw candidate counts and candidates per input are not reported."
+      },
+      {
+        "scope": "Standard DPO baseline preference construction",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "automatic-metric",
+        "detail": "For the standard DPO baseline, negative samples were selected with the humor discriminator and structure discriminator simultaneously; labeled puns from the pun datasets served as positives. Candidate counts per prompt are not reported."
+      },
+      {
+        "scope": "Improved humor preference triplet construction for PGCL",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "automatic-metric",
+        "detail": "Outputs were sampled from the structurally optimized stage-1 model. Structure-compliant outputs were retained as rumination samples; outputs lacking humor and pun structure were selected as negatives using the humor and structure discriminators. Appendix B says 10,000 triplets were randomly selected; raw generation counts and per-input candidate counts are not reported."
+      },
+      {
+        "scope": "ChatGPT ChinesePun pre-annotation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "The authors processed each candidate sentence with ChatGPT to obtain shallow annotations before manual revision. The paper does not report retries, multiple candidate annotations, or selection among candidates."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "gpt-3.5-turbo (ChatGPT)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as the ChatGPT baseline with few-shot prompts and for ChatGPT-style pre-annotation; no dated snapshot, API date, or access details are reported."
+      },
+      {
+        "name": "AmbiPun",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Prior SOTA pun generation model fine-tuned on T5; the authors fine-tuned/adapted it on ChinesePun. Exact checkpoint and T5 variant are not reported."
+      },
+      {
+        "name": "LLaMA2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for English pun generation on SemEval; acquired from HuggingFace Transformers. The exact HuggingFace checkpoint and whether base/chat variant are not reported."
+      },
+      {
+        "name": "LLaMA2_sft",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Instruction-tuned LLaMA2-7B baseline for SemEval; also serves as the SFT/reference model in preference optimization. Exact checkpoint/training run identifiers are not reported."
+      },
+      {
+        "name": "LLaMA2_dpo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Standard-DPO fine-tuned LLaMA2-7B baseline for SemEval; exact run/version identifiers are not reported."
+      },
+      {
+        "name": "PGCL on LLaMA2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Final English PGCL model produced by structure preference optimization followed by improved humor DPO on a LLaMA2-7B backbone."
+      },
+      {
+        "name": "Baichuan2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used for Chinese pun generation on ChinesePun; acquired from HuggingFace Transformers. Exact checkpoint is not reported."
+      },
+      {
+        "name": "Baichuan2_sft",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Instruction-tuned Baichuan2-7B baseline for ChinesePun; exact run/version identifiers are not reported."
+      },
+      {
+        "name": "Baichuan2_dpo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Standard-DPO fine-tuned Baichuan2-7B baseline for ChinesePun; exact run/version identifiers are not reported."
+      },
+      {
+        "name": "PGCL on Baichuan2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Final Chinese PGCL model produced by structure preference optimization followed by improved humor DPO on a Baichuan2-7B backbone."
+      },
+      {
+        "name": "RoBERTa-Large pun-type classifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Trained on CCL2018 Task4 to classify/select homographic and homophonic Chinese pun candidates during ChinesePun construction."
+      },
+      {
+        "name": "RoBERTa-large English humor discriminator",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned on the ColBERT dataset of 200,000 jokes and non-jokes for English humor detection and preference-data selection."
+      },
+      {
+        "name": "RoBERTa-large Chinese humor discriminator",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Fine-tuned on the Chinese humor recognition dataset from Chen et al. (2023), containing 18,709 jokes and 7,709 non-jokes."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Local model decoding for generation and candidate sampling",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "temperature = 0.95; top-p = 0.95; top-k = 5",
+        "compute_or_cost": "All experiments were performed on 2 RTX 3090 GPUs.",
+        "detail": "The paper states these decoding settings in the experiment setup and says all other settings are LLaMA-Factory defaults. It does not break out settings by model, stage, or evaluation vs preference sampling."
+      },
+      {
+        "scope": "ChatGPT baseline and ChatGPT pre-annotation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "few-shot prompts with three examples are shown for the ChatGPT baseline; ChatGPT-specific temperature, top-p, max tokens, retries, and stopping criteria are not reported.",
+        "compute_or_cost": null,
+        "detail": "The paper identifies the ChatGPT model as gpt-3.5-turbo but gives no API date, cost, or call budget."
+      },
+      {
+        "scope": "Structure preference data construction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "SFT model outputs were sampled with the designed prompts; 10,000 structure preference pairs were randomly selected.",
+        "compute_or_cost": "2 RTX 3090 GPUs for the overall experiments.",
+        "detail": "The number of raw generated candidates, filtering acceptance rate, and candidates per prompt are not reported."
+      },
+      {
+        "scope": "Humor preference triplet construction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Outputs were sampled from the structurally optimized model; 10,000 humor preference triplets were randomly selected.",
+        "compute_or_cost": "2 RTX 3090 GPUs for the overall experiments.",
+        "detail": "The number of raw generated candidates, filtering acceptance rate, and candidates per prompt are not reported."
+      },
+      {
+        "scope": "Fine-tuning / preference-optimization setup",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "DPO β = 0.5; optimizer AdamW; learning rate 5e-5; batch size 4; LoRA strategy; all other settings default LLaMA-Factory.",
+        "compute_or_cost": "2 RTX 3090 GPUs; monetary cost not reported.",
+        "detail": "Training epochs/steps, LoRA rank/alpha/dropout, random seeds, and wall-clock time are not reported in the supplied text."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human rows in Table 4 and examples in Table 6",
+        "present": true,
+        "description": "The paper reports “Human” rows for reference puns from ChinesePun and SemEval, including Avg-Length, Dist-1, Dist-2, and Structure Succ.; Table 6 compares generated examples with human reference puns.",
+        "directly_comparable": false,
+        "detail": "The human outputs are pre-existing dataset puns rather than newly generated under the same prompt, decoding, and selection conditions as model outputs. No human Humor A/B-test or Pun Succ. value is reported for the Human rows."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "ChinesePun is newly annotated in this paper and split into train/test partitions.",
+        "SemEval and ChinesePun evaluations use held-out test splits rather than training examples.",
+        "Human evaluation samples 50 pun word pairs randomly from the test dataset."
+      ],
+      "basis": "SemEval 2017 is a public legacy benchmark that predates gpt-3.5-turbo, LLaMA2, and Baichuan2. ChinesePun is newly released, but its source jokes were scraped from public GitHub and humor websites, and no collection dates, model inference dates, or decontamination/memorization checks are reported. Train/test splitting and new Chinese annotations reduce but do not eliminate the possibility that public joke texts or pun word pairs appeared in pretraining data, especially for ChatGPT and base LLMs."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "ChinesePun pre-annotation and preference-data construction are affected; headline evaluation claims are mainly determined by human evaluators and automatic lexical/structure metrics rather than LLM judges.",
+      "human_validation": "Three postgraduates manually revised ChatGPT shallow annotations, annotated all sentences, resolved disagreements by discussion/majority vote, and achieved Fleiss’ κ = 0.68 on 150 multiply annotated instances. The same three performed human model evaluation with reported average IAA of 0.47 for humor and 0.58 for pun success.",
+      "detail": "ChatGPT was used for shallow pre-annotation, and RoBERTa-based classifiers/discriminators selected candidate puns and preference-training negatives/ruminations. These model judgments shape the dataset/training pipeline but do not directly score the main human A/B-test or Pun Succ. results."
+    },
+    "reporting_gaps": [
+      "No dated snapshot, inference date, or access details are reported for gpt-3.5-turbo/ChatGPT.",
+      "Exact HuggingFace checkpoint identifiers are not reported for LLaMA2-7B, Baichuan2-7B, RoBERTa/Chinese RoBERTa, or AmbiPun/T5.",
+      "The paper does not report whether evaluation-time outputs were single samples or selected from multiple candidates; candidate counts per prompt and any reranking/selection policy are missing.",
+      "Maximum token limits, stop criteria, retry policy, API cost, and ChatGPT-specific sampling parameters are not reported.",
+      "Preference-data construction reports 10,000 selected pairs/triplets but not the number of raw generated candidates, candidates per input, acceptance rates, or random seeds.",
+      "Human evaluation blinding, presentation order randomization, and exact rating workload per annotator/model pair are not reported beyond the 50 sampled pun word pairs and the three evaluators.",
+      "Participant recruitment, demographics, and geography are not reported beyond “three postgraduates from language-related fields”; compensation is reported.",
+      "The paired t-test is reported only as p < 0.05; exact p-values, tested metrics, pairing unit, multiple-comparison handling, and assumptions are not described.",
+      "No benchmark contamination or decontamination analysis is reported for SemEval, public Chinese source jokes, or proprietary/base LLMs.",
+      "Training epochs/steps, LoRA hyperparameters beyond using LoRA, wall-clock time, and full compute/cost accounting are not reported."
+    ]
   }
 }

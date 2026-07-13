@@ -21,6 +21,7 @@ import json
 import sys
 import time
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 import fitz  # PyMuPDF
@@ -107,6 +108,7 @@ def main() -> int:
             paper["pdf_source"] = url
             paper["pdf_bytes"] = len(data)
             paper["pdf_sha256"] = hashlib.sha256(data).hexdigest()
+            paper["pdf_retrieved_at"] = date.today().isoformat()
             paper["page_count"] = page_count
             if verify_ok is not None:
                 paper["verify_ok"] = verify_ok

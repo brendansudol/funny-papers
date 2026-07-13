@@ -286,5 +286,441 @@
     "code_url": null,
     "data_url": null,
     "other": "Project page: https://cyberiada.github.io/NYCC-Thinking/. The paper says evaluation train/test splits, preprocessing code, and prompt templates will be released, while copyrighted IM corpus materials cannot be directly released."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "1",
+        "population": "professional captionist with sustained experience in the New Yorker Cartoon Caption Contest",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Table 1 reports expert accuracy on a subset of tasks: Matching 100.00%, Ranking 100.00%, 10-vs-1000 60.00%, and 30-vs-300 40.00%. Item counts and subset definition are not reported.",
+        "detail": "The paper describes this baseline as an expert captionist and professional with sustained NYCC experience; no further protocol, demographics, or recruitment details are provided."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "21",
+        "population": "non-expert human participants in a user study",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Table 1 reports non-expert human accuracy on a subset of tasks: Matching 53.03%, Ranking 65.61%, 10-vs-1000 54.70%, and 30-vs-300 52.27%. These are performance observations, not participant counts.",
+        "detail": "The paper reports a user study with 21 participants but does not report recruitment, demographics, compensation, item counts, or aggregation procedure."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "New Yorker Caption Contest crowd caption submitters and audience/crowd voters represented in source benchmarks",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The NYCC corpus is described as pairing cartoons with thousands of crowd-submitted captions, expert editorial curation, and large-scale audience judgments. Ranking labels use crowd-preferred captions and rank ranges such as top-10 vs. 1000-1009 and 30-39 vs. 300-309; participant/vote counts are not reported in this paper.",
+        "detail": "These humans are not newly recruited by the authors but provide labels/preferences through the source NYCC-derived datasets used for evaluation and training."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "New Yorker expert editorial curators/finalist-selection process represented in the NYCC corpus",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The corpus is described as including expert editorial curation and NYCC finalist/gold captions; the number of editors or curation decisions is not reported.",
+        "detail": "This source contributes to the benchmark/data provenance rather than a newly run human evaluation in this paper."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "human annotators from Hessel et al. (2023) whose annotations are reused",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Human-annotated cartoon descriptions, scene descriptions, uncanny elements, and entity/reference observations are used for text-only evaluation and reasoning-trace generation; annotator counts and annotation volumes are not reported here.",
+        "detail": "The paper starts RM trace construction from these existing human-annotated cartoon descriptions."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "human supervisors for generated captionist reasoning traces; identity/expertise not specified",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Generated traces are said to be verified under human supervision for consistency with expert reasoning patterns; the number of supervisors, traces checked, and agreement criteria are not reported.",
+        "detail": "This is a validation/quality-control population for training data, not an evaluation participant sample."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "curators of visual reference descriptions; likely authors/research team, but not explicitly specified",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "For each cartoon, the authors curate up to ten concise visual reference descriptions of entities, scene context, and key incongruities for the visual perception reward; curator count and protocol are not reported.",
+        "detail": "These references are used as anchors for LLM-judged visual perception rewards during preference alignment."
+      }
+    ],
+    "judges": [
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy (%)",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary quantitative results in Tables 1-3 and Appendix F are computed as accuracy on caption matching, ranking/preference discrimination, YesBut subtasks, and DeepEval subtasks."
+      },
+      {
+        "type": "platform-vote",
+        "name": "NYCC crowd/audience preferences and ranks",
+        "role": "primary",
+        "blind": null,
+        "detail": "Ranking labels are determined by crowd-preferred captions and crowd rank ranges, including top-10 vs. 1000-1009 and 30-39 vs. 300-309. The paper does not report voter counts or voting protocol."
+      },
+      {
+        "type": "human-expert",
+        "name": "NYCC editorial/gold-caption provenance",
+        "role": "primary",
+        "blind": null,
+        "detail": "The NYCC corpus is described as involving expert editorial curation; matching uses a gold caption among distractors. The exact adjudication process for each gold label is inherited from prior NYCC-derived benchmarks and not detailed here."
+      },
+      {
+        "type": "human-expert",
+        "name": "Expert captionist baseline",
+        "role": "secondary",
+        "blind": null,
+        "detail": "A professional NYCC-experienced captionist provides human baseline performance in Table 1; the paper treats this as a qualitative/reference human-level comparison."
+      },
+      {
+        "type": "human-lay",
+        "name": "Non-expert user-study participants",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Twenty-one non-expert participants provide a human baseline in Table 1; protocol and blinding are not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "Qwen2.5-7B-Instruct",
+        "role": "data-labeling",
+        "blind": true,
+        "detail": "Used as an LLM judge for visual perception and style rewards during preference alignment. The visual judge compares reasoning to curated visual references; the style judge scores five captionist-style criteria. The paper states the judge operates on reasoning traces without access to ground-truth captions."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy and format rewards",
+        "role": "data-labeling",
+        "blind": false,
+        "detail": "During GRPO preference alignment, accuracy reward verifies the final caption choice against the gold/crowd-preferred answer and format reward enforces parseable <think>/<answer> structure."
+      },
+      {
+        "type": "LLM",
+        "name": "DeepSeek-R1",
+        "role": "data-labeling",
+        "blind": false,
+        "detail": "Used to generate structured captionist reasoning traces from Hessel et al. annotations and correct answers; also evaluated as a text-only baseline on structured annotations."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to rephrase generated reasoning traces into concise, observational, image-grounded captionist-style commentary while preserving the reasoning structure."
+      },
+      {
+        "type": "LLM",
+        "name": "OpenAI o3",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "For cartoons missing Hessel-style descriptions, the paper reports using OpenAI o3 to generate descriptions automatically from the image; o3 is also evaluated as a closed multimodal baseline."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "The paper says generated traces are verified under human supervision and visual references are curated, but does not specify whether this was performed by authors, hired annotators, or experts."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Caption matching/ranking and external benchmark inference",
+        "mode": "single-sample",
+        "n": "1 parsed final answer per item; no repeated sampling or best-of-N selection reported",
+        "selector": "none",
+        "detail": "Models choose among dataset-provided candidate captions/options. The five matching candidates and two ranking candidates are task inputs, not model-generated candidates."
+      },
+      {
+        "scope": "Reasoning-trace construction for Resolution Modeling",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "DeepSeek-R1 generates traces and GPT-4o rephrases them; the paper does not report generating multiple candidate traces or selecting best-of-N traces. Correct answers are included in trace-generation prompts."
+      },
+      {
+        "scope": "Preference Alignment GRPO rollouts",
+        "mode": "not-applicable",
+        "n": "3 rollouts per prompt during training",
+        "selector": "none",
+        "detail": "The 3 rollouts are used for GRPO reward normalization/training, not for selecting a best output for evaluation."
+      },
+      {
+        "scope": "Zero-shot cartoon caption generation examples in Appendix G",
+        "mode": "single-sample",
+        "n": "The prompt requests a single caption; figures show one final caption per example",
+        "selector": "none",
+        "detail": "Caption generation is qualitative only; no best-of-N, reranking, or human selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "DeepSeek-R1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a text-only reasoning baseline on structured annotations and as the teacher model for generating captionist reasoning traces. No exact checkpoint, API snapshot, or inference date is reported."
+      },
+      {
+        "name": "o3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a closed multimodal baseline and used to generate descriptions for cartoons missing annotations. No API snapshot or inference date is reported."
+      },
+      {
+        "name": "o4-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a closed multimodal baseline. No API snapshot or inference date is reported."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to rephrase reasoning traces into captionist-style commentary. No exact snapshot or inference date is reported."
+      },
+      {
+        "name": "GLM-4.1V-9B-Thinking",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an open multimodal reasoning baseline; no checkpoint revision, access method, or inference date is reported."
+      },
+      {
+        "name": "Kimi-VL-A3B-Thinking-2506",
+        "version_or_snapshot": "2506",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an open multimodal reasoning baseline; the model name includes 2506, but no checkpoint hash, access method, or inference date is reported."
+      },
+      {
+        "name": "LlamaV-o1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as an open multimodal reasoning baseline; no checkpoint revision, access method, or inference date is reported."
+      },
+      {
+        "name": "Qwen2.5-VL-7B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as the 7B base model and used as the backbone for IRS-7B; training details report local GPU training, but no checkpoint revision or inference date is reported."
+      },
+      {
+        "name": "Qwen2.5-VL-32B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as the 32B base model and used as the backbone for IRS-32B; no checkpoint revision or inference date is reported."
+      },
+      {
+        "name": "Qwen2.5-VL-72B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Evaluated as the 72B base model and used as the backbone for IRS-72B; no checkpoint revision or inference date is reported."
+      },
+      {
+        "name": "IRS-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Authors' trained model based on Qwen2.5-VL-7B-Instruct with IM, RM, and PA stages. Training hyperparameters and GPU resources are reported, but no checkpoint identifier or inference date is given."
+      },
+      {
+        "name": "IRS-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Authors' trained model based on Qwen2.5-VL-32B-Instruct with IRS stages. No checkpoint identifier or inference date is given."
+      },
+      {
+        "name": "IRS-72B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Authors' trained model based on Qwen2.5-VL-72B-Instruct with IRS stages. No checkpoint identifier or inference date is given."
+      },
+      {
+        "name": "Qwen2.5-7B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as the LLM judge for visual perception and style rewards during preference alignment. This is reported as Qwen2.5-7B-Instruct, not Qwen2.5-VL-7B-Instruct."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Multimodal benchmark evaluation on NYCC matching/ranking and Zhou et al. preference splits",
+        "calls_per_item": null,
+        "candidates_per_item": "Task-provided options: 5 captions for matching; 2 captions for ranking, 10-vs-1000, and 30-vs-300. No number of sampled model outputs per item is reported beyond a parsed final answer.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "All multimodal models use standardized prompts requiring <think>...</think><answer>...</answer>. Decoding parameters, maximum output length, number of runs, inference hardware, and cost are not reported."
+      },
+      {
+        "scope": "Text-only DeepSeek-R1 evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "Task-provided options: 5 captions for matching and 2 captions for ranking.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "DeepSeek-R1 is evaluated using structured cartoon annotations rather than images, with original Hessel et al. prompts. Decoding parameters, output length limits, inference hardware, and cost are not reported."
+      },
+      {
+        "scope": "Reasoning-trace generation and rephrasing for RM",
+        "calls_per_item": "DeepSeek-R1 generation plus GPT-4o rephrasing per trace is described; OpenAI o3 is used for cartoons missing descriptions. Exact call counts are not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper does not report the number of traces, number of retries, decoding settings, token limits, API costs, or the fraction of cartoons requiring o3-generated descriptions."
+      },
+      {
+        "scope": "Incongruity Modeling continual pretraining",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "IM corpus total: 6,291,740 tokens across 4,123 instances",
+        "sampling_parameters": null,
+        "compute_or_cost": "7B: LoRA rank 32, 50 epochs, batch 1, LR 1e-4, bf16, 2x H100, about 4h. 32B: LoRA with 4-bit quantization rank 8, 25 epochs, batch 1, LR 1e-4, 4x H100, about 6h. 72B: 10 epochs, batch 1, LR 1e-4, 4x H200, about 6h.",
+        "detail": "The visual encoder and multimodal projection layers are frozen because the IM corpus is predominantly textual. Monetary cost is not reported."
+      },
+      {
+        "scope": "Resolution Modeling supervised training",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "LoRA training from IM-adapted model; rank 64 for 7B and rank 8 for 32B; 7 epochs; effective batch size 16; cosine LR schedule with 10% warmup; peak LR 1e-4. 7B: about 3h on 2x H100; 32B: about 6h on 4x H100.",
+        "detail": "The paper shows RM dynamics for 7B/32B/72B but the text does not fully specify 72B RM resource details. Number of training traces and monetary cost are not reported."
+      },
+      {
+        "scope": "Preference Alignment GRPO training",
+        "calls_per_item": "3 rollouts per prompt",
+        "candidates_per_item": "3 rollouts per prompt",
+        "token_budget": "Maximum length 512",
+        "sampling_parameters": "Temperature 1.0; GRPO; rollout batch size 16; learning rate 1e-6; KL penalty removed",
+        "compute_or_cost": "PA table: full-model training, 5 epochs, bf16, 4x H100, about 1.5 days. Text further states 4x H100 for 7B, 8 GPUs for 32B, and 16 GPUs for 72B.",
+        "detail": "Reward weights lambda_a, lambda_f, lambda_p, lambda_s and GRPO clipping epsilon are not numerically reported. Monetary cost and larger-model durations are not reported."
+      },
+      {
+        "scope": "Zero-shot caption generation qualitative examples",
+        "calls_per_item": null,
+        "candidates_per_item": "Prompt requests one final caption per image; no multiple candidates reported",
+        "token_budget": "Prompt asks for a concise single-line caption, ideally under 15 words; no model max-token limit is reported",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Appendix G is qualitative and does not report sample size beyond shown examples, decoding settings, hardware, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "NYCC matching/ranking, 10-vs-1000, and 30-vs-300",
+        "present": true,
+        "description": "Table 1 includes an expert captionist baseline and a 21-participant non-expert user-study baseline on a subset of tasks.",
+        "directly_comparable": null,
+        "detail": "The baselines use the same accuracy columns as model results, but the paper does not report the human item subset, interface, instructions, timing, or whether conditions were materially matched to model evaluation."
+      },
+      {
+        "scope": "YesBut and DeepEval zero-shot generalization",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "Appendix F compares IRS-7B only to Qwen2.5-VL-7B-Instruct; no human baseline is reported for these evaluations."
+      },
+      {
+        "scope": "Zero-shot caption generation",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "Appendix G provides qualitative model examples but no human captions or human evaluation baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "All evaluation cartoons are excluded from the continual pretraining corpus.",
+        "The authors verify negligible n-gram overlap between the CPT corpus and evaluation caption text.",
+        "The IM corpus removes items overlapping evaluation cartoons or captions.",
+        "The paper explicitly notes potential data advantages for closed models, including possible stylistic familiarity from OpenAI's Condé Nast licensing partnership."
+      ],
+      "basis": "The main evaluations use public NYCC-derived benchmarks from Hessel et al. (2023) and Zhou et al. (2025), plus public external benchmarks YesBut and DeepEval. Several evaluated models are later proprietary or open models for which pretraining data are not fully known; the paper itself flags possible New Yorker/Condé Nast exposure for OpenAI models. The authors implement leakage controls for their CPT corpus, but these do not decontaminate base-model or closed-model pretraining, and no private held-out benchmark or convincing model-level decontamination test is reported. Risk is therefore not low, but the reported train/eval corpus exclusions support a moderate rather than maximal assessment for the authors' controlled training pipeline."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Claims about Preference Alignment, visual perception/style reward ablations, and the full IRS pipeline depend on LLM-generated or LLM-judged supervision during training. Headline task scores are computed with accuracy against human/dataset labels rather than by an LLM evaluator.",
+      "human_validation": "Generated reasoning traces are said to be verified under human supervision. For reward judges, the paper reports that when Rp or Rs exceeds 80% of maximum, over 70% of cases are correct, but it does not report an independent human validation study of the LLM judge outputs.",
+      "detail": "Qwen2.5-7B-Instruct supplies visual perception and style rewards during GRPO; DeepSeek-R1 generates reasoning traces; GPT-4o rephrases them; o3 fills missing descriptions. Thus LLMs materially shape training data and reward signals, even though final benchmark evaluation is automatic accuracy over dataset labels."
+    },
+    "reporting_gaps": [
+      "Exact API snapshots/checkpoint revisions and inference dates are not reported for closed models, GPT-4o, DeepSeek-R1, o3/o4-mini, Qwen judge, or open-weight baselines.",
+      "Decoding parameters for benchmark evaluation are not reported: temperature, top-p/top-k, max output tokens, number of repeated runs, and handling of non-parseable outputs are unspecified.",
+      "Main NYCC evaluation item counts, split sizes, and human-baseline subset sizes are not reported in the paper.",
+      "Human baseline protocol is underreported: recruitment, demographics, geography, compensation, instructions, interface, timing, aggregation, and whether humans saw the same items/conditions as models are not provided.",
+      "Human supervision of reasoning traces is underreported: number and expertise of supervisors, amount of data checked, blinding, adjudication rules, and inter-annotator agreement are not reported.",
+      "The size of the RM captionist reasoning-trace dataset and train/validation/test split details are not reported.",
+      "Curated visual reference creation is underreported: curator identity/count, annotation guidelines, quality control, and number of cartoons/references actually curated are not fully specified beyond 'up to ten' per cartoon.",
+      "LLM reward-judge reliability is not independently validated against human judgments; judge checkpoint/snapshot and inference settings are also not reported.",
+      "Reward hyperparameters are incomplete: lambda weights for accuracy, format, perception, and style rewards and the GRPO clipping epsilon are not numerically specified.",
+      "Inference hardware and monetary cost for model evaluation and API-based trace generation/rephrasing are not reported.",
+      "Contamination controls are limited to the authors' CPT corpus; there is no decontamination test for base Qwen models, open baselines, closed models, or public external benchmarks.",
+      "Cross-dataset YesBut evaluation subset sizes are not reported; DeepEval reports 29 humorous images but not all task-level item counts/details.",
+      "Zero-shot caption generation is qualitative only; sample selection criteria, number of attempted examples, decoding parameters, and human evaluation are not reported.",
+      "The paper states that evaluation splits, preprocessing code, and prompt templates will be released, but the full copyrighted IM corpus cannot be released, limiting exact reproducibility."
+    ]
   }
 }

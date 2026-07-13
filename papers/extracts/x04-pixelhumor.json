@@ -213,5 +213,238 @@
     "code_url": null,
     "data_url": "https://github.com/Social-AI-Studio/PixelHumor",
     "other": "The paper states that PixelHumor will be released as URLs linking to original sources, with associated metadata, rather than redistributing comic images directly."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "8",
+        "population": "undergraduate students aged 18 to 25",
+        "recruitment": "university internal calls for part-time research assistantship",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "2,800 comics; split into four sets of 700, each annotated by a pair of annotators; tasks released in 100-comic batches with quality checks on 10 random comics per batch; disagreements in 15% of cases resolved by a third annotator; final labels determined by majority voting.",
+        "detail": "Annotators were trained over two weeks, including five trial comics and three practice sessions. They answered annotation questions for humor presence, sound-effect contribution, punchline panel, modality contribution, and humor styles. They were paid 20 dollars per hour and could withdraw or skip uncomfortable samples."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Model-generated explanations for 350 comics with high annotator agreement were rated on a 7-point Likert scale; Table 5 reports model-level mean/median/STD and Table 6 reports inter-rater reliability and absolute rating differences.",
+        "detail": "The paper calls these people human annotators/evaluators but does not report the number of evaluators, demographics, recruitment, whether they overlapped with dataset annotators, or how many raters scored each explanation."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": "1",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "70 human-written humor interpretations, for 70 comics selected as 10 comics randomly chosen per source.",
+        "detail": "For the preference study, “a human was tasked to interpret the humor” in the 70 comics. The paper does not report the author’s demographics, recruitment, or whether the human author followed the same prompt/length constraints as models."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "2 primary participants plus a third annotator for disagreements",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "70 preference-study judgments choosing the best interpretation from one human-written and six model-generated explanations per comic; disagreements were resolved by a third annotator from the chosen explanations.",
+        "detail": "The paper does not report participant demographics, recruitment, blinding/source masking, or the number of disagreements requiring third-annotator resolution."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Eight undergraduate annotators produced the PixelHumor ground-truth labels for humor presence, sound-effect contribution, punchline panel, modality contribution, and humor styles; pairwise annotation and third-annotator majority voting resolved disagreements."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "precision, recall, weighted F1-score",
+        "role": "primary",
+        "blind": null,
+        "detail": "Humor identification and humor classification results were computed against human-annotated ground truth using precision, recall, and weighted F1-score."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Human evaluators rated model-generated humor explanations for 350 high-agreement comics on a 7-point Likert scale for relevance and coherence; the paper reports Krippendorff’s alpha and exact-match/absolute-difference agreement statistics."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Preference-study participants selected the best interpretation among one human-written and six model-generated explanations for each of 70 comics; disagreements between the two primary participants were resolved by a third annotator."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "panel accuracy, text accuracy, WER, CER",
+        "role": "primary",
+        "blind": null,
+        "detail": "Sequence recognition was evaluated automatically: visual sequencing by panel accuracy, and text sequencing by text accuracy, Word Error Rate, and Character Error Rate."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Humor interpretation explanations generated by LMMs for Likert evaluation and preference study",
+        "mode": "single-sample",
+        "n": "one evaluated explanation per model/comic is reported; no multiple candidates or best-of-N procedure described",
+        "selector": "none",
+        "detail": "Question 6 prompted models to explain why the comic is funny or not funny in 3 sentences. Human evaluation and preference study used the resulting model explanations; selection before evaluation was not reported."
+      },
+      {
+        "scope": "Prompted model outputs for humor identification, humor classification, and sequence recognition tasks",
+        "mode": "single-sample",
+        "n": "one evaluated answer per model/comic/question is reported; no multiple candidates or best-of-N procedure described",
+        "selector": "none",
+        "detail": "Models answered task-specific prompts for Questions 1–5 and 7–8 under standardized prompts with temperature 0. Repeated sampling or candidate selection is not described."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": "GPT-4o 2024-08-06",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Closed-source model; evaluated in publicly available pre-trained form without task-specific fine-tuning. The paper does not state access method/API, inference date, or other serving details."
+      },
+      {
+        "name": "Gemini-1.5-Pro",
+        "version_or_snapshot": "gemini-1.5-pro-001",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Closed-source model; evaluated in publicly available pre-trained form without task-specific fine-tuning. The paper does not state access method/API, inference date, or other serving details."
+      },
+      {
+        "name": "Qwen2-VL-72B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source model identified by family and size only; evaluated in publicly available pre-trained form without task-specific fine-tuning. Checkpoint, commit/hash, quantization, and serving setup are not reported."
+      },
+      {
+        "name": "Gemma3-27B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source model identified by family and size only; evaluated in publicly available pre-trained form without task-specific fine-tuning. Exact checkpoint and serving setup are not reported."
+      },
+      {
+        "name": "LLaVA-OneVision-7B-SI",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper specifies the SI variant is pre-trained on single-image tasks; exact checkpoint, commit/hash, and serving setup are not reported."
+      },
+      {
+        "name": "Qwen2-VL-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Open-source model identified by family and size only; evaluated in publicly available pre-trained form without task-specific fine-tuning. Checkpoint, commit/hash, quantization, and serving setup are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "All LMM benchmark inference across PixelHumor tasks",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "temperature = 0",
+        "compute_or_cost": null,
+        "detail": "The paper states that all models were evaluated under a unified framework using standardized prompts with temperature 0, in zero-shot/pre-trained form without task-specific fine-tuning. It does not report call counts, batching, retries, max output/input tokens, other decoding parameters, hardware, latency, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Preference study for humor interpretation on 70 comics",
+        "present": true,
+        "description": "One human-written explanation was compared with six model-generated explanations per comic; human-written explanations were selected as best in 48 of 70 samples (68.6%).",
+        "directly_comparable": null,
+        "detail": "The outputs were judged side-by-side on the same comics, but the paper does not report whether the human explanation author followed the same prompt, length constraint, time limit, or information access as models, so material comparability of production conditions is unclear."
+      },
+      {
+        "scope": "Likert evaluation of model-generated humor interpretations on 350 comics",
+        "present": false,
+        "description": "Only model-generated explanations were rated in the 350-comic Likert evaluation; no human-written explanation baseline is reported for this evaluation.",
+        "directly_comparable": false,
+        "detail": "Human involvement here was as evaluators, not as a performance baseline."
+      },
+      {
+        "scope": "Sequence recognition",
+        "present": false,
+        "description": "The abstract states that top models are far below human performance, but the paper does not provide a human sequence-recognition protocol, participant count, sample, or metric value.",
+        "directly_comparable": false,
+        "detail": "No directly comparable human panel/text sequencing results are reported in the methods or results tables."
+      },
+      {
+        "scope": "Humor identification and humor classification",
+        "present": false,
+        "description": "The experiments compare models to human-annotated ground truth labels; they do not report separate human performance under matched prediction conditions.",
+        "directly_comparable": false,
+        "detail": "Ground-truth annotations are labels, not a human baseline score."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "PixelHumor task labels and annotations were newly created by the study annotators, and the paper states the collected comics were used only for annotation and analysis, not for model training by the authors.",
+        "For sequence recognition, panels were randomly assigned numerical labels displayed at the top-left corner."
+      ],
+      "basis": "PixelHumor as a benchmark was introduced in this 2025 paper, so the benchmark annotations were not a public legacy benchmark before the reported GPT-4o 2024-08-06 and gemini-1.5-pro-001 evaluations. However, the underlying items are publicly available online comics from well-known sources such as XKCD, Peanuts, Garfield, SMBC, and Cyanide and Happiness, many likely available on the web before model training. The paper provides no decontamination test or analysis of whether evaluated LMMs had seen the comics or their text in pretraining. New annotations and randomized panel labels reduce label leakage but do not rule out content memorization."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Open-ended humor-interpretation claims are based on human Likert ratings and human preference judgments; identification, classification, and sequence-recognition claims are based on automatic metrics against ground truth.",
+      "detail": "No LLM is used as an evaluator, judge, or labeling metric in the reported study. The LMMs are evaluated systems/generators, not judges."
+    },
+    "reporting_gaps": [
+      "The number, demographics, recruitment, and possible overlap with original annotators are not reported for the human evaluators who rated the 350-comic humor-interpretation outputs.",
+      "The paper does not explicitly report how many raters scored each model-generated explanation in the 350-comic Likert evaluation, despite reporting inter-rater reliability and absolute rating differences.",
+      "Blinding/source masking is not reported for the Likert evaluation or the 70-comic preference study; it is unclear whether judges knew which explanations were human-written or model-generated.",
+      "The human explanation author in the preference study is not described beyond “a human”; recruitment, demographics, expertise, time limits, and whether the same 3-sentence prompt/constraints were used are not reported.",
+      "The preference study does not report how many disagreements occurred between the two primary participants before third-annotator resolution.",
+      "Model access method is not reported for closed-source models, and serving method is not reported for open-source models.",
+      "Open-source model provenance is incomplete: exact checkpoints, commit hashes, quantization, preprocessing, and software/serving versions are not reported.",
+      "Inference dates are not reported for any model.",
+      "Inference budgets are incomplete: calls per comic/task, batching, retry policy, candidate count, max tokens, context limits used, and decoding parameters beyond temperature 0 are not reported.",
+      "Compute hardware, latency, and monetary cost are not reported.",
+      "No decontamination or memorization analysis is reported for public web-comic source material that may have appeared in model pretraining data.",
+      "The abstract claims models are far below human performance in panel sequencing, but no human sequence-recognition baseline protocol or numeric result is provided.",
+      "The criteria or threshold for selecting the 350 “high annotator agreement” comics for humor-interpretation rating are not specified.",
+      "The source of ground truth for text sequence recognition/OCR text and how text within panels was transcribed or verified are not described in detail.",
+      "The Appendix E model prompt for modality contribution asks models to output only Text, Visual, or Both, while the annotation scheme includes NA for non-humorous comics; the paper does not explain how NA cases were handled for model prompting/evaluation.",
+      "The paper does not clearly state whether all non-interpretation tasks were evaluated on the full 2,800 comics or whether any task-specific exclusions occurred."
+    ]
   }
 }

@@ -1,0 +1,631 @@
+{
+  "key": "x31-clef-joker-2024",
+  "ref": "Part 7 (shared-task ecosystem)",
+  "section": "Part 7 - Cross-Cultural & Translation",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x31-clef-joker-2024/x31-clef-joker-2024.md",
+  "source_md_sha256": "e809c0454c40d11f242c96aecb90efa7c965a2d75d0f99584c7f0adf7a72c026",
+  "source_truncated": false,
+  "title": "Overview of the CLEF 2024 JOKER Task 3: Translate puns from English to French",
+  "authors": [
+    "Liana Ermakova",
+    "Anne-Gwenn Bosser",
+    "Tristan Miller",
+    "Adam Jatowt"
+  ],
+  "year": 2024,
+  "venue": "CLEF 2024: Conference and Labs of the Evaluation Forum, September 9–12, 2024, Grenoble, France",
+  "paper_types": [
+    "shared-task",
+    "benchmark",
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How well can participant systems translate English punning jokes into French while preserving, as far as possible, both the form and meaning of the original wordplay?",
+    "How do commercial machine translation engines, LLM-based systems, and out-of-the-box or fine-tuned translation models compare under BLEU and BERT Score on the CLEF 2024 JOKER Task 3 data?",
+    "Can checking for the presence of manually annotated pun-location words in generated translations reveal aspects of wordplay preservation that standard automatic metrics overlook?",
+    "How do English-to-Spanish open-task submissions using BLOOM and Google Translate compare with CLEF JOKER 2023 Spanish translation results?"
+  ],
+  "tasks": [
+    "pun translation",
+    "joke translation",
+    "wordplay translation",
+    "pun-location-based translation analysis"
+  ],
+  "humor_domains": [
+    "puns",
+    "wordplay",
+    "punning jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English",
+    "French",
+    "Spanish"
+  ],
+  "datasets_used": [
+    {
+      "name": "JOKER parallel wordplay corpus",
+      "role": "source-material",
+      "size": "5,838 French translations of 1,405 distinct English puns"
+    },
+    {
+      "name": "CLEF 2024 JOKER track data",
+      "role": "introduced",
+      "size": "376 new distinct source texts with 832 corresponding reference translations created by professional French native speaker translators"
+    },
+    {
+      "name": "CLEF 2024 JOKER track data",
+      "role": "trained-on",
+      "size": "1,405 English wordplay instances with a total of 5,838 professional human French translations; maximum 29 reference translations per English pun; 72% of English puns have multiple reference translations"
+    },
+    {
+      "name": "CLEF 2024 JOKER track data",
+      "role": "evaluated-on",
+      "size": "test files shared with participants consist of 4,501 English wordplay instances; official reported evaluation uses 376 distinct English texts with 832 reference translations to French"
+    },
+    {
+      "name": "CLEF 2023 JOKER Task 2 pun location data",
+      "role": "analyzed",
+      "size": "5,838 French translations of 1,405 distinct English puns with 4,355 distinct locations; 2,000 annotations released as train data in 2023; overlap with the 2024 Task 3 test data has 13 distinct locations for 8 unique English puns"
+    },
+    {
+      "name": "CLEF 2023 JOKER English-to-Spanish training data",
+      "role": "evaluated-on",
+      "size": "215 puns in English with 644 corresponding references"
+    }
+  ],
+  "models_evaluated": [
+    "MarianMT",
+    "T5-base",
+    "T5",
+    "Google Translate",
+    "Helsinki-NLP Opus-MT",
+    "mBART",
+    "M2M100",
+    "EasyNMT-Opus",
+    "EasyNMT-mBART",
+    "GPT-4",
+    "GPT-4o",
+    "Llama-2-7b",
+    "DeepL",
+    "ChatGPT",
+    "BLOOM",
+    "mT5-base",
+    "T5-large",
+    "j2-grande-finetuned",
+    "GPT-3",
+    "SimpleT5"
+  ],
+  "methods_proposed": [
+    {
+      "name": "CLEF 2024 JOKER Task 3 shared-task benchmark",
+      "summary": "The paper organizes and reports a shared task for translating English punning jokes into French, with the goal of preserving both form and meaning of wordplay following a pun→pun strategy. The benchmark extends the JOKER parallel wordplay corpus with new French reference translations and evaluates participant runs."
+    },
+    {
+      "name": "Pun-location exact-match analysis",
+      "summary": "For a finer-grained analysis, the authors check whether generated French translations contain at least one exact string from the set of manually annotated words or phrases carrying multiple meanings in the reference translations for the same English pun. This is used to examine whether systems reproduce punning words that BLEU and BERT Score may not specifically reward."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The task objective is explicitly framed as implementing the pun→pun strategy from Delabastita’s typology of pun translation strategies, aiming to preserve both the form and meaning of the original wordplay."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "BLEU using the sacreBLEU implementation with the default 13a tokenizer; the paper reports BLEU score and BLEU precisions for n-grams."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "BERT Score using the Python bert-score package; the paper reports mean precision, recall, and F₁ over all references."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Exact string matching for whether each generated French translation contains at least one word from the set of annotated pun locations corresponding to the English pun."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Pun locations in the French reference translations were manually annotated by master’s students specializing in translation who are native speakers of French."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The paper uses prior manual evaluation from CLEF 2023 for context, reporting that the highest success rate for preserving both form and sense was 6% for French and 18% for Spanish."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "On the English-to-French test data, Arampatzis_GoogleTranslate ranked first by BLEU.",
+      "metric": "BLEU",
+      "value": "65.23 (BLEU_1 78.96, BLEU_2 67.48, BLEU_3 61.59, BLEU_4 57.52)",
+      "dataset": "CLEF 2024 JOKER track data test data",
+      "best_system": "Arampatzis_GoogleTranslate"
+    },
+    {
+      "finding": "On the English-to-French test data, Arampatzis_GoogleTranslate had the highest BERT Score F₁.",
+      "metric": "BERT Score F₁",
+      "value": "91.85% (P 91.93%, R 91.82%)",
+      "dataset": "CLEF 2024 JOKER track data test data",
+      "best_system": "Arampatzis_GoogleTranslate"
+    },
+    {
+      "finding": "On the English-to-French training data, UAms_Marian_ft achieved the highest BLEU score.",
+      "metric": "BLEU",
+      "value": "68.56",
+      "dataset": "CLEF 2024 JOKER track data training data",
+      "best_system": "UAms_Marian_ft"
+    },
+    {
+      "finding": "On the English-to-French training data, UAms_T5-base_ft achieved the highest BERT Score F₁.",
+      "metric": "BERT Score F₁",
+      "value": "83.80% (P 84.35%, R 83.33%)",
+      "dataset": "CLEF 2024 JOKER track data training data",
+      "best_system": "UAms_T5-base_ft"
+    },
+    {
+      "finding": "The largest training-data overlap with identified French pun-location words was achieved by UAmS_Marian_ft.",
+      "metric": "pun-location exact-match overlap",
+      "value": "317/1,405; 23%",
+      "dataset": "CLEF 2024 JOKER track data training data with CLEF 2023 JOKER Task 2 pun location annotations",
+      "best_system": "UAmS_Marian_ft"
+    },
+    {
+      "finding": "Prior manual evaluation cited in the paper found very low success rates for preserving both form and sense of wordplay.",
+      "metric": "manual success rate",
+      "value": "6% for French; 18% for Spanish",
+      "dataset": "manually evaluated CLEF 2023 JOKER test set",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Ten teams submitted 20 official English-to-French runs, and Olga submitted three additional English-to-Spanish open-task runs, for 11 teams and 23 runs total.",
+    "Commercial machine translation engines achieved the best automatic results on the English-to-French test data, with Google Translate scoring BLEU 65.23 and BERT Score F₁ 91.85%.",
+    "On the training data, fine-tuned models largely outperformed Google Translate by BLEU, with UAms_Marian_ft scoring 68.56 compared with Arampatzis_GoogleTranslate at 42.19.",
+    "BERT Score and BLEU can disagree substantially: the paper notes that UBO submissions had very low BLEU but very high BERT scores, and that more analysis is needed.",
+    "Only a small percentage of generated translations contained reference pun-location words: fine-tuned models reached a maximum of 23%, while non-fine-tuned models used pun-location words in only 11% of cases.",
+    "For Spanish, the paper reports high BERT scores across models, with F₁ always exceeding 77%, while prior manual evaluation found a maximum of only 18% successful translations."
+  ],
+  "limitations": [
+    "The paper emphasizes that existing automatic metrics do not take punning words into account and can reward translations where the wordplay and even the sense are lost.",
+    "The pun-location analysis on the 2024 test data is limited because the overlap with the CLEF 2023 Task 2 pun-location data contains only 13 distinct locations for 8 unique English puns, so the results are close to zero and not entirely interpretable.",
+    "The pun-location method uses only exact string matches, which can miss valid paraphrases or alternative wordplay strategies.",
+    "Several submitted runs are partial, with different counts across systems, making some comparisons uneven.",
+    "The English-to-Spanish evaluation uses 215 puns from prior CLEF 2023 training data because no new Spanish references were constructed in 2024.",
+    "The paper states that more analysis is needed to investigate the discrepancy between low BLEU and high BERT scores for the UBO submissions."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Additional information on the track is available on the JOKER website: https://www.joker-project.com/"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "professional human French translators; the 2024 test references are described as created by professional French native-speaker translators",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "French"
+        ],
+        "observations": "Training data: 5,838 professional human French translations of 1,405 English wordplay instances. 2024 expansion/test references: 832 French reference translations for 376 new distinct source texts.",
+        "detail": "The paper reports translation/reference counts but does not report the number of translators, recruitment procedure, or assignment protocol."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "master’s students specializing in translation who are native speakers of French",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "French"
+        ],
+        "observations": "Annotated 4,355 distinct French pun locations in 5,838 French translations of 1,405 English puns; 2,000 annotations had been released as 2023 train data; overlap with the 2024 Task 3 test data was 13 distinct locations for 8 unique English puns.",
+        "detail": "These annotators supplied pun-location labels used for the exact-match analysis; the paper does not report annotator count, agreement, or adjudication."
+      },
+      {
+        "role": "other",
+        "participant_count": "individual count not reported; 11 teams",
+        "population": "CLEF 2024 JOKER Task 3 submitting teams; the paper notes that six submissions were made by translators rather than computer scientists, from teams Olga and UBO",
+        "recruitment": "CLEF 2024 JOKER shared-task participation",
+        "geography": null,
+        "languages": [
+          "English",
+          "French",
+          "Spanish"
+        ],
+        "observations": "Ten teams submitted 20 official English-to-French runs; Olga submitted 3 additional English-to-Spanish open-task runs, for 23 runs total.",
+        "detail": "Team/run counts are not individual participant counts."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "human evaluators in cited CLEF 2023 JOKER manual evaluation",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "French",
+          "Spanish"
+        ],
+        "observations": "The paper cites prior manual evaluation reporting highest success rates for preserving both form and sense of wordplay: 6% for French and 18% for Spanish; for the training set, successful French translations were less than 17%.",
+        "detail": "This is prior work cited for context; evaluator population, number of evaluations, rubric details, and blinding are not described in this overview."
+      }
+    ],
+    "judges": [
+      {
+        "type": "automatic-metric",
+        "name": "sacreBLEU BLEU",
+        "role": "primary",
+        "blind": null,
+        "detail": "Official automatic evaluation used sacreBLEU with the default 13a tokenizer; BLEU score and n-gram precisions were reported for English-to-French and English-to-Spanish translation runs."
+      },
+      {
+        "type": "LLM",
+        "name": "BERT Score / Python bert-score package",
+        "role": "primary",
+        "blind": null,
+        "detail": "The paper reports mean BERT Score precision, recall, and F1 over references. The underlying pretrained scoring model and package version are not reported; treated as an LLM/model-based judge because it is a learned language-model metric."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "exact string match against annotated pun-location terms",
+        "role": "secondary",
+        "blind": null,
+        "detail": "For each English pun, the authors computed whether the corresponding generated French translation contained at least one exact word/string from the set of annotated French pun locations for that pun."
+      },
+      {
+        "type": "human-expert",
+        "name": "professional French reference translators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Professional human French translations served as reference translations for automatic metrics; the paper does not describe the translation workflow or whether translators were blind to system outputs."
+      },
+      {
+        "type": "human-expert",
+        "name": "French native-speaker translation master’s students",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "They manually annotated French words or phrases carrying multiple meanings, used as pun-location labels in the secondary analysis."
+      },
+      {
+        "type": "human-expert",
+        "name": "CLEF 2023 manual evaluation, as cited",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Prior manual evaluation supplied contextual claims about low success rates for wordplay preservation; this paper does not report evaluator identities, expertise beyond the cited source, or blinding."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Official English-to-French Task 3 submitted runs",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The overview evaluates submitted run files, generally one submitted translation per source text per run where present, but does not report whether systems generated multiple candidates or used best-of-N selection."
+      },
+      {
+        "scope": "Farhan GPT-4/GPT-4o English-to-French runs",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper states that the team used single-shot prompting with GPT-4 and GPT-4o; single-shot describes prompting context, not the number of generated candidates. Candidate selection and sampling are not reported."
+      },
+      {
+        "scope": "UBO semi-manual English-to-French runs using commercial models",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper describes three semi-manual runs using commercial models such as DeepL, Google Translate, and ChatGPT, but does not explain whether humans edited, selected among candidates, or generated final outputs."
+      },
+      {
+        "scope": "Olga English-to-Spanish open-task runs",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper states that Spanish translations were generated by Google Translate and BLOOM with few-shot prompting, with two different BLOOM prompts and partial BLOOM runs; candidate counts and selection procedures are not reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "MarianMT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used by UAms, Arampatzis, Tomislav&Rowan, Jokester, and in approaches described as neural MT models like MarianMT; UAms_Marian_ft was fine-tuned, but exact checkpoint/version is not reported."
+      },
+      {
+        "name": "T5 / t5-base",
+        "version_or_snapshot": "t5-base for UAms run; other T5 run not further specified",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "UAms used T5(t5-base) with standard preprocessing; Arampatzis submitted an Arampatzis_T5 run. Exact checkpoints and training/inference details are not reported."
+      },
+      {
+        "name": "Google Translate",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used in Arampatzis_GoogleTranslate, UBO commercial/semi-manual runs, and Olga_ES_Googletranslator; no service version or query date is reported."
+      },
+      {
+        "name": "Helsinki-NLP Opus / Opus-MT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used by Arampatzis, Petra&Regina through EasyNMT, Tomislav&Rowan through MarianMT framework, and appears in Spanish comparison runs; exact model checkpoint is not reported."
+      },
+      {
+        "name": "mBART",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in Arampatzis_mBART and in Spanish comparison EasyNMT-mbart; exact checkpoint is not reported."
+      },
+      {
+        "name": "M2M100",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in Arampatzis_M2M100 and Spanish comparison ThePunDetectives_EN-ES_M2M100; exact checkpoint is not reported."
+      },
+      {
+        "name": "EasyNMT with Helsinki-NLP Opus-MT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Petra&Regina used the EasyNMT library with the Helsinki-NLP Opus-MT model; no library/model version is reported."
+      },
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Farhan used GPT-4 with single-shot prompting; no API snapshot, version, access path, or inference date is reported."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Farhan used GPT-4o with single-shot prompting; no API snapshot, version, access path, or inference date is reported."
+      },
+      {
+        "name": "Llama-2-7b",
+        "version_or_snapshot": "7b",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "AB&DPV used simple prompts with Llama-2-7b; exact checkpoint, serving setup, and decoding settings are not reported in the overview."
+      },
+      {
+        "name": "DeepL",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used in UBO_DeepL/semi-manual commercial-model runs; no service version or inference date is reported."
+      },
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used in UBO_ChatGPT/semi-manual commercial-model runs; no underlying model version or inference date is reported."
+      },
+      {
+        "name": "BLOOM",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Olga used BLOOM with few-shot prompting for English-to-Spanish; the Spanish comparison table also includes Smroltra_EN-ES_BLOOM from 2023. Model size/checkpoint is not reported."
+      },
+      {
+        "name": "Frane/Dajana&Kathy TranslationModel",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper describes neural machine translation models like MarianMT refined with a custom module using bilingual dictionaries and contextual embeddings to preserve pun elements; exact model identity/version is not reported."
+      },
+      {
+        "name": "UBO_SDL / commercial models integrated into SDL Studio",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "mixed",
+        "reporting": "partial",
+        "detail": "UBO_SDL is reported as a semi-manual run using commercial models integrated into SDL Studio; the specific underlying engine(s) and versions are not specified."
+      },
+      {
+        "name": "mT5-base",
+        "version_or_snapshot": "base",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Appears in CLEF 2023 English-to-Spanish comparison rows LJGG_es_mt5_base_auto and LJGG_es_mt5_base_no_label_auto; not newly described in detail."
+      },
+      {
+        "name": "T5-large",
+        "version_or_snapshot": "large",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Appears in CLEF 2023 English-to-Spanish comparison rows; exact checkpoint and inference details are not reported in this overview."
+      },
+      {
+        "name": "j2-grande-finetuned",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Appears as TheLangVerse_j2-grande-finetuned in the English-to-Spanish comparison table; provenance details are deferred to prior working notes."
+      },
+      {
+        "name": "GPT-3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Appears in CLEF 2023 English-to-Spanish comparison rows Smroltra_EN-ES_GPT3 and Croland_EN_ES_GPT3; no snapshot or inference date is given here."
+      },
+      {
+        "name": "SimpleT5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Appears in the CLEF 2023 English-to-Spanish comparison row Smroltra_EN-ES_SimpleT5; no version or inference details are reported here."
+      },
+      {
+        "name": "BERT Score scorer",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The Python bert-score package was run for evaluation, but the underlying model, package version, and configuration are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Official English-to-French shared-task generation runs",
+        "calls_per_item": null,
+        "candidates_per_item": "One submitted output per source item per run was evaluated where present; internal candidate generation not reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The overview reports output counts by run, including complete runs with 376 test items and partial runs with counts such as 312, 92, 63, 49, or 1 for BLEU; it does not report model-call counts, decoding parameters, hardware, or cost."
+      },
+      {
+        "scope": "Fine-tuned and out-of-the-box encoder-decoder MT systems",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "MarianMT, T5/t5-base, mBART, M2M100, Opus/Opus-MT, EasyNMT, and custom TranslationModel systems are described at a high level only; training/fine-tuning and inference budgets are not reported in this overview."
+      },
+      {
+        "scope": "GPT-4/GPT-4o Farhan runs",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "single-shot prompting is reported; temperature, decoding, prompt text, and other parameters are not reported",
+        "compute_or_cost": null,
+        "detail": "Two GPT-based runs were submitted, but the paper gives no token limits, API version/date, number of retries, or candidate-selection information."
+      },
+      {
+        "scope": "Llama-2-7b AB&DPV run",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "simple prompts are reported; decoding parameters are not reported",
+        "compute_or_cost": null,
+        "detail": "The paper notes incomplete or mixed-language translations in some instances but does not provide inference budget details."
+      },
+      {
+        "scope": "UBO semi-manual commercial-model runs",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "UBO used commercial models such as DeepL, Google Translate, and ChatGPT in semi-manual runs; the extent of human editing/selection and service-call budget is not reported."
+      },
+      {
+        "scope": "Olga English-to-Spanish open-task runs",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "BLOOM used few-shot prompting with two different prompts; other parameters not reported",
+        "compute_or_cost": null,
+        "detail": "Google Translate covered 215 puns; both BLOOM runs were partial, with BLEU count 5 and BERT Score count 8. Token budgets, model size, prompt examples, and decoding settings are not reported."
+      },
+      {
+        "scope": "Automatic evaluation computation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "sacreBLEU default tokenizer 13a; BERT Score package used but scorer configuration not reported",
+        "compute_or_cost": null,
+        "detail": "Evaluation budget and software versions, other than sacreBLEU tokenizer choice and the Python bert-score package, are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "CLEF 2024 English-to-French Task 3 automatic evaluation",
+        "present": false,
+        "description": "Professional French translations were used as references, not as a separately evaluated human baseline system. No human-only translations were scored under the same submitted-run conditions.",
+        "directly_comparable": false,
+        "detail": "The shared task compares machine/LLM/commercial/semi-manual systems against human references using automatic metrics."
+      },
+      {
+        "scope": "English-to-Spanish open-task comparison",
+        "present": false,
+        "description": "The paper compares Olga’s 2024 Spanish runs with CLEF 2023 participant system results on 215 puns and 644 references; it does not report a directly comparable human performance baseline.",
+        "directly_comparable": false,
+        "detail": "Prior manual success rates assess system outputs; they are not human translator baseline scores."
+      },
+      {
+        "scope": "Prior CLEF 2023 manual evaluation cited for context",
+        "present": false,
+        "description": "Manual evaluation reported low system success rates for preserving wordplay, but no human translator performance rate is reported in this overview.",
+        "directly_comparable": false,
+        "detail": "The cited manual evaluation is a human judgment of system outputs, not a matched human baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The 2024 English-to-French expansion introduced 376 new distinct source texts with 832 reference translations created by professional French native-speaker translators.",
+        "Pun-location annotations were not shared with participants in 2024, although 2,000 annotations had been released as 2023 train data.",
+        "For the Spanish open-task comparison, the authors state that Olga’s models had not been trained on their data, so last year’s train references were considered not problematic."
+      ],
+      "basis": "The official 2024 English-to-French reference translations were newly created, which mitigates reference leakage for the shared task. However, the paper does not report decontamination tests for proprietary or LLM systems, does not give inference dates, and evaluates/report results on public/shared training data and CLEF 2023 Spanish training data. Source puns and legacy benchmark material may have been public or included in later model pretraining, so contamination cannot be ruled out."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "BERT Score precision/recall/F1 rankings and claims about high model-based semantic scores, including the English-to-French and English-to-Spanish BERT Score tables and observations about discrepancies between BLEU/BERT Score and manual success.",
+      "human_validation": "The paper cites prior CLEF 2023 manual evaluation showing low wordplay-preservation success despite high automatic scores, but it does not provide new human validation of the 2024 outputs.",
+      "detail": "Headline evaluation uses BLEU plus BERT Score; BLEU and exact pun-location matching are non-LLM automatic metrics, but BERT Score is a learned language-model metric and is a primary reported measure. Therefore important, though not all, conclusions depend on an LLM/model-based judge."
+    },
+    "reporting_gaps": [
+      "Exact model versions, checkpoints, API snapshots, service versions, access paths, and inference dates are not reported for commercial systems, GPT models, ChatGPT, BLOOM, and most MT models.",
+      "Prompt templates, number of few-shot examples, single-shot example content, token limits, temperature/decoding parameters, retry policies, and best-of-N or candidate-selection procedures are not reported.",
+      "Fine-tuning details, training hyperparameters, compute, and costs for fine-tuned MarianMT/T5 and other participant models are not described in the overview.",
+      "Counts, recruitment, assignment process, and quality-control protocol for professional reference translators are not reported.",
+      "Pun-location annotator count, annotation guidelines, inter-annotator agreement, adjudication, and blinding are not reported.",
+      "Details of the cited CLEF 2023 manual evaluation, including evaluator population, item counts, rubric, and blinding, are not provided in this paper.",
+      "BERT Score configuration is incomplete: package version, underlying pretrained model, language setting, IDF/rescaling choices, and random seeds are not reported.",
+      "Several runs are partial and have different evaluation counts; the overview reports counts but generally does not explain missing outputs or how partial coverage affects comparability.",
+      "Mapping from all participant approaches to all result-table run IDs is not fully transparent in the overview.",
+      "No general decontamination or memorization check is reported for LLMs or proprietary translation services against public JOKER/CLEF data or public pun sources."
+    ]
+  }
+}

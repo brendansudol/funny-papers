@@ -26,6 +26,11 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
+try:
+    from evidence_schema import EVIDENCE_INSTRUCTIONS, EVIDENCE_PROFILE_SCHEMA
+except ModuleNotFoundError:  # Imported as scripts.extract_papers in tests/tools.
+    from scripts.evidence_schema import EVIDENCE_INSTRUCTIONS, EVIDENCE_PROFILE_SCHEMA
+
 ROOT = Path(__file__).resolve().parent.parent
 PAPERS_PATH = ROOT / "papers" / "papers.json"
 DATASETS_PATH = ROOT / "data" / "datasets.json"
@@ -143,6 +148,7 @@ SCHEMA = {
                 "required": ["type", "detail"],
             },
         },
+        "evidence_profile": EVIDENCE_PROFILE_SCHEMA,
         "headline_results": {
             "type": "array",
             "description": "The paper's most important quantitative results, with exact numbers",
@@ -185,7 +191,7 @@ SCHEMA = {
         "title", "authors", "year", "venue", "paper_types", "research_questions",
         "tasks", "humor_domains", "modalities", "languages", "datasets_used",
         "models_evaluated", "methods_proposed", "humor_theories", "evaluation_methods",
-        "headline_results", "key_findings", "limitations", "safety_ethics_notes",
+        "evidence_profile", "headline_results", "key_findings", "limitations", "safety_ethics_notes",
         "artifacts", "one_pager_markdown",
     ],
 }
@@ -200,6 +206,8 @@ You will receive the full Markdown transcription of one paper (transcribed page-
 - models_evaluated: only models actually run in experiments; use canonical public names.
 - humor_theories: only theories the paper actually engages with; "operationalized" means the theory shapes the method/annotation scheme, not just the intro.
 - headline_results: 2-6 rows covering the paper's most load-bearing numbers.
+
+""" + EVIDENCE_INSTRUCTIONS + """
 
 one_pager_markdown: write a ~400-650 word single-page summary a researcher could read instead of the paper. Use exactly these section headers (## level):
 ## TL;DR

@@ -154,5 +154,176 @@
     "code_url": "https://github.com/anna-arnett/ai-humor/",
     "data_url": "https://github.com/anna-arnett/ai-humor/",
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Speakers/performers in existing SMILE (TED+sitcoms) source material whose transcript utterances provide context C and candidate humorous attempt X.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Transcript utterances were used to construct local textual context C and punchline/utterance X; the paper reports 31 manually reviewed examples and 307 generated explanation examples, but not the number of unique speakers/performers.",
+        "detail": "The paper uses existing datasets with TED Talks and sitcom examples; it does not report source-speaker counts, selection criteria, or demographic details."
+      },
+      {
+        "role": "live-audience",
+        "participant_count": null,
+        "population": "Audiences in TED Talks or sitcoms represented in SMILE source examples.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Observed audience reaction Y was represented as laughter/no laughter or humor succeeded/failed; no audience-member count is reported.",
+        "detail": "Y is described as the receiver reaction: 1 means audience laughed/felt humorous and 0 otherwise. The current paper reuses these observable reactions rather than recruiting audiences."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Paper authors/research team performing manual review.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "31 generated explanations were double-checked one-by-one for Prompt 1; the same 31 examples were tested under Prompt 2; a small pilot before scaling was manually inspected, but its size is not reported.",
+        "detail": "The paper says 'we manually reviewed,' 'we double-checked,' and 'we judged each output as acceptable or unacceptable based on whether it matched our interpretation of the transcript.' It does not report the number of reviewers or whether review was independent."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Manual author/research-team judgment determined the reported Prompt 1 vs Prompt 2 results on the 31-example set: Prompt 1 had 17 acceptable and 14 incorrect outputs; Prompt 2 had 27 correctly labeled outputs and 4 errors. Blinding is not reported."
+      },
+      {
+        "type": "live-audience",
+        "name": "SMILE/TED+sitcom audience reactions",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Audience laughter/no-laughter in the existing source material determined the reaction label Y used as input to explanation generation."
+      },
+      {
+        "type": "LLM",
+        "name": "gpt-4o-mini",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The LLM generated explanations and, under Prompt 2, also generated text_support_label, data_quality_flags, reasoning_steps, flow_chart, final_explanation, and hallucination_flag for the resulting data objects. These labels/metadata are model outputs, not independent human annotations."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Prompt 1 explanation generation on 31 manually reviewed examples",
+        "mode": "single-sample",
+        "n": "1 reported output per example",
+        "selector": "none",
+        "detail": "The paper reports 31 outputs for 31 examples under Prompt 1 and does not report multiple candidates, reranking, or best-of-N selection."
+      },
+      {
+        "scope": "Prompt 2 explanation generation on the same 31 manually reviewed examples",
+        "mode": "single-sample",
+        "n": "1 reported output per example",
+        "selector": "none",
+        "detail": "The paper reports 31 outputs for the same 31 examples under Prompt 2 and does not report multiple candidates, reranking, or best-of-N selection."
+      },
+      {
+        "scope": "Scaled generation using revised Prompt 2",
+        "mode": "single-sample",
+        "n": "1 final generated explanation example per produced data object; 307 explanation examples total",
+        "selector": "none",
+        "detail": "After an unquantified pilot, the authors used the revised prompt to produce 307 explanation examples. No candidate sampling/selection procedure is reported."
+      },
+      {
+        "scope": "DSPy/GEPA automatic prompt optimization exploration",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper says DSPy/GEPA was explored and did not improve performance beyond manual prompt adjustment, but gives no generation, candidate, selection, or evaluation details."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "gpt-4o-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper states: 'All explanations were generated using the same base LLM checkpoint: [gpt-4o-mini].' It does not report API/provider details, exact snapshot, release variant, or inference dates."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Manual evaluation generation for Prompt 1 and Prompt 2 on 31 examples",
+        "calls_per_item": null,
+        "candidates_per_item": "1 reported output per example for each prompt",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper says both prompts were applied to the same 31 examples. It does not report API-call counts, retries, parsing failures, random seeds, temperature, top_p, max tokens, latency, compute, or cost."
+      },
+      {
+        "scope": "Scaled revised-prompt generation of 307 explanation examples",
+        "calls_per_item": null,
+        "candidates_per_item": "307 final explanation examples produced; number of candidates or retries per source item not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports a small pilot followed by a larger run yielding 307 examples, but does not report pilot size or generation budget details."
+      },
+      {
+        "scope": "DSPy/GEPA automatic prompt optimization exploration",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No optimization budget, number of trials, objective, validation split, model calls, or compute/cost information is reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor explanation generation task R given C, X, and Y",
+        "present": false,
+        "description": null,
+        "directly_comparable": false,
+        "detail": "The paper does not evaluate human-written explanations against LLM-generated explanations under matched conditions. Humans served as manual judges/error analysts, not as a baseline system."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [],
+      "basis": "The 31-example evaluation and 307-example generation are based on an existing public source dataset, SMILE (TED+sitcoms), cited as 2023, and on TED/sitcom transcript material that may be present in proprietary LLM training data. The model is gpt-4o-mini, but the paper provides no training-data disclosure, held-out/private item construction, or decontamination test. Manual review checks output quality but does not mitigate possible source memorization or prior exposure."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "The generated dataset's per-instance text-support, data-quality, and hallucination labels are produced by gpt-4o-mini; the main Prompt 1 vs Prompt 2 performance table is based on author manual judgment rather than LLM-as-judge evaluation.",
+      "human_validation": "Manual validation is reported for the same 31 examples and an unspecified small pilot; the full 307-example generated dataset is not systematically human-validated in the paper.",
+      "detail": "The paper explicitly proposes future LLM-as-a-judge evaluation only after validating a rubric against human judgments. In the reported study, the LLM is primarily the generator/data-labeler, while authors are the primary evaluators."
+    },
+    "reporting_gaps": [
+      "Number, identity, expertise, and demographics of manual reviewers are not reported.",
+      "Blinding, independent annotation, adjudication procedure, and inter-annotator agreement are not reported.",
+      "Sampling/selection method for the 31 manually reviewed examples is not reported, so representativeness is unclear.",
+      "The size and composition of the initial source pool from SMILE, source split between TED and sitcoms, Y=1/Y=0 distribution, and number of unique speakers/audiences are not reported.",
+      "Pilot size before the 307-example scaled run and precise go/no-go criteria are not reported.",
+      "The 307 generated explanation examples are not systematically evaluated; the paper reports only preliminary/manual inspection and future evaluation plans.",
+      "Model access route, provider/API endpoint, exact snapshot/version beyond 'gpt-4o-mini,' and inference dates are not reported.",
+      "Sampling and decoding parameters such as temperature, top_p, max tokens, seed, stop conditions, retry/JSON-repair policy, and parsing failure rate are not reported.",
+      "Compute, latency, and monetary cost are not reported.",
+      "DSPy/GEPA prompt-optimization details, including objective, training/validation split, number of trials, and evaluation method, are not reported.",
+      "No contamination or decontamination analysis is reported for SMILE, TED Talk transcripts, sitcom transcripts, or gpt-4o-mini.",
+      "No directly comparable human baseline with human-authored humor explanations is included."
+    ]
   }
 }

@@ -1,0 +1,482 @@
+{
+  "key": "x18-yodalib",
+  "ref": "Part 2 (learned-generation anchor)",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x18-yodalib/x18-yodalib.md",
+  "source_md_sha256": "b1e1dc822f848ebfbf214d6df6b49ef0e7c4941fca519f180396a4fd9b5eb1c4",
+  "source_truncated": false,
+  "title": "“Judge me by my size (noun), do you?” YodaLib: A Demographic-Aware Humor Generation Framework",
+  "authors": [
+    "Aparna Garimella",
+    "Carmen Banea",
+    "Nabil Hossain",
+    "Rada Mihalcea"
+  ],
+  "year": 2020,
+  "venue": "COLING 2020",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can humor generation for Mad Libs stories be automated while accounting for the demographic background, specifically location, of the intended audience?",
+    "Can BERT-based location-biased word prediction and location-specific humor classification produce funnier Mad Lib stories than a generic masked language model, AMT human players, and a previous semi-automated approach?",
+    "How do humor preferences differ between Indian and US audiences and writers in terms of funniness, coherence, incongruity, and deviation from the story title?"
+  ],
+  "tasks": [
+    "demographic-aware humor generation",
+    "Mad Lib blank filling",
+    "humorous story completion",
+    "location-specific humor classification",
+    "candidate word and sentence ranking for humor"
+  ],
+  "humor_domains": [
+    "Mad Libs",
+    "fill-in-the-blank stories",
+    "story-based textual humor"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Location-specific Mad Lib humor dataset",
+      "role": "introduced",
+      "size": "50 stories; stories filled by 3 players from each country and judged by 5 judges from the same country, with opposite-country judgements for filled-in test stories"
+    },
+    {
+      "name": "Fun Libs",
+      "role": "source-material",
+      "size": "50 stories curated by Hossain et al. (2017); 4 discarded and replaced with 4 new stories"
+    },
+    {
+      "name": "Garimella et al. (2017) blog posts",
+      "role": "trained-on",
+      "size": "35K blogs, 17M tokens for IN, and 33K, 12M tokens for US"
+    },
+    {
+      "name": "Location-specific humor classification datasets",
+      "role": "trained-on",
+      "size": "TRAIN funny/not funny: IN 566/130, US 574/122; VALIDATION: IN 173/49, US 193/29"
+    },
+    {
+      "name": "Location-specific humor classification datasets",
+      "role": "evaluated-on",
+      "size": "TEST funny/not funny: IN 137/94, US 210/21"
+    },
+    {
+      "name": "Wikipedia",
+      "role": "source-material",
+      "size": "three judge-selection stories; four player-selection stories; additional non-funny sentence-pairs"
+    }
+  ],
+  "models_evaluated": [
+    "BERT_base",
+    "BERT masked language model (MLM)",
+    "FunnyBERT_IN",
+    "FunnyBERT_US",
+    "YodaLib_IN",
+    "YodaLib_US"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Location-biased language model",
+      "summary": "The authors further train BERT_base masked language models on location-rich blog data from India and the United States so that candidate blank fillings reflect country-specific word preferences."
+    },
+    {
+      "name": "FunnyBERT",
+      "summary": "FunnyBERT is a BERT-based sentence-pair classifier fine-tuned on location-specific Mad Lib annotations and augmented Wikipedia non-funny pairs; it predicts whether a filled-in sentence is a funny transformation and ranks candidates by humor probability."
+    },
+    {
+      "name": "YodaLib",
+      "summary": "YodaLib is a three-stage Mad Lib humor generation pipeline: candidate word selection with the location-biased MLM, candidate sentence ranking with FunnyBERT, and story completion using sentence-level funniness and BERT-embedding coherence scores."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The paper defines incongruity as surprise that defies reader expectations; AMT judges annotate whether incongruity was applied, candidate selection uses low-probability replacements as potentially incongruous, and the analysis correlates incongruity with MFG."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "AMT judges grade overall funniness, coherence, deviation from story title, incongruity, and word-level humor; generated stories receive 5 judgements on a 0-3 funniness scale and are summarized by mean funniness grade (MFG)."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Sentence labels for FunnyBERT are derived from AMT annotations using majority vote over word-level funny judgements; a sentence is considered funny if at least 50% of the filled-in words are funny."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "FunnyBERT is evaluated with precision, recall, F1 score, and accuracy; the paper also reports Krippendorff’s alpha and correlations of coherence, incongruity, and deviation with MFG."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "FunnyBERT achieved higher-than-baseline validation accuracy for both locations, with stronger US validation performance.",
+      "metric": "Accuracy",
+      "value": "IN 84.39; US 88.60*; majority vote baseline 50%",
+      "dataset": "Location-specific humor classification validation sets",
+      "best_system": "FunnyBERT_US"
+    },
+    {
+      "finding": "For IN judges in the TOP3 story evaluation, Yoda_US achieved the highest average MFG, above Yoda_IN, FT_US, FT_IN, and MLM.",
+      "metric": "Average MFG (0-3), TOP3",
+      "value": "Yoda_US 2.03; Yoda_IN 1.94; FT_US 1.57; FT_IN 1.17; MLM 0.70",
+      "dataset": "test Fun Lib stories",
+      "best_system": "YodaLib_US"
+    },
+    {
+      "finding": "For US judges in the TOP3 story evaluation, Yoda_US achieved the highest average MFG.",
+      "metric": "Average MFG (0-3), TOP3",
+      "value": "Yoda_US 1.77; Yoda_IN 1.56; FT_US 1.41; FT_IN 1.39; MLM 0.68",
+      "dataset": "test Fun Lib stories",
+      "best_system": "YodaLib_US"
+    },
+    {
+      "finding": "In the TOP10 setting, Yoda_US remained the best YodaLib variant for both judge groups and outscored MLM.",
+      "metric": "Average MFG (0-3), TOP10",
+      "value": "IN judges: Yoda_US 1.70, Yoda_IN 1.60, MLM 0.91; US judges: Yoda_US 1.48, Yoda_IN 1.32, MLM 0.84",
+      "dataset": "test Fun Lib stories",
+      "best_system": "YodaLib_US"
+    },
+    {
+      "finding": "YodaLib outperformed the previously published Libitum result in the TOP3 setting described as closest to US humor judged by US judges.",
+      "metric": "Average MFG",
+      "value": "Yoda_US 1.77; Libitum 1.51",
+      "dataset": "test Fun Lib stories",
+      "best_system": "YodaLib_US"
+    },
+    {
+      "finding": "YodaLib outperformed FreeText for most test stories in the qualitative analysis.",
+      "metric": "number of stories and average MFG gains",
+      "value": "28 and 23 stories; average gains 0.79 and 0.46 for IN judges, and 0.17 and 0.37 for US judges, for IN- and US-generated stories respectively",
+      "dataset": "30 test stories",
+      "best_system": "YodaLib"
+    }
+  ],
+  "key_findings": [
+    "YodaLib’s generated stories are generally preferred to the generic MLM baseline because MLM chooses plausible words and introduces less surprise.",
+    "US-slanted humor is preferred to IN-slanted humor by both IN and US judges in the YodaLib evaluation.",
+    "The paper reports that an average US turker writes better Mad Lib stories than an average IN turker, while judges often enjoy humor written by turkers from the other country more than humor from their own country.",
+    "Human FreeText stories that are funnier tend to use coherence more effectively, while YodaLib’s humor is generated primarily through incongruity and deviation despite its coherence mechanism.",
+    "IN judges appear more lenient toward humor, whereas US judges appear stricter and more coherence-sensitive, possibly due to greater familiarity with Mad Libs."
+  ],
+  "limitations": [
+    "The study is limited to location as the demographic dimension and only compares India and the United States.",
+    "The dataset is limited to the 50 Fun Lib-style stories used in the study, with 4 original Fun Libs replaced by new stories.",
+    "YodaLib has difficulty generating coherent humor compared with skilled human writers; the paper states that coherence plays very little role in YodaLib’s humor.",
+    "The authors suggest that US familiarity with Mad Libs may have affected both the quality of US-written stories and the strictness of US judgements.",
+    "The authors state future work should use a larger number and wider variety of Mad Lib-like stories and other demographic dimensions such as gender, age group, and occupation."
+  ],
+  "safety_ethics_notes": "The AMT collection uses demographic surveys and prevents a qualified turker from acting as both player and judge for the same stories. Players are instructed not to use slang words or sexual references, and filled words must be dictionary words in the Latin alphabet matching the hint type.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "http://lit.eecs.umich.edu/downloads.html",
+    "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "50 US and 43 IN judges selected from 60 US and 100 IN candidates respectively",
+        "population": "Amazon Mechanical Turk turker judges from the United States and India, selected through linguistic and demographic screening",
+        "recruitment": "Amazon Mechanical Turk; judge-selection task with seven pre-filled stories, verification questions, and demographic survey",
+        "geography": "United States and India",
+        "languages": [
+          "English"
+        ],
+        "observations": "Judge-selection candidates rated 7 pre-filled stories; qualified judges later provided 5 judgments per filled story/generated story on AMT. Observations are ratings/annotations, not participant counts.",
+        "detail": "Selected judges had to assign 0 to Wikipedia stories, assign a grade in {1,2,3} to at least three of four funny stories, answer story-based questions correctly, and spend at least 4 minutes. Judges rated overall funniness, coherence, deviation from title on a 0–3 scale, incongruity as Yes/No, and each filled-in word as funny/not funny; they also answered verification questions. The demographic survey asked age group, nationality, gender, education, occupation, and income, but distributions are not reported. For each story, a qualified turker could be either player or judge but not both. Total AMT cost is reported as about $1,200."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": "30 IN and 26 US players selected from 80 IN and 60 US turkers respectively",
+        "population": "Amazon Mechanical Turk turker players from India and the United States selected for ability to write funny Mad Lib completions",
+        "recruitment": "Amazon Mechanical Turk; player-selection tasks using masked Wikipedia stories and demographic survey",
+        "geography": "India and United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "For player selection, candidates filled masked Wikipedia stories; for Fun Lib annotation, each story was filled by 3 players from each country. Observations are story completions, not participant counts.",
+        "detail": "Players were instructed to fill stories to make them funny. Filled words had to occur in an English dictionary, be exactly one word in the Latin alphabet, agree with hint types, and avoid slang words or sexual references. Selection required mean funniness grade, averaged over 5 qualified same-country judges, of at least 1 for at least one story."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "English speakers from the corresponding country who created the four non-Wikipedia pre-filled stories used in judge selection",
+        "recruitment": null,
+        "geography": "India and United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "Four judge-selection stories were filled by English speakers from the corresponding country to create funny examples; counts are not reported.",
+        "detail": "The paper reports these stories were used alongside three Wikipedia stories in the judge-selection task, but does not report the number of English speakers, recruitment method, or whether they overlapped with AMT participants."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Human subjects who assessed validation-set story quality for choosing the BERT embedding aggregation strategy",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Validation-set story quality judgments used to choose second-to-last-layer BERT embeddings over summed last-four-layer embeddings; number of judgments/items is not reported.",
+        "detail": "Footnote 7 states that story quality was determined by human subjects because the task is subjective; the paper does not specify whether these were AMT judges or a separate population."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Blog authors/users from India and the United States in the pre-existing Garimella et al. (2017) blog-post dataset",
+        "recruitment": "Pre-existing blog-post dataset used for location-biased language-model training",
+        "geography": "India and United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "35K blogs / 17M tokens for IN and 33K blogs / 12M tokens for US; these are documents/tokens, not participant counts.",
+        "detail": "The paper reports blog and token counts but not the number of distinct authors/users."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Qualified AMT judges from India and the United States",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary source of subjective evaluation labels and headline MFG results. Judges provided 0–3 funniness grades, coherence, title-deviation scores, incongruity labels, word-level funny/not-funny labels, and verification-question responses. The paper does not state whether judges were blind to generation method, location slant, or human/model source."
+      },
+      {
+        "type": "human-crowd",
+        "name": "AMT majority-vote gold labels for FunnyBERT",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "FunnyBERT training/validation/test sentence-pair labels were derived from AMT word-level funny judgments: labels were assigned to each filling using majority vote over funny judgments, and a sentence was considered funny if at least 50% of filled-in words were funny."
+      },
+      {
+        "type": "human-crowd",
+        "name": "AMT MFG used as YodaLib TOP3 selector",
+        "role": "primary",
+        "blind": null,
+        "detail": "For YodaLib TOP3 evaluation, the paper selected three stories from BEST10 that had the highest MFG assigned by judges. Thus human judgments both evaluated and post-hoc selected the TOP3 YodaLib outputs."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Classification metrics and agreement/statistical analyses",
+        "role": "validation",
+        "blind": null,
+        "detail": "FunnyBERT validation was reported with precision, recall, F1 score, and accuracy against AMT-derived labels. The paper also reports Krippendorff’s alpha for AMT agreement and correlations of coherence, incongruity, and deviation with MFG."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "FunnyBERT softmax humor probability and BERT embedding similarity",
+        "role": "secondary",
+        "blind": null,
+        "detail": "These automatic scores were used inside YodaLib to rank candidate filled-in sentences and select coherent story continuations. They determined which outputs were generated/retained, but final humor-quality claims were based on AMT human judgments."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "FreeText human baseline story completion",
+        "mode": "single-sample",
+        "n": "3 filled-in stories per Fun Lib per country",
+        "selector": "none",
+        "detail": "AMT players completed stories following the player instructions. The three human completions for each test Fun Lib/location were evaluated; the paper does not report a best-of selection among additional human outputs."
+      },
+      {
+        "scope": "Generic BERT MLM baseline story generation",
+        "mode": "best-of-n",
+        "n": "Top 10 generated stories per test Fun Lib were graded; TOP3 uses the top 3 stories ranked by filled-in word probabilities",
+        "selector": "automatic-metric",
+        "detail": "MLM does not use location-specific training. Stories were ranked by probabilities of filled-in words fitting their contexts. The paper does not fully report the candidate pool or exact decoding procedure that produced the top 10."
+      },
+      {
+        "scope": "YodaLib automatic generation and BEST10/TOP10 evaluation",
+        "mode": "best-of-n",
+        "n": "For each mask, top k=10,000 vocabulary candidates retained; during left-to-right filling top n=100 candidates/sentences retained; during story completion top N=100 transformations/story paths retained; BEST10/top 10 stories per test Fun Lib were graded",
+        "selector": "automatic-metric",
+        "detail": "YodaLib uses location-biased MLM candidates, FunnyBERT softmax humor probabilities, BERT-embedding sentence similarity, story funniness score, and average word coherence to prune/rank candidate completions. TOP10 evaluation uses these BEST10 generated variants."
+      },
+      {
+        "scope": "YodaLib TOP3 reported setting",
+        "mode": "best-of-n",
+        "n": "3 selected from 10 BEST10 YodaLib stories per Fun Lib",
+        "selector": "human",
+        "detail": "For TOP3, the three YodaLib stories selected were those with the highest human-assigned MFG among BEST10, because the framework scores differed only in the fourth decimal place. This is an oracle/human post-hoc selection over generated outputs, not a single sampled output."
+      },
+      {
+        "scope": "Wikipedia non-funny sentence-pair augmentation for FunnyBERT",
+        "mode": "single-sample",
+        "n": "Highest-probability replacement word per masked Wikipedia sentence for the focused POS tag",
+        "selector": "automatic-metric",
+        "detail": "The location-specific MLM was used to replace masked words in Wikipedia sentences with the highest-probability word for each location, creating location-biased non-funny sentence pairs for augmentation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "BERT_base / original BERT masked language model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Described as BERT_base with default parameters, pretrained on English Wikipedia and Book Corpus, with vocabulary size 30,522. Used as the generic MLM baseline and as the base for further location training/fine-tuning. No exact checkpoint, software version, or run date is reported."
+      },
+      {
+        "name": "Location-biased BERT MLM_IN",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "BERT_base further trained on India blog data: 35K blogs and 17M tokens. Used for India-biased word prediction and BERT embeddings. No checkpoint/version, access mode, compute, or inference date is reported."
+      },
+      {
+        "name": "Location-biased BERT MLM_US",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "BERT_base further trained on US blog data: 33K blogs and 12M tokens. Used for US-biased word prediction and BERT embeddings. No checkpoint/version, access mode, compute, or inference date is reported."
+      },
+      {
+        "name": "FunnyBERT_IN",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "BERT-based sentence-pair humor classifier fine-tuned for India-specific humor labels. Reported parameters include batch size 32, gelu activation, sequence length 512, vocabulary 30,522, Adam optimizer, learning rate 1e-5 selected over alternatives, and 10 epochs selected over 1–100. No exact checkpoint/version or inference date is reported."
+      },
+      {
+        "name": "FunnyBERT_US",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "BERT-based sentence-pair humor classifier fine-tuned for US-specific humor labels with the same reported parameters as FunnyBERT_IN. No exact checkpoint/version or inference date is reported."
+      },
+      {
+        "name": "YodaLib_IN",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Proposed India-specific generation pipeline combining location-biased MLM_IN candidate selection, FunnyBERT_IN ranking, and BERT-embedding coherence/story-completion scoring. No released system version or run date is reported."
+      },
+      {
+        "name": "YodaLib_US",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Proposed US-specific generation pipeline combining location-biased MLM_US candidate selection, FunnyBERT_US ranking, and BERT-embedding coherence/story-completion scoring. No released system version or run date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "FunnyBERT fine-tuning/classification setup",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Sequence length 512; vocabulary 30,522",
+        "sampling_parameters": "Training parameters reported: batch size 32, gelu activation, Adam optimizer, learning rate 1e-5 selected over 5e-5, 5e-6, and 1e-6, and 10 epochs selected over 1–100 epochs. Inference sampling parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "The paper reports classification hyperparameters but not hardware, runtime, random seeds, number of inference calls, or compute cost."
+      },
+      {
+        "scope": "YodaLib candidate word selection per blank",
+        "calls_per_item": null,
+        "candidates_per_item": "Top k=10,000 words retained from the BERT vocabulary for each mask before filtering; for multi-mask sentences, left-to-right pruning uses top n=100 candidates",
+        "token_budget": null,
+        "sampling_parameters": "Probability ranking from the location-specific MLM; random sampling/temperature are not reported",
+        "compute_or_cost": null,
+        "detail": "Candidates are filtered to satisfy hint types and restrictions from player selection, including number/tense matching for nouns/verbs. Exact number of masks, model calls, and post-filter candidate counts are not reported."
+      },
+      {
+        "scope": "YodaLib candidate sentence ranking",
+        "calls_per_item": null,
+        "candidates_per_item": "Top n=100 filled-in sentences/candidates retained at each mask step",
+        "token_budget": "FunnyBERT sequence length 512",
+        "sampling_parameters": "FunnyBERT softmax humor probability used for ranking; no stochastic sampling parameters reported",
+        "compute_or_cost": null,
+        "detail": "For each candidate filled-in sentence, FunnyBERT scores whether the transformation is funny. The exact number of FunnyBERT scoring calls per story is not reported."
+      },
+      {
+        "scope": "YodaLib story completion and BEST10 selection",
+        "calls_per_item": null,
+        "candidates_per_item": "Top N=100 funny and similar transformations selected for each subsequent sentence; only top N completed partial stories advanced after each sentence; top 10 BEST10 stories graded",
+        "token_budget": null,
+        "sampling_parameters": "Cosine similarity of BERT sentence embeddings and story funniness/average word-coherence scores used for deterministic ranking; no random decoding parameters reported",
+        "compute_or_cost": null,
+        "detail": "Sentence embeddings use the second-to-last hidden layer of location-specific BERT after validation. The paper does not report the total number of candidate stories generated before pruning."
+      },
+      {
+        "scope": "Generic MLM baseline generation",
+        "calls_per_item": null,
+        "candidates_per_item": "Top 10 generated stories per test Fun Lib evaluated; TOP3 uses top 3",
+        "token_budget": null,
+        "sampling_parameters": "Stories ranked by filled-in word probabilities under original BERT MLM; exact decoding, candidate-pool size, and any stochastic parameters are not reported",
+        "compute_or_cost": null,
+        "detail": "The baseline is described less fully than YodaLib; the paper does not report the full generation budget for MLM."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "AMT FreeText players versus MLM/YodaLib",
+        "present": true,
+        "description": "Selected AMT players from India and the United States completed Mad Lib stories; for each test Fun Lib, 3 human filled-in stories from FT were judged by AMT judges from both locations.",
+        "directly_comparable": false,
+        "detail": "The same 0–3 MFG human-judging scale was used, but comparison to YodaLib is not materially matched: FT has 3 human completions per story/location, whereas YodaLib generates and grades 10 variants and its TOP3 result is selected post-hoc by highest human MFG. TOP10 is reported for MLM/YodaLib but not FT."
+      },
+      {
+        "scope": "Previously published Libitum result from Hossain et al. (2017)",
+        "present": true,
+        "description": "The paper compares YodaLib_US TOP3 judged by US judges with a previously published Libitum average MFG of 1.51, described as closest to US humor judged by US judges.",
+        "directly_comparable": false,
+        "detail": "Libitum was not rerun in this paper under the same annotation protocol; the authors state only that its training/evaluation settings are closer to the US-humor/US-judge TOP3 setting."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "Human ratings/annotations for the location-specific dataset and generated-output evaluation were newly collected on AMT.",
+        "Four US-specific Fun Lib source stories were discarded and replaced with four newly created stories.",
+        "The paper reports a train/evaluation split for humor classification and prevents a qualified turker from serving as both player and judge for the same story.",
+        "Final generated outputs are newly produced and judged by humans rather than scored solely against a static public answer key."
+      ],
+      "basis": "The source Fun Lib stories come from Hossain et al. (2017), a public legacy dataset predating the BERT-based models used here, and the paper reports no decontamination test or audit of BERT/BookCorpus/Wikipedia/blog training data against the story templates. The main risk is not memorized gold answers, since outputs and AMT ratings are newly collected, but public templates plus no contamination discussion keep the risk above low. The evaluation split is also somewhat unclear because the paper states 40 of 50 stories are used for training with the remainder for evaluation, while Figure 2/qualitative analysis refer to 30 test stories."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Headline funniness results, coherence/deviation/incongruity analyses, and TOP3 human-oracle selection are based on AMT human judgments.",
+      "detail": "No LLM is used as an external evaluator of final humor quality. BERT/FunnyBERT are model components used to generate and rank candidates inside YodaLib, but the paper’s evaluative conclusions rely on human AMT ratings and automatic descriptive metrics rather than LLM-as-judge scoring."
+    },
+    "reporting_gaps": [
+      "Exact BERT checkpoint identifiers, software versions, random seeds, access mode, and inference dates are not reported.",
+      "Hardware, training runtime, inference runtime, and model compute/cost are not reported.",
+      "The paper reports total AMT cost of about $1,200 but not detailed payment rates or compensation per task.",
+      "The number of unique judges who participated in the final generated-story evaluation is not separately reported beyond the selected judge pools.",
+      "Judge blinding is not reported: the paper does not state whether judges knew whether stories came from FT, MLM, or YodaLib, or which location slant produced them.",
+      "Randomization/order of judged stories and whether the same judge evaluated multiple systems for the same story are not reported.",
+      "The exact MLM baseline decoding/candidate-generation budget is under-specified, including full candidate-pool size and number of model calls.",
+      "YodaLib reports pruning thresholds but not total numbers of masks, candidates after filtering, model scoring calls, or generated story candidates before pruning.",
+      "The test-story split is ambiguous: Section 4.1.2 says 40 of 50 stories are used for training and the remainder for evaluation, whereas Figure 2 and the qualitative analysis refer to 30 test stories.",
+      "Demographic distributions for judges and players are not reported, despite demographic survey collection.",
+      "The human-subject validation used to choose the BERT embedding aggregation strategy is not described with participant counts, recruitment, geography, or judgments.",
+      "The Libitum comparison uses a previously published score and is described as only closer to the US-humor/US-judge TOP3 setting; rerun details and matched statistical testing are not reported."
+    ]
+  }
+}

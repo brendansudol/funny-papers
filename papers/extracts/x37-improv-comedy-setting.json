@@ -1,0 +1,285 @@
+{
+  "key": "x37-improv-comedy-setting",
+  "ref": "Part 5 (live improv evaluation)",
+  "section": "Part 5 - Situated Humor",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x37-improv-comedy-setting/x37-improv-comedy-setting.md",
+  "source_md_sha256": "d28d91e3acc235a48b4ff3e72d8b9aa9455d5eb9544b6981eb1bc2c61fe17b21",
+  "source_truncated": false,
+  "title": "Evaluating Humor Generation in an Improvisational Comedy Setting",
+  "authors": [
+    "Thomas Winters",
+    "Stijn Van der Stockt"
+  ],
+  "year": 2025,
+  "venue": "Computational Linguistics in the Netherlands Journal 14 (2025) 505-523",
+  "paper_types": [
+    "evaluation-study",
+    "HCI-study",
+    "dataset"
+  ],
+  "research_questions": [
+    "How does GPT-4-generated Dutch improvisational humor, using few-shot chain-of-thought prompts, compare with spontaneous jokes by professional comedians under the same live audience suggestions and delivery conditions?",
+    "Can a live improvisational comedy setting reduce unfairness from comparing raw AI outputs with polished human jokes and account for delivery effects?",
+    "How do audience ratings, pairwise preferences, best-joke votes, and variation across comedians differ between human-created and AI-generated jokes?"
+  ],
+  "tasks": [
+    "improvisational joke generation",
+    "humor evaluation",
+    "worst slogan generation",
+    "innuendo analogy generation",
+    "Jeopardy-style question generation",
+    "pairwise human-vs-AI joke comparison"
+  ],
+  "humor_domains": [
+    "improvisational comedy",
+    "quick-fire one-liners",
+    "bad slogans",
+    "innuendo",
+    "Jeopardy-style answer/question jokes",
+    "live performance comedy",
+    "Dutch humor"
+  ],
+  "modalities": [
+    "text",
+    "audio",
+    "video"
+  ],
+  "languages": [
+    "Dutch"
+  ],
+  "datasets_used": [
+    {
+      "name": "zzd-impro",
+      "role": "introduced",
+      "size": "54 jokes; 2,160 ratings"
+    },
+    {
+      "name": "Ze Zeggen Dat latest-season topics",
+      "role": "source-material",
+      "size": "nine different audience suggestions"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Live improvisational comedy evaluation protocol",
+      "summary": "The paper evaluates AI and human jokes in the same live improv rounds, with the same audience suggestion, the same comedian delivering both sources, and audience members unaware that some jokes were AI-generated."
+    },
+    {
+      "name": "Game-specific few-shot chain-of-thought prompting for improv games",
+      "summary": "The authors use separate prompts for “Worst Slogan for X,” “Sex with Me is Like X,” and “If X is the Answer, What is the Question?”, each asking GPT-4 to generate multiple candidates and step-by-step reasoning examples before joke outputs."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "Section 2.1 explains jokes as involving expectation disruption followed by resolution, and Section 2.2 uses this to motivate chain-of-thought prompting that lets GPT-4 plan punchlines rather than only generate left-to-right."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "live-audience",
+      "detail": "A live studio audience of 40 individuals rated all 54 performed jokes on a four-point scale: Bad (1), Okay (2), Good (3), Amazing (4), immediately after the performance and within 15 minutes after the show."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "Audience members also selected their favorite joke of the entire performance; one GPT-4 joke received 18 of the 40 best-joke votes."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The authors computed pairwise preference rates, mean ratings, Fleiss’ Kappa (κ = 0.0858), Krippendorff’s alpha (α = 0.129), a Wilcoxon signed-rank test (W = 108207.5, p = 0.0317), and Cohen’s d (0.161) from audience ratings."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "live-audience",
+        "participant_count": "40",
+        "population": "live studio audience",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Dutch"
+        ],
+        "observations": "2,160 ratings (54 jokes × 40 audience members) plus favorite-joke selections",
+        "detail": "Audience members were unaware that some jokes were AI-generated and filled in a questionnaire after the full on-stage performance."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": "3",
+        "population": "professional Dutch improvisational comedians with extensive live performance experience",
+        "recruitment": "enlisted",
+        "geography": null,
+        "languages": [
+          "Dutch"
+        ],
+        "observations": "27 human-created jokes and 27 GPT-4-generated jokes performed; each comedian participated in three games played over three rounds",
+        "detail": "Comedians delivered their own improvised joke and a GPT-4 joke per round, and were instructed to deliver AI-generated jokes as if they had created them on the spot."
+      },
+      {
+        "role": "other",
+        "participant_count": "1",
+        "population": "offstage assistant",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Dutch"
+        ],
+        "observations": "selected AI-generated jokes in real time from GPT-4 candidate outputs",
+        "detail": "The assistant remained offstage and selected jokes from the generated pool to present on the TV screen."
+      }
+    ],
+    "judges": [
+      {
+        "type": "live-audience",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "The 40 audience members supplied the joke ratings and favorite-joke votes; they were unaware that some jokes were AI-generated."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Fleiss’ Kappa, Krippendorff’s alpha, Wilcoxon signed-rank test, Cohen’s d",
+        "role": "secondary",
+        "blind": null,
+        "detail": "These statistics were computed from the audience ratings to summarize agreement and differences between AI and human jokes."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "GPT-4-generated jokes for live performance",
+        "mode": "best-of-n",
+        "n": "several candidate jokes; prompt templates request at least 7 initial candidates plus 5 step-by-step candidates",
+        "selector": "human",
+        "detail": "For each round, the audience suggestion was inserted into the prompt, GPT-4 generated several candidate jokes, and an offstage assistant selected jokes in real time; the paper also states that the assistant and comedians selected their favorite jokes and that comedians sometimes adapted wording."
+      },
+      {
+        "scope": "Human improvised jokes",
+        "mode": "single-sample",
+        "n": "one performed human-created joke per comedian per round",
+        "selector": "none",
+        "detail": "Human jokes were improvised on stage from the same audience suggestions, with no preparation or rehearsal time reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "The paper refers to GPT-4 and provides CustomGPT links for the three prompt bots, but does not report an exact model snapshot, version, or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-4 real-time joke generation",
+        "calls_per_item": null,
+        "candidates_per_item": "several; prompt templates request at least 7 direct candidates plus 5 step-by-step candidates per suggestion",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Generation occurred in real time on stage using game-specific prompts; exact numbers of service calls, returned candidates, token limits, sampling settings, and costs are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Live improvisational joke generation",
+        "present": true,
+        "description": "Three professional Dutch improvisational comedians generated 27 human jokes live, matched to the same games, suggestions, comedians, and audience as 27 GPT-4 jokes.",
+        "directly_comparable": true,
+        "detail": "The comparison is unusually direct because the same comedian delivered the human and AI joke for the same suggestion, but the paper notes caveats from AI candidate filtering, occasional adaptation by comedians, and order imbalance."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": true,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "Both AI and human jokes were created in a live improvisational context rather than drawn from an existing joke benchmark.",
+        "The paper argues that using complex topics and requiring jokes to follow given improv-game formats drastically reduces the risk of reproducing existing jokes.",
+        "The audience suggestions and generated/performed jokes became part of a newly created study dataset, not a legacy public benchmark evaluated after model training."
+      ],
+      "basis": "The evaluation does not rely on a public legacy benchmark; it uses new live performance material. However, the paper does not report a decontamination test, and GPT-4 may have seen similar jokes or prompt examples in training."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "All main humor-quality claims are based on live audience ratings and votes, not LLM judgments.",
+      "detail": "No LLM-as-judge evaluation is reported."
+    },
+    "reporting_gaps": [
+      "GPT-4 exact model version/snapshot, access route used during the live show, and inference date are not reported.",
+      "Sampling parameters, token limits, number of calls, cost, and exact candidate pool sizes are not reported.",
+      "The criteria and full log for real-time selection/filtering by the assistant and comedians are not reported.",
+      "Audience demographics, recruitment procedure, and geography are not reported or controlled.",
+      "The extent of comedian adaptations to AI-generated jokes is not systematically logged.",
+      "No detailed ethics or consent procedure is described despite audience blinding to AI-generated content."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "In direct pairwise comparisons for the same comedian and audience suggestion, audience members preferred the human joke 34.6% of the time, the AI-generated joke 29.7% of the time, and rated them equally 35.7% of the time.",
+      "metric": "Pairwise preference rate",
+      "value": "34.6% human; 29.7% AI; 35.7% equal",
+      "dataset": "zzd-impro",
+      "best_system": "Human"
+    },
+    {
+      "finding": "Human-created jokes had a slightly higher mean rating than AI-generated jokes on the four-point scale, with a statistically significant but small difference.",
+      "metric": "Mean rating; Wilcoxon signed-rank test; Cohen’s d",
+      "value": "2.67 vs. 2.59; W = 108207.5, p = 0.0317; Cohen’s d = 0.161",
+      "dataset": "zzd-impro",
+      "best_system": "Human"
+    },
+    {
+      "finding": "Inter-rater agreement was minimal, consistent with the paper’s emphasis on humor subjectivity.",
+      "metric": "Fleiss’ Kappa; Krippendorff’s alpha",
+      "value": "κ = 0.0858; α = 0.129",
+      "dataset": "zzd-impro",
+      "best_system": null
+    },
+    {
+      "finding": "Among the top 10 jokes by average rating, 6 were generated by GPT-4.",
+      "metric": "Top-10 source count",
+      "value": "6 were generated by GPT-4",
+      "dataset": "zzd-impro",
+      "best_system": "GPT-4"
+    },
+    {
+      "finding": "The highest-rated joke was a GPT-4 joke delivered by Comedian B and received a large share of best-joke votes.",
+      "metric": "Average score; best-joke votes",
+      "value": "Avg. Score 3.88; 18 of the 40 participants",
+      "dataset": "zzd-impro",
+      "best_system": "GPT-4"
+    }
+  ],
+  "key_findings": [
+    "GPT-4 was competitive with professional human improvisers in this Dutch live setting, but humans retained a narrow edge in consistency.",
+    "The strongest GPT-4 outputs could be standout jokes: 6 of the top 10 by average rating were GPT-4-generated, and one GPT-4 joke received 18 of 40 best-joke votes.",
+    "Delivery mattered: the paper reports that one comedian delivered GPT-4-generated jokes more effectively, while another received much lower ratings for AI-delivered content.",
+    "Audience agreement was very low, with Fleiss’ Kappa κ = 0.0858 and Krippendorff’s alpha α = 0.129, reinforcing the subjectivity of humor evaluation.",
+    "The final AI jokes were hybrid artifacts because GPT-4 candidates were selected by humans and sometimes adapted by comedians before delivery."
+  ],
+  "limitations": [
+    "The evaluation was conducted in a single live performance with only 40 audience members.",
+    "Audience demographics, recruitment, and composition were not controlled, which may have introduced rating biases.",
+    "The four-point Likert scale had one negative and three positive options, which the paper says may bias ratings upward and limits numerical interpretation.",
+    "AI outputs were filtered by an offstage assistant and comedians, and comedians occasionally adapted wording, blurring raw AI generation with human-AI collaboration.",
+    "Presentation order was not fully balanced because GPT-4 generation delays meant the first two jokes were predominantly human-generated.",
+    "The study focused on Dutch humor with three performers, limiting generalizability to other languages, cultures, and comedy formats.",
+    "Low inter-rater agreement means statistical results should be interpreted cautiously."
+  ],
+  "safety_ethics_notes": "Audience members were unaware that some jokes were AI-generated to avoid expectation bias. The comedy formats included adult and sensitive themes, including “Sex with Me is Like X”; the paper does not report a detailed ethics or consent procedure.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://huggingface.co/datasets/thomaswint/zzd-impro",
+    "other": "TV recording URL: https://lfvp-static-overlays.dpgmedia.net/3/247901632. CustomGPT prompt bots: https://chatgpt.com/g/g-2eFN9BDGB-improv-slechte-slogans, https://chatgpt.com/g/g-HUf8fSgGk-improv-innuendo, https://chatgpt.com/g/g-sMNdHk1ke-improv-waagstuk."
+  }
+}

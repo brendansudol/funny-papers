@@ -116,6 +116,13 @@ def main() -> int:
                 note_bits.append(STATUS_LABELS.get(status, status))
             if paper.get("note"):
                 note_bits.append(paper["note"])
+            if paper.get("source_version"):
+                source_pin = f"Source pin: {paper['source_version']}"
+                if paper.get("source_checked"):
+                    source_pin += f"; checked {paper['source_checked']}"
+                if paper.get("pdf_retrieved_at"):
+                    source_pin += f"; PDF retrieved {paper['pdf_retrieved_at']}"
+                note_bits.append(source_pin + ".")
             notes_cell = md_escape(" ".join(note_bits)) if note_bits else ""
 
             lines.append(

@@ -2,11 +2,11 @@
   "key": "60-pun-generation-survey",
   "ref": "#60",
   "section": "Part 9 - Surveys & Resources",
-  "extracted_at": "2026-07-03",
+  "extracted_at": "2026-07-13",
   "extraction_model": "gpt-5.5",
   "extraction_reasoning_effort": "high",
   "source_md": "papers/md/60-pun-generation-survey/60-pun-generation-survey.md",
-  "source_md_sha256": "536c81d44938ea6c65d5e6e939b62954f56e33b802d58bbe3a2e22787b7e5075",
+  "source_md_sha256": "ced67ce78a4664319caac916319d056be89e3dd1cc019fb4cc4ac7a7bfacb714",
   "source_truncated": false,
   "title": "A Survey of Pun Generation: Datasets, Evaluations and Methodologies",
   "authors": [
@@ -18,22 +18,27 @@
     "Michael Witbrock"
   ],
   "year": 2025,
-  "venue": null,
+  "venue": "Findings of EMNLP 2025",
   "paper_types": [
     "survey"
   ],
   "research_questions": [
-    "What pun datasets have been used or constructed for pun generation research?",
-    "How have pun generation methods evolved across conventional methods, classic DNNs, fine-tuned pre-trained language models, prompting, and visual-language models?",
+    "What datasets have been used and constructed for pun research, and how can they be categorized into generic, derived, and human-annotated datasets?",
+    "What methodologies have been used for pun generation across conventional methods, classic deep neural networks, pre-trained language models, prompting, and visual-language models?",
     "What automatic and human evaluation metrics are used to assess pun generation quality?",
-    "What challenges and future directions remain for multilingual, multimodal, and prompt-based pun generation?"
+    "What challenges and promising future directions remain for pun generation, especially in multilingual, multimodal, and prompting-based settings?"
   ],
   "tasks": [
     "pun generation",
+    "homophonic pun generation",
+    "heterographic pun generation",
+    "homographic pun generation",
+    "visual pun generation",
     "pun evaluation",
-    "pun recognition/detection",
-    "pun interpretation/explanation",
-    "visual pun comprehension"
+    "pun understanding",
+    "pun recognition",
+    "pun explanation",
+    "pun translation"
   ],
   "humor_domains": [
     "puns",
@@ -41,10 +46,10 @@
     "heterographic puns",
     "homographic puns",
     "visual puns",
+    "wordplay",
     "advertising puns",
     "church marquees",
-    "newspaper comics",
-    "code-mixed Hindi-English puns"
+    "newspaper comics"
   ],
   "modalities": [
     "text",
@@ -57,11 +62,12 @@
     "French",
     "Hindi",
     "Arabic",
-    "Spanish"
+    "Spanish",
+    "Multi-language"
   ],
   "datasets_used": [
     {
-      "name": "Wikipedia",
+      "name": "English Wikipedia corpus",
       "role": "analyzed",
       "size": null
     },
@@ -81,17 +87,12 @@
       "size": null
     },
     {
-      "name": "Dakshina",
+      "name": "Dakshina dataset",
       "role": "analyzed",
       "size": null
     },
     {
       "name": "ParaBank",
-      "role": "analyzed",
-      "size": null
-    },
-    {
-      "name": "Gutenberg BookCorpus",
       "role": "analyzed",
       "size": null
     },
@@ -109,11 +110,6 @@
       "name": "Paron-edit",
       "role": "analyzed",
       "size": "1,182"
-    },
-    {
-      "name": "Lucas (2004) tiny pun corpus",
-      "role": "analyzed",
-      "size": null
     },
     {
       "name": "Church",
@@ -181,7 +177,7 @@
       "size": "1,011"
     },
     {
-      "name": "UNPIE",
+      "name": "UNPIE (Understanding Pun with Image Explanations)",
       "role": "analyzed",
       "size": "1,000"
     },
@@ -199,108 +195,164 @@
   "models_evaluated": [],
   "methods_proposed": [
     {
-      "name": "Survey tree for pun generation",
-      "summary": "The paper organizes pun generation research into datasets, methods, and evaluation, with datasets grouped as generic, derived, and human-annotated and methods grouped by technological development timeline."
-    },
-    {
-      "name": "Five-group methodology taxonomy",
-      "summary": "The survey classifies pun generation methods into conventional template/rule systems, classic deep neural networks, fine-tuned pre-trained language models, prompted pre-trained language models, and visual-language models."
+      "name": "Pun generation survey taxonomy",
+      "summary": "The survey organizes pun generation research into datasets, methods, and evaluation, and classifies methods along a technological timeline: conventional/template methods, classic DNNs, PLM fine-tuning, PLM prompting, and visual-language models."
     }
   ],
   "humor_theories": [
     {
       "theory": "surprise theory",
       "usage": "operationalized",
-      "detail": "The survey summarizes Surprisal as an automatic funniness metric based on local and global surprise around a pun word and its alternative word."
+      "detail": "The paper reviews surprisal as an automatic evaluation metric that quantifies surprise based on the pun word and its alternative word under local and global contexts."
     },
     {
       "theory": "other",
-      "usage": "operationalized",
-      "detail": "The survey summarizes information-theoretic ambiguity and distinctiveness metrics for linguistic humor in puns."
+      "usage": "grounding/motivation",
+      "detail": "The survey grounds pun categories in linguistic ambiguity, including polysemy, homophony, heterography, homography, and visual double meaning."
     }
   ],
   "evaluation_methods": [
     {
       "type": "automatic-metric",
-      "detail": "The survey groups automatic metrics into funniness, diversity, and fluency: Ambiguity, Distinctiveness, Surprisal, Unusualness, Dist-1, Dist-2, Perplexity Score, and Structure Succ."
+      "detail": "The survey summarizes ambiguity, distinctiveness, surprisal, unusualness, Dist-1 & Dist-2, perplexity score, and structure success as automatic evaluation metrics."
     },
     {
       "type": "human-eval",
-      "detail": "Human evaluation metrics summarized include Success, Funniness, Fluency, Informativeness, Coherence, and Readability; the paper notes use of Likert scales such as 1 (not at all) to 5 (extremely) and binary True/False success judgments."
-    },
-    {
-      "type": "human-eval",
-      "detail": "The survey reports that Chen et al. (2024) used a human A/B test in which annotators compared paired puns generated by their methods and ChatGPT and selected the more humorous pun."
+      "detail": "The survey summarizes human evaluation metrics including success, funniness, fluency, informativeness, coherence, and readability, often assessed with Likert scales or binary success judgments."
     },
     {
       "type": "LLM-as-judge",
-      "detail": "The survey reports that Zeng et al. (2024) replaced human reviewers with GPT-4 to assess readability, funniness, and coherence."
+      "detail": "The survey notes that Zeng et al. (2024) replaced human reviewers with GPT-4 to assess readability, funniness, and coherence."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "The survey describes SemEval as manually or expert annotated and notes later human-annotated datasets such as ExPUNations, CUP, ChinesePun, and UNPIE."
     }
   ],
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "none",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "This is a non-empirical survey and does not conduct original human or model judging experiments."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "survey paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper does not generate new pun outputs; it reviews prior pun generation work."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "survey paper",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No inference was run by the survey paper."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "survey paper",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "No original model evaluation or matched human baseline is reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper is a literature survey and does not evaluate models on benchmark data."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "The survey mentions GPT-4 judging in prior work, but its own conclusions are not based on LLM-as-judge evaluation."
+    },
+    "reporting_gaps": [
+      "The paper collection procedure gives approximate counts, such as “around 150 publications” and “approximately 30 papers,” but does not report query dates, full search strings, or detailed inclusion/exclusion criteria.",
+      "The survey does not provide a quantitative meta-analysis of model performance across papers.",
+      "The paper itself notes that many prior human evaluation studies fail to provide detailed information about evaluators’ backgrounds.",
+      "No original model provenance, inference budgets, or generation-selection procedures are applicable because the paper runs no experiments."
+    ]
+  },
   "headline_results": [
     {
-      "finding": "The paper collection process initially identified around 150 publications and filtered them to approximately 30 papers focused on pun generation.",
-      "metric": "paper collection/filtering",
+      "finding": "The paper collection process initially identified around 150 publications and then filtered to approximately 30 papers focused on pun generation.",
+      "metric": "paper collection count",
       "value": "around 150 publications; approximately 30 papers",
       "dataset": null,
       "best_system": null
     },
     {
-      "finding": "Paron is listed as a derived heterographic pun dataset collected from advertisements.",
-      "metric": "Corpus (C)",
-      "value": "3,850",
-      "dataset": "Paron",
-      "best_system": null
-    },
-    {
-      "finding": "SemEval is described as the first expert-annotated pun dataset and one of the most commonly used datasets in the pun generation community.",
+      "finding": "The survey lists SemEval as an expert-sourced English homographic and heterographic pun dataset with 2,878 corpus items.",
       "metric": "Corpus (C)",
       "value": "2,878",
       "dataset": "SemEval-2017 Task 7 puns",
       "best_system": null
     },
     {
-      "finding": "The two SemEval enhancements listed are ExPUNations and CUP.",
+      "finding": "The survey lists ExPUNations as a SemEval-derived English homographic and heterographic pun dataset with 1,999 corpus items.",
       "metric": "Corpus (C)",
-      "value": "1,999; 2,396",
-      "dataset": "ExPUNations (ExPun); CUP",
+      "value": "1,999",
+      "dataset": "ExPUNations (ExPun)",
       "best_system": null
     },
     {
-      "finding": "ChinesePun is listed as the first dataset for Chinese homophonic and homographic puns, designed for pun understanding and generation tasks.",
+      "finding": "The survey lists CUP as a SemEval-derived English homographic and heterographic pun dataset with 2,396 corpus items.",
       "metric": "Corpus (C)",
-      "value": "2,106",
+      "value": "2,396",
+      "dataset": "CUP",
+      "best_system": null
+    },
+    {
+      "finding": "The survey lists ChinesePun as a Chinese homophonic and homographic pun dataset with 2,106 corpus items, split into ChinesePun-P with 1,049 and ChinesePun-G with 1,057.",
+      "metric": "Corpus (C)",
+      "value": "2,106; 1,049; 1,057",
       "dataset": "ChinesePun",
       "best_system": null
     },
     {
-      "finding": "The multimodal and multilingual pun datasets listed are Pun Rebus Art and UNPIE.",
+      "finding": "The survey lists UNPIE as a multi-language homographic and heterographic pun dataset with 1,000 corpus items, split into UNPIE-P with 500 and UNPIE-G with 500.",
       "metric": "Corpus (C)",
-      "value": "1,011; 1,000",
-      "dataset": "Pun Rebus Art; UNPIE",
+      "value": "1,000; 500; 500",
+      "dataset": "UNPIE (Understanding Pun with Image Explanations)",
       "best_system": null
     }
   ],
   "key_findings": [
-    "The survey presents pun generation as a creative NLG task that must balance humour, double meaning, coherence, and contextual appropriateness.",
-    "The paper categorizes puns into homophonic, heterographic, homographic, and visual puns based on phonetic, graphic, and meaning relationships.",
-    "Pun datasets are organized as generic corpora, derived datasets, and human-annotated datasets, with SemEval-2017 Task 7 puns described as especially widely referenced.",
-    "Methodological development is described as moving from conventional template and rule systems to classic DNNs, fine-tuned PLMs, prompting, and preliminary visual-language-model work.",
-    "The survey argues that English textual pun generation dominates existing research, while multilingual and multimodal pun generation remain underexplored.",
-    "The paper emphasizes that both automatic and human evaluation have important weaknesses: automatic metrics miss semantic or logical quality, while human judgments are subjective and culturally dependent."
+    "The survey presents pun generation as a creative NLG task centered on semantic ambiguity, phonetic similarity, coherence, and contextual appropriateness.",
+    "It categorizes pun datasets into generic datasets, derived datasets, and human-annotated datasets, and identifies SemEval as the first expert-annotated pun dataset and one of the most commonly used in the pun generation community.",
+    "It organizes methods into conventional template systems, classic DNNs, PLM fine-tuning, PLM prompting, and visual-language models, describing a shift from manually engineered systems to LLM-based approaches.",
+    "The survey argues that human evaluation is essential for pun generation, while automatic metrics such as perplexity, diversity, surprisal, ambiguity, and structure success capture only parts of pun quality.",
+    "The paper highlights that most pun generation research focuses on English, while multilingual and multimodal pun generation remain underexplored.",
+    "The survey states that LLMs show potential for pun generation but still exhibit limitations in creativity and humour, including a “Lazy Pun Generation” pattern noted in recent studies."
   ],
   "limitations": [
-    "Some relevant works may have been missed due to variations in search keywords.",
-    "The survey’s exploration of other pun categories is limited, including recursive puns and antanaclasis.",
-    "The study does not cover the entire historical scope nor the latest advancements following the survey because the field is rapidly developing.",
-    "Surprisal-based automatic evaluation is context-dependent and local Surprisal is highly sensitive to the choice of local window size.",
-    "Dist-1 and Dist-2 fail to capture semantic diversity, and Perplexity Score does not necessarily imply semantic coherence or logical consistency.",
-    "Human evaluation is subjective, especially for readability and funniness, and many studies do not provide detailed evaluator background information."
+    "The authors state that some works may have been missed due to variations in search keywords.",
+    "The authors state that their exploration of other categories of puns is limited, including recursive puns and antanaclasis.",
+    "The authors state that the study does not cover the entire historical scope nor the latest advancements following the survey because of rapid development in the field.",
+    "The paper notes that automatic evaluation metrics have limitations: surprisal is context-dependent, Dist-1 and Dist-2 fail to capture semantic diversity, and perplexity does not necessarily imply semantic coherence or logical consistency.",
+    "The paper notes that human evaluation is subjective and affected by participants’ cultural backgrounds and knowledge levels, and that many studies do not report detailed evaluator backgrounds."
   ],
   "safety_ethics_notes": null,
   "artifacts": {
     "code_url": null,
     "data_url": null,
-    "other": "https://github.com/ysu132/Pun-Generation-Survey"
+    "other": "GitHub repository / updated reading list: https://github.com/ysu132/Pun-Generation-Survey"
   }
 }

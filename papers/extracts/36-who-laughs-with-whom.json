@@ -179,5 +179,190 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper says scripts for data collection, processing, and analysis will be released under the CC BY-NC-SA 4.0 license upon publication. Source site stated in the paper: https://chinsukoustudy.com"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "276",
+        "population": "Active users from the Oogiri Sogo platform retained after filtering for at least 100 total votes.",
+        "recruitment": "Observational public-platform voting logs crawled by the authors; no study recruitment reported.",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "57,751 votes over 908 prompts and 14,389 responses; users can cast up to three votes per prompt; 35.6 users per prompt on average.",
+        "detail": "These user-level votes were used to build voting-history vectors, cluster users, and derive human preference comparisons for BTL modeling. Only votes from active users were retained, and responses with fewer than three votes were removed."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Oogiri Sogo / Oogiri-Corpus contributors who authored prompts and responses used as source material.",
+        "recruitment": "Public website/source corpus; not recruited for this study.",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "Source Oogiri-Corpus contains 908 prompts and 82,536 responses; analytical subset contains 14,389 responses; LLM evaluation subset contains 897 prompts and 14,352 responses.",
+        "detail": "The paper reports item counts but not the number of unique prompt or response authors."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "One author, described as a Japanese male in his 30s, well-versed in the label definitions and annotation guidelines.",
+        "recruitment": "Author annotator; unpaid; informed consent reported.",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "110 randomly selected instances, 10 instances per label across 11 labels; binary appropriateness judgments; 94/110 judged correct.",
+        "detail": "This human evaluation validated GPT-5.1 humor-strategy labels. The annotator was shown the prompt-response pair, the LLM-assigned label, and the label definitions/guidelines."
+      }
+    ],
+    "judges": [
+      {
+        "type": "platform-vote",
+        "name": "Oogiri Sogo active-user vote logs",
+        "role": "primary",
+        "blind": null,
+        "detail": "Human preference data came from platform votes. Vote counts were converted into response-level pairwise comparisons; if one response had more votes than another it was treated as the winner, and ties were discarded."
+      },
+      {
+        "type": "LLM",
+        "name": "Gemini 3 Pro, GPT-5.1, and Claude Sonnet 4.5",
+        "role": "primary",
+        "blind": null,
+        "detail": "These LLMs supplied the LLM humor-preference judgments by selecting the funniest response from each prompt’s candidate responses under no_persona and persona settings. Three API responses per persona prompt were treated as independent votes."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-5.1",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "GPT-5.1 annotated all 14,389 prompt-response pairs with 11 humor-strategy labels via API. The authors used three trials per response and majority voting; multiple labels could be assigned."
+      },
+      {
+        "type": "author",
+        "name": "One author annotator",
+        "role": "validation",
+        "blind": false,
+        "detail": "The author judged whether GPT-5.1-assigned humor-strategy labels were appropriate for 110 sampled instances. The annotator saw the LLM-assigned label, so this was not a blinded validation."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "K-means clustering over TF-IDF/SVD user representations",
+        "role": "primary",
+        "blind": null,
+        "detail": "K-means assigned users to seven clusters. K=7 was selected using the elbow method and silhouette scores; the reported silhouette score was 0.025."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Bradley-Terry-Luce model with Luce spectral ranking via choix; Pearson correlations",
+        "role": "primary",
+        "blind": null,
+        "detail": "BTL/LSR estimated factor weights for users, clusters, LLMs, and personas. Pearson correlations between BTL score vectors determined reported alignment and preference-similarity results."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Humorous/Oogiri response generation",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper does not generate new humorous responses. LLMs select among human platform responses and generate labels/reasons for judging/annotation tasks; repeated LLM judging or majority labeling is not best-of-N humor generation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Gemini 3 Pro",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used via API for LLM humor-preference collection under seven persona settings. The paper also writes the name as Gemini-3-Pro; no API snapshot, endpoint version, or inference date is reported."
+      },
+      {
+        "name": "GPT-5.1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used via API both for LLM humor-preference collection and for humor-strategy labeling. No API snapshot, endpoint version, or inference date is reported."
+      },
+      {
+        "name": "Claude Sonnet 4.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used via API for LLM humor-preference collection under seven persona settings. The paper also writes the name as Claude-Sonnet-4.5; no API snapshot, endpoint version, or inference date is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "LLM funniest-response selection / persona preference collection",
+        "calls_per_item": "3 API calls per prompt for each model-persona condition.",
+        "candidates_per_item": "K_p candidate responses for each prompt; prompts with fewer than five responses were excluded; evaluation dataset contains 897 prompts and 14,352 responses, about 16 responses per prompt on average.",
+        "token_budget": null,
+        "sampling_parameters": "temperature=1.0; default values for other parameters; response orders randomly permuted across calls.",
+        "compute_or_cost": null,
+        "detail": "Seven personas were used: no_persona, female_20, male_20, female_45, male_45, female_65, and male_65. Each LLM response was treated as an independent vote. The main text defines selecting exactly one response, while the appendix prompt says to select at most one and allows zero selections."
+      },
+      {
+        "scope": "Humor-strategy labeling with GPT-5.1",
+        "calls_per_item": "Three model responses per labeling prompt; batch prompting processed 20 samples per API call.",
+        "candidates_per_item": "Not applicable; each item was one prompt-response pair. The paper labels 14,389 instances.",
+        "token_budget": null,
+        "sampling_parameters": "temperature=1; default values for all other parameters.",
+        "compute_or_cost": "Batch prompting was adopted to reduce API costs; actual cost is not reported.",
+        "detail": "A self-consistency protocol was used: three trials per response and final labels by majority voting. Multiple strategy labels per response were allowed."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "LLM preference alignment with human users/clusters",
+        "present": true,
+        "description": "Human comparison data are vote-derived BTL scores for all users and seven user clusters from 276 active Oogiri Sogo voters.",
+        "directly_comparable": false,
+        "detail": "The comparison uses the same factor space, but the human data are observational platform votes with up to three votes per prompt and unknown display/order/context, whereas LLMs were prompted via API to select at most/exactly one response from candidate lists with repeated shuffled calls. Thus the conditions are not materially matched."
+      },
+      {
+        "scope": "Humor-strategy label quality",
+        "present": true,
+        "description": "One author evaluated 110 GPT-5.1-assigned strategy labels for appropriateness; 85.5% were judged correct.",
+        "directly_comparable": false,
+        "detail": "This is a validation check of LLM-generated labels, not a matched independent human labeling baseline for the full dataset."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The LLM evaluation items are derived from a public Japanese Oogiri website and the existing Oogiri-Corpus, and the paper uses later proprietary API models without reporting training cutoffs, model release/training dates, or any decontamination test. The exact public-before-model relationship is not documented, but the public source content and lack of controls create a plausible contamination/memorization risk for LLM selections and alignment results."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "RQ2 and RQ3 claims about LLM-human cluster alignment and persona prompting depend on LLM funniest-response selections. BTL factor analyses also partly depend on GPT-5.1 humor-strategy labels used as features.",
+      "human_validation": "Humor-strategy labels were checked by one non-blinded author on 110 instances, with 94/110 judged correct. The paper reports no human validation of the LLM funniest-response selections themselves.",
+      "detail": "LLMs are not only systems under study; their selections are treated as preference judgments, and GPT-5.1 supplies dataset labels used in the factor analysis. Human platform votes independently support the user-cluster analyses, so LLM judging is substantial rather than the sole basis for all results."
+    },
+    "reporting_gaps": [
+      "No API snapshots, endpoint versions, inference dates, model release dates, or training-data cutoffs are reported for Gemini 3 Pro, GPT-5.1, or Claude Sonnet 4.5.",
+      "No contamination analysis or decontamination controls are reported, despite using public Oogiri content and proprietary LLM APIs.",
+      "No token limits, maximum output length, top_p/top_k, seed, retry policy, invalid-output handling, or total API cost are reported; only temperature=1.0/default parameters are stated.",
+      "The main LLM selection task says to select exactly one response, but the appendix prompt says at most one and allows zero selections; the frequency and handling of no-selection cases are not reported.",
+      "The exact total number of API calls is not reported, especially for batched humor-strategy labeling with 20 samples per call.",
+      "The paper does not report the platform voting UI conditions, candidate order shown to human users, timing, or whether human voters saw the same candidate sets as the LLMs.",
+      "It is not explicit whether the human BTL scores used in LLM comparisons were restricted to the same 897-prompt evaluation subset used for LLM preference collection.",
+      "Verified demographics, geography, and background attributes of the platform voters are unavailable; the paper notes that true rater attributes cannot be traced.",
+      "Counts and demographics of prompt/response authors are not reported.",
+      "The humor-strategy label validation used only one non-blinded author annotator; no independent multi-annotator reliability or inter-annotator agreement is reported.",
+      "Random seeds/initialization details for K-means, SVD, UMAP, response-order permutation, and other stochastic steps are not reported.",
+      "The procedure for majority voting multi-label GPT-5.1 annotations is only summarized; tie or disagreement handling for labels is not fully specified."
+    ]
   }
 }

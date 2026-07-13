@@ -208,5 +208,331 @@
     "code_url": "https://github.com/rexera/Pun2Pun",
     "data_url": "https://github.com/rexera/Pun2Pun",
     "other": "The paper states that the Pun2Pun dataset, inference scripts, and evaluation scripts are available at the GitHub URL."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "People whose textual puns are represented in the pre-existing source datasets Liu (2018), Chen et al. (2024), and Simpson et al. (2019)",
+        "recruitment": "The paper reused/curated examples from these existing datasets; original contributor recruitment is not reported in this paper.",
+        "geography": null,
+        "languages": [
+          "Chinese",
+          "English"
+        ],
+        "observations": "Source dataset statistics are reported as Liu (2018): 947 phonic and 528 graphic Chinese textual puns; Chen et al. (2024): 524 phonic and 528 graphic Chinese textual puns; Simpson et al. (2019): 1268 phonic and 1610 graphic English textual puns.",
+        "detail": "These are source-material item counts, not participant counts; the paper does not describe the original human populations behind these datasets."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Unidentified creators/users of Chinese and English public social media sources containing caption-embedded visual puns",
+        "recruitment": "Manual curation from public social media sources; source platforms, collection dates, and creator demographics are not reported.",
+        "geography": null,
+        "languages": [
+          "Chinese",
+          "English"
+        ],
+        "observations": "Visual Pun2Pun data are described as 1k caption-embedded images; Table 1 totals 426 Chinese phonic, 74 Chinese graphic, 155 English phonic, and 349 English graphic visual items.",
+        "detail": "The paper says no relevant visual-pun datasets existed and that the authors manually curated examples from public social media."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3 authors",
+        "population": "Paper authors acting as annotators/curators",
+        "recruitment": "Internal author annotation; no external recruitment procedure reported.",
+        "geography": "Authors are affiliated with Beijing University of Posts and Telecommunications; annotator locations are not otherwise reported.",
+        "languages": [
+          "Chinese",
+          "English"
+        ],
+        "observations": "Final Pun2Pun dataset comprises 5.5k textual examples across English and Chinese plus 1k caption-embedded images; Table 1 totals 5,502 textual and 1,004 visual items.",
+        "detail": "For textual puns, three authors independently reviewed and curated each example under unified guidelines after helper-model-assisted verification. For visual puns, three authors manually collected, reviewed, and annotated the entire dataset."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "External translation experts consulted for challenging annotation cases",
+        "recruitment": "Challenging cases were referred to external translation experts; selection procedure is not reported.",
+        "geography": null,
+        "languages": [
+          "Chinese",
+          "English"
+        ],
+        "observations": "The number of referred cases is not reported.",
+        "detail": "The paper does not report the number, identities, qualifications beyond being translation experts, or agreement procedures for these experts."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "2 authors",
+        "population": "Paper authors acting as evaluators in the optimization study",
+        "recruitment": "Internal author evaluation; no external recruitment reported.",
+        "geography": "Authors are affiliated with Beijing University of Posts and Telecommunications; evaluator locations are not otherwise reported.",
+        "languages": [
+          "Chinese",
+          "English"
+        ],
+        "observations": "20 randomly selected textual examples were evaluated over five refinement iterations on three 5-point dimensions: innovativeness, content retention, and target-language fluency.",
+        "detail": "The two authors independently evaluated outputs from a naive deepseek-r1 iterative optimization pipeline; the paper does not report inter-rater reliability or aggregation details beyond Figure 5."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Three authors independently reviewed and curated examples and annotations for Pun2Pun subtasks; disagreements were resolved through team discussion."
+      },
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "External translation experts were consulted for challenging annotation cases; count and procedures are not reported."
+      },
+      {
+        "type": "LLM",
+        "name": "gpt-4o-mini",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used as a helper model during annotation for initial pun classification and mechanism decomposition, with vanilla settings and task-agnostic instructions; outputs were manually reviewed and corrected."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Task I classification performance was measured as accuracy against human-reviewed labels."
+      },
+      {
+        "type": "LLM",
+        "name": "gpt-4o-mini",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used as the judge model for Agent-Accuracy on Tasks II/III, binary Hit for translation validity, and Overlap scoring for hit translations. The paper notes this makes evaluation consistent only within categories rather than comparable across all."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "text-embedding-v3 from Qwen Team",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used to compute cosine similarity for translations; the paper says Cos is not a determinant metric but a measure of semantic alignment/creativity and reports it relative to 70."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Two authors independently rated optimization-study outputs on 5-point scales for innovativeness, content retention, and target-language fluency."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main Pun2Pun model runs for textual and visual understanding and translation tasks under Vanilla, 1-Shot, and CVO strategies",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "No best-of-N generation, reranking, or selection procedure is reported. The number of generated candidates per item is not stated."
+      },
+      {
+        "scope": "Naive deepseek-r1 iterative optimization study on 20 textual examples",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "The study used five consecutive refinement iterations, but this is iterative refinement rather than best-of-N candidate selection; no final-output selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "gpt-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on textual and visual Pun2Pun tasks; no API snapshot, release variant, or inference date is reported."
+      },
+      {
+        "name": "gpt-4o-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as helper and judge model; no snapshot or inference date is reported."
+      },
+      {
+        "name": "o1-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on textual puns; no snapshot or inference date is reported."
+      },
+      {
+        "name": "o3-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on visual puns; no snapshot or inference date is reported."
+      },
+      {
+        "name": "deepseek-v3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on textual puns; no checkpoint/snapshot or inference date is reported."
+      },
+      {
+        "name": "deepseek-r1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on textual puns and used in the optimization study; no checkpoint/snapshot or inference date is reported."
+      },
+      {
+        "name": "qwen-vl-max",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on textual and visual puns. The main text uses qwen-vl-max; appendix tables contain the apparent spelling qwen-v1-max."
+      },
+      {
+        "name": "qwq-32b-preview",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on textual puns; no exact hosted snapshot or inference date is reported."
+      },
+      {
+        "name": "qvq-72b-preview",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on visual puns; no exact hosted snapshot or inference date is reported."
+      },
+      {
+        "name": "claude-3.5-sonnet",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated on textual and visual puns; no dated Claude snapshot is reported."
+      },
+      {
+        "name": "text-embedding-v3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Qwen Team embedding model used for cosine similarity; the paper gives an Alibaba Cloud Model Studio documentation URL but no exact service version or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main LLM/RLM task prompting for Pun2Pun textual and visual tasks",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "All hyperparameters remained default.",
+        "compute_or_cost": null,
+        "detail": "Strategies were Vanilla zero-shot CoT with “Let’s think step by step,” 1-Shot with one Pun2Pun translation CoT example, and CVO with a step-wise CVO theory description plus the same example. Seeds, retries, candidate counts, and token limits are not reported."
+      },
+      {
+        "scope": "gpt-4o-mini helper during annotation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Vanilla settings and task-agnostic instructions are reported; exact parameters are not.",
+        "compute_or_cost": null,
+        "detail": "Helper performed initial classification and mechanism decomposition; all outputs were manually reviewed when contradicting predefined labels or for mechanism clarity."
+      },
+      {
+        "scope": "gpt-4o-mini judging for AAcc, Hit, and Ovl",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "AAcc scores Task II/III predictions on a 0-10 scale; Hit is a strict Yes/No translation-validity judgment; Ovl is scored only for hit instances using weighted SM1/TM1, SM2/TM2, and SPM/TPM components. The Ovl prompt is shown as extraction and scoring steps, but implementation call counts are not reported."
+      },
+      {
+        "scope": "Cosine similarity evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Cos uses text-embedding-v3 from Qwen Team and is reported relative to 70; embedding call counts and token limits are not reported."
+      },
+      {
+        "scope": "Optimization study with deepseek-r1",
+        "calls_per_item": "Five consecutive refinement iterations; whether there was a separate initial-generation call is not specified.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "20 textual examples were randomly selected from Pun2Pun and subjected to a naive iterative refinement pipeline; no compute, cost, seed, or sampling settings are reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Main Pun2Pun understanding tasks",
+        "present": false,
+        "description": "Human-reviewed annotations serve as labels, but the paper does not report human performance on the same classification, locating, decomposition, or appreciation tasks.",
+        "directly_comparable": false,
+        "detail": "Task I accuracy and Tasks II/III AAcc compare model predictions to annotations; this is not a human performance baseline."
+      },
+      {
+        "scope": "Pun translation tasks",
+        "present": false,
+        "description": "No human translation baseline, gold-standard reference translations, or main human evaluation benchmark is provided.",
+        "directly_comparable": false,
+        "detail": "The limitations explicitly state that the absence of human judgment undermines the reliability and validity of the quantitative results and that gold-standard pun translations are lacking."
+      },
+      {
+        "scope": "Optimization study",
+        "present": false,
+        "description": "Two authors rated model outputs, but no human-generated translations or human iterative-refinement baseline were evaluated under matched conditions.",
+        "directly_comparable": false,
+        "detail": "The study measures changes in deepseek-r1 iterative outputs, not human-vs-model performance."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "Pun2Pun is introduced in this paper, but many underlying textual items were collected from public pre-existing datasets from 2018, 2019, and 2024, and visual items were manually curated from public social media sources. The evaluated models’ training cutoffs and training data overlap are not reported, and no decontamination test, private held-out source, or collection-date control is described. Thus the final benchmark may be newly curated, but public source-item exposure leaves at least moderate contamination risk."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "Headline claims about translation difficulty, CVO/1-shot/vanilla comparisons, Hit rates, Ovl scores, and Tasks II/III AAcc depend on gpt-4o-mini judgments; Task I classification accuracy is less affected because it uses automatic comparison to human-reviewed labels.",
+      "human_validation": "No human validation is reported for the main quantitative LLM-judge metrics. The separate 20-example optimization study has author ratings but does not validate the main benchmark judgments.",
+      "detail": "The paper itself acknowledges heavy reliance on LLM-as-a-judge methods, potential biases and consistency issues, and that automated metrics should be interpreted cautiously, especially for absolute translation quality."
+    },
+    "reporting_gaps": [
+      "No inter-annotator agreement or annotation consistency metrics are reported for the dataset labels.",
+      "The number, selection criteria, and qualifications of external translation experts are not reported beyond the phrase “external translation experts.”",
+      "Model snapshots, API versions, inference dates, access methods, and service endpoints are not reported for the evaluated LLMs/RLMs or gpt-4o-mini judge/helper.",
+      "The paper says all hyperparameters remained default but does not report actual temperature, top-p, max-token limits, seeds, retry policy, or stop criteria.",
+      "Number of generated candidates per item and whether any retries or multiple samples were produced are not reported; no best-of-N selection is described.",
+      "Judge-model settings, repeated-judging reliability, calibration, and agreement with human judgments are not reported for AAcc, Hit, or Ovl.",
+      "No human validation benchmark is provided for the main translation metrics, and no gold-standard reference translations are available.",
+      "Compute resources, runtime, and monetary cost are not reported.",
+      "Public social-media visual source platforms, URLs, collection dates, and filtering counts are not reported.",
+      "Counts of examples modified or removed during dataset construction are not reported.",
+      "Appendix tables appear to use the spelling qwen-v1-max whereas the main text names qwen-vl-max, creating a model-name reporting ambiguity.",
+      "For the optimization study, inter-rater agreement and detailed aggregation of the two authors’ ratings are not reported."
+    ]
   }
 }

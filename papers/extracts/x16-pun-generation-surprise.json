@@ -1,0 +1,493 @@
+{
+  "key": "x16-pun-generation-surprise",
+  "ref": "Part 2 (learned-generation anchor)",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x16-pun-generation-surprise/x16-pun-generation-surprise.md",
+  "source_md_sha256": "d89c2b29cc94e9beb85b967a7a821aa4fbb56e43a35dcf24239a49c7af1d2e76",
+  "source_truncated": false,
+  "title": "Pun Generation with Surprise",
+  "authors": [
+    "He He",
+    "Nanyun Peng",
+    "Percy Liang"
+  ],
+  "year": 2019,
+  "venue": "Proceedings of NAACL-HLT 2019, pages 1734–1744",
+  "paper_types": [
+    "method",
+    "system",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can a local-global surprisal principle characterize what makes homophonic pun sentences funny?",
+    "How well does a local-global surprisal metric correlate with human funniness ratings compared with ambiguity, distinctiveness, and unusualness metrics?",
+    "Can an unsupervised retrieve-and-edit system generate puns from unhumorous text given a pun word and an alternative homophone?",
+    "Does the proposed system outperform a neural joint decoding baseline and retrieval/editing ablations in human evaluation?"
+  ],
+  "tasks": [
+    "pun generation",
+    "pun detection",
+    "pun funniness scoring"
+  ],
+  "humor_domains": [
+    "puns",
+    "homophonic puns",
+    "wordplay"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "SemEval-2017 Task 7 puns",
+      "role": "evaluated-on",
+      "size": "1099 human-written puns; 219 for development; 150 pun/alternative word pairs evaluated"
+    },
+    {
+      "name": "BookCorpus",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "WikiText-103",
+      "role": "trained-on",
+      "size": null
+    },
+    {
+      "name": "KAO",
+      "role": "analyzed",
+      "size": "141 puns; 257 non-puns"
+    },
+    {
+      "name": "SEMEVAL AMT funniness ratings",
+      "role": "introduced",
+      "size": "130 sentences: 33 puns, 33 swap-puns, and 64 non-puns"
+    },
+    {
+      "name": "Pun generation AMT evaluation set",
+      "role": "introduced",
+      "size": "150 pun/alternative word pairs; each generated sentence was rated by 5 workers"
+    }
+  ],
+  "models_evaluated": [
+    "NEURALJOINTDECODER",
+    "RETRIEVE",
+    "RETRIEVE+SWAP",
+    "SURGEN",
+    "RETRIEVE+SWAP+TOPIC+SMOOTHER"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Local-global surprisal measure",
+      "summary": "The paper defines surprisal as a log-likelihood ratio comparing the pun word and alternative word in context, then compares local surprisal around the pun position with global surprisal over the whole sentence. The resulting S_ratio is intended to identify sentences where the pun word is locally surprising but globally supported."
+    },
+    {
+      "name": "SURGEN",
+      "summary": "SURGEN is an unsupervised retrieve-and-edit pun generator. It retrieves a seed sentence containing the alternative word, swaps in the pun word, and inserts a type-consistent topic word related to the pun word near the beginning of the sentence."
+    },
+    {
+      "name": "Distant skip-gram topic prediction",
+      "summary": "The system trains a skip-gram model on words that appear in the same sentence between d1 and d2 words apart, then uses top predictions conditioned on the pun word as candidate topic words for global support."
+    },
+    {
+      "name": "Neural smoother variation",
+      "summary": "A sequence-to-sequence model is trained like a denoising autoencoder to reconstruct deleted neighboring words around a noun or pronoun, with the goal of smoothing edited sentences after topic-word insertion."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The paper states that its local-global surprisal principle formalizes unexpectedness through local surprisal and incongruity resolution through global association."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "operationalized",
+      "detail": "The core method is built around the contrast between the pun word being surprising in the local context and supported in the global context."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "For metric analysis, AMT workers rated 130 sentences on funniness from 1 to 7; each sentence was rated by 5 workers, 10 workers were removed, and ratings were z-scored per worker."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For generation, AMT workers rated outputs for 150 pun/alternative word pairs on success as yes/no, funniness from 1 to 5, and grammaticality from 1 to 5; each generated sentence was rated by 5 workers."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper computes Spearman correlations between human funniness ratings and local-global surprisal, ambiguity, distinctiveness, and unusualness, with outliers beyond two standard deviations clipped to +2 or -2."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Local-global surprisal correlated with human funniness for puns versus non-puns on both analyzed datasets.",
+      "metric": "Spearman correlation",
+      "value": "0.46 on SEMEVAL; 0.58 on KAO; p=0.00 for both",
+      "dataset": "SEMEVAL; KAO",
+      "best_system": "Surprisal (S_ratio)"
+    },
+    {
+      "finding": "For puns versus swap-puns, local-global surprisal was the only metric reported with a statistically significant correlation.",
+      "metric": "Spearman correlation",
+      "value": "0.48; p=0.00",
+      "dataset": "SEMEVAL",
+      "best_system": "Surprisal (S_ratio)"
+    },
+    {
+      "finding": "SURGEN achieved the highest pun-generation success rate among automatic systems, more than tripling NEURALJOINTDECODER.",
+      "metric": "Success rate",
+      "value": "31.4% for SURGEN vs 9.2% for NJD; Human 78.9%",
+      "dataset": "Pun generation AMT evaluation set",
+      "best_system": "SURGEN"
+    },
+    {
+      "finding": "SURGEN tied the smoother variation for the best automatic funniness score while remaining far below expert-written puns.",
+      "metric": "Average funniness, 1-5 scale",
+      "value": "1.7 for SURGEN; 1.7 for R+S+T+M; 1.4 for NJD; Human 3.0",
+      "dataset": "Pun generation AMT evaluation set",
+      "best_system": "SURGEN; RETRIEVE+SWAP+TOPIC+SMOOTHER"
+    },
+    {
+      "finding": "The retrieval-only baseline had the highest grammaticality, showing a tradeoff between editing for puns and fluency.",
+      "metric": "Average grammar, 1-5 scale",
+      "value": "3.9 for R; 3.0 for SURGEN; 2.6 for NJD; Human 3.8",
+      "dataset": "Pun generation AMT evaluation set",
+      "best_system": "RETRIEVE"
+    },
+    {
+      "finding": "In pairwise comparison, SURGEN beat NEURALJOINTDECODER more often than it lost across success, funniness, and grammar.",
+      "metric": "Pairwise win % / lose %",
+      "value": "Success 48.0 / 5.3; Funniness 56.7 / 25.3; Grammar 60.7 / 30.0",
+      "dataset": "Pun generation AMT evaluation set",
+      "best_system": "SURGEN"
+    }
+  ],
+  "key_findings": [
+    "The local-global surprisal metric distinguishes puns from non-puns and swap-puns, supporting the paper's claim that surprise beyond ambiguity matters for puns.",
+    "SURGEN's retrieve-swap-topic strategy outperforms both pure retrieval and the adapted NEURALJOINTDECODER baseline on success rate and funniness.",
+    "Adding more edits increases pun success but tends to reduce grammaticality; the neural smoother did not improve grammaticality and slightly hurt success rate.",
+    "Within human-written puns, distinctiveness is the only metric with statistically significant correlation, so local-global surprisal is not fine-grained enough to rank good versus mediocre puns.",
+    "Generated puns remain far below expert-written puns, with Human at 78.9% success versus SURGEN at 31.4%."
+  ],
+  "limitations": [
+    "The local-global surprisal principle is not formalized robustly enough to be directly optimized for generation.",
+    "No single automatic metric works well across all types of sentences or reliably scores funniness within puns.",
+    "SURGEN remains far from expert-written puns across success, funniness, and grammaticality.",
+    "Error analysis finds major problems in finding seed sentences that accommodate both the pun word and the topic word.",
+    "The type-consistency checker is simple and can miss selectional or animacy problems, such as treating butter as animate.",
+    "The neural smoother can fail to fix topic-word errors and may rewrite rare topic words into common phrases."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": "https://github.com/hhexiy/pungen",
+    "data_url": "https://github.com/hhexiy/pungen",
+    "other": "CodaLab reproducibility worksheet: https://worksheets.codalab.org/worksheets/0x5a7d0fe35b144ad68998d74891a31ed6"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Authors/creators of expert-written puns in the SemEval-2017 Task 7 pun dataset",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "SemEval dataset contains 1099 human-written puns annotated with pun words and alternative words; 219 were taken for development; 150 pun/alternative word pairs were used in the generation evaluation, with expert-written SemEval puns included as the Human baseline.",
+        "detail": "The paper does not report the number or demographics of the people who wrote or curated the SemEval puns."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "48 workers; 10 removed",
+        "population": "Amazon Mechanical Turk workers",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Funniness ratings for 130 sentences from the development set: 33 puns, 33 swap-puns, and 64 non-puns. Each sentence was rated by 5 workers; each worker read roughly 10–20 sentences in random order on a 1–7 funniness scale.",
+        "detail": "Workers rated the question 'How funny is this sentence?' from 1 (not at all) to 7 (extremely). Sentence types were counterbalanced. Workers were removed if their maximum Spearman correlation with other people rating the same sentence was below 0.2. Ratings were z-scored per worker and averaged per sentence; average Spearman agreement among remaining workers was 0.3."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Human raters for the Kao et al. (2015) pun dataset",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "KAO dataset statistics used here: 141 puns and 257 non-puns with funniness ratings; no swap-puns.",
+        "detail": "The paper states that the KAO human ratings were collected separately and that the two datasets have different numbers and types of sentences. It does not report the KAO participant count, recruitment, or rating protocol details."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "65 workers; 3 removed",
+        "population": "Amazon Mechanical Turk workers in the generation success survey",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Yes/no success ratings for sentences from all 5 automatic systems plus expert-written puns over 150 pun/alternative word pairs; each sentence was rated by 5 workers.",
+        "detail": "Workers were shown a group of sentences generated by all systems for the same pun/alternative pair, randomly shuffled with the expert-written pun. They answered 'Is the sentence a pun?' after being shown the Miller et al. definition of a pun. Removed workers had maximum Spearman correlation with other workers below 0.2. Average inter-annotator Spearman correlation for success was 0.57."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "93 workers; 4 removed",
+        "population": "Amazon Mechanical Turk workers in the generation funniness survey",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Funniness ratings for sentences from all 5 automatic systems plus expert-written puns over 150 pun/alternative word pairs; each sentence was rated by 5 workers.",
+        "detail": "Workers rated 'How funny is the sentence?' on a 1–5 scale and had an N/A option for cases that did not make sense. N/A ratings were excluded unless all ratings for a sentence were N/A, in which case the score was set to 0. Workers were instructed to try their best to give different scores for sentences in the same group. Average inter-annotator Spearman correlation for funniness was 0.36."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "66 workers; 4 removed",
+        "population": "Amazon Mechanical Turk workers in the generation grammaticality survey",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Grammaticality ratings for sentences from all 5 automatic systems plus expert-written puns over 150 pun/alternative word pairs; each sentence was rated by 5 workers.",
+        "detail": "Workers rated 'How grammatical is the sentence?' on a 1–5 scale. Workers were instructed to try their best to give different scores for sentences in the same group. Removed workers had maximum Spearman correlation with other workers below 0.2. Average inter-annotator Spearman correlation for grammaticality was 0.32."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "SemEval-2017 Task 7 dataset creators/annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The SemEval dataset supplied human-written puns annotated with pun words and alternative words; these annotations supplied the pun/alternative pairs used by the paper. The paper does not describe the original annotation protocol."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk workers for surprisal-analysis funniness ratings",
+        "role": "primary",
+        "blind": null,
+        "detail": "AMT ratings on 130 SemEval-derived sentences supplied the human funniness scores used for correlations with automatic metrics. The paper reports random order and counterbalancing but does not explicitly report whether workers were blind to sentence type or source."
+      },
+      {
+        "type": "human-lay",
+        "name": "Kao et al. (2015) human funniness ratings",
+        "role": "primary",
+        "blind": null,
+        "detail": "Human funniness ratings from KAO were used as the target ratings for correlations on 141 puns and 257 non-puns. Participant and blinding details are not reported in this paper."
+      },
+      {
+        "type": "human-lay",
+        "name": "Kao et al. (2015) human word-relatedness annotations",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "For KAO, the paper directly used ambiguity and distinctiveness scores from the original implementation, which requires human-annotated word relatedness. Details of those annotators are not reported here."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Local-global surprisal, ambiguity, distinctiveness, and unusualness",
+        "role": "primary",
+        "blind": null,
+        "detail": "These automatic metrics were standardized, clipped at ±2 standard deviations for outliers, and correlated with human funniness ratings using Spearman correlation. Local-global surprisal and unusualness used a neural language model trained on WikiText-103; SEMEVAL ambiguity/distinctiveness used a skip-gram approximation."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk workers for generation evaluation",
+        "role": "primary",
+        "blind": null,
+        "detail": "AMT workers rated generated and expert-written sentences for success, funniness, and grammaticality. Sentences for the same pun/alternative pair were randomly shuffled, but explicit source/system blinding is not reported."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors",
+        "role": "secondary",
+        "blind": null,
+        "detail": "For error analysis, the authors randomly sampled 50 unsuccessful generations labeled by workers and manually characterized errors into six non-exclusive categories."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "NEURALJOINTDECODER baseline in the 150-pair generation evaluation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper adapted Yu et al. (2018)'s best model and retrained forward/backward language models on BookCorpus, but does not report decoding parameters, number of generated candidates, or how the final evaluated sentence was selected for each pun/alternative pair."
+      },
+      {
+        "scope": "RETRIEVE and RETRIEVE+SWAP systems in the 150-pair generation evaluation",
+        "mode": "not-reported",
+        "n": "Retriever returned 500 candidates; the top 100 were used as seed sentences for edited systems.",
+        "selector": "unclear",
+        "detail": "Sentences containing exactly one alternative word were ranked by the position of that word, with later being better. The paper reports evaluating one sentence per method per pair but does not fully specify final selection from retrieved/seed candidates."
+      },
+      {
+        "scope": "SURGEN / RETRIEVE+SWAP+TOPIC and RETRIEVE+SWAP+TOPIC+SMOOTHER in the 150-pair generation evaluation",
+        "mode": "not-reported",
+        "n": "Top 100 seed sentences and top 100 skip-gram topic-word predictions were considered before filtering.",
+        "selector": "unclear",
+        "detail": "The system filters candidate topic words for type consistency and edits seed sentences, but the paper does not specify whether the final evaluated output was a single deterministic top candidate, selected from multiple candidates, or otherwise chosen. Therefore best-of-N versus single-sample selection cannot be determined from the paper."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "WikiText-103 neural language model for surprisal and unusualness",
+        "version_or_snapshot": "fairseq WikiText-103 convolutional LM archive: https://dl.fbaipublicfiles.com/fairseq/models/wiki103_fconv_lm.tar.bz2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to estimate probabilities of text spans for local-global surprisal and unusualness. The paper does not report an inference date, code commit, or runtime environment."
+      },
+      {
+        "name": "Skip-gram topic prediction model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Trained by the authors on BookCorpus with d1=5 and d2=10, word embedding size 300, 15 epochs, Adam, and learning rate 0.0001. Used to predict topic words and to approximate word relatedness for SEMEVAL ambiguity/distinctiveness."
+      },
+      {
+        "name": "Neural smoother sequence-to-sequence model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Single-layer LSTM sequence-to-sequence model with attention, 512 hidden units, trained on BookCorpus for 50 epochs using AdaGrad with learning rate 0.01 and dropout 0.1."
+      },
+      {
+        "name": "NEURALJOINTDECODER",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Adapted from Yu et al. (2018)'s best model for homophonic puns by treating the pun word and alternative word as two input senses and decoding from the pun word. Forward/backward language models were retrained on the same BookCorpus used for the authors' system."
+      },
+      {
+        "name": "RETRIEVE",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Retrieval baseline that retrieves sentences containing the pun word."
+      },
+      {
+        "name": "RETRIEVE+SWAP",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "System variation that retrieves sentences containing the alternative word and replaces it with the pun word."
+      },
+      {
+        "name": "SURGEN / RETRIEVE+SWAP+TOPIC",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Main retrieve-and-edit system: retrieve a seed sentence containing the alternative word, swap in the pun word, and insert a type-consistent topic word related to the pun word."
+      },
+      {
+        "name": "RETRIEVE+SWAP+TOPIC+SMOOTHER",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "SURGEN variant that applies the neural smoother after topic-word insertion."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Surprisal and unusualness metric computation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Local context window size d=2. Scores were standardized, and outliers beyond two standard deviations were clipped to +2 or -2. S_ratio was set to -1 if either local or global surprisal was negative.",
+        "compute_or_cost": null,
+        "detail": "The paper does not report model call counts, runtime, hardware, or inference cost for metric computation."
+      },
+      {
+        "scope": "SURGEN and edited retrieval variants",
+        "calls_per_item": null,
+        "candidates_per_item": "For each alternative word, the retriever returned 500 candidates and the top 100 were used as seed sentences. For topic words, the top 100 skip-gram predictions from p_theta(w | pun word) were considered before type-consistency filtering.",
+        "token_budget": null,
+        "sampling_parameters": "Sentences containing exactly one alternative word were ranked by later position of the alternative word. Topic-word replacement targeted the first noun or pronoun near the beginning of the seed sentence. WordNet path-similarity threshold for type consistency was 0.3.",
+        "compute_or_cost": null,
+        "detail": "The final output-selection budget for the one evaluated sentence per pair is not reported."
+      },
+      {
+        "scope": "NEURALJOINTDECODER baseline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports the adapted decoding direction at a high level but not beam size, sampling settings, number of candidates, stopping criteria, runtime, or cost."
+      },
+      {
+        "scope": "RETRIEVE baseline",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Baseline simply retrieves sentences containing the pun word.",
+        "compute_or_cost": null,
+        "detail": "Candidate counts and final selection procedure for the RETRIEVE baseline are not reported separately."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Pun generation human evaluation",
+        "present": true,
+        "description": "Expert-written puns from the SemEval pun dataset were evaluated as the Human condition. Reported scores: 78.9% success, 3.0 average funniness, and 3.8 average grammaticality; pairwise comparisons against SURGEN were also reported.",
+        "directly_comparable": true,
+        "detail": "Human and system outputs were rated in the same AMT evaluation groups for the same pun/alternative word pairs and same rating questions. The creation conditions for the expert-written puns were not matched to the automatic generation process."
+      },
+      {
+        "scope": "Surprisal-principle metric analysis",
+        "present": false,
+        "description": "Human funniness ratings served as target labels for correlation analysis, but there was no separate human predictor or human metric baseline.",
+        "directly_comparable": false,
+        "detail": "The comparison was among automatic metrics, not human versus model performance."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [],
+      "basis": "The evaluation relies on public SemEval-2017 and Kao et al. (2015) pun datasets that predate the paper's trained systems, and the paper reports no decontamination or overlap checks against BookCorpus or WikiText-103. The risk is lower than in opaque web-scale proprietary LLM evaluations because the systems are described as unsupervised/retrained on BookCorpus or using a specified WikiText-103 LM and are not reported as trained on the SemEval puns, but the public evaluation items, use of SemEval development data, and possible corpus overlap leave nontrivial uncertainty."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Headline generation results are based on AMT ratings. Metric-analysis claims compare automatic metrics against human funniness ratings.",
+      "detail": "The paper uses a neural language model inside automatic metrics, but it does not use a prompted LLM or LLM-as-judge to evaluate outputs or determine labels."
+    },
+    "reporting_gaps": [
+      "AMT worker geography, demographics, qualifications, and compensation are not reported.",
+      "Explicit blinding of human raters to system/source is not reported; the paper only states that sentences in each group were randomly shuffled.",
+      "Participant counts and rating-protocol details for the KAO human ratings and word-relatedness annotations are not reported in this paper.",
+      "The exact source/split of the 150 pun/alternative word pairs relative to SemEval development/test portions is not fully specified.",
+      "Final output selection from retrieved seed sentences and topic-word candidates is not reported, so single-output versus best-of-N selection cannot be determined.",
+      "Decoding parameters for NEURALJOINTDECODER, including beam size, sampling settings, number of candidates, and stopping criteria, are not reported.",
+      "Candidate counts and final selection procedure for the RETRIEVE baseline are not reported separately.",
+      "Exact software versions, code commits, model checkpoints beyond the WikiText-103 LM archive URL, inference dates, and runtime environments are not reported.",
+      "Inference compute, runtime, hardware, and monetary cost are not reported.",
+      "No decontamination or corpus-overlap analysis is reported for SemEval/KAO items against BookCorpus or WikiText-103.",
+      "The number and identity of the expert writers or curators of the SemEval human baseline puns are not reported."
+    ]
+  }
+}

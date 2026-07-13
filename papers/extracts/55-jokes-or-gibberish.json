@@ -152,5 +152,156 @@
     "code_url": null,
     "data_url": "https://kaggle.com/competitions/humor-detection",
     "other": "The data presented in this study are available on request from the corresponding author."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "Thai-native annotators",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "Thai"
+        ],
+        "observations": "Independently labeled translated joke outputs into X, XJ, J, or N; final labels were set by majority vote with consensus/adjudication for 1-1-1 splits. The study used 850 English jokes translated by four systems.",
+        "detail": "Training used written bilingual guidelines and oral explanations, followed by a 15-item test set with feedback. Reported inter-rater reliability on pre-consensus labels: Fleiss’ κ = 0.6536 and simple agreement = 78.57%. No recruitment, compensation, age, gender, location, or translation/humor expertise details are reported beyond Thai-native status."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual classifiers of the original English jokes; the paper states that 'we' applied the scheme but does not identify the classifiers or count them.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Manually assigned multi-label joke-type categories to the 850 source jokes: Wordplay n=413, Idioms n=24, Cultural Reference n=203, Irony n=224, Dark Humor n=177, Absurd Humor n=28, Other n=47. Counts are category memberships and overlap because the scheme is multi-label.",
+        "detail": "Classification was based on structural and semantic cues in the original English jokes. The paper does not report coder number, coder qualifications, independence, adjudication procedure, or reliability for this joke-type labeling."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Three Thai-native annotators independently categorized each translated text as X, XJ, J, or N. The paper does not report whether annotators were blinded to translation system or prompt condition. Majority-vote/consensus/adjudicated labels are the primary basis for humor-retention results."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "For unresolved 1-1-1 splits after annotator consensus discussion, the protocol says a blinded adjudicator assigned the final label. The paper does not report the adjudicator’s qualifications or the number of items adjudicated."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The source jokes were manually categorized into overlapping humor-type labels by the authors/research team as implied by 'we applied a multi-label scheme'; exact labelers and reliability are not reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Humor retention rate and exact McNemar tests",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Humor retention was computed as the percentage of final human labels equal to J. Pairwise significance used exact McNemar tests on J vs. non-J discordant pairs; full class distributions and shift heatmaps were descriptive."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Google Translate / MT translations for 850 English jokes",
+        "mode": "single-sample",
+        "n": "1 evaluated output per joke",
+        "selector": "none",
+        "detail": "The study reports one MT translation per source joke evaluated by annotators. No best-of-N generation, alternative candidates, or selection step is reported."
+      },
+      {
+        "scope": "GPT-4o prompt conditions: baseline GPT, GPT-P, and GPT-Ex",
+        "mode": "single-sample",
+        "n": "1 evaluated output per joke per prompt condition",
+        "selector": "none",
+        "detail": "Each GPT prompt condition produced the evaluated Thai translation; GPT-Ex additionally instructed the model to provide a parenthetical explanation. No multiple-candidate generation or output-selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Google Translate",
+        "version_or_snapshot": "deep_translator Python package version 1.11.4; Google Translate NMT system as of January 2025",
+        "inference_date": "January 2025",
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used as the MT condition via the deep_translator package. The exact Google Translate backend/model version or service snapshot is not reported."
+      },
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for baseline GPT, GPT-P, and GPT-Ex prompt conditions. The paper gives the model name and system prompts but does not report an API snapshot/version, endpoint, access route, or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Google Translate / MT condition",
+        "calls_per_item": null,
+        "candidates_per_item": "1 evaluated translation per source joke",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports use of Google Translate via deep_translator but does not report batching, retries, call counts, rate limits, cost, or any service parameters."
+      },
+      {
+        "scope": "GPT-4o baseline GPT, GPT-P, and GPT-Ex conditions",
+        "calls_per_item": null,
+        "candidates_per_item": "1 evaluated output per source joke per prompt condition",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "System prompts are reported, but max tokens, temperature, top_p, seed, stop conditions, retries, batching, latency, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "English-to-Thai joke translation performance",
+        "present": false,
+        "description": "No human translator output or human translation-performance baseline was evaluated. Humans served as annotators of machine-produced translations, not as a matched translation baseline.",
+        "directly_comparable": false,
+        "detail": "The study compares Google Translate with GPT-4o prompt variants only."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [],
+      "basis": "The 850 source jokes were randomly selected from the public Kaggle Humorous Jokes Dataset, cited as a 2020 Kaggle competition and sourced from public websites/social media. The evaluated systems include Google Translate as of January 2025 and GPT-4o, so the source jokes were public before the model runs and plausibly before/within proprietary model training data. The paper provides no decontamination analysis, held-out/private item construction, or controls for model prior exposure. Risk is moderated by the fact that the evaluated outputs and Thai humor-retention labels were newly produced for this study, but the public legacy joke source keeps contamination risk at least moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Primary evaluation labels came from three Thai-native human annotators; no LLM-as-evaluator is reported.",
+      "detail": "LLMs were used as translation generators, not as judges or automatic evaluators. Statistical conclusions are computed from human labels."
+    },
+    "reporting_gaps": [
+      "No GPT-4o API snapshot, version date, endpoint, access method, or inference date is reported.",
+      "No exact Google Translate backend/model snapshot is reported beyond deep_translator package version 1.11.4 and 'as of January 2025'.",
+      "No GPT sampling or decoding parameters are reported, including temperature, top_p, max tokens, seed, stop conditions, retries, or batching.",
+      "No model call counts, retry policy, latency, compute, or monetary cost are reported for either Google Translate or GPT-4o conditions.",
+      "No annotator recruitment method, compensation, demographics, geography, bilingual proficiency, or humor/translation expertise is reported beyond Thai-native status.",
+      "The paper states that it reports the number of adjudicated items, but the supplied text does not provide that number.",
+      "The number of 1-1-1 splits, consensus-discussion cases, and unresolved cases sent to the blinded adjudicator is not reported.",
+      "The source and construction of the 15-item test set’s gold-standard labels are not described.",
+      "Manual source-joke type classification lacks coder count, coder identity, independence/blinding, disagreement resolution, and inter-coder reliability reporting.",
+      "No human translator baseline is included.",
+      "No contamination or decontamination analysis is reported for the public Kaggle/online joke dataset.",
+      "The data are stated to be available on request; no public release of the translated outputs, human labels, or analysis code is reported."
+    ]
   }
 }

@@ -1,0 +1,339 @@
+{
+  "key": "x20-does-bigger-funnier",
+  "ref": "Part 4 (judge-validity stress test)",
+  "section": "Part 4 - Evaluation Methodology",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x20-does-bigger-funnier/x20-does-bigger-funnier.md",
+  "source_md_sha256": "df0b35d6b19817334cb3f3a9dcabcb041da9d9e71559b9728eedb3868a46d658",
+  "source_truncated": false,
+  "title": "Does Bigger Mean Funnier? Evaluating Humor Generation Across the Qwen3 Model Family",
+  "authors": [
+    "Jatin Agrawal",
+    "Radhika Mamidi"
+  ],
+  "year": 2026,
+  "venue": "CHum 2026",
+  "paper_types": [
+    "evaluation-study",
+    "dataset"
+  ],
+  "research_questions": [
+    "Does increasing model parameter count within the Qwen3 family improve humor generation quality?",
+    "How do automated LLM-as-a-judge evaluations compare with blinded human annotation on a highly subjective creative task?",
+    "Are humor scaling effects masked in aggregate by low annotator agreement and revealed on themes where annotators can distinguish joke quality?",
+    "How do dense and Mixture-of-Experts Qwen3 variants compare when considering total parameter capacity versus active per-token parameters?"
+  ],
+  "tasks": [
+    "humor generation",
+    "joke generation",
+    "pairwise joke comparison",
+    "joke ranking",
+    "LLM-as-a-judge validity analysis"
+  ],
+  "humor_domains": [
+    "everyday observational humor",
+    "stand-up-style jokes",
+    "one-liners",
+    "setup-punchline jokes"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Qwen3 humor parameter ablation data",
+      "role": "introduced",
+      "size": "50 themes; one joke per theme from each of five models; 999 LLM judge comparisons; human evaluation of three models across 40 themes with 240 total rankings"
+    }
+  ],
+  "models_evaluated": [
+    "Qwen3-8B",
+    "Qwen3-14B",
+    "Qwen3-32B",
+    "Qwen3-30B-A3B",
+    "Qwen3-235B-A22B",
+    "DeepSeek-V3.2"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Controlled within-family humor parameter ablation",
+      "summary": "The study evaluates five instruction-tuned Qwen3 variants from 8B to 235B on the same 50 everyday humor themes using a standardized joke-generation prompt with thinking disabled. By staying within one model family, it aims to isolate parameter count from training-data and tokenizer confounds while also comparing dense and MoE architectures."
+    },
+    {
+      "name": "Symmetric pairwise LLM judging with Bradley-Terry aggregation",
+      "summary": "For each theme, all 10 model pairs are judged in both A-first and B-first orderings by DeepSeek-V3.2, producing 999 comparisons after one timeout. The paper aggregates pairwise outcomes with normalized Bradley-Terry scores and reports win rates, while also measuring positional and length biases."
+    },
+    {
+      "name": "High-agreement subset analysis",
+      "summary": "The paper computes per-theme distinguishability as the fraction of annotator pairs agreeing on the funniest model, defining high-agreement themes as those with pairwise winner agreement ≥ 0.4. This subset analysis is used to test whether scaling effects appear only when humans can reliably distinguish joke quality."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "Representative outputs are analyzed through Suls’s Incongruity-Resolution framework to argue that larger models more reliably establish an expectation and subvert it with a concrete, interpretable punchline."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "LLM-as-judge",
+      "detail": "DeepSeek-V3.2 judged pairwise joke comparisons via OpenRouter. For each of 50 themes, all 10 model pairs were compared in both orderings, yielding 999 comparisons because one theme had 19 of 20 planned comparisons due to an API timeout; results were aggregated with Bradley-Terry scoring and win rates."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Two independent groups of six annotators performed blinded evaluation of Qwen3-32B, Qwen3-30B-A3B, and Qwen3-235B-A22B across 40 themes. Three anonymized jokes were shown in random order for 60 seconds, and annotators ranked them from funniest to least funny, yielding 240 total rankings."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The analysis reports Spearman correlation, cluster-bootstrap standard errors and confidence intervals for Bradley-Terry scores, Friedman tests, Wilcoxon signed-rank tests, Kendall’s W, Krippendorff’s alpha, chi-square tests for positional bias, binomial tests for length bias, and Spearman correlation between human preference and joke length."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The automated judge produced a perfectly monotonic size ranking across all five Qwen3 models.",
+      "metric": "Spearman correlation between total parameter count and win rate",
+      "value": "ρ = 1.0, p < 0.001",
+      "dataset": "Qwen3 humor parameter ablation data",
+      "best_system": "Qwen3-235B-A22B"
+    },
+    {
+      "finding": "DeepSeek-V3.2 assigned the highest automated win rate and Bradley-Terry score to the largest Qwen3 model.",
+      "metric": "Win Rate; BT Score (± SE); Avg Rank",
+      "value": "61.0%; 0.276 ± 0.030; 2.63",
+      "dataset": "Qwen3 humor parameter ablation data",
+      "best_system": "Qwen3-235B-A22B"
+    },
+    {
+      "finding": "The automated judge showed a strong positional artifact, choosing the first-presented joke far more often than chance.",
+      "metric": "Position A win rate; chi-square test",
+      "value": "73.5%; χ² = 215.9, p < 0.001",
+      "dataset": "Qwen3 humor parameter ablation data",
+      "best_system": "DeepSeek-V3.2"
+    },
+    {
+      "finding": "The automated judge also preferred longer jokes, unlike the human evaluators.",
+      "metric": "Longer-joke selection rate; human length correlation",
+      "value": "62.2%, binomial p < 0.0001; human Spearman ρ = -0.065, p = 0.082",
+      "dataset": "Qwen3 humor parameter ablation data",
+      "best_system": "DeepSeek-V3.2"
+    },
+    {
+      "finding": "Human evaluation showed the largest model leading directionally but not significantly across all 40 annotated themes.",
+      "metric": "Mean Rank; Borda; Ranked 1st; Friedman test",
+      "value": "1.900; 1.100; 40.8%; χ² = 3.73, p = 0.155",
+      "dataset": "Qwen3 humor parameter ablation data",
+      "best_system": "Qwen3-235B-A22B"
+    },
+    {
+      "finding": "On high-agreement themes, human rankings showed a significant scaling effect favoring the largest model.",
+      "metric": "Friedman test; Kendall’s W; Wilcoxon test for 235A22 vs. 30A3",
+      "value": "χ² = 6.47, p = 0.039; Kendall’s W = 0.025; W = 3404, p = 0.020",
+      "dataset": "Qwen3 humor parameter ablation data",
+      "best_system": "Qwen3-235B-A22B"
+    }
+  ],
+  "key_findings": [
+    "Automated DeepSeek-V3.2 judging produced a perfect monotonic relationship between total parameter count and win rate, but the mid-sized models clustered tightly between 49–55% and had overlapping uncertainty intervals.",
+    "Human annotators showed no statistically significant aggregate preference among Qwen3-32B, Qwen3-30B-A3B, and Qwen3-235B-A22B, despite Qwen3-235B-A22B having the best mean rank and the largest share of first-place votes.",
+    "When analysis was restricted to 22 high-agreement themes, the scaling effect became significant and Qwen3-235B-A22B significantly outperformed Qwen3-30B-A3B.",
+    "The automated judge exhibited large procedural artifacts, including 73.5% positional bias and 62.2% preference for the longer joke when lengths differed.",
+    "The dense Qwen3-32B model directionally outperformed the Qwen3-30B-A3B MoE model for humans on the high-agreement subset, but the difference was not statistically significant.",
+    "Qualitative examples suggest that larger models’ advantage appears in sharper incongruity construction, clearer setup-punchline structure, and more concrete punchline imagery."
+  ],
+  "limitations": [
+    "Each model generated only a single joke per theme, so the study could not assess within-model variance.",
+    "The dataset is relatively small, and automated evaluation relies on a single LLM judge, DeepSeek-V3.2, leaving inter-judge reliability untested.",
+    "The human evaluation had a small sample size, low annotator agreement, and manual ratings for only three of the five evaluated models.",
+    "Using the /no_think token disabled model reasoning, so the design excludes deliberative inference that may improve humor competence.",
+    "The study cannot determine whether larger models generate novel jokes or retrieve memorized examples.",
+    "Although originality was included in the judging prompt, the pipeline parsed only the final WINNER: A/B token and not per-criterion scores, so the paper cannot assess how the judge weighed originality against structural proxies.",
+    "The qualitative analysis is grounded in Incongruity-Resolution, while extending the analysis to theories such as benign violation or superiority is left for future work."
+  ],
+  "safety_ethics_notes": "The paper states that the 50 everyday humor themes were chosen to avoid domain-specific knowledge requirements, culturally sensitive topics, and themes likely to produce offensive content; no separate ethics section is provided.",
+  "artifacts": {
+    "code_url": "https://github.com/J1Official/Humor-Parameter-Ablation",
+    "data_url": "https://github.com/J1Official/Humor-Parameter-Ablation",
+    "other": "The repository is stated to include the open-source pipeline, dataset, annotation data, full theme list, and generated outputs for all 50 themes across all 5 models."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "12 total (two independent groups of six; 6 annotators per theme)",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "240 total rankings of three anonymized model-generated jokes across 40 themes (themes 11–50); the first 10 themes were reserved for pilot testing.",
+        "detail": "Blinded human evaluation covered three models only: Qwen3-32B, Qwen3-30B-A3B, and Qwen3-235B-A22B. Evaluation was simultaneous using a split projected screen; Figure 2 states Group 1 evaluated themes 11–30 and Group 2 evaluated themes 31–50. For each theme, three anonymized jokes were shown in random order for 60 seconds, and annotators independently ranked them from funniest to least funny without seeing each other’s responses."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "DeepSeek-V3.2",
+        "role": "primary",
+        "blind": true,
+        "detail": "Used as the automated pairwise joke judge via OpenRouter. The judging prompt showed the theme plus Joke A and Joke B and did not include model identities. For each theme, all 10 model pairs were compared in both A-first and B-first orderings; 999 comparisons were completed because one theme had 19 of 20 planned comparisons due to an API timeout. The pipeline parsed only the final WINNER: A/B token."
+      },
+      {
+        "type": "human-lay",
+        "name": "12 annotators",
+        "role": "primary",
+        "blind": true,
+        "detail": "Human annotators determined the blinded human ranking results and the high-/low-agreement subset analysis. They ranked three anonymized jokes per theme from funniest to least funny; the paper does not report annotator expertise, demographics, recruitment, or geography."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Bradley-Terry scoring and statistical tests",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Automated analyses included win rates, normalized Bradley-Terry scores with cluster-bootstrap standard errors/confidence intervals, Spearman correlations, chi-square tests for positional bias, binomial tests for length bias, Friedman tests, Wilcoxon signed-rank tests, Kendall’s W, Krippendorff’s alpha, and Spearman correlation between human preference and joke length."
+      },
+      {
+        "type": "author",
+        "name": "paper authors",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Authors selected and interpreted representative outputs through Suls’s Incongruity-Resolution framework for the qualitative analysis of why scaling may help."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Joke generation by five Qwen3 variants on 50 everyday humor themes",
+        "mode": "single-sample",
+        "n": "1 joke per model per theme; 5 models × 50 themes = 250 generated jokes",
+        "selector": "none",
+        "detail": "Each model generated one joke per theme using the same prompt with max_tokens=128 and Qwen3 thinking disabled. No best-of-N generation, reranking, or output selection procedure is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Qwen3-8B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Instruction-tuned dense Qwen3 model; exact checkpoint/snapshot, hosting/access method, and inference date are not reported."
+      },
+      {
+        "name": "Qwen3-14B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Instruction-tuned dense Qwen3 model; exact checkpoint/snapshot, hosting/access method, and inference date are not reported."
+      },
+      {
+        "name": "Qwen3-32B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Instruction-tuned dense Qwen3 model; exact checkpoint/snapshot, hosting/access method, and inference date are not reported."
+      },
+      {
+        "name": "Qwen3-30B-A3B / 30A3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Instruction-tuned Mixture-of-Experts Qwen3 model described as 30B total parameters and 3B active parameters per token; exact checkpoint/snapshot, hosting/access method, and inference date are not reported."
+      },
+      {
+        "name": "Qwen3-235B-A22B / 235A22",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Instruction-tuned Mixture-of-Experts Qwen3 model described as 235B total parameters and 22B active parameters per token; exact checkpoint/snapshot, hosting/access method, and inference date are not reported."
+      },
+      {
+        "name": "DeepSeek-V3.2",
+        "version_or_snapshot": "V3.2",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as a non-Qwen LLM judge via OpenRouter. The paper does not report an OpenRouter/provider snapshot, exact model revision, inference date, or judge decoding parameters."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Qwen3 joke generation",
+        "calls_per_item": "1 generation per model-theme; 5 model generations per theme across 50 themes",
+        "candidates_per_item": "1 generated joke per model-theme",
+        "token_budget": "max_tokens=128",
+        "sampling_parameters": "Qwen3 thinking disabled using /no_think; temperature, top_p, seed, and other decoding parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "System prompt instructed the model to write one short, self-contained setup/punchline or one-liner and output only the joke text; the user message was the theme text."
+      },
+      {
+        "scope": "DeepSeek-V3.2 automated pairwise judging",
+        "calls_per_item": "20 planned judge comparisons per theme (10 model pairs × 2 orderings); 999 completed comparisons total because one theme had 19 of 20 planned comparisons after an API timeout",
+        "candidates_per_item": "2 jokes per judge comparison",
+        "token_budget": null,
+        "sampling_parameters": "not reported",
+        "compute_or_cost": null,
+        "detail": "Judge prompt asked for 2–3 sentences of reasoning followed by a final line of only WINNER: A or WINNER: B. Only the final winner token was parsed; per-criterion scores were not collected."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human-authored joke generation baseline",
+        "present": false,
+        "description": "No human-written joke baseline or human joke-generation performance condition is reported; all evaluated jokes were generated by Qwen3 models.",
+        "directly_comparable": null,
+        "detail": "Humans served as evaluators, not as content-generation baselines."
+      },
+      {
+        "scope": "Human evaluator comparison for LLM-as-judge validity",
+        "present": true,
+        "description": "Blinded human rankings were used as a comparator for automated DeepSeek-V3.2 judgments on subjective humor quality.",
+        "directly_comparable": false,
+        "detail": "The protocols were not materially matched: DeepSeek judged all five models over 50 themes using pairwise A/B comparisons, while humans ranked three models over 40 themes, excluding Qwen3-8B, Qwen3-14B, and the first 10 themes."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The paper states that it curated 50 everyday humor themes for this study rather than reusing a named public legacy benchmark.",
+        "The DeepSeek judging prompt included originality as one criterion, although the pipeline did not parse or report originality scores."
+      ],
+      "basis": "Classic benchmark leakage risk is reduced because the task uses curated themes and generated outputs rather than fixed public answer labels. However, the exact creation/publication timing of the theme list relative to model training is not reported, the themes are generic everyday joke topics likely to overlap with web humor, no decontamination or novelty test is reported, and the authors explicitly state that it remains unclear whether larger models generated novel jokes or retrieved memorized examples. Therefore the conservative risk is moderate rather than low."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Automated five-model monotonic scaling results, Bradley-Terry/win-rate rankings, positional-bias and length-bias findings, and the human–LLM disconnect claims depend on DeepSeek-V3.2 judgments. Human aggregate and high-agreement scaling claims depend on human rankings rather than LLM judging.",
+      "human_validation": "The paper includes blinded human rankings from 12 annotators for three models across 40 themes, but this validation is partial because it excludes two smaller Qwen3 models and 10 themes and uses ranking rather than the LLM judge’s full pairwise protocol.",
+      "detail": "DeepSeek-V3.2 is the only LLM judge; no inter-LLM-judge reliability is tested. The paper’s headline warning about automated judges is based on comparing this LLM judge’s outputs and artifacts with the partial human evaluation."
+    },
+    "reporting_gaps": [
+      "Annotator demographics, expertise, recruitment method, compensation/incentives, and geography are not reported.",
+      "Pilot-testing details are not reported, including pilot participant count and whether pilot annotators overlapped with main annotators.",
+      "Exact Qwen3 checkpoint names, snapshots/revisions, hosting/access method, and inference dates are not reported.",
+      "Exact DeepSeek-V3.2/OpenRouter model snapshot or provider revision and inference date are not reported.",
+      "Generation decoding parameters other than max_tokens=128 and /no_think are not reported, including temperature, top_p, seed, and stopping settings.",
+      "DeepSeek judge decoding parameters and response token limits are not reported.",
+      "Hardware, compute, latency, and monetary cost are not reported for generation or judging.",
+      "The human evaluation covers only three of five Qwen3 models and 40 of 50 themes, so it is not a full human replication of the automated evaluation.",
+      "Only one joke was generated per model-theme, so within-model generation variance is not assessed.",
+      "The automated evaluation uses a single LLM judge; inter-judge reliability across multiple LLM judges is not tested.",
+      "No decontamination or novelty/originality analysis of generated jokes is reported, despite the stated memorization concern.",
+      "The judging prompt includes originality, but the pipeline parses only WINNER: A/B and does not report per-criterion scores.",
+      "Randomization details are incomplete; the paper says jokes were presented in random order but does not report the randomization procedure, whether order varied per annotator, or random seeds."
+    ]
+  }
+}

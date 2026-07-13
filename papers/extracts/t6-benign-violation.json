@@ -176,5 +176,162 @@
     "code_url": null,
     "data_url": null,
     "other": "The scenario stimuli are printed in Table 1 and Table 2; no separate code or data release is stated."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "66",
+        "population": "People approached on a large university campus; 42% female, 58% male.",
+        "recruitment": "Approached on campus; agreed to complete Study 1 in exchange for a candy bar.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants read violation and control versions of four scenarios and answered yes/no questions after each about wrongness and whether the scenario made them laugh.",
+        "detail": "Study 1 used a 2 (version: violation/control, within subjects) × 2 (version order) × 4 (scenario order) mixed design; version order and scenario order were between-subjects factors."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "73",
+        "population": "People approached on a large university campus; demographics not reported.",
+        "recruitment": "Approached by a research assistant and asked to participate in a brief research study; those who consented were included.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants read one Snorting Remains scenario version and then answered yes/no questions about whether the behavior could be interpreted as wrong and as not wrong.",
+        "detail": "Study 2 randomly assigned participants to violation or control scenario versions; exact condition cell sizes were not reported."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "Research assistant.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Observed each Study 2 participant while reading and recorded whether the participant smiled or laughed; participants who smiled or laughed were coded as displaying amusement.",
+        "detail": "The observer was blind to both the participant’s condition and the experiment’s hypotheses."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "36",
+        "population": "Undergraduates; 42% female, 58% male.",
+        "recruitment": "Completed the experiment in exchange for partial course credit.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants read one kitten-scenario version and gave dichotomous yes/no self-reports of whether they were amused, were disgusted, and thought the behavior was wrong.",
+        "detail": "Study 3 randomly assigned participants to harmless or harmful versions of the kitten scenario; exact condition cell sizes were not reported."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "80",
+        "population": "Undergraduate participants; 55% female, 45% male.",
+        "recruitment": "Completed Study 4 for partial course credit.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants read one Hummer scenario version, reported yes/no amusement and disgust, and reported whether they attended church; Table 4 reports violation-version N = 39 and control-version N = 41.",
+        "detail": "Study 4 used a 2 (version: violation/control) × 2 (commitment: high/low) between-subjects design, with church attendance used as the proxy for commitment to church sanctity."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "73 reported completed; Table 5 analyses report N = 72 (violation N = 40, control N = 32), unexplained",
+        "population": "Undergraduate participants at a large university; 34% female, 66% male.",
+        "recruitment": "Completed the experiment for partial course credit.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants completed a spatial-distance priming task, read one chicken-scenario version, and gave yes/no self-reports of amusement and disgust.",
+        "detail": "Study 5 randomly assigned participants to a 2 (version: violation/control) × 2 (psychological distance: far/near) between-subjects design."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "Study participants",
+        "role": "primary",
+        "blind": null,
+        "detail": "Participant self-reports determined wrongness, laughter, wrong/not-wrong interpretations, amusement, disgust, and mixed-emotion outcomes across Studies 1–5. The paper does not report participant blinding to hypotheses."
+      },
+      {
+        "type": "human-lay",
+        "name": "Study 2 research assistant",
+        "role": "primary",
+        "blind": true,
+        "detail": "A research assistant determined the Study 2 behavioral-amusement label by observing whether participants smiled or laughed while reading; the assistant was blind to condition and hypotheses."
+      },
+      {
+        "type": "author",
+        "name": "paper authors",
+        "role": "secondary",
+        "blind": null,
+        "detail": "In Study 4, the authors coded participants who attended church as strongly committed and participants who never attended church as weakly committed to the sanctity of the church."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "All studies",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "No AI or text-generation experiment was conducted; the studies used fixed scenario stimuli."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "All studies",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No computational model inference was performed."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "All studies",
+        "present": false,
+        "description": "The paper reports human participant experiments only; there is no AI/model system whose performance is compared with a human baseline.",
+        "directly_comparable": null,
+        "detail": "Human responses are the object of study rather than a baseline for model evaluation."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "This is a human-subjects psychology paper with no AI model evaluation, no trained or prompted model, and no benchmark-performance claim. Some stimuli were adapted from prior sources, but AI benchmark contamination is not applicable."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs were used as judges, metrics, generators, or analysis tools in the reported studies."
+    },
+    "reporting_gaps": [
+      "Study 2 participant demographics were not reported.",
+      "Exact random-assignment cell sizes were not reported for Study 2 violation/control groups or Study 3 harmless/harmful groups.",
+      "Study 4 exact low-commitment/high-commitment cell counts within version conditions were not reported; the table reports only version totals via chi-square Ns and percentages.",
+      "Study 5 has an unexplained sample-size inconsistency: the text reports 73 undergraduates completed the experiment, whereas Table 5 and violation-vs-control tests report N = 72, with violation N = 40 and control N = 32.",
+      "The Study 5 text and Table 5 report slightly different chi-square values for the far-vs-near disgust comparison in the violation condition.",
+      "Ages, fuller demographic details, and precise geographic location of the university samples were not reported.",
+      "The exact randomization procedure and allocation concealment were not specified.",
+      "Blinding was reported for the Study 2 observer only; participant and experimenter blinding were otherwise not reported.",
+      "No inter-rater reliability or independent validation was reported for the Study 2 behavioral amusement coding.",
+      "No preregistration, data repository, code, or full trial-level data release was stated."
+    ]
   }
 }

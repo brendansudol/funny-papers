@@ -7,7 +7,3 @@ arXiv:2501.11433 — **IUI 2025** · `peer-reviewed` `HCI study`
 - **Findings:** Collaboration yields more ideas with less perceived effort; "AI as collaborator" rather than solo author.
 
 ---
-
-## Part 3 — Multimodal & Visual Humor
-
-Transition: the previous parts mix text-only and some image-caption work (CLoT/Oogiri-GO, HumorSkills, memes); this part treats **multimodal humor as the primary object** — cartoons, memes, comics, video, and visual satire. World knowledge and cross-panel/visual integration are the recurring bottlenecks.

@@ -479,5 +479,70 @@
     "code_url": null,
     "data_url": null,
     "other": "Latest updates: https://dl.acm.org/doi/10.1145/3778357"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "author",
+        "name": "Jens Lemmens and Victor De Marez",
+        "role": "primary",
+        "blind": null,
+        "detail": "The survey authors collected and filtered related work using keyword searches, backward/forward citation search, and the decision tree in Figure 1; they also categorized datasets/models by task, modality, genre, language, evaluation method, and humor-theory usage in the survey tables."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Original study in this survey paper",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper is a literature survey and does not perform original humor generation experiments or select generated outputs."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "Original study in this survey paper",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No original model inference is reported; models named in the paper are models from reviewed studies rather than systems run by the survey authors."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Original study in this survey paper",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The survey reports human baselines/evaluations from reviewed papers in some cases, but does not conduct an original human-vs-model evaluation under matched conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "This is a survey with no original model benchmarking or inference. Although it summarizes public datasets, shared tasks, and LLM studies from the literature, contamination risk for a newly run model evaluation is not applicable to the survey’s own evidence."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "The paper discusses reviewed work that used GPT-4 or other LLMs for evaluation/explanation, but the survey’s own conclusions are based on literature review and author synthesis, not on LLM judging."
+    },
+    "reporting_gaps": [
+      "The paper reports search sources and keywords but not exact search strings, query combinations, or search dates/cutoff beyond publication-scope statements.",
+      "The paper does not report the number of records retrieved, screened, excluded, or included at each stage of the survey selection process.",
+      "The paper does not report whether paper screening, inclusion decisions, or dataset/model categorizations were performed independently by multiple reviewers, nor any inter-rater agreement for those decisions.",
+      "The paper does not provide a PRISMA-style flow diagram or equivalent audit trail for exclusions.",
+      "No original model runs are performed, so exact model snapshots, inference dates, sampling parameters, token budgets, compute, or cost are not applicable rather than reported."
+    ]
   }
 }

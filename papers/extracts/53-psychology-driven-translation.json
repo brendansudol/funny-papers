@@ -174,5 +174,239 @@
     "code_url": null,
     "data_url": "Short Jokes Dataset: https://www.kaggle.com/datasets/thedevastator/short-jokes-dataset; Question-Answer Jokes: https://www.kaggle.com/datasets/jiriroz/qa-jokes",
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "GEMBA using a GPT4-based evaluator (GEMBA-SQM and GEMBA-STARS)",
+        "role": "primary",
+        "blind": null,
+        "detail": "All reported quantitative results are automatic GEMBA evaluations of humour, fluency, and coherence. The paper says GEMBA-SQM scores 0–100 and GEMBA-STARS gives 1–5 star rankings; prompts were modified for humour translation; results were averaged over three runs and invalid LLM responses were omitted."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "The authors provide qualitative case/error analysis, including examples they describe as correct HDM cases and a pun/cultural-linguistic error case. No formal human annotation protocol or blinding is reported."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main English-to-Chinese Short Jokes experiments in Table 1 using Gemini1.5-Pro, Yi-Large, GPT3.5-Turbo, and GPT4-Turbo with direct, DUAL-REFLECT, MAPS, and HDM methods",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper does not report whether outputs were single samples or selected from multiple candidates. No best-of-N generation or selection policy is described. Repeated GEMBA evaluation over three runs is evaluation repetition, not generation selection."
+      },
+      {
+        "scope": "Generality analyses in Tables 2 and 3 on other datasets and target languages",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports MAPS as baseline and HDM as the proposed method, with 100 randomly selected samples per dataset/language due to budget constraints, but does not report candidate counts or any output-selection procedure."
+      },
+      {
+        "scope": "Open-source model generality analysis in Table 4",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper evaluates Marco-o1-7B, Llama3.1-8B-Instruct, and Qwen2.5 variants with base and HDM settings, but does not report whether multiple generations were sampled or selected."
+      },
+      {
+        "scope": "Prompt-selection analysis in Figure 3 using GPT4-Turbo and four HDM prompt variants",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper compares four prompts marked V1–V4, but does not report candidate counts, exact selection procedures, or whether outputs were regenerated multiple times."
+      },
+      {
+        "scope": "Ablation study in Table 5 using GPT4-Turbo and Gemini1.5-Pro",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper reports settings with HDM/HT removed or retained on 100 random samples, but does not report whether outputs were single generations or selected from a candidate pool."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Gemini1.5-Pro",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Selected as a backbone model; the paper says default hyperparameters were used in the models' playgrounds. No API snapshot or inference date is reported."
+      },
+      {
+        "name": "Yi-Large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Selected as a backbone model; the paper says default hyperparameters were used in the models' playgrounds. No API snapshot or inference date is reported."
+      },
+      {
+        "name": "GPT3.5-Turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Selected as a backbone model; the paper says default hyperparameters were used in the models' playgrounds. No exact OpenAI model snapshot or inference date is reported."
+      },
+      {
+        "name": "GPT4-Turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Selected as a backbone model and used in prompt-selection and ablation analyses. No exact OpenAI model snapshot or inference date is reported."
+      },
+      {
+        "name": "Marco-o1-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in the open-source model analysis. The paper does not report runtime environment, checkpoint hash, or inference date."
+      },
+      {
+        "name": "Llama3.1-8B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in the open-source model analysis. The table names Llama3.1-8B-Instruct, while the footnote links to Meta-Llama-3-8B-Instruct; no checkpoint hash, runtime environment, or inference date is reported."
+      },
+      {
+        "name": "Qwen2.5-0.5B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in the open-source model analysis. No checkpoint hash, runtime environment, or inference date is reported."
+      },
+      {
+        "name": "Qwen2.5-7B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in the open-source model analysis. No checkpoint hash, runtime environment, or inference date is reported."
+      },
+      {
+        "name": "Qwen2.5-14B-Instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated in the open-source model analysis. No checkpoint hash, runtime environment, or inference date is reported."
+      },
+      {
+        "name": "GPT4 used through GEMBA",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The evaluator is described only as a GPT4-based GEMBA metric. The exact GPT-4 variant, API snapshot, inference date, and access route are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "HDM generation procedure",
+        "calls_per_item": "3 sequential LLM generation steps per input joke are specified: humour decomposition, translation of the analysis, and humour composition into the target-language joke.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "For the four closed-source backbone models, the paper states that default hyperparameters in their playgrounds were used; exact parameters are not reported. Sampling settings for open-source models are not reported.",
+        "compute_or_cost": "Budget constraints are mentioned as the reason for sample sizes, but no compute or monetary cost is reported.",
+        "detail": "The method prompts the same backbone LLM to analyze the joke, translate the analysis, and generate the final target-language joke. The paper does not state max tokens, temperature, top-p, seeds, or whether decoding was deterministic."
+      },
+      {
+        "scope": "Main Table 1 experiments",
+        "calls_per_item": "Not fully reported; HDM call structure is specified, but direct translation, DUAL-REFLECT, and MAPS call counts/implementation details are not stated in this paper.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Default playground hyperparameters for Gemini1.5-Pro, Yi-Large, GPT3.5-Turbo, and GPT4-Turbo.",
+        "compute_or_cost": "500 Short Jokes Dataset samples were randomly selected due to budget constraints; no cost or compute is reported.",
+        "detail": "The main experiment translates English-to-Chinese and evaluates direct backbone outputs plus DUAL-REFLECT, MAPS, and HDM with GEMBA metrics."
+      },
+      {
+        "scope": "Generality analyses in Tables 2–4",
+        "calls_per_item": "Not fully reported; HDM uses its three-step procedure, but baseline and open-source-model call counts are not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "The paper states that 100 samples were randomly selected in each dataset and language due to budget constraints; no compute or cost is reported.",
+        "detail": "The analyses cover Question-Answer Jokes and SemEval-2021 for English-to-Chinese, English-to-Spanish and English-to-German translation, and open-source models on Short Jokes."
+      },
+      {
+        "scope": "Ablation study in Table 5",
+        "calls_per_item": "Not fully reported; settings remove HDM and/or humour theory, but exact prompt-call counts for each ablation setting are not specified.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "100 samples were randomly selected for the ablation study; no cost or compute is reported.",
+        "detail": "The ablation compares full method, -HDM, -HT, and base for GPT4-Turbo and Gemini1.5-Pro on English-to-Chinese and English-to-Spanish Short Jokes."
+      },
+      {
+        "scope": "Prompt-selection analysis in Figure 3",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper compares four HDM prompts using GPT4-Turbo, but does not report the exact prompts in the text, sample size for this figure, number of calls, or decoding settings."
+      },
+      {
+        "scope": "GEMBA evaluation",
+        "calls_per_item": "The paper reports averaging GEMBA results over three runs in each type of experiment, but does not report exact LLM calls per output or per metric.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "GEMBA-SQM and GEMBA-STARS are used for humour, fluency, and coherence. Invalid responses outside the expected score/ranking ranges are omitted, but their frequency is not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humour translation quality evaluation",
+        "present": false,
+        "description": "No human evaluation or human translation baseline is included. The paper explicitly notes the absence of human evaluation as a limitation and says future work will incorporate human judgments.",
+        "directly_comparable": false,
+        "detail": "All quantitative comparisons are between LLM-based translation methods and are evaluated by GPT4-based GEMBA metrics."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The experiments use public/open-source humour datasets, including a Kaggle Short Jokes Dataset, Kaggle Question-Answer Jokes, and SemEval-2021 Task 7 samples. The paper provides no decontamination analysis, private held-out items, training-data overlap checks, or inference dates. Randomly selecting 500 or 100 samples addresses budget but is not a contamination control. Because public jokes may have appeared in training data for later proprietary or open models, contamination risk is at least moderate, although the task is no-reference translation/generation rather than exact-label prediction."
+    },
+    "llm_judge_dependence": {
+      "level": "primary",
+      "affected_claims": "All headline claims about HDM improving humour, fluency, and coherence; generalization to other datasets/languages/models; prompt robustness; and ablation effects are based on GPT4-based GEMBA judgments.",
+      "human_validation": "None. The paper states that human evaluation is absent and remains future work.",
+      "detail": "GEMBA is the sole quantitative evaluator. The paper cites prior work suggesting GPT-4 opinions may overlap with human reviewers, but it does not validate GEMBA scores against human judgments in this study."
+    },
+    "reporting_gaps": [
+      "No human participants, annotators, or human baseline translations are reported.",
+      "Exact GEMBA evaluator version/snapshot, API/access route, inference date, prompts, and decoding parameters are not reported.",
+      "Exact API snapshots or model versions beyond model aliases are not reported for GPT3.5-Turbo, GPT4-Turbo, Gemini1.5-Pro, or Yi-Large.",
+      "Inference dates are not reported for any generation or evaluation model.",
+      "Runtime environment, checkpoint hashes, hardware, and serving setup are not reported for the open-source models.",
+      "The paper states default playground hyperparameters for closed-source models but does not report temperature, top-p, max tokens, stop sequences, seeds, or determinism.",
+      "The number of generated candidates per item and any output-selection policy are not reported; no best-of-N procedure is described.",
+      "Implementation details and call budgets for DUAL-REFLECT and MAPS baselines are not reported in this paper.",
+      "Random subset sample IDs and random seeds for selecting the 500- and 100-sample subsets are not reported.",
+      "Invalid GEMBA response counts/rates and how omissions affected denominators are not reported.",
+      "Prompt-selection analysis does not report the exact V1–V4 prompt texts or clearly state the sample size and inference settings for Figure 3.",
+      "No contamination or memorization analysis is reported for public joke datasets.",
+      "No statistical significance tests, confidence intervals, or variance estimates beyond averaging over three GEMBA runs are reported."
+    ]
   }
 }

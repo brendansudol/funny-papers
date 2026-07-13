@@ -164,5 +164,181 @@
     "code_url": null,
     "data_url": "https://osf.io/hvtgc/?view_only=6c08679d4b9a4c8892096eb76afabd3c",
     "other": "The paper states that pre-registration, materials, S1 File, and data are available at the OSF link; it also states that all relevant data are within the manuscript and Supporting Information files."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "N = 123 recruited; final N = 105 after excluding N = 18 who self-reported copying/pasting jokes from another source",
+        "population": "CloudResearch-approved Amazon Mechanical Turk workers located in the United States; reported mean age = 39.6 years, 41% female",
+        "recruitment": "Recruited through CloudResearch.com as a broad sample of MTurk workers; paid $2.58; recruited on 10/10/2023",
+        "geography": "United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "945 human-produced comedic responses: 105 participants × 1 response per prompt × 3 prompts × 3 tasks",
+        "detail": "Study 1 humor-production sample. Participants completed acronym, fill-in-the-blank, and roast joke tasks in randomized order and were instructed to use their own imagination to create new humorous answers."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "N = 200; no exclusions",
+        "population": "CloudResearch-approved Amazon Mechanical Turk workers located in the United States; mean age = 40.0, 41% female",
+        "recruitment": "Recruited through CloudResearch; paid $1.30; recruited on 10/30/2023",
+        "geography": "United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each participant rated 54 responses: 3 human-produced and 3 ChatGPT-produced responses for each of 9 items, on a 0–6 funniness scale",
+        "detail": "Study 1 rating sample. Source labels were not shown. Responses were randomly chosen from the pools of 105 human-produced and 20 A.I.-produced responses per prompt."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Professional comedy writers at The Onion; individual writers and writer count not reported",
+        "recruitment": "Published The Onion 'Local' headlines were retrieved by the authors; not a recruited participant sample",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The authors retrieved the last 50 'Local' headlines published in The Onion before October 1, 2023, and randomly selected 20 as the human-generated headline set",
+        "detail": "Study 2 professional-human comparison source. The paper treats The Onion headlines as written by professional comedy writers, but does not report which writers wrote the selected headlines."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "N = 217; no exclusions",
+        "population": "University of Southern California psychology subject-pool students; mean age = 20.3, 62% female",
+        "recruitment": "Recruited from 10/20/2023 to 11/6/2023 from the USC psychology subject pool",
+        "geography": "United States; University of Southern California",
+        "languages": [
+          "English"
+        ],
+        "observations": "Each participant rated 10 satirical headlines in randomized order: 5 randomly chosen from 20 The Onion headlines and 5 randomly chosen from 20 ChatGPT headlines, on a 0–6 funniness scale",
+        "detail": "Study 2 rating sample. Participants also reported prior exposure to the headlines, comedy seeking, satirical-news consumption, whether they followed The Onion, demographics, and political orientation."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Study 1 CloudResearch MTurk raters",
+        "role": "primary",
+        "blind": true,
+        "detail": "N = 200 raters provided the funniness ratings that determined the Study 1 comparison between human-produced and ChatGPT-produced responses. The paper states that source information was not included."
+      },
+      {
+        "type": "human-lay",
+        "name": "Study 2 USC student raters",
+        "role": "primary",
+        "blind": true,
+        "detail": "N = 217 raters provided the funniness ratings that determined the Study 2 comparison between ChatGPT headlines and The Onion headlines. The paper states that source information was not included."
+      },
+      {
+        "type": "human-lay",
+        "name": "Study 1 humor producers' self-report",
+        "role": "validation",
+        "blind": null,
+        "detail": "Study 1 producers were asked whether they copied/pasted any joke completions from an A.I. tool, humor website, or social media account. Self-reported copying/pasting determined the pre-registered exclusion of N = 18 producers."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors",
+        "role": "validation",
+        "blind": null,
+        "detail": "For Study 2, the authors searched online whether any ChatGPT 3.5 responses were copied from somewhere else and report that they did not find evidence of mere reproduction."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Study 1 ChatGPT 3.5 responses to acronym, fill-in-the-blank, and roast prompts",
+        "mode": "single-sample",
+        "n": "20 A.I.-produced responses per prompt; 3 prompts × 3 tasks = 180 responses total",
+        "selector": "random",
+        "detail": "The paper reports asking ChatGPT 3.5 to generate 20 humorous answers to each prompt. It does not report best-of-N selection; the 20-per-prompt response pools were used for evaluation, with each rater seeing randomly chosen subsets."
+      },
+      {
+        "scope": "Study 2 ChatGPT 3.5 satirical headlines",
+        "mode": "single-sample",
+        "n": "20 new headlines generated from one prompt containing 50 The Onion 'Local' example headlines",
+        "selector": "random",
+        "detail": "The 20 ChatGPT-generated headlines served as the A.I.-generated stimulus set. The paper does not report best-of-N selection; each rater saw 5 randomly chosen ChatGPT headlines."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "ChatGPT 3.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper identifies the model only as ChatGPT 3.5. It does not report an API model name, web-interface version, snapshot, system prompt, or exact generation date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Study 1 ChatGPT 3.5 humor-production prompts",
+        "calls_per_item": null,
+        "candidates_per_item": "20 humorous answers per prompt; 180 A.I.-produced responses total",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "ChatGPT 3.5 was given the same tasks and instructions as participants, but asked to generate 20 rather than one answer to each prompt. Number of calls or chat sessions, decoding settings, retries, and cost are not reported."
+      },
+      {
+        "scope": "Study 2 ChatGPT 3.5 The Onion-style headline generation",
+        "calls_per_item": null,
+        "candidates_per_item": "20 new humorous satirical news article headlines generated after being shown 50 The Onion 'Local' headlines",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper quotes the high-level prompt and states that the 20 new headlines served as the A.I.-generated stimulus set. Number of calls, decoding settings, retries, token limits, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Study 1 laypeople vs. ChatGPT 3.5 on three humor-production tasks",
+        "present": true,
+        "description": "Final N = 105 laypeople produced responses to the same acronym, fill-in-the-blank, and roast prompts used with ChatGPT 3.5; a separate blinded rater sample evaluated human and A.I. responses on the same 0–6 funniness scale.",
+        "directly_comparable": true,
+        "detail": "The prompt tasks and blinded evaluation were materially matched, although humans produced one response per prompt while ChatGPT was asked for 20 responses per prompt."
+      },
+      {
+        "scope": "Study 2 The Onion professional writers vs. ChatGPT 3.5 on satirical local-news headlines",
+        "present": true,
+        "description": "The human baseline was 20 published The Onion 'Local' headlines randomly selected from the last 50 before October 1, 2023; the A.I. set was 20 ChatGPT-generated headlines in that style; blinded participants rated both on the same 0–6 funniness scale.",
+        "directly_comparable": true,
+        "detail": "The evaluation conditions were matched and source-blind. The production conditions were not matched: ChatGPT was explicitly prompted with the 50 The Onion headlines from which the 20 human-comparison headlines were sampled."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Study 1 used newly collected human-produced responses and excluded producers who self-reported copying/pasting from A.I., websites, or social media.",
+        "Both studies hid source labels from human raters.",
+        "Study 2 authors searched online for evidence that ChatGPT merely reproduced existing headlines and report finding none.",
+        "Study 2 asked raters whether they had previously seen any presented headlines; only 2 participants reported having seen one, both The Onion headlines."
+      ],
+      "basis": "Study 1 has relatively low contamination concern because the human comparison responses were newly produced by recruited participants. The overall assessment is high because a central Study 2 claim compares ChatGPT to The Onion using public headlines, and ChatGPT was explicitly given the 50 The Onion headlines from which the 20 human comparison headlines were randomly selected. The authors also note that ChatGPT may already have had data from The Onion's public webpage. The paper does not report the exact ChatGPT 3.5 snapshot, inference date, training cutoff, or a systematic decontamination/memorization test beyond an author online search for copied outputs. Because the benchmark-public-before-model status is mixed and the model version/date are not reported, it is recorded as null."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Headline results rest on source-blind human funniness ratings, not LLM judgments.",
+      "detail": "ChatGPT 3.5 was used as a generator only. No LLM judge or LLM-based metric determined labels, ratings, or headline conclusions."
+    },
+    "reporting_gaps": [
+      "Exact ChatGPT 3.5 version, snapshot, and training cutoff are not reported.",
+      "The paper does not report whether ChatGPT was accessed through the web interface, API, or another hosted route.",
+      "Exact dates/times of ChatGPT generations are not reported.",
+      "Number of ChatGPT calls or chat sessions per prompt is not reported.",
+      "Sampling and decoding parameters such as temperature, top_p, seed, max tokens, and stop criteria are not reported.",
+      "The paper does not report compute or monetary cost for model generation.",
+      "The paper does not fully specify whether any ChatGPT outputs were regenerated, edited, or filtered before inclusion, beyond stating the resulting stimulus counts and reporting an online search for copied Study 2 headlines.",
+      "No systematic decontamination or memorization test is reported for The Onion material; Study 2 relies on prompt design plus an author online search for copied headlines.",
+      "Study 2 does not report the number or identities of the professional The Onion writers who authored the selected headlines."
+    ]
   }
 }

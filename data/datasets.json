@@ -1,6 +1,7 @@
 {
   "generated_from": "humor-and-llms-field-guide.md + papers/papers.json",
   "created": "2026-07-03",
+  "updated": "2026-07-13",
   "note": "Catalog of public datasets released by papers in the field guide. `paper_keys` cross-reference papers/papers.json. Status lifecycle: pending -> downloaded; or gated / request / too_large / unavailable / failed. Datasets land in data/<key>/.",
   "datasets": [
     {
@@ -167,13 +168,15 @@
       "paper_keys": [
         "57-mwahaha"
       ],
-      "source_url": "https://www.codabench.org/competitions/9719/",
+      "source_url": "https://aclanthology.org/attachments/2026.semeval-1.454.SupplementaryMaterial.zip",
       "method": "direct",
-      "access": "gated",
-      "license": null,
-      "approx_size": "small",
-      "status": "gated",
-      "note": "Requires free Codabench account. Task site: pln-fing-udelar.github.io/semeval-2026-humor-gen; organizers' repo github.com/pln-fing-udelar/semeval-2026-humor-gen may gain data post-competition."
+      "access": "public",
+      "license": "CC BY 4.0 (ACL proceedings materials)",
+      "approx_size": "12.3 MB supplementary archive",
+      "status": "downloaded",
+      "note": "Official task-overview supplement: evaluation data, prompts, and leaderboard resources. Task site and additional baselines: github.com/pln-fing-udelar/semeval-2026-humor-gen.",
+      "local_path": "data/mwahaha-semeval2026",
+      "disk_mb": 12.3
     },
     {
       "key": "newyorker-caption-ranking",
@@ -212,7 +215,7 @@
     },
     {
       "key": "yesbut",
-      "name": "YesBut (V1)",
+      "name": "YesBut-Satire (Nandy et al.)",
       "contents": "2,547 two-panel contradiction/satire comics (1,084 satirical) with annotations",
       "paper_keys": [
         "26-yesbut"
@@ -229,11 +232,31 @@
       "disk_mb": 133.0
     },
     {
+      "key": "yesbut-juxtaposition",
+      "name": "YesBut-Juxtaposition (Hu et al.)",
+      "contents": "348 two-panel comics with descriptions, contradiction explanations, philosophies, titles, distractors, and source URLs",
+      "paper_keys": [
+        "x33-yesbut-juxtaposition"
+      ],
+      "source_url": "https://huggingface.co/datasets/zhehuderek/YESBUT_Benchmark",
+      "hf_repo_id": "zhehuderek/YESBUT_Benchmark",
+      "method": "hf",
+      "access": "public",
+      "license": "CC BY-NC-ND 4.0",
+      "approx_size": "small (348 annotation rows; images referenced by URL)",
+      "status": "downloaded",
+      "note": "Official NeurIPS 2024 Hu et al. benchmark; distinct from Nandy et al.'s EMNLP satire dataset.",
+      "source_checked": "2026-07-13",
+      "note_auto": "No module named 'huggingface_hub'",
+      "local_path": "data/yesbut-juxtaposition",
+      "disk_mb": 1.2
+    },
+    {
       "key": "yesbut-v2",
-      "name": "YesBut V2",
+      "name": "YesBut V2-Juxtaposition (Hu et al.)",
       "contents": "1,262 multilingual/multicultural satire comic images",
       "paper_keys": [
-        "26-yesbut"
+        "x34-yesbut-v2"
       ],
       "source_url": "https://huggingface.co/datasets/zhehuderek/YESBUT_Benchmark_V2",
       "hf_repo_id": "zhehuderek/YESBUT_Benchmark_V2",
@@ -242,9 +265,76 @@
       "license": null,
       "approx_size": "small",
       "status": "downloaded",
-      "note": "Different author team from V1.",
+      "note": "Follow-up to Hu et al.'s 348-item YesBut-Juxtaposition benchmark, not to Nandy et al.'s YesBut-Satire dataset.",
+      "source_checked": "2026-07-13",
       "local_path": "data/yesbut-v2",
       "disk_mb": 4.3
+    },
+    {
+      "key": "turing-jest",
+      "name": "Turing Jest stimuli and responses",
+      "contents": "One-line joke, non-joke, and surprising non-joke stimuli plus human and LLM detection, appreciation, and comprehension data and analysis code",
+      "paper_keys": [
+        "x35-turing-jest"
+      ],
+      "source_url": "https://github.com/seantrott/humor_llms",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "~12 MB repository",
+      "status": "downloaded",
+      "note": "Official reproducibility repository; no repository-level license detected.",
+      "source_checked": "2026-07-13",
+      "commit": "a1c4fceae24b20976a13c4b2584d0834cc728e12",
+      "local_path": "data/turing-jest",
+      "disk_mb": 36.7
+    },
+    {
+      "key": "multipun",
+      "name": "MultiPun",
+      "contents": "445 multimodal puns and 890 adversarial non-pun distractors for detection, localization, and explanation",
+      "paper_keys": [
+        "x38-multipun"
+      ],
+      "source_url": "https://github.com/bluedream02/MultiPun",
+      "method": "git",
+      "access": "public",
+      "license": "MIT",
+      "approx_size": "small repository; image archive hosted separately on Google Drive",
+      "status": "downloaded",
+      "note": "Official repository links the image dataset on Google Drive; the git checkout contains release metadata rather than the image archive.",
+      "source_checked": "2026-07-13",
+      "commit": "30b24bfc3fae5c455cdc8da1b46ffcaea9c86c2f",
+      "local_path": "data/multipun",
+      "disk_mb": 0.0
+    },
+    {
+      "key": "corpus-pragmatics-humor",
+      "name": "Corpus-pragmatics humor annotations",
+      "contents": "Annotations of 200 Italian political tweets for humor presence and 90 humorous tweets for five communicative functions, with human/LLM labels, prompts, codebooks, and R analysis",
+      "paper_keys": [
+        "x40-corpus-pragmatics"
+      ],
+      "source_url": "https://osf.io/wpcr6/",
+      "direct_urls": [
+        "https://osf.io/download/n62eb/",
+        "https://osf.io/download/r36b7/",
+        "https://osf.io/download/vrn52/",
+        "https://osf.io/download/v4seh/",
+        "https://osf.io/download/fq3ew/",
+        "https://osf.io/download/gc9f8/",
+        "https://osf.io/download/rdvsb/",
+        "https://osf.io/download/yzg6a/"
+      ],
+      "method": "direct",
+      "access": "public",
+      "license": "CC BY 4.0",
+      "approx_size": "small tabular data and documentation",
+      "status": "downloaded",
+      "note": "Official OSF release (doi:10.17605/OSF.IO/WPCR6).",
+      "source_checked": "2026-07-13",
+      "local_path": "data/corpus-pragmatics-humor",
+      "disk_mb": 0.6
     },
     {
       "key": "pixelhumor",
@@ -593,6 +683,212 @@
       "commit": "c801818da5d742ca4cf5480ece047b94bbdc8466",
       "local_path": "data/ur-funny",
       "disk_mb": 0.1
+    },
+    {
+      "key": "unpie",
+      "name": "UNPIE (Understanding Pun with Image Explanations)",
+      "contents": "1,000 puns, each paired with an image explaining both meanings; grounding, disambiguation, and reconstruction tasks",
+      "paper_keys": [
+        "x19-unpie"
+      ],
+      "source_url": "https://huggingface.co/datasets/jiwan-chung/VisualPun_UNPIE",
+      "hf_repo_id": "jiwan-chung/VisualPun_UNPIE",
+      "method": "hf",
+      "access": "public",
+      "license": null,
+      "approx_size": "~132 MB",
+      "status": "downloaded",
+      "note": "Official EMNLP artifact; images may retain source-specific rights.",
+      "source_checked": "2026-07-11",
+      "local_path": "data/unpie",
+      "disk_mb": 131.6
+    },
+    {
+      "key": "humor-word-embeddings",
+      "name": "Cockamamie Gobbledegook single-word humor data",
+      "contents": "Single-word humor ratings, individual preferences, demographic clusters, and theory-motivated feature annotations",
+      "paper_keys": [
+        "x22-humor-word-embeddings"
+      ],
+      "source_url": "https://github.com/limorigu/Cockamamie-Gobbledegook",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small (~4 MB repository)",
+      "status": "downloaded",
+      "note": "Official ICML code/data repository.",
+      "source_checked": "2026-07-11",
+      "commit": "9a3aa3082319b27c4984eb1da84bdf7b19537370",
+      "local_path": "data/humor-word-embeddings",
+      "disk_mb": 13.8
+    },
+    {
+      "key": "jester",
+      "name": "Jester joke ratings",
+      "contents": "6.5M anonymous -10 to +10 ratings from roughly 150K users over a small set of up to 158 jokes",
+      "paper_keys": [
+        "x23-eigentaste-jester"
+      ],
+      "source_url": "https://eigentaste.berkeley.edu/dataset/",
+      "method": "direct",
+      "direct_urls": [
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_1_joke_texts.zip",
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_1_1.zip",
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_1_2.zip",
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_1_3.zip",
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_2/3_joke_texts.zip",
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_3.zip",
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_4_joke_texts.zip",
+        "https://eigentaste.berkeley.edu/dataset/jester_dataset_4.zip"
+      ],
+      "access": "public for research with acknowledgment",
+      "license": null,
+      "approx_size": "~20 MB compressed",
+      "status": "failed",
+      "note": "Foundational preference data, but the joke inventory is small and culturally dated. The official site requests a courtesy email when the data is used.",
+      "note_auto": "Official Berkeley download host was unreachable from the pipeline on 2026-07-11; retry later.",
+      "source_checked": "2026-07-11"
+    },
+    {
+      "key": "does-bigger-funnier",
+      "name": "Qwen3 humor parameter ablation data",
+      "contents": "50 humor themes, model generations, human rankings, automated-judge results, and analysis code",
+      "paper_keys": [
+        "x20-does-bigger-funnier"
+      ],
+      "source_url": "https://github.com/J10Official/Humor-Parameter-Ablation",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "small (~1 MB repository)",
+      "status": "downloaded",
+      "source_checked": "2026-07-11",
+      "commit": "786ee02f855e6a2f7e4d8e167c9fd1e89fb200dc",
+      "local_path": "data/does-bigger-funnier",
+      "disk_mb": 3.0
+    },
+    {
+      "key": "one-million-reddit-jokes",
+      "name": "One Million Reddit Jokes",
+      "contents": "One-million-joke reference corpus used for corpus novelty and topic-handle originality measures",
+      "paper_keys": [
+        "x21-joke-space-originality"
+      ],
+      "source_url": "https://huggingface.co/datasets/SocialGrep/one-million-reddit-jokes",
+      "hf_repo_id": "SocialGrep/one-million-reddit-jokes",
+      "method": "hf",
+      "access": "public",
+      "license": "CC BY 4.0 per dataset card; underlying Reddit content remains subject to platform/user rights",
+      "approx_size": "~286 MB",
+      "status": "downloaded",
+      "source_checked": "2026-07-11",
+      "local_path": "data/one-million-reddit-jokes",
+      "disk_mb": 286.1
+    },
+    {
+      "key": "open-mic-humor-quotient",
+      "name": "Open Mic humor quotient dataset",
+      "contents": "~40 hours of English stand-up clips/transcripts with five-level laughter-derived humor quotient labels",
+      "paper_keys": [
+        "x24-open-mic-humor-quotient"
+      ],
+      "source_url": "https://github.com/cfiltnlp/AI-OpenMic",
+      "method": "git",
+      "access": "public",
+      "license": "CC BY-SA 4.0 for repository; source-media rights may differ",
+      "approx_size": "small code repository; media archive linked externally",
+      "status": "downloaded",
+      "note": "The repository links the media archive at cfilt.iitb.ac.in; that server currently rejects automated HEAD requests, so the pipeline vendors the code/metadata repository only.",
+      "source_checked": "2026-07-11",
+      "commit": "c8d6164e36aafebcf2ecad9f05a094f1d857ba62",
+      "local_path": "data/open-mic-humor-quotient",
+      "disk_mb": 0.2
+    },
+    {
+      "key": "tic-talk",
+      "name": "TIC-TALK",
+      "contents": "5,416 aligned topic segments across 90 filmed stand-up specials: text, laughter, shot type, pose, and kinematic features",
+      "paper_keys": [
+        "x25-tic-talk"
+      ],
+      "source_url": "https://huggingface.co/datasets/ENC-PSL/TIC-TALK",
+      "hf_repo_id": "ENC-PSL/TIC-TALK",
+      "method": "hf",
+      "access": "public",
+      "license": "CC BY-NC 4.0",
+      "approx_size": "~44 MB derived features (no raw specials)",
+      "status": "downloaded",
+      "note": "Processing code: github.com/yaelle-z/TIC-TALK. Source Netflix specials are not redistributed.",
+      "source_checked": "2026-07-11",
+      "local_path": "data/tic-talk",
+      "disk_mb": 43.7
+    },
+    {
+      "key": "counterfactual-humor-fairness",
+      "name": "Counterfactual humor fairness data",
+      "contents": "Identity-agnostic and identity-specific joke subsets plus 61,600 speaker-target-conditioned generation/refusal outputs",
+      "paper_keys": [
+        "x28-counterfactual-unfairness"
+      ],
+      "source_url": "https://github.com/shubinkim/humor-counterfactual-unfairness",
+      "method": "git",
+      "access": "public",
+      "license": null,
+      "approx_size": "~22 MB repository",
+      "status": "downloaded",
+      "note": "Official preprint repository; downstream Humor Recognition and HaHackathon source terms also apply.",
+      "source_checked": "2026-07-11",
+      "commit": "1f728dd32a229a6c3cf5c86561ee38832659cede",
+      "local_path": "data/counterfactual-humor-fairness",
+      "disk_mb": 49.4
+    },
+    {
+      "key": "d-humor",
+      "name": "D-HUMOR",
+      "contents": "4,379 Reddit memes labeled for dark humor, target category, and three-level intensity",
+      "paper_keys": [
+        "x29-d-humor"
+      ],
+      "source_url": "https://github.com/Sai-Kartheek-Reddy/D-Humor-Dark-Humor-Understanding-via-Multimodal-Open-ended-Reasoning",
+      "method": "unavailable",
+      "access": "data-use agreement required",
+      "license": "Academic non-commercial use; no redistribution",
+      "approx_size": "unknown",
+      "status": "gated",
+      "note": "Submit the access form linked from the official repository. Sensitive/offensive content; redistribution is explicitly prohibited.",
+      "source_checked": "2026-07-11"
+    },
+    {
+      "key": "hins",
+      "name": "HinS Hindi long-context humor benchmark",
+      "contents": "1,046 Hindi sitcom, film, and stand-up clips represented by dialogue plus textual visual/audio cues; 676 clips are CC-licensed",
+      "paper_keys": [
+        "x30-hins"
+      ],
+      "source_url": "https://osf.io/hsdx8/overview?view_only=dc86594301e844ebb78221ca5887f81c",
+      "method": "unavailable",
+      "access": "review-only public link",
+      "license": "Mixed: 64.5% Creative Commons, 35.4% standard copyright",
+      "approx_size": "unknown",
+      "status": "unavailable",
+      "note": "The proceedings paper still points to an anonymized OSF view-only URL; wait for a stable deanonymized release before vendoring.",
+      "source_checked": "2026-07-11"
+    },
+    {
+      "key": "clef-joker-2024",
+      "name": "CLEF 2024 JOKER track data",
+      "contents": "Humor-aware retrieval, humor genre/technique classification, and English-to-French pun translation resources",
+      "paper_keys": [
+        "x31-clef-joker-2024"
+      ],
+      "source_url": "https://www.joker-project.com/clef-2024/tasks",
+      "method": "unavailable",
+      "access": "track registration/archive",
+      "license": null,
+      "approx_size": "small text corpora",
+      "status": "unavailable",
+      "note": "No stable public download archive was linked from the 2024 task page or overview as of 2026-07-11; data was distributed to registered participants.",
+      "source_checked": "2026-07-11"
     }
   ]
 }

@@ -179,5 +179,274 @@
     "code_url": "https://tinyurl.com/EMNLPHumourStandUpPublic",
     "data_url": "https://tinyurl.com/EMNLPHumourStandUpPublic",
     "other": "The paper states that released features include Action Units from LibreFace, poses from MMDetection and MMPose, and camera angle changes from PySceneDetect."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Stand-up comedians appearing in collected online stand-up comedy videos; videos with more than one comedian were excluded.",
+        "recruitment": "Videos were collected from YouTube channels listed in Table 1; YouTube Shorts and videos with more than one comedian were excluded.",
+        "geography": "Not reported at participant level; source channels include Comedy Central, Comedy Central UK, Comedy Central Latam, Comedy Central España, Comedy Central Italia, Comedy Central Magyarország, Paramount Network CZ, Montreux Comedy, and Comedy Central Brasil.",
+        "languages": [
+          "English",
+          "Spanish",
+          "Italian",
+          "Hungarian",
+          "Czech",
+          "French",
+          "Portuguese"
+        ],
+        "observations": "3,617 videos; 334.2 hours; 2,887,402 words; 128,194 words labeled as laughter. These are items/labels, not participant counts.",
+        "detail": "The paper does not report unique comedian counts, demographics, or performer recruitment beyond source-channel collection and exclusions."
+      },
+      {
+        "role": "live-audience",
+        "participant_count": null,
+        "population": "Audiences whose laughter is audible in the stand-up comedy videos.",
+        "recruitment": "Not recruited by the study; laughter was observed in publicly available performance videos.",
+        "geography": "Not reported at audience level.",
+        "languages": [
+          "English",
+          "Spanish",
+          "Italian",
+          "Hungarian",
+          "Czech",
+          "French",
+          "Portuguese"
+        ],
+        "observations": "Audience laughter was automatically detected/refined across the corpus; Table 1 reports 128,194 words labeled as laughter, not audience members or independent laughs.",
+        "detail": "Audience identity, size, demographics, and venue information are not reported."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual annotators for the 70-video test set; the paper says 'we manually annotate' but does not enumerate annotators.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English",
+          "Spanish",
+          "Italian",
+          "Hungarian",
+          "Czech",
+          "French",
+          "Portuguese"
+        ],
+        "observations": "70 videos, 10 per language, manually annotated in laughs with timestamps at 0.1 seconds using the audio file and Audacity; ASR outputs were manually checked.",
+        "detail": "No annotator count, annotator training, adjudication procedure, blinding, or inter-annotator agreement is reported."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual annotators for ASR-derived candidate laughter validation; the paper says the candidates were manually annotated but does not enumerate annotators.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "376 outburst candidates on 50 videos were manually annotated as real laughter or other events; 208 were real laughter events not previously detected by the off-the-shelf detector.",
+        "detail": "The paper does not report annotator count, expertise, language coverage for this subset, annotation instructions, blinding, adjudication, or agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": "Paper authors/research team, not individually specified",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Manual annotations provide the labels for the 70-video laughter test set and for the 376 candidate laughter segments used to train/evaluate the Random Forest candidate validator."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Omine et al. (2024) laughter detection model",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used as the off-the-shelf automatic audience-laughter detector, as the source of Raw laughter labels, and as a baseline in the IoU evaluation."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Whisper and WhisperX timestamp comparison plus ASR-based rule",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The proposed method uses complementary timestamp errors from Whisper and WhisperX to insert candidate laughter segments that the initial laughter detector missed."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Random Forest candidate laughter classifier",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Filters ASR-derived candidate laughter segments into laughter versus non-laughter/other; trained on manually labeled candidates using acoustic features."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Precision/recall/F1, macro F1, classification metrics, and IoU threshold 0.2",
+        "role": "primary",
+        "blind": null,
+        "detail": "Reported results for the candidate classifier, full laughter detection system, and word-level sequence-labeling models are determined by automatic metrics against manual or automatic labels."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Paper-level",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The study introduces a dataset and evaluates laughter/humor detection and sequence-labeling systems. It does not generate humorous text or select best-of-N generated outputs; ASR-derived candidate filtering is detection, not generation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Omine et al. (2024) laughter segmentation/detection model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Described as the state-of-the-art/off-the-shelf model used for automatic laughter detection; exact checkpoint, implementation, access method, and run date are not reported."
+      },
+      {
+        "name": "Whisper",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for transcript extraction and timestamp comparison; model size, checkpoint, implementation version, decoding settings, and run date are not reported."
+      },
+      {
+        "name": "WhisperX",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for transcript extraction and timestamp comparison; model/checkpoint version, alignment settings, and run date are not reported."
+      },
+      {
+        "name": "Random Forest classifier",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Trained with scikit-learn on acoustic features; reported tuned hyperparameters are n_estimators=50, max_depth=13, min_samples_split=2. Exact scikit-learn version is not reported."
+      },
+      {
+        "name": "xlm-roberta-base",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Accessed via transformers to fine-tune unimodal text sequence-labeling models. The paper reports transformers 4.46.3, torch 2.1.2, CUDA 12.2, and Nvidia RTX-A6000, but not a Hugging Face revision/snapshot."
+      },
+      {
+        "name": "LibreFace",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used to extract Action Unit features released with the dataset; exact library/model version and run settings are not reported."
+      },
+      {
+        "name": "MMDetection and MMPose",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used to extract pose features released with the dataset; exact versions/checkpoints and run settings are not reported."
+      },
+      {
+        "name": "PySceneDetect",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used to extract camera angle changes released with the dataset; exact version and settings are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Corpus transcription and initial laughter detection",
+        "calls_per_item": "For each sample/video, the paper reports using two ASR systems, Whisper and WhisperX; it also reports running the Omine et al. (2024) laughter detection model on the videos.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No ASR model size, decoding parameters, batching, hardware, runtime, or cost are reported for this stage."
+      },
+      {
+        "scope": "ASR-based candidate laughter extraction and validation",
+        "calls_per_item": null,
+        "candidates_per_item": "376 outburst candidates on 50 videos; 208 were manually labeled as real laughter. The paper states the overall method detects approximately 3 new outbursts of laughter per video.",
+        "token_budget": null,
+        "sampling_parameters": "Segments shorter than 0.5 seconds were discarded and classified as 'other' before classifier evaluation.",
+        "compute_or_cost": null,
+        "detail": "Candidate generation depends on intersections between Whisper and WhisperX timestamp errors around laughter-like events; exact per-video candidate distribution and runtime are not reported."
+      },
+      {
+        "scope": "Random Forest candidate laughter classifier",
+        "calls_per_item": null,
+        "candidates_per_item": "Binary classification over ASR-derived candidate segments.",
+        "token_budget": null,
+        "sampling_parameters": "15% of the dataset was randomly selected for hyperparameter tuning/validation; tuned parameters were n_estimators=50, max_depth=13, min_samples_split=2; 200 iterations varied the training/testing split while consistently using 15% validation.",
+        "compute_or_cost": null,
+        "detail": "The paper does not report exact train/test split proportions, random seeds, elapsed time, or cost."
+      },
+      {
+        "scope": "Word-level sequence-labeling models",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Maximum sequence length 512 with a stride/'stripe' of 128 when cutting from the same monologue.",
+        "sampling_parameters": "Fine-tuned xlm-roberta-base with Adam, 10 epochs, learning rate 1e-5.",
+        "compute_or_cost": "Experiments used torch 2.1.2, transformers 4.46.3, a Nvidia RTX-A6000 GPU, and CUDA 12.2; cost and runtime are not reported.",
+        "detail": "The paper does not report batch size, random seeds, number of runs for transformer models, or inference-time settings."
+      },
+      {
+        "scope": "Released non-baseline multimodal feature extraction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Action Units, poses, and camera angle changes were extracted with LibreFace, MMDetection/MMPose, and PySceneDetect, but these features were not used in the reported baseline experiments and detailed extraction budgets are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Laughter detection and word-level humor/laughter prediction",
+        "present": false,
+        "description": "No human prediction baseline is reported. Human/manual annotations are used as ground truth or validation labels, not as a competing baseline system.",
+        "directly_comparable": false,
+        "detail": "No matched human-vs-model task in which humans predicted laughter from the same inputs under comparable conditions is described."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The StandUp4AI dataset and its manual test annotations are newly introduced in the paper rather than reused as an older public benchmark.",
+        "The 70-video test set was manually annotated and ASR outputs were manually checked."
+      ],
+      "basis": "The paper does not discuss contamination or decontamination. Although the benchmark annotations are new, the source material consists of public YouTube videos from well-known channels, and collection/publication dates for individual videos are not reported. Pretrained components such as xlm-roberta-base, Whisper/WhisperX, and the off-the-shelf laughter detector could in principle have been exposed to related public web/audio content or transcripts. Because labels are newly created but source content is public and no decontamination test is reported, the risk is assessed as moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Manual annotations validate the laughter detector and the sequence-labeling test set; no LLM evaluator is used.",
+      "detail": "The paper uses ASR systems and pretrained/fine-tuned models, but no LLM is used to judge outputs or determine headline conclusions."
+    },
+    "reporting_gaps": [
+      "Manual annotator count, annotator identities beyond 'we', annotator training, blinding, adjudication, and inter-annotator agreement are not reported.",
+      "Unique comedian counts, audience counts, and performer/audience demographics are not reported; video counts and laughter labels should not be read as participant counts.",
+      "Exact video collection dates and source video publication dates are not reported.",
+      "Exact train/dev/test split sizes for the sequence-labeling experiments are not fully specified beyond the 70-video manually annotated test set and automatic-test tables.",
+      "The Random Forest experiment reports 15% validation and 200 varied train/test splits, but not exact train/test split proportions or random seeds.",
+      "Exact checkpoints/model sizes/versions for Whisper, WhisperX, and the Omine et al. (2024) detector are not reported.",
+      "The Hugging Face revision/snapshot for xlm-roberta-base is not reported.",
+      "ASR decoding settings, batching, runtime, hardware, inference dates, and cost are not reported for Whisper/WhisperX or the Omine detector.",
+      "Transformer fine-tuning omits batch size, random seeds, number of runs, variance/confidence intervals, and inference-time settings.",
+      "Versions/checkpoints/settings for LibreFace, MMDetection, MMPose, and PySceneDetect feature extraction are not reported.",
+      "No contamination/decontamination analysis is reported for public YouTube source material or pretrained models.",
+      "No human baseline for laughter prediction or sequence labeling is reported."
+    ]
   }
 }

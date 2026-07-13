@@ -195,5 +195,387 @@
     "code_url": "https://github.com/dayoon-ko/ExFunTube",
     "data_url": "https://github.com/dayoon-ko/ExFunTube",
     "other": "The paper states that only URLs, not videos, will be distributed because copyright remains with the original owners."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Users who uploaded or shared short-form funny YouTube videos on the r/youtubehaiku subreddit; not recruited as study participants.",
+        "recruitment": "Videos were crawled from r/youtubehaiku rather than contributed through the study.",
+        "geography": null,
+        "languages": [
+          "English retained for the final dataset; videos with no speech or languages other than English were removed"
+        ],
+        "observations": "220K videos were initially crawled as source material.",
+        "detail": "The paper treats these videos as user-generated source material. It does not report the number or demographics of creators/uploaders."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "60 passed the qualification test out of 219 workers; the number who actually contributed accepted dataset annotations is not separately reported.",
+        "population": "Amazon Mechanical Turk workers with HIT approval rate of 99% or higher, more than 10,000 approved HITs, located in AU, CA, GB, NZ, or US, and selected through a humor-explanation qualification test.",
+        "recruitment": "Crowdsourced via AMT; workers took a qualification test, received detailed feedback, and were paid approximately $18/hour, about $2 per data point plus additional wages for extended time and effort.",
+        "geography": "AU, CA, GB, NZ, or US",
+        "languages": [
+          "English"
+        ],
+        "observations": "One worker per video identified up to three funny moments and annotated start/end timestamps plus text explanations. The final dataset has 10,136 videos and 11,166 timestamped explanations; 9,222 videos have one funny moment, 798 have two, and 116 have three.",
+        "detail": "Workers were instructed to explain both what is funny and why it is funny, with recommended format '[What is funny]. It is funny because [Why funny]'. Responses lacking descriptions or justifications were rejected."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "10",
+        "population": "AMT workers meeting the same criteria as dataset annotators, excluding workers who had already participated in dataset annotation.",
+        "recruitment": "Crowdsourced via AMT for human evaluation.",
+        "geography": "AU, CA, GB, NZ, or US",
+        "languages": [
+          "English"
+        ],
+        "observations": "100 randomly selected test videos were evaluated. For rating, five workers rated each explanation on No/Weak No/Neutral/Weak Yes/Yes and checked shortcomings; highest and lowest scores were excluded before averaging. For comparison, five workers compared GPT-3.5 with the proposed prompting against text-only GPT-3.5, MAF, and Gold explanations for each pair.",
+        "detail": "The rated systems shown in Table 2 are text-only BART, text-only GPT-3.5, MAF, BART with prompting, GPT-3.5 with prompting, and Gold; T5 and VideoChat-Text baselines were not human-rated."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Paper authors acting as manual safety reviewers.",
+        "recruitment": "Not recruited; manual review conducted by the authors.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Authors manually reviewed all 21K videos remaining after the automated filtering pipeline and removed about 50%, leaving 10,136 videos.",
+        "detail": "The review filtered videos for discrimination, animal cruelty, dangerous goods/services/activities or self-harm, obscenities or profanities, and shocking content."
+      }
+    ],
+    "judges": [
+      {
+        "type": "LLM",
+        "name": "GPT-3.5 text-davinci-003",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used in the video filtering pipeline to detect funny utterances with video caption plus transcript and with transcript only, and to generate one-sentence explanations with and without visual information; these outputs determined whether candidate videos were retained as multimodal humorous videos."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "SentBERT score",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used in the filtering pipeline to compare GPT-3.5 explanations with and without visual information; videos were removed when the explanation similarity was at or above the reported 0.8 threshold."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Authors manually viewed videos and removed content judged inappropriate under the five safety criteria."
+      },
+      {
+        "type": "human-crowd",
+        "name": "AMT dataset annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Crowdworkers supplied the gold start/end timestamps and natural-language explanations of funny moments."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "SentBERT Score",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary automatic evaluation metric comparing generated explanations with gold explanations; reported mean scores and proportions above thresholds."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "ROSCOE reasoning alignment (RA)",
+        "role": "primary",
+        "blind": null,
+        "detail": "Primary automatic evaluation metric for reasoning alignment between generated and gold explanations; reported mean scores and proportions above thresholds."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "QD-DETR moment localizer with IoU-based rationale quality score",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for the rationale quality evaluation. QD-DETR was trained to localize gold funny moments from gold explanations, then IoU differences between gold-explanation and model-explanation localization were used as rationale quality scores."
+      },
+      {
+        "type": "human-crowd",
+        "name": "AMT human evaluation workers",
+        "role": "primary",
+        "blind": null,
+        "detail": "Workers rated explanation quality and performed pairwise comparisons. The paper does not report whether model identities were hidden or whether explanation order was randomized."
+      },
+      {
+        "type": "LLM",
+        "name": "ChatGPT",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to classify all 10,136 videos into 20 humor taxonomy categories from their explanations, using category descriptions and one example for one-shot classification."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Humor explanation generation for evaluated systems",
+        "mode": "single-sample",
+        "n": "1 evaluated explanation per video per system is reported; no multiple-candidate selection is described.",
+        "selector": "none",
+        "detail": "T5, BART, GPT-3.5, MAF, VideoChat-Text, and prompted variants were evaluated on the generated explanation as produced. The paper reports no best-of-N sampling, reranking, or human/model selection among multiple final explanations."
+      },
+      {
+        "scope": "BLIP-2 visual caption generation inside the proposed video-to-text prompting",
+        "mode": "best-of-n",
+        "n": "K=20 captions per frame; candidate corpus per segment is #frames × 20 captions.",
+        "selector": "automatic-metric",
+        "detail": "For each video segment, BLIP-2 generated 20 captions per extracted frame, and InternVideo retrieved the caption that best matched the video segment, yielding one selected caption per segment."
+      },
+      {
+        "scope": "Zero-shot video captioning in the dataset filtering pipeline",
+        "mode": "single-sample",
+        "n": "1 video caption per video is described.",
+        "selector": "none",
+        "detail": "The Tewel et al. zero-shot video captioning model was used to produce a video caption for filtering; the paper reports inference-time pseudo-token optimization but no multi-candidate selection for this caption."
+      },
+      {
+        "scope": "GPT-3.5 explanation generation inside the filtering pipeline",
+        "mode": "single-sample",
+        "n": "One explanation with video caption plus transcript and one explanation with transcript only are described for the relevant filtering step.",
+        "selector": "none",
+        "detail": "The two explanations were compared to each other by SentBERT similarity; they were not selected from multiple generated candidates."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "T5 Large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Finetuned and evaluated as a text-only LLM and as an LLM with the proposed prompting. Exact checkpoint source and inference date are not reported."
+      },
+      {
+        "name": "BART Large",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Finetuned and evaluated as a text-only LLM and as an LLM with the proposed prompting; also used as the base for MAF according to the appendix. Exact checkpoint source and inference date are not reported."
+      },
+      {
+        "name": "GPT-3.5",
+        "version_or_snapshot": "text-davinci-003",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used for video filtering and zero-shot humor explanation, and as the LLM in VideoChat-Text. The paper reports the model identifier but not API/access method or inference date."
+      },
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for speaker separation and humor taxonomy classification. The paper cites OpenAI 2023 but does not provide a snapshot/version or inference date."
+      },
+      {
+        "name": "MAF",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Multimodal end-to-end model from Kumar et al. (2022), trained on ExFunTube with an adaptor added to BART; exact implementation/version is not reported."
+      },
+      {
+        "name": "VideoChat-Text",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Multimodal prompting framework from Li et al. (2023b) that textualizes video information and uses GPT-3.5 to generate explanations; exact implementation/snapshot is not reported."
+      },
+      {
+        "name": "Zero-shot video captioning model from Tewel et al. (2022)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used in the filtering pipeline; described as using CLIP ViT-L/14 and GPT-2 with inference-time pseudo-token optimization. Exact checkpoint/source is not reported."
+      },
+      {
+        "name": "Whisper",
+        "version_or_snapshot": "large-v2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used for speech-to-text transcription in the filtering pipeline and video-to-text prompting."
+      },
+      {
+        "name": "BLIP-2",
+        "version_or_snapshot": "coco-pretrained",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to generate image/frame captions for visual prompt construction with a 'Who is doing what?' prompt and nucleus sampling."
+      },
+      {
+        "name": "InternVideo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a video-to-text retrieval model to select the best-matching caption for each video segment; paper states CLIP ViT-L/14 was used as the image encoder."
+      },
+      {
+        "name": "Audio-tagging model from Schmid et al. (2022)",
+        "version_or_snapshot": "mn40_as",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to classify the entire audio stream and provide up to three sound tags above the confidence threshold."
+      },
+      {
+        "name": "QD-DETR",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Trained for moment localization in the rationale quality experiment; used bert-base-uncased as text encoder and CLIP ViT-L/14 as video encoder."
+      },
+      {
+        "name": "SentBERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used both in filtering and as an automatic evaluation metric; exact Sentence-BERT checkpoint is not reported."
+      },
+      {
+        "name": "ROSCOE",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The reasoning alignment score from ROSCOE was used as an automatic evaluation metric; exact model/checkpoint configuration is not reported."
+      },
+      {
+        "name": "bert-base-uncased",
+        "version_or_snapshot": "bert-base-uncased",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Used as the text encoder for QD-DETR in rationale quality experiments, with maximum query length 400."
+      },
+      {
+        "name": "CLIP",
+        "version_or_snapshot": "ViT-L/14",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used as an image/video encoder component in the zero-shot video captioning model, InternVideo setup, and QD-DETR setup."
+      },
+      {
+        "name": "GPT-2",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as part of the zero-shot video captioning model in the filtering pipeline; exact GPT-2 variant is not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Dataset filtering pipeline",
+        "calls_per_item": "Conditional GPT-3.5 calls are described but exact counts per crawled video are not reported: funny-utterance detection with video caption+transcript, funny-utterance detection with transcript only, and in later cases explanation generation with and without video caption.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "For GPT-3.5 text-davinci-003 in filtering, temperature 0 for funny-utterance detection and 0.3 for explanation generation. The video captioning model optimizes pseudo tokens for 25 inference-time iterations with AdamW, learning rate 0.008, and L2 weight decay 0.003. Whisper large-v2 is used for transcription.",
+        "compute_or_cost": null,
+        "detail": "The pipeline began from 220K crawled videos, removed videos with no speech or non-English speech, retained 21K multimodal humorous videos before manual safety review, and 10,136 after manual review. Token limits, exact prompt call counts, and monetary/API costs are not reported."
+      },
+      {
+        "scope": "Proposed video-to-text prompting construction",
+        "calls_per_item": "Per video, the visual stream is segmented into N segments; frames are extracted at 5 fps; BLIP-2 generates K=20 captions per frame; InternVideo retrieves one caption per segment. Whisper transcribes speech, ChatGPT performs speaker separation, and the audio tagger processes the full audio stream.",
+        "candidates_per_item": "#frames × 20 visual captions per segment before InternVideo selection; top 3 sound tags are selected if confidence is above 0.3.",
+        "token_budget": null,
+        "sampling_parameters": "BLIP-2 uses nucleus sampling with a 'Who is doing what?' prompt. ChatGPT temperature is 0.3 for speaker separation. Audio tags use confidence threshold 0.3.",
+        "compute_or_cost": null,
+        "detail": "The final prompt chronologically arranges sound tags, speech, and visual captions and asks for an explanation of up to three sentences. Exact token budgets and runtime costs are not reported."
+      },
+      {
+        "scope": "Final humor explanation generation",
+        "calls_per_item": "Not fully reported. The experiments produce one predicted explanation per video per evaluated system; GPT-3.5 zero-shot generations are used for text-only, VideoChat-Text, and proposed-prompting settings.",
+        "candidates_per_item": "1 evaluated output per model-video; no best-of-N final explanation selection is reported.",
+        "token_budget": "Prompt asks for an explanation of up to three sentences; maximum input/output tokens are not reported.",
+        "sampling_parameters": "Decoding parameters for final T5/BART/MAF generation and final GPT-3.5 explanation generation are not reported in the paper.",
+        "compute_or_cost": null,
+        "detail": "For finetuned models, five-fold cross-validation over all 10,136 videos is used: each iteration trains on three subsets, validates on one, tests on one, and rotating test folds yields predictions for the whole dataset."
+      },
+      {
+        "scope": "Finetuning and training of explanation models",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "T5 and BART are finetuned with batch size 4 for 5 epochs using AdamW, learning rate 2e-5, and L2 weight decay 0.01. MAF is trained with batch size 4 for 20 epochs using AdamW, L2 weight decay 1e-4, learning rate 5e-8 for BART parameters and 5e-7 for remaining parameters. Other hyperparameters use defaults.",
+        "compute_or_cost": null,
+        "detail": "Hardware, wall-clock time, random seeds, and compute cost are not reported."
+      },
+      {
+        "scope": "Rationale quality / moment localization experiment",
+        "calls_per_item": "At inference, QD-DETR produces localization candidates for each test explanation; the score uses the maximum IoU from the top 5 candidates for model-generated and gold explanations.",
+        "candidates_per_item": "Top 5 localization candidates per explanation.",
+        "token_budget": "Maximum query length 400 for the bert-base-uncased text encoder.",
+        "sampling_parameters": "Dataset split for QD-DETR is 8:1:1: train 8,110, validation 1,013, test 1,013. QD-DETR is trained with batch size 128 for 200 epochs, AdamW learning rate 1e-5, L2 weight decay 1e-4, moment retrieval loss with L1/cross-entropy/generalized-IoU loss balancing terms 10/1/2, no saliency loss, and video frames sampled at 1 fps.",
+        "compute_or_cost": null,
+        "detail": "Rationale quality is reported at IoU thresholds 0.3 and 0.5; lower scores are better. Hardware and runtime are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human-written Gold explanations in human evaluation",
+        "present": true,
+        "description": "Gold ExFunTube explanations, written by AMT annotators, were included in the 100-video human rating and pairwise comparison evaluation. Gold received a human rating of 0.792, while GPT-3.5 with prompting received 0.523.",
+        "directly_comparable": true,
+        "detail": "Gold and model explanations were judged on the same selected videos by the same AMT rating/comparison procedures. Caveat: gold explanations were created during the dataset annotation process by workers watching the videos and annotating moments, not generated under the same input transformation as every model."
+      },
+      {
+        "scope": "Automatic and rationale-quality metrics",
+        "present": false,
+        "description": "No separate human performance score is reported for SentBERT, ROSCOE, or QD-DETR rationale quality. Human gold explanations serve as references or as inputs for the localizer, not as an independently measured human system in those metrics.",
+        "directly_comparable": false,
+        "detail": "Claims about model scores on automatic and rationale-quality metrics are not directly compared to human task performance."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "ExFunTube annotations and timestamps are newly collected for this paper rather than a legacy public benchmark.",
+        "Finetuned T5, BART, and MAF use cross-validation with held-out test folds.",
+        "Gold explanations are human-authored and not reported as pre-existing web text."
+      ],
+      "basis": "The benchmark annotations appear newly created and not public before the named GPT-3.5 text-davinci-003 model, which lowers direct label-contamination risk. However, the source videos were public YouTube/Reddit content, several pretrained web-scale vision/language models are used, proprietary model training data and inference dates are not reported, and no decontamination or memorization test is described. Because the item content may have been present in pretraining data even if the gold explanations were not, the conservative risk level is moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "The claim that ExFunTube contains multimodal humorous videos depends substantially on GPT-3.5 filtering judgments and SentBERT similarity over GPT-3.5 explanations; the humor-taxonomy analysis depends on ChatGPT labels. The main model-ranking claims are also supported by automatic metrics and AMT human evaluations, so they do not rest primarily on LLM judging.",
+      "human_validation": "AMT workers produced gold timestamps/explanations and separately evaluated selected model outputs; authors manually safety-reviewed videos. The paper does not report a human validation study of GPT-3.5's multimodal filtering decisions or ChatGPT's taxonomy labels.",
+      "detail": "LLMs are used not only as generators but also as data-labeling/filtering instruments. GPT-3.5 determines funny-utterance presence and explanation differences during dataset construction; ChatGPT assigns humor categories for analysis."
+    },
+    "reporting_gaps": [
+      "Actual number of AMT workers who completed accepted dataset annotations is not reported; only 219 qualification-test takers and 60 passers are given.",
+      "Demographics beyond AMT platform, country restrictions, HIT approval rate, and approved-HIT count are not reported for annotators or evaluators.",
+      "The paper does not report whether human evaluators were blinded to model identity or whether explanation order was randomized in rating/comparison tasks.",
+      "Inter-annotator agreement or reliability is not reported for dataset annotations, human ratings, pairwise comparisons, GPT-3.5 filtering decisions, or ChatGPT taxonomy labels.",
+      "No exact inference dates, API access details, or service snapshots are reported for GPT-3.5 text-davinci-003 or ChatGPT.",
+      "Final explanation-generation decoding parameters are not reported for T5, BART, MAF, VideoChat-Text, or GPT-3.5, including beam search/sampling settings, random seeds, and maximum output tokens.",
+      "Token budgets, prompt lengths, exact GPT/ChatGPT call counts, and API costs are not reported.",
+      "Exact checkpoint sources/versions are not reported for several open-source components, including SentBERT, ROSCOE configuration, VideoChat-Text, InternVideo, the Tewel et al. video captioning model, and the Schmid et al. audio tagger beyond mn40_as.",
+      "Compute hardware, training runtime, and model-training/inference cost are not reported.",
+      "The paper does not discuss benchmark contamination, model training-data overlap with public YouTube/Reddit source videos, or any decontamination test.",
+      "Exact numerical vote counts or percentages for the pairwise human preference figure are not provided in the text.",
+      "The exact full text of all prompts is not fully reproduced in the main text; some prompts are shown only in figures or described procedurally."
+    ]
   }
 }

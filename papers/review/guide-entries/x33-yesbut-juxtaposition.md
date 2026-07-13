@@ -1,0 +1,3 @@
+<!-- guide claims for x33-yesbut-juxtaposition (Part 3 (Hu YesBut lineage)) -->
+
+**YesBut-Juxtaposition (Hu et al.):** [**Cracking the Code of Juxtaposition: Can AI Models Understand the Humorous Contradictions**](https://proceedings.neurips.cc/paper_files/paper/2024/hash/540a6eefb60428c8547a27253f9a2a59-Abstract-Conference.html) (Hu, Liang, Li et al., NeurIPS 2024 Oral) `peer-reviewed` `dataset` `benchmark` introduces 348 comics annotated with a literal description, contradiction explanation, underlying philosophy, title, and distractors. Its four tasks move from description and contradiction generation to title and philosophy selection. Large VLMs remain below human performance, with visual misreading and weak cross-panel relational reasoning as recurring failures.

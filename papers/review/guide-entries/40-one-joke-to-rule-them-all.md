@@ -4,9 +4,3 @@
 Turgeman, Shani & Shahaf — **CHum 2026** (arXiv:2508.19402) · `workshop` `method`
 - **Method:** Transfer-learning experiments across four humor-detection datasets representing different humor types; varied training-diversity settings (1–3 datasets in training, tested on a novel type).
 - **Findings:** Transfer is real but partial — up to 75% accuracy on unseen datasets; training on diverse sources improves transferability (+1.88–4.05%) with minimal in-domain cost; relations between humor types are *asymmetric*, with Dad Jokes surprisingly the best enabler of transfer yet the hardest target. The direct empirical test of whether "humor competence" is one thing — it mostly isn't (Synthesis 2), which is also Phunny's conclusion (#8) from the generation side.
-
----
-
-## Part 5 — Situated Humor: Workplace, Supportive & Live Performance
-
-Humor is context-bound; this part is about *where* the joke happens (audience and setting as first-class variables).

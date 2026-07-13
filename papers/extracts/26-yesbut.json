@@ -2,7 +2,7 @@
   "key": "26-yesbut",
   "ref": "#26",
   "section": "Part 3 - Multimodal & Visual Humor",
-  "extracted_at": "2026-07-03",
+  "extracted_at": "2026-07-13",
   "extraction_model": "gpt-5.5",
   "extraction_reasoning_effort": "high",
   "source_md": "papers/md/26-yesbut/26-yesbut.md",
@@ -27,44 +27,61 @@
     "evaluation-study"
   ],
   "research_questions": [
-    "Whether existing Vision-Language Models are able to decipher satire in images.",
-    "How well SOTA VL Models perform on Satirical Image Detection, Satirical Image Understanding, and Satirical Image Completion in zero-shot and zero-shot Chain-of-Thought settings.",
-    "Whether the YesBut dataset, with two sub-images, little text, and multiple artistic styles, provides a challenging benchmark for multimodal satire and humor comprehension."
+    "Can existing Vision-Language Models decipher satire in images in zero-shot settings?",
+    "How well do SOTA VL Models perform on satirical image detection, satirical image understanding, and satirical image completion on the YesBut dataset?",
+    "Do dataset properties such as lack of text, multiple artistic styles, and disconnected sub-images make multimodal satire comprehension difficult for VL Models?",
+    "Do SOTA VL Models also struggle on real satirical photographs following the Yes, But theme?"
   ],
   "tasks": [
-    "Satirical Image Detection",
-    "Satirical Image Understanding",
-    "Satirical Image Completion"
+    "satirical image detection",
+    "satirical image understanding",
+    "satirical image completion"
   ],
   "humor_domains": [
     "satire",
-    "satirical social media images",
-    "societal satire",
+    "multimodal humor",
+    "social media Yes/But images",
     "real satirical photographs",
-    "visual humor"
+    "social satire",
+    "Horatian satire"
   ],
   "modalities": [
-    "image",
-    "text"
+    "text",
+    "image"
   ],
   "languages": [
     "English"
   ],
   "datasets_used": [
     {
-      "name": "YesBut (V1)",
+      "name": "YesBut-Satire (Nandy et al.)",
       "role": "introduced",
       "size": "2,547 images, 1,084 satirical and 1,463 non-satirical"
     },
     {
-      "name": "real, satirical photographs",
-      "role": "introduced",
-      "size": "119 images"
+      "name": "YesBut-Satire (Nandy et al.)",
+      "role": "evaluated-on",
+      "size": "2,547 images for detection; 1,084 satirical images for understanding; 150 samples for completion"
     },
     {
       "name": "X handle @_yesbut_ posts",
       "role": "source-material",
-      "size": "283 images"
+      "size": "283 satirical images"
+    },
+    {
+      "name": "Dataset of real, satirical photographs",
+      "role": "introduced",
+      "size": "119 images"
+    },
+    {
+      "name": "Dataset of real, satirical photographs",
+      "role": "evaluated-on",
+      "size": "119 images"
+    },
+    {
+      "name": "Instagram Yes, But real photo posts",
+      "role": "source-material",
+      "size": "119 images"
     },
     {
       "name": "MemeCap",
@@ -79,93 +96,431 @@
   ],
   "models_evaluated": [
     "Gemini Pro Vision",
-    "GPT-4 Vision (gpt-4-vision-preview)",
+    "gpt-4-vision-preview",
     "LLaVA",
-    "MiniGPT-4",
+    "MiniGPT4",
     "Kosmos-2"
   ],
   "methods_proposed": [
     {
-      "name": "YesBut dataset",
-      "summary": "A high-quality annotated multimodal dataset of two-panel satirical and non-satirical images spanning colorized sketches, 2D stick figures, and 3D stick figures. Satirical images include left-sub-image, right-sub-image, and overall punchline descriptions."
+      "name": "YesBut dataset construction pipeline",
+      "summary": "The paper collects 283 satirical Yes/But images from the X handle @_yesbut_, obtains human annotations for sub-image descriptions and overall punchlines, and augments the data with DALL-E 3-generated 2D and 3D stick-figure sub-images followed by manual satirical/non-satirical labeling."
     },
     {
-      "name": "Four-stage annotation and generation pipeline",
-      "summary": "The authors collect 283 satirical images from the X handle @_yesbut_, annotate them with five annotators, then use DALL-E 3 to generate 2D and 3D stick-figure variants from the annotated descriptions and manually label the resulting combined images as satirical or non-satirical."
+      "name": "Satirical Image Detection task",
+      "summary": "Given a two-half image, the model must classify whether the combined image is satirical or non-satirical."
     },
     {
-      "name": "Three-task satire comprehension benchmark",
-      "summary": "The paper defines Satirical Image Detection, Satirical Image Understanding, and Satirical Image Completion as benchmark tasks for evaluating zero-shot multimodal satire comprehension."
+      "name": "Satirical Image Understanding task",
+      "summary": "Given a satirical image, the model generates textual descriptions of the sub-images and an explanation of why the complete image is funny or satirical."
+    },
+    {
+      "name": "Satirical Image Completion task",
+      "summary": "Given one half of a colorized-sketch image and two candidate sub-images, the model selects the candidate that completes the Yes/But pair so that it is meaningful and satirical."
     }
   ],
-  "humor_theories": [],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The paper frames satire as humor that uses irony or exaggeration to criticize or mock people, politics, or society, and operationally designs images around a normal scenario plus a conflicting or ironic scenario."
+    }
+  ],
   "evaluation_methods": [
     {
       "type": "automatic-metric",
-      "detail": "Satirical Image Detection is evaluated with Accuracy and F1-Score; Satirical Image Completion is evaluated with accuracy; Satirical Image Understanding is evaluated with BLEU, ROUGE-L, METEOR, BERTScore, and, in the appendix, Polos."
+      "detail": "Satirical Image Detection is evaluated with Accuracy and F1-Score in zero-shot and zero-shot Chain-of-Thought settings."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Satirical Image Understanding is evaluated with BLEU, ROUGE-L, METEOR, BERTScore, and in the appendix the image-based Polos metric."
     },
     {
       "type": "human-eval",
-      "detail": "For Satirical Image Understanding, 30 images are randomly sampled, 10 from each of Stages 2, 3, and 4; three students evaluate model-generated and human-written overall descriptions by majority vote on Correctness, Appropriate Length, Visual Completeness, and Faithfulness."
+      "detail": "For Satirical Image Understanding, 30 randomly sampled images, 10 from each of Stages 2, 3, and 4, are evaluated by 3 students in the lab on binary criteria: Correctness, Appropriate Length, Visual Completeness, and Faithfulness; majority vote is taken."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Satirical Image Completion is evaluated with accuracy in zero-shot and zero-shot Chain-of-Thought settings."
     },
     {
       "type": "human-eval",
-      "detail": "For the 119 real satirical photographs, Understanding is evaluated by whether the model-generated text correctly describes the satire in the image, and accuracy is reported for each VL Model."
+      "detail": "For the 119 real satirical photographs, model outputs to the WHYFUNNY prompt are evaluated by a human annotator who answers whether the generated text correctly describes the satire in the image."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Five annotators annotate original satirical images with sub-image descriptions, overall punchline descriptions, text-presence features, connectedness, and annotation difficulty; a graduate student manually labels generated image combinations as satirical or non-satirical."
+    },
+    {
+      "type": "LLM-as-judge",
+      "detail": "ChatGPT is used to classify overall descriptions into four satire types and to elaborate topic-modeling outputs into intuitive topic descriptions; it is not used to score the benchmarked VL model outputs."
     }
   ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "5",
+        "population": "undergraduate sophomore students or above, enrolled in English-medium colleges",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "283 satirical images annotated for left sub-image description, right sub-image description, overall punchline description, three binary image features, and annotation difficulty",
+        "detail": "These annotators performed Stage 2 annotation of the original satirical images."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "graduate student in the authors' lab",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Manual satirical/non-satirical labeling of DALL-E 3-generated combined images; Stage 3 added 302 satirical and 547 non-satirical images, and Stage 4 added 499 satirical and 916 non-satirical images",
+        "detail": "The annotator was given 10 satirical and 10 non-satirical images prior to manual labeling as assistance."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "3",
+        "population": "students in the lab; the paper states they were not the annotators who annotated YesBut",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "30 sampled images, 10 from each of Stages 2, 3, and 4, with model-generated and human-written overall descriptions evaluated on four binary criteria; majority vote used",
+        "detail": "This human evaluation assessed Correctness, Appropriate Length, Visual Completeness, and Faithfulness."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "not reported; described as “the annotator”",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "WHYFUNNY outputs for 119 real satirical photographs evaluated for whether the generated text correctly describes the satire",
+        "detail": "The paper reports per-model understanding accuracy on the real-photograph set but does not give annotator recruitment or agreement details."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The authors manually downloaded and filtered 283 images from @_yesbut_ as satirical."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Five qualified student annotators wrote textual descriptions and categorical features for the 283 original satirical images."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "A graduate student manually labeled generated image combinations as satirical or non-satirical."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "The limitations section states that the authors manually reviewed annotations to minimize incorrect annotations."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy and F1-Score",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for Satirical Image Detection; accuracy also used for Satirical Image Completion and real-photo detection."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "BLEU, ROUGE-L, METEOR, BERTScore",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used for automatic evaluation of text generation in Satirical Image Understanding."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Polos",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used in the appendix as an image-based metric for Satirical Understanding with the WHYFUNNY prompt."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Three lab students judged generated and human-written descriptions for the 30-image Satirical Image Understanding human evaluation subset by majority vote."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "A human annotator judged whether model-generated text correctly described satire in the 119 real photographs."
+      },
+      {
+        "type": "LLM",
+        "name": "ChatGPT",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to classify the original images' overall descriptions into satire types and to generate intuitive descriptions of BERTopic topics."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "DALL-E 3 synthetic sub-image generation for 2D and 3D stick-figure dataset augmentation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper gives the prompts used for 2D and 3D generation and then manually labels the resulting combined images; it does not report candidate counts, reranking, or best-of-N selection."
+      },
+      {
+        "scope": "VL model generation for Satirical Image Understanding",
+        "mode": "single-sample",
+        "n": "1 generated description per prompt is implied; no alternatives reported",
+        "selector": "none",
+        "detail": "Models are prompted to describe sub-images and answer WHYFUNNY_PROMPT; the paper does not report generating multiple candidates or selecting the best response."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Gemini Pro Vision",
+        "version_or_snapshot": "Gemini Pro Vision API",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used for all tasks; no API snapshot or inference date reported."
+      },
+      {
+        "name": "gpt-4-vision-preview",
+        "version_or_snapshot": "gpt-4-vision-preview",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used for all tasks; no inference date reported."
+      },
+      {
+        "name": "LLaVA",
+        "version_or_snapshot": "7B parameters",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source model run on an NVIDIA A40 GPU; exact checkpoint not reported."
+      },
+      {
+        "name": "MiniGPT4",
+        "version_or_snapshot": "15.7B parameters",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source model run on an NVIDIA A40 GPU; exact checkpoint not reported."
+      },
+      {
+        "name": "Kosmos-2",
+        "version_or_snapshot": "1.66B parameters",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Open-source model run on an NVIDIA A40 GPU; exact checkpoint not reported."
+      },
+      {
+        "name": "DALL-E 3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to generate 2D and 3D stick-figure sub-images for dataset augmentation; access route and date not reported."
+      },
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for satire-type classification and topic description; no exact model version reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Open-source VL model inference for detection, understanding, and completion",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "NVIDIA A40 GPU; inference time per sample goes upto around 10 seconds for Satirical Image Detection, 1 minute for Satirical Image Understanding, and 10 seconds for Satirical Image Completion",
+        "detail": "The paper reports compute only for open-source models and does not report decoding settings."
+      },
+      {
+        "scope": "Satirical Image Detection",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Zero-shot and zero-shot CoT setups are used; the non-CoT prompt constrains output to exactly Y or N. CoT prompt details and retry handling are not reported."
+      },
+      {
+        "scope": "Satirical Image Understanding",
+        "calls_per_item": null,
+        "candidates_per_item": "1 output per prompt reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Models are prompted with Describe the image and WHYFUNNY_PROMPT; token limits, sampling parameters, and API cost are not reported."
+      },
+      {
+        "scope": "Satirical Image Completion",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Zero-shot and zero-shot CoT setups are used; the non-CoT prompt constrains output to exactly A or B."
+      },
+      {
+        "scope": "DALL-E 3 dataset augmentation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports two prompts for generating 2D and 3D stick-figure sub-images but not number of attempts, candidate selection, cost, or generation date."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Satirical Image Understanding human-evaluation subset",
+        "present": true,
+        "description": "Human-written overall image descriptions are evaluated alongside model-generated descriptions. Human scores are Correctness 100.00, Appropriate Length 100.00, Visual Completeness 80.00, and Faithfulness 93.33.",
+        "directly_comparable": true,
+        "detail": "The same 30-image subset and same four binary criteria are used for human-written and model-generated descriptions."
+      },
+      {
+        "scope": "Satirical Image Detection",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "No human accuracy baseline is reported for the detection task."
+      },
+      {
+        "scope": "Satirical Image Completion",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "No human accuracy baseline is reported for the completion task."
+      },
+      {
+        "scope": "Real-photograph detection and understanding",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The paper uses human judgment to score model understanding outputs but does not report a human task-performance baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The YesBut benchmark is newly constructed and released by the paper.",
+        "Many examples are synthetic 2D and 3D stick-figure variants generated during dataset construction.",
+        "The evaluation is zero-shot and zero-shot CoT, with no in-context exemplars."
+      ],
+      "basis": "The paper introduces the benchmark, but original source images come from public social media posts and real-photo posts, API model inference dates and snapshots are not reported, and no decontamination test is described."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Dataset characterization claims about the distribution of satire types and the intuitive descriptions of BERTopic topics use ChatGPT.",
+      "human_validation": null,
+      "detail": "The main benchmark scores are produced by automatic metrics and human evaluators, not by an LLM judge; ChatGPT is used for ancillary dataset analysis."
+    },
+    "reporting_gaps": [
+      "No exact inference dates or snapshots are reported for Gemini Pro Vision or gpt-4-vision-preview.",
+      "Exact checkpoints for LLaVA, MiniGPT4, and Kosmos-2 are not reported beyond parameter counts.",
+      "Sampling parameters, decoding settings, token budgets, retry policies, and API costs are not reported.",
+      "The zero-shot CoT prompts are not fully specified in the transcription, although the non-CoT detection and completion prompts are provided.",
+      "No inter-annotator agreement is reported for the five dataset annotators, the graduate-student generated-image labeling, or the three-person human evaluation.",
+      "Blind status for human evaluation is not reported.",
+      "Recruitment details, geography, and demographics are not reported for the human-evaluation annotators beyond lab-student status.",
+      "The real-photograph human evaluation annotator count and recruitment details are not clearly reported.",
+      "The paper does not discuss benchmark contamination or run a decontamination test."
+    ]
+  },
   "headline_results": [
     {
-      "finding": "On Satirical Image Detection, Kosmos-2 had the best reported TEST ACC. in the zero-shot CoT setting and the best F1 SCORE in the zero-shot setting; no model crossed 60 on either metric.",
-      "metric": "TEST ACC.; F1 SCORE",
-      "value": "56.97; 59.71",
-      "dataset": "YesBut (V1)",
-      "best_system": "Kosmos-2 (0-shot, CoT) for TEST ACC.; Kosmos-2 (0-shot) for F1 SCORE"
+      "finding": "The introduced YesBut dataset contains 2,547 images, comprising 1,084 satirical and 1,463 non-satirical images.",
+      "metric": "dataset size",
+      "value": "2,547 images; 1,084 satirical; 1,463 non-satirical",
+      "dataset": "YesBut-Satire (Nandy et al.)",
+      "best_system": null
     },
     {
-      "finding": "For the central WHYFUNNY prompt in Satirical Image Understanding, the best Average Score in Table 6 was achieved by Gemini, while the paper states that all normalized average metric values are below 0.4.",
+      "finding": "On Satirical Image Detection, the best test accuracy is obtained by Kosmos-2 in the zero-shot CoT setting, while the best F1 Score is obtained by Kosmos-2 in the zero-shot setting.",
+      "metric": "TEST ACC.; F1 SCORE",
+      "value": "56.97; 59.71",
+      "dataset": "YesBut-Satire (Nandy et al.)",
+      "best_system": "Kosmos-2"
+    },
+    {
+      "finding": "For Satirical Image Understanding with the WHYFUNNY prompt, Gemini gives the best Average Score at each annotation stage, but the scores remain low.",
       "metric": "Average Score",
-      "value": "0.3227",
-      "dataset": "YesBut (V1)",
+      "value": "Stage 2: 0.3227; Stage 3: 0.321; Stage 4: 0.3227",
+      "dataset": "YesBut-Satire (Nandy et al.)",
       "best_system": "Gemini"
     },
     {
-      "finding": "In human evaluation of overall image descriptions, the best model scores were far below human-written descriptions across all four criteria.",
-      "metric": "Accuracy",
-      "value": "Correctness: 60.00 vs Human 100.00; Appropriate Length: 56.67 vs Human 100.00; Visual Completeness: 46.67 vs Human 80.00; Faithfulness: 56.67 vs Human 93.33",
-      "dataset": "30 sampled YesBut images",
+      "finding": "In human evaluation of Satirical Image Understanding, the aspect-wise best model remains far below human-written descriptions.",
+      "metric": "Accuracy; gap to human",
+      "value": "Correctness 60.00 vs 100.00, Appropriate Length 56.67 vs 100.00, Visual Completeness 46.67 vs 80.00, Faithfulness 56.67 vs 93.33; gaps 40, 43.33, 33.33, 36.66 points",
+      "dataset": "30-image YesBut-Satire human-evaluation subset",
       "best_system": "GPT4 for Correctness; Gemini for Appropriate Length, Visual Completeness, and Faithfulness"
     },
     {
-      "finding": "On Satirical Image Completion, Gemini performed best in both zero-shot and zero-shot CoT settings.",
+      "finding": "On Satirical Image Completion, Gemini performs best in both zero-shot and zero-shot CoT settings.",
       "metric": "TEST ACC.",
-      "value": "61.11; 61.81",
-      "dataset": "150 YesBut completion samples",
-      "best_system": "Gemini (0-shot); Gemini (0-shot, CoT)"
+      "value": "61.11 in 0-shot; 61.81 in 0-shot CoT",
+      "dataset": "YesBut-Satire (Nandy et al.) completion set",
+      "best_system": "Gemini"
     },
     {
-      "finding": "On the 119 real satirical photographs, GPT4 performed best on both Detection and Understanding, but all models had Understanding accuracy below 50%.",
-      "metric": "Detection accuracy; Understanding accuracy",
+      "finding": "On the 119 real satirical photographs, GPT4 obtains the highest reported detection and understanding accuracies, but all understanding accuracies are below 50%.",
+      "metric": "Detection; Understanding accuracy",
       "value": "93.27; 46.22",
-      "dataset": "119 real satirical photographs",
+      "dataset": "Dataset of real, satirical photographs",
       "best_system": "GPT4"
     }
   ],
   "key_findings": [
-    "YesBut contains 2,547 images: 1,084 satirical and 1,463 non-satirical, across colorized sketch, 2D stick figure, and 3D stick figure styles.",
-    "The original 283 satirical images have 53.0% with zero sub-images containing text, 94.7% with unconnected sub-images, and 13.5% whose annotations were MEDIUM or HARD.",
-    "Satirical Image Detection is difficult for the evaluated VL models: the best test accuracy is 56.97 and the best F1 score is 59.71.",
-    "Zero-shot CoT has mixed effects for detection, improving test accuracy in only 2/5 models and F1 Score in only 1/5 models, but improves completion accuracy in 3/5 models.",
-    "For Satirical Image Understanding, the paper reports that all normalized average metric values are below 0.4 and that the best model remains substantially below human performance in human evaluation.",
-    "The appendix reports that models perform better on images with text in 15 out of 20 metric/model cases, suggesting that absence of text makes satire understanding harder."
+    "No evaluated VL model exceeds 60% on both detection accuracy and F1 Score for YesBut; the best detection accuracy is 56.97 and the best F1 Score is 59.71.",
+    "Automatic understanding metrics are low: for WHYFUNNY, Gemini's best Average Scores are 0.3227, 0.321, and 0.3227 across Stages 2, 3, and 4.",
+    "The paper reports that CoT improves detection accuracy for only 2/5 models and F1 Score for only 1/5 models, suggesting limited benefit for satire detection.",
+    "For completion, CoT improves results in 3/5 models, and Gemini reaches the best zero-shot CoT accuracy of 61.81.",
+    "Human evaluation shows large gaps between model-generated and human-written satire explanations across Correctness, Appropriate Length, Visual Completeness, and Faithfulness.",
+    "On real satirical photographs, all models score below 50% on understanding accuracy, with GPT4 highest at 46.22."
   ],
   "limitations": [
-    "The annotation task requires background knowledge that may differ among annotators, and although annotations were manually reviewed, some subjectivity still remains.",
-    "The work is in English, and the authors state that they plan to extend it to languages other than English."
+    "The annotation task involves background knowledge that may differ among annotators, so subjectivity remains despite manual review.",
+    "The work is in English, and the authors state that they plan to extend it to languages other than English.",
+    "The human evaluation of Satirical Image Understanding uses a randomly sampled set of 30 images.",
+    "The paper does not report decontamination checks for public social-media source material."
   ],
-  "safety_ethics_notes": "The paper states that the 283 images from the X handle @_yesbut_ were manually downloaded “with proper consent.”",
+  "safety_ethics_notes": "The paper states that images from the X handle @_yesbut_ were downloaded with proper consent. It also notes annotation subjectivity and manual review to minimize incorrect annotations.",
   "artifacts": {
     "code_url": "https://github.com/abhilnandy2/yesbut_dataset",
     "data_url": "https://github.com/abhilnandy2/yesbut_dataset",
-    "other": null
+    "other": "The paper states that the dataset and code are available at the GitHub URL and additionally releases 119 real, satirical photographs for further research."
   }
 }

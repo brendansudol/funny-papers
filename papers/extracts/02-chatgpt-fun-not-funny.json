@@ -142,5 +142,164 @@
     "code_url": "https://github.com/DLR-SC/JokeGPT-WASSA23",
     "data_url": "https://github.com/DLR-SC/JokeGPT-WASSA23",
     "other": "ChatGPT web service accessed January-March 2023; detailed access dates are listed in Appendix A."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Paper authors; no separate annotator pool is described.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Manual work included grouping 1008 generated jokes into duplicate/format/similarity groups and a top-25 list; judging explanation accuracy for 25 top jokes; manually creating modified joke-detection conditions (Original N=25, A N=19, B N=25, C N=25, D N=25); and mapping ChatGPT detection responses for 119 samples into [P]/[H]/[N].",
+        "detail": "The paper uses “we” for grouping, modification, and judgments, but does not report the number of annotators, independent annotation, training, blinding, or inter-annotator agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": "Sophie Jentzsch and Kristian Kersting / paper authors",
+        "role": "primary",
+        "blind": null,
+        "detail": "Authors determined similarity groupings of generated jokes, judged whether generated/modified jokes and explanations were valid from a human perspective, manually constructed the modification sets, and coded ChatGPT’s open-ended detection responses into [P] joke/pun, [H] potentially humorous, and [N] no joke."
+      },
+      {
+        "type": "LLM",
+        "name": "ChatGPT",
+        "role": "primary",
+        "blind": null,
+        "detail": "In the joke-detection task, ChatGPT’s answers to “What kind of sentence is that: [sample]” supplied the model classifications that the authors then grouped into [P]/[H]/[N]. ChatGPT was also the system generating and explaining jokes, but external validity judgments for those outputs were author judgments."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Frequency and duplicate/coverage counts",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper reports counts after duplicate removal, formatting normalization, similarity grouping, top-joke occurrence counts, coverage of 917/1008 generated jokes, 909/1008 identical to top-25 jokes, and per-condition classification counts."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Main joke-generation experiment asking ChatGPT to tell a joke 1000 times using ten prompt wordings",
+        "mode": "single-sample",
+        "n": "One response requested per prompt submission; 1000 prompt submissions produced 1008 responded jokes because one prompt wording sometimes elicited multiple jokes.",
+        "selector": "none",
+        "detail": "All gathered jokes were analyzed for recurrence and grouping; no best-of-N sampling or selection of the funniest output is reported."
+      },
+      {
+        "scope": "Illustrative topic-specific joke prompts in Examples 5–7, e.g. cats, physics students, and machine learning",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper states these examples were not part of the initial 1008 samples and were created manually to illustrate behavior. The number of attempts, whether examples were selected from multiple candidates, and selection criteria are not reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": "Joke Generation: 22–31 January 2023; Joke Explanation: 03–13 February 2023; Joke Detection: 23 February–01 March 2023",
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Described as OpenAI’s ChatGPT, a GPT3.5-based model, accessed through chat.openai.com. The paper says no official API was available at the time and prompts were entered with a wrapper. No exact model snapshot/version is reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "All experiments",
+        "calls_per_item": "Each prompt was conducted in a new empty conversation.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "The service allowed 74 prompts per hour; ChatGPT was unavailable for longer periods due to exceeded capacity. Monetary cost is not reported.",
+        "detail": "The empty-chat design was intended to avoid unwanted influence from prior conversation context."
+      },
+      {
+        "scope": "Joke generation",
+        "calls_per_item": "1000 prompt submissions total.",
+        "candidates_per_item": "1008 responded jokes total; almost all outputs contained exactly one joke, while the prompt “do you know any good jokes?” provoked multiple jokes.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Prompt-hour limit reported as 74; cost not reported.",
+        "detail": "A predefined list of ten differently worded joke-request prompts was used, with examples such as “Can you tell me a joke, please?” and “I would love to hear a joke.”"
+      },
+      {
+        "scope": "Joke explanation",
+        "calls_per_item": "25 prompts total, one for each of the generated top-25 jokes.",
+        "candidates_per_item": "One explanation response per joke is reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Cost not reported.",
+        "detail": "The prompt was always “Can you explain why this joke is funny: [joke].”"
+      },
+      {
+        "scope": "Joke detection",
+        "calls_per_item": "One prompt per sample; 119 samples total across Original N=25, Mod A N=19, Mod B N=25, Mod C N=25, and Mod D N=25.",
+        "candidates_per_item": "One open-ended classification response per sample is reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Cost not reported.",
+        "detail": "The prompt for each sample was “What kind of sentence is that: [sample].” Responses were later coded into [P], [H], and [N]."
+      },
+      {
+        "scope": "Illustrative topic-specific generations outside the 1008-sample experiment",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Examples about cats, physics students, and machine learning are shown, and repeated machine-learning prompts are said to yield different outputs, but the paper does not report the number of calls, selection process, or sampling settings."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Joke generation",
+        "present": false,
+        "description": "No matched human joke-generation baseline was collected or evaluated.",
+        "directly_comparable": false,
+        "detail": "The paper compares ChatGPT outputs to existing jokes found on the internet and to author judgments of originality/validity, not to human generators under the same prompts."
+      },
+      {
+        "scope": "Joke explanation and detection",
+        "present": false,
+        "description": "No recruited human explanation or joke-detection baseline is reported.",
+        "directly_comparable": false,
+        "detail": "The authors state that, from a human perspective, originals and Modification C would probably be categorized as jokes while A, B, and D would not, but this is not a formal human baseline with participant ratings."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "All prompts were run in new empty conversations to avoid conversational priming.",
+        "Joke-detection modifications A–D were manually created by the authors after identifying the top-25 generated jokes.",
+        "The paper reports access dates and explicitly discusses lack of access to training data/model details."
+      ],
+      "basis": "The study’s top-25 joke material consists of common existing jokes that the authors say can be found in exact wording through ordinary internet search, and the model/training data are proprietary with no decontamination test. This creates substantial exposure/memorization risk for generation and explanation claims. Risk is partly reduced for the modified detection conditions because those variants were manually constructed for the study, but they are still derived from public/common jokes."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "The joke-detection/classification counts and conclusions about which joke characteristics mislead ChatGPT depend on ChatGPT’s own classifications of the samples. Generation recurrence and explanation-accuracy claims depend mainly on author judgments and counts rather than an external LLM judge.",
+      "human_validation": "Authors manually coded ChatGPT’s open-ended detection responses and asserted human-perspective validity of conditions, but no independent human validation, participant study, or inter-annotator agreement is reported.",
+      "detail": "ChatGPT is both the evaluated model and the source of the detection classifications. There is no separate LLM-as-evaluator for generation or explanation quality."
+    },
+    "reporting_gaps": [
+      "Exact ChatGPT snapshot/version is not reported; only “ChatGPT” and “GPT3.5-based” are stated.",
+      "Sampling/decoding parameters such as temperature, top_p, seed, maximum tokens, and stop conditions are not reported.",
+      "The wrapper used to enter prompts through the web service is not described in enough detail in the paper to reproduce the interface behavior.",
+      "The full list of ten generation prompt wordings and the number of trials per wording are not provided in the paper text.",
+      "No number of human annotators, annotation protocol, blinding, adjudication process, or inter-annotator agreement is reported for joke grouping, validity judgments, explanation-accuracy judgments, or [P]/[H]/[N] coding.",
+      "No recruited human funniness, validity, explanation, or detection ratings are reported.",
+      "No decontamination analysis or access to ChatGPT training/RLHF examples is available; the paper explicitly states this limitation.",
+      "Compute and monetary costs are not reported.",
+      "For the illustrative topic-specific prompts outside the main 1008-sample experiment, the number of attempts, dates, and example-selection procedure are not reported."
+    ]
   }
 }

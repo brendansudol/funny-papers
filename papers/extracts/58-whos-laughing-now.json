@@ -244,5 +244,69 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "none",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "No new empirical evaluation, annotation, labeling, or preference-judgment study is conducted in this paper. The paper is a literature survey and position-style overview that reports selected results from prior work."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "paper-level; no new humour-generation experiment",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper surveys humour generation methods in prior work but does not generate new outputs or select among generated candidates."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "paper-level; no new model inference",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No models are run by the authors in this survey, so inference budget details are not applicable."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "paper-level; no new evaluation",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The paper cites prior studies involving human evaluation or human-authored explanations, but it does not conduct a new matched human-vs-model comparison."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "This paper performs no new benchmark evaluation, model training, or model inference. It discusses public datasets and prior results from the literature, but contamination risk for those cited studies cannot be assessed as a property of this survey’s own experimental design."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "The survey does not use an LLM as an evaluator or metric for new results. Its claims are based on narrative synthesis of cited literature and author argumentation."
+    },
+    "reporting_gaps": [
+      "No systematic review protocol is reported: the paper does not specify database searches, search strings, date ranges, inclusion/exclusion criteria, screening counts, or inter-reviewer agreement for study selection.",
+      "The paper reports selected quantitative findings from prior work, but generally does not reproduce the underlying participant counts, annotation protocols, model-version details, prompts, sampling settings, or inference dates from those cited studies.",
+      "No meta-analysis or standardized re-evaluation is performed across the surveyed humour-generation and humour-explanation systems.",
+      "Because the paper conducts no new empirical study, there are no new human-sample details, model-provenance records, inference budgets, or generation-selection procedures to audit."
+    ]
   }
 }

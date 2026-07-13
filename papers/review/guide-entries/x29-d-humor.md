@@ -1,0 +1,3 @@
+<!-- guide claims for x29-d-humor (Part 6 (dark-humor resource)) -->
+
+**Dark-humor resource:** [**D-HUMOR: Dark Humor Understanding via Multimodal Open-ended Reasoning**](https://arxiv.org/abs/2509.06771) (Kasu et al., ICDM 2025) `peer-reviewed` `dataset` `benchmark` contains 4,379 Reddit memes labeled for dark humor, target category, and three-level intensity, and proposes a reasoning-augmented tri-stream classifier. Three undergraduate annotators created the labels after expert-led training and adjudication; access requires a data-use agreement and redistribution is prohibited. It is valuable coverage of implicit/taboo multimodal humor, but those annotation and access constraints should travel with any result reported on it.

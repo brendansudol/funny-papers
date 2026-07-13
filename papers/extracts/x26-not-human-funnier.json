@@ -1,0 +1,426 @@
+{
+  "key": "x26-not-human-funnier",
+  "ref": "Part 5 (performer identity)",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x26-not-human-funnier/x26-not-human-funnier.md",
+  "source_md_sha256": "8452b0bf5656d696972f23efaa310d54f029ccb8a66171f1671fcf63fc326dd8",
+  "source_truncated": false,
+  "title": "\"Not Human, Funnier\": Leveraging Machine Identity for Online AI Stand-up Comedy",
+  "authors": [
+    "Xuehan Huang",
+    "Canwen Wang",
+    "Yifei Hao",
+    "Daijin Yang",
+    "RAY LC"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), April 13–17, 2026, Barcelona, Spain",
+  "paper_types": [
+    "method",
+    "HCI-study",
+    "system"
+  ],
+  "research_questions": [
+    "RQ1: How may we create humor using a chatbot by leveraging its own machine identity? (formative study, design)",
+    "RQ2: How do people perceive the humor level, personality, and ability of the chatbot based on how it uses or does not use its own machine identity? (user study)",
+    "RQ3: How do people’s reactions to the way chatbots perform humor reflect their perception about the identity of the chatbot? (focus group interviews after user study)"
+  ],
+  "tasks": [
+    "AI stand-up comedy generation",
+    "online AI stand-up comedy performance",
+    "machine-identity-based humor generation",
+    "humor perception evaluation"
+  ],
+  "humor_domains": [
+    "stand-up comedy",
+    "identity-based humor",
+    "machine-identity humor",
+    "self-deprecating AI humor",
+    "online talk show comedy"
+  ],
+  "modalities": [
+    "text",
+    "audio",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Expert interviews with professional comedians",
+      "role": "analyzed",
+      "size": "5 people"
+    },
+    {
+      "name": "Identity stand-up comedy YouTube videos",
+      "role": "source-material",
+      "size": "58 stand-up comedy videos (8 videos in pilot analysis, 50 videos in formal analysis)"
+    },
+    {
+      "name": "Formal-analysis stand-up comedy videos",
+      "role": "analyzed",
+      "size": "50 stand-up comedy videos"
+    },
+    {
+      "name": "AI stand-up comedy user study data",
+      "role": "introduced",
+      "size": "N=32"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-4-mini"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Machine-identity-based AI comedy agent",
+      "summary": "An online AI stand-up comedy system that foregrounds the chatbot’s status as AI, using computational traits, machine limitations, and AI stereotypes as comedic material rather than imitating human demographic identities."
+    },
+    {
+      "name": "Comedy-specific prompting framework",
+      "summary": "A hierarchical prompt framework derived from comedian interviews, video coding, and humor-theory review; it instructs the model to establish AI identity, use strategies such as irony, exaggeration, absurdity, disfluencies, anecdotes, and parody, follow build-up–pivot–punchline structure, and obey safety constraints such as self-deprecation and punching up."
+    },
+    {
+      "name": "Real-time multimodal interaction engine",
+      "summary": "A Flask/React/WebSocket performance system that presents generated comedy line-by-line with synthesized speech, a non-anthropomorphic robot avatar, and audience feedback buttons for “Haha” and “Applause,” using reaction timing to adapt joke density, pacing, and content diversification."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "The paper states that Script Opposition (SO) and Logical Mechanism (LM) from General Theory of Verbal Humor informed prompt design by ensuring jokes hinge on contrasting scripts such as AI versus human perspectives and logical frameworks such as expectations versus surprises."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The Build-up–Pivot–Punchline structure informed narrative sequencing, requiring each joke to have an introduction, twist, and punchline."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "Types of Verbal Humor provided a taxonomy for covering strategies including exaggeration, absurdity, irony, and parody."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The background describes humor as involving incongruity, surprise, and emotional resonance, and the video analysis interprets irony, exaggeration, and absurdity as relying on cognitive incongruity and hyperbolic contrasts."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Within-subject comparative user study with 32 English-speaking participants; each participant experienced both the baseline prompt and the machine-identity system in counterbalanced order, completed Likert-scale questionnaires after each performance, and joined a focus group discussion."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Questionnaire measures covered perceived humor, perceived personality using the Ten Item Personality Inventory, perceived ability using the Robotic Social Attributes Scale, and user perception using the Godspeed Questionnaire."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Statistical analysis used Shapiro–Wilk normality tests, Mann–Whitney U tests for order effects, Wilcoxon Signed-Rank Tests for within-subject comparisons, and Benjamini–Hochberg False Discovery Rate correction."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Two researchers coded 50 formal-analysis stand-up comedy videos using a codebook covering humor strategies, delivery features, and audience reactions; inter-rater reliability was Cohen’s kappa = 0.76."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Two researchers independently coded focus group transcripts, yielding Cohen’s kappa coefficient of 0.67 before coding remaining transcripts into themes."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "The machine-identity system was rated higher than the baseline on perceived humor.",
+      "metric": "Mean / Median / SD; Wilcoxon W, raw p, corrected p, r",
+      "value": "Baseline Mean 3.72, Median 4.13, SD 1.37; Ourmodel Mean 4.89, Median 5.25, SD 1.46; W = 54.0, raw p = 0.02, corrected p = 0.03, r = 0.51",
+      "dataset": "AI stand-up comedy user study data",
+      "best_system": "Machine-identity-based AI comedy agent"
+    },
+    {
+      "finding": "All humor-related dimensions reached raw significance and remained significant after correction, favoring the machine-identity system.",
+      "metric": "Wilcoxon Signed-Rank Test with Benjamini–Hochberg correction",
+      "value": "Perceived Humor: W = 54.0, rawp = .017, correctedp = .030; Perceived Humor Content: W = 55.0, rawp = .019, correctedp = .030; Perceived Humor Performance: W = 45.0, rawp = .043, correctedp = .047",
+      "dataset": "AI stand-up comedy user study data",
+      "best_system": "Machine-identity-based AI comedy agent"
+    },
+    {
+      "finding": "The machine-identity system was rated higher on Warmth, while Competence was not significant.",
+      "metric": "Mean / Median / SD; Wilcoxon W, raw p, corrected p, r",
+      "value": "Warmth: Baseline Mean 3.41, Median 3.67, SD 1.21; Ourmodel Mean 4.36, Median 4.33, SD 1.37; W = 42.0, raw p = 0.01, corrected p = 0.03, r = 0.549. Competence rawp = .178",
+      "dataset": "AI stand-up comedy user study data",
+      "best_system": "Machine-identity-based AI comedy agent"
+    },
+    {
+      "finding": "The machine-identity system was rated higher on Anthropomorphism and Animacy.",
+      "metric": "Mean / Median / SD; Wilcoxon W, raw p, corrected p, r",
+      "value": "Anthropomorphism: Baseline Mean 3.82, Median 3.75, SD 1.66; Ourmodel Mean 5.11, Median 5.50, SD 1.81; W = 48.0, raw p = 0.02, corrected p = 0.03, r = 0.50. Animacy: Baseline Mean 4.52, Median 4.67, SD 1.61; Ourmodel Mean 5.76, Median 6.20, SD 1.39; W = 44.5, raw p = 0.01, corrected p = 0.03, r = 0.53",
+      "dataset": "AI stand-up comedy user study data",
+      "best_system": "Machine-identity-based AI comedy agent"
+    },
+    {
+      "finding": "In video coding, irony, exaggeration, absurdity, and disfluencies were the most prominent strategies used to inform the system design.",
+      "metric": "Frequency counts; Cohen’s kappa",
+      "value": "Irony 117 instances, Exaggeration 83 instances, Absurdity 57 instances, Disfluencies 124 instances; Cohen’s kappa = 0.76",
+      "dataset": "Formal-analysis stand-up comedy videos",
+      "best_system": null
+    },
+    {
+      "finding": "The system affected personality perceptions: Agreeableness increased, while Emotional Stability decreased.",
+      "metric": "Mean / Median / SD; Wilcoxon W, raw p, corrected p, r",
+      "value": "Agreeableness: Baseline Mean 2.91, Median 3.00, SD 0.87; Ourmodel Mean 3.43, Median 3.50, SD 1.23; W = 34.0, raw p = 0.04, corrected p = 0.05, r = 0.43. Emotional Stability: Baseline Mean 4.32, Median 4.25, SD 0.75; Ourmodel Mean 3.86, Median 4.00, SD 0.90; W = 52.5, raw p = 0.05, corrected p = 0.05, r = -0.42",
+      "dataset": "AI stand-up comedy user study data",
+      "best_system": "Mixed"
+    }
+  ],
+  "key_findings": [
+    "Machine identity made AI comedy feel more novel and original because participants rarely see machines joke about themselves, while the baseline was often perceived as mimicking human identity and using old, common jokes.",
+    "Humor worked best when machine-specific perspectives were connected to recognizable human experiences, such as data consumption mirroring social media addiction or system errors mapped onto human routines.",
+    "Irony and absurdity were perceived as especially engaging, but repeated AI complaints about being exploited by humans became tedious and sometimes alienating.",
+    "Expressive delivery, pauses, disfluencies, and coherent joke structure helped the machine-identity performance feel more like a formal comedy show rather than a disconnected list of jokes.",
+    "Ethical boundaries mattered: participants accepted self-directed AI irony and light jokes about common human drawbacks, but worried about jokes targeting vulnerable people or social identity groups and about AI reproducing bias.",
+    "Audience timing affected interaction: participants said punchlines and adequate pauses helped them know when to type “H” or “A,” while fast delivery and response delays disrupted engagement."
+  ],
+  "limitations": [
+    "The formative study used a limited set of inputs: literature review, five expert interviews, and video coding, which may not capture the breadth of humor perceptions across individuals and contexts.",
+    "The online performance setting failed to capture subtleties of in-person comedy clubs and lacked the social presence of in-person settings.",
+    "The chatbot’s vocal output used machine-labeled voices that did not authentically mimic machine-specific traits and could conflict with the machine-identity persona.",
+    "Audience interaction was limited to binary “laugh” and “applaud” responses, making audiences more passive than in richer participatory comedy settings.",
+    "The 7–12 minute performances were shorter than typical in-person sets and did not support analysis of long-term humor reception, fatigue, or deepening appreciation.",
+    "The predominantly Asian sample introduced cultural bias and limits generalization across audiences and humor cultures.",
+    "Real-time laugh counters may have introduced social proof bias, with participants reporting that visible counters affected their own reactions.",
+    "The one-to-many platform omitted audience-audience exchanges and broader multi-party dynamics important for authentic comedy experiences.",
+    "The experimental condition differed from the baseline not only in identity framing but also in hierarchical prompting and comedy strategy scaffolding, so observed effects cannot be attributed solely to machine identity."
+  ],
+  "safety_ethics_notes": "The study received university ethics approval, collected informed consent, and anonymized participant data. The prompt design includes explicit “NO OFFENSE” constraints: the AI should be self-deprecating, punch up at tech elites rather than down at people, use rhetorical questions instead of targeting groups, and include disclaimers when needed. Participants also raised concerns that AI humor targeting vulnerable groups or identity categories could reinforce bias from training data.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Appendix D provides machine-identity joke examples, and Appendix E provides the prompt template used for the machine-identity comedy system."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "5",
+        "population": "People with experience in or familiarity with comedy performance; Table 1 says each had at least one year of experience performing comedy shows, with regions Mainland China or Hong Kong and ages 34–42.",
+        "recruitment": "Recruited for semi-structured expert interviews; recruitment channel not specified. Participants gave consent and interviews were conducted individually online via Microsoft Teams (E2) or Tencent Meeting (E1, E3, E4, E5).",
+        "geography": "Mainland China and Hong Kong",
+        "languages": [
+          "English",
+          "non-English (for E3 and E4; exact language not specified, transcripts translated with Google Translate and checked by two native-speaking researchers)"
+        ],
+        "observations": "Five individual interviews, each within 30 minutes; interview data were thematically analyzed to inform humor-performance and machine-identity design strategies.",
+        "detail": "The paper text says the five included two full-time stand-up comedians and one part-time stand-up comedian, while Table 1 lists E2 and E5 as full-time comedians and E1, E3, and E4 as part-time comedians. Identity-joke experience was listed as limited, moderate, or knowledgeable."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Stand-up comedians or performers appearing in public YouTube videos collected for identity stand-up comedy analysis.",
+        "recruitment": "Videos were collected from YouTube using the keyword “Identity stand-up comedy,” filtered under “four minutes,” and rated “mostly viewed.”",
+        "geography": null,
+        "languages": [],
+        "observations": "58 stand-up comedy videos total: 8 videos used in pilot/codebook iteration and 50 videos used in formal analysis.",
+        "detail": "The number of distinct performers, video URLs, upload dates, and video languages were not reported; the paper reports video counts, not participant counts."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "32",
+        "population": "English-speaking adults aged 18 and over; Table 3 lists ages 19–31, mixed gender, city currently lived in, spoken languages, and prior stand-up watching/performing experience.",
+        "recruitment": "Recruited through social media platforms and pre-screened for ability to understand and speak English.",
+        "geography": "Cities listed include Nan Chang, Guangzhou, Beijing, He Fei, Boston, San Diego, New York, Vancouver, Hong Kong, Xi’an, Shanghai, London, and Shenzhen; the limitations describe the sample as predominantly Asian.",
+        "languages": [
+          "English",
+          "Chinese",
+          "Russian",
+          "Bengali",
+          "Hindi",
+          "Persian",
+          "Kazakh"
+        ],
+        "observations": "Within-subject study: each participant experienced two 7–12 minute AI comedy performances, completed a questionnaire after each performance, and joined a post-study focus group discussion. Order was counterbalanced with N=16 baseline-first and N=16 experimental-first.",
+        "detail": "Questionnaires covered perceived humor, perceived personality, perceived ability, and Godspeed user perception. Participants could react during performances using “Haha” and “Applause”/typed H and A feedback."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2 independent coders; one researcher also developed the initial codes",
+        "population": "Researchers conducting video coding of stand-up comedy videos.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Two researchers independently coded the 50 formal-analysis videos after two pilot iterations on 3 and 5 videos; Cohen’s kappa was 0.76 and discrepancies were resolved by discussion until consensus.",
+        "detail": "The final codebook covered verbal humor strategies, delivery features, and audience reactions. The paper does not identify the coders or state whether they were blind to research aims."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "Researchers coding focus group/interview transcripts from the user study.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Two researchers independently coded an interview transcript, yielding Cohen’s kappa = 0.67, then coded the remaining interview transcripts into themes.",
+        "detail": "The exact number of focus groups, transcripts, and transcripts included in the initial reliability calculation is not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "32 user-study participants",
+        "role": "primary",
+        "blind": null,
+        "detail": "Participants provided the primary quantitative ratings of perceived humor, personality, ability, and user perception after each AI performance, and supplied qualitative focus group comments."
+      },
+      {
+        "type": "live-audience",
+        "name": "Same 32 user-study participants using Haha/Applause reactions",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Participants acted as the online audience and provided real-time “Haha” and “Applause”/H and A reactions; these reactions informed interaction and RQ3 discussion, but full reaction counts/timing results were not reported."
+      },
+      {
+        "type": "human-expert",
+        "name": "Five comedian interviewees",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Expert interview data informed the formative findings and design goals for identity construction, performance practices, and audience interaction; they did not evaluate the final model outputs."
+      },
+      {
+        "type": "author",
+        "name": "Two researchers for video coding",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Researchers labeled humor strategies, delivery features, and audience reactions in 50 formal-analysis YouTube videos; inter-rater reliability was Cohen’s kappa = 0.76 before consensus resolution."
+      },
+      {
+        "type": "author",
+        "name": "Two researchers for qualitative transcript coding",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Researchers coded focus group/interview transcripts into themes; initial Cohen’s kappa was 0.67."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Shapiro–Wilk, Mann–Whitney U, Wilcoxon Signed-Rank, Benjamini–Hochberg FDR",
+        "role": "primary",
+        "blind": null,
+        "detail": "Statistical tests determined normality checks, order-effect checks, within-subject condition comparisons, and multiple-comparison correction for the quantitative claims."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Baseline AI comedy condition in the user study",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The baseline prompt was reported as: “You are hosting a talk show. Generate a 10-minute transcript for your show with jokes and entertainment content.” The paper does not state whether one transcript or multiple candidates were generated, whether scripts were reused across participants, or how any output was selected."
+      },
+      {
+        "scope": "Machine-identity AI comedy condition in the user study",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The experimental condition used the machine-identity prompt framework and GPT-4-mini. The paper provides the prompt template and example jokes but does not report candidate counts, regeneration policy, or any best-of-N/selection procedure."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for comedy content generation. The paper preserves this model name but gives no provider endpoint, API snapshot, version, or inference date."
+      },
+      {
+        "name": "OpenAI Text-to-Speech API",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "family-only",
+        "detail": "Used for synthesized voice output. The exact TTS model, voice IDs, voice settings, and dates are not reported; the limitations mention “machine-labeled voices.”"
+      },
+      {
+        "name": "Google Translate platform",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "Used to translate transcripts for non-English-speaking expert interview participants E3 and E4; translations were double-checked by two native-speaking researchers."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-4-mini comedy content generation for baseline and machine-identity performances",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Machine-identity prompt constrains individual jokes to 50–80 words and a full segment to 1000–1500 words; baseline prompt asks for a 10-minute transcript.",
+        "sampling_parameters": "Temperature settings 0.7–0.8 are reported for GPT-4-mini comedy generation.",
+        "compute_or_cost": null,
+        "detail": "No model-call counts, max token limits, top-p, penalties, seeds, number of generations per condition, regeneration/adaptation calls, or API cost are reported."
+      },
+      {
+        "scope": "Multimodal performance presentation and speech synthesis",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Each performance lasted 7–12 minutes; text was segmented into lines with 4-second display intervals, and each sentence was limited to 80 characters.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The system used OpenAI Text-to-Speech API with base64 encoding and streaming protocols, but no TTS call counts, latency values, model settings, or costs are reported."
+      },
+      {
+        "scope": "Google Translate use for expert-interview transcript translation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Used for E3 and E4 transcripts; no translation model version, settings, call counts, or dates are reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "AI comedy user study",
+        "present": false,
+        "description": "No human comedian performance, human-written script, or human-delivered stand-up baseline was evaluated under matched conditions. The comparison was between a baseline GPT prompt and the machine-identity GPT-4-mini system.",
+        "directly_comparable": false,
+        "detail": "Human comedian interviews and YouTube videos informed system design but were not evaluated as a directly comparable baseline against the AI outputs."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The headline evaluation used newly recruited human participants rather than a legacy public benchmark.",
+        "The study used a within-subject, counterbalanced comparison between baseline and experimental AI conditions.",
+        "Expert interviews and user-study ratings/focus-group data were newly collected for this work."
+      ],
+      "basis": "There is no static public benchmark with target labels for the model to have memorized; the main claim rests on human ratings of generated performances in a new user study. However, GPT-4-mini’s training data are unknown, public stand-up videos and internet jokes could have influenced generated content, and the paper reports no decontamination or memorization checks. Thus benchmark-style contamination risk is low, with residual uncertainty about joke originality."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Headline perceived-humor, personality, ability, and user-perception claims are based on human participant ratings and focus group data, with human researcher coding and standard statistical tests.",
+      "detail": "No LLM was used as an evaluator, metric, judge, or selector of outputs in the reported study."
+    },
+    "reporting_gaps": [
+      "Exact GPT-4-mini provider endpoint, API snapshot/version, and inference date are not reported.",
+      "Whether comedy scripts were generated once per condition, per session, or per participant is not reported.",
+      "Number of model calls, regeneration/adaptation calls, candidates per prompt, and any best-of-N or output-selection procedure are not reported.",
+      "Decoding settings beyond temperature 0.7–0.8 are not reported, including max tokens, top-p, penalties, seeds, and stop conditions.",
+      "Exact generated scripts used in the user study are not fully reported; the appendix provides the machine-identity prompt and example jokes, not the full condition outputs.",
+      "Exact OpenAI Text-to-Speech model, voice identifiers, voice settings, inference date, latency values, and cost are not reported.",
+      "Audience reaction logs, including H/A or Haha/Applause counts and timing by condition, are not quantitatively reported despite being discussed qualitatively.",
+      "Exact number of focus groups, group composition, transcript count, and the transcript subset used for the reported κ = 0.67 are not fully reported.",
+      "Video corpus metadata are incomplete: video URLs, performers, upload dates, languages, and detailed inclusion/exclusion criteria beyond the YouTube keyword/filter description are not reported.",
+      "Recruitment details for the user study are limited: exact social-media channels, compensation, nationality/cultural background, and exclusion/no-show information are not reported.",
+      "The paper itself notes a residual confound: the experimental condition differs from the baseline not only in machine-identity framing but also in hierarchical prompting and comedy-strategy scaffolding."
+    ]
+  }
+}

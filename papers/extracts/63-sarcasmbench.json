@@ -216,5 +216,487 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "No newly recruited human evaluation participants are reported for SarcasmBench experiments.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "The study evaluates models against existing benchmark test sets and reports automatic classification metrics.",
+        "detail": "The paper reports no new human-subject evaluation, survey, preference study, or live audience."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Online debate/discussion commenters represented in IAC-V1 and IAC-V2.",
+        "recruitment": "Legacy Internet Argument Corpus datasets; this paper does not describe new recruitment.",
+        "geography": null,
+        "languages": [],
+        "observations": "IAC-V1: Train 1214, Valid 304, Test 417, Sarcastic 973, Non-sarcastic 962. IAC-V2: Train 4031, Valid 1008, Test 1481, Sarcastic 3260, Non-sarcastic 3260.",
+        "detail": "The paper describes these as benchmark datasets from online debates and discussions with sarcastic and non-sarcastic comments, but does not report participant counts or labeler details."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Twitter users whose tweets were included in the Ghosh dataset.",
+        "recruitment": "Legacy dataset automatically collected from Twitter using users’ self-declaration of sarcasm/irony via hashtags such as #irony and #sarcasm.",
+        "geography": null,
+        "languages": [],
+        "observations": "Original Ghosh dataset described as 51,189 tweets, with 24,453 sarcastic tweets and 26,736 non-sarcastic tweets; the authors report filtering out 7,804 noisy tweets. Table statistics after splitting: Train 32708, Valid 8687, Test 2000, Sarcastic 19546, Non-sarcastic 23839.",
+        "detail": "Tweet counts are item counts, not human participant counts."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Text authors in iSarcasmEval who provided and labelled their own samples.",
+        "recruitment": "Legacy iSarcasmEval shared-task dataset; no recruitment details for this paper.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Train 821, Valid 280, Test 299, Sarcastic 200, Non-sarcastic 1200.",
+        "detail": "The paper states that each iSarcasmEval sample is provided and labelled by the authors of the texts themselves, and that English sarcastic texts include ironic-speech category labels. It does not report contributor counts."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human annotators for the Riloff tweet dataset.",
+        "recruitment": "Legacy Riloff dataset; tweets containing #sarcasm or #sarcastic and tweets without these tags were presented to annotators after removing such tags.",
+        "geography": null,
+        "languages": [],
+        "observations": "The source dataset is described as 1,600 hashtagged tweets and 1,600 without these tags; table statistics used here: Train 276, Valid 100, Test 113, Sarcastic 77, Non-sarcastic 412.",
+        "detail": "The paper says tweets were presented to a group of human annotators for final labelling, but gives no annotator count or demographics."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Manual annotators for SemEval 2018 Task 3.",
+        "recruitment": "Legacy SemEval 2018 Task 3 dataset collected using irony-related hashtags and subsequently manually annotated.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Train 2910, Valid 924, Test 784, Sarcastic 2222, Non-sarcastic 2396.",
+        "detail": "The paper does not report annotator counts, annotation protocol, or demographics."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Social-network or conversation users represented in the multi-modal sarcasm datasets MMSD and CMMA.",
+        "recruitment": "Legacy public multi-modal sarcasm datasets; no new recruitment described.",
+        "geography": null,
+        "languages": [
+          "English",
+          "Chinese"
+        ],
+        "observations": "The paper reports results on MMSD and CMMA but does not report dataset sizes in the provided text; it characterizes MMSD as English and CMMA as Chinese in the results discussion.",
+        "detail": "Participant or creator counts are not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "automatic-metric",
+        "name": "Precision, recall, accuracy, and F1",
+        "role": "primary",
+        "blind": null,
+        "detail": "Model predictions are compared with benchmark ground-truth labels using P, R, Acc, and F1. The paper states that each method is run with five random seeds and the average test-set result is reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Normalized confusion matrices",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used for error analysis of GPT-4 Turbo/GPT-4 across six text datasets and three prompting approaches; cells represent the percentage of class i classified as class j."
+      },
+      {
+        "type": "human-lay",
+        "name": "Text authors in iSarcasmEval",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper states that iSarcasmEval samples were provided and labelled by the authors of the texts themselves."
+      },
+      {
+        "type": "human-lay",
+        "name": "Riloff human annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper states that Riloff tweets were presented to a group of human annotators for final labelling after sarcasm hashtags were removed."
+      },
+      {
+        "type": "human-lay",
+        "name": "SemEval 2018 Task 3 manual annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper states that the dataset was collected using irony-related hashtags and subsequently manually annotated."
+      },
+      {
+        "type": "human-lay",
+        "name": "Twitter users’ self-declaration hashtags",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "For Ghosh, sarcastic tweets are described as automatically collected from Twitter using users’ self-declaration of sarcasm/irony with hashtags such as #irony and #sarcasm."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The authors state that they conducted a thorough double-check of the Ghosh dataset and filtered out 7,804 noisy tweets."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Supervised DLM/PLM baselines and random baseline",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "These systems are evaluated as classifiers, not as free-form generation systems with candidate selection."
+      },
+      {
+        "scope": "Text LLM zero-shot IO sarcasm classification",
+        "mode": "single-sample",
+        "n": "One output label per prompted test input is implied; no multiple generated candidates are described.",
+        "selector": "none",
+        "detail": "Prompts instruct the LLM to return only ‘sarcastic’ or ‘non-sarcastic’. No best-of-N generation or output reranking is reported."
+      },
+      {
+        "scope": "Text LLM few-shot IO sarcasm classification",
+        "mode": "single-sample",
+        "n": "One output label per prompted test input is implied; k=2 demonstrations are used in the main few-shot experiments.",
+        "selector": "none",
+        "detail": "The two demonstrations include one sarcastic and one non-sarcastic example sampled from the training set via KNN search. Demonstration retrieval is not output-candidate selection."
+      },
+      {
+        "scope": "Text LLM few-shot CoT sarcasm classification",
+        "mode": "single-sample",
+        "n": "One output per prompted test input is implied; no output-candidate set is described.",
+        "selector": "none",
+        "detail": "The paper evaluates few-shot CoT prompting but does not report any best-of-N selection."
+      },
+      {
+        "scope": "Impact-of-demonstrations experiment for GPT-4 and Mistral",
+        "mode": "single-sample",
+        "n": "One output per prompted test input is implied; k={0,2,4,6,8} demonstrations are varied.",
+        "selector": "none",
+        "detail": "KNN is used to choose demonstrations similar to the test sample; this is context selection, not generation selection."
+      },
+      {
+        "scope": "Multi-modal LLM zero-shot IO for GPT-4V, Qwen-VL-Plus, and Wenxin 4",
+        "mode": "single-sample",
+        "n": "One output label per image-text input is implied; no multiple generated candidates are described.",
+        "selector": "none",
+        "detail": "The prompt asks the model to analyze image and text and return only ‘sarcastic’ or ‘non-sarcastic’."
+      },
+      {
+        "scope": "Retrieval-LLaVA 1.5 multi-modal sarcasm detection",
+        "mode": "single-sample",
+        "n": "One output per image-text input is implied; no generated-candidate selection is described.",
+        "selector": "none",
+        "detail": "Retrieval-LLaVA 1.5 uses a retrieval module to search for demonstrations, but the paper does not describe best-of-N output selection."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Random baseline",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Uniform random predictions sampled across the test set."
+      },
+      {
+        "name": "TextCNN",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Official implementation and hyperparameters used; exact code commit/checkpoint not reported."
+      },
+      {
+        "name": "LSTM",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Official implementation and hyperparameters used; exact implementation version not reported."
+      },
+      {
+        "name": "Bi-LSTM",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Official implementation and hyperparameters used; exact implementation version not reported."
+      },
+      {
+        "name": "AT-LSTM",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Official implementation and hyperparameters used; exact implementation version not reported."
+      },
+      {
+        "name": "BERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Used as a PLM baseline; exact pretrained checkpoint not reported."
+      },
+      {
+        "name": "RoBERTa",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Used as a PLM baseline; exact pretrained checkpoint not reported."
+      },
+      {
+        "name": "DeBERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Used as a PLM baseline; exact pretrained checkpoint not reported."
+      },
+      {
+        "name": "XLNet",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "family-only",
+        "detail": "Listed as a PLM baseline and reported in Table 2 for some datasets; exact checkpoint not reported."
+      },
+      {
+        "name": "DC-Net-RoBERTa",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Dual-channel RoBERTa-based sarcasm baseline; exact code/checkpoint not reported."
+      },
+      {
+        "name": "Baichuan 2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no checkpoint, snapshot, inference date, or access mapping; LLM methods are said to use official Python API libraries and Hugging Face Transformers."
+      },
+      {
+        "name": "ChatGLM 2-6B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no checkpoint, snapshot, or inference date."
+      },
+      {
+        "name": "ChatGLM 3-6B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no checkpoint, snapshot, or inference date."
+      },
+      {
+        "name": "LLaMA 2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no exact Hugging Face checkpoint, chat/instruct variant, or inference date."
+      },
+      {
+        "name": "LLaMA 3-8B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no exact checkpoint, chat/instruct variant, or inference date."
+      },
+      {
+        "name": "Mistral-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no exact checkpoint, instruct variant, or inference date."
+      },
+      {
+        "name": "Qwen 1.5-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no exact checkpoint, chat/instruct variant, or inference date."
+      },
+      {
+        "name": "Qwen 2-7B",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports the model name/size but no exact checkpoint, chat/instruct variant, or inference date."
+      },
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "family-only",
+        "detail": "The paper names ChatGPT and references chat.openai.com, but does not report whether this is GPT-3.5, a dated ChatGPT snapshot, or any inference date."
+      },
+      {
+        "name": "GPT-4 Turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "The paper reports GPT-4 Turbo but no API model snapshot such as a dated gpt-4-turbo version and no inference date."
+      },
+      {
+        "name": "Claude-3-haiku",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "The paper reports Claude-3-haiku but no dated Anthropic snapshot or inference date."
+      },
+      {
+        "name": "Retrieval-LLaVA 1.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a multi-modal LLM with a retrieval module for demonstrations; exact checkpoint and execution access not reported."
+      },
+      {
+        "name": "Wenxin 4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Evaluated as a multi-modal LLM; the paper provides a Wenxin/Yiyan URL but no snapshot or inference date."
+      },
+      {
+        "name": "Qwen-VL-Plus",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a multi-modal LLM; no exact API/checkpoint snapshot or inference date reported."
+      },
+      {
+        "name": "GPT-4V",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Evaluated as a multi-modal LLM; the paper references the GPT-4V system card but does not report an API snapshot or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Traditional DLM and PLM supervised baselines",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "All experiments are stated to be conducted on an NVIDIA GeForce GTX 4090 GPU; learning rate 5e-5, batch size 32, epochs 30, dropout 0.5, weight initialization U(-0.1, 0.1).",
+        "detail": "The paper says official implementations and hyperparameters are used and that five random seeds are run with average test-set results reported. It does not provide wall-clock time or training cost."
+      },
+      {
+        "scope": "Text LLM zero-shot IO prompting across six text datasets",
+        "calls_per_item": "Not reported.",
+        "candidates_per_item": "Not reported; no multiple candidates or best-of-N are described.",
+        "token_budget": "Not reported.",
+        "sampling_parameters": "Not reported.",
+        "compute_or_cost": "LLM methods are implemented with respective official Python API library and Hugging Face Transformers; no cost is reported.",
+        "detail": "Prompts consist of task instruction plus test input. The paper does not report temperature, top-p, max tokens, decoding mode, retry policy, or how invalid outputs are handled."
+      },
+      {
+        "scope": "Text LLM few-shot IO prompting",
+        "calls_per_item": "Not reported.",
+        "candidates_per_item": "Not reported; no multiple candidates or best-of-N are described.",
+        "token_budget": "Not reported.",
+        "sampling_parameters": "Not reported.",
+        "compute_or_cost": "No API cost or runtime reported.",
+        "detail": "Main few-shot setup uses k=2 demonstrations, including one sarcastic and one non-sarcastic example, selected from the training set via KNN search. The encoding function f for KNN is not specified."
+      },
+      {
+        "scope": "Text LLM impact-of-demonstrations experiment",
+        "calls_per_item": "Not reported.",
+        "candidates_per_item": "Not reported.",
+        "token_budget": "Not reported.",
+        "sampling_parameters": "Not reported.",
+        "compute_or_cost": "No API cost or runtime reported.",
+        "detail": "For GPT-4 and Mistral, k-shot settings are k={0,2,4,6,8}; KNN selects examples similar to the test sample."
+      },
+      {
+        "scope": "Text LLM few-shot CoT prompting",
+        "calls_per_item": "Not reported.",
+        "candidates_per_item": "Not reported; no output-candidate selection is described.",
+        "token_budget": "Not reported.",
+        "sampling_parameters": "Not reported.",
+        "compute_or_cost": "No API cost or runtime reported.",
+        "detail": "The paper evaluates few-shot CoT and provides an example with step-by-step rationale, but does not report decoding parameters or exact CoT demonstration count separately from the few-shot setup."
+      },
+      {
+        "scope": "Multi-modal LLM prompting on MMSD and CMMA",
+        "calls_per_item": "Not reported.",
+        "candidates_per_item": "Not reported; no best-of-N described.",
+        "token_budget": "Not reported.",
+        "sampling_parameters": "Not reported.",
+        "compute_or_cost": "No API, compute, or cost budget reported.",
+        "detail": "GPT-4V, Qwen-VL-Plus, and Wenxin 4 use zero-shot IO prompts. Retrieval-LLaVA 1.5 uses retrieved demonstrations. Dataset sizes/splits for MMSD and CMMA are not reported in this paper section."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Text and multi-modal sarcasm detection performance",
+        "present": false,
+        "description": "No human performance baseline is reported. Human involvement appears only through legacy dataset creation/annotation/self-labeling, not as an evaluated baseline under matched conditions.",
+        "directly_comparable": false,
+        "detail": "All headline comparisons are among random, DLM/PLM baselines, LLMs, and multi-modal LLMs/baselines using automatic metrics against dataset labels."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "The authors report double-checking the Ghosh dataset and filtering 7,804 noisy tweets, but this is a noise-filtering step, not a decontamination test.",
+        "Few-shot demonstrations are selected from training sets via KNN, but this does not mitigate prior exposure of public test sets."
+      ],
+      "basis": "The main evaluations use six widely used public sarcasm benchmarks, plus public MMSD and CMMA multi-modal benchmarks, many created years before evaluated 2023–2024 proprietary and open LLMs. The paper does not discuss training-data contamination, does not use newly held-out/private test items, and reports no decontamination audit or canary test. Because headline claims compare LLMs on public legacy test sets with unknown training exposure, contamination risk is conservatively assessed as high."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "LLMs are evaluated systems that generate sarcasm labels; they are not used to judge or score other systems. Results are determined by dataset ground-truth labels and automatic classification metrics."
+    },
+    "reporting_gaps": [
+      "No API snapshots, dated model versions, or inference dates are reported for ChatGPT, GPT-4 Turbo, GPT-4V, Claude-3-haiku, Wenxin 4, Qwen-VL-Plus, or other LLMs.",
+      "Exact Hugging Face checkpoints, chat/instruct variants, and local-versus-API access mapping are not reported for open LLMs such as LLaMA, Mistral, Qwen, Baichuan, and ChatGLM.",
+      "Token budgets, temperature/top-p, decoding method, max output length, retry policy, and handling of invalid/non-label outputs are not reported.",
+      "The KNN demonstration encoder/function f and retrieval implementation details are not specified.",
+      "The paper reports five random seeds but does not list the seed values or clearly separate how random seeds apply to API-based LLM prompting versus trained baselines.",
+      "Human annotator/contributor counts, demographics, geography, and annotation quality controls for the legacy datasets are mostly not reported in this paper.",
+      "For IAC-V1, IAC-V2, MMSD, and CMMA, this paper uses dataset labels but does not describe the labeler/source-labeling process in detail.",
+      "MMSD and CMMA dataset sizes, splits, and label distributions are not reported in the multi-modal evaluation section.",
+      "For multi-modal PLM comparison baselines in Table 6, the paper does not clearly state whether scores were newly run by the authors or copied from prior work.",
+      "No contamination or benchmark-memorization analysis is reported despite evaluating later LLMs on public legacy benchmarks.",
+      "No API/computation cost, runtime, or number of total model calls is reported."
+    ]
   }
 }

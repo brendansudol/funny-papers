@@ -115,5 +115,68 @@
     "code_url": null,
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "none",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "The paper is a position/review paper and does not report an original empirical evaluation with judges, annotators, raters, or labelers determining new results."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Paper-level",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper reviews and discusses real-time comedy LLM/live-performance systems; it does not report a new generation experiment or select generated outputs for evaluation."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "Paper-level",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No model inference setup is reported for this paper because it does not run a new empirical generation/evaluation experiment."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Paper-level",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "No new human-vs-model baseline is evaluated in this paper. The paper discusses reviewed examples such as comedy Turing tests and human-AI comparison shows, but does not report a materially matched original baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper does not evaluate models on a benchmark or dataset in an original empirical study; it is a position/review of live AI comedy systems. Therefore benchmark contamination is not applicable."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "The paper does not use LLMs as evaluators or metrics for its claims; its claims are argumentative/review-based rather than determined by LLM judgments."
+    },
+    "reporting_gaps": [
+      "No original empirical human sample, participant counts, recruitment details, geography, or languages are reported for this paper-level study design.",
+      "No models are run in this paper, so exact model versions, inference dates, access modes, prompts, sampling parameters, token budgets, compute, and costs are not reported.",
+      "Reviewed live-performance examples often mention audiences, performers, sensors, surveys, microphones, or chat engagement, but the paper generally does not provide participant counts or detailed evaluation protocols for those examples."
+    ]
   }
 }

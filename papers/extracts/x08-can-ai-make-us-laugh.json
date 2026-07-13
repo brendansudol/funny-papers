@@ -140,5 +140,185 @@
     "code_url": null,
     "data_url": null,
     "other": "The Witscript app version used was publicly available on October 9, 2024, from www.witscript.com. The Appendix lists all topics, AI and human punchlines, and per-joke laughter metrics."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "1",
+        "population": "Longtime joke writer for a well-known, U.S.-based, late-night comedy/talk show",
+        "recruitment": "Not reported; acknowledged anonymously",
+        "geography": "U.S.-based",
+        "languages": [
+          "American English"
+        ],
+        "observations": "Generated jokes for eight edited topics over three days and selected/submitted one chosen human joke per topic.",
+        "detail": "This human expert served as the professional human comparison. The paper states the human expert and Witscript independently generated jokes from the same eight topics and each selected the joke they believed would elicit the most laughter."
+      },
+      {
+        "role": "other",
+        "participant_count": "1",
+        "population": "Author JT, described as a professional comedy writer",
+        "recruitment": "Author/investigator",
+        "geography": null,
+        "languages": [
+          "American English"
+        ],
+        "observations": "Selected and edited news topics; operated Witscript; selected one Witscript output per topic for submission.",
+        "detail": "OA selected 16 current news headlines. JT eliminated headlines strongly associated with events after the GPT model cutoff, selected eight, edited them into one-sentence joke topics, operated Witscript, and selected from Witscript’s output the one joke per topic he expected to elicit the most laughter."
+      },
+      {
+        "role": "live-audience",
+        "participant_count": "35 in Set 1 and 15 in Set 2; the paper summarizes this as ~50 audience members, but unique-person overlap is not reported",
+        "population": "Live comedy-venue audiences; intended audience for the jokes was typical American adults",
+        "recruitment": "Not reported",
+        "geography": "Same North Hollywood venue for the two analyzed sets; comedy venues in the U.S. for the broader performance collection",
+        "languages": [
+          "American English"
+        ],
+        "observations": "Audience laughter was recorded for 16 joke performances across the two analyzed sets: eight topics per set, with half of the punchlines in each set written by Witscript and half by the human expert.",
+        "detail": "Two analyzed sets were performed a month apart at the same time of day, at the end of Mike Perkins’s 10-minute opening set for the 8 p.m. show. Two other sets were excluded because of poor venue quality or small audience size (N<10). Audience members’ responses were treated as not fully independent because laughter is contagious."
+      },
+      {
+        "role": "other",
+        "participant_count": "1 for the two analyzed sets; additional experienced standup comics performed other sets, but their count is not reported",
+        "population": "Experienced standup comics; analyzed sets were performed by Mike Perkins",
+        "recruitment": "Not reported",
+        "geography": "U.S. comedy venues; analyzed sets at a North Hollywood venue",
+        "languages": [
+          "American English"
+        ],
+        "observations": "Performed the jokes live; the analyzed comedian performed two high-quality sets used for the reported analysis.",
+        "detail": "The comics did not reveal the sources of the jokes and did not know which jokes had been written by AI. As a cover story, they said they would perform jokes written by a friend."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Labeled or annotated audio tracks to mark the laughter segments associated with each joke.",
+        "detail": "The paper says recordings/audio tracks were labeled or annotated to select laughter segments, and that the laugh segment was ended before the comedian resumed talking. It does not report the annotator count, identity, expertise, blinding, or agreement."
+      }
+    ],
+    "judges": [
+      {
+        "type": "live-audience",
+        "name": null,
+        "role": "primary",
+        "blind": true,
+        "detail": "Live audience laughter was the primary behavioral response used to assess funniness. The comics did not reveal joke sources and used a cover story that the jokes were written by a friend."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Total Laughter",
+        "role": "primary",
+        "blind": null,
+        "detail": "After laughter segments were marked, audio was converted to decibels over time using dB = 20 * log10(|s| + 1e^-6), and the area under the curve was computed with Simpson’s numerical integration method in Python. The result was reported in decibel-seconds."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Mean Loudness, Median Laughter Loudness, Length of Laugh, Mann-Whitney U tests, paired t-tests, and GLM",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper reports additional laughter measures and statistical comparisons within and between sets, including paired t-tests and a GLM controlling for Set effects."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The source of laughter-segment annotation is not explicitly identified. The paper uses passive wording for labeling/annotation and also says 'we always ended the laugh segment before the comedian resumed talking,' implying authorial segmentation decisions but not reporting who annotated or whether they were blinded."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Witscript jokes for the eight edited topics",
+        "mode": "best-of-n",
+        "n": "Not reported; described as selection from 'all of the jokes generated by Witscript' during the three-day task",
+        "selector": "human",
+        "detail": "Witscript was operated by JT. JT selected one Witscript joke per topic that he believed would elicit the most laughter from typical American adults. The selected Witscript jokes were submitted exactly as output by Witscript."
+      },
+      {
+        "scope": "Professional human expert jokes for the same eight edited topics",
+        "mode": "best-of-n",
+        "n": "Not reported; the paper says the human expert selected from all of their own output and later describes the human jokes as cherry-picked from multiple joke candidates",
+        "selector": "human",
+        "detail": "The human expert independently generated jokes over the same three-day period and selected one joke per topic expected to elicit the most laughter. The human expert submitted eight chosen jokes to a third-party data manager."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Witscript",
+        "version_or_snapshot": "Version of the Witscript app publicly available on October 9, 2024 from www.witscript.com",
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "The paper describes Witscript as a neural-symbolic hybrid AI system designed for American English, incorporating human-authored joke-writing algorithms and calls to an OpenAI GPT-family model. No semantic version number or exact run date is reported."
+      },
+      {
+        "name": "OpenAI GPT-family large language model used inside Witscript",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper states that Witscript calls on a large language model in the GPT family from OpenAI and refers to the GPT model’s knowledge cutoff date, but it does not name the exact model, snapshot, cutoff date, API, or inference date."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Witscript joke generation for eight edited one-sentence topics",
+        "calls_per_item": null,
+        "candidates_per_item": "Not reported; multiple candidates are implied because JT selected from all Witscript output",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports that Witscript and the human expert were given three days to complete the task, but it does not report prompts beyond the topics, number of Witscript calls, number of outputs, sampling settings, token limits, compute, or cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Professional human comedy/talk-show joke writer baseline",
+        "present": true,
+        "description": "A longtime joke writer for a well-known, U.S.-based, late-night comedy/talk show wrote jokes for the same eight edited topics, over the same three-day period, and selected one joke per topic for evaluation.",
+        "directly_comparable": true,
+        "detail": "Human and Witscript punchlines were evaluated in the same live-performance design: same topics, source-blinded comedian, source-blinded audiences, random/counterbalanced topic order and source assignment across two analyzed sets. Both Witscript and the human expert submitted selected best candidates rather than all generated candidates."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The evaluation topics were newly selected and edited for this study rather than taken from a public legacy benchmark.",
+        "The human-comparison punchlines were newly written for the experiment and submitted to a third-party data manager.",
+        "The evaluated Witscript outputs were generated for the experiment from the study topics."
+      ],
+      "basis": "This was not an evaluation on a public legacy benchmark with known labels; the prompts were study-specific edited news topics and the comparison punchlines were newly produced. The paper does mention the GPT model knowledge cutoff when excluding headlines tied to post-cutoff events, but this is a recency/performance control rather than an explicit contamination analysis. Residual uncertainty remains because the exact underlying GPT snapshot and its training data are not reported, and the source news/headline material may have been public, but there are no public gold jokes or labels for the model to memorize."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Headline claims are based on live audience laughter, manually segmented audio, and derived audio/statistical metrics, not on LLM evaluation.",
+      "detail": "An OpenAI GPT-family model is part of the Witscript generator, but no LLM is used as a judge, metric, evaluator, or labeler in the reported study."
+    },
+    "reporting_gaps": [
+      "Exact underlying OpenAI GPT model, snapshot/version, and knowledge cutoff date used by Witscript are not reported.",
+      "Exact Witscript inference/run dates are not reported; only the public availability date of the app version is given.",
+      "Number of Witscript calls, prompts beyond the edited topics, total generated candidates per topic, unselected outputs, token limits, sampling parameters, compute, and cost are not reported.",
+      "The human expert’s total number of candidate jokes, drafting process, and exact time spent are not reported beyond the shared three-day window.",
+      "The human expert’s identity is anonymized; recruitment and demographic details are not reported.",
+      "Audience recruitment, demographics, and possible overlap between the two analyzed audiences are not reported.",
+      "Audio recording setup, microphone placement, calibration, preprocessing details, and noise-handling procedures are not fully reported.",
+      "Laughter annotation personnel, number of annotators, blinding to joke source, annotation protocol details, and inter-annotator reliability are not reported.",
+      "Details of randomization and counterbalancing, including random seed/procedure and full assignment table, are not reported in detail.",
+      "Complete data from the two excluded sets and precise exclusion criteria beyond poor venue quality or small audience size (N<10) are not reported.",
+      "No preregistration or power analysis is reported.",
+      "The GLM specification is only briefly described; full model details are not reported."
+    ]
   }
 }

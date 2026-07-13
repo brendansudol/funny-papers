@@ -164,5 +164,299 @@
     "code_url": "https://github.com/swaggir19000/humor",
     "data_url": null,
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "live-audience",
+        "participant_count": null,
+        "population": "Live audiences in the Open Mic stand-up comedy dataset performances used to derive laughter-based ground truth.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Laughter timestamps were extracted from accompanying audio for 51 randomly selected transcripts; forced alignment mapped laughter time frames to transcript sentences, and the sentence preceding laughter was treated as the humorous ground truth.",
+        "detail": "The paper does not report audience counts or demographics. The laughter detector used default minimum laughter length 0.2 seconds and probability threshold 0.5."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "11",
+        "population": "Naive raters across various cultural backgrounds, all aged 20 to 30 years.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Each participant received 6 transcripts from well-known comedians, split into sentences, and marked each sentence as funny or not. Their answers were used for human-human Percentage Agreement, human-machine Percentage Agreement, and a fuzzy-string score against ground truth.",
+        "detail": "The paper reports 86.7% average human-human PA and 40.7% human score against the laughter-derived ground truth using the fuzzy string module."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Stand-up comedians represented in the Open Mic dataset; the human-evaluation subset used transcripts from Ali Wong, Anthony Jeselnik, Hasan Minhaj, Jimmy Yang, Joe List, and John Mulaney.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "51 stand-up transcripts were randomly selected for the main model evaluation; 6 transcripts from well-known comedians were used for human evaluation.",
+        "detail": "The paper does not report the number of distinct comedians in the 51-transcript set or creator demographics."
+      }
+    ],
+    "judges": [
+      {
+        "type": "live-audience",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "Audience laughter in the original stand-up recordings is the substantive signal for the ground-truth humorous quotes/punchlines."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Gillick (2017) laughter detection model plus forced alignment",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The laughter detection model extracted laughter timestamps from audio; forced alignment mapped timestamps to transcript sentences. The study assumes the sentence preceding detected laughter is humorous."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Proposed fuzzy string matching module",
+        "role": "primary",
+        "blind": null,
+        "detail": "Uses Levenshtein/fuzzy string similarity between model-predicted quote lists and ground-truth quote lists, selects the best match for each ground truth, assigns 0 to unmatched ground truths, and applies an overgeneration penalty with alpha = 0.1."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Proposed vector embedding module",
+        "role": "primary",
+        "blind": null,
+        "detail": "Uses Sentence Transformers sentence embeddings to compare semantic similarity between predicted and ground-truth quotes, with the same averaging and overgeneration-penalty procedure as the fuzzy module."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Proposed subspace similarity module",
+        "role": "primary",
+        "blind": null,
+        "detail": "Uses feature-vector subspaces formed from model outputs and ground truths across multiple instruction variations; PCA/SVD and canonical-angle similarity produce the subspace score."
+      },
+      {
+        "type": "human-lay",
+        "name": "11 naive raters",
+        "role": "validation",
+        "blind": null,
+        "detail": "Marked sentence-split transcripts as funny or not. A quote was treated as funny for human-machine PA if a majority of raters voted for it."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Percentage Agreement",
+        "role": "primary",
+        "blind": null,
+        "detail": "Used to compute agreement between human evaluators and between human majority labels and LLM outputs."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Prompt 1 model comparison on 51 Open Mic transcripts",
+        "mode": "single-sample",
+        "n": "One output list per model/transcript is described; repeated candidates are not reported.",
+        "selector": "none",
+        "detail": "Models were zero-shot prompted with a transcript and asked to extract humorous lines/punchlines. The paper does not describe generating multiple candidate responses and selecting the best."
+      },
+      {
+        "scope": "Prompt-engineering, persona, humor-type, comedian-persona, and audience-demographic prompt experiments",
+        "mode": "single-sample",
+        "n": "One output list per prompt condition/transcript/model is described; repeated candidates are not reported.",
+        "selector": "none",
+        "detail": "All reported prompt variants were evaluated with the fuzzy string module. Prompts 2–4 were generated using ChatGPT from a transcript and ground truth, but the paper does not describe best-of-N output selection."
+      },
+      {
+        "scope": "Subspace similarity module",
+        "mode": "single-sample",
+        "n": "Multiple instruction variations are used to form subspaces, but the exact number of variations is not reported.",
+        "selector": "none",
+        "detail": "Outputs from multiple prompt variations are aggregated into a subspace for scoring; this is not best-of-N selection because no candidate output is selected as the final answer."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Gemma 2b-it / Gemma 2b-instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reported as Google's Gemma with 2-billion parameters and labeled in tables as Gemma 2b-it or Gemma 2b-instruct. Exact checkpoint, release, and execution environment are not reported."
+      },
+      {
+        "name": "Gemma 2 9b-it / Gemma 2 9b-instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reported as Google's Gemma 2 with 9-billion parameters and labeled in tables as Gemma 2 9b-it or Gemma 2 9b-instruct. Exact checkpoint and execution environment are not reported."
+      },
+      {
+        "name": "Gemma 2 27-b parameter model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper discusses a 27-billion-parameter Gemma 2 model in the Gemma 2-it family evaluation, but the exact model label/checkpoint and table values are not fully reported in text."
+      },
+      {
+        "name": "Phi 3-Mini 3.8b-it / Phi3-Mini 3.8b-instruct",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reported as Microsoft's Phi 3-Mini with 3.8-billion parameters; exact checkpoint and execution environment are not reported."
+      },
+      {
+        "name": "Llama 3.1 8B Instruct / Llama 3 8b-it",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The prose says Meta's Llama 3.1 with 8-billion parameters; tables label it Llama 3 8b-it or Llama 3 8b-instruct. Exact checkpoint and execution environment are not reported."
+      },
+      {
+        "name": "ChatGPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Evaluated as a model in the main comparison and comedian-persona prompt test. No API snapshot/version, access mode, or inference date is reported."
+      },
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to generate Prompts 2–4 by providing a transcript and ground truth and asking for an instruction. The paper does not state whether this was ChatGPT-4o or another ChatGPT model."
+      },
+      {
+        "name": "Claude 3.5 Sonnet",
+        "version_or_snapshot": null,
+        "inference_date": "December 2024",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Footnote states experiments were conducted in December 2024. Exact Claude snapshot/API version and access mode are not reported."
+      },
+      {
+        "name": "DeepSeek-V3",
+        "version_or_snapshot": null,
+        "inference_date": "January 2025",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Footnote states the experiment was conducted in January 2025. Exact service/checkpoint snapshot and access mode are not reported."
+      },
+      {
+        "name": "Sentence Transformers embedding model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in the vector embedding scoring module; the exact Sentence Transformers model is not named."
+      },
+      {
+        "name": "Gillick (2017) laughter detection model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to extract laughter timestamps from audio. The referenced GitHub resource was accessed 2024-09-26; the paper reports default thresholds but not a model version/checkpoint."
+      },
+      {
+        "name": "Forced alignment system",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used to map audio/laughter timestamps to transcript sentences, but the exact forced-alignment tool/model and settings are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "LLM quote-extraction experiments for model comparison and prompt engineering",
+        "calls_per_item": "One prompt with a transcript per model/prompt condition is described; exact call counts, reruns, or failed calls are not reported.",
+        "candidates_per_item": "One output list is scored per model/prompt condition; no alternate candidates are reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "All experiments ran in less than a day.",
+        "detail": "The setting is described as zero-shot prompting. The main dataset has 51 transcripts averaging 270 words and 106 seconds."
+      },
+      {
+        "scope": "Subspace similarity scoring",
+        "calls_per_item": "Multiple instruction variations per transcript/model are required, but the exact number is not reported.",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Multiple outputs are used to form model and ground-truth subspaces; q/r dimensions and full prompt-variation details are not reported."
+      },
+      {
+        "scope": "ChatGPT prompt generation for Prompts 2–4",
+        "calls_per_item": null,
+        "candidates_per_item": "Three prompt variants are reported, but the number of ChatGPT calls/samples is not reported.",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "ChatGPT was given a transcript and ground truth and asked what instruction would extract that quote list."
+      },
+      {
+        "scope": "Laughter detection for ground-truth construction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Minimum laughter length 0.2 seconds and minimum probability threshold 0.5, described as default values.",
+        "compute_or_cost": null,
+        "detail": "Forced-alignment settings and the number of detected laughter events are not reported."
+      },
+      {
+        "scope": "Sentence-embedding scoring module",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper does not report the exact embedding model, embedding dimensionality, batching, or compute budget."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Human humor-line identification on 6 transcripts",
+        "present": true,
+        "description": "11 naive raters marked sentence-split transcripts as funny/not. Human answers scored 40.7% against the laughter-derived ground truth using the fuzzy string module; average human-human Percentage Agreement was 86.7%. Majority human labels were used for human-machine PA.",
+        "directly_comparable": false,
+        "detail": "The human and model tasks are related and use the same transcript source, but conditions are not materially matched: humans made binary judgments over pre-segmented sentences, while LLMs generated free-form quote lists. The headline model comparison uses 51 transcripts, while the human evaluation uses 6 transcripts; model metric scores on exactly that 6-transcript subset are not separately reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [],
+      "basis": "The Open Mic dataset is from Mittal et al. (2021), preceding the 2024–2025 models evaluated or run here, and the human-evaluation subset uses well-known comedians whose routines/transcripts may be present in pretraining data. The paper reports no decontamination test, private held-out items, or training-data audit. Risk is moderated because the transcript is provided at inference and labels are derived from laughter timestamps, but this is still a public legacy benchmark evaluated with later LLMs."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Human raters provide a separate baseline and agreement analysis, not validation of an LLM judge.",
+      "detail": "Headline scores are determined by live-audience-laughter-derived ground truth and automatic similarity/PA metrics. ChatGPT was used to suggest prompt variants, but no LLM is used to judge model outputs or assign evaluation labels."
+    },
+    "reporting_gaps": [
+      "Exact model checkpoints, API snapshots, and release identifiers are not reported for evaluated LLMs; only Claude 3.5 Sonnet's December 2024 and DeepSeek-V3's January 2025 experiment dates are footnoted.",
+      "Access mode and execution environment for all LLMs are not reported, including whether proprietary systems were accessed by API or hosted interface and whether open-weight models were run locally.",
+      "Sampling and decoding parameters such as temperature, top_p, max tokens, stop sequences, and random seeds are not reported.",
+      "Exact number of calls, reruns, failed generations, and output-regeneration policy are not reported.",
+      "The exact Sentence Transformers embedding model, embedding dimensionality, and inference settings are not reported.",
+      "The forced-alignment tool/model and settings are not named.",
+      "The random selection procedure, seed, and full identity of the 51 selected transcripts are not reported in the paper.",
+      "Counts of ground-truth punchlines, detected laughter events, transcript sentences, and model overgenerated quotes are not reported.",
+      "Live-audience participant counts, demographics, geography, and language information are not reported.",
+      "Human-rater recruitment method, geography, gender distribution, compensation, language proficiency, exclusion criteria, task ordering, and blinding are not reported.",
+      "Model naming is inconsistent in places, e.g. Llama 3.1 versus Llama 3 and Gemma 2b-it versus Gemma 2b-instruct.",
+      "Subspace-module prompt variations, exact count of variations, and q/r dimensional settings are not fully reported.",
+      "Prompt generation with ChatGPT lacks exact model version, inference date, number of calls/samples, and selection criteria for Prompts 2–4.",
+      "The paper does not report LLM fuzzy-string metric scores specifically on the same 6 transcripts used for the human baseline."
+    ]
   }
 }

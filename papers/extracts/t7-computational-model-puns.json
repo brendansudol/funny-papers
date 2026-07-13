@@ -1,0 +1,403 @@
+{
+  "key": "t7-computational-model-puns",
+  "ref": "T7",
+  "section": "Theory Foundations",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/t7-computational-model-puns/t7-computational-model-puns.md",
+  "source_md_sha256": "d16c96c822aaa40b13bd3d73047c557c113934e34b34c6cd9fbd6c0674b5ccf7",
+  "source_truncated": false,
+  "title": "A Computational Model of Linguistic Humor in Puns",
+  "authors": [
+    "Justine T. Kao",
+    "Roger Levy",
+    "Noah D. Goodman"
+  ],
+  "year": 2015,
+  "venue": "Cognitive Science",
+  "paper_types": [
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can information-theoretic measures derived from a probabilistic model of sentence processing predict human judgments of humor in puns?",
+    "Do ambiguity and distinctiveness distinguish phonetic puns from non-pun sentences that also contain phonetically ambiguous words?",
+    "Within a set of puns, can the proposed measures predict fine-grained differences in funniness?"
+  ],
+  "tasks": [
+    "pun funniness prediction",
+    "pun versus non-pun discrimination",
+    "identifying semantic support for alternative pun interpretations"
+  ],
+  "humor_domains": [
+    "puns",
+    "phonetic puns",
+    "homophone puns",
+    "near-homophone puns"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Phonetic pun and non-pun sentence set",
+      "role": "introduced",
+      "size": "435 sentences: 65 identical-homophone puns, 130 corresponding non-pun sentences, 80 near-homophone puns, and 160 corresponding non-pun sentences"
+    },
+    {
+      "name": "Pun of the Day",
+      "role": "source-material",
+      "size": "over a thousand puns submitted by users; 40 identical-homophone puns and 80 near-homophone puns collected from a pun website"
+    },
+    {
+      "name": "Heinle’s Newbury House Dictionary of American English",
+      "role": "source-material",
+      "size": "130 non-pun sentences for identical homophones and 160 corresponding non-pun sentences for near homophones"
+    },
+    {
+      "name": "Funniness ratings for phonetic pun and non-pun sentence set",
+      "role": "introduced",
+      "size": "100 participants rated the 195 identical homophone sentences; 160 participants rated the 240 near homophone sentences; seven and four non-native-English participants were removed"
+    },
+    {
+      "name": "Semantic relatedness word-pair ratings",
+      "role": "introduced",
+      "size": "1,460 distinct word pairs for identical homophone sentences and 2,056 word pairs for near homophone sentences; 200 and 120 participants rated them, with five and two non-native-English participants removed"
+    },
+    {
+      "name": "Google N-grams corpus",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Google Web unigrams",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Noisy-channel gist-level sentence-processing model for puns",
+      "summary": "The paper models a phonetically ambiguous sentence as evidence for a latent sentence meaning, approximated by the observed ambiguous word and its homophone or near homophone. Each content word is generated either from semantic relatedness to the latent meaning or from a noise process based on n-gram statistics."
+    },
+    {
+      "name": "Ambiguity",
+      "summary": "Ambiguity is defined as the entropy of the posterior distribution over the two candidate sentence meanings, P(m|w). High entropy indicates that both meanings are similarly likely in context."
+    },
+    {
+      "name": "Distinctiveness",
+      "summary": "Distinctiveness is defined as the symmetrized Kullback-Leibler divergence between the distributions over semantically relevant words given each candidate meaning. High distinctiveness indicates that the two meanings are supported by different subsets of words in the sentence."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "Ambiguity operationalizes the presence of incongruous sentence meanings, while distinctiveness is described as roughly corresponding to resolution through different supporting contexts."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "The discussion relates the model to Raskin’s claim that a funny text activates two incompatible scripts."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "grounding/motivation",
+      "detail": "The discussion compares the work with Attardo and Raskin’s General Theory of Verbal Humor and later ontological-semantics approaches."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Amazon Mechanical Turk participants rated sentence funniness on a 1 to 7 scale; ratings were z-scored within participant and averaged across participants."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Amazon Mechanical Turk participants rated semantic relatedness for word pairs on a 1 to 10 scale; these ratings were used to estimate word-meaning relatedness in the model."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The paper evaluates ambiguity and distinctiveness using t-tests, linear mixed-effects regression, F-test/R^2, Pearson correlations, and quartile comparisons against human funniness ratings."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Ambiguity was significantly higher for pun sentences than non-pun sentences.",
+      "metric": "t-test",
+      "value": "t(159.48) = 7.89, p < .0001",
+      "dataset": "435 sentences",
+      "best_system": "Ambiguity"
+    },
+    {
+      "finding": "Distinctiveness was significantly higher for pun sentences than non-pun sentences.",
+      "metric": "t-test",
+      "value": "t(248.99) = 6.11, p < .0001",
+      "dataset": "435 sentences",
+      "best_system": "Distinctiveness"
+    },
+    {
+      "finding": "A model using ambiguity and distinctiveness explained a substantial amount of reliable variance in averaged funniness ratings.",
+      "metric": "F-test/R^2",
+      "value": "F(2, 432) = 74.07, R^2 = 0.25, p < .0001",
+      "dataset": "435 sentences",
+      "best_system": "Ambiguity + Distinctiveness"
+    },
+    {
+      "finding": "In the linear mixed-effects regression, both measures were positive significant predictors of funniness.",
+      "metric": "regression coefficients",
+      "value": "Ambiguity estimate 1.915, SE 0.221, p < .0001; Distinctiveness estimate 0.264, SE 0.040, p < .0001",
+      "dataset": "435 sentences",
+      "best_system": "Ambiguity + Distinctiveness"
+    },
+    {
+      "finding": "Within puns, distinctiveness predicted fine-grained funniness, whereas ambiguity did not.",
+      "metric": "Pearson correlation",
+      "value": "distinctiveness r = .28, p < .001; ambiguity r = .03, p = .697",
+      "dataset": "145 pun sentences",
+      "best_system": "Distinctiveness"
+    },
+    {
+      "finding": "Puns in the top distinctiveness quartile were significantly funnier than puns in lower quartiles.",
+      "metric": "t-test",
+      "value": "t(90.15) = 3.41, p < .001",
+      "dataset": "145 pun sentences",
+      "best_system": "Distinctiveness"
+    }
+  ],
+  "key_findings": [
+    "Phonetic puns cluster higher than non-pun sentences on both ambiguity and distinctiveness, even though the non-puns also contain phonetically ambiguous words.",
+    "Ambiguity helps distinguish puns from non-puns, but it does not explain which puns are funnier within the pun set.",
+    "Distinctiveness significantly correlates with human funniness ratings within puns and identifies especially funny puns in the top quartile.",
+    "The model can also identify words most likely to support each interpretation of a pun, producing qualitatively plausible explanations such as linking “magician” and “hare” versus “mad,” “pulled,” and “hair.”",
+    "Identical-homophone and near-homophone puns did not differ significantly in funniness ratings, ambiguity scores, or distinctiveness scores."
+  ],
+  "limitations": [
+    "The study is limited to written sentences containing phonetic ambiguity, especially homophone and near-homophone puns.",
+    "Sentence meaning is approximated coarsely by the meaning of the ambiguous word and its homophone, capturing only the gist rather than full compositional sentence meaning.",
+    "The model relies on human semantic relatedness judgments to estimate P(w_i|m), because automatic corpus-based estimates were difficult for sparse commonsense word pairs.",
+    "The relatedness of a word with itself is treated as a free parameter and fitted to people’s funniness judgments, resulting in r = 13.",
+    "The paper notes that more complex jokes may require models of time-course sentence processing, pragmatic reasoning, background knowledge, and multisentence discourse.",
+    "The paper does not examine spoken sentences, where ambiguity cannot be partially resolved by orthographic form."
+  ],
+  "safety_ethics_notes": null,
+  "artifacts": {
+    "code_url": null,
+    "data_url": "http://web.stanford.edu/~justinek/pun-paper/results.html",
+    "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "Pun of the Day website users",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "At collection time the website contained over a thousand user-submitted puns; the authors collected 40 identical-homophone puns and 80 near-homophone puns from it.",
+        "detail": "The paper does not report the number or demographics of website contributors."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": "1",
+        "population": "research assistant",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Generated 25 additional identical-homophone pun sentences based on a separate list of homophone words.",
+        "detail": "Used because only a limited number of website puns satisfied the identical-homophone criterion."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "100 recruited; 7 removed for reporting a native language other than English; 93 retained",
+        "population": "Amazon Mechanical Turk participants; retained participants reported English as native language",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Funniness ratings for the 195 sentences containing identical homophones. Each participant read roughly 60 sentences in random order, counterbalanced for sentence types, and rated each sentence from 1 (not at all funny) to 7 (extremely funny).",
+        "detail": "Ratings were z-scored within participant and averaged across participants. The paper states sample sizes were chosen so each sentence would receive roughly 20–30 funniness ratings."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "160 recruited; 4 removed for reporting a native language other than English; 156 retained",
+        "population": "Amazon Mechanical Turk participants; retained participants reported English as native language",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Funniness ratings for the 240 near-homophone sentences. Each participant read 40 sentences in random order, counterbalanced for sentence types, and rated each sentence from 1 to 7.",
+        "detail": "Ratings were z-scored within participant and averaged across participants."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "200 recruited; 5 removed for reporting a native language other than English; 195 retained",
+        "population": "Amazon Mechanical Turk participants; retained participants reported English as native language",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Semantic relatedness ratings for 1,460 distinct word pairs from identical-homophone sentences. Each participant saw 146 word pairs in random order and rated relatedness on a 1–10 scale.",
+        "detail": "Average z-scored relatedness ratings were used to estimate R(w_i, m), which the model treats as an approximation to PMI."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "120 recruited; 2 removed for reporting a native language other than English; 118 retained",
+        "population": "Amazon Mechanical Turk participants; retained participants reported English as native language",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Semantic relatedness ratings for 2,056 distinct word pairs from near-homophone sentences, on a 1–10 scale.",
+        "detail": "The paper does not report how many near-homophone word pairs each participant rated."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk funniness raters",
+        "role": "primary",
+        "blind": null,
+        "detail": "Provided the human funniness judgments used as the dependent variable for all 435 sentences; ratings were z-scored within participant and averaged."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk semantic relatedness raters",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided word-pair relatedness ratings used to estimate P(w_i|m) in the computational model."
+      },
+      {
+        "type": "author",
+        "name": "Authors and research assistant",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Selected puns from Pun of the Day, selected corresponding non-pun dictionary sentences, identified homophone or near-homophone alternatives, and added 25 research-assistant-generated identical-homophone puns. No independent validation of pun/non-pun labels is reported."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Ambiguity and distinctiveness measures",
+        "role": "primary",
+        "blind": null,
+        "detail": "Ambiguity was computed as entropy of P(m|w); distinctiveness was computed as symmetrized KL divergence between distributions over semantically relevant words. These measures determined the model scores used in the headline analyses."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Statistical analyses",
+        "role": "primary",
+        "blind": null,
+        "detail": "The reported results use t-tests, a linear mixed-effects regression, an F-test/R^2 analysis on averaged ratings, Pearson correlations, and a quartile comparison."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "No AI/model generation experiment",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The study scores human-collected or human-authored sentence stimuli. A research assistant generated 25 pun stimuli, but there is no model output sampling and no best-of-N selection."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Noisy-channel gist-level sentence-processing model for phonetic puns",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Custom model proposed in the paper. It computes ambiguity and distinctiveness for each sentence using two candidate meanings: the observed phonetically ambiguous word and its homophone or near-homophone. No software version, code release, or run date is reported."
+      },
+      {
+        "name": "Trigram language-model/noise component based on Google N-grams",
+        "version_or_snapshot": "Google Web 1T 5-gram Version 1 / LDC2006T13 is cited for Brants & Franz (2006)",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to compute P(w_i|bigram_i) for words treated as noise. The paper does not report smoothing, preprocessing, or zero-count handling."
+      },
+      {
+        "name": "Google Web unigrams frequency estimates",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to obtain P(w_i) in the transformation from relatedness ratings to P(w_i|m). The exact snapshot/version is not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Scoring the 435 sentence stimuli with the custom ambiguity/distinctiveness model",
+        "calls_per_item": null,
+        "candidates_per_item": "2 candidate sentence meanings per sentence: the observed ambiguous word h and its homophone or near-homophone h'",
+        "token_budget": null,
+        "sampling_parameters": "No random sampling reported. The model uses deterministic formulas: entropy for ambiguity and symmetrized KL divergence for distinctiveness. It assumes equal prior probability over subsets of semantically relevant words; P(m) is approximated using unigram frequency; the self-relatedness parameter r was fit to funniness judgments, resulting in r = 13.",
+        "compute_or_cost": null,
+        "detail": "One ambiguity score and one distinctiveness score were computed for each of 435 sentences. The model also computed argmax_f P(f|m,w) for qualitative examples of semantically relevant words. Runtime, hardware, implementation, and monetary cost are not reported."
+      },
+      {
+        "scope": "Corpus-frequency components",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports using Google N-grams for P(w_i|bigram_i) and Google Web unigrams for P(w_i), but does not report lookup counts, smoothing choices, preprocessing, or computational cost."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Funniness prediction and pun-versus-non-pun analyses",
+        "present": false,
+        "description": "Human funniness ratings were the criterion variable and human semantic relatedness ratings were model inputs; the paper does not report a separate human baseline predictor or human-vs-model performance comparison.",
+        "directly_comparable": false,
+        "detail": "There are no model-generated outputs evaluated alongside human-authored outputs, and no matched human baseline for predicting the sentence-level funniness scores."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The 435-sentence evaluation set and the funniness/semantic-relatedness ratings were collected or constructed for this study rather than taken from a preexisting rated benchmark.",
+        "No pretrained LLM or proprietary generative model is evaluated."
+      ],
+      "basis": "This is a custom deterministic computational model using newly collected human ratings, not a later pretrained model evaluated on a public legacy benchmark. Some source material came from public websites/dictionaries, and the self-relatedness parameter r was fit on the same funniness judgments used in evaluation, which is a validation/overfitting concern rather than classic benchmark-contamination. The paper does not discuss contamination or decontamination."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Primary empirical claims are based on Mechanical Turk funniness judgments, Mechanical Turk semantic relatedness ratings, automatic model-derived measures, and statistical tests; no LLM judge is used.",
+      "detail": "No LLMs are reported as evaluators, annotators, metrics, or model-output selectors."
+    },
+    "reporting_gaps": [
+      "No participant demographics beyond exclusion by self-reported non-English native language; age, gender, geography, education, English proficiency criteria, and MTurk qualifications are not reported.",
+      "MTurk compensation, recruitment dates, consent/IRB details, and exact participant assignment procedures are not reported.",
+      "Blindness of participants to study hypotheses and to pun/non-pun categories is not reported.",
+      "Exact number of funniness ratings per sentence after exclusions is not reported; the paper only states roughly 20–30 ratings per sentence.",
+      "For the near-homophone semantic relatedness task, the number of word pairs seen by each participant and assignment/counterbalancing details are not reported.",
+      "Stimulus-selection procedures are only partially specified: the criteria for choosing puns from Pun of the Day, the separate homophone list used by the research assistant, and dictionary-sentence selection details are not fully reported.",
+      "No independent validation of pun/non-pun labels is reported.",
+      "The function-word removal list, preprocessing details, code implementation, and full handling of homophones/near-homophones are not reported in the paper.",
+      "Google Web unigram version/snapshot is not reported; n-gram smoothing, normalization, and zero-count handling are not reported.",
+      "Model runtime, hardware, compute budget, and monetary cost are not reported.",
+      "The free self-relatedness parameter r was fit to people’s funniness judgments and evaluated on the same sentence set; no held-out test split or cross-validation is reported.",
+      "No baseline computational models or human predictor baseline are reported for comparison with ambiguity and distinctiveness."
+    ]
+  }
+}

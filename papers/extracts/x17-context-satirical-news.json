@@ -1,0 +1,546 @@
+{
+  "key": "x17-context-satirical-news",
+  "ref": "Part 2 (learned-generation anchor)",
+  "section": "Part 2 - Generating Jokes",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x17-context-satirical-news/x17-context-satirical-news.md",
+  "source_md_sha256": "8229312b5525e7ff9da196e2f8f5db9d8c9bc459483c53a6f6c84bfeea03b926",
+  "source_truncated": false,
+  "title": "Context-Driven Satirical Headline Generation",
+  "authors": [
+    "Zachary Horvitz",
+    "Nam Do",
+    "Michael L. Littman"
+  ],
+  "year": 2020,
+  "venue": "Proceedings of the Second Workshop on Figurative Language Processing",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study",
+    "system"
+  ],
+  "research_questions": [
+    "Can transformer-based language models and summarization models be fine-tuned to generate satirical headlines that people find funny?",
+    "Does conditioning satirical headline generation on retrieved real-world context improve humor, topicality, and coherence compared with context-free headline generation?",
+    "Can an automatic retrieval pipeline construct useful real-world context for existing satirical headlines?",
+    "Can the context-based approach generalize to unseen news contexts such as COVID-19-related stories?"
+  ],
+  "tasks": [
+    "satirical headline generation",
+    "topical satire generation",
+    "humorous headline evaluation",
+    "retrieval of real-world context for satire generation"
+  ],
+  "humor_domains": [
+    "satirical news headlines",
+    "The Onion-style satire",
+    "topical news satire"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "Real-world context–satirical headline pairs",
+      "role": "introduced",
+      "size": "more than 15K satirical headlines paired with ranked contextual information from news articles and Wikipedia"
+    },
+    {
+      "name": "Real-world context–satirical headline pairs",
+      "role": "trained-on",
+      "size": "15199 satirical Onion headlines; 85-15 train-test split"
+    },
+    {
+      "name": "Real-world context–satirical headline pairs",
+      "role": "evaluated-on",
+      "size": "750 headlines annotated for each model"
+    },
+    {
+      "name": "The Onion satirical headlines",
+      "role": "source-material",
+      "size": "15199 satirical Onion headlines"
+    },
+    {
+      "name": "The Onion satirical headlines",
+      "role": "evaluated-on",
+      "size": "750 headlines annotated for Onion (Gold)"
+    },
+    {
+      "name": "CNN.com",
+      "role": "source-material",
+      "size": "contemporaneous news content published the week that the satirical article was written"
+    },
+    {
+      "name": "Wikipedia",
+      "role": "source-material",
+      "size": "all paragraphs from those entities’ Wikipedia entries"
+    },
+    {
+      "name": "Unfun.me database dumps",
+      "role": "trained-on",
+      "size": "roughly 10K real news headlines"
+    },
+    {
+      "name": "Unfun.me database dumps",
+      "role": "trained-on",
+      "size": "2758 unfunned-satirical pairs"
+    },
+    {
+      "name": "CNN and Daily Mail articles",
+      "role": "trained-on",
+      "size": "286K CNN and Daily Mail articles"
+    },
+    {
+      "name": "CNN articles from April 2020",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Retrieved context relevance sample",
+      "role": "analyzed",
+      "size": "1500 of the satirical headlines"
+    }
+  ],
+  "models_evaluated": [
+    "BERTSum",
+    "GPT-2 large",
+    "Satire GPT-2",
+    "News GPT-2",
+    "D-Context",
+    "E-Context",
+    "A-Context",
+    "Summarizer"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Context-driven satirical headline generation",
+      "summary": "The paper formulates satirical headline generation as mapping an approximated real-world context document to a satirical headline, treating the task as conditional generation rather than context-free language modeling."
+    },
+    {
+      "name": "Information retrieval pipeline for satire context",
+      "summary": "For each satirical headline, the pipeline looks up the article lede, extracts named entities with SpaCy NER, queries CNN.com and Wikipedia, and ranks retrieved news articles and Wikipedia paragraphs as contextual evidence."
+    },
+    {
+      "name": "Synthetic document construction",
+      "summary": "The method constructs an aggregate context document by taking the first k sentences from the top n ranked documents; in experiments it includes the first four sentences from the top two CNN articles and the top three remaining documents, trimmed to approximately 512 tokens."
+    },
+    {
+      "name": "Encoder-Weighted-Context (E-Context)",
+      "summary": "A context-based BERTSum fine-tuning scheme that trains the encoder and decoder with learning rates of 0.002 and 0.02, respectively."
+    },
+    {
+      "name": "Abstractive-Context (A-Context)",
+      "summary": "A context-based BERTSum model trained on contexts that had first been preprocessed by the pretrained abstractive summarizer."
+    },
+    {
+      "name": "Decoder-Weighted-Context (D-Context)",
+      "summary": "A context-based BERTSum fine-tuning scheme that trains the decoder with learning rate 0.02 and the encoder with learning rate 0.00002, emphasizing a satirical decoder over a largely preserved summarization encoder."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "superiority",
+      "usage": "grounding/motivation",
+      "detail": "The introduction states that Superiority Theory treats jokes as hinging on power-relations between entities."
+    },
+    {
+      "theory": "relief",
+      "usage": "grounding/motivation",
+      "detail": "The introduction states that Relief Theory proposes humor releases conflict between desires and inhibitions."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper discusses Incongruity Theory as humor emerging from low-probability juxtapositions between objects and events, and later qualitatively analyzes incongruous juxtapositions in generated headlines."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "Appendix A.4 uses the Script-Based Semantic Theory of Humor to interpret generated examples such as “God Admits He’s Not The Creator” and “Royal Baby Born in Captivity” as involving opposing scripts."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "Appendix A.4 discusses false-analogy as a logical mechanism connecting opposing scripts in generated headlines."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Amazon Mechanical Turk workers evaluated generated headlines for coherence, whether they sounded like The Onion, and funniness; each generated headline received three unique annotations, labels used majority agreement, and 750 headlines were annotated for each model."
+    },
+    {
+      "type": "human-eval",
+      "detail": "For dataset retrieval quality, 62 Mechanical Turk annotators judged the relevance of the top five retrieved documents for 1500 satirical headlines, given the headline, lede, and retrieved document snippets."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Generation-to-context similarity was measured using a normalized Jaccard index between each generated headline and its corresponding input context, with tokenization, stemming, and stopword filtering."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Generated headlines were submitted to the Brown Noser satirical newspaper; two were accepted for publication, and one was rated as high as or better than 73% of writer submissions."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Original Onion headlines outperformed all generated systems in the human evaluation.",
+      "metric": "Coherence / Onion / Funny / F|C",
+      "value": "99.5% / 86.6% / 38.2% / 38.4%",
+      "dataset": "satire-generation human evaluation",
+      "best_system": "Onion (Gold)"
+    },
+    {
+      "finding": "Among generated systems, D-Context achieved the highest Funny score.",
+      "metric": "Funny",
+      "value": "9.4%",
+      "dataset": "satire-generation human evaluation",
+      "best_system": "D-Context"
+    },
+    {
+      "finding": "E-Context achieved the highest probability of a headline being rated funny given that it was coherent among generated systems.",
+      "metric": "F|C",
+      "value": "10.8%",
+      "dataset": "satire-generation human evaluation",
+      "best_system": "E-Context"
+    },
+    {
+      "finding": "The News GPT-2 baseline was rated coherent but performed poorly on humor metrics.",
+      "metric": "Coherence / Funny / F|C",
+      "value": "89.2% / 2.4% / 2.7%",
+      "dataset": "satire-generation human evaluation",
+      "best_system": "News GPT-2"
+    },
+    {
+      "finding": "The retrieval pipeline found at least one relevant document in the top five for most evaluated headlines.",
+      "metric": "Top 5 retrieved document relevance",
+      "value": "99.0% (≥1 consensus), 80.7% (Majority)",
+      "dataset": "1500 satirical headlines",
+      "best_system": "retrieval pipeline"
+    },
+    {
+      "finding": "All context-based satire models produced generations substantially more similar to their input context than to an arbitrary context.",
+      "metric": "Normalized Jaccard (Avg.)",
+      "value": "D-Context 6.2, E-Context 6.7, A-Context 6.0; Onion 5.0; Summarizer 9.9",
+      "dataset": "generation-to-context similarity evaluation",
+      "best_system": "Summarizer"
+    }
+  ],
+  "key_findings": [
+    "Both GPT-2 language models and BERTSum-based summarization models could be fine-tuned to generate satirical headlines that some annotators found funny.",
+    "The context-based models received higher Funny scores than the Satire GPT-2 language-model baseline, with D-Context at 9.4% versus Satire GPT-2 at 6.9%.",
+    "All satire-trained models substantially outperformed the News GPT-2 baseline on funniness, supporting the authors’ claim that humor judgments were not merely due to awkward machine-generated language.",
+    "The automatic retrieval pipeline systematically retrieved relevant context, with a majority of annotators finding at least one relevant document in the top five for 80.7% of evaluated headlines.",
+    "Qualitative analysis found that context-based generations often adopted a newsy Onion-like register, introduced entities from the context, and sometimes inverted facts or created incongruous juxtapositions.",
+    "The approach generalized qualitatively to April 2020 CNN COVID-19 stories, producing topical satirical headlines about coronavirus-related contexts."
+  ],
+  "limitations": [
+    "The best generated Funny score, 9.4%, remained far below Onion (Gold) at 38.2%.",
+    "The retrieval pipeline was imperfect: majority agreement found a relevant document in the top five for approximately 80% of headlines, not all headlines.",
+    "The authors state that the latent space of Transformer-based architectures is fundamentally difficult to analyze.",
+    "Sensitivity analysis suggested the model was less sensitive to adjective or negation changes than to entity changes.",
+    "The Decoder-Weighted model sometimes produced more standardized, less context-conditioned outputs, including generic “area man” style headlines.",
+    "The model trained on the Unfun.me corpus was excluded because only 2.5% of its generations were rated funny and 64% of generations duplicated the original input context."
+  ],
+  "safety_ethics_notes": "The paper has no formal safety or ethics section. It notes qualitatively that the context-based model appears to capture “edgy” or taboo topics and satirical corpus terms such as “abortion” and “sex.”",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Brown Noser site mentioned in footnote: http://thenoser.com/"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Amazon Mechanical Turk workers qualified by being from the United States, having more than 50 prior annotations approved, and having an approval rating higher than 95%.",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": "United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "For satire-generation evaluation, each headline received 3 unique annotations. Workers answered whether the headline was coherent, sounded like The Onion, and was funny. The paper says 750 headlines were annotated for each model, with labels determined by 2/3+ majority agreement.",
+        "detail": "The number of distinct MTurk workers used for this generation evaluation is not reported. Annotators were instructed to mark incoherent headlines as not funny."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "62",
+        "population": "Amazon Mechanical Turk workers qualified by being from the United States, having more than 50 prior annotations approved, and having an approval rating higher than 95%.",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": "United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "For dataset/retrieval validation, annotators evaluated retrieved documents for 1500 satirical headlines. For each article/headline, 3 different annotators saw the satirical headline, lede, and top five retrieved documents, trimmed to title plus first three sentences, and judged relevance.",
+        "detail": "Relevance was defined as covering the event discussed by the satirical article or providing useful context to understand it. Reported top-five relevance was 99.0% with at least one annotator agreeing and 80.7% with 2/3+ majority agreement."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "Brown Noser satirical newspaper staff/writers/editors.",
+        "recruitment": "Generated headlines were submitted to the Brown Noser’s competitive process.",
+        "geography": "Brown University / United States",
+        "languages": [
+          "English"
+        ],
+        "observations": "Two generated headlines were accepted for publication; one was rated as high as or better than 73% of writer submissions.",
+        "detail": "This was outside the formal study. The number of staff judges, number of submitted model headlines, and details of the ranking procedure are not reported."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "The Onion writers/editors whose published satirical headlines were collected.",
+        "recruitment": "Existing public Onion headlines were used as source/gold material.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The paper retrieved documents for 15199 Onion headlines. Original Onion headlines were also crowd-rated as the Onion (Gold) comparison in the generation evaluation.",
+        "detail": "No counts or identities of Onion writers are reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk workers for satire-generation evaluation",
+        "role": "primary",
+        "blind": null,
+        "detail": "Workers judged coherence, Onion-like style, and funniness for generated and gold headlines. Three unique annotations were collected per headline and final labels used 2/3+ majority agreement."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk workers for retrieved-context relevance",
+        "role": "validation",
+        "blind": null,
+        "detail": "62 workers judged whether retrieved CNN/Wikipedia documents were relevant to the original satirical articles."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Normalized Jaccard index",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Generation-to-context similarity was computed between each headline and its corresponding input context, normalized by the average Jaccard similarity between that headline and every context; tokenization, stemming, and stopword filtering were used."
+      },
+      {
+        "type": "human-expert",
+        "name": "Brown Noser satirical newspaper staff/writers",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Staff acceptance/ranking provided an informal external evaluation: two model-generated headlines were accepted and one was ranked at least as high as 73% of writer submissions."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Authors conducted qualitative analysis of generated examples, sensitivity-analysis observations, and the qualitative April 2020 COVID-19 topical-generation demonstration."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Formal evaluation: Satire GPT-2 and News GPT-2 context-free baselines",
+        "mode": "single-sample",
+        "n": "1 per prompt as described",
+        "selector": "none",
+        "detail": "The paper says the authors used greedy generation. The prompts were the first two words extracted from each of 1955 validation-set Onion headlines. Top-k and top-p random sampling were tried but found to degrade headline quality and were not used for the evaluated baselines."
+      },
+      {
+        "scope": "Formal evaluation: D-Context, E-Context, and A-Context models",
+        "mode": "single-sample",
+        "n": "1 reported evaluated headline per input; exact decoder candidate handling not reported",
+        "selector": "none",
+        "detail": "Context-based models generated headlines by receiving synthetic documents from the test set; the paper states these models never saw any segment of the original satirical headline as input. No best-of-N selection is described, but exact decoding settings such as beam size, length limits, or whether multiple decoder candidates existed are not reported."
+      },
+      {
+        "scope": "Unfun.me unfunned-satirical-pair baseline that was excluded from the main table",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "A footnote says this model was excluded because only 2.5% of its generations were rated funny and 64% duplicated the original input context. Its exact generation/selection procedure is not reported."
+      },
+      {
+        "scope": "Qualitative April 2020 CNN/COVID-19 topical-generation examples",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The authors show selected example outputs from April 2020 CNN articles preprocessed with the pretrained BERTSum summarizer. The number of articles, number of generated candidates, and example-selection procedure are not reported."
+      },
+      {
+        "scope": "Brown Noser newspaper submission",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "The paper says two generated headlines, along with others, were submitted to the Brown Noser. The authors do not report how many model generations were produced, how many were submitted, or how the submitted headlines were selected."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "SpaCy Named Entity Recognition Tagger",
+        "version_or_snapshot": "spaCy 2 citation; exact NER pipeline/model not reported",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to extract named entities from Onion article ledes for the retrieval pipeline."
+      },
+      {
+        "name": "BERTSum pretrained abstractive/extractive summarization model",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Architecture from Liu and Lapata (2019), described as pretrained for abstractive and extractive summarization on 286K CNN and Daily Mail articles. Used as the base for context models, as a preprocessing summarizer, and as the non-satirical Summarizer comparison in the Jaccard analysis."
+      },
+      {
+        "name": "E-Context",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "BERTSum-based Encoder-Weighted-Context model; encoder and decoder learning rates were 0.002 and 0.02, respectively."
+      },
+      {
+        "name": "D-Context",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "BERTSum-based Decoder-Weighted-Context model; decoder learning rate was 0.02 and encoder learning rate was 0.00002."
+      },
+      {
+        "name": "A-Context",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "BERTSum-based Abstractive-Context model trained on contexts preprocessed by the pretrained abstractive summarizer."
+      },
+      {
+        "name": "Satire GPT-2",
+        "version_or_snapshot": "Hugging Face large GPT-2; exact checkpoint/package version not reported",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Hugging Face’s large GPT-2 model fine-tuned on the paper’s satirical headline corpus."
+      },
+      {
+        "name": "News GPT-2",
+        "version_or_snapshot": "Hugging Face large GPT-2; exact checkpoint/package version not reported",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Hugging Face’s large GPT-2 model fine-tuned on roughly 10K real news headlines from the Unfun.me corpus."
+      },
+      {
+        "name": "Unfun.me unfunned-satirical-pair baseline",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "The paper says an additional baseline was trained on 2758 unfunned-satirical pairs and was excluded from the main results; the architecture/checkpoint is not clearly specified."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Context retrieval and synthetic-document construction",
+        "calls_per_item": "Named entities extracted from each lede were queried on CNN.com and Wikipedia; the exact number of entities or queries per headline is not reported.",
+        "candidates_per_item": "Synthetic documents used the first four sentences from the top two CNN articles and from the top three remaining ranked documents; retrieval validation examined the top five retrieved documents.",
+        "token_budget": "Aggregate contexts were trimmed to approximately 512 tokens.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "This budget applies to constructing the input contexts for context-based generation, not to decoder sampling."
+      },
+      {
+        "scope": "Formal GPT-2 baseline headline generation",
+        "calls_per_item": "One greedy generation per two-word prompt is described.",
+        "candidates_per_item": "1 output per prompt as described; no multi-candidate selection reported.",
+        "token_budget": null,
+        "sampling_parameters": "Greedy generation. The first two words of each validation-set Onion headline were used as prompts. Top-k and Top-p sampling were tried but not used because they degraded headline quality.",
+        "compute_or_cost": null,
+        "detail": "The paper says 1955 validation-set Onion headlines supplied two-word prompts; 750 headlines were annotated for each model."
+      },
+      {
+        "scope": "Formal context-based BERTSum headline generation",
+        "calls_per_item": null,
+        "candidates_per_item": "No best-of-N or candidate-selection procedure is reported; exact decoder/beam behavior is not reported.",
+        "token_budget": "Input synthetic documents were approximately 512 tokens.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "For BERTSum fine-tuning, the paper reports batch size 200, warmup 500, Liu-and-Lapata learning-rate decay, and the model-specific learning rates for E-Context and D-Context. Inference hardware, runtime, seeds, and cost are not reported."
+      },
+      {
+        "scope": "April 2020 CNN topical-generation demonstration",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "CNN article beginnings were preprocessed into concise abstracts by the pretrained BERTSum model; no exact token limit or number of articles is reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "This was a qualitative demonstration on novel COVID-19-related news contexts rather than a formal annotated evaluation."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Crowd-rated headline-quality evaluation",
+        "present": true,
+        "description": "Original Onion headlines were evaluated as Onion (Gold) with the same crowd questions and reported at 99.5% coherence, 86.6% Onion-like, 38.2% funny, and 38.4% F|C.",
+        "directly_comparable": true,
+        "detail": "Comparable for the reported output-quality ratings because the same annotation questions and majority-label procedure were used. It is not a matched production baseline in which human writers wrote headlines from the same synthetic contexts or two-word prompts."
+      },
+      {
+        "scope": "Human writers generating from the same retrieved contexts/prompts",
+        "present": false,
+        "description": "The paper does not report a study where human writers were asked to generate satirical headlines from the same retrieved contexts or GPT-2 two-word prompts.",
+        "directly_comparable": false,
+        "detail": "Thus the main formal human comparison is to pre-existing professional Onion headlines, not to humans performing the identical conditional-generation task."
+      },
+      {
+        "scope": "Brown Noser informal publication/ranking comparison",
+        "present": true,
+        "description": "Generated headlines were submitted to a satirical newspaper; two were accepted, and one was rated as high as or better than 73% of writer submissions.",
+        "directly_comparable": false,
+        "detail": "This comparison is informal and outside the formal study; judging protocol, number of judges, number of model submissions, and exact human-submission pool are not reported."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The paper used an 85-15 train-test split for all satire models.",
+        "For context-based models, the test input was a synthetic context document, and the paper states the model never sees any segment of the original satirical headline as input.",
+        "For Unfun.me pairs, the authors ensured duplicate unfunned candidates did not appear in both train and test corpora.",
+        "The Unfun.me-pair baseline was excluded after 64% of generations duplicated the original input context.",
+        "For the qualitative COVID-19 demonstration, the authors state all training headlines were collected before COVID-19 was declared a pandemic in March 2020."
+      ],
+      "basis": "The formal evaluation uses newly assembled train/test splits, which mitigates supervised leakage from the authors’ fine-tuning data. However, the source materials are public Onion headlines, CNN content, Wikipedia, and Unfun.me data, and the paper does not report any decontamination against GPT-2 WebText, BERTSum pretraining data, or other pretrained-model corpora. The exact dates of evaluated Onion headlines relative to pretrained checkpoints are not specified, and the GPT-2 baselines are prompted with the first two words of real Onion headlines. These factors leave a nontrivial but not clearly demonstrated contamination/memorization risk, so the conservative assessment is moderate."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Primary headline-quality claims rely on AMT majority annotations; retrieval-quality validation also uses AMT annotators. Context relevance is additionally analyzed with a non-LLM Jaccard metric.",
+      "detail": "No LLM-as-judge, learned evaluator, or LLM metric is reported. BERTSum/GPT-2 are generation or preprocessing models, not evaluators."
+    },
+    "reporting_gaps": [
+      "The number of distinct MTurk workers for the satire-generation evaluation is not reported.",
+      "The paper does not state whether crowd annotators were blinded to model/source identity or evaluation condition.",
+      "Exact decoding settings for BERTSum context models are not reported, including beam size, length limits, stopping criteria, or whether multiple decoder candidates existed.",
+      "The selection procedure for the 750 annotated headlines per model is not fully specified.",
+      "Figure 2 sometimes shows multiple example generations for the same input/model, but the paper does not explain how these examples were generated or selected.",
+      "Exact checkpoint versions/snapshots for BERTSum, GPT-2, Hugging Face Transformers, and the spaCy NER model are not reported.",
+      "Model access mode, inference dates, hardware, runtime, random seeds, and compute/cost are not reported.",
+      "The architecture of the excluded Unfun.me unfunned-satirical-pair baseline is not clearly reported.",
+      "The paper does not report decontamination checks against pretrained-model data or exact Onion headline dates relative to GPT-2/BERTSum pretraining.",
+      "The Brown Noser evaluation lacks details: number of staff judges, number of human submissions, number of model submissions, ranking rubric, and blinding are not reported.",
+      "The April 2020 CNN topical-generation demonstration does not report the number of articles tried, number of generations per article, or example-selection criteria.",
+      "The dataset section contains a malformed/incomplete sentence about the resulting number of document-headline pairs, although elsewhere the paper states 15199 Onion headlines and over 15K pairs."
+    ]
+  }
+}

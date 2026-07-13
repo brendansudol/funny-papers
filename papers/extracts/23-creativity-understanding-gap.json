@@ -191,5 +191,344 @@
     "code_url": null,
     "data_url": null,
     "other": "No code or data URL is stated. Appendix D states that the experiments used OpenAI, Anthropic and Google APIs, cost around $4,000 USD, and that LLMs were used to rephrase some parts of the paper."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": null,
+        "population": "New Yorker Cartoon Caption Contest entrants submitting captions",
+        "recruitment": "Weekly public contest invites readers to submit humorous captions for a captionless cartoon.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The paper states that each week over 6,000 captions are submitted; the study uses human-submitted captions from NYCCC contests, especially contests #510–#889 / #530–#895 depending on dataset source.",
+        "detail": "These are caption observations, not participant counts. The paper does not report the number of distinct caption submitters."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": null,
+        "population": "Users/readers participating in the New Yorker Cartoon Caption Contest crowd voting/rating system",
+        "recruitment": "Crowdsource voting page for the Caption Contest; users score captions as “funny,” “somewhat funny,” or “unfunny.”",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "For contests #530 to #895, the bandit-based rating system yields complete crowdsourced caption rankings. Zhang et al. (2024) is described as having 6,000+ ranked captions per contest.",
+        "detail": "These crowd rankings provide the ground-truth preference labels for model training/evaluation. The paper does not report the number of distinct voters or total votes/ratings."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Prior human annotators from the Hessel et al. (2023) annotated NYCCC dataset",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "A subset of the 379 cartoons came from the annotated dataset introduced by Hessel et al. (2023), which had human descriptions.",
+        "detail": "The paper uses these prior human annotations/descriptions for some cartoons but does not specify how many cartoons in the subset or how many annotators."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Human reviewers for cartoon-description quality assessment and refinement",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Quality assessment covered 379 GPT-4o-generated cartoon descriptions; 23.5% (89/379) were identified as inaccurate and then iteratively corrected or regenerated with human feedback.",
+        "detail": "The paper describes “human reviewers” but does not report their number, qualifications, blinding, or exact review protocol."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1 (described as “our humor expert”)",
+        "population": "Humor expert",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The paper states that the humor expert found that over 85% of o1-preview explanations effectively captured a cartoon’s humor.",
+        "detail": "The number of explanations reviewed, selection procedure, criteria, and blinding are not reported."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "5",
+        "population": "Highly renowned human experts in the New Yorker Cartoon Caption Contest world, including famous cartoonists, editors, and podcast hosts; Bob Mankoff is specifically mentioned as the best-performing individual expert.",
+        "recruitment": "Authors conducted a study with these experts; the paper notes that due to busy schedules the evaluation corpus was limited to 50 contests from the testing set.",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Each expert completed 100 trials: 50 contests × two caption-pair comparisons, one rank-1 vs rank-1000 pair and one rank-30 vs rank-300 pair per contest. Total expert judgments: 5 experts × 100 trials, excluding attention checks.",
+        "detail": "Appendix C reports average accuracy, highest accuracy, majority accuracy, Fleiss kappa, and agreement rate. The paper does not report compensation, demographics beyond professional expertise, or whether experts were blinded to caption ranks."
+      }
+    ],
+    "judges": [
+      {
+        "type": "platform-vote",
+        "name": "New Yorker Cartoon Caption Contest crowdsource rating system / crowd voters",
+        "role": "primary",
+        "blind": null,
+        "detail": "Crowd scores of captions as “funny,” “somewhat funny,” or “unfunny” are converted into complete rankings and used as the ground-truth labels for pairwise accuracy and for SFT preference data."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Pairwise ranking accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Model or human choices between two captions are scored as correct when they select the caption with the better crowd ranking. Reported tasks include #1–10 vs #1000–1009 / rank-1 vs rank-1000 and #30–39 vs #300–309 / rank-30 vs rank-300 variants."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4o, GPT-4o SFT variants, Claude 3.5 Sonnet, Gemini 2.0 Flash Thinking / Thinking Experiment, o1, and o3-mini",
+        "role": "primary",
+        "blind": null,
+        "detail": "These LLM systems act as caption rankers/verifiers by choosing the funnier of two candidate captions; their selections determine the model-performance results that are scored against crowd rankings."
+      },
+      {
+        "type": "human-expert",
+        "name": "Five NYCCC-domain experts",
+        "role": "primary",
+        "blind": null,
+        "detail": "Experts selected the funnier caption from pairs and determine the human expert average, majority-vote, highest-accuracy, and agreement results in Tables 3 and 5."
+      },
+      {
+        "type": "human-lay",
+        "name": "Human reviewers for visual-description refinement",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Reviewers identified and corrected erroneous or incomplete GPT-4o cartoon descriptions; the paper does not state whether they were lay or expert, so expertise is not assumed."
+      },
+      {
+        "type": "human-expert",
+        "name": "Humor expert evaluating o1-preview explanations",
+        "role": "validation",
+        "blind": null,
+        "detail": "A humor expert judged that over 85% of o1-preview explanations effectively captured the cartoon’s humor; this supports the use of o1-preview explanations but is not the primary accuracy metric."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "GPT-4o cartoon-description generation and human-in-the-loop refinement",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "GPT-4o generated descriptions for cartoons lacking human annotations and regenerated problematic descriptions after specific human feedback until descriptions met accuracy/completeness criteria. The number of generations per image and any alternative-candidate selection procedure are not reported."
+      },
+      {
+        "scope": "Uncanny-description generation from validated canny descriptions",
+        "mode": "single-sample",
+        "n": "one response requested per prompt; no alternatives reported",
+        "selector": "none",
+        "detail": "After clean canny descriptions were established, the authors used a 5-shot prompt to ask GPT-4o to write an uncanny description. No best-of-N or candidate selection is described."
+      },
+      {
+        "scope": "Humor-explanation generation with GPT-4o and o1-preview",
+        "mode": "single-sample",
+        "n": "one explanation response per caption is described; no alternatives reported",
+        "selector": "none",
+        "detail": "Appendix A.2 uses a zero-shot prompt with canny and uncanny descriptions plus the caption, asking for bullet-point reasons why the caption is funny. No best-of-N selection is reported."
+      },
+      {
+        "scope": "Prompted caption-ranking inference",
+        "mode": "single-sample",
+        "n": "one A/B answer per caption pair",
+        "selector": "none",
+        "detail": "Baseline and persona/ICL ranking prompts ask the model to choose either A or B and nothing else. Repeated sampling, self-consistency, majority voting, or best-of-N output selection are not reported."
+      },
+      {
+        "scope": "Fine-tuned GPT-4o caption-ranking inference",
+        "mode": "single-sample",
+        "n": "one choice between two candidate captions per pair",
+        "selector": "none",
+        "detail": "The SFT models are trained to choose between two candidate captions given the cartoon description and, for the explanation variant, o1-preview explanations. No best-of-N inference is reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4o",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used for cartoon descriptions, baseline/prompted caption ranking, GPT-4o-generated explanations, and as the base model for fine-tuning. Exact OpenAI API snapshot/version and inference dates are not reported."
+      },
+      {
+        "name": "GPT-4o SFT w/o Expl. (Ours)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Supervised fine-tuned GPT-4o variant trained on pairwise caption preferences without explanation inputs. Base snapshot, fine-tuning job details, and inference date are not reported."
+      },
+      {
+        "name": "GPT-4o SFT w/ Expl. (Ours)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Supervised fine-tuned GPT-4o variant trained/evaluated with o1-preview-generated explanation inputs. Base snapshot, fine-tuning job details, and inference date are not reported."
+      },
+      {
+        "name": "o1-preview",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used to generate humor explanations that are supplied to rankers and SFT models. Exact OpenAI snapshot and inference date are not reported."
+      },
+      {
+        "name": "o1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as a prompted caption-ranking baseline in Table 3. The paper distinguishes Table 3’s “o1” from o1-preview explanation generation but gives no exact snapshot."
+      },
+      {
+        "name": "o3-mini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used in persona-prompting experiments and Table 3 prompted caption-ranking results. Exact OpenAI snapshot and inference date are not reported."
+      },
+      {
+        "name": "Claude 3.5 Sonnet / Claude-3.5-sonnet",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used in persona-prompting experiments and Table 3 prompted caption-ranking results. Exact Anthropic snapshot and inference date are not reported."
+      },
+      {
+        "name": "Gemini 2.0 Flash Thinking / Gemini-2.0-Thinking-Experiment",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used in persona-prompting experiments and Table 3 prompted caption-ranking results. Table 2 calls it “Gemini-2.0-Thinking-Experiment,” while Table 3 calls it “Gemini 2.0 Flash Thinking.” Exact Google API snapshot and inference date are not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "All API experiments",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "around $4,000 USD total",
+        "detail": "Appendix D states that OpenAI, Anthropic, and Google APIs were used for all experiments and that the overall experiments cost around $4,000 USD. Per-model or per-experiment costs are not reported."
+      },
+      {
+        "scope": "Dataset split and pairwise-ranking item construction",
+        "calls_per_item": null,
+        "candidates_per_item": "2 candidate captions per comparison",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The study uses 379 contests split randomly into 279 training cartoons and 100 testing cartoons. For SFT training, each training cartoon contributes 10 pairs from ranks #1–10 vs #1000–1009 and 10 pairs from #30–39 vs #300–309, totaling 5,580 pairs. Table 2 persona experiments are measured on a size-200 subset of the test set."
+      },
+      {
+        "scope": "Prompted caption-ranking evaluation",
+        "calls_per_item": null,
+        "candidates_per_item": "2 candidate captions per prompt",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Baseline ranking uses a 5-shot prompt with canny and uncanny descriptions and asks for A/B. Persona/explanation variants add persona system prompts and o1-preview explanations. Number of API calls, retries, seeds, and decoding settings are not reported."
+      },
+      {
+        "scope": "Persona-prompting experiment",
+        "calls_per_item": null,
+        "candidates_per_item": "2 candidate captions per prompt",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Nine persona prompts plus an empty baseline are evaluated across GPT-4o, Claude, Gemini, and o3-mini on a size-200 subset; all persona experiments incorporate five random in-context examples and o1-preview explanations. Token limits and sampling parameters are not reported."
+      },
+      {
+        "scope": "Humor-explanation generation",
+        "calls_per_item": null,
+        "candidates_per_item": "one caption is explained per prompt; no alternative explanations reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "GPT-4o and o1-preview generate explanations zero-shot from canny/uncanny descriptions and a caption. The number of generated explanations, calls, retries, and decoding settings are not reported."
+      },
+      {
+        "scope": "Cartoon-description generation and refinement",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "GPT-4o is used to generate descriptions for 379 images and to regenerate problematic descriptions after human feedback; uncanny descriptions are generated with a 5-shot prompt. The number of iterations/calls per image and sampling parameters are not reported."
+      },
+      {
+        "scope": "GPT-4o supervised fine-tuning and SFT inference",
+        "calls_per_item": null,
+        "candidates_per_item": "2 candidate captions per training/evaluation pair",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "SFT uses 5,580 training pairs from 279 cartoons. Inputs include cartoon descriptions, two candidate captions, and for the explanation variant, corresponding o1-preview explanations. Fine-tuning hyperparameters, epochs, batch size, learning rate, and fine-tuning compute are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "NYCCC-domain human expert caption-ranking baseline",
+        "present": true,
+        "description": "Five human experts selected the funnier caption from 100 trials each; reported metrics include expert majority vote, expert average accuracy, best expert accuracy, Fleiss kappa, and agreement rate.",
+        "directly_comparable": false,
+        "detail": "The baseline is not fully matched to the model evaluations: experts saw the original cartoon image, while models generally saw textual descriptions and often o1-preview explanations; experts evaluated only 50 contests from the test set with one rank-1 vs rank-1000 and one rank-30 vs rank-300 pair per contest, while model evaluations are reported for broader test-set/tier tasks."
+      },
+      {
+        "scope": "Non-expert human baseline under matched prompt conditions",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The paper does not report a lay-human baseline completing the same description-plus-explanation A/B task as the models."
+      }
+    ],
+    "contamination_risk": {
+      "level": "high",
+      "paper_discusses": false,
+      "benchmark_public_before_model": true,
+      "mitigations": [
+        "The paper uses a random train/test split with 279 training cartoons and 100 testing cartoons, so SFT training pairs are separated from the authors’ test cartoons.",
+        "Human expert evaluation uses contests selected from the testing set."
+      ],
+      "basis": "The underlying NYCCC cartoons, captions, and crowd rankings come from public contests and prior datasets/benchmarks such as Hessel et al. (2023) and Zhang et al. (2024), and several evaluated proprietary models postdate at least some of those sources. The exact refined split/pairs may be newly constructed, but they are derived from public source material and public ranking data. The paper does not report any pretraining-contamination analysis, API provider decontamination guarantees, held-out/private item construction, or memorization tests; the random train/test split only addresses leakage from the authors’ SFT training, not contamination of base proprietary models."
+    },
+    "llm_judge_dependence": {
+      "level": "substantial",
+      "affected_claims": "Claims about LLM caption-ranking/verifier performance, including expert-level GPT-4o SFT accuracy and the usefulness of o1-preview explanations, depend on LLMs selecting the funnier caption and generating intermediate descriptions/explanations.",
+      "human_validation": "Correctness is anchored to NYCCC crowd rankings; five human experts provide a baseline on a test subset; human reviewers validate/correct descriptions; one humor expert validates o1-preview explanation quality above 85%.",
+      "detail": "No LLM is reported as the ground-truth labeler or as an external grader of another model’s generated humor. However, the evaluated systems themselves are LLM judges/rankers of caption funniness, and o1-preview-generated explanations are a central input to major model results."
+    },
+    "reporting_gaps": [
+      "Exact API model snapshots/versions and inference dates are not reported for GPT-4o, o1-preview, o1, o3-mini, Claude 3.5 Sonnet, or Gemini 2.0 Flash Thinking.",
+      "Decoding/sampling parameters, temperature, seeds, retry policy, and token limits are not reported for ranking, description generation, or explanation generation.",
+      "The number of API calls per item and per experiment is not reported; only the approximate total experiment cost of $4,000 USD is given.",
+      "The number of distinct NYCCC crowd voters, total ratings/votes, voter demographics, and vote aggregation details beyond the bandit-based ranking system are not reported.",
+      "The number, qualifications, recruitment, compensation, and blinding of human reviewers who refined cartoon descriptions are not reported.",
+      "The protocol for the description quality assessment is underspecified: criteria, adjudication, number of reviewers per description, and inter-reviewer agreement are not reported.",
+      "The humor-expert validation of o1-preview explanations does not report the sample size, sampling method, rubric, or blinding.",
+      "Fine-tuning hyperparameters and OpenAI fine-tuning job details, including epochs, batch size, learning rate, validation procedure, and base snapshot, are not reported.",
+      "The random train/test split seed and full list of train/test contest IDs or exact evaluation pairs are not provided in the paper text.",
+      "Human expert study details such as compensation, demographics beyond expertise, geography, recruitment procedure, and whether experts were blinded to caption ranks are not reported.",
+      "Model scores on the exact same 100 expert-evaluation trials are not separately reported, limiting direct human-model comparability.",
+      "Table 3 states that prompted models use the best persona, but the paper does not fully specify a separate validation procedure for choosing personas; Table 2 persona results are measured on a test subset.",
+      "No data or code release URL is stated in the paper text.",
+      "The paper does not discuss pretraining contamination or perform a decontamination/memorization test for public NYCCC captions and rankings."
+    ]
   }
 }

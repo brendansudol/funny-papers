@@ -1,0 +1,3 @@
+<!-- guide claims for x21-joke-space-originality (Part 4 (originality beyond funniness)) -->
+
+**Originality beyond funniness:** [**Navigating the Joke Space: Towards Automated Originality Assessment of AI-Generated Humor**](https://aclanthology.org/2026.chum-1.8/) (Amir, Ngo, Toplyn & Hickerson, CHum 2026) `workshop` `method` evaluates corpus novelty, semantic distance, and PMI-based "topic handle" measures against three professional comedians. On 240 jointly rated jokes, the best individual measures correlate at Spearman ρ=.37 with originality and a cross-validated composite reaches ρ=.40. Useful as a screening signal, but human originality agreement itself is low and the reference is a single one-million-Reddit-joke corpus, so it is not an originality oracle.

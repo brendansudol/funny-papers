@@ -1,0 +1,939 @@
+{
+  "key": "57-mwahaha",
+  "ref": "#57",
+  "section": "Part 8 - Datasets & Shared Tasks",
+  "extracted_at": "2026-07-12",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/57-mwahaha/57-mwahaha.md",
+  "source_md_sha256": "1e3eda704088e8ad9203a491f6715e8fbdefd1ef901f4f7cf7f69a02d06602a2",
+  "source_truncated": false,
+  "title": "SemEval-2026 Task 1: MWAHAHA, Models Write Automatic Humor And Humans Annotate",
+  "authors": [
+    "Santiago Castro",
+    "Luis Chiruzzo",
+    "Santiago Góngora",
+    "Salar Rahili",
+    "Naihao Deng",
+    "Ignacio Sastre",
+    "Victoria Amoroso",
+    "Guillermo Rey",
+    "Aiala Rosá",
+    "Guillermo Moncecchi",
+    "J. A. Meaney",
+    "Juan José Prada",
+    "Rada Mihalcea"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the The 20th International Workshop on Semantic Evaluation (2026)",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "evaluation-study",
+    "shared-task"
+  ],
+  "research_questions": [
+    "Can a Chatbot Arena-style pairwise human-preference protocol produce reliable system-level rankings for subjective humor-generation outputs?",
+    "Can systems generate short jokes in English, Spanish, and Chinese under lexical or topical constraints, and humorous captions or punchlines for GIFs?",
+    "Do elaborate multi-stage humor-generation pipelines outperform a simple frontier LLM baseline prompted zero-shot?"
+  ],
+  "tasks": [
+    "general-purpose humor generation",
+    "text-based constrained joke generation",
+    "word-inclusion joke generation",
+    "news-headline joke generation",
+    "GIF-based humorous caption generation",
+    "GIF-conditioned punchline generation",
+    "pairwise humor preference ranking"
+  ],
+  "humor_domains": [
+    "short jokes",
+    "news-headline jokes",
+    "rare word-pair constrained jokes",
+    "GIF captions",
+    "punchlines",
+    "multimodal humor",
+    "wordplay"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English",
+    "Spanish",
+    "Chinese"
+  ],
+  "datasets_used": [
+    {
+      "name": "SemEval-2026 Task 1 MWAHAHA data",
+      "role": "introduced",
+      "size": "Subtask A development: 1 200 rows for English and Spanish, and 1 000 rows for Chinese; Subtask A test: 300 rows per language; Subtask B1: 1 100 GIFs development and 300 unseen GIFs test; Subtask B2: 500 GIF-and-prompt pairs development and 300 unseen pairs test"
+    },
+    {
+      "name": "RareAct dataset",
+      "role": "source-material",
+      "size": "100 word-pair examples per language in development; 25 infrequent word combinations per language in test"
+    },
+    {
+      "name": "Manually curated news headlines",
+      "role": "source-material",
+      "size": "1 100 English and Spanish headlines, 900 Chinese headlines in development; 275 new headlines per language in test"
+    },
+    {
+      "name": "Giphy API GIFs",
+      "role": "source-material",
+      "size": "1 100 GIFs as development data and 300 unseen GIFs as test data for B1; reused for B2 with 500 development GIF-and-prompt pairs and 300 unseen pairs"
+    },
+    {
+      "name": "MemeCap dataset",
+      "role": "trained-on",
+      "size": "4 206 meme captions"
+    },
+    {
+      "name": "EspressoEnglish word lists",
+      "role": "source-material",
+      "size": "Pilot 1 used two words randomly sampled from the most frequent nouns, verbs, adjectives, and adverbs"
+    },
+    {
+      "name": "Wikipedia subset",
+      "role": "source-material",
+      "size": "25k-document Wikipedia subset"
+    },
+    {
+      "name": "RAGthoven curated joke corpus",
+      "role": "source-material",
+      "size": "98 jokes annotated with humor mechanism labels"
+    },
+    {
+      "name": "YNU-HPCC golden library",
+      "role": "source-material",
+      "size": "120 exemplar jokes"
+    },
+    {
+      "name": "lmfaoooo Humor Arena judgments",
+      "role": "trained-on",
+      "size": "∼2.5K human pairwise judgments"
+    },
+    {
+      "name": "SLPG_FJWU_Insa human-filtered dataset",
+      "role": "trained-on",
+      "size": "12 000-example human-filtered dataset"
+    }
+  ],
+  "models_evaluated": [
+    "Gemini 2.5 Flash",
+    "Gemini 2.5 Pro",
+    "Gemini 2.0 Flash",
+    "Gemini 1.5 Flash",
+    "Claude 3.5 Sonnet",
+    "Llama 3.1 8B Instruct",
+    "Qwen3-235B-A22B",
+    "gpt-oss-120B",
+    "GPT-4o",
+    "GPT-5",
+    "GPT-5.1",
+    "GPT-5.2",
+    "Gemini 3 Flash",
+    "Gemini 3 Pro",
+    "Claude Sonnet 4",
+    "Claude Sonnet 4.5",
+    "Claude Opus 4.5",
+    "Qwen2.5-3B",
+    "Qwen2.5-7B",
+    "Qwen2.5-14B-Instruct",
+    "Qwen2.5-32B",
+    "DeepSeek-R1",
+    "DeepSeek-R1-Distill-Qwen-32B",
+    "DeepSeek-V3",
+    "DeepSeek-V3.1",
+    "DeepSeek-V3.2",
+    "Llama-3-8B",
+    "Llama-4 Scout",
+    "Mistral-7B-Instruct-v0.3",
+    "Gemma 2",
+    "Gemma 3",
+    "Gemma 3 27B",
+    "GLM-4.7-Flash",
+    "Kimi-K2-Thinking",
+    "Phi-2",
+    "XLM-RoBERTa",
+    "mDeBERTa",
+    "DistilBERT",
+    "BERT",
+    "BLIP",
+    "Qwen-Max",
+    "BGE text embeddings",
+    "Qwen2-VL-7B",
+    "Qwen3-8B",
+    "Nemotron Nano 12B VL",
+    "Qwen3-Next-80B",
+    "Qwen-Plus",
+    "Salamandra-2B-Instruct",
+    "TinyLlama"
+  ],
+  "methods_proposed": [
+    {
+      "name": "MWAHAHA benchmark/shared task",
+      "summary": "A general-purpose humor-generation shared task covering constrained text jokes in English, Spanish, and Chinese and multimodal GIF-caption humor in English. The benchmark uses rare word pairs and recent news headlines to reduce memorization and includes development and test prompts plus evaluation outputs and leaderboards."
+    },
+    {
+      "name": "Chatbot Arena-style pairwise humor evaluation",
+      "summary": "Annotators compare two system outputs produced for the same prompt and choose the funnier one, tie, skip, or flag offensive content. The paper fits a Bradley–Terry model to non-skip votes, reports Elo-style ratings, and uses 1,000 bootstrap resamples to compute 95% confidence intervals and tier-aware rankings."
+    },
+    {
+      "name": "Gemini 2.5 Flash zero-shot baseline",
+      "summary": "The organizers use Gemini 2.5 Flash with simple prompt templates for all subtasks. For GIF subtasks, the baseline feeds the first frame of the GIF to the model rather than the full GIF."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "operationalized",
+      "detail": "RAGthoven anchors a four-stage pipeline in the Script-based Semantic Theory of Humor, and j10official’s GTVH decomposition includes Script Opposition as one of the mapped Knowledge Resources."
+    },
+    {
+      "theory": "benign violation",
+      "usage": "operationalized",
+      "detail": "RAGthoven encodes Benign Violation Theory in planner prompts, and XplaiNLP translates BVT into a three-step cognitive prompting framework with a gatekeeper pipeline to enforce the benign constraint."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "j10official maps the General Theory of Verbal Humor’s six Knowledge Resources to typed DSPy modules for joke construction."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "Lattice structures zero-shot pun generation around Dikkers’s eleven “Funny Filters,” and ICT-NLP is described as grounded in Toplyn’s theory."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Final evaluation used pairwise human preference judgments: annotators saw the prompt and two outputs and selected the funnier one, a tie, or skip; they could also flag offensive content."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "The final phase collected 12 936 non-skip votes, or 16 877 including skipped pairs, with 10 707 non-skip votes from paid Prolific annotators and 2 229 from volunteers."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Non-skip votes were fit with a Bradley–Terry model to obtain Elo-style ratings; the fit was bootstrapped with 1,000 resamples to obtain 95% confidence intervals."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Pilot 1 was annotated by the organizers, yielding roughly 850 pairwise battles for English Subtask A, 211 for Spanish, and 40 for Subtask B."
+    }
+  ],
+  "headline_results": [
+    {
+      "finding": "Per-item agreement was low, matching the subjectivity of humor judgments.",
+      "metric": "pooled pairwise %-agreement; Fleiss’ κ; Krippendorff’s α",
+      "value": "46.8%; Fleiss’ κ = 0.15; Krippendorff’s α = 0.17",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data",
+      "best_system": null
+    },
+    {
+      "finding": "System-level rankings were much more stable than individual judgments.",
+      "metric": "split-half Spearman correlation between rankings from disjoint annotator pools",
+      "value": "0.79 in English, 0.90 in Spanish, 0.79 in Chinese, 0.90 in B1, and 0.59 in B2 (mean 0.79)",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data",
+      "best_system": null
+    },
+    {
+      "finding": "In Subtask A English, nine systems tied for first, with the organizer baseline having the highest point estimate.",
+      "metric": "Elo rating",
+      "value": "1081",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data, Subtask A English",
+      "best_system": "baseline"
+    },
+    {
+      "finding": "In Subtask A Spanish, RAGthoven and the baseline tied for first despite different point estimates.",
+      "metric": "Elo rating",
+      "value": "RAGthoven 1182; baseline 1140",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data, Subtask A Spanish",
+      "best_system": "RAGthoven"
+    },
+    {
+      "finding": "In Subtask A Chinese, eight systems tied for first, led by UIR_CIS by point estimate while the baseline remained in the tied top tier.",
+      "metric": "Elo rating",
+      "value": "UIR_CIS 1120; baseline 1053",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data, Subtask A Chinese",
+      "best_system": "UIR_CIS"
+    },
+    {
+      "finding": "In the multimodal subtasks, the baseline also tied for first: B1 was led by praveenjoshi007 and B2 by UIR_CIS.",
+      "metric": "Elo rating",
+      "value": "B1: praveenjoshi007 1140, baseline 1124; B2: UIR_CIS 1065, baseline 1022",
+      "dataset": "SemEval-2026 Task 1 MWAHAHA data, Subtasks B1 and B2",
+      "best_system": "praveenjoshi007; UIR_CIS"
+    }
+  ],
+  "key_findings": [
+    "The task attracted 309 registered users and 37 final-phase teams, producing 12 936 non-skip pairwise judgments from volunteers and paid Prolific annotators.",
+    "The simple Gemini 2.5 Flash zero-shot baseline tied for first place in every subtask, showing that frontier LLM prompting was hard for participating systems to beat.",
+    "Generate-then-rank pipelines were over-represented among top-ranked systems, but INF-rsrs’s deliberately lowest-scored candidate still tied for first in A-en, suggesting a small gap between strong systems relative to evaluation noise.",
+    "Humor-theory-grounded systems using SSTH, BVT, or GTVH reached top tiers, but the paper did not find a consistent advantage over theory-agnostic prompting or the baseline.",
+    "Chinese humor generation was especially difficult because of homophonic wordplay, and the paper reports that systems generating natively in each language outperformed translation-based approaches.",
+    "Alignment training for humor was fragile: the five systems using RL or preference optimization reported reward hacking, training instability, noisy synthetic preferences, or stronger in-context alternatives."
+  ],
+  "limitations": [
+    "The evaluation did not include human-written jokes as a baseline, making it hard to tell whether leaderboard saturation reflects task saturation or prompt difficulty.",
+    "Humor preferences vary across audiences, demographics, and cultural backgrounds, so residual subjectivity limits the signal-to-noise ratio of pairwise preference evaluation.",
+    "The baseline’s first-place tie may reflect evaluation saturation in highly subjective comparisons as much as raw model capability.",
+    "The task covers only English, Spanish, and Chinese for text generation and only English for the multimodal subtask.",
+    "Rare-word and headline constraints reduce but do not eliminate memorization risk, and some constraints may coincide with public jokes or memes.",
+    "The Prolific annotator demographics skew toward certain regions and age groups, and the volunteer pool is self-selected."
+  ],
+  "safety_ethics_notes": "Paid Prolific annotators were compensated approximately 12 USD per hour, volunteer annotators used a public interface after a content warning, potentially sensitive or controversial news headlines were manually removed, and annotators had skip and offensive-content flag options. The paper notes cultural sensitivity concerns and warns that humor-generation systems can be misused for mockery, harassment, or offensive content, recommending filtering, audience awareness, and human review.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://pln-fing-udelar.github.io/semeval-2026-humor-gen/",
+    "other": "CodaBench competition: https://www.codabench.org/competitions/9719/ ; annotation site: https://thefunnier.com/"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "content-creator",
+        "participant_count": "309 registered users; 37 teams submitted systems in the final evaluation phase (team count, not individual human count)",
+        "population": "SemEval-2026 Task 1 MWAHAHA competitors/system developers",
+        "recruitment": "Open CodaBench competition running October 15, 2025 to February 20, 2026",
+        "geography": "For system-description papers with affiliations, teams spanned 17 countries; full geography for all registered users/teams not reported",
+        "languages": [
+          "English",
+          "Spanish",
+          "Chinese"
+        ],
+        "observations": "Trial phase: 29 teams, 71 submissions total. Final phase: 30 A-en submissions, 15 A-es, 19 A-zh, 10 B1, and 9 B2; only each team’s most recent correct final submission was evaluated.",
+        "detail": "The paper reports users and teams, not individual author counts for the competing teams."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "roughly 100",
+        "population": "Paid Prolific annotators for the final test phase; first language constrained to match each subtask language",
+        "recruitment": "Recruited via Prolific for the February 2–20, 2026 annotation period; paid 8 USD per round for an estimated 40 minutes, approximately 12 USD/hour",
+        "geography": "Country-of-birth distributions shown in Fig. 4; paper states the pool was concentrated geographically in countries where the target language is spoken",
+        "languages": [
+          "English",
+          "Spanish",
+          "Chinese"
+        ],
+        "observations": "10,707 non-skip final-test votes from Prolific annotators: A-en 4,942; A-es 1,743; A-zh 2,033; B1 978; B2 1,011. Each annotator rated approximately 100 joke pairs.",
+        "detail": "The paper reports aggregate Prolific demographics: 62% under 40 overall; gender roughly 50/50 overall, with subtask variation such as 82% male in Spanish and 65% female in Chinese. It does not give exact per-subtask Prolific annotator counts."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Volunteer annotators in the final test phase; self-selected public web-interface users",
+        "recruitment": "Public annotation site; volunteer annotators contributed after a content warning and could leave at any time. Participants who submitted systems were told they should not rank jokes.",
+        "geography": null,
+        "languages": [
+          "English",
+          "Spanish",
+          "Chinese"
+        ],
+        "observations": "2,229 non-skip final-test votes from volunteers: A-en 1,296; A-es 564; A-zh 70; B1 244; B2 55. Volunteer annotations had roughly 60% skips, versus about 6% for Prolific annotations.",
+        "detail": "The number of distinct volunteer annotators is not reported."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Development/trial-phase annotators, described as organizers and volunteers",
+        "recruitment": "Annotation site opened and publicized after trial submissions; participants who submitted were asked not to rank jokes",
+        "geography": null,
+        "languages": [
+          "English",
+          "Spanish",
+          "Chinese"
+        ],
+        "observations": "4,509 non-skip development-phase votes across all tasks; 5,740 votes including 1,231 skipped pairs. Dev non-skip totals: A-en 2,960; A-es 907; A-zh 212; B1 266; B2 164.",
+        "detail": "The development phase was annotated entirely by organizers and volunteers; distinct annotator count is not reported."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Task organizers in Pilot 1",
+        "recruitment": "Internal pilot, June 2025",
+        "geography": null,
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "observations": "Pilot 1 yielded roughly 850 pairwise battles for English Subtask A, 211 for Spanish Subtask A, and 40 for Subtask B. The pilot covered 100 Subtask A items per language and 20 image-and-constraint Subtask B items.",
+        "detail": "The paper says Pilot 1 annotation was carried out by the organizers but does not report how many organizers annotated."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Internal pilot annotators for Pilot 2; exact annotator population not explicitly stated",
+        "recruitment": "Internal pilot, August 2025",
+        "geography": null,
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "observations": "Pilot 2 compared Gemini 2.5 Pro, Qwen3-235B-A22B, and gpt-oss-120B over 80 battles per language under the news-headline constraint format.",
+        "detail": "The paper says both pilots were internal and annotated through the same arena-style interface, but only Pilot 1 explicitly identifies the annotators as organizers."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "External human pairwise-judgment contributors used by a participant system, lmfaoooo",
+        "recruitment": "Not reported",
+        "geography": null,
+        "languages": [],
+        "observations": "The lmfaoooo participant system collected approximately 2.5K human pairwise judgments through a custom Humor Arena platform for preference modeling.",
+        "detail": "This human-judgment collection was part of a participant system, not the organizers’ official evaluation pool; distinct contributor count is not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Volunteer and Prolific annotators",
+        "role": "primary",
+        "blind": true,
+        "detail": "Official final evaluation used pairwise human preference judgments. Annotators saw the prompt and two anonymized outputs labeled A/B and chose left funnier, right funnier, tie, skip, and could flag either output as offensive."
+      },
+      {
+        "type": "human-expert",
+        "name": "Task organizers",
+        "role": "primary",
+        "blind": null,
+        "detail": "Pilot 1 annotation was carried out by the organizers and produced the Pilot 1 Bradley–Terry Elo rankings."
+      },
+      {
+        "type": "human-crowd",
+        "name": "Development-phase organizers and volunteers",
+        "role": "primary",
+        "blind": null,
+        "detail": "The trial/development leaderboard was based on arena votes from organizers and volunteers; the paper does not fully specify blinding for this phase."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Bradley–Terry model with Elo-style ratings",
+        "role": "primary",
+        "blind": null,
+        "detail": "Non-skip votes were fit with a Bradley–Terry model to obtain Elo-style ratings. The fit was bootstrapped with 1,000 resamples to obtain 95% confidence intervals; overlapping intervals defined tied ranks."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Agreement and reliability statistics",
+        "role": "validation",
+        "blind": null,
+        "detail": "The paper reports pooled pairwise percent agreement, Fleiss’ kappa, Krippendorff’s alpha, leaderboard-vs-majority agreement, Spearman correlation between score margin and majority-vote margin, and split-half Spearman correlations between disjoint annotator pools."
+      },
+      {
+        "type": "LLM",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Subtask B2 dataset construction included an LLM-as-judge verification step over candidate GIF-prompt pairs, checking grammatical correctness, flexibility, and compatibility with humorous completions. The model is not named."
+      },
+      {
+        "type": "LLM",
+        "name": "Participant-system LLM judges",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Many participant systems used LLM-as-a-judge mechanisms to score or rank candidate jokes, including arena/tournament-style ranking or synthetic preference generation. These LLM judges affected submitted outputs for those systems but did not determine the official leaderboard."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Participant-system learned rerankers, hand-designed metrics, reward models, and classifiers",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Some systems selected candidates or trained alignment data using learned rerankers, custom humor/adherence metrics, funniness classifiers, reward models, BERT/DistilBERT-style moderators, or preference models."
+      },
+      {
+        "type": "human-lay",
+        "name": "Participant-system human-in-the-loop selectors",
+        "role": "secondary",
+        "blind": null,
+        "detail": "The paper reports human-in-the-loop final selection for some participant systems, including BAHAHA and UIR_CIS. Counts and procedures are not specified."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Organizer Gemini 2.5 Flash baseline for all official subtasks",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "none",
+        "detail": "The baseline is described as a single zero-shot prompt with no fine-tuning or candidate ranking. For GIF subtasks the organizers fed the first frame, not the full GIF, to Gemini 2.5 Flash."
+      },
+      {
+        "scope": "Pilot 1 and Pilot 2 baseline/model comparisons",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The pilots evaluated multiple model or temperature conditions, but the paper does not state whether each model produced one output per prompt or whether multiple candidates were sampled and selected."
+      },
+      {
+        "scope": "Participant generate-then-rank systems using automated or LLM-based scoring",
+        "mode": "best-of-n",
+        "n": "candidate pools ranged from 4 to 50 per input; examples: RAGthoven 4 candidates, lmfaoooo 50, BAHAHA 50",
+        "selector": "LLM-judge",
+        "detail": "Eighteen systems adopted some form of generate-then-rank pipeline; most used one or more LLM judges in arena/tournament-style ranking, sometimes with the same model as generator and judge and sometimes with split generator/judge families."
+      },
+      {
+        "scope": "Participant generate-then-rank systems using learned rerankers or hand-designed metrics",
+        "mode": "best-of-n",
+        "n": "reported overall range 4 to 50 candidates per input; per-system values not always given",
+        "selector": "automatic-metric",
+        "detail": "Examples include JCT’s hand-designed composite humor metrics, lmfaoooo’s learned reranker trained on human pairwise judgments, and DANGNT@SGU’s joke-vs-non-joke reranker."
+      },
+      {
+        "scope": "Participant systems with human-in-the-loop final selection",
+        "mode": "best-of-n",
+        "n": "BAHAHA is reported with 50 candidates; UIR_CIS candidate count not reported",
+        "selector": "human",
+        "detail": "BAHAHA and UIR_CIS are described as augmenting automated generation/ranking with human-in-the-loop final selection."
+      },
+      {
+        "scope": "Participant prompting-only or validation/regeneration systems",
+        "mode": "single-sample",
+        "n": null,
+        "selector": "rule",
+        "detail": "Four documented systems relied exclusively on prompting without fine-tuning or a multi-stage selection pipeline; some used lightweight validation or regeneration to enforce constraints, but broad candidate-pool sizes are not reported."
+      },
+      {
+        "scope": "Participant systems with no description or only sparse notes",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Six teams provided no system description and two provided only short written notes, so their generation-selection budgets and selection mechanisms are incomplete or unavailable."
+      },
+      {
+        "scope": "Subtask B2 dataset prompt creation and verification",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "LLM-judge",
+        "detail": "The organizers prompted an unnamed LLM to write open-ended prompts with a blank and then used an unnamed LLM-as-judge verification step. The number of candidates per GIF-prompt item is not reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "Gemini 2.5 Flash",
+        "version_or_snapshot": "2.5 Flash",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Organizer official baseline for all subtasks; exact API snapshot, endpoint, and generation date are not reported."
+      },
+      {
+        "name": "Claude 3.5 Sonnet",
+        "version_or_snapshot": "3.5 Sonnet",
+        "inference_date": "June 2025 pilot",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Pilot 1 baseline/model condition; exact provider snapshot not reported."
+      },
+      {
+        "name": "Gemini 2.0 Flash",
+        "version_or_snapshot": "2.0 Flash",
+        "inference_date": "June 2025 pilot",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Pilot 1 evaluated multiple decoding temperatures, including t=0.7, 0.9, 1.2, and 1.5 depending on subtask/language table entries."
+      },
+      {
+        "name": "Gemini 1.5 Flash",
+        "version_or_snapshot": "1.5 Flash",
+        "inference_date": "June 2025 pilot",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Pilot 1 evaluated multiple decoding temperatures, including t=0.7, 0.9, and 1.2 depending on subtask/language table entries."
+      },
+      {
+        "name": "Llama 3.1 8B Instruct",
+        "version_or_snapshot": "3.1 8B Instruct",
+        "inference_date": "June 2025 pilot",
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Pilot 1 baseline/model condition."
+      },
+      {
+        "name": "Gemini 2.5 Pro",
+        "version_or_snapshot": "2.5 Pro",
+        "inference_date": "August 2025 pilot",
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Pilot 2 frontier-system condition; exact API snapshot not reported."
+      },
+      {
+        "name": "Qwen3-235B-A22B",
+        "version_or_snapshot": "Qwen3-235B-A22B",
+        "inference_date": "August 2025 pilot",
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Pilot 2 frontier-system condition."
+      },
+      {
+        "name": "gpt-oss-120B",
+        "version_or_snapshot": "gpt-oss-120B",
+        "inference_date": "August 2025 pilot",
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Pilot 2 frontier-system condition."
+      },
+      {
+        "name": "Unnamed LLM for Giphy search-term generation",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used by organizers to generate thousands of short Giphy-optimized search terms for Subtask B1 data construction."
+      },
+      {
+        "name": "Unnamed LLM for Subtask B2 prompt generation",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used by organizers to write open-ended GIF-conditioned prompts with a single blank."
+      },
+      {
+        "name": "Unnamed LLM-as-judge for Subtask B2 verification",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Used by organizers to verify candidate B2 prompts for grammar, flexibility, and compatibility with humorous completions."
+      },
+      {
+        "name": "GPT models used by participant systems",
+        "version_or_snapshot": "GPT-4o; GPT-5; GPT-5.1; GPT-5.2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "The paper reports these participant-used GPT labels but not API snapshots, endpoints, inference dates, or which exact submissions used each version."
+      },
+      {
+        "name": "Gemini models used by participant systems",
+        "version_or_snapshot": "Gemini 2.5 Flash; Gemini 3 Flash; Gemini 3 Pro",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Participant-reported model labels; exact snapshots and inference dates not reported."
+      },
+      {
+        "name": "Claude models used by participant systems",
+        "version_or_snapshot": "Claude Sonnet 4; Claude Sonnet 4.5; Claude Opus 4.5",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Participant-reported model labels; exact snapshots and inference dates not reported."
+      },
+      {
+        "name": "Grok variants",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "The paper reports Grok variants and a Grok-based L52+-IIMAS-UNAM system keyword, but not exact versions."
+      },
+      {
+        "name": "Qwen2.5 models used by participant systems",
+        "version_or_snapshot": "Qwen2.5-3B; Qwen2.5-7B; Qwen2.5-14B-Instruct; Qwen2.5-32B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used across prompting, fine-tuning, GRPO/PPO/DPO, and distillation systems; exact checkpoints/access details not fully reported."
+      },
+      {
+        "name": "DeepSeek models used by participant systems",
+        "version_or_snapshot": "DeepSeek-R1; DeepSeek-R1-Distill-Qwen-32B; DeepSeek-V3; DeepSeek-V3.1; DeepSeek-V3.2",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Participant-reported labels; exact access paths and inference dates not reported."
+      },
+      {
+        "name": "Llama models used by participant systems",
+        "version_or_snapshot": "Llama-3-8B; Llama 3.1-8B-Instruct; Llama 4 Scout; unspecified Llama model",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used by systems including YNWA_AZ, AI4PC, and yasamin_al; some references are family-only."
+      },
+      {
+        "name": "Mistral-7B-Instruct-v0.3",
+        "version_or_snapshot": "Mistral-7B-Instruct-v0.3",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Reported for participant systems such as DUTH and DANGNT@SGU."
+      },
+      {
+        "name": "Gemma models used by participant systems",
+        "version_or_snapshot": "Gemma 2; Gemma 3; Gemma 3 27B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used by systems including MINDS, FunnyBorg, and j10official; exact checkpoints/access dates not reported."
+      },
+      {
+        "name": "GLM-4.7-Flash",
+        "version_or_snapshot": "GLM-4.7-Flash",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Listed among participant-used open/proprietary model choices; no further provenance reported."
+      },
+      {
+        "name": "Kimi-K2-Thinking",
+        "version_or_snapshot": "Kimi-K2-Thinking",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Listed among participant-used model choices; no further provenance reported."
+      },
+      {
+        "name": "Phi-2",
+        "version_or_snapshot": "Phi-2 2.7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used by SLPG_FJWU_Insa with QLoRA; paper reports the size but not checkpoint hash or inference date."
+      },
+      {
+        "name": "XLM-RoBERTa",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used by TuLK as a 0–10 funniness classifier/reward component; exact checkpoint not reported."
+      },
+      {
+        "name": "mDeBERTa",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used by YNU-HPCC as a reward model; exact checkpoint not reported."
+      },
+      {
+        "name": "DistilBERT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used by DANGNT@SGU as a reranker; exact checkpoint not reported."
+      },
+      {
+        "name": "BERT / EmoBERTa-style moderator",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "XplaiNLP is described as using a BERT-based ethics moderator/gatekeeper, with Table 7 mentioning EmoBERTa; exact checkpoint not reported."
+      },
+      {
+        "name": "BLIP",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used in several multimodal participant systems, including SLPG_FJWU_Warda, YNWA_AZ, and wangkongqiang; exact BLIP checkpoint not reported."
+      },
+      {
+        "name": "Qwen-Max",
+        "version_or_snapshot": "Qwen-Max",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used by ICT-NLP to retrieve/summarize news article content from headlines; exact snapshot not reported."
+      },
+      {
+        "name": "BGE text embeddings",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used by YNWA_AZ for language-specific vector stores; exact embedding model not reported."
+      },
+      {
+        "name": "Qwen2-VL-7B",
+        "version_or_snapshot": "Qwen2-VL-7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used by ABARUAH for visual grounding."
+      },
+      {
+        "name": "Qwen3-8B",
+        "version_or_snapshot": "Qwen3-8B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used by ABARUAH for humor synthesis."
+      },
+      {
+        "name": "Nemotron Nano 12B VL",
+        "version_or_snapshot": "Nemotron Nano 12B VL",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used by j10official to preprocess GIFs into textual descriptions."
+      },
+      {
+        "name": "Qwen3-Next-80B",
+        "version_or_snapshot": "Qwen3-Next-80B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Reported in wangkongqiang system keywords; exact access and date not reported."
+      },
+      {
+        "name": "Qwen-Plus",
+        "version_or_snapshot": "Qwen-Plus",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reported in wangkongqiang system keywords; exact snapshot not reported."
+      },
+      {
+        "name": "Salamandra-2B-Instruct",
+        "version_or_snapshot": "Salamandra-2B-Instruct",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "exact",
+        "detail": "Used by CUET_Clashing for Spanish-specialized generation."
+      },
+      {
+        "name": "TinyLlama",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Reported in participant-system model-family summaries; exact version not reported."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Official organizer baseline generation",
+        "calls_per_item": null,
+        "candidates_per_item": "Described as a single zero-shot prompt with no candidate ranking; exact number of API calls per item not stated",
+        "token_budget": "Task output limits: B1 captions at most 20 words; B2 punchlines at most 10 words. Model token limits not reported.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Prompt templates are reported in Appendix C. API endpoint, snapshot, generation date, decoding parameters, retry/regeneration policy, and cost are not reported."
+      },
+      {
+        "scope": "Official baseline multimodal input handling",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "B1 at most 20 words; B2 at most 10 words",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "For B1 and B2, the baseline used the first frame of the GIF rather than the full GIF; image resolution, frame-extraction details, and multimodal API settings are not reported."
+      },
+      {
+        "scope": "Pilot 1 generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": "Some Gemini conditions report temperature values: Gemini 2.0 Flash and Gemini 1.5 Flash at t=0.7, 0.9, 1.2, and/or 1.5 depending on subtask/language table entry. Other sampling parameters are not reported.",
+        "compute_or_cost": null,
+        "detail": "Pilot 1 covered 100 A-en items, 100 A-es items, and 20 B-en image-and-constraint items; it evaluated seven baseline conditions and reports Elo ratings."
+      },
+      {
+        "scope": "Pilot 2 generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Pilot 2 compared Gemini 2.5 Pro, Qwen3-235B-A22B, and gpt-oss-120B over 80 battles per language, but generation call counts, candidate counts, and decoding settings are not reported."
+      },
+      {
+        "scope": "Participant generate-then-rank systems",
+        "calls_per_item": null,
+        "candidates_per_item": "4 to 50 candidates per input, with RAGthoven at 4 and lmfaoooo/BAHAHA at 50 explicitly mentioned",
+        "token_budget": null,
+        "sampling_parameters": "The paper says systems varied prompting strategies, humor styles, models, and decoding parameters; specific decoding settings are not summarized for all systems.",
+        "compute_or_cost": null,
+        "detail": "Selection mechanisms included LLM judges, learned rerankers, hand-designed metrics, and human-in-the-loop selection. Per-system call counts, costs, and token budgets are largely absent from this overview paper."
+      },
+      {
+        "scope": "Participant fine-tuning/alignment systems",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports high-level training approaches such as QLoRA, GRPO, PPO, DPO, and SFT, but not uniform inference budgets, training compute, or per-item generation costs."
+      },
+      {
+        "scope": "Organizer B1/B2 dataset construction with LLMs and Giphy API",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The organizers generated Giphy search terms, retrieved top-ranked GIFs through the Giphy API, generated B2 prompts with an LLM, and used LLM-as-judge verification. LLM names, prompt templates, candidate counts, and call budgets are not reported."
+      },
+      {
+        "scope": "Official score computation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Bradley–Terry fit bootstrapped with 1,000 resamples",
+        "detail": "This is an automatic scoring computation over human votes rather than model inference; compute cost is not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Official MWAHAHA final leaderboard",
+        "present": false,
+        "description": "The paper explicitly states that no human-written jokes were included as a reference/baseline.",
+        "directly_comparable": false,
+        "detail": "The Limitations section says adding human authors such as expert comedians and/or laypeople writing under the same constraints would clarify whether leaderboard saturation reflects task saturation or prompt difficulty."
+      },
+      {
+        "scope": "Pilot studies",
+        "present": false,
+        "description": "The pilots compared model-generated outputs only; no human-written joke baseline is reported.",
+        "directly_comparable": false,
+        "detail": "Pilot 1 and Pilot 2 tables list only model systems."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": true,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "No training data were provided by the organizers; only development and test datasets were created.",
+        "Subtask A used rare word-pair constraints and recent news-headline constraints intended to discourage memorization and make retrieval of existing jokes difficult.",
+        "Final test data contained 300 new, unseen examples per subtask; Subtask B used 300 unseen GIFs/pairs for test.",
+        "News headlines were manually curated and inspected to remove potentially sensitive or controversial topics.",
+        "Pairwise comparisons always matched outputs generated under the same constraint, reducing topic confounds."
+      ],
+      "basis": "The benchmark/test items were newly constructed for the 2025–2026 competition rather than a legacy public benchmark, which lowers risk. However, the source headlines and Giphy GIFs came from public web sources; participants could use arbitrary external resources; many evaluated systems were proprietary or later frontier models with unknown training data; the exact model snapshots and inference dates are mostly missing; and the paper itself states that rare-word/headline constraints reduce but do not eliminate memorization risk because constraints may coincide with public jokes or memes. No decontamination test is reported."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "LLM judging affected B2 prompt verification and many participant systems’ candidate selection or synthetic preference construction; it supports descriptive claims about generate-then-rank pipelines and alignment difficulties. The official Elo leaderboards and headline baseline-parity result are based on human pairwise votes, not LLM judges.",
+      "human_validation": "Official final evaluation used 12,936 non-skip human pairwise votes, with reliability analyses including agreement metrics and split-half system-rank correlations. The paper does not report a separate human validation of the unnamed LLM-as-judge B2 prompt verification step.",
+      "detail": "LLM-as-judge is not the primary official evaluator, but it is present in dataset construction and in many submitted systems, so it has secondary influence on what outputs entered human evaluation and on some methodological conclusions about participant approaches."
+    },
+    "reporting_gaps": [
+      "Exact API endpoints, model snapshots, and inference dates are not reported for the Gemini 2.5 Flash official baseline.",
+      "Baseline decoding parameters, random seeds, retry/regeneration policy, token limits, API cost, and number of calls per item are not reported.",
+      "The unnamed LLMs used for Giphy search-term generation, B2 prompt generation, and B2 LLM-as-judge verification are not identified.",
+      "The number of candidate B2 prompts generated before LLM-as-judge verification is not reported.",
+      "Distinct volunteer annotator counts are not reported for either development or final evaluation phases.",
+      "The Prolific annotator count is given only approximately, and exact per-subtask Prolific annotator counts are not reported.",
+      "The number of organizer annotators in Pilot 1 is not reported, and Pilot 2’s annotator population is not explicitly identified.",
+      "Most participant systems lack exact model checkpoints, access method, inference dates, sampling settings, call counts, token budgets, compute costs, and complete per-item candidate counts in this overview paper.",
+      "Six final systems provided no system description and two provided only short notes, limiting provenance and budget auditing for those submissions.",
+      "No human-written joke baseline is included.",
+      "No formal decontamination or memorization test is reported, despite the paper noting residual memorization risk.",
+      "Recruitment constraints for Prolific annotators beyond first language are not reported; demographic balancing was not performed.",
+      "Offensive-flag counts or analyses are not reported in the supplied text, although the interface allowed offensive-content flags."
+    ]
+  }
+}

@@ -222,5 +222,238 @@
     "code_url": "https://github.com/morturr/HumorTransferLearning.git",
     "data_url": "https://github.com/morturr/HumorTransferLearning.git",
     "other": null
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Original Amazon Questions humor annotators",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "The paper says the Amazon dataset contains 19K records annotated for humor by humans; the study downsampled datasets to 6,250 examples before splitting.",
+        "detail": "Annotator count, annotator qualifications, recruitment, and annotation protocol are not reported in this paper."
+      },
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "r/dadjokes Reddit users and Reddit score contributors",
+        "recruitment": "Public Reddit/Kaggle dataset",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Positive Dad Jokes samples were selected as high-confidence positives using Reddit score ≥ 20; lower-score jokes were inputs for GPT-4 Turbo negative-example generation.",
+        "detail": "The paper does not report numbers of Reddit posters or voters, score distribution, or demographics."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Authors or unspecified manual reviewers",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "3,000 GPT-4 Turbo-generated Dad Jokes negative outputs were manually reviewed for style/content preservation and punchline removal.",
+        "detail": "The paper reports 2.63% failed to maintain style or content and no examples retained the punchline; number of reviewers, independence, blinding, and agreement statistics are not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "automatic-metric",
+        "name": "Accuracy",
+        "role": "primary",
+        "blind": null,
+        "detail": "Main transfer-learning results are accuracy scores on dataset labels, averaged over four training seeds."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "F1-score, recall, precision, standard deviation, and 95% confidence intervals",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Reported in appendices using sklearn metrics with pos_label = 1; standard deviations and confidence intervals are computed across four seeds."
+      },
+      {
+        "type": "human-lay",
+        "name": "Amazon Questions original human humor annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "The paper only states that Amazon product-question records were annotated for humor by humans."
+      },
+      {
+        "type": "platform-vote",
+        "name": "Reddit score",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used to select high-confidence positive Dad Jokes samples with Reddit score ≥ 20."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4 Turbo",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Used in a few-shot setup to minimally modify lower-score Dad Jokes to create non-humorous negative examples while preserving style and content."
+      },
+      {
+        "type": "author",
+        "name": "Authors/manual reviewers",
+        "role": "validation",
+        "blind": null,
+        "detail": "Manually reviewed 3,000 GPT-4 Turbo-generated Dad Jokes negatives for generation quality."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "One Liners source/collection labels",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Humorous examples were collected using an algorithm designed to harvest funny one-liners; non-humorous examples came from news headlines, proverbs, and British National Corpus sentences."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Sarcasm Headlines source labels",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Dataset consists of real news headlines and sarcastic headlines from The Onion; this paper does not report a separate human annotation process for these labels."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "GPT-4 Turbo generation of Dad Jokes negative examples",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper describes generating negative examples by minimally modifying lower-score jokes, but does not report number of candidates per input, decoding settings, or whether multiple candidates were generated and selected. Manual review assessed quality rather than reporting a best-of-N selection procedure."
+      },
+      {
+        "scope": "LLaMA-2 and Mistral classification outputs during zero-shot and fine-tuned evaluation",
+        "mode": "single-sample",
+        "n": "Not explicitly reported; no multiple-candidate or best-of-N procedure is described.",
+        "selector": "none",
+        "detail": "Evaluation used model.generate() with max_new_tokens = 5 to produce classification responses; results are averaged across training seeds, not selected among multiple generated candidates."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "LLaMA-2-7B",
+        "version_or_snapshot": "Hugging Face identifier meta-llama/Llama-2-7b-hf",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Loaded via AutoModelForCausalLM/AutoTokenizer, with 4-bit quantization; base version used for zero-shot validation and LoRA instruction-fine-tuned for main experiments. Exact revision/hash and inference dates are not reported."
+      },
+      {
+        "name": "Mistral-7B",
+        "version_or_snapshot": "Hugging Face identifier mistralai/Mistral-7B-v0.1",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Loaded via AutoModelForCausalLM/AutoTokenizer, with 4-bit quantization; base version used for zero-shot validation and LoRA instruction-fine-tuned for main experiments. Also used as pretrained Mistral for embedding similarity analysis. Exact revision/hash and inference dates are not reported."
+      },
+      {
+        "name": "GPT-4 Turbo",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used for few-shot generation of negative Dad Jokes examples; exact OpenAI model snapshot, API parameters, and generation dates are not reported."
+      },
+      {
+        "name": "ChatGPT",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Reported in Appendix M as writing/coding assistance only; not used as an empirical evaluator in the reported experiments."
+      },
+      {
+        "name": "GitHub Copilot",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Reported in Appendix M as writing/coding assistance only; not used as an empirical evaluator in the reported experiments."
+      },
+      {
+        "name": "Google Gemini",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Reported in Appendix M as writing/coding assistance only; not used as an empirical evaluator in the reported experiments."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Fine-tuning and hyperparameter search for LLaMA-2-7B and Mistral-7B",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "max_seq_length = 1024 for SFTTrainer",
+        "sampling_parameters": "Hyperparameter search over learning rate {3e-4, 5e-5, 6e-5}, LoRA rank {32, 64, 128}, and LoRA alpha {8, 16, 32}; 10 randomly sampled configurations per dataset from 27; 2 epochs; batch size 4 when possible and 2 for longer inputs; LoRA dropout = 0.1; gradient_accumulation_steps = 4; gradient_checkpointing = True.",
+        "compute_or_cost": "Training used a mix of A6000, A40, and L40S GPUs; training and evaluation of all experiments took approximately 14 days total. Monetary cost is not reported.",
+        "detail": "Single, double, and triple dataset experiments used 5,000 training examples. Main experiments used four random seeds: 7, 18, 28, and 42. Configurations were selected by median accuracy as described in Appendix E."
+      },
+      {
+        "scope": "Generation-based classification evaluation for LLaMA-2 and Mistral",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "max_new_tokens = 5",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper reports use of model.generate() for evaluation but does not report decoding parameters such as temperature, top_p, do_sample, num_beams, or num_return_sequences."
+      },
+      {
+        "scope": "GPT-4 Turbo Dad Jokes negative-example generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Few-shot prompt is provided in Appendix A; exact call count, candidate count, context/token limits, decoding parameters, inference dates, and cost are not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Humor detection and cross-dataset transfer experiments",
+        "present": false,
+        "description": "No human classifier or human transfer-learning baseline is reported. Human involvement is limited to pre-existing dataset labels and manual validation of generated Dad Jokes negatives.",
+        "directly_comparable": false,
+        "detail": "Model performance is compared across model/dataset training conditions and zero-shot model validation, not against humans under matched conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Zero-shot validation on the validation splits showed near-guess accuracy ranges of 40% to 56%, which the authors use to argue the models were not already strong on the tasks.",
+        "Random downsampling and train/validation/test splits were used before fine-tuning, so test examples were held out from the study's fine-tuning data.",
+        "Dad Jokes negative examples were generated for this study with GPT-4 Turbo and manually reviewed.",
+        "The authors performed domain classification to assess distinctness among datasets, though this addresses inter-dataset overlap rather than pretraining contamination."
+      ],
+      "basis": "The evaluated datasets are largely public legacy or web datasets: One Liners, Amazon Questions, Sarcasm Headlines, and Reddit Dad Jokes, with additional GPT-4 Turbo-generated negatives. Exact pretraining cutoffs, model revisions, and deduplication/decontamination against test examples are not reported. Some source data clearly predates the 2023 base models and other sources are contemporaneous or unclear. The paper addresses zero-shot familiarity but not benchmark contamination directly, so public-test contamination remains a moderate uncertainty."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": "No headline evaluation claim is based on an LLM judge scoring model outputs; however, Dad Jokes results depend on GPT-4 Turbo-generated negative examples as dataset construction.",
+      "human_validation": "The authors manually reviewed 3,000 GPT-4 Turbo-generated negatives and reported 2.63% style/content failures and no retained punchlines.",
+      "detail": "GPT-4 Turbo is used as a data generator for negative examples, not as a metric or evaluator of model outputs. Main results use automatic metrics against dataset labels."
+    },
+    "reporting_gaps": [
+      "Counts, demographics, geography, recruitment, and annotation protocols for original human annotators or Reddit voters are not reported in this paper.",
+      "Manual review protocol for the 3,000 generated Dad Jokes negatives is incomplete: number of reviewers, blinding, independence, adjudication, and inter-annotator agreement are not reported.",
+      "Exact GPT-4 Turbo model snapshot/version, API access method, inference dates, decoding parameters, candidate count per input, filtering policy after review, and cost are not reported.",
+      "Exact Hugging Face model revisions/hashes and inference dates for LLaMA-2-7B and Mistral-7B are not reported.",
+      "Evaluation decoding parameters beyond max_new_tokens = 5 are not reported, including temperature, top_p, do_sample, beams, and number of returned sequences.",
+      "The paper does not report a decontamination or deduplication check against the pretrained models' corpora or exact benchmark publicness relative to model training cutoffs.",
+      "The exact number of Dad Jokes inputs used for GPT-4 Turbo negative generation before downsampling/pairing is not reported.",
+      "No directly comparable human performance baseline is reported."
+    ]
   }
 }

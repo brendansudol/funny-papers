@@ -1,0 +1,3 @@
+<!-- guide claims for x28-counterfactual-unfairness (Part 6 (relational fairness)) -->
+
+**Relational fairness under identity swaps:** [**Investigating Counterfactual Unfairness in LLMs towards Identities through Humor**](https://aclanthology.org/2026.acl-long.2041/) (Kim, Son, Park et al., ACL 2026) `peer-reviewed` `benchmark` holds joke and situation fixed while swapping speaker and listener identities. Across its tasks, privileged speakers are refused up to 67.5% more often, assigned malicious intent up to 64.7% more often, and judged up to 1.5/5 points more socially harmful. These maxima vary by identity pairing and rely partly on validated LLM judges, but the design usefully exposes *relational* disparities that content-only safety tests miss.

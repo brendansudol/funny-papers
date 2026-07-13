@@ -178,5 +178,255 @@
     "code_url": null,
     "data_url": null,
     "other": "https://improbotics.org"
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "live-audience",
+        "participant_count": "over 1750 people",
+        "population": "Audience members attending Improbotics AI-based improv theatre performances at the 2023 Edinburgh Festival Fringe.",
+        "recruitment": "Ticketed/public festival performances; the show framing in the festival program and on stage made clear that AI assisted the improvisers.",
+        "geography": "Edinburgh Festival Fringe 2023, Edinburgh, UK",
+        "languages": [
+          "English"
+        ],
+        "observations": "26 unique performances; average attendance reported as 67 audience members per show and later as 63% seat capacity in a 106-seat venue.",
+        "detail": "This is attendance/exposure to the live system, distinct from the smaller post-performance survey sample."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": "150 unique individual responses",
+        "population": "Audience members who attended one of the 26 shows and completed the anonymous post-performance Qualtrics survey.",
+        "recruitment": "QR code shown before and after the show; participants read a study statement and consented before proceeding.",
+        "geography": "Edinburgh Festival Fringe 2023, Edinburgh, UK",
+        "languages": [
+          "English"
+        ],
+        "observations": "All 150 answered the first 5 questions; the subsequent 15 questions were answered on average by 109 unique individuals; Q12 had 109 responses and Q14 had 100 responses.",
+        "detail": "No demographic data were collected; authors state the survey results are for discussion rather than statistically significant claims because data were collected in the wild with many uncontrolled variables."
+      },
+      {
+        "role": "content-creator",
+        "participant_count": "20 different improvisers",
+        "population": "Improbotics human improvisers/professional actors performing with the AI system across the festival run.",
+        "recruitment": "Improbotics cast and guest improvisers; actors tried the system and provided regular feedback during participatory iterative design.",
+        "geography": "Edinburgh Festival Fringe 2023, Edinburgh, UK",
+        "languages": [
+          "English"
+        ],
+        "observations": "Various groups of the 20 improvisers performed across 26 shows; performer feedback and close observations informed game and interface design.",
+        "detail": "This performer population is distinct from the reported actor-survey response count."
+      },
+      {
+        "role": "survey-respondent",
+        "participant_count": null,
+        "population": "Actors/improvisers who performed with and/or as the Cyborg and completed the anonymous actor survey.",
+        "recruitment": "Survey links shared by email; participants read a study statement and consented before proceeding.",
+        "geography": "Edinburgh Festival Fringe 2023, Edinburgh, UK",
+        "languages": [
+          "English"
+        ],
+        "observations": "21 individual actor-survey responses over the course of 26 shows.",
+        "detail": "The paper reports 21 individual responses, not a unique actor-participant count; no demographic data were collected."
+      }
+    ],
+    "judges": [
+      {
+        "type": "live-audience",
+        "name": "audience survey respondents",
+        "role": "primary",
+        "blind": false,
+        "detail": "Audience respondents rated and described perceptions of A.L.Ex/the robot/AI after shows, including entertainment, anthropomorphism, responsiveness, acting ability, and attitudes toward AI creativity."
+      },
+      {
+        "type": "human-expert",
+        "name": "actor survey respondents",
+        "role": "primary",
+        "blind": false,
+        "detail": "Performers provided Likert-style and open-ended evaluations of performing with A.L.Ex, including meaningful contributions, collaboration, absurd/random information, story advancement, obstacles, surprise, and enjoyment."
+      },
+      {
+        "type": "human-expert",
+        "name": "Curator",
+        "role": "primary",
+        "blind": true,
+        "detail": "A human curator selected lines in real time from a stream of LLM-generated candidates; the paper states the person selecting lines did not know which LLM produced each response, enabling later analysis of model selection rates."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "dialogue system logs",
+        "role": "primary",
+        "blind": null,
+        "detail": "Logs from all 26 performances recorded speech-recognition results, operator context metadata, LLM-generated lines, and curator-selected lines; the authors used them to analyze generated-line counts and normalized selection chances by model."
+      },
+      {
+        "type": "author",
+        "name": "authors/creative team close observations",
+        "role": "secondary",
+        "blind": false,
+        "detail": "The paper reports close observations of performances and rehearsal/design iterations, including qualitative claims about delays, non-sequiturs, turn-taking, audience laughter as an informal game-design feedback mechanism, and performer/audience experience."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "live improvised dialogue lines for A.L.Ex/Cyborg/Robot",
+        "mode": "best-of-n",
+        "n": "not fixed or not reported; a continuous stream of multiple candidate lines from multiple LLMs, with prompts asking for several possible responses",
+        "selector": "human",
+        "detail": "For each incoming speech-recognition or operator-context update, the system prompted LLMs and displayed generated lines; the curator selected a subset/best response in real time, without seeing which LLM produced it, and selected lines were sent via text-to-speech/earpiece or robot."
+      },
+      {
+        "scope": "AI-generated PowerPoint slides for Improvised TED Talk game",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper says this game relied on AI-generated PowerPoint slides, unbeknownst to the actor, but does not specify the generation model, number of candidates, or whether any selection/curation occurred."
+      },
+      {
+        "scope": "real-time generated images for Movie Pitch game",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The paper says image generators were used to output images in real time illustrating or disrupting an improvised film pitch; model names, candidate counts, and selection procedure are not reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "gpt-3.5-turbo",
+        "version_or_snapshot": null,
+        "inference_date": "2023 Edinburgh Festival Fringe",
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Reported as Chat GPT-3.5/OpenAI and shown as gpt-3.5-turbo in Figure 4; accessed remotely via the OpenAI ChatGPT-3.5 API. No API snapshot, exact version, or exact inference dates are reported."
+      },
+      {
+        "name": "text-bison",
+        "version_or_snapshot": null,
+        "inference_date": "2023 Edinburgh Festival Fringe",
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Reported as PaLM 2/Google and shown as text-bison in Figure 4; accessed via the Google PaLM 2 API. No API snapshot or exact version is reported."
+      },
+      {
+        "name": "llama-2-13b-chat",
+        "version_or_snapshot": "4-bit quantized",
+        "inference_date": "2023 Edinburgh Festival Fringe",
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Reported as Llama 2 13B chat, served locally as a 4-bit quantized model on the stage laptop. No exact checkpoint hash or implementation version is reported."
+      },
+      {
+        "name": "whisper-small.en",
+        "version_or_snapshot": "4-bit quantized; modified C++ Whisper implementation",
+        "inference_date": "2023 Edinburgh Festival Fringe",
+        "access": "local",
+        "reporting": "partial",
+        "detail": "Used continuously for speech recognition with a USB Blue Yeti microphone; the paper reports a typical 0.3s latency on a MacBook Pro M2 with 96GB memory. No exact commit/hash is reported."
+      },
+      {
+        "name": "ChatGPT-4 API",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "family-only",
+        "detail": "The Appendix states that the LLM server used the OpenAI ChatGPT-3.5 and ChatGPT-4 API to access remote LLMs, but the main deployment/results describe a three-LLM stream consisting of ChatGPT-3.5, PaLM 2/text-bison, and Llama 2; no GPT-4 model ID, scope of use, or results are reported."
+      },
+      {
+        "name": "unnamed image-generation model(s) for Movie Pitch",
+        "version_or_snapshot": null,
+        "inference_date": "2023 Edinburgh Festival Fringe",
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "The paper states that image generators were used in real time for the Movie Pitch game but does not name the model(s) or service(s)."
+      },
+      {
+        "name": "unnamed slide-generation system for Improvised TED Talk",
+        "version_or_snapshot": null,
+        "inference_date": "2023 Edinburgh Festival Fringe",
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "The paper states that AI-generated PowerPoint slides were used for the Improvised TED Talk game but does not report the model or system details."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "continuous speech recognition during live shows",
+        "calls_per_item": "continuous during the show; each line of recognised speech was sent to the language-model server",
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "4-bit quantized whisper-small.en using a modified C++ implementation on a MacBook Pro M2 with 96GB memory; typical latency reported as 0.3s; cost not reported",
+        "detail": "A single Blue Yeti USB microphone on a stand at the front of the stage captured speech, resulting in numerous transcription errors according to the paper."
+      },
+      {
+        "scope": "dialogue LLM generation for live improvised lines",
+        "calls_per_item": "Each incoming line of speech-recognised text and each line of operator-entered context was processed into a prompt for the LLMs; the main analysis describes three LLMs prompted simultaneously, but exact call counts are not reported",
+        "candidates_per_item": "Several possible responses were requested and displayed as a continuous stream; exact number of candidates per prompt/item is not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "gpt-3.5-turbo and text-bison were remote API services; llama-2-13b-chat was 4-bit quantized and served locally on the stage laptop; API costs and rate limits are not reported",
+        "detail": "A typical prompt included a system prompt, speech-recognition dialogue lines prefixed by a manually entered speaker name, operator-entered context metadata, and an instruction such as “Write several possible responses for Alex.”"
+      },
+      {
+        "scope": "human curation and delivery of generated dialogue",
+        "calls_per_item": null,
+        "candidates_per_item": "Curator viewed a stream of LLM-generated lines and selected only a small subset; exact displayed and selected counts are not reported",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Text-to-speech/radio/earpiece delivery was used, but the TTS system/model and cost are not reported",
+        "detail": "Selected lines were sent by text-to-speech to a human Cyborg performer’s earpiece or to a robot; the paper notes curation and delivery introduced delays."
+      },
+      {
+        "scope": "AI-generated slides and images in secondary games",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper mentions AI-generated PowerPoint slides and real-time image generation but does not report models, prompts, candidate counts, compute, latency, or costs."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "AI dialogue/acting ability compared with human improvisers",
+        "present": false,
+        "description": "Human improvisers performed alongside the AI and audience questions referenced humans and robots, but the study did not include a human-only condition or matched human-generated dialogue evaluated under the same conditions.",
+        "directly_comparable": false,
+        "detail": "The paper uses human performance context and audience/actor perceptions, not a controlled directly comparable human baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "Evaluation data came from live improvised 2023 performances, system logs, and post-performance surveys rather than a public legacy benchmark.",
+        "Prompts included real-time speech recognition and operator-entered scene metadata from newly improvised scenes."
+      ],
+      "basis": "This is a situated live-performance evaluation with newly generated dialogue context and newly collected human survey/log data, so benchmark memorization is unlikely to drive the reported audience, actor, and curation findings. The paper does not report any formal decontamination test, and model pretraining could contain general improv/comedy material, but no static public test set is central to the claims."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Claims are based on human curator selections, audience surveys, actor surveys, dialogue logs, and author observations; no LLM is reported as an evaluator or metric.",
+      "detail": "LLMs generate dialogue and other creative material but do not judge, score, or label outputs in the reported evaluation."
+    },
+    "reporting_gaps": [
+      "Exact API snapshots/versions and exact inference dates are not reported for gpt-3.5-turbo, text-bison/PaLM 2, or ChatGPT-4.",
+      "The Appendix mentions ChatGPT-4 API access, but the main results describe only three LLMs; the scope and results of any GPT-4 use are unclear.",
+      "Token/context limits, sampling parameters, temperature/top-p, maximum response length, rate limits, and API costs are not reported.",
+      "Exact numbers of generated lines and curator-selected lines per model/per show are not reported; the paper only states that normalized selection chances were comparable.",
+      "The number, identity, training, and consistency of operators/curators are not fully specified; no inter-rater or multi-curator reliability is reported.",
+      "No demographic data were collected for audience or actor survey respondents.",
+      "Survey response attrition is substantial: all 150 audience respondents answered the first five questions, but later questions averaged 109 unique individuals; the paper presents results for discussion rather than statistical significance.",
+      "No controlled human baseline or human-only comparison condition is reported.",
+      "The text-to-speech system/model is not named.",
+      "Image-generation and slide-generation models used in secondary games are not named, and their prompts/budgets/selection procedures are not reported.",
+      "Audience laughter is described as an informal feedback/success criterion for game design but is not quantitatively measured.",
+      "Raw survey data, dialogue logs, model outputs, and code are not reported as publicly released in the paper."
+    ]
   }
 }

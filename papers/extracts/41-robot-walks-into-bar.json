@@ -176,5 +176,170 @@
     "code_url": null,
     "data_url": null,
     "other": "The paper states that full outputs of the writing sessions, individual survey results, and raw focus-group transcripts will be shared in anonymised form as supplementary material once the work is published."
+  },
+  "evidence_enriched_at": "2026-07-12",
+  "evidence_extraction_model": "gpt-5.5",
+  "evidence_extraction_reasoning_effort": "high",
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "20",
+        "population": "Professional comedians/performers who perform live shows in front of audiences and who already use AI in their artistic process.",
+        "recruitment": "Authors reached out to comedians performing at Edinburgh Festival Fringe 2023 or in their network; they attempted to recruit a diverse pool along linguistic, cultural, gender, sexual, national, and racial dimensions. Participants registered through Prolific via an allowlist and were paid £300 for a 3-hour workshop.",
+        "geography": "10 participated in person at Edinburgh Festival Fringe 2023; 10 participated online in three workshops with 3, 4, and 3 participants. No demographic data were collected because participant anonymity was an ethics requirement.",
+        "languages": [
+          "German",
+          "Dutch",
+          "English",
+          "French",
+          "Hindi",
+          "Swedish",
+          "Tamil"
+        ],
+        "observations": "Four workshops; around 45 minutes of individual LLM-based comedy writing per participant; three post-writing surveys; one-hour focus-group discussions. Only 10 participants responded to the Likert item “Collaborated with AI.”",
+        "detail": "Participants were invited to use the language(s) they felt most comfortable with. The paper reports a 5-level Likert survey, a Creativity Support Index questionnaire, free-form survey questions, and focus-group transcripts/quotes from anonymised participants p1–p20."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Paper authors / researchers conducting qualitative analysis.",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "Focus-group transcripts were automatically transcribed using Google Meet speech recognition tools, manually verified against moderator notes, anonymised, and analysed by constant comparison analysis with sentence-by-sentence open coding, grouping into themes, and identification of themes coherent across focus groups.",
+        "detail": "The paper does not report the number of coders, intercoder reliability, or a full codebook; it states that authors independently reviewed transcripts to remove personally identifiable information."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-expert",
+        "name": "Professional comedian workshop participants",
+        "role": "primary",
+        "blind": false,
+        "detail": "Participants interacted with LLMs and provided the primary evaluative evidence through Likert ratings, Creativity Support Index responses, free-form survey comments, and focus-group discussion. They knew they were using AI tools."
+      },
+      {
+        "type": "author",
+        "name": "Paper authors / qualitative analysts",
+        "role": "primary",
+        "blind": false,
+        "detail": "Authors manually verified transcripts, anonymised them, and performed constant comparison analysis to derive qualitative themes reported in Section 4."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Creativity Support Index (CSI)",
+        "role": "primary",
+        "blind": null,
+        "detail": "CSI was computed from the participant questionnaire to produce quantitative scores such as μ = 54.6, σ = 18.1. The metric is a formula applied to human survey responses, not an LLM judge."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "August 2023 in-person comedy-writing exercise",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "The 10 in-person participants spent around 45 minutes individually using study-provided ChatGPT-3.5 through a plain-text interface similar to ChatGPT. The exercise was open-ended; no fixed prompt set, per-item candidate count, sampling count, or best-of-N selection protocol was reported."
+      },
+      {
+        "scope": "Online comedy-writing exercises",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "The 10 online participants, split across three workshops of 3, 4, and 3, used their preferred model via personal accounts: ChatGPT-3.5, ChatGPT-4, or Google Bard powered by Gemini Pro. Interaction was open-ended and participant-directed; no per-prompt candidate counts or formal selection rules were reported."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "ChatGPT-3.5",
+        "version_or_snapshot": null,
+        "inference_date": "August 2023 and December 2023 workshops",
+        "access": "mixed",
+        "reporting": "partial",
+        "detail": "In the first workshop, participants were provided access to ChatGPT-3.5 served via a plain-text interface similar to ChatGPT. In later online workshops, some participants used ChatGPT-3.5 via personal accounts. Exact model snapshot/API version was not reported."
+      },
+      {
+        "name": "ChatGPT-4",
+        "version_or_snapshot": null,
+        "inference_date": "December 2023 workshops",
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used by some online participants through their personal account. The paper does not report the exact GPT-4/ChatGPT-4 snapshot or how many participants used it."
+      },
+      {
+        "name": "Google Bard powered by Gemini Pro",
+        "version_or_snapshot": "December 2023 version",
+        "inference_date": "December 2023 workshops",
+        "access": "hosted-service",
+        "reporting": "partial",
+        "detail": "Used by some online participants through their personal account. The paper identifies Bard as powered by Gemini Pro and specifies “December 2023 version,” but not an exact snapshot."
+      },
+      {
+        "name": "Google Meet speech recognition tools",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "hosted-service",
+        "reporting": "family-only",
+        "detail": "Used to automatically transcribe focus-group audio before manual verification; not an evaluated comedy-writing model."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "LLM comedy-writing sessions across all workshops",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Participants spent around 45 minutes using an LLM in an open-ended writing exercise. The paper does not report number of prompts, number of generations, token limits, context-window limits, temperature, decoding parameters, model-call counts, or inference cost."
+      },
+      {
+        "scope": "Google Meet speech-recognition transcription of focus groups",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Focus groups were recorded as audio, automatically transcribed with Google Meet speech recognition tools, manually verified, and then the audio/video recordings were destroyed. Exact transcription model, settings, and processing budget were not reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Creativity-support evaluation for comedy writing",
+        "present": false,
+        "description": "The study did not include a matched human-only writing condition or a controlled comparison against comedy material written without AI. Participants discussed differences between LLM use and working alone, with other comedians, or with resources such as Wikipedia/Google search, but these were qualitative reflections rather than a directly comparable baseline.",
+        "directly_comparable": false,
+        "detail": "The primary quantitative evidence is participant evaluation after using LLM tools; no parallel human baseline was scored under the same CSI/Likert setup."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "The evaluation was based on newly conducted 2023 workshops, surveys, and focus groups rather than a fixed public benchmark.",
+        "There were no ground-truth benchmark items or held-out test labels used to score model accuracy."
+      ],
+      "basis": "This is an HCI/user-study evaluation of LLMs as comedy-writing support tools, not a public benchmark evaluation. The paper discusses copyrighted training data and possible plagiarism concerns, but it does not discuss benchmark contamination because no legacy benchmark is used."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "LLMs were the writing tools being evaluated. The paper’s conclusions are based on human participant surveys/focus groups, CSI computation, and author qualitative analysis; no LLM was used to judge humor quality or determine the headline claims."
+    },
+    "reporting_gaps": [
+      "Exact ChatGPT-3.5 and ChatGPT-4 model snapshots, API versions, and system prompts are not reported.",
+      "The paper does not report how many online participants used each model, nor participant-level model assignments.",
+      "The access details for the study-provided ChatGPT-3.5 plain-text interface are not fully specified, including whether it used an API and which backend snapshot was served.",
+      "Number of prompts, number of model calls, number of generated outputs, candidate counts, and any best-of-N or selection procedure are not reported.",
+      "Token budgets, context-window limits, sampling/decoding parameters such as temperature or top-p, and inference costs are not reported.",
+      "The paper does not provide numerical response counts for all Likert items in the text; it notes only that 10 participants answered “Collaborated with AI.”",
+      "No demographic data were collected because participant anonymity was required, limiting demographic analysis.",
+      "The qualitative coding procedure does not report number of coders, intercoder agreement, adjudication process, or a complete codebook.",
+      "Raw writing-session outputs, individual survey results, and raw focus-group transcripts were not included in the paper text; the paper states they would be shared in anonymised form as supplementary material once published.",
+      "There is no directly comparable human-only baseline condition."
+    ]
   }
 }
