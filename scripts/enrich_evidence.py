@@ -18,14 +18,16 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-from evidence_schema import EVIDENCE_INSTRUCTIONS, EVIDENCE_PROFILE_SCHEMA
+try:
+    from evidence_schema import EVIDENCE_INSTRUCTIONS, EVIDENCE_PROFILE_SCHEMA
+    from paper_sources import is_restricted, paper_md_path
+except ModuleNotFoundError:  # Imported as scripts.enrich_evidence in tests/tools.
+    from scripts.evidence_schema import EVIDENCE_INSTRUCTIONS, EVIDENCE_PROFILE_SCHEMA
+    from scripts.paper_sources import is_restricted, paper_md_path
 
 ROOT = Path(__file__).resolve().parent.parent
 PAPERS_PATH = ROOT / "papers" / "papers.json"
 EXTRACTS_DIR = ROOT / "papers" / "extracts"
-
-sys.path.insert(0, "/Users/bren/Documents/code/pdf-to-md")
-from pdf_to_md import load_default_env_files  # noqa: E402
 
 MODEL = "gpt-5.5"
 REASONING_EFFORT = "high"
@@ -47,6 +49,14 @@ Extract only study-design facts supported by the supplied paper. The existing ex
 {EVIDENCE_INSTRUCTIONS}"""
 
 
+def load_default_env_files() -> None:
+    """Use the required sibling project's environment loader for paid runs."""
+    sys.path.insert(0, "/Users/bren/Documents/code/pdf-to-md")
+    from pdf_to_md import load_default_env_files as load  # type: ignore
+
+    load()
+
+
 def build_client():
     from openai import OpenAI
 
@@ -54,8 +64,21 @@ def build_client():
 
 
 def call_model(client, paper: dict, extract: dict, markdown: str) -> dict:
+    source_scope = paper.get("extraction", {}).get("source_scope", "complete paper")
+    pending = [
+        source.get("label", "publisher source")
+        for source in paper.get("official_sources", [])
+        if source.get("consulted") is False
+    ]
+    pending_note = (
+        "\nUNCONSULTED CATALOG SOURCES (do not infer evidence from these): "
+        + "; ".join(pending)
+        if pending
+        else ""
+    )
     user_content = (
-        f"PAPER IDENTITY: {paper['ref']} / {paper['key']} / {paper['title']}\n\n"
+        f"PAPER IDENTITY: {paper['ref']} / {paper['key']} / {paper['title']}\n"
+        f"CONSULTED SOURCE SCOPE: {source_scope}.{pending_note}\n\n"
         f"EXISTING STRUCTURED EXTRACT:\n{json.dumps(extract, ensure_ascii=False)}\n\n"
         f"FULL PAPER MARKDOWN:\n\n{markdown}"
     )
@@ -97,22 +120,41 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--only", help="Enrich only this paper key")
     parser.add_argument("--force", action="store_true", help="Replace an existing evidence profile")
+    parser.add_argument(
+        "--include-restricted",
+        action="store_true",
+        help="Explicitly allow a restricted source (single-pass sources only)",
+    )
     parser.add_argument("--workers", type=int, default=4)
     args = parser.parse_args()
 
-    load_default_env_files()
     papers = json.loads(PAPERS_PATH.read_text(encoding="utf-8"))["papers"]
+    selected = next((paper for paper in papers if paper["key"] == args.only), None)
+    if args.only and selected is None:
+        parser.error(f"unknown paper key: {args.only}")
+    if selected and is_restricted(selected) and not args.include_restricted:
+        parser.error("restricted sources require --include-restricted")
+    if args.include_restricted and not args.only:
+        parser.error("paid restricted enrichment requires a scoped --only KEY")
+
     todo = []
     for paper in papers:
-        if paper.get("status") != "converted":
+        if paper.get("status") != "converted" and not (
+            is_restricted(paper) and args.include_restricted
+        ):
             continue
         if args.only and paper["key"] != args.only:
             continue
         extract_path = EXTRACTS_DIR / f"{paper['key']}.json"
+        if not extract_path.exists():
+            continue
         extract = json.loads(extract_path.read_text(encoding="utf-8"))
         if not args.force and extract.get("evidence_profile"):
             continue
         todo.append((paper, extract_path, extract))
+
+    if todo:
+        load_default_env_files()
 
     print(
         f"Enriching {len(todo)} evidence profiles with {args.workers} workers "
@@ -129,11 +171,18 @@ def main() -> int:
     def process(item) -> tuple[str, bool, str]:
         paper, extract_path, extract = item
         key = paper["key"]
-        markdown = (ROOT / paper["md_path"]).read_text(encoding="utf-8")
-        if len(markdown) > MAX_CHARS:
-            markdown = markdown[:MAX_CHARS]
         started = time.time()
         try:
+            if paper.get("extraction", {}).get("strategy") == "chapters":
+                raise ValueError(
+                    "book-length evidence must be regenerated through extract_papers.py "
+                    "so the profile is synthesized from complete chapter records"
+                )
+            markdown = paper_md_path(ROOT, paper).read_text(encoding="utf-8")
+            if len(markdown) > MAX_CHARS:
+                raise ValueError(
+                    f"source has {len(markdown):,} characters; refusing to truncate it"
+                )
             profile = call_model(get_client(), paper, extract, markdown)
             extract["evidence_enriched_at"] = time.strftime("%Y-%m-%d")
             extract["evidence_extraction_model"] = MODEL

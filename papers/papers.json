@@ -2,7 +2,7 @@
   "generated_from": "humor-and-llms-field-guide.md",
   "created": "2026-07-03",
   "updated": "2026-07-13",
-  "note": "Master catalog of papers referenced in the field guide. `key` is the canonical file/dir name (papers/pdfs/<key>.pdf, papers/md/<key>/). `ref` is the entry number in the guide. Status lifecycle: pending -> downloaded -> converted; or unavailable / download_failed. `verify` is a lowercase phrase expected in the first pages of the PDF (sanity check against grabbing the wrong paper). New and refreshed entries pin `source_version`, `source_checked`, and `pdf_retrieved_at`; older entries retain their original PDF provenance and hash.",
+  "note": "Master catalog of papers referenced in the field guide. `key` is the canonical file/dir name for distributed sources. `ref` is the entry number in the guide. Status lifecycle: pending -> downloaded -> converted; restricted marks a consulted primary source whose PDF and full-text derivatives are kept outside the repository; other terminal states include unavailable and download_failed. `verify` is a lowercase phrase expected in the first pages of the PDF (sanity check against grabbing the wrong paper). New and refreshed entries pin `source_version`, `source_checked`, and `pdf_retrieved_at`; older entries retain their original PDF provenance and hash.",
   "papers": [
     {
       "key": "t1-ssth",
@@ -17,8 +17,73 @@
       ],
       "page_url": "https://link.springer.com/book/10.1007/978-94-009-6472-3",
       "pdf_candidates": [],
-      "status": "unavailable",
-      "note": "Book; no open-access PDF."
+      "status": "restricted",
+      "access_notice": "Restricted primary source consulted; full text not distributed.",
+      "official_sources": [
+        {
+          "label": "Springer book page",
+          "url": "https://link.springer.com/book/10.1007/978-94-009-6472-3",
+          "consulted": true
+        }
+      ],
+      "restricted_source": {
+        "consulted_at": "2026-07-13",
+        "scope": "complete book",
+        "page_count": 308,
+        "sha256": "a1ebfeb2165adb4d148adde9ded54476788f370ae90e16f212acad0f09358190"
+      },
+      "extraction": {
+        "strategy": "chapters",
+        "source_scope": "complete book",
+        "units": [
+          {
+            "id": "front-matter",
+            "title": "Front matter",
+            "pages": "1-23"
+          },
+          {
+            "id": "chapter-1",
+            "title": "Survey of Humor Research",
+            "pages": "24-67"
+          },
+          {
+            "id": "chapter-2",
+            "title": "Theory",
+            "pages": "68-81"
+          },
+          {
+            "id": "chapter-3",
+            "title": "Semantic Theory",
+            "pages": "82-121"
+          },
+          {
+            "id": "chapter-4",
+            "title": "Semantic Theory of Humor",
+            "pages": "122-170"
+          },
+          {
+            "id": "chapter-5",
+            "title": "Sexual Humor",
+            "pages": "171-202"
+          },
+          {
+            "id": "chapter-6",
+            "title": "Ethnic Humor",
+            "pages": "203-244"
+          },
+          {
+            "id": "chapter-7",
+            "title": "Political Humor",
+            "pages": "245-269"
+          },
+          {
+            "id": "back-matter",
+            "title": "Afterword, appendices, references, and indexes",
+            "pages": "270-308"
+          }
+        ]
+      },
+      "note": "Book-length restricted source. Public outputs may include derived analysis only; the PDF, transcription, page files, manifests, chapter intermediates, and run logs are not distributed."
     },
     {
       "key": "t2-gtvh",
@@ -31,10 +96,28 @@
       "tags": [
         "theory"
       ],
-      "page_url": null,
+      "page_url": "https://www.degruyterbrill.com/document/doi/10.1515/humr.1991.4.3-4.293/html?lang=en",
       "pdf_candidates": [],
-      "status": "unavailable",
-      "note": "Paywalled journal article / book; no open-access PDF."
+      "status": "restricted",
+      "access_notice": "Restricted primary source consulted; full text not distributed.",
+      "official_sources": [
+        {
+          "label": "De Gruyter article page",
+          "url": "https://www.degruyterbrill.com/document/doi/10.1515/humr.1991.4.3-4.293/html?lang=en",
+          "consulted": true
+        }
+      ],
+      "restricted_source": {
+        "consulted_at": "2026-07-13",
+        "scope": "complete journal article",
+        "page_count": 56,
+        "sha256": "80a96aab4893ba9b0369feabfc774898a2c9323063fbcba68c608161d32fa8cc"
+      },
+      "extraction": {
+        "strategy": "single",
+        "source_scope": "complete journal article"
+      },
+      "note": "Paywalled journal article consulted as a restricted primary source; full text and full-text derivatives are not distributed."
     },
     {
       "key": "t3-inside-jokes",
@@ -65,8 +148,123 @@
       ],
       "page_url": "https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731",
       "pdf_candidates": [],
-      "status": "unavailable",
-      "note": "Book; no open-access PDF."
+      "status": "restricted",
+      "access_notice": "Restricted primary source consulted; full text not distributed.",
+      "official_sources": [
+        {
+          "label": "Routledge book page",
+          "url": "https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731",
+          "consulted": true
+        }
+      ],
+      "restricted_source": {
+        "consulted_at": "2026-07-13",
+        "scope": "complete book",
+        "page_count": 278,
+        "sha256": "32f7c3ed3c6ef8ee44ea696fd69bf320f56d20fa2fc877098ab5c69275d55f95"
+      },
+      "extraction": {
+        "strategy": "chapters",
+        "source_scope": "complete book",
+        "units": [
+          {
+            "id": "front-matter",
+            "title": "Front matter",
+            "pages": "1-10"
+          },
+          {
+            "id": "chapter-1",
+            "title": "Introduction",
+            "pages": "11-16"
+          },
+          {
+            "id": "chapter-2",
+            "title": "Assumptions and methodology",
+            "pages": "17-39"
+          },
+          {
+            "id": "chapter-3",
+            "title": "Linguistic preliminaries",
+            "pages": "40-58"
+          },
+          {
+            "id": "chapter-4",
+            "title": "Incongruity and its resolution",
+            "pages": "59-71"
+          },
+          {
+            "id": "chapter-5",
+            "title": "Two models of incongruity-resolution",
+            "pages": "72-82"
+          },
+          {
+            "id": "chapter-6",
+            "title": "The General Theory of Verbal Humour",
+            "pages": "83-95"
+          },
+          {
+            "id": "chapter-7",
+            "title": "Joke similarity and identity",
+            "pages": "96-105"
+          },
+          {
+            "id": "chapter-8",
+            "title": "Manipulating interpretations",
+            "pages": "106-125"
+          },
+          {
+            "id": "chapter-9",
+            "title": "The structure of puns",
+            "pages": "126-160"
+          },
+          {
+            "id": "chapter-10",
+            "title": "Some computational studies",
+            "pages": "161-177"
+          },
+          {
+            "id": "chapter-11",
+            "title": "Pragmatic and discourse issues",
+            "pages": "178-194"
+          },
+          {
+            "id": "chapter-12",
+            "title": "Speculations on joke structure",
+            "pages": "195-206"
+          },
+          {
+            "id": "chapter-13",
+            "title": "Future directions",
+            "pages": "207-210"
+          },
+          {
+            "id": "appendix-a",
+            "title": "Formal definitions",
+            "pages": "211-222"
+          },
+          {
+            "id": "appendix-b",
+            "title": "Examples",
+            "pages": "223-243"
+          },
+          {
+            "id": "glossary",
+            "title": "Glossary",
+            "pages": "244-249"
+          },
+          {
+            "id": "references",
+            "title": "References",
+            "pages": "250-259"
+          },
+          {
+            "id": "index",
+            "title": "Index",
+            "pages": "260-278"
+          }
+        ]
+      },
+      "note": "Book-length restricted source. Public outputs may include derived analysis only; the PDF, transcription, page files, manifests, chapter intermediates, and run logs are not distributed."
     },
     {
       "key": "t5-incongruity-resolution",
@@ -79,10 +277,33 @@
       "tags": [
         "theory"
       ],
-      "page_url": null,
+      "page_url": "https://www.sciencedirect.com/book/edited-volume/9780122889509/the-psychology-of-humor",
       "pdf_candidates": [],
-      "status": "unavailable",
-      "note": "Book chapters; no open-access PDF."
+      "status": "restricted",
+      "access_notice": "Restricted primary source consulted; full text not distributed.",
+      "official_sources": [
+        {
+          "label": "Suls chapter on ScienceDirect",
+          "url": "https://www.sciencedirect.com/book/edited-volume/9780122889509/the-psychology-of-humor",
+          "consulted": true
+        },
+        {
+          "label": "Oring book at University of Illinois Press",
+          "url": "https://www.press.uillinois.edu/books/?id=p075933",
+          "consulted": false
+        }
+      ],
+      "restricted_source": {
+        "consulted_at": "2026-07-13",
+        "scope": "Suls (1972) chapter only; Oring (2003) remains pending",
+        "page_count": 20,
+        "sha256": "57a05e3327a8211c7f71081a77332e3470fbfda0dae49cc9d95ad6eda77ee673"
+      },
+      "extraction": {
+        "strategy": "single",
+        "source_scope": "Suls (1972) chapter only; Oring (2003) remains pending"
+      },
+      "note": "Only Suls's two-stage-model chapter has been consulted. Oring's appropriate-incongruity source remains pending, so derived analysis must not present T5 as complete coverage of both theories."
     },
     {
       "key": "t6-benign-violation",

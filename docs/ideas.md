@@ -4,16 +4,18 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 
 ## Done (for context)
 
-- ✅ Paper library: 111/116 guide entries with PDF + full-text markdown (`papers/`)
+- ✅ Paper library: 111/116 guide entries with distributable PDF + full-text Markdown; restricted-source mode and local primary sources for T1, T2, T4, and Suls's half of T5; T3 remains unavailable (`papers/`)
 - ✅ Dataset library: 39 of 53 artifacts vendored, ~9.4GB (`data/`)
 - ✅ Structured extracts + one-pagers + cross-paper analysis (`papers/extracts/`, `papers/summaries/`, `papers/ANALYSIS.md`)
 - ✅ Evidence-strength profiles + synthesis support/counterevidence/confidence map ([papers/EVIDENCE.md](../papers/EVIDENCE.md))
 - ✅ Guide-vs-paper evidence certification: all 111 converted entries audited across two passes (796 claims; all 14 fixes applied), plus a stratified 26-extract substantive spot check ([papers/DISCREPANCIES.md](../papers/DISCREPANCIES.md))
-- ✅ Git + GitHub: public repo at https://github.com/brendansudol/funny-papers. `data/` is gitignored (~9.4GB, rebuilds from `data/datasets.json` via the scripts); `papers/pdfs/` is versioned. Secrets stay in `.env` (ignored).
+- ✅ Restricted theory extraction: scoped gpt-5.5 conversion and extraction completed for T1, T2, T4, and Suls's half of T5, with complete-source and direct-claim quality checks; all four remain outside the certification totals pending an independent audit.
+- ✅ Git + GitHub: public repo at https://github.com/brendansudol/funny-papers. `data/` is gitignored (~9.4GB, rebuilds from `data/datasets.json` via the scripts); distributable `papers/pdfs/` is versioned; restricted `papers/private/` and secrets stay ignored.
 - ✅ Docs: [README.md](../README.md) (front door), [AGENTS.md](../AGENTS.md) (agent ops guide; imported by `CLAUDE.md`), [docs/query-cookbook.md](query-cookbook.md) (verified jq/python recipes over catalogs + extracts)
 
 ## Housekeeping (cheap, do soon)
 
+- **Certify restricted theory extracts** — independently audit the T1, T2, T4, and partial-T5 derived extracts before folding them into guide certification. T5 remains explicitly partial until Oring is consulted; T3 remains an acquisition gap.
 - **BibTeX file** (`papers/papers.bib`) — generate from `papers.json` + extracts (extracts have verified author lists). Cheap; useful the moment any writing happens.
 - **Figure images for visual-humor papers** — transcriptions have `[Figure: …]` placeholders; rerun pdf-to-md with `--keep-images` for the few papers where the figure *is* the content (HumorDB, YesBut, PixelHumor, cartoon papers).
 

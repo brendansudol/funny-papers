@@ -2,8 +2,9 @@
 """Split humor-and-llms-field-guide.md into per-paper claim files for the
 guide-vs-paper discrepancy check.
 
-Writes papers/review/guide-entries/<key>.md for every converted paper in
-papers/papers.json. Numbered entries (#N, T-N) are extracted by header;
+Writes papers/review/guide-entries/<key>.md for every analysis-ready paper in
+papers/papers.json (converted sources plus restricted sources with a public
+extract). Numbered entries (#N, T-N) are extracted by header;
 'also in this section' items by anchor phrase (paragraph containing it).
 """
 
@@ -13,10 +14,16 @@ import json
 import re
 from pathlib import Path
 
+try:
+    from paper_sources import analysis_ready
+except ModuleNotFoundError:  # Imported as scripts.split_guide in tests/tools.
+    from scripts.paper_sources import analysis_ready
+
 ROOT = Path(__file__).resolve().parent.parent
 GUIDE = ROOT / "humor-and-llms-field-guide.md"
 PAPERS = ROOT / "papers" / "papers.json"
 OUT_DIR = ROOT / "papers" / "review" / "guide-entries"
+EXTRACTS_DIR = ROOT / "papers" / "extracts"
 
 # Keys whose guide text is not a numbered "### N." block: anchor phrase whose
 # containing paragraph (to the next blank line) is the entry.
@@ -116,7 +123,7 @@ def main() -> int:
 
     written, missed = 0, []
     for paper in papers:
-        if paper.get("status") != "converted":
+        if not analysis_ready(paper, EXTRACTS_DIR):
             continue
         key, ref = paper["key"], paper["ref"]
         entry = None

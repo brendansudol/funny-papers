@@ -1,0 +1,818 @@
+{
+  "key": "t4-linguistic-analysis-of-jokes",
+  "ref": "T4",
+  "section": "Theory Foundations",
+  "extracted_at": "2026-07-14",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_access": "restricted",
+  "source_md_sha256": "348775c3eaee0c1ca57b39a274e5243f439953b8d78d9d946b20a766cbf805cd",
+  "source_truncated": false,
+  "extraction_coverage": {
+    "strategy": "chapter-extraction-plus-synthesis",
+    "source_scope": "complete book",
+    "source_page_count": 278,
+    "covered_page_count": 278,
+    "complete_for_consulted_scope": true,
+    "units": [
+      {
+        "id": "front-matter",
+        "title": "Front matter",
+        "source_pages": "1-10",
+        "source_characters": 4863
+      },
+      {
+        "id": "chapter-1",
+        "title": "Introduction",
+        "source_pages": "11-16",
+        "source_characters": 12872
+      },
+      {
+        "id": "chapter-2",
+        "title": "Assumptions and methodology",
+        "source_pages": "17-39",
+        "source_characters": 59281
+      },
+      {
+        "id": "chapter-3",
+        "title": "Linguistic preliminaries",
+        "source_pages": "40-58",
+        "source_characters": 47957
+      },
+      {
+        "id": "chapter-4",
+        "title": "Incongruity and its resolution",
+        "source_pages": "59-71",
+        "source_characters": 30199
+      },
+      {
+        "id": "chapter-5",
+        "title": "Two models of incongruity-resolution",
+        "source_pages": "72-82",
+        "source_characters": 23222
+      },
+      {
+        "id": "chapter-6",
+        "title": "The General Theory of Verbal Humour",
+        "source_pages": "83-95",
+        "source_characters": 29185
+      },
+      {
+        "id": "chapter-7",
+        "title": "Joke similarity and identity",
+        "source_pages": "96-105",
+        "source_characters": 23155
+      },
+      {
+        "id": "chapter-8",
+        "title": "Manipulating interpretations",
+        "source_pages": "106-125",
+        "source_characters": 46191
+      },
+      {
+        "id": "chapter-9",
+        "title": "The structure of puns",
+        "source_pages": "126-160",
+        "source_characters": 83861
+      },
+      {
+        "id": "chapter-10",
+        "title": "Some computational studies",
+        "source_pages": "161-177",
+        "source_characters": 33896
+      },
+      {
+        "id": "chapter-11",
+        "title": "Pragmatic and discourse issues",
+        "source_pages": "178-194",
+        "source_characters": 37058
+      },
+      {
+        "id": "chapter-12",
+        "title": "Speculations on joke structure",
+        "source_pages": "195-206",
+        "source_characters": 25470
+      },
+      {
+        "id": "chapter-13",
+        "title": "Future directions",
+        "source_pages": "207-210",
+        "source_characters": 5814
+      },
+      {
+        "id": "appendix-a",
+        "title": "Formal definitions",
+        "source_pages": "211-222",
+        "source_characters": 27560
+      },
+      {
+        "id": "appendix-b",
+        "title": "Examples",
+        "source_pages": "223-243",
+        "source_characters": 37869
+      },
+      {
+        "id": "glossary",
+        "title": "Glossary",
+        "source_pages": "244-249",
+        "source_characters": 11156
+      },
+      {
+        "id": "references",
+        "title": "References",
+        "source_pages": "250-259",
+        "source_characters": 28373
+      },
+      {
+        "id": "index",
+        "title": "Index",
+        "source_pages": "260-278",
+        "source_characters": 25691
+      }
+    ]
+  },
+  "source_notice": "Restricted primary source consulted; full text not distributed.",
+  "source_official_sources": [
+    {
+      "label": "Routledge book page",
+      "url": "https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731",
+      "consulted": true
+    }
+  ],
+  "catalog_entry_source_coverage_complete": true,
+  "title": "The Linguistic Analysis of Jokes",
+  "authors": [
+    "Graeme Ritchie"
+  ],
+  "year": 2004,
+  "venue": "Routledge; Routledge Studies in Linguistics",
+  "paper_types": [
+    "method",
+    "theory",
+    "survey"
+  ],
+  "research_questions": [
+    "How can jokes be studied rigorously enough to support formal, falsifiable, and eventually computational accounts of humour?",
+    "What mechanisms underlie verbally expressed jokes, especially simple jokes, puns, forced reinterpretation jokes, and question–answer forms?",
+    "How should jokehood be distinguished from funniness, and how should joke classes be defined by internal mechanisms rather than surface labels?",
+    "What do influential theories such as incongruity-resolution, SSTH, and GTVH explain, and where are they too vague or under-specified?",
+    "What can early computational humour systems show about the formal description, generation, and evaluation of restricted joke classes?"
+  ],
+  "tasks": [
+    "joke analysis",
+    "joke structure formalization",
+    "humor theory critique",
+    "pun analysis",
+    "pun generation",
+    "pun detection",
+    "punning riddle generation",
+    "light-bulb joke generation",
+    "Tom Swifty generation",
+    "acronym humor generation",
+    "joke similarity analysis",
+    "joke identity analysis",
+    "jokehood classification",
+    "computer-generated joke evaluation review"
+  ],
+  "humor_domains": [
+    "jokes",
+    "verbally expressed humour",
+    "verbal humour",
+    "puns",
+    "paradigmatic puns",
+    "syntagmatic puns",
+    "malapropisms",
+    "story puns",
+    "punning riddles",
+    "riddles",
+    "question–answer jokes",
+    "knock-knock jokes",
+    "light-bulb jokes",
+    "Tom Swifties",
+    "acronyms",
+    "forced reinterpretation jokes",
+    "incongruity-resolution jokes",
+    "double entendre",
+    "misinterpretation jokes",
+    "narrative jokes",
+    "simple jokes",
+    "cartoons",
+    "ethnic/nationality jokes",
+    "taboo humour",
+    "absurd humour"
+  ],
+  "modalities": [
+    "text",
+    "image",
+    "audio"
+  ],
+  "languages": [
+    "English",
+    "Japanese",
+    "Latin",
+    "French",
+    "Finnish"
+  ],
+  "datasets_used": [
+    {
+      "name": "Appendix B examples",
+      "role": "introduced",
+      "size": "195 numbered examples"
+    },
+    {
+      "name": "Joke books",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Internet web pages of jokes",
+      "role": "source-material",
+      "size": "between December 2001 and March 2002"
+    },
+    {
+      "name": "Academic-article joke examples",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Jokes heard on radio, TV, film, stage, or in everyday situations",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Constructed illustrative items",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "WordNet online dictionary",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "MRC psycholinguistic database",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "HCPP lexicon of common phrases and words",
+      "role": "source-material",
+      "size": "36 common phrases and 240 words"
+    },
+    {
+      "name": "WisCraic knowledge bases",
+      "role": "source-material",
+      "size": "Idioms, Professions, Dictionary, Lexicon, and Grammar"
+    },
+    {
+      "name": "CMU pronouncing dictionary",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HAHAcronym WordNet domain labels and domain hierarchy",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HAHAcronym table of opposed semantic domains",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HAHAcronym antonym sets from WordNet",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "HAHAcronym a-semantic dictionary",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Ruch et al. (1993) constructed joke stimuli",
+      "role": "analyzed",
+      "size": "3 groups; 1 base joke + 6 variants per group"
+    },
+    {
+      "name": "Paolillo (1998) Far Side cartoon analyses",
+      "role": "analyzed",
+      "size": "800 Far Side cartoons"
+    }
+  ],
+  "models_evaluated": [
+    "LIBJOG",
+    "Tom Swifty generator",
+    "simple riddle generator",
+    "JAPE",
+    "HCPP",
+    "WisCraic",
+    "HAHAcronym"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Bottom-up linguistic analysis of joke classes",
+      "summary": "The book advocates detailed, formal analysis of restricted joke classes rather than a premature universal theory of humour. Joke classes are to be defined by internal mechanisms, using sufficient conditions where necessary."
+    },
+    {
+      "name": "Linguistic versus propositional joke distinction",
+      "summary": "The book distinguishes jokes whose class definition depends crucially on linguistic form from jokes whose class definition depends on semantic or propositional content rather than exact wording."
+    },
+    {
+      "name": "Forced reinterpretation and delivery-mechanism framework",
+      "summary": "The book refines forced reinterpretation into structures involving ordered interpretations, punchline conflict, punchline resolution, discourse-coherence misunderstanding, punchline revision, punchline inference, double entendre, and related mechanisms."
+    },
+    {
+      "name": "Structural account of linguistically normal paradigmatic puns",
+      "summary": "The book proposes conditions for a major subclass of English puns: a present string is phonetically similar or identical to an absent string, contextual suitability and lexical distinctness/linkage conditions hold, and the absent string is recognizable."
+    },
+    {
+      "name": "Formal definitions in Appendix A",
+      "summary": "Appendix A formalizes linguistic and semantic primitives used in the analyses, including text strings, text-meaning mappings, situations, salience, inference, interpretation sequences, predictions, delivery mechanisms, puns, and knock-knock jokes."
+    },
+    {
+      "name": "Supplementary and extraneous information framework",
+      "summary": "The book separates central joke-structural factors from supplements that may increase humorous effect and extraneous information not necessary to the joke’s working."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The book critiques vague IR theory but formalizes variants such as forced reinterpretation, punchline conflict, punchline resolution, punchline revision, punchline inference, double entendre, and expectation clash."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "grounding/motivation",
+      "detail": "A full chapter examines SSTH as a forced-reinterpretation/incongruity-resolution account whose distinctive claim is script opposition; the book criticizes the definitions of script and script opposition as under-specified."
+    },
+    {
+      "theory": "GTVH",
+      "usage": "grounding/motivation",
+      "detail": "A full chapter analyzes GTVH’s six knowledge resources and argues that the framework lacks a central mechanism and clear falsifiable predictions."
+    },
+    {
+      "theory": "frame-shifting / conceptual blending",
+      "usage": "grounding/motivation",
+      "detail": "Koestler’s bisociation, frames, scripts, mental spaces, and related knowledge-structure ideas are discussed as influential but often too broad unless formally specified."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "Superiority, hostility, disparagement, and aggression theories are discussed mainly as background or as possible supplements to joke funniness."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "Relief/release theories are included in the standard taxonomy of humour theories but are not developed as the book’s own mechanism."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "Prediction, violated expectation, thwarted expectation, timing, and expectation-clash punchlines are discussed, but the book does not make surprise a complete theory of humour."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The book discusses Suls’ two-stage model, Ruch’s INC-RES/NON/SEX components, Latta’s critique, Berger’s humour techniques, and several pragmatic/discourse theories."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "The book reviews reported human evaluations of generated humour systems including JAPE, HCPP, WisCraic, and HAHAcronym."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The JAPE evaluation used objective MRC psycholinguistic database criteria for filtering and readability measures; readability was correlated with jokehood and funniness when human and JAPE jokes were combined."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "The book’s main evidence is close authorial linguistic analysis of numbered joke examples and critical comparison of prior theories."
+    },
+    {
+      "type": "human-eval",
+      "detail": "The book discusses Ruch et al. (1993)’s human similarity judgments over GTVH-manipulated joke variants."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "evaluation-participant",
+        "participant_count": "122 subjects",
+        "population": "children aged eight to eleven",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "each text item was rated by at least nine children, with most items getting twelve ratings",
+        "detail": "Children in the reported JAPE controlled study judged whether texts were jokes, rated funniness on a five-point scale, and indicated prior familiarity."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "16 subjects",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "groups of 25 output items",
+        "detail": "Subjects rated HCPP output items on a five-point scale; the book notes the study included no non-HCPP controls and asked only one question."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "15 subjects",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "ten items per subject: six WisCraic-generated and four control items",
+        "detail": "Subjects judged WisCraic-generated and control items for jokehood, funniness, and cleverness."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "20 subjects",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "genuine acronym expansions and distorted expansions rated on a five-point scale; maximum possible score 100",
+        "detail": "Subjects rated HAHAcronym acronym reanalysis outputs for funniness."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "20 subjects",
+        "population": "undergraduate students",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "87 generated acronyms rated with the two input words on a 1–5 rating",
+        "detail": "Subjects rated generated HAHAcronym acronyms for being funny/ironical."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "different set of 20 subjects",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "random-control acronym reanalysis outputs",
+        "detail": "A control version of HAHAcronym without semantic filters and heuristics was rated by a different group."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": "over 500 undergraduate psychology students",
+        "population": "undergraduate psychology students",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "base–variant joke pairs judged on ‘undecided’ plus four degrees of similarity",
+        "detail": "Ruch et al. (1993) participants judged similarity for three joke groups, each with a base joke and six GTVH-parameter variants."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "jokes/cartoons rated on scales such as funniness",
+        "detail": "Ruch (1992) is discussed as summarizing psychological humour-appreciation studies that found INC-RES, NON, and SEX factors, but this book does not give participant counts for those studies."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": "Graeme Ritchie",
+        "role": "primary",
+        "blind": false,
+        "detail": "The book’s core classifications, critiques, and example analyses rely on the author’s close linguistic judgment and stated intuitions about jokehood."
+      },
+      {
+        "type": "human-lay",
+        "name": "children aged eight to eleven",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Children judged JAPE-generated jokes, human-generated jokes, and non-joke controls for jokehood, funniness, and familiarity in the reported JAPE evaluation."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "HCPP, WisCraic, and HAHAcronym outputs were rated by human subjects in the reported evaluations."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "MRC psycholinguistic database",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Used in the JAPE study for objective filtering/readability measures."
+      },
+      {
+        "type": "human-crowd",
+        "name": "undergraduate psychology students",
+        "role": "secondary",
+        "blind": null,
+        "detail": "Over 500 participants in Ruch et al. (1993) judged similarity among joke variants."
+      },
+      {
+        "type": "none",
+        "name": null,
+        "role": "validation",
+        "blind": null,
+        "detail": "No LLM judge is used."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Book’s own analyses",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The book does not conduct a new joke-generation experiment; it analyzes examples and reviews prior systems."
+      },
+      {
+        "scope": "JAPE reviewed evaluation",
+        "mode": "best-of-n",
+        "n": null,
+        "selector": "automatic-metric",
+        "detail": "Program texts generated using WordNet were filtered by objective MRC-database criteria before being mixed with controls for human judgment; the number of generated candidates is not reported in this unit."
+      },
+      {
+        "scope": "HCPP reviewed evaluation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "Venour listed 50 jokes and evaluated groups of 25 output items; the book says item group selection and ordering were not explained."
+      },
+      {
+        "scope": "WisCraic reviewed evaluation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The evaluation used 21 types and 76 tokens, with uneven rating coverage; selection details are not fully specified."
+      },
+      {
+        "scope": "HAHAcronym reviewed evaluations",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "The book reports ratings for acronym reanalysis and 87 generated acronyms, but not a best-of-N sampling or selection procedure."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "LIBJOG",
+        "version_or_snapshot": "started around 1988",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reviewed as Raskin and Attardo’s light-bulb joke generator; no evaluation or result summary is reported."
+      },
+      {
+        "name": "Tom Swifty generator",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Reviewed as Lessard and Levison’s generator using small specially constructed lexicons and VINCI; no evaluation is reported."
+      },
+      {
+        "name": "simple riddle generator",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "not-reported",
+        "detail": "Reviewed as Lessard and Levison’s simple riddle generator using machine-readable dictionary data; no full evaluation is reported."
+      },
+      {
+        "name": "JAPE",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reviewed via Binsted and Ritchie work; a controlled human evaluation using WordNet and the MRC database is summarized."
+      },
+      {
+        "name": "HCPP",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reviewed as Venour’s Homonym Common Phrase Pun generator; ten schemata were defined and three implemented."
+      },
+      {
+        "name": "WisCraic",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reviewed as McKay’s idiom-based pun generator with knowledge bases for Idioms, Professions, Dictionary, Lexicon, and Grammar."
+      },
+      {
+        "name": "HAHAcronym",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Reviewed as Stock and Strapparava’s Humorous Agent for Humorous Acronyms, evaluated for acronym reanalysis and acronym generation."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Book’s own theoretical analysis",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No computational inference budget is applicable to the book’s own qualitative analyses."
+      },
+      {
+        "scope": "LIBJOG",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The first version used five-tuples for valid filler sets and a five-slot textual template; no compute or generation budget is reported."
+      },
+      {
+        "scope": "JAPE",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Generated texts were filtered using MRC-database criteria; no number of candidates, runtime, or cost is reported."
+      },
+      {
+        "scope": "HCPP",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Ten schemata were defined, only three implemented; with a lexicon of 36 common phrases and 240 words, the three schemata produced 34, 7 and 9 jokes."
+      },
+      {
+        "scope": "WisCraic",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Evaluation output size is reported as 21 types and 76 tokens; no compute budget is given."
+      },
+      {
+        "scope": "HAHAcronym",
+        "calls_per_item": null,
+        "candidates_per_item": "87 generated acronyms in one evaluation",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No runtime, candidate-search budget, or cost is reported."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "JAPE evaluation",
+        "present": true,
+        "description": "Human-generated jokes, JAPE-generated jokes, sensible non-joke controls, and nonsense non-joke controls were judged by children under the same presentation conditions.",
+        "directly_comparable": true,
+        "detail": "The book reports that human-generated jokes and JAPE-generated jokes were distinguished from non-jokes, and human-generated jokes received higher jokehood and funniness ratings than JAPE-generated jokes."
+      },
+      {
+        "scope": "HCPP evaluation",
+        "present": false,
+        "description": "Only HCPP outputs were evaluated.",
+        "directly_comparable": false,
+        "detail": "The book explicitly notes that no non-HCPP controls were included."
+      },
+      {
+        "scope": "WisCraic evaluation",
+        "present": false,
+        "description": "Four classes of control items were included, but the book does not describe a matched human-generated baseline.",
+        "directly_comparable": false,
+        "detail": "The author calls the study very small and methodologically weak."
+      },
+      {
+        "scope": "HAHAcronym evaluation",
+        "present": false,
+        "description": "A random-control reanalysis program was compared, but no human-generated acronym baseline is described.",
+        "directly_comparable": false,
+        "detail": "The semantically controlled reanalyser was compared to syntactically valid but otherwise random acronyms."
+      },
+      {
+        "scope": "Book’s structural joke analyses",
+        "present": false,
+        "description": "The book relies on authorial examples and intuitions rather than matched human/model performance.",
+        "directly_comparable": false,
+        "detail": "No direct human baseline is applicable."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The book predates LLM benchmark evaluation and does not evaluate later proprietary models on public benchmarks."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs are used as generators, subjects, annotators, or judges."
+    },
+    "reporting_gaps": [
+      "The book does not conduct a new controlled empirical evaluation of its own joke-structure proposals.",
+      "Many example jokes in Appendix B lack bibliographic provenance beyond occasional embedded attributions.",
+      "The size and exact composition of the author’s joke source material from books, websites, media, and everyday recall are not fully specified.",
+      "Core constructs such as INAPPROPRIATENESS, ABSURDITY, TABOO, CONTRAST, contextual suitability, and phonetic similarity remain partly primitive or undefined.",
+      "Model versions, execution dates, compute budgets, and candidate-generation counts are generally not reported for the reviewed computational systems.",
+      "Several reviewed computational systems have no evaluation or only limited evaluation as reported by the book.",
+      "Selection procedures for some evaluated generated items, especially HCPP and WisCraic, are unclear.",
+      "The book repeatedly notes reliance on authorial intuition about jokehood and calls for more objective corroboration or falsification."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "Appendix B supplies the book’s numbered example inventory.",
+      "metric": "numbered examples",
+      "value": "195 numbered examples",
+      "dataset": "Appendix B examples",
+      "best_system": null
+    },
+    {
+      "finding": "The controlled JAPE evaluation used children as judges and obtained multiple ratings per item.",
+      "metric": "human evaluation sample and item-rating coverage",
+      "value": "122 subjects; each text item was rated by at least nine children, with most items getting twelve ratings",
+      "dataset": "JAPE evaluation materials",
+      "best_system": "JAPE"
+    },
+    {
+      "finding": "Venour’s HCPP evaluation reported a modest average score and one high-scoring item.",
+      "metric": "five-point human rating scale",
+      "value": "average score 2.81; highest average score 4.4",
+      "dataset": "HCPP output",
+      "best_system": "HCPP"
+    },
+    {
+      "finding": "McKay’s WisCraic outputs were mostly classed as jokes in the reported small evaluation.",
+      "metric": "jokehood classification",
+      "value": "84 per cent classed as jokes; 10 per cent classed as failed attempts at jokes",
+      "dataset": "WisCraic output",
+      "best_system": "WisCraic"
+    },
+    {
+      "finding": "HAHAcronym’s semantically controlled reanalyser outperformed a random-control reanalysis condition in reported ratings.",
+      "metric": "human funniness score",
+      "value": "mean 59.61; standard deviation 8.91; minimum 40; maximum 80 versus control mean 42.05; standard deviation 9.76; minimum 27; maximum 67",
+      "dataset": "HAHAcronym acronym reanalysis outputs",
+      "best_system": "HAHAcronym"
+    },
+    {
+      "finding": "For the more humour-related GTVH similarity orderings SI/LM/SO, the author finds the Ruch et al. evidence unconvincing.",
+      "metric": "predicted orderings checked by the author",
+      "value": "4 as predicted; 5 not as predicted",
+      "dataset": "Ruch et al. (1993) constructed joke stimuli",
+      "best_system": "GTVH"
+    }
+  ],
+  "key_findings": [
+    "The book argues that humour research should not begin with a universal theory, but with precise, falsifiable descriptions of restricted joke classes.",
+    "It distinguishes jokehood from funniness and treats structural joke analysis as a prerequisite for, but not identical to, explaining why people laugh.",
+    "It criticizes broad incongruity, SSTH, and GTVH accounts as influential but too vague or under-specified unless key constructs such as script, opposition, resolution, and logical mechanism are made formal.",
+    "It develops a detailed structural vocabulary for forced reinterpretation, delivery mechanisms, interpretation ordering, punchline conflict, punchline resolution, and related propositional-joke structures.",
+    "It proposes that many puns can be analyzed as formal relations between present and absent phonetically similar strings linked to context, while acknowledging that syntagmatic, orthographic, bilingual, and abnormal puns remain harder.",
+    "Its computational survey finds that early joke generators provide useful tests of narrow structural descriptions, but their coverage is extremely limited and their architectures do not obviously generalize to wider humour."
+  ],
+  "limitations": [
+    "The book explicitly does not claim to provide a complete theory of humour or even of verbally expressed jokes.",
+    "Most class definitions are described as preliminary, partial, or sufficient rather than necessary conditions.",
+    "The analysis is centered mainly on simple, verbally expressed, mostly English jokes within a narrow cultural range.",
+    "Many central constructs are left primitive or only provisionally defined.",
+    "The work relies heavily on close authorial analysis and intuition rather than new large-scale empirical validation.",
+    "Several computational systems reviewed have weak, absent, or methodologically limited evaluations.",
+    "The book leaves the explanatory question of why particular structures are funny for future research."
+  ],
+  "safety_ethics_notes": "The book contains and analyzes examples involving ethnic/national stereotypes, sexual and taboo content, insults, disparagement, profanity, violence, bodily-function humour, and other potentially offensive material. It discusses targets, taboo, disparagement, audience beliefs, and appropriateness analytically, but it does not present a dedicated ethics or safety framework.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Appendix A provides formal definitions; Appendix B lists 195 numbered examples."
+  }
+}

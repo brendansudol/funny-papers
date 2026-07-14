@@ -17,6 +17,11 @@ the operational rules that are easy for an agent to miss.
 - `papers/extracts/` and `papers/summaries/` are pipeline outputs. Prefer
   re-extraction or evidence enrichment; make a manual correction only when it
   is grounded in the primary paper and preserves provenance metadata.
+- Restricted primary sources and all full-text derivatives live under
+  gitignored `papers/private/<key>/`. Never copy their PDFs, Markdown, page
+  files, manifests, chapter caches, or run logs into a public/versioned path.
+  Public summaries may link only to the official publisher pages recorded in
+  the catalog and must carry the restricted-source notice.
 - If a guide entry changes bibliographic facts such as title, venue, or
   publication status, synchronize `papers/papers.json` and regenerate the
   affected views.
@@ -57,6 +62,9 @@ the operational rules that are easy for an agent to miss.
   downloads use the network, and dataset downloads may be multi-gigabyte.
 - Use `--only KEY` where supported. Do not start an unscoped paid or large
   download run unless the task explicitly requires it.
+- Restricted conversion and extraction additionally require the explicit
+  `--include-restricted` flag. This is a privacy guard, not authorization to
+  run a paid operation.
 - Pipeline scripts are resumable and idempotent, but that is not permission to
   trigger expensive work unnecessarily. `extract_papers.py` skips existing
   extracts unless `--force`; `convert_papers.py` resumes page by page.
@@ -81,7 +89,7 @@ the operational rules that are easy for an agent to miss.
   inference budget, human baselines, contamination risk, and LLM-judge
   dependence. Use `enrich_evidence.py` to backfill them without regenerating
   summaries.
-- Paper statuses are `converted`, `downloaded`, `unavailable`,
+- Paper statuses are `converted`, `downloaded`, `restricted`, `unavailable`,
   `download_failed`, `convert_failed`, or `pending`. Dataset statuses are
   `downloaded`, `too_large`, `gated`, `request`, `unavailable`, `pending`, or
   `failed`.
@@ -100,9 +108,10 @@ the operational rules that are easy for an agent to miss.
 
 ## Repository gotchas
 
-- Bot-walled PDFs from ACM, OpenReview, and MDPI may require a browser
-  download. Put a verified file at `papers/pdfs/<key>.pdf`, then rerun the
-  relevant catalog, conversion, and build steps.
+- Bot-walled distributable PDFs from ACM, OpenReview, and MDPI may require a
+  browser download. Put a verified file at `papers/pdfs/<key>.pdf`, then rerun
+  the relevant catalog, conversion, and build steps. Restricted sources go
+  only to `papers/private/<key>/source.pdf` and use the explicit opt-in path.
 - PDFs are versioned by design, so pushes can be large. Do not remove them or
   introduce Git LFS without an explicit repository-level decision.
 - Git LFS is not installed. Dataset clones may contain pointer stubs;

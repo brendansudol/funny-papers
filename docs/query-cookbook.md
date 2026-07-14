@@ -11,11 +11,11 @@ The four queryable layers:
 | `papers/synthesis_claims.json` | curated field-level claims with supporting papers, counterevidence, confidence, and rationale |
 | `data/datasets.json` | dataset catalog: contents, source, license, size, vendored status, paper cross-refs |
 
-Plus the full text itself in `papers/md/<key>/<key>.md` — plain grep works great.
+For distributable sources, full text also lives in `papers/md/<key>/<key>.md` — plain grep works great. Restricted full text and its derivatives are intentionally absent from the repository; use its public extract/summary once generated.
 
 ## Extract schema quick reference
 
-Each `papers/extracts/<key>.json` has: `key`, `ref` (guide number like `#3`), `title`, `authors`, `year`, `venue`, `paper_types`, `research_questions`, `tasks`, `humor_domains`, `modalities`, `languages`, `datasets_used` (`{name, role, size}` — role is `introduced` / `evaluated-on` / `trained-on` / `analyzed` / `source-material`), `models_evaluated` (strings), `methods_proposed`, `humor_theories` (`{theory, usage, detail}`), `evaluation_methods`, `evidence_profile`, `headline_results` (`{finding, metric, value, dataset, best_system}`), `key_findings`, `limitations`, `safety_ethics_notes`, and `artifacts`.
+Each `papers/extracts/<key>.json` has: `key`, `ref` (guide number like `#3`), source-access/provenance fields, `title`, `authors`, `year`, `venue`, `paper_types`, `research_questions`, `tasks`, `humor_domains`, `modalities`, `languages`, `datasets_used` (`{name, role, size}` — role is `introduced` / `evaluated-on` / `trained-on` / `analyzed` / `source-material`), `models_evaluated` (strings), `methods_proposed`, `humor_theories` (`{theory, usage, detail}`), `evaluation_methods`, `evidence_profile`, `headline_results` (`{finding, metric, value, dataset, best_system}`), `key_findings`, `limitations`, `safety_ethics_notes`, and `artifacts`. New outputs include `source_access` and `extraction_coverage`; restricted outputs publish official source URLs and a notice, never local full-text paths.
 
 `evidence_profile` records distinct human samples, judge types, single-sample versus best-of-N generation, exact model/version/date reporting, inference budgets, human baselines, contamination risk, LLM-judge dependence, and reporting gaps. [papers/EVIDENCE.md](../papers/EVIDENCE.md) is the generated human-readable view.
 
@@ -100,7 +100,13 @@ jq -r '.evidence_profile.contamination_risk.level' papers/extracts/*.json | sort
 **Papers not in the library (and why):**
 
 ```bash
-jq -r '.papers[] | select(.status != "converted") | .ref + "  " + .title + "  (" + (.note // .status) + ")"' papers/papers.json
+jq -r '.papers[] | select(.status == "unavailable" or .status == "download_failed" or .status == "pending") | .ref + "  " + .title + "  (" + (.note // .status) + ")"' papers/papers.json
+```
+
+**Restricted primary sources (publisher links and coverage):**
+
+```bash
+jq -r '.papers[] | select(.status == "restricted") | [.ref, .title, .extraction.source_scope, .page_url] | @tsv' papers/papers.json
 ```
 
 **Everything in one guide section:**
@@ -124,7 +130,7 @@ jq -r '.datasets[] | select(.paper_keys | index("03-humorbench")) | .key' data/d
 
 ## Full-text search
 
-**Which papers discuss a concept anywhere in their full text:**
+**Which distributable papers discuss a concept anywhere in their full text:**
 
 ```bash
 grep -rli "benign violation" papers/md --include="*.md" | grep -v /pages/ | sed 's|papers/md/\([^/]*\)/.*|\1|'

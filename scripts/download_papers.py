@@ -63,11 +63,14 @@ def main() -> int:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     PDF_DIR.mkdir(parents=True, exist_ok=True)
 
-    downloaded = cached = failed = unavailable = 0
+    downloaded = cached = failed = unavailable = restricted = 0
     failures: list[str] = []
 
     for paper in catalog["papers"]:
         key = paper["key"]
+        if paper.get("status") == "restricted":
+            restricted += 1
+            continue
         candidates = paper.get("pdf_candidates") or []
         if not candidates:
             unavailable += 1
@@ -132,7 +135,8 @@ def main() -> int:
 
     print(
         f"\nDownloaded {downloaded}, already present {cached}, "
-        f"failed {failed}, unavailable (no source) {unavailable}"
+        f"failed {failed}, unavailable (no source) {unavailable}, "
+        f"restricted (skipped) {restricted}"
     )
     if failures:
         print("Failed keys: " + ", ".join(failures))

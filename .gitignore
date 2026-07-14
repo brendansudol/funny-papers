@@ -3,6 +3,10 @@
 __pycache__/
 .DS_Store
 
+# Paywalled/restricted primary sources and every full-text derivative.
+# Public catalog records and derived extracts/summaries live outside this tree.
+papers/private/
+
 # vendored datasets (~8.8GB) — rebuild with scripts/download_datasets.py
 data/*
 !data/datasets.json

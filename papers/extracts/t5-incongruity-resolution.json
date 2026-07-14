@@ -1,0 +1,175 @@
+{
+  "key": "t5-incongruity-resolution",
+  "ref": "T5",
+  "section": "Theory Foundations",
+  "extracted_at": "2026-07-14",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_access": "restricted",
+  "source_md_sha256": "1b1a072af4aab750090535a1ec1523ba857af5cec509f3f9678871e2874085d0",
+  "source_truncated": false,
+  "extraction_coverage": {
+    "strategy": "single-pass",
+    "source_scope": "Suls (1972) chapter only; Oring (2003) remains pending",
+    "source_page_count": 20,
+    "covered_page_count": 20,
+    "source_characters": 47256,
+    "complete_for_consulted_scope": true
+  },
+  "source_notice": "Restricted primary source consulted; full text not distributed.",
+  "source_official_sources": [
+    {
+      "label": "Suls chapter on ScienceDirect",
+      "url": "https://www.sciencedirect.com/book/edited-volume/9780122889509/the-psychology-of-humor",
+      "consulted": true
+    },
+    {
+      "label": "Oring book at University of Illinois Press",
+      "url": "https://www.press.uillinois.edu/books/?id=p075933",
+      "consulted": false
+    }
+  ],
+  "catalog_entry_source_coverage_complete": false,
+  "title": "A Two-Stage Model for the Appreciation of Jokes and Cartoons: An Information-Processing Analysis",
+  "authors": [
+    "Jerry M. Suls"
+  ],
+  "year": 1972,
+  "venue": null,
+  "paper_types": [
+    "theory"
+  ],
+  "research_questions": [
+    "What information-processing sequence explains how recipients appreciate verbal jokes and captioned cartoons?",
+    "Why is incongruity necessary but not sufficient for humor appreciation?",
+    "How do problem solving, motivation, salience, complexity, solution time, and repeated exposure affect perceived funniness?"
+  ],
+  "tasks": [
+    "humor appreciation",
+    "joke comprehension",
+    "captioned cartoon appreciation"
+  ],
+  "humor_domains": [
+    "verbal jokes",
+    "captioned cartoons"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Two-stage model for the appreciation of jokes and cartoons",
+      "summary": "The chapter proposes that humor appreciation first requires an abrupt disconfirmation of expectations by a punch line or cartoon caption, producing incongruity and surprise. In a second stage, the recipient engages in problem solving to find a cognitive rule—semantic, logical, or experiential—that makes the ending follow from the stem or picture, thereby resolving the incongruity."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "incongruity-resolution",
+      "usage": "operationalized",
+      "detail": "The central model defines humor as a two-stage process in which a sudden incongruity is encountered and then made congruous through problem solving."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "Stage 1 is described as abrupt disconfirmation of the recipient’s prediction; the chapter argues that degree of incongruity is directly related to the amount of surprise and the need to solve the joke problem."
+    },
+    {
+      "theory": "relief",
+      "usage": "grounding/motivation",
+      "detail": "Freudian/psychoanalytic and arousal-relief accounts are discussed as contrasts; the chapter argues that motivational factors affect attention and rule accessibility rather than serving as the principal basis of humor."
+    },
+    {
+      "theory": "frame-shifting / conceptual blending",
+      "usage": "grounding/motivation",
+      "detail": "The comparison section discusses Maier’s restructuring account, Bateson’s figure-ground reversal, and Koestler’s “bisociation” as related cognitive theories, while arguing that they do not specify the problem-solving steps that integrate discrepant parts."
+    }
+  ],
+  "evaluation_methods": [],
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "none",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "The chapter is a theoretical information-processing analysis and reports no original labels, ratings, or judging procedure."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "No generation experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The chapter does not generate jokes or cartoons; it analyzes humor appreciation conceptually."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "No computational inference",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Not applicable; no computational models are run."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "All claims",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "No model or system performance is evaluated, so no human baseline is applicable."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The chapter does not evaluate models on benchmarks or datasets."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs are used as judges, metrics, or experimental systems."
+    },
+    "reporting_gaps": [
+      "No original empirical experiment, dataset, participant sample, or quantitative effect sizes are reported.",
+      "The supplied chapter transcription does not state the containing book or publication venue.",
+      "The model is presented conceptually; the chapter calls for future experiments to assess and weight factors such as salience, complexity, incongruity, and solution time."
+    ]
+  },
+  "headline_results": [],
+  "key_findings": [
+    "The chapter argues that humor appreciation requires both an incongruous punch line or caption and a successful resolution that makes the incongruity follow from the preceding material.",
+    "Incongruity alone is described as necessary but not sufficient: unexpected endings that cannot be reconciled produce puzzlement rather than humor.",
+    "Stage-2 resolution is modeled as problem solving analogous to the General Problem Solver, using cognitive rules as operators to reduce differences between the joke stem and punch line.",
+    "Motivational, emotional, and situational factors are said to affect humor by increasing attention to relevant content and making relevant cognitive rules more salient and accessible.",
+    "The chapter identifies four factors influencing funniness: incongruity of the ending, complexity of Stage-2 problem solving, time taken to solve the incongruity problem, and salience of the joke’s content."
+  ],
+  "limitations": [
+    "The model is explicitly limited to narrative verbal jokes and captioned cartoons, and excludes physical slapstick, exaggerated gestures and facial expressions, cartoons without captions, and political caricatures.",
+    "The chapter acknowledges that the claim that resolved incongruous situations are funny is strong and may require qualifications, such as knowing that the stimulus is intended as a joke or fantasy.",
+    "The chapter notes that repeated exposure is a weakness for incongruity theories and offers several possible explanations rather than a settled account.",
+    "The chapter does not determine how much weight to give incongruity, complexity, solution time, and salience, or whether these factors interact additively or multiplicatively.",
+    "The conclusion states that the model is not in final form and will probably require revisions."
+  ],
+  "safety_ethics_notes": "The chapter does not discuss safety or ethics; some illustrative jokes involve body size, prostitution, and robbery.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}
