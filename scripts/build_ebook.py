@@ -43,7 +43,8 @@ READY_STATUSES = {"converted", "restricted"}
 
 EDITION_CONFIG = {
     "guide": {
-        "subtitle": "Humor and Large Language Models: A Field Guide",
+        "title": "Getting the Joke: Field Guide",
+        "subtitle": "Humor and Large Language Models",
         "description": (
             "A curated guide to humor theory, computational humor, and the "
             "large-language-model era."
@@ -53,6 +54,7 @@ EDITION_CONFIG = {
         "split_level": 1,
     },
     "complete": {
+        "title": "Getting the Joke: Complete Edition",
         "subtitle": "Humor and Large Language Models: Field Guide and Paper Companion",
         "description": (
             "A curated field guide to humor and large language models, followed "
@@ -152,7 +154,7 @@ def markdown_metadata(edition: str, catalog: dict, body: str) -> str:
         (edition + "\0" + body).encode("utf-8")
     ).hexdigest()
     values = {
-        "title": "Getting the Joke",
+        "title": config["title"],
         "subtitle": config["subtitle"],
         "author": "funny-papers project",
         "lang": "en-US",

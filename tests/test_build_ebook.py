@@ -41,7 +41,8 @@ class EbookBuildTest(unittest.TestCase):
         self.assertNotIn("t3-inside-jokes", expected)
 
     def test_guide_edition_promotes_sections_and_rewrites_repo_links(self):
-        self.assertIn('subtitle: "Humor and Large Language Models: A Field Guide"', self.guide)
+        self.assertIn('title: "Getting the Joke: Field Guide"', self.guide)
+        self.assertIn('subtitle: "Humor and Large Language Models"', self.guide)
         self.assertIn('author: "funny-papers project"', self.guide)
         self.assertIn("\n# A Framework for Reading the Field\n", self.guide)
         self.assertNotIn("\n## A Framework for Reading the Field\n", self.guide)
@@ -60,6 +61,7 @@ class EbookBuildTest(unittest.TestCase):
         ]
         anchors = [f"{{#summary-{paper['key']}}}" for paper in grouped_papers]
 
+        self.assertIn('title: "Getting the Joke: Complete Edition"', self.complete)
         self.assertEqual(115, self.complete.count("{#summary-"))
         positions = [self.complete.index(anchor) for anchor in anchors]
         self.assertEqual(positions, sorted(positions))
