@@ -1,0 +1,280 @@
+{
+  "key": "x41-mulai",
+  "ref": "Part 5 (dyadic laughter and participant perception)",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x41-mulai/x41-mulai.md",
+  "source_md_sha256": "49efb5875c705c40e4bf23d30209552fd629d2c12e0a894fcb3e9640c04c2c5a",
+  "source_truncated": false,
+  "title": "Introducing MULAI: A Multimodal Database of Laughter during Dyadic Interactions",
+  "authors": [
+    "Michel-Pierre Jansen",
+    "Khiet P. Truong",
+    "Deniece S. Nazareth",
+    "Dirk K.J. Heylen"
+  ],
+  "year": 2020,
+  "venue": "Proceedings of the 12th Conference on Language Resources and Evaluation (LREC 2020)",
+  "paper_types": [
+    "dataset",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Introduce the Multimodal Laughter during Interaction (MULAI) database for studying expressive patterns of conversational and humour related laughter in dyadic human-human interactions.",
+    "How do self-rated humour and perceived humour by conversational partners correlate?",
+    "How do acoustic properties (pitch, intensity, duration) of laughter correlate with self-rated humour?",
+    "How do acoustic properties (pitch, intensity, duration) of laughter correlate with perceived humour?"
+  ],
+  "tasks": [
+    "survival task for conversational laughter elicitation",
+    "make the other laugh task",
+    "joke telling task",
+    "laughter annotation",
+    "humour self-rating and conversation-partner rating",
+    "acoustic-property analysis of laughter and perceived humour"
+  ],
+  "humor_domains": [
+    "social laughter",
+    "conversational laughter",
+    "humour-related laughter",
+    "joke telling",
+    "dyadic interaction"
+  ],
+  "modalities": [
+    "audio",
+    "video"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "MULAI",
+      "role": "introduced",
+      "size": "13 sessions; 357 minutes of recorded video-, audio- and physiological data streams; annotated part spans 134 minutes; 601 annotated laughter bouts, 168 annotated speech-laughs and 538 laughter related events; 26 participants"
+    },
+    {
+      "name": "International Affective Picture System (IAPS)",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "MULAI database",
+      "summary": "A multimodal dyadic human-human interaction database designed to capture conversational and humour-related laughter, with synchronized audio, video, IMU movement, ECG, GSR, personality questionnaires, and participant self/perceiver humour ratings."
+    },
+    {
+      "name": "Participant-context humour ratings linked to laughter acoustics",
+      "summary": "After each task, interlocutors rated how funny they thought they were and how funny they perceived their partner to be; the paper links these ratings to acoustic laughter features extracted from annotated laughter bouts."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The discussion invokes the modified affect induction theory of laughter to interpret why perceivers may rely on social context and laugh intensity when judging humour."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Participants provided five-point Likert self-ratings for the statement “I think I was funny” and perceived-partner ratings for “the other was very funny” after each task."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "Laughter bouts, speech-laughs, and onset/offset respiration events were annotated in Praat using elements of the third tier of the laughter annotation scheme from Truong et al. (2019); unresolved cases were discussed among the authors."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Praat was used to extract duration, mean pitch, and mean intensity from annotated laughter bouts; Pearson rank correlation tests and linear mixed effects models were then applied in R."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": "26 participants included in the database (32 participated over 16 sessions; 6 participants excluded because they did not give consent)",
+        "population": "Students from a course and participants they recruited from outside the course; age M = 24, SD = 2.3; 14 male and 12 female; most pairs were at least to some extent familiar; majority Dutch (N=17) with some international students; all participants spoke English.",
+        "recruitment": "Students from a course were asked to find a participant from outside the course and participate together in a data collection session.",
+        "geography": "University of Twente; majority Dutch (N=17) plus international students",
+        "languages": [
+          "English"
+        ],
+        "observations": "13 sessions of dyadic human-human interactions; 357 minutes recorded; 134 minutes annotated; 601 annotated laughter bouts, 168 annotated speech-laughs, and 538 laughter related respiration events.",
+        "detail": "Participants completed survival, make-the-other-laugh, and joke-telling tasks while wearing microphones, cameras, and Shimmer physiological sensors."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "26 included participants",
+        "population": "The same dyadic interlocutors who participated in the MULAI recordings.",
+        "recruitment": "Same as the database participants.",
+        "geography": "University of Twente; majority Dutch (N=17) plus international students",
+        "languages": [
+          "English"
+        ],
+        "observations": "Five-point Likert humour self-ratings and conversation-partner ratings after each task.",
+        "detail": "Participants rated both their own humorousness and their partner’s humorousness, leveraging knowledge of the social context."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Research assistant and authors",
+        "recruitment": null,
+        "geography": null,
+        "languages": [],
+        "observations": "240 video clips and 152 audio clips were segmented; 601 laughter bouts, 168 speech-laughs and 538 on-/offset respiration events were annotated for the make-the-other-laugh and joke-telling tasks.",
+        "detail": "A research assistant segmented audio/video using Adobe Premiere Pro. Laughter annotations were made in Praat; the number of laughter annotators and inter-annotator agreement are not reported."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-lay",
+        "name": "MULAI participant self-raters",
+        "role": "primary",
+        "blind": false,
+        "detail": "Participants judged their own humorousness after each task using the five-point self-rating scale."
+      },
+      {
+        "type": "human-lay",
+        "name": "Conversation partners / perceivers",
+        "role": "primary",
+        "blind": null,
+        "detail": "Conversation partners judged each participant’s humorousness after each task. Participants were kept blind to their partner’s instructions for each make-the-other-laugh round; broader blinding is not reported."
+      },
+      {
+        "type": "human-expert",
+        "name": "Research assistant/authors",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Human annotators/experimenters segmented the recordings and annotated laughter bouts, speech-laughs, and laughter-related respirations; difficult cases were resolved through discussions among the authors."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Praat",
+        "role": "primary",
+        "blind": null,
+        "detail": "Praat-derived duration, mean pitch, and mean intensity values were used as acoustic predictors in the correlation analyses."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "No generation task",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper introduces and analyzes a human interaction database and performs no humor-generation experiment."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "No model inference",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No computational model inference or LLM prompting is performed."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Model comparison",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The paper does not evaluate computational humor systems, so no human baseline against models is provided."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper does not evaluate LLMs or other models on a benchmark; it introduces a human interaction database and analyzes human ratings and acoustic features."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLM judges are used."
+    },
+    "reporting_gaps": [
+      "The number of laughter annotators and inter-annotator agreement for laughter annotations are not reported.",
+      "The exact number of completed humour questionnaire ratings used in the analyses is not reported.",
+      "The source, number, and language of the jokes distributed in the joke stacks are not specified.",
+      "The exact language(s) actually used in the recorded interactions are not stated beyond all participants speaking English.",
+      "No data URL or code URL is provided; access is described as requiring an individual license and contacting the authors."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "MULAI contains dyadic human-human interaction recordings with a substantial annotated laughter subset.",
+      "metric": "corpus size",
+      "value": "13 sessions; 357 minutes of recorded video-, audio- and physiological data streams; annotated part spans 134 minutes; 601 annotated laughter bouts, 168 annotated speech-laughs and 538 laughter related events",
+      "dataset": "MULAI",
+      "best_system": null
+    },
+    {
+      "finding": "The included database participants comprised a small young adult sample with more Dutch than international participants.",
+      "metric": "participant sample",
+      "value": "26 participants; age M = 24, SD = 2.3; 14 male and 12 female; majority Dutch (N=17)",
+      "dataset": "MULAI",
+      "best_system": null
+    },
+    {
+      "finding": "Self-rated humour and partner-perceived humour were not significantly correlated in conversational tasks but were significantly positively correlated in joke-telling tasks.",
+      "metric": "Pearson rank correlation",
+      "value": "conversation ρ = 0.03, p = 0.527; joke-telling ρ = 0.22, p<.001",
+      "dataset": "MULAI",
+      "best_system": null
+    },
+    {
+      "finding": "No duration, pitch, or intensity feature significantly correlated with humour self-ratings in either task setting.",
+      "metric": "linear mixed model fixed-effect p-values",
+      "value": "Conversation: duration p = 0.2447, pitch p = 0.0619, intensity p = 0.2543; joke-telling: duration p = 0.7500, pitch p = 0.2300, intensity p = 0.850",
+      "dataset": "MULAI",
+      "best_system": null
+    },
+    {
+      "finding": "For conversation-partner humour ratings in the conversational task, laughter pitch and intensity were significant positive predictors.",
+      "metric": "linear mixed model fixed effects",
+      "value": "Pitch β = 0.0010, SE = 0.0004, CI = 0.0001/0.0019, p = 0.0239; intensity β = 0.0234, SE = 0.0062, CI = 0.0110/0.0358, p = 0.0002",
+      "dataset": "MULAI",
+      "best_system": null
+    },
+    {
+      "finding": "For conversation-partner humour ratings in the joke-telling task, laughter duration was a significant negative predictor and intensity was a significant positive predictor.",
+      "metric": "linear mixed model fixed effects",
+      "value": "Duration β = -0.0675, SE = 0.0327, CI = -0.1320/-0.0024, p = 0.0413; intensity β = 0.0163, SE = 0.0071, CI = 0.0023/0.0302, p = 0.0226",
+      "dataset": "MULAI",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "MULAI is a multimodal dyadic laughter database with audio, video, IMU movement, ECG, GSR, participant personality profiles, and participant humour ratings.",
+    "The annotated portion of the database covers 134 minutes and includes 601 laughter bouts, 168 speech-laughs, and 538 laughter-related respiration events.",
+    "Self-rated humour and partner-rated humour were significantly related only in the joke-telling task, not in the conversational task.",
+    "Laughter duration, pitch, and intensity did not significantly correlate with how humorous participants judged themselves to be.",
+    "Conversation partners’ humour ratings did correlate with acoustic laughter features: intensity in both task settings, pitch in the conversational task, and duration negatively in the joke-telling task.",
+    "The authors argue that the relationship between laughter acoustics and perceived humour appears task dependent and socially context-sensitive."
+  ],
+  "limitations": [
+    "Speech-laughter was excluded from the preliminary analysis because of its complex and ambiguous nature.",
+    "The significant correlations reported in the discussion are described as small, and the authors note that other unexplored factors may show stronger correlations.",
+    "The authors state that they did not find an explanation in the literature for the negative correlation between laughter duration and perceived humour in the joke-telling task.",
+    "The survival task is not yet included in the annotations described for analysis, and data for this task is missing in three sessions.",
+    "Speech transcripts, strategies used to make the partner laugh, degrees of familiarity between pairs, and annotations of function/context for individual laughs are planned as future additions rather than reported as available.",
+    "The paper does not report inter-annotator agreement or the number of annotators for the laughter annotations."
+  ],
+  "safety_ethics_notes": "Participants signed informed consent forms, and 6 participants were excluded from the database because they did not give consent for incorporating their data. Access to questionnaire, video, audio, and physiological data requires an individual license.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The MULAI database is described as available to the research community after official publication; an individual license is needed and the paper asks readers to contact the authors for updates and availability."
+  }
+}

@@ -1,0 +1,379 @@
+{
+  "checked_at": "2026-07-13",
+  "checker": "Codex (GPT-5), in a primary-text review separate from the GPT-5.5 extraction run",
+  "method": [
+    "Compared every converted guide entry absent from the 2026-07-03 audit with its primary full-text transcription and, where needed, the publisher or archival record.",
+    "Counted bibliographic, design, sample, dataset, quantitative-result, finding, and limitation statements as separate checkable claims; excluded editorial recommendations and cross-paper synthesis unless directly testable.",
+    "Checked a stratified extract sample for source identity, dataset and task counts, headline results, participants versus observations, judges, generation selection, inference budget, human baselines, contamination risk, and LLM-judge dependence.",
+    "Verified globally that every converted paper has an extract, every extract points to the current source hash, and no source was truncated."
+  ],
+  "guide_audit": {
+    "scope": "All 31 converted guide entries not present in papers/review/discrepancies.json",
+    "papers_checked": 31,
+    "claims_checked": 256,
+    "results": [
+      {
+        "key": "57-mwahaha",
+        "verdict": "confirmed",
+        "claims_checked": 11,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the first general-purpose generation-task framing, three languages plus GIF subtasks, participation and vote counts, low item-level agreement, stronger split-half system-ranking stability, Gemini 2.5 Flash baseline result, and absence of a human-written baseline."
+      },
+      {
+        "key": "t7-computational-model-puns",
+        "verdict": "confirmed",
+        "claims_checked": 7,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the ambiguity/distinctiveness model, human-rating studies, 435-sentence analysis, and the finding that distinctiveness predicts fine-grained pun funniness. The catalog uses the 2016 journal issue year; the supplied version was first published online in 2015."
+      },
+      {
+        "key": "x16-pun-generation-surprise",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the local-global surprisal proposal, SemEval/KAO analyses, SURGEN design, and generation success rates of 31.4%, 9.2%, and 78.9% for SURGEN, the neural baseline, and humans."
+      },
+      {
+        "key": "x17-context-satirical-news",
+        "verdict": "confirmed",
+        "claims_checked": 7,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the 15,199-article context corpus, retrieve-edit-rerank pipeline, two accepted generated headlines, and the reported percentile result for the stronger accepted headline."
+      },
+      {
+        "key": "x18-yodalib",
+        "verdict": "confirmed",
+        "claims_checked": 6,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the location-specific pun-generation framing and the BERT ranking plus Mad-Libs-style generation pipeline."
+      },
+      {
+        "key": "x19-unpie",
+        "verdict": "confirmed",
+        "claims_checked": 7,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the controlled 1,000-item cross-modal pun resource, its three tasks, and the persistent model-human gap."
+      },
+      {
+        "key": "x20-does-bigger-funnier",
+        "verdict": "confirmed",
+        "claims_checked": 9,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the five-model Qwen3 comparison, perfectly monotonic automated size ranking, position/length effects, 12 blinded human annotators, nonsignificant aggregate difference among the three largest models, and the post-hoc p=.039, Kendall's W=.025 result."
+      },
+      {
+        "key": "x21-joke-space-originality",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the three professional-comedian raters, 240 jointly rated jokes, one-million-Reddit-joke reference corpus, and Spearman correlations of .37 and .40."
+      },
+      {
+        "key": "x22-humor-word-embeddings",
+        "verdict": "confirmed",
+        "claims_checked": 7,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the 120,000-word/phrase collection stage, embedding-based preference representation, individual ratings, theory-motivated features, and demographic preference clustering."
+      },
+      {
+        "key": "x23-eigentaste-jester",
+        "verdict": "discrepancy_found_and_fixed",
+        "claims_checked": 6,
+        "discrepancies": [
+          {
+            "severity": "minor",
+            "guide_said": "The current Jester releases contain 6.5M ratings from roughly 150K users.",
+            "source_says": "The official dataset page states 6.5M anonymous ratings and gives release-specific user counts, but does not state a deduplicated combined user total.",
+            "resolution": "Removed the approximate combined user count and described the 6.5M ratings as spanning successive releases over 100–158 jokes."
+          }
+        ],
+        "unverifiable": [],
+        "notes": "Confirmed Eigentaste's constant-time collaborative-filtering contribution against the supplied manuscript and current release statistics against the official Jester dataset page. The catalog distinguishes the manuscript's 2000 date from the 2001 journal issue."
+      },
+      {
+        "key": "x24-open-mic-humor-quotient",
+        "verdict": "confirmed",
+        "claims_checked": 7,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the roughly 40-hour stand-up corpus, 0–4 humor-quotient scale, and approximately .60 quadratic-weighted-kappa agreement."
+      },
+      {
+        "key": "x25-tic-talk",
+        "verdict": "confirmed",
+        "claims_checked": 9,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the 5,416-item corpus, 90 series, 24 genre labels, negative/positive correlations around -.75/.28, and the qualification that the Netflix material is edited television rather than live interaction."
+      },
+      {
+        "key": "x26-not-human-funnier",
+        "verdict": "confirmed",
+        "claims_checked": 9,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed five expert interviews, 58 analyzed videos, 32 study participants, the 4.89 versus 3.72 humor ratings with corrected p=.03, and the identity/scaffolding confound that prevents a pure model-capability interpretation."
+      },
+      {
+        "key": "x27-genai-humor-bias",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the preregistered 600-image audit, human coding/pretests, and the trait-specific stereotype shifts after the instruction to make images funnier."
+      },
+      {
+        "key": "x28-counterfactual-unfairness",
+        "verdict": "confirmed",
+        "claims_checked": 9,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the counterfactual speaker/listener design, maximum reported asymmetries of 67.5%, 64.7%, and 1.5 percentage points across tasks, and the use of human and Llama validation for automated judgments."
+      },
+      {
+        "key": "x29-d-humor",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed 4,379 memes, annotation design, three prediction tasks, and multimodal benchmark results. The paper's conclusion contains an internal 4,397 typo; the guide correctly follows the abstract and split totals."
+      },
+      {
+        "key": "x30-hins",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the Hindi long-context resource size, video/segment structure, model comparisons, context-length effects, and limited human validation of generated ground truth."
+      },
+      {
+        "key": "x31-clef-joker-2024",
+        "verdict": "confirmed",
+        "claims_checked": 9,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the 1,405 English puns, 5,838 French translations, 376 new sources with 832 references, task/run counts, automatic rankings, and low prior manually evaluated wordplay-preservation rates."
+      },
+      {
+        "key": "x32-hsq-fingerprinting",
+        "verdict": "confirmed",
+        "claims_checked": 7,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the six-model HSQ design, 1,000 simulated response sets per model, 1,071-response human reference, low human-model factor-correlation similarity, and failure to recover the human four-factor structure."
+      },
+      {
+        "key": "x33-yesbut-juxtaposition",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed 348 comics, annotation fields, four tasks, human verification, and the reported literal-perception and cross-panel reasoning failures."
+      },
+      {
+        "key": "x34-yesbut-v2",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the separate 1,262-comic multilingual YesBut V2 lineage, its tasks, and reported perception, comparison, and hallucination gaps."
+      },
+      {
+        "key": "x35-turing-jest",
+        "verdict": "confirmed",
+        "claims_checked": 7,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the source-blind human discrimination design and its interpretation as authorship indistinguishability rather than direct proof of superior funniness."
+      },
+      {
+        "key": "x36-ironic-melting-pot",
+        "verdict": "discrepancy_found_and_fixed",
+        "claims_checked": 8,
+        "discrepancies": [
+          {
+            "severity": "minor",
+            "guide_said": "The paper's checklist calls for population, recruitment source, language/culture, expertise, and aggregation protocol.",
+            "source_says": "Its proposed evaluation statement calls for evaluator number and sample assignment, recruitment and compensation, demographic information, task proficiency, definitions, pilot-driven amendments, training materials, and inter-annotator agreement; it does not explicitly name an aggregation protocol.",
+            "resolution": "Replaced the paraphrase with the paper's actual reporting categories."
+          }
+        ],
+        "unverifiable": [],
+        "notes": "Confirmed that this is a position paper with a critical survey of 17 generation papers, not an effect-size meta-analysis, and confirmed its underreporting findings."
+      },
+      {
+        "key": "x37-improv-comedy-setting",
+        "verdict": "confirmed",
+        "claims_checked": 10,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed three professional improvisers, 54 jokes, 40 audience members, 2,160 ratings, 34.6%/29.7%/35.7% pairwise preferences, 2.67/2.59 means, and offstage human selection from multiple GPT-4 candidates."
+      },
+      {
+        "key": "x38-multipun",
+        "verdict": "discrepancy_found_and_fixed",
+        "claims_checked": 8,
+        "discrepancies": [
+          {
+            "severity": "minor",
+            "guide_said": "All 890 non-pun distractors were minimally substituted.",
+            "source_says": "The negatives use both explicative substitution and random substitution; the latter can also regenerate the image.",
+            "resolution": "Changed the characterization to 'substitution-based non-pun distractors.'"
+          }
+        ],
+        "unverifiable": [],
+        "notes": "Confirmed 445 positive puns, 890 negatives, three tasks, affirmative pun-pattern failures, and the average 16.5% F1 improvement from Pun-CoT/Pun-Tuning."
+      },
+      {
+        "key": "x39-how-humorous-ai",
+        "verdict": "confirmed",
+        "claims_checked": 8,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the four-study design, task-dependent comparisons, human and GPT-4o evaluator roles, and the limits on generalizing across generation, coping, evaluation, and workplace-conflict settings."
+      },
+      {
+        "key": "x40-corpus-pragmatics",
+        "verdict": "confirmed",
+        "claims_checked": 9,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed the 200-tweet humor-presence sample, 90 humorous tweets for function labels, exact agreement values, and reliance on one expert reference annotator."
+      },
+      {
+        "key": "x41-mulai",
+        "verdict": "discrepancy_found_and_fixed",
+        "claims_checked": 10,
+        "discrepancies": [
+          {
+            "severity": "minor",
+            "guide_said": "The author order followed ACL metadata: Jansen, Truong, Heylen & Nazareth.",
+            "source_says": "The proceedings PDF lists Jansen, Truong, Nazareth & Heylen.",
+            "resolution": "Synchronized the guide and canonical paper catalog to the author order printed on the primary paper."
+          }
+        ],
+        "unverifiable": [],
+        "notes": "Confirmed 2h14 of annotated interaction, 601 laughs, 168 speech-laughs, 538 respiration events, participant self/partner perceptions, personality/physiology measures, acoustic findings, and individual-license access."
+      },
+      {
+        "key": "x42-cheese",
+        "verdict": "discrepancy_found_and_fixed",
+        "claims_checked": 10,
+        "discrepancies": [
+          {
+            "severity": "minor",
+            "impact": "scope-important",
+            "guide_said": "Five interactions had received the full enrichment pipeline, implying smile and humor annotations.",
+            "source_says": "Five interactions had speech/transcription enrichment, but only two had manual smile and humor annotations and entered the exploratory analysis.",
+            "resolution": "Made the five-versus-two distinction explicit in both the guide and dataset catalog."
+          }
+        ],
+        "unverifiable": [],
+        "notes": "Confirmed 11 roughly 15-minute conversations, 22 French-speaking friends, the smile/humor/reaction annotation scheme, exploratory success/failure analysis, and mixed-access distribution."
+      },
+      {
+        "key": "x43-smile-next",
+        "verdict": "discrepancy_found_and_fixed",
+        "claims_checked": 9,
+        "discrepancies": [
+          {
+            "severity": "minor",
+            "guide_said": "The compact citation treated Korean given names from ACL metadata as surnames.",
+            "source_says": "The PDF displays Lee Jung-Mok, Kim Sung-Bin, Joohyun Chang, Lee Hyun, and Tae-Hyun Oh.",
+            "resolution": "Changed the compact guide citation to the unambiguous 'Lee et al.' while retaining the full display names in the catalog."
+          }
+        ],
+        "unverifiable": [],
+        "notes": "Confirmed the detection/type/reasoning tasks, 3,590 clips and 6,386 QA pairs, human verification, self-instruction, Mixture-of-Laugh-Experts, public-video sourcing, and textualized multimodal inputs."
+      },
+      {
+        "key": "x44-mame-re",
+        "verdict": "confirmed",
+        "claims_checked": 11,
+        "discrepancies": [],
+        "unverifiable": [],
+        "notes": "Confirmed 250 synthetic contexts by 400 manga panels, 100,000 pairs, five labels per pair, 500,000 annotations, 2,325 crowdworkers, Fleiss' kappa of -.022, consensus subsets, model results, and lack of visual-input benefit. The paper's release URL was still a placeholder when checked, so the catalog correctly marks the benchmark unavailable."
+      }
+    ]
+  },
+  "combined_guide_coverage": {
+    "historical_artifact": "papers/review/discrepancies.json",
+    "historical_papers_checked": 80,
+    "historical_claims_checked": 540,
+    "second_pass_papers_checked": 31,
+    "second_pass_claims_checked": 256,
+    "converted_entries_checked": 111,
+    "converted_entries_total": 111,
+    "unavailable_entries_excluded": 5,
+    "claims_checked": 796
+  },
+  "extract_audit": {
+    "population": 111,
+    "integrity_checks": {
+      "extracts_present": 111,
+      "current_source_hash": 111,
+      "non_truncated_sources": 111
+    },
+    "selection": "Purposeful stratified sample spanning theory, Parts 1–9, the adjacent section, 2010–2026, datasets/benchmarks/HCI/surveys, text and multimodal work, human-only and LLM-heavy designs, single-sample and best-of-N generation, all four newly added conversational resources, and none/secondary/substantial LLM-judge dependence.",
+    "sample_size": 26,
+    "sample_fraction": 0.234,
+    "fields_checked": [
+      "source identity and version",
+      "dataset and task counts",
+      "at least one headline result",
+      "participants versus observations",
+      "judges and label sources",
+      "generation selection and inference budget",
+      "human baseline comparability",
+      "contamination-risk basis",
+      "LLM-judge dependence"
+    ],
+    "results": [
+      {"key": "t6-benign-violation", "status": "passed", "notes": "Human-only experimental design, five-study samples/results, observer role, and not-applicable model fields match the source."},
+      {"key": "t7-computational-model-puns", "status": "passed", "notes": "Stimulus/rater counts, fitted measures, headline statistics, and absence of LLM judging match; the extract correctly uses the online-version year."},
+      {"key": "01-androids-electric-sheep", "status": "passed", "notes": "704 cartoons versus 2.7K captions, task results, human estimates, beam selection, construction filters, and contamination warning match."},
+      {"key": "04-pun-unintended", "status": "passed", "notes": "Dataset splits, model results, five-person error analysis, single-output evaluation, and no LLM-as-judge dependence match."},
+      {"key": "14-ai-humor-generation-skills", "status": "passed", "notes": "The profile correctly separates 32/21/17 respondents from 6,015/4,765/4,044 ratings and records best-of-30 generation followed by GPT-4o filtering."},
+      {"key": "20-multi-agent-comedy-club", "status": "passed", "notes": "Fifty rounds, 250 matched pairs, five raters, primary human results, single-output conditions, and secondary GPT-5.1 diagnostic use match."},
+      {"key": "x16-pun-generation-surprise", "status": "passed", "notes": "Stimulus and worker counts, correlation and success results, retrieval candidate budget, and directly comparable expert-written baseline match."},
+      {"key": "25-humordb", "status": "passed", "notes": "Dataset counts, validation/results, human baselines, and unresolved 650-versus-850 participant-reporting conflict are faithfully preserved."},
+      {"key": "x33-yesbut-juxtaposition", "status": "passed", "notes": "Dataset/tasks, eight annotators, three-person evaluation subset, human verification, and secondary GPT construction/scoring dependence match."},
+      {"key": "x38-multipun", "status": "passed", "notes": "Positive/negative counts, three-annotator acceptance, generation path, no human performance baseline, and secondary LLM explanation judge match."},
+      {"key": "x20-does-bigger-funnier", "status": "passed", "notes": "Single joke per model/theme, 12 human annotators versus 240 rankings, automated-judge biases, and substantial judge dependence match."},
+      {"key": "x22-humor-word-embeddings", "status": "passed", "notes": "Collection stages, 1,678-person study, embedding results, static-model design, and no LLM judging match."},
+      {"key": "x36-ironic-melting-pot", "status": "passed", "notes": "Non-empirical profile, survey flow/counts, reporting results, and not-applicable generation/baseline fields match."},
+      {"key": "x26-not-human-funnier", "status": "passed", "notes": "Interview/video/study samples, matched-condition results, unreported output-selection budget, lack of human-performance baseline, and human evaluation match."},
+      {"key": "x37-improv-comedy-setting", "status": "passed", "notes": "Three performers, 40 audience members versus 2,160 ratings, live matched human baseline, and offstage best-of-multiple AI selection match."},
+      {"key": "x41-mulai", "status": "passed", "notes": "The profile distinguishes 32 recruited/6 excluded/26 included, 357 recorded versus 134 annotated minutes, event counts, participant ratings, and no model evaluation."},
+      {"key": "x42-cheese", "status": "passed", "notes": "Eleven dyads, five speech-enriched versus two manually smile/humor-annotated interactions, coder roles, kappa values, and descriptive limitations match."},
+      {"key": "x43-smile-next", "status": "passed", "notes": "Clip/QA/split counts, majority-vote type labels, unreported annotator population, GPT-4 label/synthetic-data role, and no directly comparable human baseline match."},
+      {"key": "x44-mame-re", "status": "passed", "notes": "The profile keeps 2,325 annotators distinct from 500,000 annotations and correctly records fixed-candidate selection, human comparison, and no LLM judge."},
+      {"key": "x27-genai-humor-bias", "status": "passed", "notes": "Two research-assistant accounts/coders, participant pretests, paired single-sample generations, human labeling, and no human creative baseline match."},
+      {"key": "x28-counterfactual-unfairness", "status": "passed", "notes": "Task/item counts, human validators, single-output generation, automated judgments with validation, and substantial LLM-judge dependence match."},
+      {"key": "x30-hins", "status": "passed", "notes": "Benchmark/result counts, explicitly unreported annotator N, generated-reference risk, no human baseline, and automatic-metric evaluation match."},
+      {"key": "x31-clef-joker-2024", "status": "passed", "notes": "Parallel/reference counts, system rankings, translator/annotation roles, missing budgets, and conservative learned-language-model-metric dependence match the source and evidence schema."},
+      {"key": "57-mwahaha", "status": "passed", "notes": "Users, teams, submissions, paid/volunteer votes, skips, system-level agreement, heterogeneous participant candidate budgets, and missing human-written baseline are kept distinct and match."},
+      {"key": "62-humor-modeling-survey", "status": "passed", "notes": "Survey counts, conversational-humor gap, and explicit non-empirical/no-judge profile match."},
+      {"key": "x32-hsq-fingerprinting", "status": "passed", "notes": "The profile distinguishes 1,071 archival human respondents from 1,000 model response sets per model and correctly records matched psychometric rather than human-generation baselines."}
+    ],
+    "outcome": {
+      "passed": 26,
+      "extracts_corrected": 0,
+      "material_errors_found": 0
+    },
+    "limitations": [
+      "This was an AI-performed second review, not an independent human replication of the extraction pipeline.",
+      "The 26 extracts received substantive spot checks; the other 85 received source-presence, hash, and truncation checks only.",
+      "A passed spot check is evidence against obvious extraction error in the checked fields, not certification of every sentence or analyst judgment in that extract."
+    ]
+  }
+}

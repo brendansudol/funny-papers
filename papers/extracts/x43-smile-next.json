@@ -1,0 +1,512 @@
+{
+  "key": "x43-smile-next",
+  "ref": "Part 5 (real-world laughter benchmark)",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x43-smile-next/x43-smile-next.md",
+  "source_md_sha256": "419ed1c1713a6784650e5b93de93b921909fe8fe9267776e84627eb09297951b",
+  "source_truncated": false,
+  "title": "SMILE-Next: Teaching Large Language Models to Detect, Classify, and Reason about Laughter",
+  "authors": [
+    "Lee Jung-Mok",
+    "Kim Sung-Bin",
+    "Joohyun Chang",
+    "Lee Hyun",
+    "Tae-Hyun Oh"
+  ],
+  "year": 2026,
+  "venue": "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How can a dataset support comprehensive laughter understanding in real-world multimodal human interactions?",
+    "Can textualized multimodal cues help LLMs detect, classify, and reason about laughter better than models that consume raw audio-visual or visual inputs?",
+    "Does laughter-specific Self-Instruct improve the generalization of laughter-understanding LLMs across tasks and scenarios?",
+    "Does a LoRA-based Mixture-of-Laugh-Experts framework improve task-specific performance while adding only small inference latency?"
+  ],
+  "tasks": [
+    "laughter detection",
+    "laughter type classification",
+    "laughter reasoning"
+  ],
+  "humor_domains": [
+    "real-world laughter",
+    "social laughter",
+    "humorous laughter",
+    "polite laughter",
+    "satirical laughter",
+    "awkward laughter",
+    "sarcastic laughter",
+    "talk shows",
+    "sitcoms",
+    "dyadic conversations",
+    "movies",
+    "TED Talks",
+    "YouTube videos"
+  ],
+  "modalities": [
+    "text",
+    "video",
+    "audio"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [
+    {
+      "name": "SMILE-Next",
+      "role": "introduced",
+      "size": "3,590 video clips with 6,386 question–answer pairs"
+    },
+    {
+      "name": "SMILE-Next",
+      "role": "trained-on",
+      "size": "4,766 train samples"
+    },
+    {
+      "name": "SMILE-Next",
+      "role": "evaluated-on",
+      "size": "959 validation samples and 661 test samples"
+    },
+    {
+      "name": "Laughter-specific Self-Instruction data",
+      "role": "introduced",
+      "size": "1,790 samples"
+    },
+    {
+      "name": "Laughter-specific Self-Instruction data",
+      "role": "trained-on",
+      "size": "1,790 samples"
+    },
+    {
+      "name": "UR-FUNNY (repo)",
+      "role": "evaluated-on",
+      "size": null
+    },
+    {
+      "name": "TED Talks",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "sitcoms",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "YouTube videos",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "The Skin Deep videos",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "MovieClips videos",
+      "role": "source-material",
+      "size": null
+    },
+    {
+      "name": "Jimmy Fallon and Conan O’Brien talk show videos",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [
+    "MiniCPM-o-v2.6",
+    "Qwen2.5-Omni-7B",
+    "Qwen2.5-VL",
+    "Video-LLaVA",
+    "Vicuna-v1.5-7B",
+    "LLaMA3",
+    "Qwen2.5"
+  ],
+  "methods_proposed": [
+    {
+      "name": "SMILE-Next",
+      "summary": "A multimodal laughter-understanding dataset containing videos, textualized multimodal representations, and question–answer annotations for laughter detection, laughter type classification, and laughter reasoning."
+    },
+    {
+      "name": "Laughter-specific Self-Instruct",
+      "summary": "A GPT-4-based synthetic instruction generation pipeline that expands the dataset with laughter-centered tasks and question–answer pairs covering socially motivated laughter such as nervous, forced, sarcastic, and tension-mitigating responses."
+    },
+    {
+      "name": "Mixture-of-Laugh-Experts (MoLE)",
+      "summary": "A LoRA-based mixture-of-experts framework that freezes the backbone LLM and trains three task-specific lightweight experts with a learned soft router for laughter detection, type classification, and reasoning."
+    },
+    {
+      "name": "Laughter expert LLM with textualized multimodal cues",
+      "summary": "A unified LLM framework that converts utterances, acoustic features, facial action units, video captions, and relationship information into text and uses LLM reasoning over those disentangled cues."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "The paper operationalizes the laughter taxonomy of Tanaka and Campbell (2014) into high-level categories: mirthful, polite, and satirical laughter."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "automatic-metric",
+      "detail": "For laughter detection and type classification, the paper reports precision, recall, F1-score, and accuracy."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "For laughter reasoning, the paper reports BLEU4, METEOR, ROUGE_L, and SentBERT."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Participants ranked laughter-reasoning responses from AV-LLM, V-LLM, and the proposed LLM based on answer correctness given the video context."
+    },
+    {
+      "type": "crowd-votes",
+      "detail": "AMT annotators labeled laughter type; three annotators were assigned per instance and the final label was selected by majority vote considering confidence."
+    },
+    {
+      "type": "expert-annotation",
+      "detail": "GPT-4 generated pseudo-reasoning labels, and AMT annotators verified, refined, or corrected them."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Inter-annotator agreement for laughter type labeling was measured with Fleiss’ Kappa (0.42195)."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Amazon Mechanical Turk workers",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": "Location is one of AU, CA, NZ, GB, US, according to the AMT screenshot",
+        "languages": [
+          "English"
+        ],
+        "observations": "Three annotators were assigned per instance for laughter type classification; final labels were majority-voted; Fleiss’ Kappa was 0.42195.",
+        "detail": "Annotators watched short video segments, selected a laughter type with a confidence score, and wrote why they chose that type."
+      },
+      {
+        "role": "annotator",
+        "participant_count": null,
+        "population": "Amazon Mechanical Turk workers",
+        "recruitment": "Amazon Mechanical Turk",
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Annotators reviewed GPT-4 pseudo-reasoning labels and either retained them if correct or wrote free-form corrections; the number of reviewed or corrected labels is not separately reported.",
+        "detail": "This human verification step was used for laughter reasoning annotations."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "English"
+        ],
+        "observations": "Participants ranked responses from MiniCPM-o, Qwen2.5-VL, and LLaMA3 under the authors’ setting for each video sample; the number of participants and evaluated samples is not reported.",
+        "detail": "The human preference evaluation reports pairwise win rates and average ranks for laughter reasoning outputs."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Amazon Mechanical Turk annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided laughter type labels, confidence scores, and justifications; also verified or corrected pseudo-reasoning labels."
+      },
+      {
+        "type": "LLM",
+        "name": "GPT-4",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Generated pseudo-laughter reasoning labels and generated self-instruction tasks and instances."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Precision, Recall, F1-score, Accuracy, BLEU4, METEOR, ROUGE_L, SentBERT",
+        "role": "primary",
+        "blind": null,
+        "detail": "These metrics determine the main quantitative results in Tables 2, 4, 5, and 8."
+      },
+      {
+        "type": "human-lay",
+        "name": null,
+        "role": "secondary",
+        "blind": null,
+        "detail": "Human preference evaluators ranked model responses for laughter reasoning in Table 3."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Fleiss’ Kappa",
+        "role": "validation",
+        "blind": null,
+        "detail": "Used to assess inter-annotator agreement for laughter type classification; reported value was 0.42195."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "GPT-4 pseudo-reasoning labels for SMILE-Next",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "human",
+        "detail": "GPT-4 generated initial reasoning annotations; human annotators retained annotations that passed verification and refined those that did not."
+      },
+      {
+        "scope": "Laughter-specific Self-Instruct synthetic data",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "unclear",
+        "detail": "GPT-4 generated tasks and question–answer pairs; the paper reports 1,790 generated samples but does not state decoding settings, candidate counts, or filtering criteria beyond task parsing/renaming analysis."
+      },
+      {
+        "scope": "Model outputs for laughter reasoning evaluation",
+        "mode": "not-reported",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper evaluates generated answers with automatic metrics and human preference ranking, but does not report whether outputs were single-sample generations or selected from multiple candidates."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "family-only",
+        "detail": "Used as an external expert LLM for pseudo-reasoning labels and laughter-specific Self-Instruct; no API snapshot is reported."
+      },
+      {
+        "name": "Vicuna-v1.5-7B",
+        "version_or_snapshot": "v1.5-7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used as a text-only LLM backbone with textualized multimodal inputs."
+      },
+      {
+        "name": "LLaMA3",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as a text-only LLM backbone with textualized multimodal inputs; model size/checkpoint is not specified."
+      },
+      {
+        "name": "Qwen2.5",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used as a text-only LLM backbone with textualized multimodal inputs; model size/checkpoint is not specified."
+      },
+      {
+        "name": "MiniCPM-o-v2.6",
+        "version_or_snapshot": "v2.6",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Audio-visual LLM baseline that processes raw video and audio inputs directly."
+      },
+      {
+        "name": "Qwen2.5-Omni-7B",
+        "version_or_snapshot": "7B",
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Audio-visual LLM baseline; the text also refers to Qwen-Omni-7B and Qwen2.5-Omni."
+      },
+      {
+        "name": "Qwen2.5-VL",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Visual LLM baseline using video inputs alongside textualized audio representations, speech transcripts, and relational descriptions."
+      },
+      {
+        "name": "Video-LLaVA",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Visual LLM baseline; Appendix A.3 also reports Video-LLaVA with a Vicuna-V1.5 backbone."
+      },
+      {
+        "name": "WhisperX",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used for utterance cue acquisition and video segmentation."
+      },
+      {
+        "name": "Active Speaker Algorithm",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "family-only",
+        "detail": "Used to identify active speakers in video segments."
+      },
+      {
+        "name": "Off-the-shelf laughter detection model (Gillick et al., 2021)",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to automatically identify video clips containing laughter during dataset construction."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "Main LLM fine-tuning setup",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Training is conducted using DeepSpeed ZeRO-3 for memory efficiency.",
+        "detail": "Models were supervised fine-tuned for three epochs with batch size 4, learning rate 1 × 10^-4, dropout rate 0, LoRA rank r = 8, scaling factor α = 16, and three MoLE experts injected into all linear layers."
+      },
+      {
+        "scope": "Laughter reasoning answer generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Reasoning instructions require answers at most 30 words, starting with “The audience/person laughed because”.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper does not report decoding settings or whether multiple generations were sampled."
+      },
+      {
+        "scope": "GPT-4 pseudo-reasoning label generation",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": "Prompt asks GPT-4 to give a reason at most 30 words, starting with “the person laughed”.",
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper provides the prompt but not the number of calls, temperature, top-p, or cost."
+      },
+      {
+        "scope": "MoLE inference latency",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "Single expert: Detect. 981 ms, Cls. 790 ms, Reasoning 2802 ms, All 1494 ms; Multi-experts(MoLE): Detect. 991 ms, Cls. 796 ms, Reasoning 2845 ms, All 1513 ms; Difference: +10, +6, +43, +19 ms.",
+        "detail": "The paper states that MoLE adds approximately 0.02 seconds per sample and about 1–2% additional inference time."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "SMILE-Next model performance",
+        "present": false,
+        "description": null,
+        "directly_comparable": false,
+        "detail": "The paper uses human annotations as gold labels and conducts human preference evaluation of model outputs, but it does not report a human performance baseline under matched task conditions."
+      }
+    ],
+    "contamination_risk": {
+      "level": "moderate",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [
+        "SMILE-Next is newly curated and split into train, validation, and test sets.",
+        "Pseudo-reasoning labels are human-verified, and type labels are crowd-annotated."
+      ],
+      "basis": "The main SMILE-Next benchmark is newly introduced in the paper, which lowers risk for the primary results, but the paper does not report decontamination checks for public source videos or model pretraining. Appendix A.3 also evaluates on the public UR-FUNNY benchmark, which raises contamination uncertainty for that auxiliary comparison."
+    },
+    "llm_judge_dependence": {
+      "level": "secondary",
+      "affected_claims": "Laughter reasoning labels and self-instruction training data depend on GPT-4-generated text; automatic reasoning metrics compare model outputs to human-verified GPT-4 pseudo-labels.",
+      "human_validation": "AMT annotators reviewed pseudo-reasoning labels and retained or corrected them; human preference evaluation also compares model outputs directly.",
+      "detail": "No LLM is used as the final evaluator of model outputs in the main result tables, but GPT-4 is part of the data-labeling and synthetic-data pipeline."
+    },
+    "reporting_gaps": [
+      "The paper does not report the GPT-4 API snapshot/version or inference dates.",
+      "Decoding and sampling parameters are not reported for GPT-4 pseudo-label generation, Self-Instruct generation, or evaluated model outputs.",
+      "The number of AMT annotators is not reported, only that three annotators were assigned per instance for laughter type classification.",
+      "The number of human preference evaluation participants, recruitment method, geography, and evaluated item count are not reported.",
+      "Hardware, GPU count, training time, and monetary cost are not reported.",
+      "Exact checkpoints or model sizes are not fully specified for LLaMA3, Qwen2.5, Qwen2.5-VL, and Video-LLaVA.",
+      "The paper does not report decontamination checks for public videos or for the UR-FUNNY auxiliary evaluation.",
+      "There is a labeling-description mismatch: the main task defines three laughter types, while Appendix A.2 and the AMT screenshot mention five choices including Others and No laugh."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "On SMILE-Next laughter detection, the best F1 was achieved by Vicuna-v1.5 and the best accuracy was tied by Vicuna-v1.5 and LLaMA3.",
+      "metric": "F1 / Acc.",
+      "value": "0.9675 / 0.9696",
+      "dataset": "SMILE-Next",
+      "best_system": "Vicuna-v1.5 for F1; Vicuna-v1.5 and LLaMA3 for Acc."
+    },
+    {
+      "finding": "On laughter type classification, LLaMA3 achieved the best overall result and outperformed the strongest visual baseline in Table 2.",
+      "metric": "F1 / Acc.",
+      "value": "0.8067 / 0.8425; strongest visual baseline Video-LLaVA: 0.7589 / 0.7912",
+      "dataset": "SMILE-Next",
+      "best_system": "LLaMA3"
+    },
+    {
+      "finding": "On laughter reasoning, the LLM approach achieved the best BLEU4 and METEOR with LLaMA3 and the best ROUGE_L and SentBERT with Vicuna-v1.5.",
+      "metric": "BLEU4 / METEOR / ROUGE_L / SentBERT",
+      "value": "0.2427 / 0.2328 / 0.4191 / 0.7907",
+      "dataset": "SMILE-Next",
+      "best_system": "LLaMA3 for BLEU4 and METEOR; Vicuna-v1.5 for ROUGE_L and SentBERT"
+    },
+    {
+      "finding": "Human preference evaluation favored the proposed LLM reasoning outputs over both V-LLM and AV-LLM outputs.",
+      "metric": "Pairwise win rates and average rank",
+      "value": "LLM vs V-LLM: 55.7 left wins, 37.4 right wins, 7.1 tie; LLM vs AV-LLM: 69.0 left wins, 26.2 right wins, 4.8 tie; average ranks: AV-LLM 2.38, V-LLM 1.93, LLM 1.69",
+      "dataset": "SMILE-Next",
+      "best_system": "LLM (ours)"
+    },
+    {
+      "finding": "Adding full textualized multimodal cues to Qwen2.5 improved performance over transcripts alone across detection, type classification, and reasoning.",
+      "metric": "Detection F1; Type F1; Reasoning SentBERT",
+      "value": "Detection F1 0.8613 → 0.9629; Type F1 0.4019 → 0.7094; Reasoning SentBERT 0.7457 → 0.7666",
+      "dataset": "SMILE-Next",
+      "best_system": "Qwen2.5 with T+A+V+R"
+    },
+    {
+      "finding": "MoLE added only marginal latency compared with a single-expert model.",
+      "metric": "Latency",
+      "value": "All: 1494 ms → 1513 ms; Difference +19 ms",
+      "dataset": "SMILE-Next",
+      "best_system": "Multi-experts(MoLE)"
+    }
+  ],
+  "key_findings": [
+    "Textualized multimodal cues let text-only LLMs outperform audio-visual and visual LLM baselines across laughter detection, type classification, and reasoning.",
+    "The dataset expands laughter understanding beyond binary detection by including type classification and free-form explanations of why laughter occurred.",
+    "Laughter-specific Self-Instruct generally improves performance, especially by adding more diverse real-world laughter scenarios and task types.",
+    "MoLE further improves task performance by specializing LoRA experts for detection, classification, and reasoning while adding about 1–2% latency.",
+    "Human preference results align with the automatic results: participants preferred the proposed LLM’s reasoning outputs over V-LLM and AV-LLM outputs.",
+    "The model still makes errors on ambiguous social laughter, especially confusing mirthful and polite laughter and sometimes over-interpreting facial or acoustic cues."
+  ],
+  "limitations": [
+    "The dataset may not fully capture all possible forms of laughter in real-world settings.",
+    "Rare or atypical cases such as culturally specific expressions, nuanced social norms, and complex group interactions may be underrepresented.",
+    "The dataset primarily focuses on English-language content and does not adequately cover other languages or cultural contexts.",
+    "Annotation is subjective; the reported Fleiss’ Kappa for laughter type classification is 0.42195.",
+    "The paper reports recurring errors where the model confuses mirthful and polite laughter and over-relies on multimodal signals.",
+    "Important reproducibility details such as decoding parameters, exact checkpoints for some models, human preference sample size, and compute cost are not reported."
+  ],
+  "safety_ethics_notes": "The paper states that SMILE-Next is curated exclusively from publicly available videos and governed by original platform policies. It notes that laughter-understanding systems could improve human–AI interaction but may raise bias, misinterpretation, or unintended social-consequence concerns, and it encourages responsible use. The authors also state that AI assistants were used only for grammatical correction and writing refinement.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "Project page: https://mok0102.github.io/smile-next/"
+  }
+}

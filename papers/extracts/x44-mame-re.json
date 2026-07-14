@@ -1,0 +1,496 @@
+{
+  "key": "x44-mame-re",
+  "ref": "Part 5 (memes as conversational actions)",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x44-mame-re/x44-mame-re.md",
+  "source_md_sha256": "ef4dd6e0af800dbba9039b6a9479fa7a9624e981ad35749ba15af25a8f698dae",
+  "source_truncated": false,
+  "title": "Memes-as-Replies: Can Models Select Humorous Manga Panel Responses?",
+  "authors": [
+    "Ryosuke Kohita",
+    "Seiichiro Yoshioka"
+  ],
+  "year": 2026,
+  "venue": "arXiv:2602.15842v1 [cs.LG]",
+  "paper_types": [
+    "benchmark",
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "Can models select the funniest manga-panel meme reply for a given social media context?",
+    "Do preference-based LLM selection methods outperform similarity-based embedding selection for contextual meme humor?",
+    "Does adding visual information, either as textual panel descriptions or direct image inputs, improve humorous meme reply selection?",
+    "Why does retrieve-and-rerank fail to improve performance, and how does candidate similarity affect models’ ability to choose the wittiest reply?",
+    "What do model successes and failures reveal about social cues such as irony, exaggeration, and predictable relevance in meme replies?"
+  ],
+  "tasks": [
+    "meme reply selection",
+    "humorous manga panel response selection",
+    "contextual humorous reply selection"
+  ],
+  "humor_domains": [
+    "memes as replies",
+    "manga memes",
+    "Japanese manga panels",
+    "social media conversational humor",
+    "recontextualized memes"
+  ],
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "languages": [
+    "Japanese"
+  ],
+  "datasets_used": [
+    {
+      "name": "MaMe-Re",
+      "role": "introduced",
+      "size": "250 contexts and 400 manga panels, forming 100,000 unique context-meme pairs with five annotations each, yielding 500,000 annotations"
+    },
+    {
+      "name": "Black Jack ni Yoroshiku",
+      "role": "source-material",
+      "size": "400 panels extracted"
+    },
+    {
+      "name": "GPT-4.1-generated synthetic social media contexts",
+      "role": "source-material",
+      "size": "250 synthetic social media contexts"
+    }
+  ],
+  "models_evaluated": [
+    "GPT-5 (gpt-5-2025-08-07)",
+    "GPT-5-mini (gpt-5-mini-2025-08-07)",
+    "GPT-OSS (gpt-oss-120b)",
+    "Gemini 2.5 Pro",
+    "Gemini 2.5 Flash",
+    "Claude 4 Sonnet (claude-sonnet-4-20250514)",
+    "GPT-5 Vision",
+    "Gemini 2.5 Pro Vision",
+    "sarashina-embedding-v1-1b",
+    "text-embedding-3-large",
+    "Calm2-7b",
+    "Qwen2.5-7B",
+    "CLIP-ViT-H-14-frozen-xlm-roberta-large-laion5B-s13B-b90k",
+    "jina-clip-v2",
+    "sarashina2-vision-8b",
+    "Llama-3-EvoVLM-JP-v2"
+  ],
+  "methods_proposed": [
+    {
+      "name": "Meme Reply Selection",
+      "summary": "Formalizes the task of choosing the funniest meme for a given natural-language context from a candidate meme set, with funniness modeled as a context–meme scoring function."
+    },
+    {
+      "name": "Score@1",
+      "summary": "Defines the primary evaluation metric as the average reference funniness score of the meme selected for each context."
+    },
+    {
+      "name": "sim-select",
+      "summary": "A similarity-based selection strategy that embeds the context and each meme and selects the candidate with the highest cosine similarity, using speech text, descriptions, images, or speech-plus-image representations."
+    },
+    {
+      "name": "pref-select",
+      "summary": "A preference-based selection strategy that prompts an LLM to directly choose the funniest candidate meme for a context from a multiple-choice candidate list."
+    },
+    {
+      "name": "Retrieve-and-rerank setup",
+      "summary": "A hybrid experimental method that first retrieves top-k candidates with Sarashina-Text-Emb and then asks an LLM preference selector to choose the funniest option from the reduced set."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "Recontextualization: the paper frames meme replies as taking fixed media and placing it in a new conversational context to create a surprising juxtaposition."
+    },
+    {
+      "theory": "surprise theory",
+      "usage": "grounding/motivation",
+      "detail": "The paper repeatedly treats surprise or unexpectedness as important to humor, including the claim that semantically relevant but predictable replies can receive low humor scores."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "human-eval",
+      "detail": "Crowdworkers provided binary funny/not funny judgments for every context–meme pair; the reference funniness score is the proportion of annotators who judged the pair funny."
+    },
+    {
+      "type": "human-eval",
+      "detail": "Exp3 collected human performance data through a crowdsourced selection task as a practical reference for distinguishable-candidate selection."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Models were evaluated with Score@1, Consensus Hit Rate (CHR), and nDCG@5 against the crowdsourced reference scores."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "annotator",
+        "participant_count": "2,325 unique annotators",
+        "population": "Yahoo! Crowdsourcing workers; no personal or demographic information such as age, gender, or cultural background was collected",
+        "recruitment": "Yahoo! Crowdsourcing",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "500,000 binary annotations; five annotations for each of 100,000 context–meme pairs",
+        "detail": "Annotators judged each pair as funny or not funny. Quality-control questions with explicit instructions were included, submissions from annotators who failed them were discarded, annotators consented through the platform interface, and compensation was approximately 200 JPY per hour."
+      },
+      {
+        "role": "evaluation-participant",
+        "participant_count": null,
+        "population": "crowdworkers, not otherwise specified",
+        "recruitment": "crowdsourced selection task",
+        "geography": null,
+        "languages": [
+          "Japanese"
+        ],
+        "observations": "Exp3 human selections for distinguishable-candidate sets with k=4, 8, and 12",
+        "detail": "The paper uses these data as a practical reference for average human performance in Exp3, but the transcription does not report the participant count or exact human scores."
+      }
+    ],
+    "judges": [
+      {
+        "type": "human-crowd",
+        "name": "Yahoo! Crowdsourcing annotators",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Provided the binary funny/not funny labels that define MaMe-Re reference funniness scores."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "Score@1, CHR, nDCG@5",
+        "role": "primary",
+        "blind": null,
+        "detail": "Computed model performance from the human reference scores; CHR measures selection of memes unanimously judged funny by all five annotators."
+      },
+      {
+        "type": "human-crowd",
+        "name": "crowdsourced selection-task participants",
+        "role": "validation",
+        "blind": null,
+        "detail": "Served as the human performance reference in Exp3 distinguishable-candidate selection."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "Humor experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The experiments study selection from provided candidate memes rather than free-form humor generation or best-of-N generation."
+      }
+    ],
+    "model_provenance": [
+      {
+        "name": "GPT-4.1",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "unknown",
+        "reporting": "partial",
+        "detail": "Used to generate panel visual descriptions and synthetic social media contexts; not evaluated as a selector."
+      },
+      {
+        "name": "GPT-5",
+        "version_or_snapshot": "gpt-5-2025-08-07",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used as a preference-based selector."
+      },
+      {
+        "name": "GPT-5-mini",
+        "version_or_snapshot": "gpt-5-mini-2025-08-07",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used as a preference-based selector."
+      },
+      {
+        "name": "GPT-OSS",
+        "version_or_snapshot": "gpt-oss-120b",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used as a preference-based selector."
+      },
+      {
+        "name": "Gemini 2.5 Flash",
+        "version_or_snapshot": "gemini-2.5-flash",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as a preference-based selector; no dated snapshot or inference date reported."
+      },
+      {
+        "name": "Gemini 2.5 Pro",
+        "version_or_snapshot": "gemini-2.5-pro",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used as a preference-based selector."
+      },
+      {
+        "name": "Claude 4 Sonnet",
+        "version_or_snapshot": "claude-sonnet-4-20250514",
+        "inference_date": null,
+        "access": "API",
+        "reporting": "exact",
+        "detail": "Used as a preference-based selector; table labels it Claude 4."
+      },
+      {
+        "name": "GPT-5 Vision",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used in Exp3 as a vision-language baseline with candidate images combined into a single grid image."
+      },
+      {
+        "name": "Gemini 2.5 Pro Vision",
+        "version_or_snapshot": null,
+        "inference_date": null,
+        "access": "API",
+        "reporting": "partial",
+        "detail": "Used in Exp3 as a vision-language baseline with candidate images combined into a single grid image."
+      },
+      {
+        "name": "sarashina-embedding-v1-1b",
+        "version_or_snapshot": "sarashina-embedding-v1-1b",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based Text-Emb model; similarity-based models were run on a single NVIDIA A100 GPU."
+      },
+      {
+        "name": "text-embedding-3-large",
+        "version_or_snapshot": "text-embedding-3-large",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based Text-Emb model; the paper states similarity-based models were run on a single NVIDIA A100 GPU."
+      },
+      {
+        "name": "Calm2-7b",
+        "version_or_snapshot": "Calm2-7b",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based LLM-Emb model."
+      },
+      {
+        "name": "Qwen2.5-7B",
+        "version_or_snapshot": "Qwen2.5-7B",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based LLM-Emb model."
+      },
+      {
+        "name": "CLIP-ViT-H-14-frozen-xlm-roberta-large-laion5B-s13B-b90k",
+        "version_or_snapshot": "CLIP-ViT-H-14-frozen-xlm-roberta-large-laion5B-s13B-b90k",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based multimodal embedding model, reported as LAION-CLIP-Multi-Emb."
+      },
+      {
+        "name": "jina-clip-v2",
+        "version_or_snapshot": "jina-clip-v2",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based multimodal embedding model, reported as Jina-CLIP-Multi-Emb."
+      },
+      {
+        "name": "sarashina2-vision-8b",
+        "version_or_snapshot": "sarashina2-vision-8b",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based vision-language embedding model, reported as Sarashina-VLM-Emb."
+      },
+      {
+        "name": "Llama-3-EvoVLM-JP-v2",
+        "version_or_snapshot": "Llama-3-EvoVLM-JP-v2",
+        "inference_date": null,
+        "access": "local",
+        "reporting": "exact",
+        "detail": "Similarity-based vision-language embedding model, reported as EvoVLM-VLM-Emb."
+      }
+    ],
+    "inference_budgets": [
+      {
+        "scope": "GPT-4.1 dataset construction",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "GPT-4.1 generated visual descriptions for manga panels and 250 synthetic social media contexts; the paper does not report prompts beyond this description, sampling parameters, token budgets, or cost."
+      },
+      {
+        "scope": "Exp1 similarity-based selection",
+        "calls_per_item": null,
+        "candidates_per_item": "400 manga panels per context",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "single NVIDIA A100 GPU",
+        "detail": "The paper evaluated 21 model variants across four similarity model types and reports top-performing models in each category."
+      },
+      {
+        "scope": "Exp1 preference-based selection",
+        "calls_per_item": null,
+        "candidates_per_item": "400 meme candidates per context",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "commercial APIs (OpenAI, Google, Anthropic)",
+        "detail": "LLMs were prompted with candidate IDs and speech text, with or without panel descriptions, and instructed to output only the selected ID."
+      },
+      {
+        "scope": "Exp2 retrieve-and-rerank",
+        "calls_per_item": null,
+        "candidates_per_item": "k = 4, 8, 12, 16, 32, 64, 128, 256, 400",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": "commercial APIs for preference-based selection; Sarashina-Text-Emb retrieval run under similarity-based setup",
+        "detail": "Sarashina-Text-Emb retrieved the top-k candidates, then GPT-5, Gemini 2.5 Pro, or GPT-OSS selected the funniest candidate."
+      },
+      {
+        "scope": "Exp3 distinguishable-candidate selection",
+        "calls_per_item": null,
+        "candidates_per_item": "k = 4, 8, 12",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "Each set contained one funny meme with score ≥ 0.8, k/2 unfunny memes with score ≤ 0.2, and the remaining candidates with 0.2 < score < 0.8; vision-language models received all candidate images combined into a single grid image."
+      },
+      {
+        "scope": "Exp4 candidate-similarity sensitivity",
+        "calls_per_item": null,
+        "candidates_per_item": "k = 4, 8, 12; similarity thresholds t={-2,0,2}",
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The funny candidate was retained and other candidates were resampled based on standardized cosine similarity from Sarashina-Text-Emb, creating Low, Mid, and High candidate-similarity conditions."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Exp3 distinguishable-candidate selection",
+        "present": true,
+        "description": "Human performance data were collected through a crowdsourced selection task as a practical reference; the paper states models were close to, and in some cases slightly higher than, average human performance.",
+        "directly_comparable": true,
+        "detail": "Humans and models selected from the same controlled candidate sets with one funny meme, k/2 unfunny memes, and remaining somewhat funny candidates for k=4, 8, and 12."
+      },
+      {
+        "scope": "Exp1, Exp2, and Exp4 model evaluations",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "These experiments use random, oracle, or human-label reference scores rather than a matched human selection baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "low",
+      "paper_discusses": false,
+      "benchmark_public_before_model": false,
+      "mitigations": [
+        "The benchmark is introduced in the paper rather than being a legacy public benchmark.",
+        "Contexts are synthetic and labels are newly crowdsourced.",
+        "All context–meme pairs are exhaustively annotated within the new benchmark."
+      ],
+      "basis": "The evaluated benchmark and its human funniness labels were introduced by this work and are not described as public before the evaluated model snapshots. However, the source manga panels are openly available, GPT-4.1 generated dataset content, and the paper does not report a decontamination test."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": "Model results are scored against crowdsourced human funniness labels; LLMs are evaluated as selectors, not used as judges.",
+      "detail": "No LLM-as-judge evaluation is reported. GPT-4.1 is used for dataset construction, and GPT-5/Gemini/Claude/GPT-OSS are systems under evaluation."
+    },
+    "reporting_gaps": [
+      "No age, gender, cultural background, or other demographic information was collected for the 2,325 annotators.",
+      "The Exp3 human baseline participant count, recruitment details beyond 'crowdsourced selection task,' and exact human scores are not reported in the text transcription.",
+      "LLM sampling parameters, token budgets, retry logic, latency, and monetary cost are not reported.",
+      "Inference dates are not reported, and Gemini/GPT-OSS/GPT-5 Vision/Gemini Vision have limited snapshot reporting compared with GPT-5 and Claude 4 Sonnet.",
+      "The prompt and parameters used by GPT-4.1 to generate panel descriptions and synthetic social media contexts are not fully specified.",
+      "The paper states that synthetic contexts were screened for relevance and diversity, but does not describe the screening procedure in detail.",
+      "Full results for all 21 similarity-based variants are not shown in the transcribed main text; only top-performing models in each category are reported."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "MaMe-Re contains 250 synthetically generated social media contexts and 400 manga panels, producing 100,000 unique context–meme pairs with five annotations each.",
+      "metric": "dataset size",
+      "value": "100,000 unique context-meme pairs; 500,000 annotations; 2,325 unique annotators",
+      "dataset": "MaMe-Re",
+      "best_system": null
+    },
+    {
+      "finding": "Overall inter-annotator agreement was very low, but a large minority of pairs had strong consensus.",
+      "metric": "Fleiss’ κ; consensus proportions",
+      "value": "Fleiss’ κ = -0.022; 20.4% unanimous agreement; additional 21.8% high agreement",
+      "dataset": "MaMe-Re",
+      "best_system": null
+    },
+    {
+      "finding": "In Exp1, GPT-5 with panel descriptions achieved the best Score@1 and CHR, narrowly ahead of the best similarity model.",
+      "metric": "Score@1; CHR",
+      "value": "GPT-5 (P) Desc Y: Score@1 0.325 (±0.014), CHR 0.052 (±0.016); Sarashina-Text-Emb (S) Desc N: Score@1 0.320 (±0.022), CHR 0.024 (±0.019); Random: Score@1 0.255 (±0.001), CHR 0.015 (±0.015)",
+      "dataset": "MaMe-Re",
+      "best_system": "GPT-5 (P) with descriptions"
+    },
+    {
+      "finding": "Models that directly used image or multimodal embeddings underperformed the best text/preference approaches and stayed close to random in Exp1.",
+      "metric": "Score@1",
+      "value": "Jina-CLIP-Multi-Emb 0.282 (±0.025); EvoVLM-VLM-Emb 0.263 (±0.022); Random 0.255 (±0.001)",
+      "dataset": "MaMe-Re",
+      "best_system": "Jina-CLIP-Multi-Emb among the cited multimodal/image-using models"
+    },
+    {
+      "finding": "In Exp2, the retrieval stage contained much better candidates than LLM rerankers could exploit.",
+      "metric": "Oracle Score@1 within retrieved top-k; standalone sim-select baseline",
+      "value": "Oracle Score@1 reached 0.48 at k = 4 and 0.55 at k = 8, while the standalone Sarashina-Text-Emb sim-select baseline was 0.320",
+      "dataset": "MaMe-Re",
+      "best_system": "Oracle upper bound"
+    },
+    {
+      "finding": "In Exp4, LLM performance generally decreased when candidate memes became more semantically similar, with the largest reported drop for GPT-OSS at k=4.",
+      "metric": "Score; Δ from Low to High similarity",
+      "value": "k=4 GPT-5: 0.457 Low, 0.437 High, Δ -0.020; Gemini 2.5 Pro: 0.467 Low, 0.444 High, Δ -0.023; GPT-OSS: 0.457 Low, 0.385 High, Δ -0.072",
+      "dataset": "MaMe-Re",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "The paper introduces Meme Reply Selection and MaMe-Re as a controlled benchmark for evaluating humor that emerges from pairing a social-media context with a manga-panel reply.",
+    "Preference-based LLM selection achieved the best Exp1 result, but GPT-5 with descriptions only narrowly exceeded Sarashina-Text-Emb without descriptions on Score@1.",
+    "Visual information did not consistently help: textual panel descriptions often failed to improve scores, and direct multimodal or vision-language embedding approaches were weaker than text-oriented methods.",
+    "Retrieve-and-rerank did not reliably improve over the best embedding baseline even though oracle scores showed that the retrieval stage often included high-quality candidates.",
+    "Controlled experiments suggest models can choose clearly distinguishable funny memes and can approach human performance in that artificial setting, but they struggle when semantically similar candidates require subtle judgments of wit.",
+    "Case studies suggest similarity methods are reliable but conservative, while GPT-5 can exploit context, persona, irony, and exaggeration but can still choose overly obvious replies."
+  ],
+  "limitations": [
+    "The benchmark is restricted to Japanese manga panels from a single freely licensed source, so results may not generalize to other meme formats such as photographic memes, GIFs, reaction photos, or image macros.",
+    "The contexts are synthetic rather than naturalistic social media posts, which supports privacy and licensing but leaves real-world validation for future work.",
+    "The annotation scheme is binary funny/not funny, and overall Fleiss’ κ is -0.022, reflecting high subjectivity despite a substantial high-consensus subset.",
+    "No demographic information was collected for annotators, limiting analysis of cultural, age, gender, or other audience effects.",
+    "The paper’s hypotheses about objective, data, and domain mismatches in visual humor use are not directly validated.",
+    "The work evaluates selection from fixed candidate sets, not generation or deployment of humorous visual replies in live conversations.",
+    "Exp3 human baseline details and exact human numeric scores are underreported in the text transcription."
+  ],
+  "safety_ethics_notes": "The paper uses synthetic contexts instead of real posts to avoid privacy risks from scraping real tweets and relies on openly licensed manga panels. Annotators consented through the platform, responses were anonymized and aggregated, no personal or demographic information was collected, compensation was approximately 200 JPY per hour, and the study was deemed exempt from IRB review. The paper also notes deployment risks such as selecting inappropriate or offensive content in sensitive contexts and calls for human oversight and context-aware filtering.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://will.be.published.soon",
+    "other": "Source manga panels are from Black Jack ni Yoroshiku: https://densho810.com/free/. Crowdsourcing platform: https://crowdsourcing.yahoo.co.jp/."
+  }
+}
