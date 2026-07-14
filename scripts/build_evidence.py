@@ -8,6 +8,11 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
+try:
+    from paper_sources import analysis_ready, is_restricted
+except ModuleNotFoundError:  # Imported as scripts.build_evidence in tests/tools.
+    from scripts.paper_sources import analysis_ready, is_restricted
+
 ROOT = Path(__file__).resolve().parent.parent
 PAPERS_PATH = ROOT / "papers" / "papers.json"
 EXTRACTS_DIR = ROOT / "papers" / "extracts"
@@ -166,12 +171,16 @@ def format_citations(citations: list[dict], extracts: dict[str, dict]) -> str:
 
 def main() -> int:
     catalog = json.loads(PAPERS_PATH.read_text(encoding="utf-8"))["papers"]
-    converted_keys = {p["key"] for p in catalog if p.get("status") == "converted"}
+    analysis_keys = {
+        paper["key"] for paper in catalog if analysis_ready(paper, EXTRACTS_DIR)
+    }
     extracts = {
         path.stem: json.loads(path.read_text(encoding="utf-8"))
         for path in sorted(EXTRACTS_DIR.glob("*.json"))
     }
-    missing = sorted(key for key in converted_keys if not extracts.get(key, {}).get("evidence_profile"))
+    missing = sorted(
+        key for key in analysis_keys if not extracts.get(key, {}).get("evidence_profile")
+    )
     if missing:
         raise ValueError(
             "Missing evidence profiles; run scripts/enrich_evidence.py: "
@@ -179,8 +188,14 @@ def main() -> int:
         )
 
     claims = json.loads(CLAIMS_PATH.read_text(encoding="utf-8"))
-    validate_claims(claims, converted_keys)
-    profiles = [extracts[key]["evidence_profile"] for key in sorted(converted_keys)]
+    validate_claims(claims, analysis_keys)
+    profiles = [extracts[key]["evidence_profile"] for key in sorted(analysis_keys)]
+    restricted_keys = {
+        paper["key"]
+        for paper in catalog
+        if paper["key"] in analysis_keys and is_restricted(paper)
+    }
+    distributed_count = len(analysis_keys - restricted_keys)
     human_grounded = sum(bool(profile["human_samples"]) for profile in profiles)
     model_runs = sum(bool(profile["model_provenance"]) for profile in profiles)
     exact_versions = sum(
@@ -220,8 +235,14 @@ def main() -> int:
 
     lines = ["# Evidence Strength", ""]
     lines.append(
-        f"Generated {date.today().isoformat()} from {len(converted_keys)} full-text-grounded "
-        "paper extracts plus the curated synthesis-claim map in "
+        f"Generated {date.today().isoformat()} from {len(analysis_keys)} primary-source-grounded "
+        f"paper extracts ({distributed_count} distributed full texts"
+        + (
+            f"; {len(restricted_keys)} restricted primary sources whose full text is not distributed"
+            if restricted_keys
+            else ""
+        )
+        + ") plus the curated synthesis-claim map in "
         "[`synthesis_claims.json`](synthesis_claims.json). Evidence profiles separate "
         "participant counts from observations and preserve missing reporting instead of "
         "filling it by inference. Contamination risk and synthesis confidence are analyst "
@@ -265,7 +286,7 @@ def main() -> int:
             f"| {md_escape(claim['rationale'])} |"
         )
 
-    ordered_extracts = [extracts[p["key"]] for p in catalog if p["key"] in converted_keys]
+    ordered_extracts = [extracts[p["key"]] for p in catalog if p["key"] in analysis_keys]
     lines.extend(
         [
             "",
@@ -303,7 +324,7 @@ def main() -> int:
         )
 
     OUTPUT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"Wrote {OUTPUT_PATH} ({len(converted_keys)} evidence profiles, {len(claims['claims'])} claims)")
+    print(f"Wrote {OUTPUT_PATH} ({len(analysis_keys)} evidence profiles, {len(claims['claims'])} claims)")
     return 0
 
 

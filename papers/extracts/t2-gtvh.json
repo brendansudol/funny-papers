@@ -1,0 +1,222 @@
+{
+  "key": "t2-gtvh",
+  "ref": "T2",
+  "section": "Theory Foundations",
+  "extracted_at": "2026-07-14",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_access": "restricted",
+  "source_md_sha256": "5f35b506b1cef1599ba31b12cdb2e82b33321334881ec7022eaab7749dffce4f",
+  "source_truncated": false,
+  "extraction_coverage": {
+    "strategy": "single-pass",
+    "source_scope": "complete journal article",
+    "source_page_count": 56,
+    "covered_page_count": 56,
+    "source_characters": 130140,
+    "complete_for_consulted_scope": true
+  },
+  "source_notice": "Restricted primary source consulted; full text not distributed.",
+  "source_official_sources": [
+    {
+      "label": "De Gruyter article page",
+      "url": "https://www.degruyterbrill.com/document/doi/10.1515/humr.1991.4.3-4.293/html?lang=en",
+      "consulted": true
+    }
+  ],
+  "catalog_entry_source_coverage_complete": true,
+  "title": "Script theory revis(it)ed: joke similarity and joke representation model",
+  "authors": [
+    "Salvatore Attardo",
+    "Victor Raskin"
+  ],
+  "year": 1991,
+  "venue": "Humor 4–3/4 (1991), 293–347",
+  "paper_types": [
+    "theory"
+  ],
+  "research_questions": [
+    "How can degrees of similarity and difference among verbal jokes be represented theoretically?",
+    "What knowledge resources inform a verbal joke, and how should they be hierarchically ordered?",
+    "How should Raskin’s script-based semantic theory of humor and Attardo’s five-level joke representation model be revised into a general theory of verbal humor?"
+  ],
+  "tasks": [
+    "joke similarity analysis",
+    "joke representation",
+    "verbal humor theory construction"
+  ],
+  "humor_domains": [
+    "verbal jokes",
+    "ethnic jokes",
+    "light-bulb jokes",
+    "riddles",
+    "puns",
+    "one-liners"
+  ],
+  "modalities": [
+    "text"
+  ],
+  "languages": [
+    "English"
+  ],
+  "datasets_used": [],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "General Theory of Verbal Humor (GTVH)",
+      "summary": "The paper proposes a general theory of verbal humor, represented by verbal jokes, in which jokes are characterized by six knowledge resources: script oppositions, logical mechanisms, situations, targets, narrative strategies, and language."
+    },
+    {
+      "name": "Six-knowledge-resource hierarchical joke representation model",
+      "summary": "The model orders the six knowledge resources as levels of joke analysis: Script Oppositions → Logical Mechanisms → Situations → Target → Narrative Strategies → Language → Joke Text. The ordering is argued from binary relations among resources, a modified content/tool distinction, and hypothesized perceptions of joke similarity."
+    },
+    {
+      "name": "Indexed taxonomy of joke variance and invariance",
+      "summary": "The paper generalizes Attardo’s earlier variant/invariant idea by defining variants according to which knowledge-resource arguments two jokes share, using the six-argument template {SO, LM, SI, TA, NS, LA}."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "The paper proposes GTVH as a six-knowledge-resource theory of verbal humor and uses it to analyze joke similarity, variants, and invariants."
+    },
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "operationalized",
+      "detail": "The paper revises and extends Raskin’s script-based semantic theory of humor; script opposition is retained as the highest knowledge resource and is used to analyze jokes such as dumbness vs. nondumbness and clean vs. dirty."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The paper discusses incongruity-based theories and the need for logical or pseudological justification of absurdity, including Aubouin’s incongruity and acceptance/justification and Ziv’s local logic."
+    },
+    {
+      "theory": "relief",
+      "usage": "cited-in-passing",
+      "detail": "The paper refers to release-based theories as special theories addressing the pleasurability of humor rather than the essentialist 'what is humor?' question."
+    },
+    {
+      "theory": "superiority",
+      "usage": "cited-in-passing",
+      "detail": "The paper refers to disparagement-based theories as special theories about alleged communicative goals of humor, contrasting them with GTVH’s essentialist focus."
+    },
+    {
+      "theory": "other",
+      "usage": "grounding/motivation",
+      "detail": "The paper discusses Freud’s tendentious vs. nontendentious humor distinction, logical mechanisms such as figure–ground reversal, chiasmus, false analogy, garden path, and local/paralogical logic."
+    }
+  ],
+  "evaluation_methods": [],
+  "evidence_profile": {
+    "human_samples": [],
+    "judges": [
+      {
+        "type": "none",
+        "name": null,
+        "role": "primary",
+        "blind": null,
+        "detail": "The paper is theoretical and does not report an empirical evaluation, annotation study, or judged benchmark."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "No generation experiment is reported.",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper analyzes and constructs joke examples for theoretical comparison; it does not run a humor generation system."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "No computational inference is reported.",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The paper predates and does not use machine-learning or LLM inference."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "No computational evaluation is reported.",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "There are no model results and no human baseline condition."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The paper is a non-computational theory article and does not evaluate models on benchmarks."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs or automated judges are used."
+    },
+    "reporting_gaps": [
+      "No empirical similarity experiment is conducted; the hierarchy is partly based on the authors’ stated 'weak psychological intuitions' and hypothesized perceptions of similarity.",
+      "No participant counts, sampling procedure, or statistical tests are reported because the paper is theoretical.",
+      "The paper explicitly says the proposed hierarchy is neutral to the actual temporal process of joke production rather than a production model."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "The proposed GTVH represents each joke with six knowledge resources: script oppositions, logical mechanisms, situations, targets, narrative strategies, and language.",
+      "metric": "number of knowledge resources",
+      "value": "six",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The core similarity analysis begins from seven jokes, examples (1)–(7), each designed to differ from joke (1) along one parameter.",
+      "metric": "number of main joke examples",
+      "value": "seven",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The paper replaces Attardo’s earlier five-level joke representation with a six-argument joke template.",
+      "metric": "template size",
+      "value": "{SO, LM, SI, TA, NS, LA}",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The final hierarchy orders the six KRs as Script Oppositions, Logical Mechanisms, Situations, Target, Narrative Strategies, and Language, followed by Joke Text.",
+      "metric": "hierarchical levels before joke text",
+      "value": "six KRs",
+      "dataset": null,
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "The paper argues that joke similarity can be explained by which knowledge-resource values jokes share or differ on.",
+    "The six knowledge resources proposed for verbal jokes are script opposition, logical mechanism, situation, target, narrative strategy, and language.",
+    "The final hierarchy places script opposition as the most abstract resource and language as the resource closest to the joke text.",
+    "Target is described as the only optional knowledge resource among the six, since some jokes do not have a clear target.",
+    "GTVH subsumes and revises SSTH by preserving script opposition while adding explicit resources that SSTH had effectively absorbed into script opposition or language.",
+    "The model is explicitly a model of joke analysis and representation, not a temporal model of how speakers actually produce jokes."
+  ],
+  "limitations": [
+    "The paper restricts its central claim to verbal humor as represented by verbal jokes, and notes that this is the area of highest performance for the theory.",
+    "The proposed hierarchy is not empirically validated in the article; the authors describe the similarity basis as involving weak psychological intuitions and say experiments could falsify it.",
+    "The theory addresses the 'what is humor?' question, not why humor exists, how people use humor, or why humor is pleasurable.",
+    "The model is neutral to joke production and does not claim that speakers create jokes by moving through the hierarchy in temporal order.",
+    "The target resource depends on cultural stereotypes, and the paper notes complications when a target group has multiple stereotypes or when a hearer lacks the relevant stereotype."
+  ],
+  "safety_ethics_notes": "The paper extensively discusses targeted ethnic jokes and stereotypes, including dumb-Pole jokes, Irish jokes, Jewish stereotypes, and xenophobic humor. It emphasizes that humorous stereotypes may be fictional and need not correspond to reality, while noting that the relationship between stereotypes in jokes and real-life attitudes remains controversial.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": null
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "key": "t1-ssth",
+  "ref": "T1",
+  "section": "Theory Foundations",
+  "extracted_at": "2026-07-14",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_access": "restricted",
+  "source_md_sha256": "899a8200d7547e00f6b0fbc9292c2a4ae7ceb759d889c9e58db79aef39b825ef",
+  "source_truncated": false,
+  "extraction_coverage": {
+    "strategy": "chapter-extraction-plus-synthesis",
+    "source_scope": "complete book",
+    "source_page_count": 308,
+    "covered_page_count": 308,
+    "complete_for_consulted_scope": true,
+    "units": [
+      {
+        "id": "front-matter",
+        "title": "Front matter",
+        "source_pages": "1-23",
+        "source_characters": 31227
+      },
+      {
+        "id": "chapter-1",
+        "title": "Survey of Humor Research",
+        "source_pages": "24-67",
+        "source_characters": 118838
+      },
+      {
+        "id": "chapter-2",
+        "title": "Theory",
+        "source_pages": "68-81",
+        "source_characters": 33045
+      },
+      {
+        "id": "chapter-3",
+        "title": "Semantic Theory",
+        "source_pages": "82-121",
+        "source_characters": 101330
+      },
+      {
+        "id": "chapter-4",
+        "title": "Semantic Theory of Humor",
+        "source_pages": "122-170",
+        "source_characters": 119366
+      },
+      {
+        "id": "chapter-5",
+        "title": "Sexual Humor",
+        "source_pages": "171-202",
+        "source_characters": 75376
+      },
+      {
+        "id": "chapter-6",
+        "title": "Ethnic Humor",
+        "source_pages": "203-244",
+        "source_characters": 100641
+      },
+      {
+        "id": "chapter-7",
+        "title": "Political Humor",
+        "source_pages": "245-269",
+        "source_characters": 59322
+      },
+      {
+        "id": "back-matter",
+        "title": "Afterword, appendices, references, and indexes",
+        "source_pages": "270-308",
+        "source_characters": 83182
+      }
+    ]
+  },
+  "source_notice": "Restricted primary source consulted; full text not distributed.",
+  "source_official_sources": [
+    {
+      "label": "Springer book page",
+      "url": "https://link.springer.com/book/10.1007/978-94-009-6472-3",
+      "consulted": true
+    }
+  ],
+  "catalog_entry_source_coverage_complete": true,
+  "title": "Semantic Mechanisms of Humor",
+  "authors": [
+    "Victor Raskin"
+  ],
+  "year": 1985,
+  "venue": "Synthese Language Library, Volume 24; D. Reidel Publishing Company",
+  "paper_types": [
+    "theory",
+    "survey"
+  ],
+  "research_questions": [
+    "What are the necessary and sufficient semantic conditions for a verbal text to be recognized as funny or as a joke?",
+    "How can formal, contextual, script-based semantics model native-speaker competence about funniness?",
+    "How do script compatibility, script overlap, script oppositeness, and script-switch triggers account for verbal jokes?",
+    "How does joke telling differ from bona-fide Gricean communication?",
+    "How can the same semantic theory be applied to sexual, ethnic, and political humor?"
+  ],
+  "tasks": [
+    "verbal humor formalization",
+    "verbal joke semantic analysis",
+    "script overlap and script opposition identification",
+    "script-switch trigger classification",
+    "humor taxonomy/classification",
+    "sexual humor analysis",
+    "ethnic humor analysis",
+    "political humor analysis",
+    "joke construction theorization"
+  ],
+  "humor_domains": [
+    "verbal humor",
+    "jokes",
+    "puns",
+    "riddles and conundrums",
+    "wordplay",
+    "double entendre",
+    "knock-knock jokes",
+    "sexual humor",
+    "dirty and obscene jokes",
+    "Russian chastushka humor",
+    "ethnic humor",
+    "Jewish humor",
+    "anti-Semitic humor",
+    "self-disparaging humor",
+    "political humor",
+    "Soviet political humor",
+    "national superiority jokes",
+    "pseudo-ethnic jokes",
+    "parody",
+    "allusive jokes",
+    "cartoon caption verbalization"
+  ],
+  "modalities": [
+    "text",
+    "audio"
+  ],
+  "languages": [
+    "English",
+    "Russian",
+    "Hebrew",
+    "French",
+    "German",
+    "Italian",
+    "Spanish",
+    "Swedish",
+    "Yiddish",
+    "Chinese",
+    "Korean",
+    "Japanese",
+    "Arabic",
+    "Welsh",
+    "Latin",
+    "Greek",
+    "Hungarian",
+    "Turkeman",
+    "Uzbek",
+    "Kazakh",
+    "Kirgiz"
+  ],
+  "datasets_used": [
+    {
+      "name": "Appendix 1: 50 Simple Jokes",
+      "role": "introduced",
+      "size": "50 simple jokes (A101–A150)"
+    },
+    {
+      "name": "Appendix 2: 25 Complex Jokes",
+      "role": "introduced",
+      "size": "25 complex jokes (A201–A225)"
+    },
+    {
+      "name": "Numbered joke examples in Semantic Mechanisms of Humor",
+      "role": "analyzed",
+      "size": "numbered examples through (401)"
+    },
+    {
+      "name": "Kabronsky/Raskin obscene chastushka materials",
+      "role": "source-material",
+      "size": "approximately 800 available chastushkas"
+    },
+    {
+      "name": "Published joke collections and performances cited for examples",
+      "role": "source-material",
+      "size": null
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "Script-Based Semantic Theory of Humor (SSTH)",
+      "summary": "The book’s Main Hypothesis states that a single-joke-carrying text is funny iff it is compatible, fully or partly, with two different scripts and those scripts are opposite in a special sense."
+    },
+    {
+      "name": "Script-based semantic theory with script lexicon and combinatorial rules",
+      "summary": "Raskin proposes a contextual semantic theory in which words evoke scripts, including extralexical common-sense and restricted knowledge, and combinatorial rules combine scripts in context to derive readings, presuppositions, inferences, associations, and possible-world information."
+    },
+    {
+      "name": "Non-bona-fide joke-telling communication model",
+      "summary": "Joke telling is treated as a non-bona-fide mode of communication with its own cooperative principle and four maxims, parallel to but different from Gricean bona-fide communication."
+    },
+    {
+      "name": "Script opposition and trigger taxonomy",
+      "summary": "The book classifies basic script oppositions into actual/non-actual, normal/abnormal, and possible/impossible real/unreal types, and classifies script-switch triggers mainly as ambiguity-based or contradiction-based, with further subtypes."
+    },
+    {
+      "name": "Domain-specific script taxonomies for sexual, ethnic, and political humor",
+      "summary": "The second part applies SSTH to sexual humor through a four-type taxonomy, to ethnic humor through stereotype-like ethnic scripts and diagnostics for true versus pseudo-ethnic jokes, and to political humor through denigration and exposure classes."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "SSTH (script opposition)",
+      "usage": "operationalized",
+      "detail": "The whole book formulates and applies script compatibility plus script oppositeness as necessary and sufficient semantic conditions for verbal jokes."
+    },
+    {
+      "theory": "incongruity-resolution",
+      "usage": "grounding/motivation",
+      "detail": "The survey discusses incongruity theories and Chapter 4 reinterprets incongruity-like accounts in script terms, especially as the confrontation of overlapping opposed scripts."
+    },
+    {
+      "theory": "superiority",
+      "usage": "grounding/motivation",
+      "detail": "Superiority, hostility, aggression, and disparagement theories are surveyed and later related especially to ethnic and political humor, but they are not the formal mechanism of the theory."
+    },
+    {
+      "theory": "relief",
+      "usage": "grounding/motivation",
+      "detail": "Release/relief theories are surveyed and discussed as compatible with, but not decided by, the semantic account; the sexual-humor chapter explicitly remains neutral about suppression/release claims."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "Grice’s cooperative principle and maxims are used to motivate a distinct non-bona-fide joke-telling communication mode."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "The book evaluates the theory through authorial qualitative semantic analysis of many numbered joke examples, appendices, and domain-specific joke classes; it reports no controlled experiment, annotation study, model evaluation, or performance metric."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": null,
+        "population": "Volunteer assistants and informants working with Kabronsky and Raskin on chastushka materials",
+        "recruitment": null,
+        "geography": "Russian/Soviet context implied by the chastushka materials",
+        "languages": [
+          "Russian"
+        ],
+        "observations": "approximately 800 available chastushkas",
+        "detail": "The chapter on sexual humor states that approximately 800 available chastushkas were collected by Kabronsky and the author with volunteer assistants and informants, and that nearly a half may be suspected of fake-folk origin."
+      },
+      {
+        "role": "other",
+        "participant_count": null,
+        "population": "Willing and knowledgeable native informants",
+        "recruitment": null,
+        "geography": "American",
+        "languages": [
+          "English"
+        ],
+        "observations": "0 American anti-institution jokes discovered",
+        "detail": "In the political-humor chapter, the author reports failing to find an American anti-institution joke for one section despite using willing and knowledgeable native informants."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": "Victor Raskin",
+        "role": "primary",
+        "blind": null,
+        "detail": "The script analyses, classifications, and claims about whether examples instantiate the Main Hypothesis are authorial theoretical judgments."
+      },
+      {
+        "type": "human-lay",
+        "name": "idealized native speaker intuition",
+        "role": "validation",
+        "blind": null,
+        "detail": "The book repeatedly states that the formal semantic theory should match native-speaker intuitions about funniness, but it does not report a sampled judgment study."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "No joke-generation experiment",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The book discusses the possibility of a computerized joke-synthesis algorithm but reports no generation experiment or generated-output selection."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "No model inference",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "The work is a 1985 theoretical book and reports no computational model inference budget."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Computational or model comparison",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "No humor system or LLM is evaluated; native-speaker intuition is a theoretical adequacy criterion rather than a measured human baseline."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "The book does not evaluate models on a benchmark or dataset; contamination risk for model evaluation is not applicable."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs are used as judges or evaluators."
+    },
+    "reporting_gaps": [
+      "No controlled human evaluation of funniness judgments is reported.",
+      "No participant counts are reported for the informal informants and assistants mentioned in relation to chastushka collection and the search for American anti-institution jokes.",
+      "No inter-annotator agreement or independent validation of script labels, oppositions, or trigger classifications is reported.",
+      "The joke examples are explicitly selected for semantic analyzability and illustrative value rather than by systematic sampling or entertainment quality.",
+      "The proposed computerized joke-synthesis direction is mentioned, but no implementation, generated outputs, or computational results are reported.",
+      "The formal semantic theory depends on some crucial formally undefined notions and does not provide a complete inventory of world-knowledge scripts."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "The Main Hypothesis defines a single-joke-carrying text through compatibility with two different scripts and special oppositeness between those scripts.",
+      "metric": "semantic conditions",
+      "value": "2 conditions",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The book reduces basic real/unreal script oppositions to actual/non-actual, normal/abnormal, and possible/impossible types.",
+      "metric": "opposition types",
+      "value": "3 types",
+      "dataset": "Numbered joke examples in Semantic Mechanisms of Humor",
+      "best_system": null
+    },
+    {
+      "finding": "The appendices provide additional example material for the theory.",
+      "metric": "appendix examples",
+      "value": "50 simple jokes; 25 complex jokes",
+      "dataset": "Appendix 1: 50 Simple Jokes; Appendix 2: 25 Complex Jokes",
+      "best_system": null
+    },
+    {
+      "finding": "The sexual-humor chapter cross-classifies explicit versus implicit sexual/non-sexual opposition with absence versus presence of a specific sexual script/opposition.",
+      "metric": "sexual humor taxonomy",
+      "value": "four types",
+      "dataset": null,
+      "best_system": null
+    },
+    {
+      "finding": "The chastushka discussion reports the available collected materials and a qualification about their origin.",
+      "metric": "source materials",
+      "value": "approximately 800; nearly a half",
+      "dataset": "Kabronsky/Raskin obscene chastushka materials",
+      "best_system": null
+    },
+    {
+      "finding": "The political-humor chapter divides political jokes into denigration jokes and exposure jokes.",
+      "metric": "political humor classes",
+      "value": "2 basic classes",
+      "dataset": null,
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "Raskin’s central claim is that verbal jokes are semantically identifiable by two overlapping scripts standing in a special opposition relation.",
+    "The book treats joke telling as a non-bona-fide communication mode, so hearers process apparent anomaly, ambiguity, or contradiction differently than in ordinary information-seeking communication.",
+    "The semantic machinery is broader than a dictionary: scripts include contextual, common-sense, restricted, and individual knowledge needed for ordinary comprehension and for jokes.",
+    "Sexual humor is analyzed as a special case of script opposition, organized around sexual/non-sexual opposition and recurring specific sexual scripts such as GENITAL SIZE, SEXUAL PROWESS, EXPOSURE, SEXUAL IGNORANCE/INEXPERIENCE, and FORBIDDEN SEX.",
+    "Ethnic humor is analyzed through acquired stereotype-like scripts that the author calls conventional, fictional, mythological, simplistic, and usually binary or near-binary.",
+    "Political humor is described as semantically simpler than sexual or ethnic humor, often opposing what a target is supposed or purports to be with what it is exposed or denigrated as being."
+  ],
+  "limitations": [
+    "The theory’s main object is verbal humor, especially short, elementary, self-contained joke texts; non-verbal humor is outside scope.",
+    "The book is theoretical and qualitative, with no controlled empirical validation, no annotation study, and no quantitative performance evaluation.",
+    "Examples are selected for semantic analyzability and illustration rather than by systematic sampling or joke quality.",
+    "The theory idealizes an ideal speaker-hearer community and relies on native-speaker intuition without measuring individual variation.",
+    "The script-based semantic theory does not encode all world knowledge and depends on some formally undefined primitives.",
+    "The Afterword says the book does not focus on good versus bad humor and omits many humor categories, including dark, sick, toilet, school/college, sports, elephant, dead-cat, Little-Audrey, Watergate, and Congresspage jokes.",
+    "Many analyses rely on dated, offensive, or stereotype-laden joke material; the book treats such stereotypes as scripts rather than as established truths."
+  ],
+  "safety_ethics_notes": "The book analyzes many examples involving explicit sexual content, obscenity, misogyny, homophobia in dated terminology, rape/incest/prostitution/zoophily references, anti-Semitism, racism, ethnic slurs, political violence, repression, and xenophobic stereotypes. Raskin explicitly states in the preface that using a joke as an example does not endorse its contents, values, or prejudices, and several chapters characterize ethnic scripts as fictional, mythological, and stereotyped.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": null,
+    "other": "The book includes Appendix 1 with 50 simple jokes, Appendix 2 with 25 complex jokes, references, subject index, and name index; no code or online data artifact is reported."
+  }
+}

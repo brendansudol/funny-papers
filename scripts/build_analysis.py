@@ -20,6 +20,11 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
+try:
+    from paper_sources import is_restricted
+except ModuleNotFoundError:  # Imported as scripts.build_analysis in tests/tools.
+    from scripts.paper_sources import is_restricted
+
 ROOT = Path(__file__).resolve().parent.parent
 EXTRACTS_DIR = ROOT / "papers" / "extracts"
 PAPERS_PATH = ROOT / "papers" / "papers.json"
@@ -195,6 +200,14 @@ def main() -> int:
     if not extracts:
         print("No extracts found; run extract_papers.py first.")
         return 1
+    catalog = json.loads(PAPERS_PATH.read_text(encoding="utf-8"))["papers"]
+    papers_by_key = {paper["key"]: paper for paper in catalog}
+    restricted_count = sum(
+        is_restricted(papers_by_key[extract["key"]])
+        for extract in extracts
+        if extract["key"] in papers_by_key
+    )
+    distributed_count = len(extracts) - restricted_count
 
     lines: list[str] = []
     lines.append("# Cross-Paper Analysis")
@@ -202,7 +215,14 @@ def main() -> int:
     lines.append(
         f"Comparison views over {len(extracts)} paper extracts. Regenerated "
         f"{date.today().isoformat()} by `scripts/build_analysis.py` from "
-        f"[extracts/](extracts/) (full-text-grounded, one JSON per paper). "
+        f"[extracts/](extracts/) (primary-source-grounded: {distributed_count} "
+        "distributed full texts"
+        + (
+            f" and {restricted_count} restricted sources whose full text is not distributed"
+            if restricted_count
+            else ""
+        )
+        + "; one JSON per paper). "
         f"One-page summaries: [summaries/](summaries/). "
         f"Methodological profiles and synthesis confidence: [EVIDENCE.md](EVIDENCE.md). "
         f"Common model spelling/version aliases and broad task synonyms are "

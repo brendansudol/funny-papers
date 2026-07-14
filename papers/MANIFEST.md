@@ -1,27 +1,28 @@
 # Paper Library Manifest
 
-Companion library for [humor-and-llms-field-guide.md](../humor-and-llms-field-guide.md). Regenerated 2026-07-13 by `scripts/build_manifest.py` from [papers.json](papers.json) (the machine-readable source of truth).
+Companion library for [humor-and-llms-field-guide.md](../humor-and-llms-field-guide.md). Regenerated 2026-07-14 by `scripts/build_manifest.py` from [papers.json](papers.json) (the machine-readable source of truth).
 
-**116 entries**: 111 converted, 5 no open PDF.
+**116 entries**: 111 converted, 4 restricted primary sources, 1 no open PDF.
 
 Layout:
 
-- `papers/pdfs/<key>.pdf` — downloaded paper PDFs
+- `papers/pdfs/<key>.pdf` — distributable downloaded paper PDFs
 - `papers/md/<key>/<key>.md` — combined Markdown transcription (per-page files in `papers/md/<key>/pages/`, per-page API usage in `papers/md/<key>/manifest.jsonl`)
 - `papers/runs/<key>.progress.jsonl` — conversion progress logs
+- Restricted PDFs, transcriptions, page files, manifests, chapter intermediates, and run logs are kept outside version control; only publisher links and derived analysis are published
 - `papers/extracts/<key>.json` — structured extract (tasks, datasets, models, theories, headline numbers); `papers/summaries/<key>.md` — one-page summary; cross-paper views in [ANALYSIS.md](ANALYSIS.md)
 
-Pipeline: `scripts/download_papers.py` -> `scripts/convert_papers.py` (uses `../pdf-to-md`) -> `scripts/build_manifest.py`. All steps are resumable; to add a missing paper, drop the PDF into `papers/pdfs/` with the right key and rerun the last two steps.
+Pipeline: `scripts/download_papers.py` -> `scripts/convert_papers.py` (uses `../pdf-to-md`) -> `scripts/build_manifest.py`. All steps are resumable; to add a missing paper, drop the PDF into `papers/pdfs/` with the right key and rerun the last two steps. Restricted sources instead require scoped `--only KEY --include-restricted`; private outputs remain outside version control.
 
 ## Theory Foundations
 
 | Ref | Paper | Year | Venue | PDF | Markdown | Summary | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| T1 | [Semantic Mechanisms of Humor (Script-based Semantic Theory of Humor)](https://link.springer.com/book/10.1007/978-94-009-6472-3) | 1985 | Reidel/Springer (book) | — | — | — | no open PDF Book; no open-access PDF. |
-| T2 | The General Theory of Verbal Humor (GTVH) | 1991 | HUMOR 4:293-347; expanded in Attardo, Linguistic Theories of Humor (1994) | — | — | — | no open PDF Paywalled journal article / book; no open-access PDF. |
+| T1 | [Semantic Mechanisms of Humor (Script-based Semantic Theory of Humor)](https://link.springer.com/book/10.1007/978-94-009-6472-3) | 1985 | Reidel/Springer (book) | — | — | [1-pager](summaries/t1-ssth.md) | Restricted primary source consulted; full text not distributed. Official sources: [Springer book page (consulted)](https://link.springer.com/book/10.1007/978-94-009-6472-3). Book-length restricted source. Public outputs may include derived analysis only; the PDF, transcription, page files, manifests, chapter intermediates, and run logs are not distributed. |
+| T2 | [The General Theory of Verbal Humor (GTVH)](https://www.degruyterbrill.com/document/doi/10.1515/humr.1991.4.3-4.293/html?lang=en) | 1991 | HUMOR 4:293-347; expanded in Attardo, Linguistic Theories of Humor (1994) | — | — | [1-pager](summaries/t2-gtvh.md) | Restricted primary source consulted; full text not distributed. Official sources: [De Gruyter article page (consulted)](https://www.degruyterbrill.com/document/doi/10.1515/humr.1991.4.3-4.293/html?lang=en). Paywalled journal article consulted as a restricted primary source; full text and full-text derivatives are not distributed. |
 | T3 | [Inside Jokes: Using Humor to Reverse-Engineer the Mind](https://mitpress.mit.edu/9780262518697/inside-jokes/) | 2011 | MIT Press (book) | — | — | — | no open PDF Book; no open-access PDF. |
-| T4 | [The Linguistic Analysis of Jokes](https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731) | 2004 | Routledge (book) | — | — | — | no open PDF Book; no open-access PDF. |
-| T5 | Incongruity-Resolution & Appropriate Incongruity | 1972 | Book chapters (Suls two-stage model; Oring, Engaging Humor) | — | — | — | no open PDF Book chapters; no open-access PDF. |
+| T4 | [The Linguistic Analysis of Jokes](https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731) | 2004 | Routledge (book) | — | — | [1-pager](summaries/t4-linguistic-analysis-of-jokes.md) | Restricted primary source consulted; full text not distributed. Official sources: [Routledge book page (consulted)](https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731). Book-length restricted source. Public outputs may include derived analysis only; the PDF, transcription, page files, manifests, chapter intermediates, and run logs are not distributed. |
+| T5 | [Incongruity-Resolution & Appropriate Incongruity](https://www.sciencedirect.com/book/edited-volume/9780122889509/the-psychology-of-humor) | 1972 | Book chapters (Suls two-stage model; Oring, Engaging Humor) | — | — | [1-pager](summaries/t5-incongruity-resolution.md) | Restricted primary source consulted; full text not distributed. Official sources: [Suls chapter on ScienceDirect (consulted)](https://www.sciencedirect.com/book/edited-volume/9780122889509/the-psychology-of-humor); [Oring book at University of Illinois Press (not yet consulted)](https://www.press.uillinois.edu/books/?id=p075933). Only Suls's two-stage-model chapter has been consulted. Oring's appropriate-incongruity source remains pending, so derived analysis must not present T5 as complete coverage of both theories. |
 | T6 | [Benign Violations: Making Immoral Behavior Funny](https://journals.sagepub.com/doi/10.1177/0956797610376073) | 2010 | Psychological Science | [pdf (9p)](pdfs/t6-benign-violation.pdf) | [md](md/t6-benign-violation/t6-benign-violation.md) | [1-pager](summaries/t6-benign-violation.md) | Author-hosted copy; journal version is paywalled. Distance follow-ups (2012, 2014) are paywalled and not downloaded. |
 | Theory (also worth knowing) | [Jokes and the Logic of the Cognitive Unconscious](https://dspace.mit.edu/handle/1721.1/6300) | 1980 | MIT AI Memo 603 | [pdf (25p)](pdfs/x15-minsky-jokes.pdf) | [md](md/x15-minsky-jokes/x15-minsky-jokes.md) | [1-pager](summaries/x15-minsky-jokes.md) | Only 'Also worth knowing' theory item with an open PDF (MIT DSpace). Other items in that list (Coulson, Martin, HSQ, Provine, Berger, Dikkers, classical works) are books/paywalled. |
 | T7 | [A Computational Model of Linguistic Humor in Puns](https://doi.org/10.1111/cogs.12269) | 2016 | Cognitive Science 40(5):1270-1285 | [pdf (16p)](pdfs/t7-computational-model-puns.pdf) | [md](md/t7-computational-model-puns/t7-computational-model-puns.md) | [1-pager](summaries/t7-computational-model-puns.md) | Source pin: Cognitive Science 40(5) version of record; first published online 2015-07-31; checked 2026-07-11; PDF retrieved 2026-07-11. |
@@ -186,9 +187,5 @@ Pipeline: `scripts/download_papers.py` -> `scripts/convert_papers.py` (uses `../
 
 ## Not in the library (and why)
 
-- **T1 — Semantic Mechanisms of Humor (Script-based Semantic Theory of Humor)**: Book; no open-access PDF.
-- **T2 — The General Theory of Verbal Humor (GTVH)**: Paywalled journal article / book; no open-access PDF.
 - **T3 — Inside Jokes: Using Humor to Reverse-Engineer the Mind**: Book; no open-access PDF.
-- **T4 — The Linguistic Analysis of Jokes**: Book; no open-access PDF.
-- **T5 — Incongruity-Resolution & Appropriate Incongruity**: Book chapters; no open-access PDF.
 

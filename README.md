@@ -9,7 +9,7 @@ The goal: everything needed to deeply understand the field — and eventually bu
 | If you want to… | Go to |
 | --- | --- |
 | Read the field, curated and in order | [humor-and-llms-field-guide.md](humor-and-llms-field-guide.md) |
-| Browse the paper library (per-paper PDF / full text / summary links) | [papers/MANIFEST.md](papers/MANIFEST.md) |
+| Browse the paper library (source / full text where distributable / summary links) | [papers/MANIFEST.md](papers/MANIFEST.md) |
 | Compare papers — who evaluated on what, which theories, which models | [papers/ANALYSIS.md](papers/ANALYSIS.md) |
 | Audit evidence strength, human grounding, budgets, and synthesis confidence | [papers/EVIDENCE.md](papers/EVIDENCE.md) |
 | Inspect guide and extract certification results | [papers/DISCREPANCIES.md](papers/DISCREPANCIES.md) |
@@ -21,7 +21,7 @@ The goal: everything needed to deeply understand the field — and eventually bu
 ## What's inside
 
 - **The field guide** — [humor-and-llms-field-guide.md](humor-and-llms-field-guide.md), a curated bibliography of 116 entries organized into theory foundations plus nine parts (explanation, generation, multimodal, evaluation, situated/live humor, safety, cross-cultural, datasets, surveys). Each entry notes method, dataset, and key findings. Across two primary-text passes, all 111 converted entries and 796 checkable claims have been audited; methods, fixes, and the stratified extract check are documented in [papers/DISCREPANCIES.md](papers/DISCREPANCIES.md).
-- **Paper library** (`papers/`) — 111 of 116 entries with downloaded PDFs and vision-transcribed Markdown full text. The 5 missing entries are books/paywalled theory works with no open PDF.
+- **Paper library** (`papers/`) — 111 of 116 entries have distributable PDFs and vision-transcribed Markdown full text. Four additional theory entries (T1, T2, T4, and the Suls half of T5) are cataloged as restricted primary sources: publisher links and derived analysis may be public, but their PDFs and full-text derivatives are not. Public extracts and summaries are available for all four consulted restricted sources. T3 remains unavailable; Oring's half of T5 remains pending.
   - `papers/papers.json` — machine-readable catalog and **source of truth** (publication/source version, check and retrieval dates, PDF provenance, sha256, page counts)
   - `papers/pdfs/<key>.pdf` · `papers/md/<key>/<key>.md` — the documents themselves
   - `papers/extracts/<key>.json` — structured extract per paper (tasks, datasets, models, theories, headline numbers, and evidence profile)
@@ -48,6 +48,7 @@ papers/
   synthesis_claims.json         # curated support/counterevidence map
   DISCREPANCIES.md              # guide-vs-paper verification report
   pdfs/ md/ extracts/ summaries/ runs/ review/
+  private/                      # local restricted sources/derivatives (gitignored)
 data/
   datasets.json                 # dataset catalog (source of truth)
   MANIFEST.md                   # human-readable index (generated)
@@ -57,7 +58,7 @@ scripts/                        # the pipelines (all resumable/idempotent)
 
 ## Rebuilding from a fresh clone
 
-PDFs, markdown, extracts, and summaries are all versioned — a clone gives you the complete paper library as-is. Only the datasets (~9.4 GB) are gitignored and need rebuilding:
+Distributable PDFs and Markdown, plus public extracts and summaries, are versioned. Restricted sources and all of their full-text derivatives are deliberately absent from a clone. Dataset payloads (~9.4 GB) are also gitignored and can be rebuilt:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install huggingface_hub
@@ -71,9 +72,9 @@ Datasets are fetched exactly as published (shallow git clone, HuggingFace snapsh
 
 Three stages, each resumable and safe to re-run:
 
-1. **Download** — `scripts/download_papers.py` walks `papers.json`, tries each entry's `pdf_candidates` in order, verifies the result looks like the right paper, and records provenance. (A handful of bot-walled publishers required downloading manually in a browser.)
-2. **Convert** — `scripts/convert_papers.py` transcribes each PDF to Markdown page-by-page using a vision LLM (via the sibling [`pdf-to-md`](https://github.com/brendansudol/pdf-to-md) tool; requires an `OPENAI_API_KEY`). Resumes mid-paper.
-3. **Extract & analyze** — `scripts/extract_papers.py` sends each full text to gpt-5.5 (high reasoning effort, strict JSON-schema output) producing the structured extract, evidence profile, and one-pager in a single call. `scripts/enrich_evidence.py` backfills that profile without rewriting existing summaries; `scripts/build_analysis.py` and `scripts/build_evidence.py` regenerate the cross-paper views.
+1. **Download** — `scripts/download_papers.py` walks `papers.json`, tries each distributable entry's `pdf_candidates` in order, verifies the result looks like the right paper, and records provenance. Restricted entries are always skipped.
+2. **Convert** — `scripts/convert_papers.py` transcribes each PDF to Markdown page-by-page using a vision LLM (via the sibling [`pdf-to-md`](https://github.com/brendansudol/pdf-to-md) tool; requires an `OPENAI_API_KEY`). Resumes mid-paper. Restricted conversion requires both `--only KEY` and `--include-restricted`; every output stays under gitignored `papers/private/<key>/`.
+3. **Extract & analyze** — `scripts/extract_papers.py` uses gpt-5.5 (high reasoning effort, strict JSON-schema output) to produce the structured extract, evidence profile, and one-pager. Sources up to 250,000 characters use one pass. Longer books use explicit, complete page units, resumable private chapter extracts, and a final synthesis pass; oversized input without a complete unit plan fails instead of being truncated. `--dry-run` validates the plan without loading credentials or making model calls. Restricted extraction also requires scoped `--only KEY --include-restricted`. `scripts/enrich_evidence.py` backfills profiles for single-pass sources without rewriting summaries; `scripts/build_analysis.py` and `scripts/build_evidence.py` regenerate cross-paper views.
 
 `scripts/build_manifest.py` and `scripts/build_data_manifest.py` regenerate the human-readable indexes from the catalogs at any time.
 
@@ -81,4 +82,5 @@ Three stages, each resumable and safe to re-run:
 
 - **Markdown full texts are LLM vision transcriptions** of the PDFs — high quality but not authoritative; figures appear as `[Figure: …]` placeholders. Cite the PDF/original.
 - **Extracts and summaries are LLM-generated** from those transcriptions. All 111 converted guide entries have now received a separate primary-text claim audit across two passes (796 claims checked, 14 discrepancies found and fixed). A stratified 26-extract sample (23.4%) received substantive field-level checks and passed; the other 85 extracts received source-presence, current-hash, and non-truncation checks only. This was an independent pipeline pass by another AI model, not a human replication or sentence-by-sentence certification. See [papers/DISCREPANCIES.md](papers/DISCREPANCIES.md) and [papers/review/certification.json](papers/review/certification.json).
-- **Copyright stays with the original authors/publishers.** PDFs are open-access or author-hosted copies vendored for personal research; datasets keep their original licenses (recorded per-entry in `data/datasets.json`).
+- **Restricted additions are not yet evidence-certified.** T1, T2, T4, and Suls's half of T5 now have derived extracts and initial direct-source quality checks, but not the separate independent audit required for certification. The existing certification totals therefore continue to cover the 111 distributed/converted entries only. T5 currently covers Suls (1972), not Oring's appropriate-incongruity account.
+- **Copyright stays with the original authors/publishers.** Versioned PDFs are open-access or author-hosted copies. Restricted primary texts are consulted locally and not distributed; their public summaries link to official publisher pages. Datasets keep their original licenses (recorded per-entry in `data/datasets.json`).
