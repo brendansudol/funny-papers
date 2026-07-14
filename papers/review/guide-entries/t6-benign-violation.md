@@ -1,6 +1,6 @@
 <!-- guide claims for t6-benign-violation (T6) -->
 
-### T6. Benign Violation Theory (BVT) & Psychological Distance
+### T6. [Benign Violation Theory (BVT)](https://journals.sagepub.com/doi/10.1177/0956797610376073) & Psychological Distance
 Peter McGraw & Caleb Warren — **2010** (*Psychological Science*), building on Tom Veatch's earlier formal theory of humor (1998), plus distance follow-ups (2012, 2014) · `theory`
 - **Core claim:** BVT proposes that humor can arise when something is simultaneously a *violation* (of a norm/expectation/how-things-should-be) and *benign* (safe, playful, acceptable). It offers a useful account of some funny/offensive judgments, not a universal boundary test. The original five-experiment paper showed that benign moral violations can elicit amusement alongside disgust.
 - **Psychological-distance follow-ups:** McGraw, Warren, Williams & Leonard, "Too Close for Comfort, or Too Far to Care?" (*Psychological Science*, 2012, 23:1215–1223) and McGraw, Williams & Warren, "The Rise and Fall of Humor" (*Social Psychological and Personality Science*, 2014, 5:566–572). The Hurricane Sandy longitudinal study found humorous responses *rose, peaked, then fell* over ~100 days — an inverted-U "comedic sweet spot." This complicates the linear "comedy = tragedy + time" aphorism and shows that distance can have nonlinear effects. Weak norm commitment, distance, and an alternative benign reading are useful variables for harmful-humor research, but they do not replace direct measurement of target, relationship, power, and audience uptake.

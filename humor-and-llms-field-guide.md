@@ -1,15 +1,19 @@
 # Getting the Joke: Humor and Large Language Models
-*A curated field guide, from humor theory (1900) to the LLM era (2026)*
+*A curated field guide, from classical humor theory and early computational systems to the LLM era (through July 2026)*
 
-This guide focuses on two questions: how models explain and understand *why* something is funny, and how they generate new humor. It also covers multimodal and visual humor, evaluation methodology, situated and live humor, safety, cross-cultural work, sarcasm, and humor styles.
+This guide maps research on what large language models can and cannot do with humor. Its two central threads are how models recognize, interpret, and explain *why* something is funny, and how they generate new humor. It also covers multimodal and visual humor, evaluation methodology, situated and live interaction, safety, cross-cultural work, sarcasm, and humor styles.
 
-**Coverage:** foundational theory and classic computational humor (1900–2020), plus LLM-era work from 2022 through July 2026 (primarily 2023 onward).
+Throughout, **“understanding” is an operational label**, not a claim that a model has a human-like inner experience. Depending on the paper, it may mean detecting a joke, selecting an interpretation, explaining a mechanism, answering questions about implied meaning, or transferring to a novel humor form. Likewise, **“funny” always means funny under a stated measurement protocol** — for example, a human rating, pairwise preference, audience-laughter signal, or model-based proxy — not an intrinsic property that every audience shares.
 
-This is a curated, not exhaustive, guide: it prioritizes papers that introduce a benchmark, dataset, method, or conceptual frame, and deliberately omits routine humor-detection work unless it changes how joke explanation, generation, evaluation, multimodality, safety, or cross-cultural humor is studied. Each entry notes **method**, **dataset**, and **key findings**, with a tag line for publication status/type. Titles link to arXiv/ACL/DOI where available.
+**Coverage cutoff:** foundational theory and classic computational humor, with an emphasis on 1900–2020, plus LLM-era work from 2022 through July 2026 (primarily 2023 onward). Older philosophical roots appear where they clarify a modern line of work.
 
-For a methodological audit of every empirical entry — human samples and populations, judge type, single-sample versus best-of-*N* selection, model provenance and inference budget, human baselines, contamination risk, LLM-judge dependence, and claim-level confidence — see [`papers/EVIDENCE.md`](papers/EVIDENCE.md).
+**Selection rule:** This is a curated, not exhaustive, guide. It prioritizes papers that introduce a benchmark, dataset, method, or conceptual frame, and deliberately omits routine humor-detection work unless it changes how explanation, generation, evaluation, multimodality, safety, or cross-cultural humor is studied. Full entries generally note **method**, **dataset**, and **key findings**; shorter inline entries preserve important historical anchors, datasets, and stress tests without turning the guide into an undifferentiated paper list. Titles link to a publisher, proceedings page, DOI, or preprint where available.
 
-**Tag legend:** `theory` · `peer-reviewed` · `preprint` · `workshop` · `dataset` · `method` · `benchmark` · `HCI study` · `evaluation study` · `shared task` · `survey`. `preprint` means the recorded arXiv/OpenReview version was not confirmed in an archival reviewed venue; `workshop` covers reviewed workshops and shared-task proceedings, including WASSA, CHum, CMCL, LM4UC, LLMSEC, ACL SRW, LaTeCH-CLfL, and SemEval.
+**Organization:** The document has three entry types: **T1–T7** are theory foundations; **#1–#65** form the numbered reading spine; and bold inline entries add related or historical resources. Papers are placed under their primary contribution rather than duplicated, so cross-references often point to another part. Part 8 gathers data-construction methods and classic dataset anchors, while dataset papers with a substantive research contribution remain in their topical sections.
+
+**Evidence and audit:** For a methodological profile of the empirical literature — human samples and populations, judge type, single-sample versus best-of-*N* selection, model provenance and inference budget, human baselines, contamination risk, LLM-judge dependence, and claim-level confidence — see [`papers/EVIDENCE.md`](papers/EVIDENCE.md). A separate primary-text audit covers all 111 entries backed by distributable, converted sources; the locally consulted restricted theory sources (T1, T2, T4, and the Suls portion of T5) are clearly marked but are not yet included in that independent certification total. See [`papers/DISCREPANCIES.md`](papers/DISCREPANCIES.md) for scope and limitations.
+
+**Tag legend:** `theory` · `peer-reviewed` · `preprint` · `workshop` · `dataset` · `method` · `benchmark` · `HCI study` (human–computer interaction) · `evaluation study` · `shared task` · `survey`. `preprint` means the recorded arXiv/OpenReview version was not confirmed in an archival reviewed venue; `workshop` covers reviewed workshops and shared-task proceedings, including WASSA, CHum, CMCL, LM4UC, LLMSEC, ACL SRW, LaTeCH-CLfL, and SemEval. Tags describe the version recorded at the July 2026 cutoff and may change as papers are revised or published.
 
 ## A Framework for Reading the Field
 
@@ -22,11 +26,38 @@ A single idea organizes the field: **humor is mechanism × medium × participant
 | **Participants / relationship** | teller, target, audience; friends vs. strangers; identities, affinity, status and power; human vs. machine performer | who may tell or receive the joke, and how it is taken up |
 | **Situation / function** | news satire, workplace, emotional support, live stage; bonding, teasing, critique, face-saving, status, entertainment | what the humor is doing here, and whether it lands or harms |
 
-This is why ChatGPT can beat laypeople on short blind-rated jokes (#31), fail at explaining corrupted puns (#4), trail humans on multimodal visual humor (#25), and be useful-but-bland for professional comedians (#41) — all at once.
+This is why ChatGPT can be rated above lay participants on short, blindly evaluated jokes (#31), fail at explaining corrupted puns (#4), trail humans on multimodal visual humor (#25), and be useful-but-bland for professional comedians (#41) — all at once.
+
+---
+
+## How to Read the Evidence
+
+Humor studies often share a headline while measuring different constructs. Before comparing two results, check five things:
+
+1. **Task and material:** Detection, ranking, explanation, and generation are different tasks; puns, cartoons, memes, stand-up, and workplace banter supply different evidence.
+2. **Whose judgment counts:** Crowdworkers, domain experts, friends in conversation, live audiences, and LLM judges need not prefer the same thing. Evaluator population is part of the result.
+3. **Sampling budget:** A single sampled response is not comparable to the best of 30 candidates, a tournament-selected output, or a human-curated model response.
+4. **Human comparison:** “No statistically significant difference” does not establish equivalence or human parity. Check which people participated, whether the model and people had comparable time and selection budgets, and whether professional work or lay responses formed the baseline.
+5. **Source status:** Peer review, preprint status, dataset availability, and model/version dates matter in a fast-moving field. Treat exact model rankings as snapshots; mechanisms and evaluation failures usually travel better than leaderboard positions.
+
+### Recurring shorthand
+
+| Term | Meaning in this guide |
+| --- | --- |
+| **LLM / VLM** | Large language model / vision-language model. A VLM consumes images as well as language; some “multimodal” studies instead convert audio or video into text first. |
+| **Zero-shot / few-shot / ICL** | No worked examples / a small number of examples / *in-context learning*, where examples or instructions are supplied in the prompt rather than through weight updates. |
+| **CoT / reasoning trace** | *Chain-of-thought* or another explicit intermediate rationale. A plausible trace can improve task performance without proving that it faithfully reports the model’s internal process. |
+| **SFT / RLHF / DPO** | Supervised fine-tuning / reinforcement learning from human feedback / direct preference optimization: different ways to adapt a model using demonstrations or preferences. |
+| **RAG** | Retrieval-augmented generation: retrieve external material, then condition generation on it. Retrieval can improve topical grounding without necessarily improving humor. |
+| **LLM-as-judge** | A model scores or compares outputs. It is a scalable surrogate, not human ground truth, and must be checked for position, length, literalness, and self-preference biases. |
+| **Best-of-*N*** | Generate *N* candidates and keep a selected “best” one. Report *N* and who or what selected the winner; larger search budgets can masquerade as better generation. |
+| **Elo / Bradley–Terry** | Methods that turn pairwise wins and losses into a ranking or latent preference score. They can stabilize comparisons but do not establish that the underlying judge is valid. |
 
 ---
 
 ## Quick Reference: Which Papers Answer Which Question?
+
+Use this as a routing index, not a ranking. Numbered references point to full entries; named references without a number are bold inline entries that can be found by title.
 
 - **"Why is this joke funny?" (explanation/understanding)** → Hessel et al. (#1), Turing Jest, HumorBench (#3), Pun Unintended (#4), Comparing Apples to Oranges (#5), "A good pun is its own reword" (#6), ExPUNations (#7), Phunny (#8), pragmatic-function annotation, IRS / Cartoon Captionist (#24), MultiPun, and BottleHumor (#27).
 - **"How do we generate better jokes?"** → Pun Generation with Surprise, Context-Driven Satirical News, YodaLib, Are U a Joke Master (#10), CLoT (#11), LoL (#12), HumorGen (#13), Kim & Chilton (#14), Small But Funny (#15), Witscript line (#17), Jokeasy (#19), Multi-Agent Comedy Club (#20), HUMORCHAIN (#28), HOMER (#29), and MWAHAHA (#57).
@@ -49,30 +80,35 @@ Victor Raskin — **1985** (Reidel/Springer) · `theory`
 - **Core claim:** The first formal, exclusively linguistic theory of verbal humor. A text is funny when it is compatible with two semantic *scripts* that overlap and are *opposed* (real/unreal, normal/abnormal, possible/impossible); the punchline triggers the switch.
 - **Why it matters here:** Root of every "script opposition" / "incongruity" framing in computational humor.
 - **Note:** Dense; the core idea travels fine via secondary summaries.
+- **Source status:** Restricted primary source consulted; full text not distributed. The derived entry has not yet received the guide's separate certification pass.
 
-### T2. The General Theory of Verbal Humor (GTVH)
+### T2. [The General Theory of Verbal Humor (GTVH)](https://www.degruyterbrill.com/document/doi/10.1515/humr.1991.4.3-4.293/html?lang=en)
 Salvatore Attardo & Victor Raskin — **1991** (*HUMOR* 4:293–347); expanded in Attardo, *Linguistic Theories of Humor* — **1994** · `theory`
 - **Core claim:** Extends SSTH into one of the most widely used linguistic frameworks for verbal humor. It describes jokes via six hierarchical *Knowledge Resources*: Script Opposition, Logical Mechanism, Situation, Target, Narrative Strategy, Language.
 - **Why it matters here:** A particularly *engineerable* vocabulary for decomposing jokes that maps onto annotation schemas, joke-similarity metrics, and rubric-based evaluation. It is directly operationalized by HOMER (#29) and HumorRank (#35), but its usefulness as a schema should not be confused with proof that it fully explains humor.
 - **Note:** Read via Attardo 1994 or a summary rather than the dense 1991 article.
+- **Source status:** Restricted primary source consulted; full text not distributed. The derived entry has not yet received the guide's separate certification pass.
 
 ### T3. [Inside Jokes: Using Humor to Reverse-Engineer the Mind](https://mitpress.mit.edu/9780262518697/inside-jokes/)
 Matthew Hurley, Daniel Dennett & Reginald Adams — **2011** (MIT Press) · `theory`
 - **Core claim:** Evolutionary + cognitive theory (a descendant of incongruity-resolution). Humor is the brain's pleasure-reward for detecting and "debugging" a mistaken epistemic commitment in an active mental space.
-- **Why it matters here:** The cleanest bridge from humor theory to an ML mindset; frames humor as a computational/epistemic process. Most readable of the three.
+- **Why it matters here:** The cleanest bridge from humor theory to an ML mindset; frames humor as a computational/epistemic process. It is among the most accessible of the major cognitive-theory books listed here.
+- **Source status:** No full primary source is currently available in the library, so this capsule is orientation rather than a certified entry.
 
 ### T4. [The Linguistic Analysis of Jokes](https://www.routledge.com/The-Linguistic-Analysis-of-Jokes/Ritchie/p/book/9781138008731)
 Graeme Ritchie — **2004** (Routledge) · `theory`
 - **Core claim:** A rigorous, AI-oriented analysis of joke mechanisms — incongruity-resolution models, GTVH, joke similarity, the structure of puns, and early computational studies.
 - **Why it matters here:** Written by a computational-linguistics/AI researcher (co-creator of JAPE; see Part 2); the most precise pre-LLM attempt to formalize what makes jokes work, especially puns.
+- **Source status:** Restricted primary source consulted; full text not distributed. The derived entry has not yet received the guide's separate certification pass.
 
 ### T5. Incongruity-Resolution & "Appropriate Incongruity"
-Suls (1972), two-stage model; Elliott Oring (esp. *Engaging Humor*, 2003; "appropriate incongruity") · `theory`
+[Suls (1972)](https://www.sciencedirect.com/book/edited-volume/9780122889509/the-psychology-of-humor), two-stage model; Elliott Oring (esp. [*Engaging Humor*](https://www.press.uillinois.edu/books/?id=p075933), 2003; "appropriate incongruity") · `theory`
 - **Core claim:** An influential family of accounts models much humor as perceiving an incongruity and then finding an apt reinterpretation. Oring's "appropriate incongruity" sharpens the point: an oddity alone is not sufficient; the relationship must feel fitting in some respect.
 - **Scope:** Resolution need not be complete. Absurdist and nonsense humor can preserve substantial residual incongruity or introduce new incongruities, so "detect then resolve" is a useful decomposition for many jokes, not a definition of all humor.
 - **Why it matters here:** It explains why models that detect an oddity can still miss a joke — detection of incongruity is not the same as an apt reinterpretation. It is directly operationalized as supervision in IRS (#24) and informs HumorBench's "elements" and BottleHumor's knowledge extraction.
+- **Source status:** The restricted Suls chapter has been consulted directly; its full text is not distributed and the derived entry is not yet independently certified. Oring's source remains pending, so the capsule above is orientation rather than a certified summary of his full account.
 
-### T6. Benign Violation Theory (BVT) & Psychological Distance
+### T6. [Benign Violation Theory (BVT)](https://journals.sagepub.com/doi/10.1177/0956797610376073) & Psychological Distance
 Peter McGraw & Caleb Warren — **2010** (*Psychological Science*), building on Tom Veatch's earlier formal theory of humor (1998), plus distance follow-ups (2012, 2014) · `theory`
 - **Core claim:** BVT proposes that humor can arise when something is simultaneously a *violation* (of a norm/expectation/how-things-should-be) and *benign* (safe, playful, acceptable). It offers a useful account of some funny/offensive judgments, not a universal boundary test. The original five-experiment paper showed that benign moral violations can elicit amusement alongside disgust.
 - **Psychological-distance follow-ups:** McGraw, Warren, Williams & Leonard, "Too Close for Comfort, or Too Far to Care?" (*Psychological Science*, 2012, 23:1215–1223) and McGraw, Williams & Warren, "The Rise and Fall of Humor" (*Social Psychological and Personality Science*, 2014, 5:566–572). The Hurricane Sandy longitudinal study found humorous responses *rose, peaked, then fell* over ~100 days — an inverted-U "comedic sweet spot." This complicates the linear "comedy = tragedy + time" aphorism and shows that distance can have nonlinear effects. Weak norm commitment, distance, and an alternative benign reading are useful variables for harmful-humor research, but they do not replace direct measurement of target, relationship, power, and audience uptake.
@@ -134,7 +170,7 @@ Loakman, Thorne & Lin — **EMNLP Findings 2025** · `peer-reviewed` `dataset`
 
 ### 6. ["A good pun is its own reword": Can Large Language Models Understand Puns?](https://aclanthology.org/2024.emnlp-main.657/)
 Xu, Yuan, Chen & Yang — **EMNLP 2024** · `peer-reviewed`
-- **Method:** Pun recognition, explanation, and generation with new ICL-suited metrics; dual-biased prompts whose "reason" doubles as the explanation; fine-grained punchline checks.
+- **Method:** Pun recognition, explanation, and generation with new metrics designed for in-context learning; dual-biased prompts whose "reason" doubles as the explanation; fine-grained punchline checks.
 - **Dataset:** SemEval-2017 Task 7 + the ExPun corpus (hom/het/non-puns); 8 LLMs (7B open models through GPT-4-Turbo, Claude-3-Opus).
 - **Findings:** Lower true-negative than true-positive rate (non-puns that resemble puns fool models); identifies the "lazy pun generation" pattern (both senses jammed into one line); strong models still do respectably.
 
@@ -152,7 +188,7 @@ Cocchieri, Ragazzi, Italiani, Tagliavini & Moro — **ACL 2025** · `peer-review
 
 ### 9. [Text Is Not All You Need: Multimodal Prompting Helps LLMs Understand Humor](https://arxiv.org/abs/2412.05315)
 Ashwin Baluja — **CHum 2025** · `workshop` `method`
-- **Method:** Presents the LLM with both the text and a TTS-generated *spoken* form of a joke for phonetic/timing cues; CoT prompting where the reasoning doubles as explanation.
+- **Method:** Presents the LLM with both the text and a text-to-speech (TTS) *spoken* form of a joke for phonetic and timing cues; chain-of-thought prompting where the reasoning doubles as explanation.
 - **Dataset:** Existing pun datasets, zero/few-shot.
 - **Findings:** Multimodal (text+audio) prompting beats text-only on pun understanding/explanation — some "understanding" failures are really modality limits (puns live in sound).
 
@@ -176,7 +212,7 @@ Ashwin Baluja — **CHum 2025** · `workshop` `method`
 
 ### 10. [Are U a Joke Master? Pun Generation via Multi-Stage Curriculum Learning towards a Humor LLM](https://aclanthology.org/2024.findings-acl.51/)
 Chen, Yang, Hu, Chen, Lan, Cai, Zhuang, Lin, Lu & Zhou — **Findings of ACL 2024** · `peer-reviewed` `method` `dataset`
-- **Method:** Multi-stage curriculum *preference* learning with an improved DPO to jointly optimize pun-structure and humor preferences (multi-objective alignment).
+- **Method:** Multi-stage curriculum *preference* learning with an improved direct preference optimization (DPO) objective to jointly optimize pun structure and humor preferences.
 - **Dataset:** ChinesePun (2.1k annotated puns); evaluated on Chinese + English (SemEval) benchmarks.
 - **Findings:** Significantly beats baselines on both languages; the most relevant recent pun-*generation* paper. (Pre-LLM pun-generation context: AmbiPun, Context-Situated Pun Generation, and "A Unified Framework for Pun Generation with Humor Principles," all EMNLP 2022; for a novelty-controlled test of pun comprehension *and* generation, see Phunny, #8.)
 
@@ -184,19 +220,19 @@ Chen, Yang, Hu, Chen, Lan, Cai, Zhuang, Lin, Lu & Zhou — **Findings of ACL 202
 
 ### 11. [Let's Think Outside the Box: Leap-of-Thought in LLMs with Creative Humor Generation (CLoT)](https://arxiv.org/abs/2312.02439)
 Zhong, Huang, Gao, Wen, Lin, Zitnik & Zhou — **CVPR 2024** · `peer-reviewed` `method` `dataset`
-- **Method:** Argues CoT hurts creativity; instruction-tunes on leap-of-thought data, then "explorative self-refinement" exploring links between unrelated concepts.
+- **Method:** Tests the claim that chain-of-thought can hurt creativity; instruction-tunes on leap-of-thought data, then uses "explorative self-refinement" to search for links between unrelated concepts.
 - **Dataset:** Oogiri-GO (130k+ multimodal/multilingual samples from the Oogiri game).
 - **Findings:** The canonical generation-method paper; improves humor generation and transfers to other creativity tasks.
 
 ### 12. [Innovative Thinking, Infinite Humor: Humor Research of Large Language Models through Structured Thought Leaps (LoL)](https://arxiv.org/abs/2410.10370)
 Wang et al. — **ICLR 2025** · `peer-reviewed` `method`
-- **Method:** Treats humor as multi-hop reasoning; RL where GPT-4o extracts each response's reasoning logic; injects external knowledge to fight knowledge-graph sparsity.
+- **Method:** Treats humor as multi-hop reasoning; uses reinforcement learning in which GPT-4o extracts each response's reasoning logic; injects external knowledge to address sparse knowledge graphs.
 - **Findings:** Knowledge-augmented multi-hop reasoning improves both judgment and generation; addresses CLoT's weakness on knowledge-sparse reasoning.
 
 ### 13. [HumorGen: Cognitive Synergy for Humor Generation in Large Language Models via Persona-Based Distillation](https://arxiv.org/abs/2604.09629)
 Ajayi & Mitra — **2026** (arXiv:2604.09629) · `preprint` `method` `dataset`
-- **Method:** Mixture-of-Thought with six cognitive personas (Absurdist, Cynic, …) grounded in humor theory; distilled data fine-tunes a 7B student; tests DPO and offline group-relative RL (O-GRPO). Evaluated on SemEval-2026 Task 1 (MWAHAHA, #57) headlines and Humor Transfer Bench.
-- **Findings:** In this setup, 7B models beat the larger instruct baselines and neither DPO nor O-GRPO beat plain SFT; these are local comparisons, not a general data-over-optimization result. Distilling the teacher's *reasoning traces* usually hurts ("the explainer trap"), and fine-tuning on stand-up transcripts regresses text-native humor (performance humor ≠ written humor).
+- **Method:** Mixture-of-Thought with six cognitive personas (Absurdist, Cynic, …) grounded in humor theory; distilled data fine-tunes a 7B student; tests DPO and offline group-relative policy optimization (O-GRPO). Evaluated on SemEval-2026 Task 1 (MWAHAHA, #57) headlines and Humor Transfer Bench.
+- **Findings:** In this setup, 7B models beat the larger instruction-tuned baselines, and neither DPO nor O-GRPO beat plain supervised fine-tuning (SFT); these are local comparisons, not a general data-over-optimization result. Distilling the teacher's *reasoning traces* usually hurts ("the explainer trap"), and fine-tuning on stand-up transcripts regresses text-native humor (performance humor ≠ written humor).
 - **Disclosure:** Companion paper to HumorRank (#35), by the same authors.
 
 ### 14. [AI Humor Generation: Cognitive, Social and Creative Skills for Effective Humor](https://arxiv.org/abs/2502.07981)
@@ -207,7 +243,7 @@ Kim & Chilton — **2025** · `preprint` `HCI study` `method`
 
 ### 15. [Small But Funny: A Feedback-Driven Approach to Humor Distillation](https://arxiv.org/abs/2402.18113)
 Ravi, Huber, Shrivastava, Sagar, Aly, Shwartz & Einolghozati — **ACL 2024** · `peer-reviewed` `method`
-- **Method:** Distills humor into Small Language Models by giving the teacher LLM a dual role — data *generator* and *critic* providing feedback — rather than imitation alone.
+- **Method:** Distills humor into smaller language models by giving the teacher LLM a dual role — data *generator* and feedback-providing *critic* — rather than relying on imitation alone.
 - **Findings:** Feedback markedly narrows the small-vs-large gap on humor generation; key paper for training compact humor models.
 
 ### 16. [Humor Mechanics: Advancing Humor Generation with Multistep Reasoning](https://computationalcreativity.net/iccc24/papers/ICCC24_paper_128.pdf)
@@ -226,7 +262,7 @@ Joe Toplyn — **2023** (arXiv:2301.02695; earlier versions peer-reviewed: Witsc
 
 ### 18. [Grounded Satirical Generation with RAG](https://arxiv.org/abs/2605.10853)
 arXiv:2605.10853 — **2026** · `preprint` `method`
-- **Method:** RAG over current news to generate satirical dictionary definitions (Finnish context); new task-specific eval; 100 definitions annotated by six humans across conditions (culture, source-word type, RAG on/off).
+- **Method:** Uses retrieval-augmented generation (RAG) over current news to produce satirical dictionary definitions in a Finnish context; six humans annotate 100 definitions across culture, source-word type, and RAG-on/off conditions.
 - **Findings:** Outputs read as more *political* than *humorous*; topic-based word selection and RAG improve political relevance but **not** clearly funniness — an important warning for topical-comedy systems (relevance ≠ humor).
 
 ### Human–AI & multi-agent joke-writing workflows
@@ -265,12 +301,12 @@ Zhang, Jain, Guo, Chen, Zhou, Suresh, Wagenmaker, Sievert, Rogers, Jamieson et a
 
 ### 23. [Bridging the Creativity Understanding Gap: Small-Scale Human Alignment Enables Expert-Level Humor Ranking](https://arxiv.org/abs/2502.20356)
 arXiv:2502.20356 — **EMNLP Findings 2025** · `peer-reviewed` `method`
-- **Method:** Aligns LLMs on a small set of human cartoon-caption judgments (20 caption pairs from 379 contests; 279 train / 100 test).
-- **Findings:** A little human alignment pushes LLM humor *ranking* toward expert level — cheap alignment goes a long way on the ranking subproblem.
+- **Method:** Aligns LLMs on 20 constructed caption-pair comparisons per New Yorker contest across 379 contests, split into 279 for training and 100 for testing.
+- **Findings:** A modest amount of human preference alignment pushes LLM humor *ranking* toward expert performance in this setup. The result supports targeted alignment on the ranking subproblem, not general expert-level humor judgment.
 
 ### 24. [Learning to Think Like a Cartoon Captionist: Incongruity-Resolution Supervision for Multimodal Humor Understanding](https://arxiv.org/abs/2604.15210)
 Vural et al. — **2026** · `preprint` `method`
-- **Method:** IRS (Incongruity-Resolution Supervision) decomposes visual humor understanding into three learnable stages — *incongruity modeling* (spotting the visual mismatch), *resolution modeling* (constructing a coherent reinterpretation), and *preference alignment* (scoring candidate interpretations against human judgments) — supervising the *intermediate reasoning trace*, not just the answer (continual pretraining → SFT on captionist-style traces → alignment with humor judgments).
+- **Method:** Incongruity-Resolution Supervision (IRS) decomposes visual humor understanding into three learnable stages: *incongruity modeling* (spotting the visual mismatch), *resolution modeling* (constructing a coherent reinterpretation), and *preference alignment* (scoring candidate interpretations against human judgments). The pipeline supervises an intermediate reasoning trace rather than only the final answer, moving from continual pretraining to SFT on captionist-style traces and then alignment with humor judgments.
 - **Dataset:** New Yorker Cartoon Caption Contest (matching/ranking).
 - **Findings:** Grounded explicitly in incongruity-resolution theory (T5), script opposition (T2), and frame-shifting (Coulson). It creates a direct bridge between humor theory and the cartoon-caption benchmark line by operationalizing "why is this funny?" as an explicit, learnable reasoning process rather than black-box ranking.
 
@@ -312,7 +348,7 @@ Hwang, West & Shwartz — **Findings of ACL 2025** · `peer-reviewed` `method`
 Zhang, Luo, Zhang & Su (Peking University) — **CVPR 2026** (arXiv:2511.21732) · `peer-reviewed` `method`
 - **Method:** Embeds cognitive structures from humor + psychological theories (incongruity-resolution, benign violation, superiority) into a theory-guided multi-stage chain for humorous image captioning: visual semantic parsing → humor/psychology reasoning → a fine-tuned discriminator for evaluation.
 - **Dataset:** Meme-Image-No-Text, Oogiri-GO, OxfordTVG-HIC.
-- **Findings:** Outperforms SOTA baselines on human humor preference and Elo/Bradley–Terry scores; claims to be the first to explicitly embed humor-theory cognitive structures into multimodal humor generation.
+- **Findings:** Outperforms the paper's prior state-of-the-art baselines on human humor preference and Elo/Bradley–Terry scores; claims to be the first to explicitly embed humor-theory cognitive structures into multimodal humor generation.
 
 ### 29. [On the Wings of Imagination: Conflicting Script-based Multi-role Framework for Humor Caption Generation (HOMER)](https://arxiv.org/abs/2602.06423)
 Shang, Sun, Ma & Huang — **ICLR 2026** (arXiv:2602.06423) · `peer-reviewed` `method`
@@ -328,7 +364,7 @@ arXiv:2604.18091 — **2026** · `preprint` `method`
 
 ## Part 4 — Evaluation Methodology & Whether LLMs Are Actually Funny
 
-Two questions under everything: *how* do we measure funniness, and *are* LLMs funny? Headline verdicts genuinely conflict — "not funny" (#2) sits beside "funnier than most laypeople" (#31) — and that conflict is the point: **the verdict is task- and measurement-dependent.** (Foundational caveat: per Provine, see Theory, laughter is mostly a social signal, not a humor meter.)
+Two questions underlie the field: *how* do we measure funniness, and *are* LLMs funny? Headline verdicts genuinely conflict — "not funny" (#2) sits beside "funnier than most laypeople" (#31) — and that conflict is the point: **the verdict is task- and measurement-dependent.** A foundational caveat from Provine (see Theory) is that laughter is mostly a social signal, not a calibrated humor meter.
 
 **Human-evaluation reporting audit:** [**The Iron(ic) Melting Pot: Reviewing Human Evaluation in Humour, Irony and Sarcasm Generation**](https://aclanthology.org/2023.findings-emnlp.444/) (Loakman, Maladry & Lin, Findings of EMNLP 2023) `peer-reviewed` `survey` `evaluation study` argues that evaluator composition is part of the construct for subjective, culturally situated language. Its critical review finds severe underreporting of evaluator demographics and heavy reliance on crowdsourcing platforms. The paper is a position paper rather than a meta-analysis of effect sizes, but its reporting checklist is directly actionable: report evaluator number and sample assignment, recruitment and compensation, relevant demographics, task expertise, definitions and training, pilot-driven changes, and inter-annotator agreement.
 
@@ -484,7 +520,7 @@ Most of the field is English; humor is deeply cultural, so this is its own stran
 
 ### 50. [Chumor 1.0 / 2.0: Chinese Humor Understanding from Ruo Zhi Ba](https://arxiv.org/abs/2406.12754)
 He et al. (Ruiqi He … Naihao Deng) — **2024–25** (1.0 arXiv:2406.12754; 2.0 in ACL Findings 2025, arXiv:2412.17729) · `peer-reviewed` `dataset`
-- **Method:** Human-annotated explanations for culturally specific RZB jokes; direct + CoT prompting; 10 LLMs; A/B testing of human vs. LLM explanations by native speakers.
+- **Method:** Human-annotated explanations for culturally specific Ruo Zhi Ba (RZB) jokes; direct and chain-of-thought prompting; 10 LLMs; A/B testing of human versus LLM explanations by native speakers.
 - **Findings:** Accuracy only slightly above random and far below human; human explanations vastly better than GPT-4o/ERNIE (LLMs "win" in ~2–3% of cases). English benchmarks overstate competence.
 
 ### 51. [CFunModel: A "Funny" Language Model Capable of Chinese Humor Generation and Processing](https://arxiv.org/abs/2503.20417)
@@ -511,7 +547,7 @@ Rivera, Pochugari, Chan, Katakwar, Zhu & Saxon (Algoverse AI / Andrews Univ. / U
 ### 55. [Jokes or Gibberish? Humor Retention in Translation: NMT vs. LLM](https://www.mdpi.com/2673-6470/5/4/49)
 Pituxcoosuvarn & Murakami — **Digital (MDPI) 2025**, 5(4):49 · `peer-reviewed`
 - **Method:** Compares a neural machine translation (NMT) system against GPT-based translation (three prompts: GPT, GPT-P, GPT-Ex) for English→Thai joke translation; human annotation of joke preservation; McNemar test for distribution differences.
-- **Findings:** GPT-based translation significantly beats NMT on humor retention; the explanation-enhanced prompt (GPT-Ex) preserves the most jokes (62.94% vs. 50.12% for NMT). Prompt engineering that surfaces humor mechanisms and cultural nuance improves retention — the generation-side counterpart to #54's evaluation-side warning.
+- **Findings:** The explanation-enhanced GPT prompt (GPT-Ex) preserves the most jokes (62.94% vs. 50.12% for NMT). The strongest result is therefore about prompting that surfaces humor mechanisms and cultural nuance, not GPT use in the abstract. It is the generation-side counterpart to #54's evaluation-side warning.
 
 **Long context in Hindi:** [**Does Reasoning Kill the Joke? Long-Context Humor Understanding in Hindi**](https://aclanthology.org/2026.c3nlp-1.14/) (Anuranjana et al., C3NLP 2026) `workshop` `dataset` `benchmark` introduces **HinS**, 1,046 sitcom, film, and stand-up clips represented as Hindi dialogue plus textualized visual/audio cues, often exceeding 2,000 words. Performance peaks at moderate context lengths (roughly 250–750 words) and declines thereafter; standard similarity metrics overstate pragmatic competence, while a smaller Hindi-specialized model can compete with much larger generalists. It adds language, conversational context, and context-length failure modes missing from short English joke benchmarks.
 
@@ -547,6 +583,8 @@ The classic resources the LLM-era work quietly stands on:
 
 ## Part 9 — Surveys & Resources
 
+Use this part to enter the literature at the right altitude. #58 is the shortest route into LLM-era generation and explanation; #62 is broader and places that work inside the full computational-humor tradition; #60 and #61 are narrower generation-focused references.
+
 ### 58. [Who's Laughing Now? An Overview of Computational Humour Generation and Explanation](https://arxiv.org/abs/2509.21175)
 Loakman, Thorne & Lin — **INLG 2025** · `peer-reviewed` `survey`
 - The best single LLM-era entry point for both core topics; covers generation (§3) and explanation (§4) plus a humor-theory primer and ethics. Bridges theory ↔ LLM literature.
@@ -559,7 +597,7 @@ arXiv:2508.07959 — **2025** · `preprint` `survey`
 Su, Zhu, Wang, Huang, Benavides-Prado & Witbrock — **Findings of EMNLP 2025** · `peer-reviewed` `survey`
 - The generation-side complement to the pun-understanding cluster (#4–#8).
 
-### 61. A Survey on Approaches to Computational Humor Generation
+### 61. [A Survey on Approaches to Computational Humor Generation](https://aclanthology.org/2020.latechclfl-1.4/)
 Amin & Burghardt — **LaTeCH-CLfL 2020 (ACL Anthology)** · `workshop` `survey`
 - A pre-LLM survey of computational humor *generation* (template/rule-based through early neural). Useful historical complement to the LLM-era surveys above and to the pre-LLM foundations note in Part 2.
 
@@ -570,6 +608,8 @@ Lemmens & De Marez — **ACM Computing Surveys 2026** (58(7):177) · `peer-revie
 ---
 
 ## Adjacent: Sarcasm & Humor Styles
+
+Sarcasm is not synonymous with humor, and the four humor styles are psychological constructs rather than joke mechanisms. They are included because both areas stress pragmatic inference, speaker intent, social function, and construct validity — and because their prompts, datasets, and evaluation methods are frequently imported into humor research.
 
 ### 63. [SarcasmBench: Towards Evaluating Large Language Models on Sarcasm Understanding](https://arxiv.org/abs/2408.11319)
 Zhang, Zou, Lian, Tiwari & Qin — **2024** · `preprint` `benchmark` — Anchor sarcasm benchmark across datasets/prompts; LLMs trail, fine-tuned small models stay competitive.
@@ -586,6 +626,8 @@ Kenneth, Khosmood & Edalat — **2024** · `preprint` `method` — Classifies te
 
 ## Synthesis: Recurring Themes
 
+**The shortest defensible conclusion:** current LLMs can be competitive on some constrained short-form humor tasks and useful inside writing, ranking, or co-creative pipelines. The literature does **not** support one broad claim of human-level “humor ability.” Performance fragments by mechanism, medium, language, audience, situation, task, sampling budget, and judge. The most persistent gaps are novelty-controlled generalization, multimodal and long-context integration, audience calibration, social appropriateness, and live timing. Claims are strongest when target participants judge blinded outputs under comparable budgets, and weakest when an uncalibrated LLM judge or a missing human baseline carries the headline.
+
 1. **Performance is task- and protocol-dependent, not a fixed ladder.** Forced-choice recognition/ranking is often easier to score, explanation exposes mechanism failures, and generation becomes less convincing as novelty, context, calibration, or live delivery demands rise. Turing Jest's matched detection, appreciation, and comprehension tasks are a useful partial control, but "recognition > explanation > origination" remains only a cross-study heuristic: even the two Oogiri papers (#38, #39) use different datasets, models, and protocols.
 2. **Humor competence fragments across forms and settings.** Transfer across humor types is partial and asymmetric (#40); novel instances break simple pun competence (#8); topical and culturally embedded explanation remains difficult (#5, HinS); and context can help until it becomes noise. "Humor ability" should be reported as a profile over tasks, forms, languages, and situations.
 3. **Explanation is a stronger probe than detection, not proof of understanding.** Models can rationalize corrupted puns and non-jokes (#2, #4), while standard similarity metrics can reward fluent but pragmatically wrong explanations (HinS). Turing Jest's entailment questions, MultiPun's adversarial negatives, perturbation tests, required joke elements, and human preference over explanations are better complements than a single reference-overlap score. The pragmatic-function annotation result adds a related warning: reliable humor-presence labels do not imply reliable interpretation of what the humor is doing socially.
@@ -599,7 +641,10 @@ Kenneth, Khosmood & Edalat — **2024** · `preprint` `method` — Classifies te
 11. **Safety is relational, not a single edginess dial.** Filtering can flatten minority voice (#41), engagement optimization can amplify stereotypes (#47), humorous framing can bypass safeguards (#49), and "make it funnier" can change who is stereotyped. BVT and psychological distance (T6) are useful diagnostic lenses, but participant identities, power, target, intent, and uptake must be measured directly.
 
 ## Reading Paths
-- **Start:** Who's Laughing Now? (#58) → Hessel et al. (#1) → Inside Jokes (T3) + GTVH (T2).
+
+These are routes through the field, not paper rankings. Read the guide entries first, then open the primary papers where the method or evidence matters to your question.
+
+- **Fast orientation:** the Framework and How to Read the Evidence sections above → Who's Laughing Now? (#58) → Hessel et al. (#1) → Gorenz & Schwarz (#31) → MWAHAHA (#57) → the Synthesis. Add GTVH (T2) and Inside Jokes (T3) for theory.
 - **Understanding:** Turing Jest → HumorBench (#3) → Pun Unintended (#4) → Phunny (#8) → Comparing Apples to Oranges (#5) → pragmatic-function annotation → HinS → ExPUNations (#7) → IRS / Cartoon Captionist (#24).
 - **Generation:** Pun Generation with Surprise → Context-Driven Satirical News → CLoT (#11) → Small But Funny (#15) → HumorGen (#13) → Kim & Chilton (#14) → HOMER (#29) → MWAHAHA (#57); then A Robot Walks into a Bar (#41) for the human reality check.
 - **Multimodal:** UNPIE → MultiPun → HumorDB (#25) → YesBut-Satire (#26) → YesBut-Juxtaposition → YesBut V2 → Humor in AI (#22) → IRS (#24) → BottleHumor (#27) → v-HUB → TIC-TALK.
@@ -610,4 +655,4 @@ Kenneth, Khosmood & Edalat — **2024** · `preprint` `method` — Classifies te
 
 ---
 
-*Coverage and provenance:* entries were checked against primary sources where available. Fast-moving preprints may change venue or content; the machine-readable catalog records the source, version, and retrieval date. [`papers/DISCREPANCIES.md`](papers/DISCREPANCIES.md) defines the scope of its 80-source claim audit and should not be read as covering every catalog record.
+*Coverage and provenance:* all 111 entries backed by distributable, converted sources received a separate primary-text claim audit across two passes (796 checkable claims; all 14 identified discrepancies corrected). A stratified 26-extract sample received substantive field-level checks; this is not sentence-by-sentence human certification. The restricted T1, T2, T4, and Suls portion of T5 extracts received direct-source quality checks but remain outside the independent certification total; T3 and Oring's portion of T5 remain acquisition gaps. Fast-moving preprints may change venue or content, so the machine-readable catalog records source version and retrieval date. See [`papers/DISCREPANCIES.md`](papers/DISCREPANCIES.md) for the audit design and [`papers/EVIDENCE.md`](papers/EVIDENCE.md) for study-level evidence profiles.
