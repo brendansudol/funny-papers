@@ -4,11 +4,11 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 
 ## Done (for context)
 
-- ✅ Paper library: 107/112 guide entries with PDF + full-text markdown (`papers/`)
-- ✅ Dataset library: 38 of 49 artifacts vendored, ~9.4GB (`data/`)
+- ✅ Paper library: 111/116 guide entries with PDF + full-text markdown (`papers/`)
+- ✅ Dataset library: 39 of 53 artifacts vendored, ~9.4GB (`data/`)
 - ✅ Structured extracts + one-pagers + cross-paper analysis (`papers/extracts/`, `papers/summaries/`, `papers/ANALYSIS.md`)
 - ✅ Evidence-strength profiles + synthesis support/counterevidence/confidence map ([papers/EVIDENCE.md](../papers/EVIDENCE.md))
-- ✅ Guide-vs-paper discrepancy check; all 8 fixes applied ([papers/DISCREPANCIES.md](../papers/DISCREPANCIES.md))
+- ✅ Guide-vs-paper evidence certification: all 111 converted entries audited across two passes (796 claims; all 14 fixes applied), plus a stratified 26-extract substantive spot check ([papers/DISCREPANCIES.md](../papers/DISCREPANCIES.md))
 - ✅ Git + GitHub: public repo at https://github.com/brendansudol/funny-papers. `data/` is gitignored (~9.4GB, rebuilds from `data/datasets.json` via the scripts); `papers/pdfs/` is versioned. Secrets stay in `.env` (ignored).
 - ✅ Docs: [README.md](../README.md) (front door), [AGENTS.md](../AGENTS.md) (agent ops guide; imported by `CLAUDE.md`), [docs/query-cookbook.md](query-cookbook.md) (verified jq/python recipes over catalogs + extracts)
 
@@ -19,8 +19,8 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 
 ## Make the library more usable
 
-- **RAG / semantic search index** — chunk + embed the ~1,680 markdown pages (and/or one-pagers) for "ask the library a question, get paper+page citations." Local and simple (sqlite + embeddings). The extracts make good metadata filters (task, dataset, theory).
-- **Citation lineage graph** — extract each paper's references, map who-cites-whom among the 112 entries, and render the lineages the guide describes in prose (Hessel → caption-preferences → HumorBench; Crowd Score → HumorRank). Could output a Mermaid/DOT graph into the repo or an Artifact page.
+- **RAG / semantic search index** — chunk + embed the ~1,880 markdown pages (and/or one-pagers) for "ask the library a question, get paper+page citations." Local and simple (sqlite + embeddings). The extracts make good metadata filters (task, dataset, theory).
+- **Citation lineage graph** — extract each paper's references, map who-cites-whom among the 116 entries, and render the lineages the guide describes in prose (Hessel → caption-preferences → HumorBench; Crowd Score → HumorRank). Could output a Mermaid/DOT graph into the repo or an Artifact page.
 - **Library browser page** — a single searchable HTML page (Artifact or local file) over the catalog: filter by task/theory/dataset/model, click through to one-pagers. Mostly a `build_*.py` script over existing JSON. Natural extension: publish it (plus summaries/manifests) via GitHub Pages since the repo is already public.
 - **Claude Code project skill / MCP server over the library** — wrap the cookbook queries + full-text grep + summary lookup as a skill or local MCP server, so any future session (here or in other repos) can ask the library questions without rediscovering the layout.
 
@@ -28,8 +28,8 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 
 - **arXiv watcher** — weekly scheduled job (Claude Code `/schedule` routine): query arXiv for new humor+LLM papers, filter against `papers.json`, propose new entries in the guide's format. The guide was revised July 2026 and the field moves monthly.
 - **Venue-status checker** — periodic pass over `preprint`-tagged entries to see if they've since landed at a venue (the guide's compilation note explicitly flags this drift). The discrepancy check found one already (#19 → IASDR 2025).
-- **Dataset gap watch** — recheck the blocked datasets occasionally: github.com/SDS-NLP/Oogiri-Eval (404 as of July 2026), MemeReaCon release, and the anonymized HinS OSF link once it has a stable public project URL.
-- **One-time unblocks (user action needed):** Chumor 2.0 (accept HF click-through + `hf auth login`), D-HUMOR (sign the authors' data-use agreement), CAH rounds data (email mail@cardsagainsthumanity.com), workplace-humor dataset (email authors — anonymous repo expired).
+- **Dataset gap watch** — recheck the blocked datasets occasionally: MaMe-Re (paper still has a placeholder URL), github.com/SDS-NLP/Oogiri-Eval (404 as of July 2026), MemeReaCon release, and the anonymized HinS OSF link once it has a stable public project URL.
+- **One-time unblocks (user action needed):** MULAI (contact authors for an individual license), CHEESE! (request the full ORTOLANG corpus), Chumor 2.0 (accept HF click-through + `hf auth login`), D-HUMOR (sign the authors' data-use agreement), CAH rounds data (email mail@cardsagainsthumanity.com), workplace-humor dataset (email authors — anonymous repo expired).
 
 ## Build the actual bot
 
@@ -42,8 +42,7 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 
 ## Analysis ideas (cheap, high-interest)
 
-- **Cross-paper contradiction/agreement mining** — the extracts make it cheap to ask "where do papers disagree?" (e.g., #2 "not funny" vs #31 "funnier than laypeople"; the guide's Synthesis 1 explains it as task-format dependence — test that framing against all 107 extracts).
-- **Extract spot-verification pass** — the discrepancy check validated the *guide*; a sampled Opus pass over extracts themselves (numbers vs. transcription) would certify the comparison database for downstream use.
+- **Cross-paper contradiction/agreement mining** — the extracts make it cheap to ask "where do papers disagree?" (e.g., #2 "not funny" vs #31 "funnier than laypeople"; the guide's Synthesis 1 explains it as task-format dependence — test that framing against all 111 extracts).
 - **Auto-generated reading paths** — cluster papers by extract fields (task × theory × modality) and compare against the guide's hand-written reading paths; differences are interesting either way.
 - **Field timeline / trends view** — papers by year × task × model generation from the extracts: watch the 2023→2026 shift (detection → explanation → generation → evaluation methodology), which theories rise/fall, when each frontier model shows up in evals. One `build_*.py` script + a chart or two.
 

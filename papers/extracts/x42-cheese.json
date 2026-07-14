@@ -1,0 +1,298 @@
+{
+  "key": "x42-cheese",
+  "ref": "Part 5 (smiling, uptake, and failed humor)",
+  "section": "Part 5 - Situated & Live Humor",
+  "extracted_at": "2026-07-13",
+  "extraction_model": "gpt-5.5",
+  "extraction_reasoning_effort": "high",
+  "source_md": "papers/md/x42-cheese/x42-cheese.md",
+  "source_md_sha256": "0258dc2a797c33a0db27ec02c674655a71ba7b34ee94dbe24f23efff00affaa7",
+  "source_truncated": false,
+  "title": "\"Cheese!\": a corpus of face-to-face French interactions. A case study for analyzing smiling and conversational humor",
+  "authors": [
+    "Béatrice Priego-Valverde",
+    "Brigitte Bigi",
+    "Mary Amoyal"
+  ],
+  "year": 2020,
+  "venue": "Proceedings of the 12th Conference on Language Resources and Evaluation (LREC 2020), pages 467–475",
+  "paper_types": [
+    "dataset",
+    "method",
+    "evaluation-study"
+  ],
+  "research_questions": [
+    "How was the Cheese! multimodal French face-to-face conversational corpus collected and enriched?",
+    "Does smiling frame humor?",
+    "Does smiling have an impact on its success or failure?"
+  ],
+  "tasks": [
+    "conversational humor annotation",
+    "failed vs successful humor annotation",
+    "smile intensity annotation during humor",
+    "analysis of smiling as a marker of humor"
+  ],
+  "humor_domains": [
+    "conversational humor",
+    "canned jokes"
+  ],
+  "modalities": [
+    "text",
+    "audio",
+    "video"
+  ],
+  "languages": [
+    "French"
+  ],
+  "datasets_used": [
+    {
+      "name": "CHEESE!",
+      "role": "introduced",
+      "size": "11 French face-to-face conversations lasting around 15 minutes each; 22 participants"
+    },
+    {
+      "name": "CHEESE!",
+      "role": "analyzed",
+      "size": "5 interactions enriched with annotations; 2 interactions (MA_PC and JS_CL) manually annotated for smiles and humor"
+    }
+  ],
+  "models_evaluated": [],
+  "methods_proposed": [
+    {
+      "name": "CHEESE! corpus collection protocol",
+      "summary": "The paper describes a multimodal French dyadic conversation collection protocol: participants sit face-to-face in a soundproof room, read canned jokes to each other, and then converse freely until the end of the interaction. The corpus uses separated high-quality audio recordings and front-facing video for each participant."
+    },
+    {
+      "name": "CHEESE! annotation pipeline",
+      "summary": "The corpus is enriched through automatic IPU segmentation with SPPAS, manual enriched orthographic transcription and verification, automatic token/phoneme/syllable/activity/POS-related annotations with SPPAS and MarsaTag, and manual annotations of smiles and humor."
+    },
+    {
+      "name": "Smiling and humor exploratory analysis",
+      "summary": "For two interactions, the paper compares humorous vs. non-humorous sequences and failed vs. successful humorous items using smile presence, facial behavior categories, and mean smile intensity."
+    }
+  ],
+  "humor_theories": [
+    {
+      "theory": "GTVH",
+      "usage": "operationalized",
+      "detail": "Humor recognition criteria include General Theory of Verbal Humor notions such as “script opposition” and “logical mechanism”."
+    },
+    {
+      "theory": "other",
+      "usage": "operationalized",
+      "detail": "Failed humor is classified through negative reactions: humor acknowledged but answered seriously (A), humor ignored (I), and humor explicitly rejected (R); items are successful when none of these reactions are observed."
+    }
+  ],
+  "evaluation_methods": [
+    {
+      "type": "expert-annotation",
+      "detail": "Manual orthographic transcription was performed by one author and verified by another; smiles in two interactions were manually annotated with the Smiling Intensity Scale; humorous sequences/items were manually annotated by one author."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "Cohen’s Kappa assessed smile double-coding reliability: 0.87 for MA_PC and 0.89 for JS_CL."
+    },
+    {
+      "type": "automatic-metric",
+      "detail": "The exploratory study uses descriptive counts, percentages, durations, and mean smiling intensities to compare humorous/non-humorous and failed/successful humor."
+    }
+  ],
+  "evidence_profile": {
+    "human_samples": [
+      {
+        "role": "dataset-contributor",
+        "participant_count": "22",
+        "population": "students in Linguistics at Aix-Marseille University; the two participants of each interaction were in the same class and were friends outside the university; all were French native students, from 20 to 40 years old",
+        "recruitment": null,
+        "geography": "Aix-en-Provence, France",
+        "languages": [
+          "French"
+        ],
+        "observations": "11 mixed and non-mixed dyadic interactions lasting around 15 minutes each",
+        "detail": "Participants read each other a canned joke chosen by the researchers and then spoke freely until the end of the interaction; they signed written consent before recordings and were informed of the purpose after data collection was entirely finished."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": "authors",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "French"
+        ],
+        "observations": "5 interactions / 10 audio files were manually transcribed and verified",
+        "detail": "One author performed the orthographic transcription; another author verified the IPUs and the orthographic transcription."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "2",
+        "population": null,
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "French"
+        ],
+        "observations": "2,610 smile intensities were annotated in MA_PC and 2,475 in JS_CL",
+        "detail": "Smiles were annotated in ELAN on 400 ms intervals using the Smiling Intensity Scale; double coding on both interactions yielded Cohen’s Kappa 0.87 for MA_PC and 0.89 for JS_CL."
+      },
+      {
+        "role": "annotator",
+        "participant_count": "1",
+        "population": "one of the authors",
+        "recruitment": null,
+        "geography": null,
+        "languages": [
+          "French"
+        ],
+        "observations": "Humorous sequences and humorous items were annotated in MA_PC and JS_CL; item counts by participant were MA 23, PC 32, JS 39, and CL 53",
+        "detail": "The annotator classified humorous sequences as canned joke or conversational humor, annotated humorous items within conversational humor, and classified items as failed or successful based on reactions."
+      }
+    ],
+    "judges": [
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "One author manually performed orthographic transcription; another author verified the IPUs and transcription."
+      },
+      {
+        "type": "human-expert",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "Two judges double-coded smile intensities on 400 ms intervals for MA_PC and JS_CL; agreement was reported with Cohen’s Kappa."
+      },
+      {
+        "type": "author",
+        "name": null,
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "One author manually annotated humorous sequences/items and classified conversational humor items as failed or successful based on reactions."
+      },
+      {
+        "type": "automatic-metric",
+        "name": "SPPAS and MarsaTag",
+        "role": "data-labeling",
+        "blind": null,
+        "detail": "SPPAS generated IPUs and time-aligned token, phoneme, syllable and activity tiers; MarsaTag generated POS-related tiers."
+      }
+    ],
+    "generation_selection": [
+      {
+        "scope": "No humor generation experiments",
+        "mode": "not-applicable",
+        "n": null,
+        "selector": "none",
+        "detail": "The paper introduces and analyzes a human conversation corpus; it does not generate humor with a model."
+      }
+    ],
+    "model_provenance": [],
+    "inference_budgets": [
+      {
+        "scope": "No model inference",
+        "calls_per_item": null,
+        "candidates_per_item": null,
+        "token_budget": null,
+        "sampling_parameters": null,
+        "compute_or_cost": null,
+        "detail": "No computational model inference is run; SPPAS and MarsaTag are used for corpus annotation rather than humor generation or evaluation."
+      }
+    ],
+    "human_baselines": [
+      {
+        "scope": "Computational humor modeling",
+        "present": false,
+        "description": null,
+        "directly_comparable": null,
+        "detail": "The paper does not evaluate computational humor systems, so no human baseline is applicable."
+      }
+    ],
+    "contamination_risk": {
+      "level": "not-applicable",
+      "paper_discusses": false,
+      "benchmark_public_before_model": null,
+      "mitigations": [],
+      "basis": "No LLM or other humor model is evaluated; the paper introduces and analyzes a human interaction corpus."
+    },
+    "llm_judge_dependence": {
+      "level": "none",
+      "affected_claims": null,
+      "human_validation": null,
+      "detail": "No LLMs are used as judges or evaluators."
+    },
+    "reporting_gaps": [
+      "Only 5 of 11 interactions had been enriched with annotations at the time of the paper, and only 2 interactions had manual smile and humor annotations.",
+      "Humor annotation was performed by one author; no inter-annotator agreement is reported for humorous sequence/item labels or failed/successful humor labels.",
+      "The paper reports double coding for smile annotations but does not specify coder identities, expertise, or blinding.",
+      "The exploratory analysis uses descriptive statistics only and reports no statistical significance tests.",
+      "The authors identify possible gender and conversational-topic effects, but these are not controlled in the two-interaction exploratory study."
+    ]
+  },
+  "headline_results": [
+    {
+      "finding": "CHEESE! contains 11 French face-to-face conversations with 22 participants, and 5 interactions had been enriched with annotations at the time of publication.",
+      "metric": "corpus size / annotation status",
+      "value": "11 French face-to-face conversations lasting around 15 minutes each; 22 participants; 5 interactions enriched with annotations",
+      "dataset": "CHEESE!",
+      "best_system": null
+    },
+    {
+      "finding": "Smile annotation reliability was qualified as excellent for both manually smile-coded interactions.",
+      "metric": "Cohen’s Kappa",
+      "value": "0.87 for MA_PC and 0.89 for JS_CL",
+      "dataset": "CHEESE!",
+      "best_system": null
+    },
+    {
+      "finding": "The 5 annotated dialogues contain a restricted vocabulary, with many singleton words and a small set of frequent words covering much of the speech.",
+      "metric": "lexical coverage",
+      "value": "2,130 different words representing 20,201 occurrences; 1,027 (48.2%) occur only once; the 10 most frequent words occur 4,817 times and cover 23.8%; 40 words covers about 50% of all spoken words",
+      "dataset": "CHEESE!",
+      "best_system": null
+    },
+    {
+      "finding": "The two analyzed interactions differed strongly in the amount of humorous production and participant humor frequency.",
+      "metric": "humorous production duration and humorous items per participant",
+      "value": "2.6 min in MA_PC for a total interaction lasting 17.4 min; 7.03 min in JS_CL for a total interaction lasting 16.5 min; MA 23 (1.3/min), PC 32 (1.8/min), JS 39 (2.36/min), CL 53 (3.2/min)",
+      "dataset": "CHEESE!",
+      "best_system": null
+    },
+    {
+      "finding": "Mean smiling intensity was higher during humorous than non-humorous segments for three of four participants, while CL showed no difference.",
+      "metric": "mean smiling intensity during humorous vs non-humorous segments",
+      "value": "MA 2,26 vs 1,3; PC 2,13 vs 1,12; JS 2,05 vs 1,43; CL 1,5 vs 1,5",
+      "dataset": "CHEESE!",
+      "best_system": null
+    },
+    {
+      "finding": "Failed humor was less frequent than successful humor, but smile presence alone did not show that smiling reduces the risk of failure; mean smiling intensity was higher for successful humor for three of four participants.",
+      "metric": "failed/successful item counts and mean smiling intensity Fa/Su",
+      "value": "Failed/Successful items: MA 4/19, PC 13/19, JS 7/32, CL 5/48; mean smiling intensity Fa/Su: MA 2,5/2,03, PC 1,81/2,45, JS 1,8/2,3, CL 0,8/2,2",
+      "dataset": "CHEESE!",
+      "best_system": null
+    }
+  ],
+  "key_findings": [
+    "CHEESE! is a multimodal corpus of 11 French face-to-face dyadic interactions with high-quality separated audio and front-facing video, designed for studying smiling and humor in conversation.",
+    "The paper’s exploratory study analyzes only conversational humor, excluding the initial canned-joke sequences from the humor-duration analysis.",
+    "Smiling is the most frequent facial behavior during humor production for all four analyzed participants, occurring more often than neutral face or laughter.",
+    "Mean smiling intensity is generally higher in humorous than non-humorous sequences, but this pattern is not systematic because CL has the same mean intensity in both conditions.",
+    "Smile presence is common in both successful and failed humor, so the study does not show that smiling by itself reduces humor failure.",
+    "Mean smiling intensity may be more informative than smile presence for success/failure, but the evidence is too limited because the result holds for only three of four participants."
+  ],
+  "limitations": [
+    "The exploratory smiling-and-humor analysis is based on only two interactions and four participants.",
+    "Only 5 of 11 corpus interactions had enriched annotations, and only 2 had manual smile and humor annotations at the time of publication.",
+    "Humor annotation was performed by one author and no inter-annotator reliability for humor labels is reported.",
+    "The authors caution that one exception among only four participants creates too much uncertainty to draw clear conclusions about smiling intensity and humor success/failure.",
+    "Potential gender effects and conversational-topic effects are suggested but not tested or controlled.",
+    "The analysis is descriptive and does not report statistical significance testing."
+  ],
+  "safety_ethics_notes": "All participants signed a written consent form before the recordings and were informed of the purpose of the data collection after it was entirely finished. The paper states that a 46-second demo is publicly available, the whole corpus can be shared on demand after registration, and downsampled audio plus reduced-size video files are freely downloadable without registration.",
+  "artifacts": {
+    "code_url": null,
+    "data_url": "https://hdl.handle.net/11403/cheese",
+    "other": "A 46-second demo is publicly available; the whole corpus can be shared on-demand after registration; 8,000 Hz audio files and 363x206 px video files are publicly available without registration."
+  }
+}

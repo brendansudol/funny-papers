@@ -2714,7 +2714,7 @@
       "venue": "CHum 2026",
       "tags": [
         "workshop",
-        "evaluation-study"
+        "evaluation study"
       ],
       "page_url": "https://aclanthology.org/2026.chum-1.7/",
       "pdf_candidates": [
@@ -2949,7 +2949,7 @@
       "venue": "Scientific Reports 15:1326",
       "tags": [
         "peer-reviewed",
-        "evaluation-study"
+        "evaluation study"
       ],
       "page_url": "https://doi.org/10.1038/s41598-024-83384-6",
       "pdf_candidates": [
@@ -3085,7 +3085,7 @@
       "tags": [
         "workshop",
         "dataset",
-        "shared-task"
+        "shared task"
       ],
       "page_url": "https://ceur-ws.org/Vol-3740/#paper-167",
       "pdf_candidates": [
@@ -3118,7 +3118,7 @@
       "venue": "EMNLP 2025",
       "tags": [
         "peer-reviewed",
-        "evaluation-study"
+        "evaluation study"
       ],
       "page_url": "https://aclanthology.org/2025.emnlp-main.13/",
       "pdf_candidates": [
@@ -3245,7 +3245,7 @@
     {
       "key": "x36-ironic-melting-pot",
       "ref": "Part 4 (human-evaluation review)",
-      "section": "Part 4 - Evaluation Methodology & Whether LLMs Are Actually Funny",
+      "section": "Part 4 - Evaluation Methodology",
       "title": "The Iron(ic) Melting Pot: Reviewing Human Evaluation in Humour, Irony and Sarcasm Generation",
       "authors": "Tyler Loakman, Aaron Maladry & Chenghua Lin",
       "year": 2023,
@@ -3279,7 +3279,7 @@
     {
       "key": "x37-improv-comedy-setting",
       "ref": "Part 5 (live improv evaluation)",
-      "section": "Part 5 - Situated Humor",
+      "section": "Part 5 - Situated & Live Humor",
       "title": "Evaluating Humor Generation in an Improvisational Comedy Setting",
       "authors": "Thomas Winters & Stijn Van der Stockt",
       "year": 2025,
@@ -3348,7 +3348,7 @@
     {
       "key": "x39-how-humorous-ai",
       "ref": "Part 5 (four-study HCI evaluation)",
-      "section": "Part 5 - Situated Humor",
+      "section": "Part 5 - Situated & Live Humor",
       "title": "How humorous is AI? Exploring ChatGPT's role in humor generation and human-AI interaction",
       "authors": "Yi Cao, Jiahao Cao, Yubo Hou & Li-Jun Ji",
       "year": 2025,
@@ -3412,6 +3412,141 @@
       "md_page_files": 22,
       "md_model": "gpt-5.5",
       "converted_seconds": 129
+    },
+    {
+      "key": "x41-mulai",
+      "ref": "Part 5 (dyadic laughter and participant perception)",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "Introducing MULAI: A Multimodal Database of Laughter during Dyadic Interactions",
+      "authors": "Michel-Pierre Jansen, Khiet P. Truong, Deniece S. Nazareth & Dirk K.J. Heylen",
+      "year": 2020,
+      "venue": "LREC 2020",
+      "tags": [
+        "peer-reviewed",
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/2020.lrec-1.534/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2020.lrec-1.534.pdf"
+      ],
+      "verify": "introducing mulai",
+      "status": "converted",
+      "source_version": "ACL Anthology proceedings version",
+      "source_checked": "2026-07-13",
+      "pdf_path": "papers/pdfs/x41-mulai.pdf",
+      "pdf_source": "https://aclanthology.org/2020.lrec-1.534.pdf",
+      "pdf_bytes": 1534713,
+      "pdf_sha256": "daba6a9ce8ade30ff1277245b96a83b8871c6a3c621ff10b00a3bee130c0c1d3",
+      "pdf_retrieved_at": "2026-07-13",
+      "page_count": 10,
+      "verify_ok": true,
+      "md_path": "papers/md/x41-mulai/x41-mulai.md",
+      "md_pages_dir": "papers/md/x41-mulai/pages",
+      "md_page_files": 10,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 115
+    },
+    {
+      "key": "x42-cheese",
+      "ref": "Part 5 (smiling, uptake, and failed humor)",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "“Cheese!”: a Corpus of Face-to-face French Interactions. A Case Study for Analyzing Smiling and Conversational Humor",
+      "authors": "Béatrice Priego-Valverde, Brigitte Bigi & Mary Amoyal",
+      "year": 2020,
+      "venue": "LREC 2020",
+      "tags": [
+        "peer-reviewed",
+        "dataset"
+      ],
+      "page_url": "https://aclanthology.org/2020.lrec-1.59/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2020.lrec-1.59.pdf"
+      ],
+      "verify": "face-to-face french interactions",
+      "status": "converted",
+      "source_version": "ACL Anthology proceedings version",
+      "source_checked": "2026-07-13",
+      "pdf_path": "papers/pdfs/x42-cheese.pdf",
+      "pdf_source": "https://aclanthology.org/2020.lrec-1.59.pdf",
+      "pdf_bytes": 5021120,
+      "pdf_sha256": "cb25432de3ed241048e2e274d82c6aa81fdfd252871fcea06dfdaeb052d7dc66",
+      "pdf_retrieved_at": "2026-07-13",
+      "page_count": 9,
+      "verify_ok": true,
+      "md_path": "papers/md/x42-cheese/x42-cheese.md",
+      "md_pages_dir": "papers/md/x42-cheese/pages",
+      "md_page_files": 9,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 133
+    },
+    {
+      "key": "x43-smile-next",
+      "ref": "Part 5 (real-world laughter benchmark)",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "SMILE-Next: Teaching Large Language Models to Detect, Classify, and Reason about Laughter",
+      "authors": "Lee Jung-Mok, Kim Sung-Bin, Joohyun Chang, Lee Hyun & Tae-Hyun Oh",
+      "year": 2026,
+      "venue": "ACL 2026",
+      "tags": [
+        "peer-reviewed",
+        "dataset",
+        "benchmark",
+        "method"
+      ],
+      "page_url": "https://aclanthology.org/2026.acl-long.2023/",
+      "pdf_candidates": [
+        "https://aclanthology.org/2026.acl-long.2023.pdf"
+      ],
+      "verify": "smile-next",
+      "status": "converted",
+      "source_version": "ACL Anthology proceedings version (2026-07)",
+      "source_checked": "2026-07-13",
+      "pdf_path": "papers/pdfs/x43-smile-next.pdf",
+      "pdf_source": "https://aclanthology.org/2026.acl-long.2023.pdf",
+      "pdf_bytes": 6534465,
+      "pdf_sha256": "f66db3df9b675cb7aadde245616739abb83d496e62732b049797f134de8f703e",
+      "pdf_retrieved_at": "2026-07-13",
+      "page_count": 19,
+      "verify_ok": true,
+      "md_path": "papers/md/x43-smile-next/x43-smile-next.md",
+      "md_pages_dir": "papers/md/x43-smile-next/pages",
+      "md_page_files": 19,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 212
+    },
+    {
+      "key": "x44-mame-re",
+      "ref": "Part 5 (memes as conversational actions)",
+      "section": "Part 5 - Situated & Live Humor",
+      "title": "Memes-as-Replies: Can Models Select Humorous Manga Panel Responses?",
+      "authors": "Ryosuke Kohita & Seiichiro Yoshioka",
+      "year": 2026,
+      "venue": "arXiv:2602.15842v1",
+      "tags": [
+        "preprint",
+        "dataset",
+        "benchmark"
+      ],
+      "page_url": "https://arxiv.org/abs/2602.15842",
+      "pdf_candidates": [
+        "https://arxiv.org/pdf/2602.15842"
+      ],
+      "verify": "memes-as-replies",
+      "status": "converted",
+      "source_version": "arXiv:2602.15842v1 (2026-01-21)",
+      "source_checked": "2026-07-13",
+      "pdf_path": "papers/pdfs/x44-mame-re.pdf",
+      "pdf_source": "https://arxiv.org/pdf/2602.15842",
+      "pdf_bytes": 7434741,
+      "pdf_sha256": "d49614fcdc60367f759f2c49541e5539be9581736ad282b4c9561f8a7714008c",
+      "pdf_retrieved_at": "2026-07-13",
+      "page_count": 11,
+      "verify_ok": true,
+      "md_path": "papers/md/x44-mame-re/x44-mame-re.md",
+      "md_pages_dir": "papers/md/x44-mame-re/pages",
+      "md_page_files": 11,
+      "md_model": "gpt-5.5",
+      "converted_seconds": 153
     }
   ]
 }

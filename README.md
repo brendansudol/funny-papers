@@ -1,6 +1,6 @@
 # funny-papers
 
-A research library on **humor and large language models**: a curated field guide covering 112 works (humor theory from 1900 through LLM-era papers up to July 2026), plus the full text of nearly every paper, the datasets they released, structured per-paper extracts, and cross-paper analysis built on top.
+A research library on **humor and large language models**: a curated field guide covering 116 works (humor theory from 1900 through LLM-era papers up to July 2026), plus the full text of nearly every paper, the datasets they released, structured per-paper extracts, and cross-paper analysis built on top.
 
 The goal: everything needed to deeply understand the field — and eventually build and evaluate humor systems — in one place, reproducibly.
 
@@ -12,6 +12,7 @@ The goal: everything needed to deeply understand the field — and eventually bu
 | Browse the paper library (per-paper PDF / full text / summary links) | [papers/MANIFEST.md](papers/MANIFEST.md) |
 | Compare papers — who evaluated on what, which theories, which models | [papers/ANALYSIS.md](papers/ANALYSIS.md) |
 | Audit evidence strength, human grounding, budgets, and synthesis confidence | [papers/EVIDENCE.md](papers/EVIDENCE.md) |
+| Inspect guide and extract certification results | [papers/DISCREPANCIES.md](papers/DISCREPANCIES.md) |
 | Read a one-page summary of a specific paper | `papers/summaries/<key>.md` |
 | See what datasets exist and what's vendored locally | [data/MANIFEST.md](data/MANIFEST.md) |
 | Query the library programmatically | [docs/query-cookbook.md](docs/query-cookbook.md) |
@@ -19,15 +20,15 @@ The goal: everything needed to deeply understand the field — and eventually bu
 
 ## What's inside
 
-- **The field guide** — [humor-and-llms-field-guide.md](humor-and-llms-field-guide.md), a curated bibliography of 112 entries organized into theory foundations plus nine parts (explanation, generation, multimodal, evaluation, situated/live humor, safety, cross-cultural, datasets, surveys). Each entry notes method, dataset, and key findings. The 80-source guide-claim audit is documented in [papers/DISCREPANCIES.md](papers/DISCREPANCIES.md); catalog records outside that audit were checked against primary sources and full-text extracts but have not undergone the same separate adversarial review.
-- **Paper library** (`papers/`) — 107 of 112 entries with downloaded PDFs and vision-transcribed Markdown full text. The 5 missing entries are books/paywalled theory works with no open PDF.
+- **The field guide** — [humor-and-llms-field-guide.md](humor-and-llms-field-guide.md), a curated bibliography of 116 entries organized into theory foundations plus nine parts (explanation, generation, multimodal, evaluation, situated/live humor, safety, cross-cultural, datasets, surveys). Each entry notes method, dataset, and key findings. Across two primary-text passes, all 111 converted entries and 796 checkable claims have been audited; methods, fixes, and the stratified extract check are documented in [papers/DISCREPANCIES.md](papers/DISCREPANCIES.md).
+- **Paper library** (`papers/`) — 111 of 116 entries with downloaded PDFs and vision-transcribed Markdown full text. The 5 missing entries are books/paywalled theory works with no open PDF.
   - `papers/papers.json` — machine-readable catalog and **source of truth** (publication/source version, check and retrieval dates, PDF provenance, sha256, page counts)
   - `papers/pdfs/<key>.pdf` · `papers/md/<key>/<key>.md` — the documents themselves
   - `papers/extracts/<key>.json` — structured extract per paper (tasks, datasets, models, theories, headline numbers, and evidence profile)
   - `papers/summaries/<key>.md` — one-page summaries
   - `papers/ANALYSIS.md` — cross-paper matrices generated from the extracts
   - `papers/EVIDENCE.md` — human samples, judge dependence, selection/budget/provenance, contamination risk, and synthesis claim confidence
-- **Dataset library** (`data/`) — 49 datasets cataloged in `data/datasets.json`; 38 public artifacts vendored locally (~9.4 GB, gitignored — rebuilds from the catalog with one script). Includes HumorBench (with autograder), the New Yorker caption-ranking corpus (250M+ votes), Oogiri-GO, ExPUNations, PunEval, HumorDB, both YesBut lineages, MultiPun, TIC-TALK, MWAHAHA, and more.
+- **Dataset library** (`data/`) — 53 datasets cataloged in `data/datasets.json`; 39 public artifacts vendored locally (~9.4 GB, gitignored — rebuilds from the catalog with one script). Includes HumorBench (with autograder), the New Yorker caption-ranking corpus (250M+ votes), Oogiri-GO, ExPUNations, PunEval, HumorDB, both YesBut lineages, MultiPun, TIC-TALK, MWAHAHA, SMILE-Next, and more.
 - **Pipeline scripts** (`scripts/`) — everything above is built by small, resumable, idempotent Python scripts (see below).
 
 ## Repo layout
@@ -79,5 +80,5 @@ Three stages, each resumable and safe to re-run:
 ## Trust & caveats
 
 - **Markdown full texts are LLM vision transcriptions** of the PDFs — high quality but not authoritative; figures appear as `[Figure: …]` placeholders. Cite the PDF/original.
-- **Extracts and summaries are LLM-generated** from those transcriptions. A defined 80-source subset of the guide was adversarially checked against full texts (~540 claims checked, 8 discrepancies found and fixed); records outside that audit were primary-source checked and spot-verified against their extracts. The extracts themselves have not had a systematic independent verification pass.
+- **Extracts and summaries are LLM-generated** from those transcriptions. All 111 converted guide entries have now received a separate primary-text claim audit across two passes (796 claims checked, 14 discrepancies found and fixed). A stratified 26-extract sample (23.4%) received substantive field-level checks and passed; the other 85 extracts received source-presence, current-hash, and non-truncation checks only. This was an independent pipeline pass by another AI model, not a human replication or sentence-by-sentence certification. See [papers/DISCREPANCIES.md](papers/DISCREPANCIES.md) and [papers/review/certification.json](papers/review/certification.json).
 - **Copyright stays with the original authors/publishers.** PDFs are open-access or author-hosted copies vendored for personal research; datasets keep their original licenses (recorded per-entry in `data/datasets.json`).

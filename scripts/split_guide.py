@@ -59,6 +59,10 @@ ANCHORS = {
     "x38-multipun": "**Adversarial multimodal-pun tests:**",
     "x39-how-humorous-ai": "**Humor in social interaction:**",
     "x40-corpus-pragmatics": "**Pragmatic-function annotation:**",
+    "x41-mulai": "**Dyadic laughter and participant perception:**",
+    "x42-cheese": "**Smiling, uptake, and failed humor:**",
+    "x43-smile-next": "**Real-world laughter tasks for LLMs:**",
+    "x44-mame-re": "**Memes as conversational actions:**",
 }
 # Keys covered by another entry's numbered block.
 ALIASES = {

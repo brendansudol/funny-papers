@@ -1,6 +1,29 @@
 # Guide-vs-Paper Discrepancy Check
 
-> **Status: all 8 fixes below were applied to the guide on 2026-07-03** (guide text edited; papers.json metadata synced for #19 and #25). The "guide says" quotes preserve the pre-fix wording.
+> **Current status (2026-07-13): all 111 converted guide entries have received a primary-text claim audit.** The five excluded entries are unavailable theory books, not unaudited converted papers. All 14 fixes across both passes have been applied; quoted pre-fix wording is retained below for provenance.
+
+The historical audit covered 80 entries and 540 factual claims. A second pass checked every converted entry added later or otherwise absent from that artifact: 31 entries and 256 more claims. Together, the two disjoint passes cover **111/111 converted entries and 796 checkable claims**. Machine-readable results are in [review/discrepancies.json](review/discrepancies.json) and [review/certification.json](review/certification.json).
+
+The certification pass also substantively spot-checked a stratified sample of **26/111 extracts (23.4%)**, including every guide part, all four new conversational resources, human-only studies, multimodal and live studies, best-of-N systems, and designs with substantial LLM-judge dependence. All 26 passed the checked fields; no extract required correction. Every converted paper also passed global extract-presence, current-source-hash, and non-truncation checks. This is deliberately narrower than claiming that every sentence in every LLM-generated extract has been independently verified.
+
+## Second-pass verdict (2026-07-13)
+
+**25 of 31 entries were fully confirmed on first comparison. Six minor discrepancies in six entries were fixed; none changed the guide's synthesis conclusions.** One correction is scope-important: CHEESE! had five speech/transcription-enriched interactions but only two with the manual smile and humor annotations used in its exploratory analysis.
+
+| Entry | Correction applied |
+| --- | --- |
+| Jester / Eigentaste | Removed an unsupported approximate combined-user total; retained the official 6.5M ratings across successive releases and the 100–158-joke scope. |
+| The Iron(ic) Melting Pot | Replaced a loose checklist paraphrase with the paper's actual categories: evaluator/sample logistics, recruitment/compensation, demographics and expertise, process/training, pilots, and agreement. |
+| MultiPun | Changed “minimally substituted” to “substitution-based”; one of the paper's two negative-generation strategies can regenerate the image. |
+| MULAI | Synchronized the guide/catalog author order to the proceedings PDF rather than the conflicting ACL metadata order. |
+| CHEESE! | Distinguished five speech/transcription-enriched interactions from the two manually annotated for smiles and humor. |
+| SMILE-Next | Replaced an ambiguous compact author citation based on misparsed ACL metadata with “Lee et al.”; full display names remain in the catalog. |
+
+The checker was Codex (GPT-5), working from the primary transcriptions in a review separate from the GPT-5.5 extraction run. It is an independent pass in the pipeline sense, not an independent human replication. Selection criteria, per-entry verdicts, per-extract checks, and limitations are recorded in [review/certification.json](review/certification.json).
+
+## Historical audit (2026-07-03)
+
+> **Status: all 8 historical fixes below were applied to the guide on 2026-07-03** (guide text edited; papers.json metadata synced for #19 and #25). The "guide says" quotes preserve the pre-fix wording.
 
 Fact-check of every entry in [humor-and-llms-field-guide.md](../humor-and-llms-field-guide.md) against the full-text transcriptions in `papers/md/`. Run 2026-07-03 by 16 Claude Opus 4.8 agents (5 papers each); every reported discrepancy is backed by a verbatim quote from the transcription. Machine-readable results: [review/discrepancies.json](review/discrepancies.json).
 

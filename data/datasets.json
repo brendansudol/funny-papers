@@ -179,6 +179,69 @@
       "disk_mb": 12.3
     },
     {
+      "key": "mulai",
+      "name": "MULAI",
+      "contents": "2h14 of annotated dyadic interaction with 601 laughs, 168 speech-laughs, respiration events, participant humor ratings, personality, and physiological measures",
+      "paper_keys": [
+        "x41-mulai"
+      ],
+      "source_url": "https://aclanthology.org/2020.lrec-1.534/",
+      "method": "unavailable",
+      "access": "request",
+      "license": "Individual license required; terms supplied by the authors",
+      "approx_size": "2h14 synchronized multimodal interaction data",
+      "status": "request",
+      "note": "The paper directs researchers to contact the authors; questionnaire, video, audio, and physiological data require an individual license. No stable public distribution page was located as of 2026-07-13."
+    },
+    {
+      "key": "cheese-conversations",
+      "name": "CHEESE!",
+      "contents": "Eleven French face-to-face dyadic conversations; five had speech/transcription enrichment and two had manual smile, humor-sequence, and recipient-reaction annotations at publication",
+      "paper_keys": [
+        "x42-cheese"
+      ],
+      "source_url": "https://hdl.handle.net/11403/cheese",
+      "method": "unavailable",
+      "access": "mixed",
+      "license": null,
+      "approx_size": "about 3h45 audiovisual data across 11 dyads",
+      "status": "request",
+      "note": "ORTOLANG hosts the corpus. At publication, five interactions had speech/transcription enrichment, while only two had manual smile and humor annotations. The paper reports reduced audio/video available without registration and the full corpus on demand after registration; redistribution terms were not stated clearly enough to vendor it automatically."
+    },
+    {
+      "key": "smile-next",
+      "name": "SMILE-Next",
+      "contents": "Question-answer data for laughter detection, polite/satirical/mirthful type classification, and laughter reasoning from textualized multimodal video cues",
+      "paper_keys": [
+        "x43-smile-next"
+      ],
+      "source_url": "https://huggingface.co/datasets/mok0102/SMILE-Next",
+      "hf_repo_id": "mok0102/SMILE-Next",
+      "method": "hf",
+      "access": "public",
+      "license": "CC BY 4.0",
+      "approx_size": "small (three JSON QA splits; 1K–10K examples)",
+      "status": "downloaded",
+      "note": "Code and model implementation: https://github.com/kaist-ami/SMILE-Next. The public dataset contains textualized multimodal cues and QA pairs, not redistributed source videos.",
+      "local_path": "data/smile-next",
+      "disk_mb": 75.9
+    },
+    {
+      "key": "mame-re",
+      "name": "MaMe-Re",
+      "contents": "250 synthetic social posts × 400 openly licensed manga panels: 100,000 context-reply pairs with five binary funniness annotations each",
+      "paper_keys": [
+        "x44-mame-re"
+      ],
+      "source_url": "https://arxiv.org/abs/2602.15842",
+      "method": "unavailable",
+      "access": "unavailable",
+      "license": null,
+      "approx_size": "100,000 pairs / 500,000 annotations",
+      "status": "unavailable",
+      "note": "The paper's dataset footnote still points to `https://will.be.published.soon`; no stable repository or archive was located as of 2026-07-13. Source manga are free-use with attribution, but benchmark release terms are not yet published."
+    },
+    {
       "key": "newyorker-caption-ranking",
       "name": "New Yorker caption ranking (Humor in AI)",
       "contents": "2.18M captions with 250M+ aggregated crowd votes across ~900 contests + cartoon images + GPT-4 descriptions",
@@ -725,7 +788,7 @@
     {
       "key": "jester",
       "name": "Jester joke ratings",
-      "contents": "6.5M anonymous -10 to +10 ratings from roughly 150K users over a small set of up to 158 jokes",
+      "contents": "6.5M anonymous -10 to +10 ratings across successive releases over a small set of 100 to 158 jokes",
       "paper_keys": [
         "x23-eigentaste-jester"
       ],

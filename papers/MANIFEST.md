@@ -2,7 +2,7 @@
 
 Companion library for [humor-and-llms-field-guide.md](../humor-and-llms-field-guide.md). Regenerated 2026-07-13 by `scripts/build_manifest.py` from [papers.json](papers.json) (the machine-readable source of truth).
 
-**112 entries**: 107 converted, 5 no open PDF.
+**116 entries**: 111 converted, 5 no open PDF.
 
 Layout:
 
@@ -106,6 +106,7 @@ Pipeline: `scripts/download_papers.py` -> `scripts/convert_papers.py` (uses `../
 | Part 4 (originality beyond funniness) | [Navigating the Joke Space: Towards Automated Originality Assessment of AI-Generated Humor](https://aclanthology.org/2026.chum-1.8/) | 2026 | CHum 2026 | [pdf (11p)](pdfs/x21-joke-space-originality.pdf) | [md](md/x21-joke-space-originality/x21-joke-space-originality.md) | [1-pager](summaries/x21-joke-space-originality.md) | Source pin: ACL Anthology proceedings version (2026-07); checked 2026-07-11; PDF retrieved 2026-07-11. |
 | Part 4 (audience-modeling anchor) | [Humor in Word Embeddings: Cockamamie Gobbledegook for Nincompoops](https://proceedings.mlr.press/v97/gultchin19a.html) | 2019 | ICML 2019 | [pdf (10p)](pdfs/x22-humor-word-embeddings.pdf) | [md](md/x22-humor-word-embeddings/x22-humor-word-embeddings.md) | [1-pager](summaries/x22-humor-word-embeddings.md) | Source pin: PMLR proceedings version; checked 2026-07-11; PDF retrieved 2026-07-11. |
 | Part 4 (audience-modeling anchor) | [Eigentaste: A Constant Time Collaborative Filtering Algorithm](https://eigentaste.berkeley.edu/about.html) | 2001 | Information Retrieval 4(2):133-151 | [pdf (11p)](pdfs/x23-eigentaste-jester.pdf) | [md](md/x23-eigentaste-jester/x23-eigentaste-jester.md) | [1-pager](summaries/x23-eigentaste-jester.md) | Source pin: Author-hosted journal/technical-report manuscript (dated 2000; journal issue 2001); checked 2026-07-11; PDF retrieved 2026-07-11. |
+| Part 4 (human-evaluation review) | [The Iron(ic) Melting Pot: Reviewing Human Evaluation in Humour, Irony and Sarcasm Generation](https://aclanthology.org/2023.findings-emnlp.444/) | 2023 | Findings of EMNLP 2023 | [pdf (14p)](pdfs/x36-ironic-melting-pot.pdf) | [md](md/x36-ironic-melting-pot/x36-ironic-melting-pot.md) | [1-pager](summaries/x36-ironic-melting-pot.md) | Source pin: ACL Anthology proceedings version; checked 2026-07-13; PDF retrieved 2026-07-13. |
 
 ## Part 5 - Situated & Live Humor
 
@@ -120,6 +121,12 @@ Pipeline: `scripts/download_papers.py` -> `scripts/convert_papers.py` (uses `../
 | Part 5 (laughter-and-performance anchor) | [“So You Think You’re Funny?”: Rating the Humour Quotient in Standup Comedy](https://aclanthology.org/2021.emnlp-main.789/) | 2021 | EMNLP 2021 | [pdf (7p)](pdfs/x24-open-mic-humor-quotient.pdf) | [md](md/x24-open-mic-humor-quotient/x24-open-mic-humor-quotient.md) | [1-pager](summaries/x24-open-mic-humor-quotient.md) | Source pin: ACL Anthology proceedings version; checked 2026-07-11; PDF retrieved 2026-07-11. |
 | Part 5 (timing as multimodal data) | [Timing In stand-up Comedy: Text, Audio, Laughter, Kinesics (TIC-TALK): Pipeline and Database for the Multimodal Study of Comedic Timing](https://aclanthology.org/2026.chum-1.2/) | 2026 | CHum 2026 | [pdf (10p)](pdfs/x25-tic-talk.pdf) | [md](md/x25-tic-talk/x25-tic-talk.md) | [1-pager](summaries/x25-tic-talk.md) | Source pin: ACL Anthology proceedings version (2026-07); checked 2026-07-11; PDF retrieved 2026-07-11. |
 | Part 5 (performer identity) | [“Not Human, Funnier”: Leveraging Machine Identity for Online AI Stand-up Comedy](https://doi.org/10.1145/3772318.3791678) | 2026 | CHI 2026 | [pdf (27p)](pdfs/x26-not-human-funnier.pdf) | [md](md/x26-not-human-funnier/x26-not-human-funnier.md) | [1-pager](summaries/x26-not-human-funnier.md) | Source pin: arXiv:2602.12763v1 (2026-02-13), CHI 2026 author manuscript; checked 2026-07-11; PDF retrieved 2026-07-11. |
+| Part 5 (live improv evaluation) | [Evaluating Humor Generation in an Improvisational Comedy Setting](https://www.clinjournal.org/clinj/article/view/214) | 2025 | Computational Linguistics in the Netherlands Journal 14 | [pdf (19p)](pdfs/x37-improv-comedy-setting.pdf) | [md](md/x37-improv-comedy-setting/x37-improv-comedy-setting.md) | [1-pager](summaries/x37-improv-comedy-setting.md) | Source pin: CLIN Journal version of record (2025-07-15); checked 2026-07-13; PDF retrieved 2026-07-13. |
+| Part 5 (four-study HCI evaluation) | [How humorous is AI? Exploring ChatGPT's role in humor generation and human-AI interaction](https://www.sciencedirect.com/science/article/pii/S2451958825002222) | 2025 | Computers in Human Behavior Reports 20:100807 | [pdf (9p)](pdfs/x39-how-humorous-ai.pdf) | [md](md/x39-how-humorous-ai/x39-how-humorous-ai.md) | [1-pager](summaries/x39-how-humorous-ai.md) | Source pin: Computers in Human Behavior Reports version of record; checked 2026-07-13; PDF retrieved 2026-07-13. |
+| Part 5 (dyadic laughter and participant perception) | [Introducing MULAI: A Multimodal Database of Laughter during Dyadic Interactions](https://aclanthology.org/2020.lrec-1.534/) | 2020 | LREC 2020 | [pdf (10p)](pdfs/x41-mulai.pdf) | [md](md/x41-mulai/x41-mulai.md) | [1-pager](summaries/x41-mulai.md) | Source pin: ACL Anthology proceedings version; checked 2026-07-13; PDF retrieved 2026-07-13. |
+| Part 5 (smiling, uptake, and failed humor) | [“Cheese!”: a Corpus of Face-to-face French Interactions. A Case Study for Analyzing Smiling and Conversational Humor](https://aclanthology.org/2020.lrec-1.59/) | 2020 | LREC 2020 | [pdf (9p)](pdfs/x42-cheese.pdf) | [md](md/x42-cheese/x42-cheese.md) | [1-pager](summaries/x42-cheese.md) | Source pin: ACL Anthology proceedings version; checked 2026-07-13; PDF retrieved 2026-07-13. |
+| Part 5 (real-world laughter benchmark) | [SMILE-Next: Teaching Large Language Models to Detect, Classify, and Reason about Laughter](https://aclanthology.org/2026.acl-long.2023/) | 2026 | ACL 2026 | [pdf (19p)](pdfs/x43-smile-next.pdf) | [md](md/x43-smile-next/x43-smile-next.md) | [1-pager](summaries/x43-smile-next.md) | Source pin: ACL Anthology proceedings version (2026-07); checked 2026-07-13; PDF retrieved 2026-07-13. |
+| Part 5 (memes as conversational actions) | [Memes-as-Replies: Can Models Select Humorous Manga Panel Responses?](https://arxiv.org/abs/2602.15842) | 2026 | arXiv:2602.15842v1 | [pdf (11p)](pdfs/x44-mame-re.pdf) | [md](md/x44-mame-re/x44-mame-re.md) | [1-pager](summaries/x44-mame-re.md) | Source pin: arXiv:2602.15842v1 (2026-01-21); checked 2026-07-13; PDF retrieved 2026-07-13. |
 
 ## Part 6 - Safety, Harm & Boundaries
 
@@ -176,19 +183,6 @@ Pipeline: `scripts/download_papers.py` -> `scripts/convert_papers.py` (uses `../
 | #64 | [Is Sarcasm Detection a Step-by-Step Reasoning Process in Large Language Models?](https://arxiv.org/abs/2407.12725) | 2025 | AAAI 2025 | [pdf (17p)](pdfs/64-sarcasm-step-by-step.pdf) | [md](md/64-sarcasm-step-by-step/64-sarcasm-step-by-step.md) | [1-pager](summaries/64-sarcasm-step-by-step.md) |  |
 | #65 | [A Two-Model Approach for Humour Style Recognition](https://arxiv.org/abs/2410.12842) | 2024 | arXiv:2410.12842 | [pdf (16p)](pdfs/65-humour-style-recognition.pdf) | [md](md/65-humour-style-recognition/65-humour-style-recognition.md) | [1-pager](summaries/65-humour-style-recognition.md) |  |
 | Adjacent (construct-validity caution) | [Fingerprinting LLMs through Survey Item Factor Correlation: A Case Study on Humor Style Questionnaire](https://aclanthology.org/2025.emnlp-main.13/) | 2025 | EMNLP 2025 | [pdf (14p)](pdfs/x32-hsq-fingerprinting.pdf) | [md](md/x32-hsq-fingerprinting/x32-hsq-fingerprinting.md) | [1-pager](summaries/x32-hsq-fingerprinting.md) | Source pin: ACL Anthology proceedings version; checked 2026-07-11; PDF retrieved 2026-07-11. |
-
-## Part 4 - Evaluation Methodology & Whether LLMs Are Actually Funny
-
-| Ref | Paper | Year | Venue | PDF | Markdown | Summary | Notes |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Part 4 (human-evaluation review) | [The Iron(ic) Melting Pot: Reviewing Human Evaluation in Humour, Irony and Sarcasm Generation](https://aclanthology.org/2023.findings-emnlp.444/) | 2023 | Findings of EMNLP 2023 | [pdf (14p)](pdfs/x36-ironic-melting-pot.pdf) | [md](md/x36-ironic-melting-pot/x36-ironic-melting-pot.md) | [1-pager](summaries/x36-ironic-melting-pot.md) | Source pin: ACL Anthology proceedings version; checked 2026-07-13; PDF retrieved 2026-07-13. |
-
-## Part 5 - Situated Humor
-
-| Ref | Paper | Year | Venue | PDF | Markdown | Summary | Notes |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Part 5 (live improv evaluation) | [Evaluating Humor Generation in an Improvisational Comedy Setting](https://www.clinjournal.org/clinj/article/view/214) | 2025 | Computational Linguistics in the Netherlands Journal 14 | [pdf (19p)](pdfs/x37-improv-comedy-setting.pdf) | [md](md/x37-improv-comedy-setting/x37-improv-comedy-setting.md) | [1-pager](summaries/x37-improv-comedy-setting.md) | Source pin: CLIN Journal version of record (2025-07-15); checked 2026-07-13; PDF retrieved 2026-07-13. |
-| Part 5 (four-study HCI evaluation) | [How humorous is AI? Exploring ChatGPT's role in humor generation and human-AI interaction](https://www.sciencedirect.com/science/article/pii/S2451958825002222) | 2025 | Computers in Human Behavior Reports 20:100807 | [pdf (9p)](pdfs/x39-how-humorous-ai.pdf) | [md](md/x39-how-humorous-ai/x39-how-humorous-ai.md) | [1-pager](summaries/x39-how-humorous-ai.md) | Source pin: Computers in Human Behavior Reports version of record; checked 2026-07-13; PDF retrieved 2026-07-13. |
 
 ## Not in the library (and why)
 
