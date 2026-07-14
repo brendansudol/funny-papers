@@ -17,6 +17,8 @@ the operational rules that are easy for an agent to miss.
 - `papers/extracts/` and `papers/summaries/` are pipeline outputs. Prefer
   re-extraction or evidence enrichment; make a manual correction only when it
   is grounded in the primary paper and preserves provenance metadata.
+- `dist/*.epub` contains generated reader editions. Never hand-edit or commit
+  them; rebuild with `python3 scripts/build_ebook.py`.
 - Restricted primary sources and all full-text derivatives live under
   gitignored `papers/private/<key>/`. Never copy their PDFs, Markdown, page
   files, manifests, chapter caches, or run logs into a public/versioned path.
@@ -40,6 +42,8 @@ the operational rules that are easy for an agent to miss.
   `python3 scripts/build_evidence.py`.
 - After changing `data/datasets.json`, run
   `python3 scripts/build_data_manifest.py`.
+- After changing `scripts/build_ebook.py` or `assets/ebook.css`, build both
+  editions with `python3 scripts/build_ebook.py --require-epubcheck`.
 - Run `python3 -m unittest discover -s tests -v` after substantive changes.
   Some tests deliberately encode catalog and claim cardinalities; update those
   expectations only when entries or claims were intentionally added or
@@ -53,6 +57,7 @@ the operational rules that are easy for an agent to miss.
 | `convert_papers.py` | any `python3` | Shells out to the sibling `pdf-to-md` venv |
 | `download_datasets.py` | `.venv/bin/python` | Requires `huggingface_hub` |
 | `build_*.py`, `split_guide.py` | any `python3` | Standard-library-only local builds |
+| `build_ebook.py` | any `python3` | Local Pandoc EPUB build; EPUBCheck validates when installed; no model calls |
 
 - The paper pipeline currently depends on the sibling checkout at
   `/Users/bren/Documents/code/pdf-to-md`. Check that path before running it;
@@ -60,6 +65,9 @@ the operational rules that are easy for an agent to miss.
 - Build scripts, the guide splitter, and tests are local and cheap. Paper
   conversion, extraction, and evidence enrichment use paid model calls;
   downloads use the network, and dataset downloads may be multi-gigabyte.
+- Ebook builds include only the public guide and summaries. They must never
+  copy PDFs, full-text Markdown, extracts, private sources, manifests, or run
+  logs into the reader edition.
 - Use `--only KEY` where supported. Do not start an unscoped paid or large
   download run unless the task explicitly requires it.
 - Restricted conversion and extraction additionally require the explicit

@@ -7,6 +7,7 @@ Candidate next steps for the project, gathered 2026-07-03. Nothing here is commi
 - ✅ Paper library: 111/116 guide entries with distributable PDF + full-text Markdown; restricted-source mode and local primary sources for T1, T2, T4, and Suls's half of T5; T3 remains unavailable (`papers/`)
 - ✅ Dataset library: 39 of 53 artifacts vendored, ~9.4GB (`data/`)
 - ✅ Structured extracts + one-pagers + cross-paper analysis (`papers/extracts/`, `papers/summaries/`, `papers/ANALYSIS.md`)
+- ✅ Reflowable EPUB reader editions: field guide alone or the guide plus all 115 available public summaries, with canonical ordering, restricted-source safeguards, and EPUBCheck validation (`scripts/build_ebook.py`)
 - ✅ Evidence-strength profiles + synthesis support/counterevidence/confidence map ([papers/EVIDENCE.md](../papers/EVIDENCE.md))
 - ✅ Guide-vs-paper evidence certification: all 111 converted entries audited across two passes (796 claims; all 14 fixes applied), plus a stratified 26-extract substantive spot check ([papers/DISCREPANCIES.md](../papers/DISCREPANCIES.md))
 - ✅ Restricted theory extraction: scoped gpt-5.5 conversion and extraction completed for T1, T2, T4, and Suls's half of T5, with complete-source and direct-claim quality checks; all four remain outside the certification totals pending an independent audit.

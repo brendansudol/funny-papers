@@ -9,6 +9,7 @@ The goal: everything needed to deeply understand the field — and eventually bu
 | If you want to… | Go to |
 | --- | --- |
 | Read the field, curated and in order | [humor-and-llms-field-guide.md](humor-and-llms-field-guide.md) |
+| Read the guide or full summary companion on an e-reader | Build the EPUB editions with `python3 scripts/build_ebook.py` |
 | Browse the paper library (source / full text where distributable / summary links) | [papers/MANIFEST.md](papers/MANIFEST.md) |
 | Compare papers — who evaluated on what, which theories, which models | [papers/ANALYSIS.md](papers/ANALYSIS.md) |
 | Audit evidence strength, human grounding, budgets, and synthesis confidence | [papers/EVIDENCE.md](papers/EVIDENCE.md) |
@@ -40,6 +41,8 @@ CLAUDE.md                       # Claude Code import shim for AGENTS.md
 docs/
   ideas.md                      # candidate next steps (a menu, not a plan)
   query-cookbook.md             # jq/python recipes over the catalogs & extracts
+assets/
+  ebook.css                     # reflowable, e-ink-friendly EPUB styling
 papers/
   papers.json                   # paper catalog (source of truth)
   MANIFEST.md                   # human-readable index (generated)
@@ -54,6 +57,7 @@ data/
   MANIFEST.md                   # human-readable index (generated)
   <key>/                        # vendored datasets (gitignored, ~9.4 GB)
 scripts/                        # the pipelines (all resumable/idempotent)
+dist/                           # generated EPUB reader editions (gitignored)
 ```
 
 ## Rebuilding from a fresh clone
@@ -77,6 +81,38 @@ Three stages, each resumable and safe to re-run:
 3. **Extract & analyze** — `scripts/extract_papers.py` uses gpt-5.5 (high reasoning effort, strict JSON-schema output) to produce the structured extract, evidence profile, and one-pager. Sources up to 250,000 characters use one pass. Longer books use explicit, complete page units, resumable private chapter extracts, and a final synthesis pass; oversized input without a complete unit plan fails instead of being truncated. `--dry-run` validates the plan without loading credentials or making model calls. Restricted extraction also requires scoped `--only KEY --include-restricted`. `scripts/enrich_evidence.py` backfills profiles for single-pass sources without rewriting summaries; `scripts/build_analysis.py` and `scripts/build_evidence.py` regenerate cross-paper views.
 
 `scripts/build_manifest.py` and `scripts/build_data_manifest.py` regenerate the human-readable indexes from the catalogs at any time.
+
+## Building the e-reader editions
+
+The ebook builder creates reflowable EPUB 3 files from the public, versioned
+library. It never includes PDFs, full-text Markdown, extracts, private sources,
+or pipeline logs. Summary order and source links come from `papers/papers.json`;
+restricted entries retain their public access notices and official publisher
+links.
+
+Install [Pandoc](https://pandoc.org/installing.html) and, for standards
+validation, [EPUBCheck](https://www.w3.org/publishing/epubcheck/). On macOS with
+Homebrew:
+
+```bash
+brew install pandoc epubcheck
+```
+
+Then build either reader edition—or both by omitting `--edition`:
+
+```bash
+python3 scripts/build_ebook.py --edition guide
+python3 scripts/build_ebook.py --edition complete
+python3 scripts/build_ebook.py --require-epubcheck
+```
+
+Outputs are written to `dist/humor-and-llms-field-guide.epub` and
+`dist/humor-and-llms-complete.epub`. The guide edition is designed for a
+continuous first read. The complete edition adds all 115 available paper
+summaries, grouped by field-guide section with a nested table of contents. Send
+either EPUB to a Kindle with [Amazon's Send to
+Kindle](https://www.amazon.com/sendtokindle). This local build is deterministic
+for unchanged sources and makes no network or paid model calls.
 
 ## Trust & caveats
 
