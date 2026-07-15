@@ -1,10 +1,12 @@
 import hashlib
+import re
 import tempfile
 import unittest
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZIP_STORED, ZipFile
 
 from scripts.build_ebook import (
+    EDITION_CONFIG,
     EbookBuildError,
     REPOSITORY_URL,
     assemble_manuscript,
@@ -117,6 +119,29 @@ class EbookBuildTest(unittest.TestCase):
             self.complete,
             assemble_manuscript("complete", catalog=self.catalog),
         )
+
+    def test_committed_epubs_match_current_manuscripts(self):
+        manuscripts = {"guide": self.guide, "complete": self.complete}
+
+        for edition, manuscript in manuscripts.items():
+            with self.subTest(edition=edition):
+                identifier_match = re.search(
+                    r'^identifier: "([^"]+)"$', manuscript, re.MULTILINE
+                )
+                self.assertIsNotNone(identifier_match)
+                expected_identifier = identifier_match.group(1)
+                epub_path = ROOT / "dist" / EDITION_CONFIG[edition]["filename"]
+                self.assertTrue(epub_path.is_file(), f"Missing {epub_path}")
+
+                with ZipFile(epub_path) as archive:
+                    opf_names = [
+                        name for name in archive.namelist() if name.endswith(".opf")
+                    ]
+                    self.assertEqual(1, len(opf_names))
+                    self.assertIn(
+                        expected_identifier.encode("utf-8"),
+                        archive.read(opf_names[0]),
+                    )
 
     def test_relative_link_rewriter_preserves_fragments(self):
         rewritten = rewrite_relative_links(

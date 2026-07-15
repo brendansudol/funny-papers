@@ -9,7 +9,7 @@ The goal: everything needed to deeply understand the field — and eventually bu
 | If you want to… | Go to |
 | --- | --- |
 | Read the field, curated and in order | [humor-and-llms-field-guide.md](humor-and-llms-field-guide.md) |
-| Read the guide or full summary companion on an e-reader | Build the EPUB editions with `python3 scripts/build_ebook.py` |
+| Read on an e-reader | Download the [Field Guide EPUB](dist/humor-and-llms-field-guide.epub) or [Complete Edition EPUB](dist/humor-and-llms-complete.epub) |
 | Browse the paper library (source / full text where distributable / summary links) | [papers/MANIFEST.md](papers/MANIFEST.md) |
 | Compare papers — who evaluated on what, which theories, which models | [papers/ANALYSIS.md](papers/ANALYSIS.md) |
 | Audit evidence strength, human grounding, budgets, and synthesis confidence | [papers/EVIDENCE.md](papers/EVIDENCE.md) |
@@ -39,6 +39,7 @@ humor-and-llms-field-guide.md   # the curated guide — the root document
 AGENTS.md                       # canonical operational guide for coding agents
 CLAUDE.md                       # Claude Code import shim for AGENTS.md
 docs/
+  ebook-release-notes.md        # contents, caveats, and checksums for the EPUBs
   ideas.md                      # candidate next steps (a menu, not a plan)
   query-cookbook.md             # jq/python recipes over the catalogs & extracts
 assets/
@@ -57,7 +58,7 @@ data/
   MANIFEST.md                   # human-readable index (generated)
   <key>/                        # vendored datasets (gitignored, ~9.4 GB)
 scripts/                        # the pipelines (all resumable/idempotent)
-dist/                           # generated EPUB reader editions (gitignored)
+dist/                           # versioned, generated EPUB reader editions
 ```
 
 ## Rebuilding from a fresh clone
@@ -106,12 +107,15 @@ python3 scripts/build_ebook.py --edition complete
 python3 scripts/build_ebook.py --require-epubcheck
 ```
 
-Outputs are written to `dist/humor-and-llms-field-guide.epub` and
-`dist/humor-and-llms-complete.epub`. The guide edition is designed for a
-continuous first read. The complete edition adds all 115 available paper
-summaries, grouped by field-guide section with a nested table of contents. Send
-either EPUB to a Kindle with [Amazon's Send to
-Kindle](https://www.amazon.com/sendtokindle). This local build is deterministic
+Outputs are written to the versioned [Field Guide
+EPUB](dist/humor-and-llms-field-guide.epub) and [Complete Edition
+EPUB](dist/humor-and-llms-complete.epub), so readers can download them without
+installing the build tools. The guide edition is designed for a continuous
+first read. The complete edition adds all 115 available paper summaries,
+grouped by field-guide section with a nested table of contents. See the [ebook
+release notes](docs/ebook-release-notes.md) for coverage, caveats, and
+checksums. Send either EPUB to a Kindle with [Amazon's Send to
+Kindle](https://www.amazon.com/sendtokindle). The local build is deterministic
 for unchanged sources and makes no network or paid model calls.
 
 ## Trust & caveats
