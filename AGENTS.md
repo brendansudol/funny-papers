@@ -17,8 +17,9 @@ the operational rules that are easy for an agent to miss.
 - `papers/extracts/` and `papers/summaries/` are pipeline outputs. Prefer
   re-extraction or evidence enrichment; make a manual correction only when it
   is grounded in the primary paper and preserves provenance metadata.
-- `dist/*.epub` contains generated reader editions. Never hand-edit or commit
-  them; rebuild with `python3 scripts/build_ebook.py`.
+- `dist/*.epub` contains versioned, generated reader editions. Never hand-edit
+  them; rebuild with `python3 scripts/build_ebook.py` and commit the refreshed
+  files after reader-facing source or ebook-build changes.
 - Restricted primary sources and all full-text derivatives live under
   gitignored `papers/private/<key>/`. Never copy their PDFs, Markdown, page
   files, manifests, chapter caches, or run logs into a public/versioned path.
@@ -42,8 +43,9 @@ the operational rules that are easy for an agent to miss.
   `python3 scripts/build_evidence.py`.
 - After changing `data/datasets.json`, run
   `python3 scripts/build_data_manifest.py`.
-- After changing `scripts/build_ebook.py` or `assets/ebook.css`, build both
-  editions with `python3 scripts/build_ebook.py --require-epubcheck`.
+- After changing the field guide, public summaries, `papers/papers.json`,
+  `scripts/build_ebook.py`, or `assets/ebook.css`, rebuild both committed EPUBs
+  with `python3 scripts/build_ebook.py --require-epubcheck`.
 - Run `python3 -m unittest discover -s tests -v` after substantive changes.
   Some tests deliberately encode catalog and claim cardinalities; update those
   expectations only when entries or claims were intentionally added or
@@ -137,6 +139,8 @@ the operational rules that are easy for an agent to miss.
 - `docs/ideas.md`: canonical backlog and next-step menu; do not create a
   parallel TODO document.
 - `docs/query-cookbook.md`: verified catalog and extract queries.
+- `docs/ebook-release-notes.md`: contents, caveats, and checksums for the
+  committed reader editions.
 - `papers/review/` and `papers/DISCREPANCIES.md`: guide-verification artifacts.
 - `papers/runs/<key>.progress.jsonl` and `papers/md/<key>/manifest.jsonl`:
   conversion logs and API usage.

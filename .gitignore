@@ -2,7 +2,10 @@
 .venv/
 __pycache__/
 .DS_Store
-dist/
+
+# Keep the reproducible reader editions in Git; ignore transient/other builds.
+dist/*
+!dist/*.epub
 
 # Paywalled/restricted primary sources and every full-text derivative.
 # Public catalog records and derived extracts/summaries live outside this tree.
